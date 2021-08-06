@@ -1,0 +1,66 @@
+# [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array)
+
+[English Version](/solution/0200-0299/0215.Kth%20Largest%20Element%20in%20an%20Array/README_EN.md)
+
+## 题目描述
+
+<!-- 这里写题目描述 -->
+
+<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code><strong>k</strong></code> 个最大的元素。</p>
+
+<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
+
+<p> </p>
+
+<p><strong>示例 1:</strong></p>
+
+<pre>
+<strong>输入:</strong> <code>[3,2,1,5,6,4] 和</code> k = 2
+<strong>输出:</strong> 5
+</pre>
+
+<p><strong>示例 2:</strong></p>
+
+<pre>
+<strong>输入:</strong> <code>[3,2,3,1,2,4,5,5,6] 和</code> k = 4
+<strong>输出:</strong> 4</pre>
+
+<p> </p>
+
+<p><strong>提示： </strong></p>
+
+<ul>
+	<li><code>1 <= k <= nums.length <= 10<sup>4</sup></code></li>
+	<li><code>-10<sup>4</sup> <= nums[i] <= 10<sup>4</sup></code></li>
+</ul>
+
+
+## 解法
+
+<!-- 这里可写通用的实现逻辑 -->
+
+<!-- tabs:start -->
+
+### **Python3**
+
+<!-- 这里可写当前语言的特殊实现逻辑 -->
+
+```python
+
+```
+
+### **Java**
+
+<!-- 这里可写当前语言的特殊实现逻辑 -->
+
+```java
+
+```
+
+### **...**
+
+```
+
+```
+
+<!-- tabs:end -->
