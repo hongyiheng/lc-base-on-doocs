@@ -78,7 +78,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        TreeNode pre;
+        while (root != null) {
+            if(root.left == null) {
+                res.add(root.val);
+                root = root.right;
+            }else {
+                pre = root.left;
+                while (pre.right != null && pre.right != root) {
+                    pre = pre.right;
+                }
+                if (pre.right == null) {
+                    pre.right = root;
+                    root = root.left;
+                }else {
+                    res.add(root.val);
+                    pre.right = null;
+                    root = root.right;
+                }
+            }
+            
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**

@@ -41,7 +41,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        TreeNode pre;
+        while (root != null) {
+            if (root.right == null) {
+                res.add(root.val);
+                root = root.left;
+            } else {
+                pre = root.right;
+                while (pre.left != null && pre.left != root) {
+                    pre = pre.left;
+                }
+                if (pre.left == null) {
+                    res.add(root.val);
+                    pre.left = root;
+                    root = root.right;
+                } else {
+                    root = root.left;
+                    pre.left = null;
+                }
+            }         
+        }
+        Collections.reverse(res);
+        return res;
+    }
+}
 ```
 
 ### **...**
