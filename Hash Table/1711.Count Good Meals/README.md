@@ -61,7 +61,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countPairs(int[] deliciousness) {
+        int mod = (int) (1e9 + 7);
+        int maxNum = 0;
+        for (int num : deliciousness){
+            maxNum = Math.max(maxNum, num);
+        }
+        int maxVal = maxNum * 2;
+        long res = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < deliciousness.length; i++) {
+            for (int sum = 1; sum <= maxVal; sum *= 2) {
+                if (map.containsKey(sum - deliciousness[i])) {
+                    res += map.get(sum - deliciousness[i]);
+                }
+            }
+            map.put(deliciousness[i], map.getOrDefault(deliciousness[i], 0) + 1);
+        }
+        return (int) (res % mod);
+    }
+}
 ```
 
 ### **...**
