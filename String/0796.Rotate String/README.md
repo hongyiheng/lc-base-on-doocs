@@ -45,7 +45,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        if (s.length() != goal.length()) {
+            return false;
+        }
+        s += s;
+        return s.contains(goal);
+    }
+}
 ```
 
 ### **...**
