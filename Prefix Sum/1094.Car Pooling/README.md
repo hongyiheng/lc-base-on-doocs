@@ -79,7 +79,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+        int[] presum = new int[1001];
+        for (int i = 0; i < trips.length; i++) {
+            presum[trips[i][1]] += trips[i][0];
+            presum[trips[i][2]] -= trips[i][0];
+        }
 
+        int cur = 0;
+        for (int num : presum) {
+            if (cur > capacity) {
+                return false;
+            }
+            cur += num;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
