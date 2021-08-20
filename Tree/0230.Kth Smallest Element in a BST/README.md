@@ -42,7 +42,7 @@
 
 
 ## 解法
-
+  
 <!-- 这里可写通用的实现逻辑 -->
 
 <!-- tabs:start -->
@@ -58,9 +58,29 @@
 ### **Java**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
-
+二叉搜索树(BST)的中序遍历是递增的
 ```java
+class Solution {
+    int depth = 0;
+    int res = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        dfs(root, k);
+        return res;
+    }
 
+    public void dfs(TreeNode root, int k) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.left, k);
+        depth++;
+        if (depth == k) {
+            res = root.val;
+            return;
+        }
+        dfs(root.right, k);
+    }
+}
 ```
 
 ### **...**
