@@ -8,7 +8,7 @@ class Solution {
 
     public void dfs(Set<List<Integer>> res, Deque<Integer> path, int depth, boolean[] used, int len) {
         if (depth == len) {
-            res.add(new ArrayList(path));
+            res.add(new ArrayList<>(path));
         }
 
         for (int i = 0; i < len; i++) {
