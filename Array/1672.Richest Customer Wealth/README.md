@@ -61,7 +61,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution(object):
+    def maximumWealth(self, accounts):
+        res = 0
+        for account in accounts:
+            res = max(res, sum(account))
+        return res
 ```
 
 ### **Java**
@@ -69,7 +74,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+        int ans = 0;
+        for (int[] account : accounts) {
+            int sum = 0;
+            for (int num : account) {
+                sum += num;
+            } 
+            ans = Math.max(ans, sum);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
