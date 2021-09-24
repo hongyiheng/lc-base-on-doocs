@@ -44,7 +44,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numTrees(self, n: int) -> int:
+        dp = [0] * (n + 1)
+        dp[0] = 1
+        dp[1] = 1
+        for i in range(2, n + 1):
+            for j in range(0, i):
+                dp[i] += dp[j] * dp[i - j - 1]
+        return dp[n]
 ```
 
 ### **Java**
@@ -52,7 +60,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numTrees(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i < n + 1; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i - j - 1];
+            }
+        }
+        return dp[n];
+    }
+}
 ```
 
 ### **...**
