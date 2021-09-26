@@ -63,7 +63,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        row = len(matrix)
+        col = len(matrix[0])
+        if col == 1:
+            return matrix[0][0]
+        dp = [[101 for i in range(col)] for j in range(row)]
+        for i in range(row):
+            for j in range(col):
+                if i == 0:
+                    dp[i][j] = matrix[i][j]
+                    continue
+                if j == 0:
+                    dp[i][j] = min(dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j]
+                elif j == col - 1:
+                    dp[i][j] = min(dp[i - 1][j], dp[i - 1][j - 1]) + matrix[i][j]
+                else:
+                    dp[i][j] = min(min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i - 1][j + 1]) + matrix[i][j]
 
+        ans = sys.maxsize
+        for i in range(col):
+            ans = min(dp[row - 1][i], ans)
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +93,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        if (col == 1) {
+            return matrix[0][0];
+        }
+        int[][] dp = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (i == 0) {
+                    dp[i][j] = matrix[i][j];
+                    continue;
+                }
+                if (j == 0) {
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j];
+                } else if (j == col - 1) {
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j - 1]) + matrix[i][j];
+                } else {
+                    dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i - 1][j + 1]) + matrix[i][j];
+                }
+            }
+        }
+        int ans = Integer.MAX_VALUE;
+        for (int num : dp[row - 1]) {
+            ans = Math.min(ans, num);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
