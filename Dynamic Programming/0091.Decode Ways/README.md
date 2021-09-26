@@ -84,7 +84,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        s = " " + s;
+        n = len(s)
+        dp = [0] * n
+        dp[0] = 1
+        for i in range(1, n):
+            cur = ord(s[i]) - ord('0')
+            if cur >= 1 and cur <= 9:
+                dp[i] = dp[i - 1]
+            last = (ord(s[i - 1]) - ord('0')) * 10
+            if last + cur >= 10 and last + cur <=26:
+                dp[i] += dp[i - 2]
+        return dp[n - 1]
+                
 ```
 
 ### **Java**
@@ -92,7 +106,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numDecodings(String s) {
+        s = " " + s;
+        int len = s.length();
+        int[] dp = new int[len];
+        dp[0] = 1;
+        for (int i = 1; i < len; i++) {
+            int cur = s.charAt(i) - '0';
+            if (cur >= 1 && cur <= 9) {
+                dp[i] = dp[i - 1];
+            }
+            int last = s.charAt(i - 1) - '0';
+            int union = last * 10 + cur;
+            if (union >= 10 && union <= 26) {
+                dp[i] += dp[i - 2];
+            }
+        }
+        return dp[len - 1];
+    }
+}
 ```
 
 ### **...**
