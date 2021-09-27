@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isUgly(self, n: int) -> bool:
+        if n <= 0:
+            return False
+        while n % 2 == 0:
+            n /= 2
+        while n % 3 == 0:
+            n /= 3
+        while n % 5 == 0:
+            n /= 5
+        return n == 1
 ```
 
 ### **Java**
@@ -71,7 +81,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        } 
+        while (n % 2 == 0) {
+            n /= 2;
+        } 
+        while (n % 3 == 0) {
+            n /= 3;
+        } 
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        return n == 1;
+    }
+}
 ```
 
 ### **...**
