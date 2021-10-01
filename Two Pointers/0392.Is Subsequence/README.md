@@ -56,7 +56,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        t_len = len(t)
+        s_len = len(s)
+        if s_len > t_len:
+            return False
+        
+        left = 0;
+        for i in range(s_len):
+            if left == t_len:
+                return False
+            while s[i] != t[left]:
+                left += 1
+                if left == t_len:
+                    return False
+            left += 1
+        return True
 ```
 
 ### **Java**
@@ -64,7 +80,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int tLen = t.length();
+        int sLen = s.length();
+        if (sLen > tLen) {
+            return false;
+        }
 
+        int left = 0;
+        char[] sChars = s.toCharArray();
+        char[] tChars = t.toCharArray();
+        for (int i = 0; i < sLen; i++) {
+            if (left == tLen) {
+                return false;
+            }
+            while (tChars[left] != sChars[i]) {
+                left++;
+                if (left == tLen) {
+                    return false;
+                }
+            }
+            left++;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
