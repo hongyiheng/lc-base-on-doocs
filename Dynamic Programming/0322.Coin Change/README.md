@@ -70,7 +70,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [0] + [10001] * amount
+        for coin in coins:
+            for j in range(coin, amount + 1):
+                dp[j] = min(dp[j - coin] + 1, dp[j])
+        return dp[-1] if dp[-1] != 10001 else -1
 ```
 
 ### **Java**
@@ -78,7 +84,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int max = Integer.MAX_VALUE;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 0; i < coins.length; i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                if (dp[j - coins[i]] != max) {
+                    dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
+                }
+            }
+        }
+        return dp[amount] == max ? -1 : dp[amount];
+    }
+}
 ```
 
 ### **...**
