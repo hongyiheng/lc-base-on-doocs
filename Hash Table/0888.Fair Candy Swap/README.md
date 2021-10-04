@@ -69,7 +69,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def fairCandySwap(self, aliceSizes: List[int], bobSizes: List[int]) -> List[int]:
+        sum1, sum2 = sum(aliceSizes), sum(bobSizes)
+        diff = (sum1 - sum2) // 2
+        rec = set(bobSizes)
+        ans = None
+        for x in aliceSizes:
+            y = x - diff
+            if y in rec:
+                ans = [x, y]
+                return ans
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +88,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
+        int sum1 = Arrays.stream(aliceSizes).sum();
+        int sum2 = Arrays.stream(bobSizes).sum();
+        int diff = (sum1 - sum2) / 2;
+        Set<Integer> dict = new HashSet<>();
+        for (int num : bobSizes) {
+            dict.add(num);
+        }
+        int[] ans = null;
+        for (int x : aliceSizes) {
+            int y = x - diff;
+            if (dict.contains(y)) {
+                ans = new int[]{x, y};
+                return ans;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
