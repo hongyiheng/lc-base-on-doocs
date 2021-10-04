@@ -64,7 +64,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left, right, count, ans = 0, 0, 0, sys.maxsize
+        n = len(nums)
+        while right < n:
+            count += nums[right]
+            right += 1
+            while count >= target:
+                ans = min(ans, right - left)
+                count -= nums[left]
+                left += 1
+        return 0 if ans == sys.maxsize else ans
 ```
 
 ### **Java**
@@ -72,7 +83,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int left = 0, right = 0, sum = 0, ans = Integer.MAX_VALUE;
+        int len = nums.length;
+        while (right < len) {
+            sum += nums[right++];
+            while (sum >= target) {
+                ans = Math.min(ans, right - left);
+                sum -= nums[left++];
+            }       
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+}
 ```
 
 ### **...**
