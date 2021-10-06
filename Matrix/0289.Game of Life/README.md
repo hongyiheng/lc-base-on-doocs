@@ -67,7 +67,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        m = len(board)
+        n = len(board[0])
+        temp = [[0] * (n + 2) for _ in range(m + 2)]
 
+        for i in range(m + 2):
+            for j in range(n + 2):
+                if i == 0 or i == m + 1 or j == 0 or j == n + 1:
+                    temp[i][j] = 0
+                else:
+                    temp[i][j] = board[i - 1][j - 1]
+        
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                live_count = temp[i - 1][j - 1] + temp[i - 1][j] + temp[i - 1][j + 1] + temp[i][j - 1] +  temp[i][j + 1] + temp[i + 1][j - 1] + temp[i + 1][j] + temp[i + 1][j + 1]
+                if live_count > 3 or live_count < 2:
+                    board[i - 1][j - 1] = 0
+                if live_count == 3:
+                    board[i - 1][j - 1] = 1
 ```
 
 ### **Java**
@@ -75,7 +97,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+        int[][] temp = new int[m + 2][n + 2];
+        for (int i = 0; i < m + 2; i++) {
+            for (int j = 0; j < n + 2; j++) {
+                if (i == 0 || i == m + 1 || j == 0 || j == n + 1) {
+                    temp[i][j] = 0;
+                } else {
+                    temp[i][j] = board[i - 1][j - 1];
+                }
+            }
+        }
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                int live = 0;
+                live += temp[i - 1][j - 1] + temp[i - 1][j] + temp[i - 1][j + 1]
+                        + temp[i][j - 1] + temp[i][j + 1]
+                        + temp[i + 1][j - 1] + temp[i + 1][j] + temp[i + 1][j + 1];
+                if (live < 2 || live > 3) {
+                    board[i - 1][j - 1] = 0;
+                }
+                if (live == 3) {
+                    board[i - 1][j - 1] = 1;
+                }
+            }
+        }
+    }
+}
 ```
 
 ### **...**
