@@ -74,7 +74,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# The guess API is already defined for you.
+# @param num, your guess
+# @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
+# def guess(num: int) -> int:
 
+class Solution:
+    def guessNumber(self, n: int) -> int:
+        left, right = 0, n
+        while left < right:
+            mid = (left + right) // 2
+            if guess(mid) == 1:
+                left = mid + 1
+            else:
+                right = mid
+        return left
 ```
 
 ### **Java**
@@ -82,7 +96,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/** 
+ * Forward declaration of guess API.
+ * @param  num   your guess
+ * @return 	     -1 if num is lower than the guess number
+ *			      1 if num is higher than the guess number
+ *               otherwise return 0
+ * int guess(int num);
+ */
 
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+        int left = 0, right = n;
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            if (guess(mid) == 1) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+}
 ```
 
 ### **...**
