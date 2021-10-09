@@ -49,7 +49,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        for num in arr:
+            if num <= k:
+                k += 1
+        return k
 ```
 
 ### **Java**
@@ -57,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        for (int num : arr) {
+            if (num <= k) {
+                k++;
+            }
+        }
+        return k;
+    }
+}
 ```
 
 ### **...**
