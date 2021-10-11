@@ -39,7 +39,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT
+	t1.NAME AS Employee 
+FROM
+	Employee t1
+	JOIN Employee t2 ON t1.ManagerId = t2.Id 
+WHERE
+	t1.Salary > t2.Salary
 ```
 
 <!-- tabs:end -->
