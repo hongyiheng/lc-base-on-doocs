@@ -59,7 +59,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        m = len(isConnected)
+        p = [i for i in range(m)]
 
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+
+        for i in range(m):
+            for j in range(m):
+                if isConnected[i][j] == 1:
+                    p[find(i)] = find(j)
+        ans = 0
+        for i in range(m):
+            if p[i] == i:
+                ans += 1  
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +85,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] p;
+    public int findCircleNum(int[][] isConnected) {
+        int m = isConnected.length;
+        p = new int[m];
+        for (int i = 0; i < m; i++) {
+            p[i] = i;
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < m; j++) {
+                if (isConnected[i][j] == 1) {
+                    p[find(i)] = find(j);
+                }   
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            if (p[i] == i) {
+                ans++;
+            }
+        }
+        return ans;
+    }
 
+    private int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+}
 ```
 
 ### **...**
