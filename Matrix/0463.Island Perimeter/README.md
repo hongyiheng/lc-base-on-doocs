@@ -60,7 +60,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    ans += 4
+                    if i < m - 1 and grid[i + 1][j] == 1:
+                        ans -= 2
+                    if j < n -1 and grid[i][j + 1] == 1:
+                        ans -= 2
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +81,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int ans = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    ans += 4;
+                    if (i < m - 1 && grid[i + 1][j] == 1) {
+                        ans -= 2;
+                    }
+                    if (j < n - 1 && grid[i][j + 1] == 1) {
+                        ans -= 2;
+                    }
+                } 
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
