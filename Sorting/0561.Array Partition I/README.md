@@ -53,7 +53,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def arrayPairSum(self, nums: List[int]) -> int:
+        nums.sort()
+        return sum(nums[::2])
 ```
 
 ### **Java**
@@ -61,7 +64,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int ans = 0;
+        for (int i = 0; i < nums.length; i += 2) {
+            ans += nums[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
