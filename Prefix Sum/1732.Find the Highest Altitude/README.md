@@ -50,7 +50,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        ans = last = 0
+        for num in gain:
+            last += num
+            ans = max(ans, last)
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +64,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int largestAltitude(int[] gain) {
+        int ans = Math.max(0, gain[0]);
+        int last = gain[0];
+        for (int i = 1; i < gain.length; i++) {
+            last += gain[i];
+            ans = Math.max(ans, last);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
