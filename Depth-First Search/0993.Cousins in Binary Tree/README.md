@@ -63,7 +63,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        p1, p2, d1, d2 = None, None, None, None
 
+        def dfs(root, parent, depth):
+            nonlocal p1, p2, d1, d2
+            if root is None:
+                return
+            if root.val == x:
+                p1 = parent
+                d1 = depth
+            if root.val == y:
+                p2 = parent
+                d2 = depth
+            dfs(root.left, root, depth + 1)
+            dfs(root.right, root, depth + 1)
+        
+        dfs(root, None, 0)
+        return p1 != p2 and d1 == d2
 ```
 
 ### **Java**
@@ -71,7 +95,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    TreeNode p1 = null, p2 = null;
+    int d1 = 0, d2 = 0;
+    public boolean isCousins(TreeNode root, int x, int y) {
+        dfs(root, null, x, y, 0);
+        return p1 != p2 && d1 == d2;
+    }
 
+    private void dfs(TreeNode root, TreeNode parent, int x, int y, int depth) {
+        if (root == null) {
+            return;
+        }
+        if (root.val == x) {
+            d1 = depth;
+            p1 = parent;
+        }
+        if (root.val == y) {
+            d2 = depth;
+            p2 = parent;
+        }
+        dfs(root.left, root, x, y, depth + 1);
+        dfs(root.right, root, x, y, depth + 1);
+    }
+}
 ```
 
 ### **...**
