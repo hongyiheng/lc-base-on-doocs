@@ -42,7 +42,9 @@
 ## 解法
 
 <!-- 这里可写通用的实现逻辑 -->
-
+两个值都在左边，则LCA在左边
+两个值都在右边，则LCA在右边
+一个在左一个在右，则说明LCA就是当前的root节点。
 <!-- tabs:start -->
 
 ### **Python3**
@@ -50,7 +52,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return None
+        if p.val > q.val:
+            return self.lowestCommonAncestor(root, q, p)
+        if q.val < root.val:
+            return self.lowestCommonAncestor(root.left, q, p)
+        if p.val > root.val:
+            return self.lowestCommonAncestor(root.right, q, p)
+        return root
 ```
 
 ### **Java**
@@ -58,7 +77,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }   
+        if (p.val > q.val) {
+            return lowestCommonAncestor(root, q, p);
+        }
+        if (q.val < root.val) {
+            return lowestCommonAncestor(root.left, q, p);
+        }
+        if (p.val > root.val) {
+            return lowestCommonAncestor(root.right, q, p);
+        }
+        return root;
+    }
+}
 ```
 
 ### **...**
