@@ -51,7 +51,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        mp = [
+            ".-","-...","-.-.","-..",".","..-.",
+            "--.","....","..",".---","-.-",".-..",
+            "--","-.","---",".--.","--.-",".-.",
+            "...","-","..-","...-",".--","-..-",
+            "-.--","--.."
+        ]
+        ans = set()
+        for word in words:
+            t = []
+            for c in word:
+                t.append(mp[ord(c) - ord('a')])
+            ans.add(''.join(t))
+        return len(ans)
 ```
 
 ### **Java**
@@ -59,7 +74,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] mp = new String[]{
+            ".-","-...","-.-.","-..",".","..-.",
+            "--.","....","..",".---","-.-",".-..",
+            "--","-.","---",".--.","--.-",".-.",
+            "...","-","..-","...-",".--","-..-",
+            "-.--","--.."
+        };
+        Set<String> ans = new HashSet<>();
+        for (String item : words) {
+            String temp = "";
+            for (int i = 0; i < item.length(); i++) { 
+                temp += mp[item.charAt(i) - 'a'];
+            }
+            ans.add(temp);
+        }
+        return ans.size();
+    }
+}
 ```
 
 ### **...**
