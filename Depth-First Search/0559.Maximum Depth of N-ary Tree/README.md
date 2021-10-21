@@ -53,7 +53,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
 
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        ans = 0
+
+        def dfs(root, depth):
+            nonlocal ans
+            if not root:
+                return
+            ans = max(ans, depth)
+            for item in root.children:
+                dfs(item, depth + 1)
+
+        dfs(root, 1)
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +82,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
 
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+    int ans = 0;
+    public int maxDepth(Node root) {
+        dfs(root, 1);
+        return ans;
+    }
+
+    private void dfs(Node root, int depth) {
+        if (root == null) {
+            return;
+        }
+        ans = Math.max(ans, depth);
+        for (Node item : root.children) {
+            dfs(item, depth + 1);
+        }
+    }
+}
 ```
 
 ### **...**
