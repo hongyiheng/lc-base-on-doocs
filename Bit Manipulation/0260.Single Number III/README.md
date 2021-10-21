@@ -56,6 +56,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        two_num_bit = 0
+        for num in nums:
+            two_num_bit ^= num
+        low_bit = two_num_bit & -two_num_bit
+        ans = [0, 0]
+        for num in nums:
+            if num & low_bit == 0:
+                ans[0] ^= num
+            else:
+                ans[1] ^= num
+        return ans
 
 ```
 
@@ -64,7 +77,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        int twoNumBit = 0;
+        for (int num : nums) {
+            twoNumBit ^= num;
+        }
+        int lowBit = twoNumBit & -twoNumBit;
+        int[] ans = new int[]{0, 0};
+        for (int num : nums) {
+            if ((num & lowBit) == 0) {
+                ans[0] ^= num;
+            } else {
+                ans[1] ^= num;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
