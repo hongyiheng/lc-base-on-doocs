@@ -67,6 +67,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        m = len(stones)
+        p = [i for i in range(m)]
+
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+
+        count = m
+        for i in range(m - 1):
+            for j in range(i + 1, m):
+                if stones[i][0] == stones[j][0] or stones[i][1] == stones[j][1]:
+                    r1 = find(i)
+                    r2 = find(j)
+                    if r1 != r2:
+                        p[r1] = r2
+                        count -= 1
+        return m - count
 
 ```
 
@@ -75,7 +95,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] p;
+    int count;
+    public int removeStones(int[][] stones) {
+        int m = stones.length;
+        p = new int[m];
+        count = m;
+        for (int i = 0; i <m; i++) {
+            p[i] = i;
+        }
+        for (int i = 0; i < m - 1; i++) {
+            for (int j = i + 1; j < m; j++) {
+                if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]) {
+                    union(i, j);
+                }
+            }
+        }
+        return m - count;
+    }
 
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    public void union(int i1, int i2) {
+        int r1 = find(i1);
+        int r2 = find(i2);
+        if (r1 != r2) {
+            p[r1] = r2;
+            count--;
+        }
+    }
+}
 ```
 
 ### **...**
