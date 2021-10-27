@@ -51,7 +51,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        stk = [-i for i in stones]
+        heapq.heapify(stk)
+        while len(stk) > 1:
+            x, y = heapq.heappop(stk), heapq.heappop(stk)
+            if x != y:
+                heapq.heappush(stk, x - y)
+        return -heapq.heappop(stk) if stk else 0
 ```
 
 ### **Java**
@@ -59,7 +67,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> stk = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        for (int stone : stones) {
+            stk.offer(stone);
+        }
+        while (stk.size() > 1) {
+            int y = stk.poll();
+            int x = stk.poll();
+            if (x != y) {
+                stk.offer(y - x);
+            }
+        }
+        return stk.isEmpty() ? 0 : stk.poll();
+    }
+}
 ```
 
 ### **...**
