@@ -59,7 +59,19 @@ queries[0] 是绿色的圆，queries[1] 是红色的圆，queries[2] 是蓝色�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
+        res = list()
+        for i, v1 in enumerate(groupSizes):
+            if v1 == -1:
+                continue
+            temp = list()
+            for j, v2 in enumerate(groupSizes):
+                if len(temp) < v1 and v2 == v1:
+                    temp.append(j)
+                    groupSizes[j] = -1
+            res.append(temp)
+        return res
 ```
 
 ### **Java**
@@ -67,7 +79,32 @@ queries[0] 是绿色的圆，queries[1] 是红色的圆，queries[2] 是蓝色�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+        List<List<Integer>> res = new ArrayList<>();
+        int m = groupSizes.length;
+        for (int i = 0; i < m; i++) {
+            if (groupSizes[i] == -1) {
+                continue;
+            }
+            int cur = groupSizes[i];
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < m; j++) {
+                if (temp.size() >= cur) {
+                    j = m;
+                    continue;
+                }
+                if (groupSizes[j] == cur) {
+                    temp.add(j);
+                    groupSizes[j] = -1;
+                }
+            }
+            res.add(temp);
+        }
+        return res;
+    }
 
+}
 ```
 
 ### **...**
