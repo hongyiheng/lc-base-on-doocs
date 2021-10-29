@@ -65,7 +65,16 @@ cost = [3,4,3]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        cur, lack, start = 0, 0, 0
+        for i in range(len(gas)):
+            cur += gas[i] - cost[i]
+            if cur < 0:
+                lack += -cur
+                cur = 0
+                start = i + 1
+        return start if cur >= lack else -1
 ```
 
 ### **Java**
@@ -73,7 +82,22 @@ cost = [3,4,3]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int cur = 0;
+        int lack = 0;
+        int start = 0;
+        for (int i = 0; i < gas.length; i++) {
+            cur += gas[i] - cost[i];
+            if (cur < 0) {
+                lack += -cur;
+                cur = 0;
+                start = i + 1;
+            }
+        }
+        return cur >= lack ? start : -1;
+    }
+}
 ```
 
 ### **...**
