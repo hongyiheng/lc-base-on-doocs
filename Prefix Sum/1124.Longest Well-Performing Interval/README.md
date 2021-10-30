@@ -43,7 +43,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestWPI(self, hours: List[int]) -> int:
+        pre_sum, res = 0, 0
+        mp = {}
+        for i in range(len(hours)):
+            temp = 1 if hours[i] > 8 else -1
+            pre_sum += temp
+            if pre_sum > 0:
+                res = i + 1
+            else:
+                if pre_sum not in mp:
+                    mp[pre_sum] = i
+                if (pre_sum - 1) in mp:
+                    res = max(res, i - mp[pre_sum - 1])
+        return res
 ```
 
 ### **Java**
@@ -51,7 +65,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestWPI(int[] hours) {
+        int sum = 0;
+        int res = 0;
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int i = 0; i < hours.length; i++) {
+            int temp = hours[i] > 8 ? 1 : -1;
+            sum += temp;
+            if (sum > 0) {
+                res = i + 1;
+            } else {
+                if (!mp.containsKey(sum)) {
+                    mp.put(sum, i);
+                }
+                if (mp.containsKey(sum - 1)) {
+                    res = Math.max(res, i - mp.get(sum - 1));
+                }
+            }
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
