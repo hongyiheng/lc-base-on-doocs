@@ -55,7 +55,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        list.sort(g)
+        list.sort(s)
+        i, j, res = 0, 0, 0
+        while i < len(g) and j < len(s):
+            if g[i] <= s[j]:
+                i += 1
+                res += 1
+            j += 1
+        return res
 ```
 
 ### **Java**
@@ -63,7 +73,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int i = 0, j = 0;
+        int count = 0;
+        while(i < g.length && j < s.length) {
+            if(g[i] <= s[j++]) {
+                count ++;
+                i++;
+            }
+        } 
+        return count;
+    }
+}
 ```
 
 ### **...**
