@@ -71,7 +71,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        five, ten = 0, 0
+        for bill in bills:
+            if bill == 5:
+                five += 1
+            elif bill == 10:
+                ten += 1
+                five -= 1
+            elif bill == 20:
+                if ten > 0:
+                    ten -= 1
+                    five -= 1
+                else:
+                    five -= 3
+            if five < 0:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -79,7 +96,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int fiveCount = 0;
+        int tenCount = 0;
+        for (int num : bills) {
+            if (num == 5) {
+                fiveCount++;
+            } else if (num == 10) {
+                tenCount++;
+                fiveCount--;
+            } else if (num == 20) {
+                if (tenCount > 0) {
+                    tenCount--;
+                    fiveCount--;
+                } else {
+                    fiveCount -= 3;
+                }
+            }
+            if (fiveCount < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
