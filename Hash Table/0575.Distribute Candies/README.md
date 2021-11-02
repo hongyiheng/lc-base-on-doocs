@@ -47,7 +47,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distributeCandies(self, candyType: List[int]) -> int:
+        type_set = set(candyType)
+        n = len(candyType) // 2
+        return n if len(type_set) > n else len(type_set)
 ```
 
 ### **Java**
@@ -55,7 +59,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        int m = candyType.length;
+        int n = m / 2;
+        Set<Integer> type = new HashSet<>();
+        for (int candy : candyType) {
+            type.add(candy);
+        }
+        return type.size() > n ? n : type.size();
+    }
+}
 ```
 
 ### **...**
