@@ -10,7 +10,7 @@ class TopVotedCandidate {
         winPerson = new int[len];
         int max = 0;
         int curWin = -1;
-        int[] count = new int[len];
+        int[] count = new int[len + 1];
         for (int i = 0; i < len; i++) {
             if (++count[persons[i]] >= max) {
                 max = count[persons[i]];

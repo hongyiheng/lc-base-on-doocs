@@ -53,10 +53,8 @@ class TopVotedCandidate:
         self.times = times
         self.persons = persons
         n = len(persons)
-        win_person = [0] * n      
-        count = [0] * n
-        cur_max = -1
-        cur_win = -1
+        win_person, count = [0] * n, [0] * (n + 1)    
+        cur_max = cur_win = -1
         for i in range(n):
             count[persons[i]] += 1
             if count[persons[i]] >= cur_max:
@@ -66,18 +64,14 @@ class TopVotedCandidate:
         self.win_person = win_person
 
     def q(self, t: int) -> int:
-        times = self.times
-        win_person = self.win_person
-        left, right = 0, len(times) - 1
+        left, right = 0, len(self.times) - 1
         while left < right:
-            mid = (left + right + 1) // 2
-            if times[mid] <= t:
+            mid = (left + right + 1) >> 1
+            if self.times[mid] <= t:
                 left = mid
             else:
                 right = mid - 1
-        return win_person[left]
-
-
+        return self.win_person[left]
 
 # Your TopVotedCandidate object will be instantiated and called as such:
 # obj = TopVotedCandidate(persons, times)
@@ -101,7 +95,7 @@ class TopVotedCandidate {
         winPerson = new int[len];
         int max = 0;
         int curWin = -1;
-        int[] count = new int[len];
+        int[] count = new int[len + 1];
         for (int i = 0; i < len; i++) {
             if (++count[persons[i]] >= max) {
                 max = count[persons[i]];
