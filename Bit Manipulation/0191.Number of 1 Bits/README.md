@@ -73,7 +73,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        ans = 0
+        for i in range(32):
+            if (n & 1 << i) != 0:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +87,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n & 1 << i) != 0) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
