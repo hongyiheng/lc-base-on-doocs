@@ -63,6 +63,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        m = len(nums)
+        dp = [0] * m
+        dp[0] = 1
+
+        def getLastMax(i):
+            cur = nums[i]
+            last_max = 0
+            for i in range(i - 1, -1, -1):
+                if nums[i] < cur:
+                    last_max = max(last_max, dp[i])
+            return last_max
+
+        for i in range(1, m):
+            last_max = getLastMax(i)
+            dp[i] = last_max + 1
+        return max(dp)
 
 ```
 
@@ -71,7 +89,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] dp;
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        dp = new int[len];
+        dp[0] = 1;
+        for (int i = 1; i < len; i++) {
+            int lastMax = getLastMax(nums, i);
+            dp[i] = lastMax + 1;
+        }
+        int ans = 0;
+        for (int num : dp) {
+            ans = Math.max(num, ans);
+        }
+        return ans;
+    }
 
+    private int getLastMax(int[] nums, int index) {
+        int cur = nums[index];
+        int ans = 0;
+        for (int i = index - 1; i >= 0; i--) {
+            if (nums[i] < cur) {
+                ans = Math.max(ans, dp[i]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
