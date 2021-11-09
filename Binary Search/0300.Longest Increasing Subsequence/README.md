@@ -63,7 +63,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        tail = [0] * len(nums)
+        res = 0
+        for num in nums:
+            left, right = 0, res
+            while left < right:
+                mid = (left + right) >> 1
+                if tail[mid] < num:
+                    left = mid + 1
+                else:
+                    right = mid
+            tail[left] = num
+            if left == res:
+                res += 1
+        return res
 ```
 
 ### **Java**
@@ -71,7 +86,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int[] tail = new int[nums.length];
+        int res = 0;
+        for (int num : nums) {
+            int left = 0;
+            int right = res;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (tail[mid] < num) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            tail[left] = num;
+            if (left == res) {
+                res++;
+            }
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
