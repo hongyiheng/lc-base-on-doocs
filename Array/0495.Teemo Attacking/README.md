@@ -52,7 +52,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
+        res = duration
+        for i in range(len(timeSeries) - 1):
+            res += min(duration, timeSeries[i + 1] - timeSeries[i])
+        return res
 ```
 
 ### **Java**
@@ -60,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findPoisonedDuration(int[] timeSeries, int duration) {
+        int res = duration;
+        for (int i = 0; i < timeSeries.length - 1; i++) {
+            res += Math.min(duration, timeSeries[i + 1] - timeSeries[i]);
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
