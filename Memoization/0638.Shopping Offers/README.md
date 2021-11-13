@@ -63,7 +63,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def shoppingOffers(self, price: List[int], special: List[List[int]], needs: List[int]) -> int:
+        min_cost = dict()
+        n = len(needs)
 
+        def dfs(cur_needs):
+            if str(cur_needs) not in min_cost:
+                min_price = 0
+                for i in range(n):
+                    min_price += cur_needs[i] * price[i]
+                for sp in special:
+                    sale = sp[n]
+                    left_needs = list()
+                    for i in range(n):
+                        if sp[i] > cur_needs[i]:
+                            break
+                        else:
+                            left_needs.append(cur_needs[i] - sp[i])
+                        if len(left_needs) == n:
+                            min_price = min(min_price, dfs(left_needs) + sale)
+                min_cost[str(cur_needs)] = min_price      
+            return min_cost[str(cur_needs)]
+        
+        return dfs(needs)
 ```
 
 ### **Java**
@@ -71,7 +94,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    Map<List<Integer>, Integer> min_cost = new HashMap<>();
 
+    public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
+        return dfs(price, special, needs);
+    }
+
+    public int dfs(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
+        if (!min_cost.containsKey(needs)) {
+            int n = needs.size();
+            int min_price = 0;
+            for (int i = 0; i < n; i++) {
+                min_price += needs.get(i) * price.get(i);
+            }
+            for (List<Integer> sp : special) {
+                int salePrice = sp.get(n);
+                List<Integer> left_needs = new ArrayList<>();
+                for (int i = 0; i < n; ++i) {
+                    if (sp.get(i) > needs.get(i)) {
+                        break;
+                    }
+                    left_needs.add(needs.get(i) - sp.get(i));
+                }
+                if (left_needs.size() == n) {
+                    min_price = Math.min(min_price, dfs(price, special, left_needs) + salePrice);
+                }
+            }
+            min_cost.put(needs, min_price);
+        }
+        return min_cost.get(needs);
+    }
+}
 ```
 
 ### **...**
