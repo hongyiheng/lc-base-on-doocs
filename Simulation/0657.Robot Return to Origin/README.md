@@ -38,7 +38,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def judgeCircle(self, moves: str) -> bool:
+        x, y = 0, 0
+        for i in range(len(moves)):
+            if moves[i] == 'U':
+                y += 1
+            elif moves[i] == 'D':
+                y -= 1
+            elif moves[i] == 'R':
+                x += 1
+            elif moves[i] == 'L':
+                x -= 1
+        return x == 0 and y == 0
 ```
 
 ### **Java**
@@ -46,7 +58,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int x = 0, y = 0;
+        char[] chars = moves.toCharArray();
+        for (char c : chars) {
+            if (c == 'U') {
+                y++;
+            } else if (c == 'D') {
+                y--;
+            } else if (c == 'R') {
+                x++;
+            } else if (c == 'L') {
+                x--;
+            }
+        }
+        return x == 0 && y == 0;
+    }
+}
 ```
 
 ### **...**
