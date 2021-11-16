@@ -51,7 +51,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        m, n = len(matrix), len(matrix[0])
+        p = list()
+        for i in range(m):
+            for j in range(n):
+                p.append(matrix[i][j])
+        list.sort(p)
+        return p[k - 1]
 ```
 
 ### **Java**
@@ -59,7 +67,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        List<Integer> p = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                p.add(matrix[i][j]);
+            }
+        }
+        Collections.sort(p);
+        return p.get(k - 1);
+    }
+}
 ```
 
 ### **...**
