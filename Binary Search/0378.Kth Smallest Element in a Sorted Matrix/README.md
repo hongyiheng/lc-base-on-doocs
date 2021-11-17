@@ -51,7 +51,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        m = len(matrix)
+        n = len(matrix[0])
+        left, right = matrix[0][0], matrix[m - 1][n - 1]
+        
+        def getLessNumCount(mid):
+            row, col = m - 1, 0
+            res = 0
+            while row >= 0 and col < n:
+                if matrix[row][col] <= mid:
+                    res += row + 1
+                    col += 1
+                else:
+                    row -= 1
+            return res
+        
+        while left < right:
+            mid = (left + right) >> 1
+            if getLessNumCount(mid) < k:
+                left = mid + 1
+            else:
+                right = mid
+        return left
 ```
 
 ### **Java**
@@ -59,7 +82,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int row;
+    int col;
+    public int kthSmallest(int[][] matrix, int k) {
+        row = matrix.length;
+        col = matrix[0].length;
+        int left = matrix[0][0];
+        int right = matrix[row - 1][col - 1];
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            int count = getLessNumCount(matrix, mid);
+            if (count < k) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
 
+    private int getLessNumCount(int[][] matrix, int mid) {
+        int i = row - 1;
+        int j = 0;
+        int count = 0;
+        while (i >= 0 && j < col) {
+            if (matrix[i][j] <= mid) {
+                count += i + 1;
+                j++;
+            } else {
+                i--;
+            }
+        }
+        return count;
+    }
+}
 ```
 
 ### **...**
