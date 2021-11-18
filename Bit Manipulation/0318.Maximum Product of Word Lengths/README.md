@@ -54,7 +54,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxProduct(self, words: List[str]) -> int:
+        n, index = len(words), 0
+        sim = [0] * n
+        for w in words:
+            t = 0
+            for i in range(len(w)):
+                u = ord(w[i]) - ord('a')
+                t |= (1 << u)
+            sim[index] = t
+            index += 1
+        ans = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                if sim[i] & sim[j] == 0:
+                    ans = max(ans, len(words[i]) * len(words[j]))
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +78,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxProduct(String[] words) {
+        int n = words.length;
+        int[] sim = new int[n];
+        int index = 0;
+        for (String w : words) {
+            int t = 0;
+            char[] chars = w.toCharArray();
+            for (char c : chars) {
+                int u = c - 'a';
+                t |= (1 << u);
+            }
+            sim[index++] = t;
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if ((sim[i] & sim[j]) == 0) {
+                    ans = Math.max(words[i].length() * words[j].length(), ans);
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
