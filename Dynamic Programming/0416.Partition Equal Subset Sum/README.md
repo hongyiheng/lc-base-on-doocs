@@ -46,7 +46,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n, total = len(nums), sum(nums)
+        if total % 2 != 0:
+            return False
+        mid = total >> 1
+        dp = [[0] * (mid + 1) for _ in range(n)]
+        for i in range(mid + 1):
+            dp[0][i] = nums[0] if i >= nums[0] else 0
+        for i in range(1, n):
+            t = nums[i]
+            for j in range(mid + 1):
+                a = dp[i - 1][j]
+                b = dp[i - 1][j - t] + t if j >= t else 0
+                dp[i][j] = max(a, b)
+        return dp[n - 1][mid] == mid
 ```
 
 ### **Java**
@@ -54,7 +69,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int sum = Arrays.stream(nums).sum();
+        if (sum % 2 != 0) {
+            return false;
+        }
+        int mid = sum / 2;
+        int n = nums.length;
+        int[][] dp = new int[n][mid + 1];
+        for (int i = 0; i < mid + 1; i++) {
+            dp[0][i] = i > nums[0] ? nums[0] : 0;
+        }
+        for (int i = 1; i < n; i++) {
+            int t = nums[i];
+            for (int j = 0; j < mid + 1; j++) {
+                int a = dp[i - 1][j];
+                int b = j >= t ? dp[i - 1][j - t] + t : 0;
+                dp[i][j] = Math.max(a, b);
+            }
+        }
+        return dp[n - 1][mid] == mid;
+    }
+}
 ```
 
 ### **...**
