@@ -1,6 +1,6 @@
 # [751. IP 到 CIDR](https://leetcode-cn.com/problems/ip-to-cidr)
 
-[English Version](/solution/0700-0799/0751.IP%20to%20CIDR/README_EN.md)
+
 
 ## 题目描述
 

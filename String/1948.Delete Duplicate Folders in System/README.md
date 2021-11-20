@@ -1,6 +1,6 @@
 # [1948. 删除系统中的重复文件夹](https://leetcode-cn.com/problems/delete-duplicate-folders-in-system)
 
-[English Version](/solution/1900-1999/1948.Delete%20Duplicate%20Folders%20in%20System/README_EN.md)
+
 
 ## 题目描述
 

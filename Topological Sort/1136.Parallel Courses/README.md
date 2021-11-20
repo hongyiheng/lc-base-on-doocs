@@ -1,6 +1,6 @@
 # [1136. 平行课程](https://leetcode-cn.com/problems/parallel-courses)
 
-[English Version](/solution/1100-1199/1136.Parallel%20Courses/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [539. 最小时间差](https://leetcode-cn.com/problems/minimum-time-difference)
 
-[English Version](/solution/0500-0599/0539.Minimum%20Time%20Difference/README_EN.md)
+
 
 ## 题目描述
 

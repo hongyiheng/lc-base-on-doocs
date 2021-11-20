@@ -1,6 +1,6 @@
 # [479. 最大回文数乘积](https://leetcode-cn.com/problems/largest-palindrome-product)
 
-[English Version](/solution/0400-0499/0479.Largest%20Palindrome%20Product/README_EN.md)
+
 
 ## 题目描述
 

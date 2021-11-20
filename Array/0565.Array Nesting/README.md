@@ -1,6 +1,6 @@
 # [565. 数组嵌套](https://leetcode-cn.com/problems/array-nesting)
 
-[English Version](/solution/0500-0599/0565.Array%20Nesting/README_EN.md)
+
 
 ## 题目描述
 

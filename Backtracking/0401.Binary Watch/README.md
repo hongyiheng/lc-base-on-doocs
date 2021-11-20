@@ -1,6 +1,6 @@
 # [401. 二进制手表](https://leetcode-cn.com/problems/binary-watch)
 
-[English Version](/solution/0400-0499/0401.Binary%20Watch/README_EN.md)
+
 
 ## 题目描述
 

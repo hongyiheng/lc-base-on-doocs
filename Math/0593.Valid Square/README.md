@@ -1,6 +1,6 @@
 # [593. 有效的正方形](https://leetcode-cn.com/problems/valid-square)
 
-[English Version](/solution/0500-0599/0593.Valid%20Square/README_EN.md)
+
 
 ## 题目描述
 

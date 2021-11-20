@@ -1,6 +1,6 @@
 # [1001. 网格照明](https://leetcode-cn.com/problems/grid-illumination)
 
-[English Version](/solution/1000-1099/1001.Grid%20Illumination/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [640. 求解方程](https://leetcode-cn.com/problems/solve-the-equation)
 
-[English Version](/solution/0600-0699/0640.Solve%20the%20Equation/README_EN.md)
+
 
 ## 题目描述
 

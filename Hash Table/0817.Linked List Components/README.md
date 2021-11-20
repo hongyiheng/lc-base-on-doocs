@@ -1,6 +1,6 @@
 # [817. 链表组件](https://leetcode-cn.com/problems/linked-list-components)
 
-[English Version](/solution/0800-0899/0817.Linked%20List%20Components/README_EN.md)
+
 
 ## 题目描述
 

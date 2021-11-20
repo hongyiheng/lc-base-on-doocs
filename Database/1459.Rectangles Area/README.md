@@ -1,6 +1,6 @@
 # [1459. 矩形面积](https://leetcode-cn.com/problems/rectangles-area)
 
-[English Version](/solution/1400-1499/1459.Rectangles%20Area/README_EN.md)
+
 
 ## 题目描述
 

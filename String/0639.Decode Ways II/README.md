@@ -1,6 +1,6 @@
 # [639. 解码方法 II](https://leetcode-cn.com/problems/decode-ways-ii)
 
-[English Version](/solution/0600-0699/0639.Decode%20Ways%20II/README_EN.md)
+
 
 ## 题目描述
 

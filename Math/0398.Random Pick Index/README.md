@@ -1,6 +1,6 @@
 # [398. 随机数索引](https://leetcode-cn.com/problems/random-pick-index)
 
-[English Version](/solution/0300-0399/0398.Random%20Pick%20Index/README_EN.md)
+
 
 ## 题目描述
 

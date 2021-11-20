@@ -1,6 +1,6 @@
 # [233. 数字 1 的个数](https://leetcode-cn.com/problems/number-of-digit-one)
 
-[English Version](/solution/0200-0299/0233.Number%20of%20Digit%20One/README_EN.md)
+
 
 ## 题目描述
 

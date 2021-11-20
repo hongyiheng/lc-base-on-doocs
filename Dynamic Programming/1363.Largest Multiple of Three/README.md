@@ -1,6 +1,6 @@
 # [1363. 形成三的最大倍数](https://leetcode-cn.com/problems/largest-multiple-of-three)
 
-[English Version](/solution/1300-1399/1363.Largest%20Multiple%20of%20Three/README_EN.md)
+
 
 ## 题目描述
 

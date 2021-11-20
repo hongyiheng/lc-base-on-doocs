@@ -1,6 +1,6 @@
 # [1987. 不同的好子序列数目](https://leetcode-cn.com/problems/number-of-unique-good-subsequences)
 
-[English Version](/solution/1900-1999/1987.Number%20of%20Unique%20Good%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

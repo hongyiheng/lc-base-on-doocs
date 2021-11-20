@@ -1,6 +1,6 @@
 # [36. 有效的数独](https://leetcode-cn.com/problems/valid-sudoku)
 
-[English Version](/solution/0000-0099/0036.Valid%20Sudoku/README_EN.md)
+
 
 ## 题目描述
 

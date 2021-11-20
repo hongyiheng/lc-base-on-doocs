@@ -1,6 +1,6 @@
 # [229. 求众数 II](https://leetcode-cn.com/problems/majority-element-ii)
 
-[English Version](/solution/0200-0299/0229.Majority%20Element%20II/README_EN.md)
+
 
 ## 题目描述
 

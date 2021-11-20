@@ -1,6 +1,6 @@
 # [59. 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii)
 
-[English Version](/solution/0000-0099/0059.Spiral%20Matrix%20II/README_EN.md)
+
 
 ## 题目描述
 

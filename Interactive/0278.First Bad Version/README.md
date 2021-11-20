@@ -1,6 +1,6 @@
 # [278. 第一个错误的版本](https://leetcode-cn.com/problems/first-bad-version)
 
-[English Version](/solution/0200-0299/0278.First%20Bad%20Version/README_EN.md)
+
 
 ## 题目描述
 

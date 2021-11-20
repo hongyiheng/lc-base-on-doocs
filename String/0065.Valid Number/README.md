@@ -1,6 +1,6 @@
 # [65. 有效数字](https://leetcode-cn.com/problems/valid-number)
 
-[English Version](/solution/0000-0099/0065.Valid%20Number/README_EN.md)
+
 
 ## 题目描述
 

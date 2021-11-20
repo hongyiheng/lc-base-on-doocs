@@ -1,6 +1,6 @@
 # [762. 二进制表示中质数个计算置位](https://leetcode-cn.com/problems/prime-number-of-set-bits-in-binary-representation)
 
-[English Version](/solution/0700-0799/0762.Prime%20Number%20of%20Set%20Bits%20in%20Binary%20Representation/README_EN.md)
+
 
 ## 题目描述
 

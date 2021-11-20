@@ -1,6 +1,6 @@
 # [251. 展开二维向量](https://leetcode-cn.com/problems/flatten-2d-vector)
 
-[English Version](/solution/0200-0299/0251.Flatten%202D%20Vector/README_EN.md)
+
 
 ## 题目描述
 

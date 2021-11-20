@@ -1,6 +1,6 @@
 # [464. 我能赢吗](https://leetcode-cn.com/problems/can-i-win)
 
-[English Version](/solution/0400-0499/0464.Can%20I%20Win/README_EN.md)
+
 
 ## 题目描述
 

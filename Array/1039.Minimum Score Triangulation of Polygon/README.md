@@ -1,6 +1,6 @@
 # [1039. 多边形三角剖分的最低得分](https://leetcode-cn.com/problems/minimum-score-triangulation-of-polygon)
 
-[English Version](/solution/1000-1099/1039.Minimum%20Score%20Triangulation%20of%20Polygon/README_EN.md)
+
 
 ## 题目描述
 

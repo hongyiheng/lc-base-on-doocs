@@ -1,6 +1,6 @@
 # [1767. 寻找没有被执行的任务对](https://leetcode-cn.com/problems/find-the-subtasks-that-did-not-execute)
 
-[English Version](/solution/1700-1799/1767.Find%20the%20Subtasks%20That%20Did%20Not%20Execute/README_EN.md)
+
 
 ## 题目描述
 

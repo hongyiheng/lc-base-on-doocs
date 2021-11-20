@@ -1,6 +1,6 @@
 # [367. 有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square)
 
-[English Version](/solution/0300-0399/0367.Valid%20Perfect%20Square/README_EN.md)
+
 
 ## 题目描述
 

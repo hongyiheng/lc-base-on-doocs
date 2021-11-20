@@ -1,6 +1,6 @@
 # [1992. 找到所有的农场组](https://leetcode-cn.com/problems/find-all-groups-of-farmland)
 
-[English Version](/solution/1900-1999/1992.Find%20All%20Groups%20of%20Farmland/README_EN.md)
+
 
 ## 题目描述
 

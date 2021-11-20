@@ -1,6 +1,6 @@
 # [424. 替换后的最长重复字符](https://leetcode-cn.com/problems/longest-repeating-character-replacement)
 
-[English Version](/solution/0400-0499/0424.Longest%20Repeating%20Character%20Replacement/README_EN.md)
+
 
 ## 题目描述
 

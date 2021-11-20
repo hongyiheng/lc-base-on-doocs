@@ -1,6 +1,6 @@
 # [283. 移动零](https://leetcode-cn.com/problems/move-zeroes)
 
-[English Version](/solution/0200-0299/0283.Move%20Zeroes/README_EN.md)
+
 
 ## 题目描述
 

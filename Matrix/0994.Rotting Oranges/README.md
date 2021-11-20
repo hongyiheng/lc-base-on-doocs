@@ -1,6 +1,6 @@
 # [994. 腐烂的橘子](https://leetcode-cn.com/problems/rotting-oranges)
 
-[English Version](/solution/0900-0999/0994.Rotting%20Oranges/README_EN.md)
+
 
 ## 题目描述
 

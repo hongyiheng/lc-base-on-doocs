@@ -1,6 +1,6 @@
 # [647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings)
 
-[English Version](/solution/0600-0699/0647.Palindromic%20Substrings/README_EN.md)
+
 
 ## 题目描述
 

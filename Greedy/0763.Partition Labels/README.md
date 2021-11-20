@@ -1,6 +1,6 @@
 # [763. 划分字母区间](https://leetcode-cn.com/problems/partition-labels)
 
-[English Version](/solution/0700-0799/0763.Partition%20Labels/README_EN.md)
+
 
 ## 题目描述
 

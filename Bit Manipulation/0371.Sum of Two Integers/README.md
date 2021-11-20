@@ -1,6 +1,6 @@
 # [371. 两整数之和](https://leetcode-cn.com/problems/sum-of-two-integers)
 
-[English Version](/solution/0300-0399/0371.Sum%20of%20Two%20Integers/README_EN.md)
+
 
 ## 题目描述
 

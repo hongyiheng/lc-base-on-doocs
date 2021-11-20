@@ -1,6 +1,6 @@
 # [1499. 满足不等式的最大值](https://leetcode-cn.com/problems/max-value-of-equation)
 
-[English Version](/solution/1400-1499/1499.Max%20Value%20of%20Equation/README_EN.md)
+
 
 ## 题目描述
 

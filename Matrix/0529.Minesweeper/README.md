@@ -1,6 +1,6 @@
 # [529. 扫雷游戏](https://leetcode-cn.com/problems/minesweeper)
 
-[English Version](/solution/0500-0599/0529.Minesweeper/README_EN.md)
+
 
 ## 题目描述
 

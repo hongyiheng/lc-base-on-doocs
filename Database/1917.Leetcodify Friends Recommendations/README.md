@@ -1,6 +1,6 @@
 # [1917. Leetcodify Friends Recommendations](https://leetcode-cn.com/problems/leetcodify-friends-recommendations)
 
-[English Version](/solution/1900-1999/1917.Leetcodify%20Friends%20Recommendations/README_EN.md)
+
 
 ## 题目描述
 

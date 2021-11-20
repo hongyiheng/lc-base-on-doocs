@@ -1,6 +1,6 @@
 # [966. 元音拼写检查器](https://leetcode-cn.com/problems/vowel-spellchecker)
 
-[English Version](/solution/0900-0999/0966.Vowel%20Spellchecker/README_EN.md)
+
 
 ## 题目描述
 

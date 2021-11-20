@@ -1,6 +1,6 @@
 # [514. 自由之路](https://leetcode-cn.com/problems/freedom-trail)
 
-[English Version](/solution/0500-0599/0514.Freedom%20Trail/README_EN.md)
+
 
 ## 题目描述
 

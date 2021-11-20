@@ -1,6 +1,6 @@
 # [41. 缺失的第一个正数](https://leetcode-cn.com/problems/first-missing-positive)
 
-[English Version](/solution/0000-0099/0041.First%20Missing%20Positive/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1370. 上升下降字符串](https://leetcode-cn.com/problems/increasing-decreasing-string)
 
-[English Version](/solution/1300-1399/1370.Increasing%20Decreasing%20String/README_EN.md)
+
 
 ## 题目描述
 

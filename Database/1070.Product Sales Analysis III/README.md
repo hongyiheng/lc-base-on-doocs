@@ -1,6 +1,6 @@
 # [1070. 产品销售分析 III](https://leetcode-cn.com/problems/product-sales-analysis-iii)
 
-[English Version](/solution/1000-1099/1070.Product%20Sales%20Analysis%20III/README_EN.md)
+
 
 ## 题目描述
 

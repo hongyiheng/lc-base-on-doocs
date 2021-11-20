@@ -1,6 +1,6 @@
 # [777. 在LR字符串中交换相邻字符](https://leetcode-cn.com/problems/swap-adjacent-in-lr-string)
 
-[English Version](/solution/0700-0799/0777.Swap%20Adjacent%20in%20LR%20String/README_EN.md)
+
 
 ## 题目描述
 

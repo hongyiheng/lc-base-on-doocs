@@ -1,6 +1,6 @@
 # [990. 等式方程的可满足性](https://leetcode-cn.com/problems/satisfiability-of-equality-equations)
 
-[English Version](/solution/0900-0999/0990.Satisfiability%20of%20Equality%20Equations/README_EN.md)
+
 
 ## 题目描述
 

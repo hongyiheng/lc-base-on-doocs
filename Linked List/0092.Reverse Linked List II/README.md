@@ -1,6 +1,6 @@
 # [92. 反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii)
 
-[English Version](/solution/0000-0099/0092.Reverse%20Linked%20List%20II/README_EN.md)
+
 
 ## 题目描述
 

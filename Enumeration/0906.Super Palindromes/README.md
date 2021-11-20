@@ -1,6 +1,6 @@
 # [906. 超级回文数](https://leetcode-cn.com/problems/super-palindromes)
 
-[English Version](/solution/0900-0999/0906.Super%20Palindromes/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [273. 整数转换英文表示](https://leetcode-cn.com/problems/integer-to-english-words)
 
-[English Version](/solution/0200-0299/0273.Integer%20to%20English%20Words/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1223. 掷骰子模拟](https://leetcode-cn.com/problems/dice-roll-simulation)
 
-[English Version](/solution/1200-1299/1223.Dice%20Roll%20Simulation/README_EN.md)
+
 
 ## 题目描述
 

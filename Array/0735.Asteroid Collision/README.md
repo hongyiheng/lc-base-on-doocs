@@ -1,6 +1,6 @@
 # [735. 行星碰撞](https://leetcode-cn.com/problems/asteroid-collision)
 
-[English Version](/solution/0700-0799/0735.Asteroid%20Collision/README_EN.md)
+
 
 ## 题目描述
 

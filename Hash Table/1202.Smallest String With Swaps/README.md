@@ -1,6 +1,6 @@
 # [1202. 交换字符串中的元素](https://leetcode-cn.com/problems/smallest-string-with-swaps)
 
-[English Version](/solution/1200-1299/1202.Smallest%20String%20With%20Swaps/README_EN.md)
+
 
 ## 题目描述
 

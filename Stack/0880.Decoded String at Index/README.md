@@ -1,6 +1,6 @@
 # [880. 索引处的解码字符串](https://leetcode-cn.com/problems/decoded-string-at-index)
 
-[English Version](/solution/0800-0899/0880.Decoded%20String%20at%20Index/README_EN.md)
+
 
 ## 题目描述
 

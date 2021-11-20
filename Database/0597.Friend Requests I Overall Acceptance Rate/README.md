@@ -1,6 +1,6 @@
 # [597. 好友申请 I：总体通过率](https://leetcode-cn.com/problems/friend-requests-i-overall-acceptance-rate)
 
-[English Version](/solution/0500-0599/0597.Friend%20Requests%20I%20Overall%20Acceptance%20Rate/README_EN.md)
+
 
 ## 题目描述
 

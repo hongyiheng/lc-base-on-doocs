@@ -1,6 +1,6 @@
 # [11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water)
 
-[English Version](/solution/0000-0099/0011.Container%20With%20Most%20Water/README_EN.md)
+
 
 ## 题目描述
 

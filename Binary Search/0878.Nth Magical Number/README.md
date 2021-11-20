@@ -1,6 +1,6 @@
 # [878. 第 N 个神奇数字](https://leetcode-cn.com/problems/nth-magical-number)
 
-[English Version](/solution/0800-0899/0878.Nth%20Magical%20Number/README_EN.md)
+
 
 ## 题目描述
 

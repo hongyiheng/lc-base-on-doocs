@@ -1,6 +1,6 @@
 # [839. 相似字符串组](https://leetcode-cn.com/problems/similar-string-groups)
 
-[English Version](/solution/0800-0899/0839.Similar%20String%20Groups/README_EN.md)
+
 
 ## 题目描述
 

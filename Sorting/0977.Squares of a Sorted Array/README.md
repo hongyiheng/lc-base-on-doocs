@@ -1,6 +1,6 @@
 # [977. 有序数组的平方](https://leetcode-cn.com/problems/squares-of-a-sorted-array)
 
-[English Version](/solution/0900-0999/0977.Squares%20of%20a%20Sorted%20Array/README_EN.md)
+
 
 ## 题目描述
 

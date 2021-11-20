@@ -1,6 +1,6 @@
 # [447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs)
 
-[English Version](/solution/0400-0499/0447.Number%20of%20Boomerangs/README_EN.md)
+
 
 ## 题目描述
 

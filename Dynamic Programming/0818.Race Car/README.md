@@ -1,6 +1,6 @@
 # [818. 赛车](https://leetcode-cn.com/problems/race-car)
 
-[English Version](/solution/0800-0899/0818.Race%20Car/README_EN.md)
+
 
 ## 题目描述
 

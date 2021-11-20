@@ -1,6 +1,6 @@
 # [1419. 数青蛙](https://leetcode-cn.com/problems/minimum-number-of-frogs-croaking)
 
-[English Version](/solution/1400-1499/1419.Minimum%20Number%20of%20Frogs%20Croaking/README_EN.md)
+
 
 ## 题目描述
 

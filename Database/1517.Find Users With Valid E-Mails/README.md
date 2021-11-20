@@ -1,6 +1,6 @@
 # [1517. 查找拥有有效邮箱的用户](https://leetcode-cn.com/problems/find-users-with-valid-e-mails)
 
-[English Version](/solution/1500-1599/1517.Find%20Users%20With%20Valid%20E-Mails/README_EN.md)
+
 
 ## 题目描述
 

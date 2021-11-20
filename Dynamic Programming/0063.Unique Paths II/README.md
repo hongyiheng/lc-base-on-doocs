@@ -1,6 +1,6 @@
 # [63. 不同路径 II](https://leetcode-cn.com/problems/unique-paths-ii)
 
-[English Version](/solution/0000-0099/0063.Unique%20Paths%20II/README_EN.md)
+
 
 ## 题目描述
 

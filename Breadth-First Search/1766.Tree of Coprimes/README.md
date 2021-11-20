@@ -1,6 +1,6 @@
 # [1766. 互质树](https://leetcode-cn.com/problems/tree-of-coprimes)
 
-[English Version](/solution/1700-1799/1766.Tree%20of%20Coprimes/README_EN.md)
+
 
 ## 题目描述
 

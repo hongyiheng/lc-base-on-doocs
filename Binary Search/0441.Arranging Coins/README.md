@@ -1,6 +1,6 @@
 # [441. 排列硬币](https://leetcode-cn.com/problems/arranging-coins)
 
-[English Version](/solution/0400-0499/0441.Arranging%20Coins/README_EN.md)
+
 
 ## 题目描述
 

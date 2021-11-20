@@ -1,6 +1,6 @@
 # [1768. 交替合并字符串](https://leetcode-cn.com/problems/merge-strings-alternately)
 
-[English Version](/solution/1700-1799/1768.Merge%20Strings%20Alternately/README_EN.md)
+
 
 ## 题目描述
 

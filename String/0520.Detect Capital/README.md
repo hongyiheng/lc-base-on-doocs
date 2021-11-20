@@ -1,6 +1,6 @@
 # [520. 检测大写字母](https://leetcode-cn.com/problems/detect-capital)
 
-[English Version](/solution/0500-0599/0520.Detect%20Capital/README_EN.md)
+
 
 ## 题目描述
 

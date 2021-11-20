@@ -1,6 +1,6 @@
 # [575. 分糖果](https://leetcode-cn.com/problems/distribute-candies)
 
-[English Version](/solution/0500-0599/0575.Distribute%20Candies/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [556. 下一个更大元素 III](https://leetcode-cn.com/problems/next-greater-element-iii)
 
-[English Version](/solution/0500-0599/0556.Next%20Greater%20Element%20III/README_EN.md)
+
 
 ## 题目描述
 

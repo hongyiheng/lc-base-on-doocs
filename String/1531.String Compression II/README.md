@@ -1,6 +1,6 @@
 # [1531. 压缩字符串 II](https://leetcode-cn.com/problems/string-compression-ii)
 
-[English Version](/solution/1500-1599/1531.String%20Compression%20II/README_EN.md)
+
 
 ## 题目描述
 

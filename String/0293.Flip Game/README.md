@@ -1,6 +1,6 @@
 # [293. 翻转游戏](https://leetcode-cn.com/problems/flip-game)
 
-[English Version](/solution/0200-0299/0293.Flip%20Game/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [998. 最大二叉树 II](https://leetcode-cn.com/problems/maximum-binary-tree-ii)
 
-[English Version](/solution/0900-0999/0998.Maximum%20Binary%20Tree%20II/README_EN.md)
+
 
 ## 题目描述
 

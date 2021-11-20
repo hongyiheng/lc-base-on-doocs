@@ -1,6 +1,6 @@
 # [724. 寻找数组的中心下标](https://leetcode-cn.com/problems/find-pivot-index)
 
-[English Version](/solution/0700-0799/0724.Find%20Pivot%20Index/README_EN.md)
+
 
 ## 题目描述
 

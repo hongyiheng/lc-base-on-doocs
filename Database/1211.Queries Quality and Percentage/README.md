@@ -1,6 +1,6 @@
 # [1211. 查询结果的质量和占比](https://leetcode-cn.com/problems/queries-quality-and-percentage)
 
-[English Version](/solution/1200-1299/1211.Queries%20Quality%20and%20Percentage/README_EN.md)
+
 
 ## 题目描述
 

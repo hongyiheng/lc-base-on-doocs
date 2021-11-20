@@ -1,6 +1,6 @@
 # [1231. 分享巧克力](https://leetcode-cn.com/problems/divide-chocolate)
 
-[English Version](/solution/1200-1299/1231.Divide%20Chocolate/README_EN.md)
+
 
 ## 题目描述
 

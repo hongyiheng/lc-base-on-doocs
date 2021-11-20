@@ -1,6 +1,6 @@
 # [1264. 页面推荐](https://leetcode-cn.com/problems/page-recommendations)
 
-[English Version](/solution/1200-1299/1264.Page%20Recommendations/README_EN.md)
+
 
 ## 题目描述
 

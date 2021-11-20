@@ -1,6 +1,6 @@
 # [1324. 竖直打印单词](https://leetcode-cn.com/problems/print-words-vertically)
 
-[English Version](/solution/1300-1399/1324.Print%20Words%20Vertically/README_EN.md)
+
 
 ## 题目描述
 

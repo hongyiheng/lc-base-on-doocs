@@ -1,6 +1,6 @@
 # [896. 单调数列](https://leetcode-cn.com/problems/monotonic-array)
 
-[English Version](/solution/0800-0899/0896.Monotonic%20Array/README_EN.md)
+
 
 ## 题目描述
 

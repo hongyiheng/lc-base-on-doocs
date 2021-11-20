@@ -1,6 +1,6 @@
 # [1826. 有缺陷的传感器](https://leetcode-cn.com/problems/faulty-sensor)
 
-[English Version](/solution/1800-1899/1826.Faulty%20Sensor/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures)
 
-[English Version](/solution/0700-0799/0739.Daily%20Temperatures/README_EN.md)
+
 
 ## 题目描述
 

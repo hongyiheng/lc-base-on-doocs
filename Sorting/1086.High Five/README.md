@@ -1,6 +1,6 @@
 # [1086. 前五科的均分](https://leetcode-cn.com/problems/high-five)
 
-[English Version](/solution/1000-1099/1086.High%20Five/README_EN.md)
+
 
 ## 题目描述
 

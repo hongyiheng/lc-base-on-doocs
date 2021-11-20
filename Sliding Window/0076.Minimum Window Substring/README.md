@@ -1,6 +1,6 @@
 # [76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring)
 
-[English Version](/solution/0000-0099/0076.Minimum%20Window%20Substring/README_EN.md)
+
 
 ## 题目描述
 

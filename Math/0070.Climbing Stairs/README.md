@@ -1,6 +1,6 @@
 # [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs)
 
-[English Version](/solution/0000-0099/0070.Climbing%20Stairs/README_EN.md)
+
 
 ## 题目描述
 

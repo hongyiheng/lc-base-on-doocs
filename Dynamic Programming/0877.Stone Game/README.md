@@ -1,6 +1,6 @@
 # [877. 石子游戏](https://leetcode-cn.com/problems/stone-game)
 
-[English Version](/solution/0800-0899/0877.Stone%20Game/README_EN.md)
+
 
 ## 题目描述
 

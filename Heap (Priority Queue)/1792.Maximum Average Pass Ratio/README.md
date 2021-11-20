@@ -1,6 +1,6 @@
 # [1792. 最大平均通过率](https://leetcode-cn.com/problems/maximum-average-pass-ratio)
 
-[English Version](/solution/1700-1799/1792.Maximum%20Average%20Pass%20Ratio/README_EN.md)
+
 
 ## 题目描述
 

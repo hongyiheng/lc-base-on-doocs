@@ -1,6 +1,6 @@
 # [937. 重新排列日志文件](https://leetcode-cn.com/problems/reorder-data-in-log-files)
 
-[English Version](/solution/0900-0999/0937.Reorder%20Data%20in%20Log%20Files/README_EN.md)
+
 
 ## 题目描述
 

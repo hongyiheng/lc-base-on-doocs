@@ -1,6 +1,6 @@
 # [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray)
 
-[English Version](/solution/0000-0099/0053.Maximum%20Subarray/README_EN.md)
+
 
 ## 题目描述
 

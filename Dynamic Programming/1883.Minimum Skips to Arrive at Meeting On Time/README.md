@@ -1,6 +1,6 @@
 # [1883. 准时抵达会议现场的最小跳过休息次数](https://leetcode-cn.com/problems/minimum-skips-to-arrive-at-meeting-on-time)
 
-[English Version](/solution/1800-1899/1883.Minimum%20Skips%20to%20Arrive%20at%20Meeting%20On%20Time/README_EN.md)
+
 
 ## 题目描述
 

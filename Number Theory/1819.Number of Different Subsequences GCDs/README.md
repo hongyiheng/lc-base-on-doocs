@@ -1,6 +1,6 @@
 # [1819. 序列中不同最大公约数的数目](https://leetcode-cn.com/problems/number-of-different-subsequences-gcds)
 
-[English Version](/solution/1800-1899/1819.Number%20of%20Different%20Subsequences%20GCDs/README_EN.md)
+
 
 ## 题目描述
 

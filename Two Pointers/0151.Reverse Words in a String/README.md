@@ -1,6 +1,6 @@
 # [151. 翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string)
 
-[English Version](/solution/0100-0199/0151.Reverse%20Words%20in%20a%20String/README_EN.md)
+
 
 ## 题目描述
 

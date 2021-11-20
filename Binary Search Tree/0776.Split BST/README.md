@@ -1,6 +1,6 @@
 # [776. 拆分二叉搜索树](https://leetcode-cn.com/problems/split-bst)
 
-[English Version](/solution/0700-0799/0776.Split%20BST/README_EN.md)
+
 
 ## 题目描述
 

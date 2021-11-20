@@ -1,6 +1,6 @@
 # [1110. 删点成林](https://leetcode-cn.com/problems/delete-nodes-and-return-forest)
 
-[English Version](/solution/1100-1199/1110.Delete%20Nodes%20And%20Return%20Forest/README_EN.md)
+
 
 ## 题目描述
 

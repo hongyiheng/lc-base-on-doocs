@@ -1,6 +1,6 @@
 # [1529. 灯泡开关 IV](https://leetcode-cn.com/problems/bulb-switcher-iv)
 
-[English Version](/solution/1500-1599/1529.Bulb%20Switcher%20IV/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1064. 不动点](https://leetcode-cn.com/problems/fixed-point)
 
-[English Version](/solution/1000-1099/1064.Fixed%20Point/README_EN.md)
+
 
 ## 题目描述
 

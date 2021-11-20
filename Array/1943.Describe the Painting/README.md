@@ -1,6 +1,6 @@
 # [1943. 描述绘画结果](https://leetcode-cn.com/problems/describe-the-painting)
 
-[English Version](/solution/1900-1999/1943.Describe%20the%20Painting/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1524. 和为奇数的子数组数目](https://leetcode-cn.com/problems/number-of-sub-arrays-with-odd-sum)
 
-[English Version](/solution/1500-1599/1524.Number%20of%20Sub-arrays%20With%20Odd%20Sum/README_EN.md)
+
 
 ## 题目描述
 

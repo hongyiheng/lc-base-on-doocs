@@ -1,6 +1,6 @@
 # [560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k)
 
-[English Version](/solution/0500-0599/0560.Subarray%20Sum%20Equals%20K/README_EN.md)
+
 
 ## 题目描述
 

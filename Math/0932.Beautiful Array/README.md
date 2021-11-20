@@ -1,6 +1,6 @@
 # [932. 漂亮数组](https://leetcode-cn.com/problems/beautiful-array)
 
-[English Version](/solution/0900-0999/0932.Beautiful%20Array/README_EN.md)
+
 
 ## 题目描述
 

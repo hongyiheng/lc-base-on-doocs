@@ -1,6 +1,6 @@
 # [646. 最长数对链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain)
 
-[English Version](/solution/0600-0699/0646.Maximum%20Length%20of%20Pair%20Chain/README_EN.md)
+
 
 ## 题目描述
 

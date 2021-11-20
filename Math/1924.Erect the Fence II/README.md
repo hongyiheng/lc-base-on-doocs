@@ -1,6 +1,6 @@
 # [1924. Erect the Fence II](https://leetcode-cn.com/problems/erect-the-fence-ii)
 
-[English Version](/solution/1900-1999/1924.Erect%20the%20Fence%20II/README_EN.md)
+
 
 ## 题目描述
 

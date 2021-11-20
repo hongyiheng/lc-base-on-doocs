@@ -1,6 +1,6 @@
 # [1971. Find if Path Exists in Graph](https://leetcode-cn.com/problems/find-if-path-exists-in-graph)
 
-[English Version](/solution/1900-1999/1971.Find%20if%20Path%20Exists%20in%20Graph/README_EN.md)
+
 
 ## 题目描述
 

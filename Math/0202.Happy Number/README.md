@@ -1,6 +1,6 @@
 # [202. 快乐数](https://leetcode-cn.com/problems/happy-number)
 
-[English Version](/solution/0200-0299/0202.Happy%20Number/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1071. 字符串的最大公因子](https://leetcode-cn.com/problems/greatest-common-divisor-of-strings)
 
-[English Version](/solution/1000-1099/1071.Greatest%20Common%20Divisor%20of%20Strings/README_EN.md)
+
 
 ## 题目描述
 

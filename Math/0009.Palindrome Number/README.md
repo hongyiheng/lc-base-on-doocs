@@ -1,6 +1,6 @@
 # [9. 回文数](https://leetcode-cn.com/problems/palindrome-number)
 
-[English Version](/solution/0000-0099/0009.Palindrome%20Number/README_EN.md)
+
 
 ## 题目描述
 

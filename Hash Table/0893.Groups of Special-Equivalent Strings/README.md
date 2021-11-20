@@ -1,6 +1,6 @@
 # [893. 特殊等价字符串组](https://leetcode-cn.com/problems/groups-of-special-equivalent-strings)
 
-[English Version](/solution/0800-0899/0893.Groups%20of%20Special-Equivalent%20Strings/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [221. 最大正方形](https://leetcode-cn.com/problems/maximal-square)
 
-[English Version](/solution/0200-0299/0221.Maximal%20Square/README_EN.md)
+
 
 ## 题目描述
 

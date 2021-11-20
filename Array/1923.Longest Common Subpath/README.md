@@ -1,6 +1,6 @@
 # [1923. 最长公共子路径](https://leetcode-cn.com/problems/longest-common-subpath)
 
-[English Version](/solution/1900-1999/1923.Longest%20Common%20Subpath/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [194. 转置文件](https://leetcode-cn.com/problems/transpose-file)
 
-[English Version](/solution/0100-0199/0194.Transpose%20File/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [472. 连接词](https://leetcode-cn.com/problems/concatenated-words)
 
-[English Version](/solution/0400-0499/0472.Concatenated%20Words/README_EN.md)
+
 
 ## 题目描述
 

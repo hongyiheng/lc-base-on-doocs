@@ -1,6 +1,6 @@
 # [411. 最短独占单词缩写](https://leetcode-cn.com/problems/minimum-unique-word-abbreviation)
 
-[English Version](/solution/0400-0499/0411.Minimum%20Unique%20Word%20Abbreviation/README_EN.md)
+
 
 ## 题目描述
 

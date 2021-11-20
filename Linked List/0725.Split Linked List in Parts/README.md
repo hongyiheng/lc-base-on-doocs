@@ -1,6 +1,6 @@
 # [725. 分隔链表](https://leetcode-cn.com/problems/split-linked-list-in-parts)
 
-[English Version](/solution/0700-0799/0725.Split%20Linked%20List%20in%20Parts/README_EN.md)
+
 
 ## 题目描述
 

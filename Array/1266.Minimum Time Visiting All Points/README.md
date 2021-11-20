@@ -1,6 +1,6 @@
 # [1266. 访问所有点的最小时间](https://leetcode-cn.com/problems/minimum-time-visiting-all-points)
 
-[English Version](/solution/1200-1299/1266.Minimum%20Time%20Visiting%20All%20Points/README_EN.md)
+
 
 ## 题目描述
 

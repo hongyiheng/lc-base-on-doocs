@@ -1,6 +1,6 @@
 # [485. 最大连续 1 的个数](https://leetcode-cn.com/problems/max-consecutive-ones)
 
-[English Version](/solution/0400-0499/0485.Max%20Consecutive%20Ones/README_EN.md)
+
 
 ## 题目描述
 

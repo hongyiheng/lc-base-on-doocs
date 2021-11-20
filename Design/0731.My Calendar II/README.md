@@ -1,6 +1,6 @@
 # [731. 我的日程安排表 II](https://leetcode-cn.com/problems/my-calendar-ii)
 
-[English Version](/solution/0700-0799/0731.My%20Calendar%20II/README_EN.md)
+
 
 ## 题目描述
 

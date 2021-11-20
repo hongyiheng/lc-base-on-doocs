@@ -1,6 +1,6 @@
 # [1108. IP 地址无效化](https://leetcode-cn.com/problems/defanging-an-ip-address)
 
-[English Version](/solution/1100-1199/1108.Defanging%20an%20IP%20Address/README_EN.md)
+
 
 ## 题目描述
 

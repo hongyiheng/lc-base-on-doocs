@@ -1,6 +1,6 @@
 # [1765. 地图中的最高点](https://leetcode-cn.com/problems/map-of-highest-peak)
 
-[English Version](/solution/1700-1799/1765.Map%20of%20Highest%20Peak/README_EN.md)
+
 
 ## 题目描述
 

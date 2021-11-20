@@ -1,6 +1,6 @@
 # [455. 分发饼干](https://leetcode-cn.com/problems/assign-cookies)
 
-[English Version](/solution/0400-0499/0455.Assign%20Cookies/README_EN.md)
+
 
 ## 题目描述
 

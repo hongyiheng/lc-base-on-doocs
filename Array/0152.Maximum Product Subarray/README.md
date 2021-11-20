@@ -1,6 +1,6 @@
 # [152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray)
 
-[English Version](/solution/0100-0199/0152.Maximum%20Product%20Subarray/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [494. 目标和](https://leetcode-cn.com/problems/target-sum)
 
-[English Version](/solution/0400-0499/0494.Target%20Sum/README_EN.md)
+
 
 ## 题目描述
 

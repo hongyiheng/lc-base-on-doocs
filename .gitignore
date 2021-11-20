@@ -10,7 +10,8 @@
 /result.json
 /sql_problem_readme_template.md
 /sql_problem_readme_template_en.md
-/summary.md
+/_sidebar.md
 /summary_en.md
 /test.py
 /.idea/
+/node_moudles/

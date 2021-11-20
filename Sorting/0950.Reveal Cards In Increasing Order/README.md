@@ -1,6 +1,6 @@
 # [950. 按递增顺序显示卡牌](https://leetcode-cn.com/problems/reveal-cards-in-increasing-order)
 
-[English Version](/solution/0900-0999/0950.Reveal%20Cards%20In%20Increasing%20Order/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst)
 
-[English Version](/solution/0500-0599/0530.Minimum%20Absolute%20Difference%20in%20BST/README_EN.md)
+
 
 ## 题目描述
 

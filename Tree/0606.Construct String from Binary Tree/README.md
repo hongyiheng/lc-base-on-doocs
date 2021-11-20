@@ -1,6 +1,6 @@
 # [606. 根据二叉树创建字符串](https://leetcode-cn.com/problems/construct-string-from-binary-tree)
 
-[English Version](/solution/0600-0699/0606.Construct%20String%20from%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

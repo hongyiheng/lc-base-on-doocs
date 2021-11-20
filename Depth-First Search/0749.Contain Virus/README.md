@@ -1,6 +1,6 @@
 # [749. 隔离病毒](https://leetcode-cn.com/problems/contain-virus)
 
-[English Version](/solution/0700-0799/0749.Contain%20Virus/README_EN.md)
+
 
 ## 题目描述
 

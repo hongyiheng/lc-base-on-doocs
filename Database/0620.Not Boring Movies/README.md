@@ -1,6 +1,6 @@
 # [620. 有趣的电影](https://leetcode-cn.com/problems/not-boring-movies)
 
-[English Version](/solution/0600-0699/0620.Not%20Boring%20Movies/README_EN.md)
+
 
 ## 题目描述
 

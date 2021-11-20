@@ -1,6 +1,6 @@
 # [379. 电话目录管理系统](https://leetcode-cn.com/problems/design-phone-directory)
 
-[English Version](/solution/0300-0399/0379.Design%20Phone%20Directory/README_EN.md)
+
 
 ## 题目描述
 

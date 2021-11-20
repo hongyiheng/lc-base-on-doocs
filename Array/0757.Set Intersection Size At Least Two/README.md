@@ -1,6 +1,6 @@
 # [757. 设置交集大小至少为2](https://leetcode-cn.com/problems/set-intersection-size-at-least-two)
 
-[English Version](/solution/0700-0799/0757.Set%20Intersection%20Size%20At%20Least%20Two/README_EN.md)
+
 
 ## 题目描述
 

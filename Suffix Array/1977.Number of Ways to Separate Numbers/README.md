@@ -1,6 +1,6 @@
 # [1977. 划分数字的方案数](https://leetcode-cn.com/problems/number-of-ways-to-separate-numbers)
 
-[English Version](/solution/1900-1999/1977.Number%20of%20Ways%20to%20Separate%20Numbers/README_EN.md)
+
 
 ## 题目描述
 

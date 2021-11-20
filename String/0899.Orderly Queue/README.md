@@ -1,6 +1,6 @@
 # [899. 有序队列](https://leetcode-cn.com/problems/orderly-queue)
 
-[English Version](/solution/0800-0899/0899.Orderly%20Queue/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1068. 产品销售分析 I](https://leetcode-cn.com/problems/product-sales-analysis-i)
 
-[English Version](/solution/1000-1099/1068.Product%20Sales%20Analysis%20I/README_EN.md)
+
 
 ## 题目描述
 

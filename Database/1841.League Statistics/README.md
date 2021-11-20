@@ -1,6 +1,6 @@
 # [1841. 联赛信息统计](https://leetcode-cn.com/problems/league-statistics)
 
-[English Version](/solution/1800-1899/1841.League%20Statistics/README_EN.md)
+
 
 ## 题目描述
 

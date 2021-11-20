@@ -1,6 +1,6 @@
 # [1189. “气球” 的最大数量](https://leetcode-cn.com/problems/maximum-number-of-balloons)
 
-[English Version](/solution/1100-1199/1189.Maximum%20Number%20of%20Balloons/README_EN.md)
+
 
 ## 题目描述
 

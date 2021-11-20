@@ -1,6 +1,6 @@
 # [73. 矩阵置零](https://leetcode-cn.com/problems/set-matrix-zeroes)
 
-[English Version](/solution/0000-0099/0073.Set%20Matrix%20Zeroes/README_EN.md)
+
 
 ## 题目描述
 

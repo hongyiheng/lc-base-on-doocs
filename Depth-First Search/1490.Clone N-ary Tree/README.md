@@ -1,6 +1,6 @@
 # [1490. 克隆 N 叉树](https://leetcode-cn.com/problems/clone-n-ary-tree)
 
-[English Version](/solution/1400-1499/1490.Clone%20N-ary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

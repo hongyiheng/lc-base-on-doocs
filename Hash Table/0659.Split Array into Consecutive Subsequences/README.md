@@ -1,6 +1,6 @@
 # [659. 分割数组为连续子序列](https://leetcode-cn.com/problems/split-array-into-consecutive-subsequences)
 
-[English Version](/solution/0600-0699/0659.Split%20Array%20into%20Consecutive%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

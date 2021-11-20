@@ -1,6 +1,6 @@
 # [39. 组合总和](https://leetcode-cn.com/problems/combination-sum)
 
-[English Version](/solution/0000-0099/0039.Combination%20Sum/README_EN.md)
+
 
 ## 题目描述
 

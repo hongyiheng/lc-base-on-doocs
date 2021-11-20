@@ -1,6 +1,6 @@
 # [1078. Bigram 分词](https://leetcode-cn.com/problems/occurrences-after-bigram)
 
-[English Version](/solution/1000-1099/1078.Occurrences%20After%20Bigram/README_EN.md)
+
 
 ## 题目描述
 

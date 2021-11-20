@@ -1,6 +1,6 @@
 # [1122. 数组的相对排序](https://leetcode-cn.com/problems/relative-sort-array)
 
-[English Version](/solution/1100-1199/1122.Relative%20Sort%20Array/README_EN.md)
+
 
 ## 题目描述
 

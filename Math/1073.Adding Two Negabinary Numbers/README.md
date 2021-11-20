@@ -1,6 +1,6 @@
 # [1073. 负二进制数相加](https://leetcode-cn.com/problems/adding-two-negabinary-numbers)
 
-[English Version](/solution/1000-1099/1073.Adding%20Two%20Negabinary%20Numbers/README_EN.md)
+
 
 ## 题目描述
 

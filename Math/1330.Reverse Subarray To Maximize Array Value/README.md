@@ -1,6 +1,6 @@
 # [1330. 翻转子数组得到最大的数组值](https://leetcode-cn.com/problems/reverse-subarray-to-maximize-array-value)
 
-[English Version](/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/README_EN.md)
+
 
 ## 题目描述
 

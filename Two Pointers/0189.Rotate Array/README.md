@@ -1,6 +1,6 @@
 # [189. 旋转数组](https://leetcode-cn.com/problems/rotate-array)
 
-[English Version](/solution/0100-0199/0189.Rotate%20Array/README_EN.md)
+
 
 ## 题目描述
 

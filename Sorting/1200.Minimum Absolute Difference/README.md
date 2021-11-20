@@ -1,6 +1,6 @@
 # [1200. 最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference)
 
-[English Version](/solution/1200-1299/1200.Minimum%20Absolute%20Difference/README_EN.md)
+
 
 ## 题目描述
 

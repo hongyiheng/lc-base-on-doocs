@@ -1,6 +1,6 @@
 # [1321. 餐馆营业额变化增长](https://leetcode-cn.com/problems/restaurant-growth)
 
-[English Version](/solution/1300-1399/1321.Restaurant%20Growth/README_EN.md)
+
 
 ## 题目描述
 

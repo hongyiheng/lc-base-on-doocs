@@ -1,6 +1,6 @@
 # [1157. 子数组中占绝大多数的元素](https://leetcode-cn.com/problems/online-majority-element-in-subarray)
 
-[English Version](/solution/1100-1199/1157.Online%20Majority%20Element%20In%20Subarray/README_EN.md)
+
 
 ## 题目描述
 

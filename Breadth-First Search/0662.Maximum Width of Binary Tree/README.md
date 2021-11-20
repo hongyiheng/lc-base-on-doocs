@@ -1,6 +1,6 @@
 # [662. 二叉树最大宽度](https://leetcode-cn.com/problems/maximum-width-of-binary-tree)
 
-[English Version](/solution/0600-0699/0662.Maximum%20Width%20of%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

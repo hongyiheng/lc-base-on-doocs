@@ -1,6 +1,6 @@
 # [1590. 使数组和能被 P 整除](https://leetcode-cn.com/problems/make-sum-divisible-by-p)
 
-[English Version](/solution/1500-1599/1590.Make%20Sum%20Divisible%20by%20P/README_EN.md)
+
 
 ## 题目描述
 

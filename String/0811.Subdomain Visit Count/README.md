@@ -1,6 +1,6 @@
 # [811. 子域名访问计数](https://leetcode-cn.com/problems/subdomain-visit-count)
 
-[English Version](/solution/0800-0899/0811.Subdomain%20Visit%20Count/README_EN.md)
+
 
 ## 题目描述
 

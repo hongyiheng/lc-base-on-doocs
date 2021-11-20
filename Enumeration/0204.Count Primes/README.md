@@ -1,6 +1,6 @@
 # [204. 计数质数](https://leetcode-cn.com/problems/count-primes)
 
-[English Version](/solution/0200-0299/0204.Count%20Primes/README_EN.md)
+
 
 ## 题目描述
 

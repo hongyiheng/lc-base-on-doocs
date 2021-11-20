@@ -1,6 +1,6 @@
 # [691. 贴纸拼词](https://leetcode-cn.com/problems/stickers-to-spell-word)
 
-[English Version](/solution/0600-0699/0691.Stickers%20to%20Spell%20Word/README_EN.md)
+
 
 ## 题目描述
 

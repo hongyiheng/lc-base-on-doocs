@@ -1,6 +1,6 @@
 # [1804. 实现 Trie （前缀树） II](https://leetcode-cn.com/problems/implement-trie-ii-prefix-tree)
 
-[English Version](/solution/1800-1899/1804.Implement%20Trie%20II%20%28Prefix%20Tree%29/README_EN.md)
+
 
 ## 题目描述
 

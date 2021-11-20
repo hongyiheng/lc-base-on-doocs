@@ -1,6 +1,6 @@
 # [890. 查找和替换模式](https://leetcode-cn.com/problems/find-and-replace-pattern)
 
-[English Version](/solution/0800-0899/0890.Find%20and%20Replace%20Pattern/README_EN.md)
+
 
 ## 题目描述
 

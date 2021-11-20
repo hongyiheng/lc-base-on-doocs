@@ -1,6 +1,6 @@
 # [613. 直线上的最近距离](https://leetcode-cn.com/problems/shortest-distance-in-a-line)
 
-[English Version](/solution/0600-0699/0613.Shortest%20Distance%20in%20a%20Line/README_EN.md)
+
 
 ## 题目描述
 

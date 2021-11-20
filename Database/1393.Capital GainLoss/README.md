@@ -1,6 +1,6 @@
 # [1393. 股票的资本损益](https://leetcode-cn.com/problems/capital-gainloss)
 
-[English Version](/solution/1300-1399/1393.Capital%20GainLoss/README_EN.md)
+
 
 ## 题目描述
 

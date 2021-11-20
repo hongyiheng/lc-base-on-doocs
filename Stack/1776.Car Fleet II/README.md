@@ -1,6 +1,6 @@
 # [1776. 车队 II](https://leetcode-cn.com/problems/car-fleet-ii)
 
-[English Version](/solution/1700-1799/1776.Car%20Fleet%20II/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1530. 好叶子节点对的数量](https://leetcode-cn.com/problems/number-of-good-leaf-nodes-pairs)
 
-[English Version](/solution/1500-1599/1530.Number%20of%20Good%20Leaf%20Nodes%20Pairs/README_EN.md)
+
 
 ## 题目描述
 

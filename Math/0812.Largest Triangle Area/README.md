@@ -1,6 +1,6 @@
 # [812. 最大三角形面积](https://leetcode-cn.com/problems/largest-triangle-area)
 
-[English Version](/solution/0800-0899/0812.Largest%20Triangle%20Area/README_EN.md)
+
 
 ## 题目描述
 

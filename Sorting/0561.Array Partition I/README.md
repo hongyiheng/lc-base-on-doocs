@@ -1,6 +1,6 @@
 # [561. 数组拆分 I](https://leetcode-cn.com/problems/array-partition-i)
 
-[English Version](/solution/0500-0599/0561.Array%20Partition%20I/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [80. 删除有序数组中的重复项 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii)
 
-[English Version](/solution/0000-0099/0080.Remove%20Duplicates%20from%20Sorted%20Array%20II/README_EN.md)
+
 
 ## 题目描述
 

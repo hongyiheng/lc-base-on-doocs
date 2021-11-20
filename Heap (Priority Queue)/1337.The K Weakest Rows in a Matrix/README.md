@@ -1,6 +1,6 @@
 # [1337. 矩阵中战斗力最弱的 K 行](https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix)
 
-[English Version](/solution/1300-1399/1337.The%20K%20Weakest%20Rows%20in%20a%20Matrix/README_EN.md)
+
 
 ## 题目描述
 

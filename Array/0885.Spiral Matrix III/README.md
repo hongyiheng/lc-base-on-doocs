@@ -1,6 +1,6 @@
 # [885. 螺旋矩阵 III](https://leetcode-cn.com/problems/spiral-matrix-iii)
 
-[English Version](/solution/0800-0899/0885.Spiral%20Matrix%20III/README_EN.md)
+
 
 ## 题目描述
 

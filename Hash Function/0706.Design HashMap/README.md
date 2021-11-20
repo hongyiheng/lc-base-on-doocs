@@ -1,6 +1,6 @@
 # [706. 设计哈希映射](https://leetcode-cn.com/problems/design-hashmap)
 
-[English Version](/solution/0700-0799/0706.Design%20HashMap/README_EN.md)
+
 
 ## 题目描述
 

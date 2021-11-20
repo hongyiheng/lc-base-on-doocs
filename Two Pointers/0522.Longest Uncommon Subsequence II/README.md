@@ -1,6 +1,6 @@
 # [522. 最长特殊序列 II](https://leetcode-cn.com/problems/longest-uncommon-subsequence-ii)
 
-[English Version](/solution/0500-0599/0522.Longest%20Uncommon%20Subsequence%20II/README_EN.md)
+
 
 ## 题目描述
 

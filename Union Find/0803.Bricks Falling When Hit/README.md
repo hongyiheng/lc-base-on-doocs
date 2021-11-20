@@ -1,6 +1,6 @@
 # [803. 打砖块](https://leetcode-cn.com/problems/bricks-falling-when-hit)
 
-[English Version](/solution/0800-0899/0803.Bricks%20Falling%20When%20Hit/README_EN.md)
+
 
 ## 题目描述
 

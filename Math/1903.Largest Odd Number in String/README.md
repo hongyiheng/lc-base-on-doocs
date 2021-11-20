@@ -1,6 +1,6 @@
 # [1903. 字符串中的最大奇数](https://leetcode-cn.com/problems/largest-odd-number-in-string)
 
-[English Version](/solution/1900-1999/1903.Largest%20Odd%20Number%20in%20String/README_EN.md)
+
 
 ## 题目描述
 

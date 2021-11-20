@@ -1,6 +1,6 @@
 # [6. Z 字形变换](https://leetcode-cn.com/problems/zigzag-conversion)
 
-[English Version](/solution/0000-0099/0006.ZigZag%20Conversion/README_EN.md)
+
 
 ## 题目描述
 

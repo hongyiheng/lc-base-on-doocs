@@ -1,6 +1,6 @@
 # [805. 数组的均值分割](https://leetcode-cn.com/problems/split-array-with-same-average)
 
-[English Version](/solution/0800-0899/0805.Split%20Array%20With%20Same%20Average/README_EN.md)
+
 
 ## 题目描述
 

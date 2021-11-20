@@ -1,6 +1,6 @@
 # [553. 最优除法](https://leetcode-cn.com/problems/optimal-division)
 
-[English Version](/solution/0500-0599/0553.Optimal%20Division/README_EN.md)
+
 
 ## 题目描述
 

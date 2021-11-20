@@ -1,6 +1,6 @@
 # [324. 摆动排序 II](https://leetcode-cn.com/problems/wiggle-sort-ii)
 
-[English Version](/solution/0300-0399/0324.Wiggle%20Sort%20II/README_EN.md)
+
 
 ## 题目描述
 

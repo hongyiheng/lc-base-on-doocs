@@ -1,6 +1,6 @@
 # [648. 单词替换](https://leetcode-cn.com/problems/replace-words)
 
-[English Version](/solution/0600-0699/0648.Replace%20Words/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1778. 未知网格中的最短路径](https://leetcode-cn.com/problems/shortest-path-in-a-hidden-grid)
 
-[English Version](/solution/1700-1799/1778.Shortest%20Path%20in%20a%20Hidden%20Grid/README_EN.md)
+
 
 ## 题目描述
 

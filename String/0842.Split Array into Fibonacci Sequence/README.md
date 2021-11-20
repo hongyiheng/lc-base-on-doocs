@@ -1,6 +1,6 @@
 # [842. 将数组拆分成斐波那契序列](https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence)
 
-[English Version](/solution/0800-0899/0842.Split%20Array%20into%20Fibonacci%20Sequence/README_EN.md)
+
 
 ## 题目描述
 

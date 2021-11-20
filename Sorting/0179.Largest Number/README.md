@@ -1,6 +1,6 @@
 # [179. 最大数](https://leetcode-cn.com/problems/largest-number)
 
-[English Version](/solution/0100-0199/0179.Largest%20Number/README_EN.md)
+
 
 ## 题目描述
 

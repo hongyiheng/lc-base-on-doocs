@@ -1,6 +1,6 @@
 # [326. 3的幂](https://leetcode-cn.com/problems/power-of-three)
 
-[English Version](/solution/0300-0399/0326.Power%20of%20Three/README_EN.md)
+
 
 ## 题目描述
 

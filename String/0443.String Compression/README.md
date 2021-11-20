@@ -1,6 +1,6 @@
 # [443. 压缩字符串](https://leetcode-cn.com/problems/string-compression)
 
-[English Version](/solution/0400-0499/0443.String%20Compression/README_EN.md)
+
 
 ## 题目描述
 

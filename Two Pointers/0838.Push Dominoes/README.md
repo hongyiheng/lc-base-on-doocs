@@ -1,6 +1,6 @@
 # [838. 推多米诺](https://leetcode-cn.com/problems/push-dominoes)
 
-[English Version](/solution/0800-0899/0838.Push%20Dominoes/README_EN.md)
+
 
 ## 题目描述
 

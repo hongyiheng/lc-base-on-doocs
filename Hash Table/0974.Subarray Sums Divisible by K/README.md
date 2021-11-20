@@ -1,6 +1,6 @@
 # [974. 和可被 K 整除的子数组](https://leetcode-cn.com/problems/subarray-sums-divisible-by-k)
 
-[English Version](/solution/0900-0999/0974.Subarray%20Sums%20Divisible%20by%20K/README_EN.md)
+
 
 ## 题目描述
 

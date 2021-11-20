@@ -1,6 +1,6 @@
 # [844. 比较含退格的字符串](https://leetcode-cn.com/problems/backspace-string-compare)
 
-[English Version](/solution/0800-0899/0844.Backspace%20String%20Compare/README_EN.md)
+
 
 ## 题目描述
 

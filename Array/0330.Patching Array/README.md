@@ -1,6 +1,6 @@
 # [330. 按要求补齐数组](https://leetcode-cn.com/problems/patching-array)
 
-[English Version](/solution/0300-0399/0330.Patching%20Array/README_EN.md)
+
 
 ## 题目描述
 

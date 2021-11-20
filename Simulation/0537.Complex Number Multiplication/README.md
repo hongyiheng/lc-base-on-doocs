@@ -1,6 +1,6 @@
 # [537. 复数乘法](https://leetcode-cn.com/problems/complex-number-multiplication)
 
-[English Version](/solution/0500-0599/0537.Complex%20Number%20Multiplication/README_EN.md)
+
 
 ## 题目描述
 

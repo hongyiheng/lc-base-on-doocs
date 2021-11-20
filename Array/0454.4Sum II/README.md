@@ -1,6 +1,6 @@
 # [454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii)
 
-[English Version](/solution/0400-0499/0454.4Sum%20II/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [938. 二叉搜索树的范围和](https://leetcode-cn.com/problems/range-sum-of-bst)
 
-[English Version](/solution/0900-0999/0938.Range%20Sum%20of%20BST/README_EN.md)
+
 
 ## 题目描述
 

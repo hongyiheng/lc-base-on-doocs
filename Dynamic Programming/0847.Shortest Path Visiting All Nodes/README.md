@@ -1,6 +1,6 @@
 # [847. 访问所有节点的最短路径](https://leetcode-cn.com/problems/shortest-path-visiting-all-nodes)
 
-[English Version](/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/README_EN.md)
+
 
 ## 题目描述
 

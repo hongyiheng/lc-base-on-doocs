@@ -1,6 +1,6 @@
 # [600. 不含连续1的非负整数](https://leetcode-cn.com/problems/non-negative-integers-without-consecutive-ones)
 
-[English Version](/solution/0600-0699/0600.Non-negative%20Integers%20without%20Consecutive%20Ones/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [703. 数据流中的第 K 大元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream)
 
-[English Version](/solution/0700-0799/0703.Kth%20Largest%20Element%20in%20a%20Stream/README_EN.md)
+
 
 ## 题目描述
 

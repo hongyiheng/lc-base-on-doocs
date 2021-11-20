@@ -1,6 +1,6 @@
 # [722. 删除注释](https://leetcode-cn.com/problems/remove-comments)
 
-[English Version](/solution/0700-0799/0722.Remove%20Comments/README_EN.md)
+
 
 ## 题目描述
 

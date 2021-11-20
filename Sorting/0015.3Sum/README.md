@@ -1,6 +1,6 @@
 # [15. 三数之和](https://leetcode-cn.com/problems/3sum)
 
-[English Version](/solution/0000-0099/0015.3Sum/README_EN.md)
+
 
 ## 题目描述
 

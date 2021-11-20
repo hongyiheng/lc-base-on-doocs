@@ -1,6 +1,6 @@
 # [791. 自定义字符串排序](https://leetcode-cn.com/problems/custom-sort-string)
 
-[English Version](/solution/0700-0799/0791.Custom%20Sort%20String/README_EN.md)
+
 
 ## 题目描述
 

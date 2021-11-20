@@ -1,6 +1,6 @@
 # [780. 到达终点](https://leetcode-cn.com/problems/reaching-points)
 
-[English Version](/solution/0700-0799/0780.Reaching%20Points/README_EN.md)
+
 
 ## 题目描述
 

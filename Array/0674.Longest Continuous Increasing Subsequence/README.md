@@ -1,6 +1,6 @@
 # [674. 最长连续递增序列](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence)
 
-[English Version](/solution/0600-0699/0674.Longest%20Continuous%20Increasing%20Subsequence/README_EN.md)
+
 
 ## 题目描述
 

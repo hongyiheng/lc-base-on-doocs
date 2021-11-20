@@ -1,6 +1,6 @@
 # [863. 二叉树中所有距离为 K 的结点](https://leetcode-cn.com/problems/all-nodes-distance-k-in-binary-tree)
 
-[English Version](/solution/0800-0899/0863.All%20Nodes%20Distance%20K%20in%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

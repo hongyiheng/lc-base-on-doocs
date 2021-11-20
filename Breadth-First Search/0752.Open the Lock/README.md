@@ -1,6 +1,6 @@
 # [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock)
 
-[English Version](/solution/0700-0799/0752.Open%20the%20Lock/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [934. 最短的桥](https://leetcode-cn.com/problems/shortest-bridge)
 
-[English Version](/solution/0900-0999/0934.Shortest%20Bridge/README_EN.md)
+
 
 ## 题目描述
 

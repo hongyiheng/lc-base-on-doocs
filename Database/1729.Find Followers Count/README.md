@@ -1,6 +1,6 @@
 # [1729. 求关注者的数量](https://leetcode-cn.com/problems/find-followers-count)
 
-[English Version](/solution/1700-1799/1729.Find%20Followers%20Count/README_EN.md)
+
 
 ## 题目描述
 

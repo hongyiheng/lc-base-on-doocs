@@ -1,6 +1,6 @@
 # [1192. 查找集群内的「关键连接」](https://leetcode-cn.com/problems/critical-connections-in-a-network)
 
-[English Version](/solution/1100-1199/1192.Critical%20Connections%20in%20a%20Network/README_EN.md)
+
 
 ## 题目描述
 

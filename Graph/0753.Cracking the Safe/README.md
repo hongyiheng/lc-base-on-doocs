@@ -1,6 +1,6 @@
 # [753. 破解保险箱](https://leetcode-cn.com/problems/cracking-the-safe)
 
-[English Version](/solution/0700-0799/0753.Cracking%20the%20Safe/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array)
 
-[English Version](/solution/0000-0099/0088.Merge%20Sorted%20Array/README_EN.md)
+
 
 ## 题目描述
 

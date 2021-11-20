@@ -1,6 +1,6 @@
 # [402. 移掉 K 位数字](https://leetcode-cn.com/problems/remove-k-digits)
 
-[English Version](/solution/0400-0499/0402.Remove%20K%20Digits/README_EN.md)
+
 
 ## 题目描述
 

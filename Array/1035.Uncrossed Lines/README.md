@@ -1,6 +1,6 @@
 # [1035. 不相交的线](https://leetcode-cn.com/problems/uncrossed-lines)
 
-[English Version](/solution/1000-1099/1035.Uncrossed%20Lines/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1913. 两个数对之间的最大乘积差](https://leetcode-cn.com/problems/maximum-product-difference-between-two-pairs)
 
-[English Version](/solution/1900-1999/1913.Maximum%20Product%20Difference%20Between%20Two%20Pairs/README_EN.md)
+
 
 ## 题目描述
 

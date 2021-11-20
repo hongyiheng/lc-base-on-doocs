@@ -1,6 +1,6 @@
 # [1044. 最长重复子串](https://leetcode-cn.com/problems/longest-duplicate-substring)
 
-[English Version](/solution/1000-1099/1044.Longest%20Duplicate%20Substring/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [976. 三角形的最大周长](https://leetcode-cn.com/problems/largest-perimeter-triangle)
 
-[English Version](/solution/0900-0999/0976.Largest%20Perimeter%20Triangle/README_EN.md)
+
 
 ## 题目描述
 

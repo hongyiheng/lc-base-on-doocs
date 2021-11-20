@@ -1,6 +1,6 @@
 # [697. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array)
 
-[English Version](/solution/0600-0699/0697.Degree%20of%20an%20Array/README_EN.md)
+
 
 ## 题目描述
 

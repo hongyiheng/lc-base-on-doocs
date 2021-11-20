@@ -1,6 +1,6 @@
 # [172. 阶乘后的零](https://leetcode-cn.com/problems/factorial-trailing-zeroes)
 
-[English Version](/solution/0100-0199/0172.Factorial%20Trailing%20Zeroes/README_EN.md)
+
 
 ## 题目描述
 

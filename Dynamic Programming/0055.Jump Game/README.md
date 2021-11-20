@@ -1,6 +1,6 @@
 # [55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game)
 
-[English Version](/solution/0000-0099/0055.Jump%20Game/README_EN.md)
+
 
 ## 题目描述
 

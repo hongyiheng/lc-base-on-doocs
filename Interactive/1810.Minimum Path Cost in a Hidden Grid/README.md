@@ -1,6 +1,6 @@
 # [1810. 隐藏网格下的最小消耗路径](https://leetcode-cn.com/problems/minimum-path-cost-in-a-hidden-grid)
 
-[English Version](/solution/1800-1899/1810.Minimum%20Path%20Cost%20in%20a%20Hidden%20Grid/README_EN.md)
+
 
 ## 题目描述
 

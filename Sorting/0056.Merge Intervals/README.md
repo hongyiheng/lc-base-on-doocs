@@ -1,6 +1,6 @@
 # [56. 合并区间](https://leetcode-cn.com/problems/merge-intervals)
 
-[English Version](/solution/0000-0099/0056.Merge%20Intervals/README_EN.md)
+
 
 ## 题目描述
 

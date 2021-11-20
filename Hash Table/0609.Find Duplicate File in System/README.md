@@ -1,6 +1,6 @@
 # [609. 在系统中查找重复文件](https://leetcode-cn.com/problems/find-duplicate-file-in-system)
 
-[English Version](/solution/0600-0699/0609.Find%20Duplicate%20File%20in%20System/README_EN.md)
+
 
 ## 题目描述
 

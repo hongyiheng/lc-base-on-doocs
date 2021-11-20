@@ -1,6 +1,6 @@
 # [491. 递增子序列](https://leetcode-cn.com/problems/increasing-subsequences)
 
-[English Version](/solution/0400-0499/0491.Increasing%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

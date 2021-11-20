@@ -1,6 +1,6 @@
 # [679. 24 点游戏](https://leetcode-cn.com/problems/24-game)
 
-[English Version](/solution/0600-0699/0679.24%20Game/README_EN.md)
+
 
 ## 题目描述
 

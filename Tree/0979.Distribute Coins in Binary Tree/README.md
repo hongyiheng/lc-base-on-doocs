@@ -1,6 +1,6 @@
 # [979. 在二叉树中分配硬币](https://leetcode-cn.com/problems/distribute-coins-in-binary-tree)
 
-[English Version](/solution/0900-0999/0979.Distribute%20Coins%20in%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

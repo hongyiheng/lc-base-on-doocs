@@ -1,6 +1,6 @@
 # [1034. 边框着色](https://leetcode-cn.com/problems/coloring-a-border)
 
-[English Version](/solution/1000-1099/1034.Coloring%20A%20Border/README_EN.md)
+
 
 ## 题目描述
 

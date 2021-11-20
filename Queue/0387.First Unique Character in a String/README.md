@@ -1,6 +1,6 @@
 # [387. 字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string)
 
-[English Version](/solution/0300-0399/0387.First%20Unique%20Character%20in%20a%20String/README_EN.md)
+
 
 ## 题目描述
 

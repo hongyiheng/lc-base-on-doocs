@@ -1,6 +1,6 @@
 # [421. 数组中两个数的最大异或值](https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array)
 
-[English Version](/solution/0400-0499/0421.Maximum%20XOR%20of%20Two%20Numbers%20in%20an%20Array/README_EN.md)
+
 
 ## 题目描述
 

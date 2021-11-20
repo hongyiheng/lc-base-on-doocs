@@ -1,6 +1,6 @@
 # [1143. 最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence)
 
-[English Version](/solution/1100-1199/1143.Longest%20Common%20Subsequence/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1532. 最近的三笔订单](https://leetcode-cn.com/problems/the-most-recent-three-orders)
 
-[English Version](/solution/1500-1599/1532.The%20Most%20Recent%20Three%20Orders/README_EN.md)
+
 
 ## 题目描述
 

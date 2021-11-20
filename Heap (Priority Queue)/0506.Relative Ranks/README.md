@@ -1,6 +1,6 @@
 # [506. 相对名次](https://leetcode-cn.com/problems/relative-ranks)
 
-[English Version](/solution/0500-0599/0506.Relative%20Ranks/README_EN.md)
+
 
 ## 题目描述
 

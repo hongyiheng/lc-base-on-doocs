@@ -1,6 +1,6 @@
 # [1527. 患某种疾病的患者](https://leetcode-cn.com/problems/patients-with-a-condition)
 
-[English Version](/solution/1500-1599/1527.Patients%20With%20a%20Condition/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree)
 
-[English Version](/solution/0500-0599/0538.Convert%20BST%20to%20Greater%20Tree/README_EN.md)
+
 
 ## 题目描述
 

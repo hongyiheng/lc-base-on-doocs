@@ -1,6 +1,6 @@
 # [68. 文本左右对齐](https://leetcode-cn.com/problems/text-justification)
 
-[English Version](/solution/0000-0099/0068.Text%20Justification/README_EN.md)
+
 
 ## 题目描述
 

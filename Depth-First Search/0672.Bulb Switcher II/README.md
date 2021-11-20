@@ -1,6 +1,6 @@
 # [672. 灯泡开关 Ⅱ](https://leetcode-cn.com/problems/bulb-switcher-ii)
 
-[English Version](/solution/0600-0699/0672.Bulb%20Switcher%20II/README_EN.md)
+
 
 ## 题目描述
 

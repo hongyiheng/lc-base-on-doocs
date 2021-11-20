@@ -1,6 +1,6 @@
 # [1522. N 叉树的直径](https://leetcode-cn.com/problems/diameter-of-n-ary-tree)
 
-[English Version](/solution/1500-1599/1522.Diameter%20of%20N-Ary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

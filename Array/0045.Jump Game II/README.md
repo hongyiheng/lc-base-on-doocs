@@ -1,6 +1,6 @@
 # [45. 跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii)
 
-[English Version](/solution/0000-0099/0045.Jump%20Game%20II/README_EN.md)
+
 
 ## 题目描述
 

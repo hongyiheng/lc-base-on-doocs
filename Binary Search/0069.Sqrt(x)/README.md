@@ -1,6 +1,6 @@
 # [69. x 的平方根](https://leetcode-cn.com/problems/sqrtx)
 
-[English Version](/solution/0000-0099/0069.Sqrt%28x%29/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [858. 镜面反射](https://leetcode-cn.com/problems/mirror-reflection)
 
-[English Version](/solution/0800-0899/0858.Mirror%20Reflection/README_EN.md)
+
 
 ## 题目描述
 

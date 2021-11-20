@@ -1,6 +1,6 @@
 # [477. 汉明距离总和](https://leetcode-cn.com/problems/total-hamming-distance)
 
-[English Version](/solution/0400-0499/0477.Total%20Hamming%20Distance/README_EN.md)
+
 
 ## 题目描述
 

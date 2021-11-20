@@ -1,6 +1,6 @@
 # [382. 链表随机节点](https://leetcode-cn.com/problems/linked-list-random-node)
 
-[English Version](/solution/0300-0399/0382.Linked%20List%20Random%20Node/README_EN.md)
+
 
 ## 题目描述
 

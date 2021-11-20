@@ -1,6 +1,6 @@
 # [44. 通配符匹配](https://leetcode-cn.com/problems/wildcard-matching)
 
-[English Version](/solution/0000-0099/0044.Wildcard%20Matching/README_EN.md)
+
 
 ## 题目描述
 

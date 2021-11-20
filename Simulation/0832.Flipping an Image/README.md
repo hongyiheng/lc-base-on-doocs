@@ -1,6 +1,6 @@
 # [832. 翻转图像](https://leetcode-cn.com/problems/flipping-an-image)
 
-[English Version](/solution/0800-0899/0832.Flipping%20an%20Image/README_EN.md)
+
 
 ## 题目描述
 

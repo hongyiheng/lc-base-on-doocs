@@ -1,6 +1,6 @@
 # [1185. 一周中的第几天](https://leetcode-cn.com/problems/day-of-the-week)
 
-[English Version](/solution/1100-1199/1185.Day%20of%20the%20Week/README_EN.md)
+
 
 ## 题目描述
 

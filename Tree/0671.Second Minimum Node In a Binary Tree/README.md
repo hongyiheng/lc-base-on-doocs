@@ -1,6 +1,6 @@
 # [671. 二叉树中第二小的节点](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree)
 
-[English Version](/solution/0600-0699/0671.Second%20Minimum%20Node%20In%20a%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

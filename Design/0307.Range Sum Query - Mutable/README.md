@@ -1,6 +1,6 @@
 # [307. 区域和检索 - 数组可修改](https://leetcode-cn.com/problems/range-sum-query-mutable)
 
-[English Version](/solution/0300-0399/0307.Range%20Sum%20Query%20-%20Mutable/README_EN.md)
+
 
 ## 题目描述
 

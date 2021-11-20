@@ -1,6 +1,6 @@
 # [748. 最短补全词](https://leetcode-cn.com/problems/shortest-completing-word)
 
-[English Version](/solution/0700-0799/0748.Shortest%20Completing%20Word/README_EN.md)
+
 
 ## 题目描述
 

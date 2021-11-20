@@ -1,6 +1,6 @@
 # [1163. 按字典序排在最后的子串](https://leetcode-cn.com/problems/last-substring-in-lexicographical-order)
 
-[English Version](/solution/1100-1199/1163.Last%20Substring%20in%20Lexicographical%20Order/README_EN.md)
+
 
 ## 题目描述
 

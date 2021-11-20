@@ -1,6 +1,6 @@
 # [1103. 分糖果 II](https://leetcode-cn.com/problems/distribute-candies-to-people)
 
-[English Version](/solution/1100-1199/1103.Distribute%20Candies%20to%20People/README_EN.md)
+
 
 ## 题目描述
 

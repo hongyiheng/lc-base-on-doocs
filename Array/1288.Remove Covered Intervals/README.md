@@ -1,6 +1,6 @@
 # [1288. 删除被覆盖区间](https://leetcode-cn.com/problems/remove-covered-intervals)
 
-[English Version](/solution/1200-1299/1288.Remove%20Covered%20Intervals/README_EN.md)
+
 
 ## 题目描述
 

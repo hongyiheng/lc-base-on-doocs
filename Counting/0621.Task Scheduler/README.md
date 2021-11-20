@@ -1,6 +1,6 @@
 # [621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler)
 
-[English Version](/solution/0600-0699/0621.Task%20Scheduler/README_EN.md)
+
 
 ## 题目描述
 

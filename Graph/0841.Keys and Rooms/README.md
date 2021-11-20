@@ -1,6 +1,6 @@
 # [841. 钥匙和房间](https://leetcode-cn.com/problems/keys-and-rooms)
 
-[English Version](/solution/0800-0899/0841.Keys%20and%20Rooms/README_EN.md)
+
 
 ## 题目描述
 

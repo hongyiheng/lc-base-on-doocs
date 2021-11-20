@@ -1,6 +1,6 @@
 # [921. 使括号有效的最少添加](https://leetcode-cn.com/problems/minimum-add-to-make-parentheses-valid)
 
-[English Version](/solution/0900-0999/0921.Minimum%20Add%20to%20Make%20Parentheses%20Valid/README_EN.md)
+
 
 ## 题目描述
 

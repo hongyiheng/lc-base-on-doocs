@@ -1,6 +1,6 @@
 # [1478. 安排邮筒](https://leetcode-cn.com/problems/allocate-mailboxes)
 
-[English Version](/solution/1400-1499/1478.Allocate%20Mailboxes/README_EN.md)
+
 
 ## 题目描述
 

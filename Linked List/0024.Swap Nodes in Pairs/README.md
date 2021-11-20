@@ -1,6 +1,6 @@
 # [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs)
 
-[English Version](/solution/0000-0099/0024.Swap%20Nodes%20in%20Pairs/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [446. 等差数列划分 II - 子序列](https://leetcode-cn.com/problems/arithmetic-slices-ii-subsequence)
 
-[English Version](/solution/0400-0499/0446.Arithmetic%20Slices%20II%20-%20Subsequence/README_EN.md)
+
 
 ## 题目描述
 

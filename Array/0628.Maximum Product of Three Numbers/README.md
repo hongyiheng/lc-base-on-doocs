@@ -1,6 +1,6 @@
 # [628. 三个数的最大乘积](https://leetcode-cn.com/problems/maximum-product-of-three-numbers)
 
-[English Version](/solution/0600-0699/0628.Maximum%20Product%20of%20Three%20Numbers/README_EN.md)
+
 
 ## 题目描述
 

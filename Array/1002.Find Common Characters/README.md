@@ -1,6 +1,6 @@
 # [1002. 查找常用字符](https://leetcode-cn.com/problems/find-common-characters)
 
-[English Version](/solution/1000-1099/1002.Find%20Common%20Characters/README_EN.md)
+
 
 ## 题目描述
 

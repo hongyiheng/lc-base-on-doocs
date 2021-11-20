@@ -1,6 +1,6 @@
 # [47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii)
 
-[English Version](/solution/0000-0099/0047.Permutations%20II/README_EN.md)
+
 
 ## 题目描述
 

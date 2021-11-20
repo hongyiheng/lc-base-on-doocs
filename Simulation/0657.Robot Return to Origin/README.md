@@ -1,6 +1,6 @@
 # [657. 机器人能否返回原点](https://leetcode-cn.com/problems/robot-return-to-origin)
 
-[English Version](/solution/0600-0699/0657.Robot%20Return%20to%20Origin/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [696. 计数二进制子串](https://leetcode-cn.com/problems/count-binary-substrings)
 
-[English Version](/solution/0600-0699/0696.Count%20Binary%20Substrings/README_EN.md)
+
 
 ## 题目描述
 

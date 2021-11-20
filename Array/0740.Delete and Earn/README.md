@@ -1,6 +1,6 @@
 # [740. 删除并获得点数](https://leetcode-cn.com/problems/delete-and-earn)
 
-[English Version](/solution/0700-0799/0740.Delete%20and%20Earn/README_EN.md)
+
 
 ## 题目描述
 

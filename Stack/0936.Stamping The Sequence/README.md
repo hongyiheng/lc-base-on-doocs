@@ -1,6 +1,6 @@
 # [936. 戳印序列](https://leetcode-cn.com/problems/stamping-the-sequence)
 
-[English Version](/solution/0900-0999/0936.Stamping%20The%20Sequence/README_EN.md)
+
 
 ## 题目描述
 
