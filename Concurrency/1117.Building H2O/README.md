@@ -1,6 +1,6 @@
 # [1117. H2O 生成](https://leetcode-cn.com/problems/building-h2o)
 
-[English Version](/solution/1100-1199/1117.Building%20H2O/README_EN.md)
+
 
 ## 题目描述
 

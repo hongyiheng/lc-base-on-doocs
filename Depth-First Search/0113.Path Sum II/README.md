@@ -1,6 +1,6 @@
 # [113. 路径总和 II](https://leetcode-cn.com/problems/path-sum-ii)
 
-[English Version](/solution/0100-0199/0113.Path%20Sum%20II/README_EN.md)
+
 
 ## 题目描述
 

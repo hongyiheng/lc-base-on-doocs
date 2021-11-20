@@ -1,6 +1,6 @@
 # [67. 二进制求和](https://leetcode-cn.com/problems/add-binary)
 
-[English Version](/solution/0000-0099/0067.Add%20Binary/README_EN.md)
+
 
 ## 题目描述
 

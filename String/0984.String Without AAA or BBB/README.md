@@ -1,6 +1,6 @@
 # [984. 不含 AAA 或 BBB 的字符串](https://leetcode-cn.com/problems/string-without-aaa-or-bbb)
 
-[English Version](/solution/0900-0999/0984.String%20Without%20AAA%20or%20BBB/README_EN.md)
+
 
 ## 题目描述
 

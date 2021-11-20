@@ -1,6 +1,6 @@
 # [666. 路径总和 IV](https://leetcode-cn.com/problems/path-sum-iv)
 
-[English Version](/solution/0600-0699/0666.Path%20Sum%20IV/README_EN.md)
+
 
 ## 题目描述
 

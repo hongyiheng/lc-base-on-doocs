@@ -1,6 +1,6 @@
 # [1494. 并行课程 II](https://leetcode-cn.com/problems/parallel-courses-ii)
 
-[English Version](/solution/1400-1499/1494.Parallel%20Courses%20II/README_EN.md)
+
 
 ## 题目描述
 

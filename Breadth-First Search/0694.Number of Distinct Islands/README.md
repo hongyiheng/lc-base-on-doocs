@@ -1,6 +1,6 @@
 # [694. 不同岛屿的数量](https://leetcode-cn.com/problems/number-of-distinct-islands)
 
-[English Version](/solution/0600-0699/0694.Number%20of%20Distinct%20Islands/README_EN.md)
+
 
 ## 题目描述
 

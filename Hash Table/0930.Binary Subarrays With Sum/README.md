@@ -1,6 +1,6 @@
 # [930. 和相同的二元子数组](https://leetcode-cn.com/problems/binary-subarrays-with-sum)
 
-[English Version](/solution/0900-0999/0930.Binary%20Subarrays%20With%20Sum/README_EN.md)
+
 
 ## 题目描述
 

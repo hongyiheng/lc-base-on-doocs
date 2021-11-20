@@ -1,6 +1,6 @@
 # [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram)
 
-[English Version](/solution/0200-0299/0242.Valid%20Anagram/README_EN.md)
+
 
 ## 题目描述
 

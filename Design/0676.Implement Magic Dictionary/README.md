@@ -1,6 +1,6 @@
 # [676. 实现一个魔法字典](https://leetcode-cn.com/problems/implement-magic-dictionary)
 
-[English Version](/solution/0600-0699/0676.Implement%20Magic%20Dictionary/README_EN.md)
+
 
 ## 题目描述
 

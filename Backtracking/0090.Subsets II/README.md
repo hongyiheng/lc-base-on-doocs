@@ -1,6 +1,6 @@
 # [90. 子集 II](https://leetcode-cn.com/problems/subsets-ii)
 
-[English Version](/solution/0000-0099/0090.Subsets%20II/README_EN.md)
+
 
 ## 题目描述
 

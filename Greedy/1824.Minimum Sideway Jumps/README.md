@@ -1,6 +1,6 @@
 # [1824. 最少侧跳次数](https://leetcode-cn.com/problems/minimum-sideway-jumps)
 
-[English Version](/solution/1800-1899/1824.Minimum%20Sideway%20Jumps/README_EN.md)
+
 
 ## 题目描述
 

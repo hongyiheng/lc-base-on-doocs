@@ -1,6 +1,6 @@
 # [594. 最长和谐子序列](https://leetcode-cn.com/problems/longest-harmonious-subsequence)
 
-[English Version](/solution/0500-0599/0594.Longest%20Harmonious%20Subsequence/README_EN.md)
+
 
 ## 题目描述
 

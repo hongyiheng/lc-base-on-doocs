@@ -1,6 +1,6 @@
 # [808. 分汤](https://leetcode-cn.com/problems/soup-servings)
 
-[English Version](/solution/0800-0899/0808.Soup%20Servings/README_EN.md)
+
 
 ## 题目描述
 

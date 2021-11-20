@@ -1,6 +1,6 @@
 # [1962. 移除石子使总数最小](https://leetcode-cn.com/problems/remove-stones-to-minimize-the-total)
 
-[English Version](/solution/1900-1999/1962.Remove%20Stones%20to%20Minimize%20the%20Total/README_EN.md)
+
 
 ## 题目描述
 

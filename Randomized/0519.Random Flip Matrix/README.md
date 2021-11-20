@@ -1,6 +1,6 @@
 # [519. 随机翻转矩阵](https://leetcode-cn.com/problems/random-flip-matrix)
 
-[English Version](/solution/0500-0599/0519.Random%20Flip%20Matrix/README_EN.md)
+
 
 ## 题目描述
 

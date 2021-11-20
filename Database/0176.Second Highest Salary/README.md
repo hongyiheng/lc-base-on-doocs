@@ -1,6 +1,6 @@
 # [176. 第二高的薪水](https://leetcode-cn.com/problems/second-highest-salary)
 
-[English Version](/solution/0100-0199/0176.Second%20Highest%20Salary/README_EN.md)
+
 
 ## 题目描述
 

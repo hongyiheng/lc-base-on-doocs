@@ -1,6 +1,6 @@
 # [2008. 出租车的最大盈利](https://leetcode-cn.com/problems/maximum-earnings-from-taxi)
 
-[English Version](/solution/2000-2099/2008.Maximum%20Earnings%20From%20Taxi/README_EN.md)
+
 
 ## 题目描述
 

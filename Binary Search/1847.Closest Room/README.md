@@ -1,6 +1,6 @@
 # [1847. 最近的房间](https://leetcode-cn.com/problems/closest-room)
 
-[English Version](/solution/1800-1899/1847.Closest%20Room/README_EN.md)
+
 
 ## 题目描述
 

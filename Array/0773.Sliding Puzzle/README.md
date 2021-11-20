@@ -1,6 +1,6 @@
 # [773. 滑动谜题](https://leetcode-cn.com/problems/sliding-puzzle)
 
-[English Version](/solution/0700-0799/0773.Sliding%20Puzzle/README_EN.md)
+
 
 ## 题目描述
 

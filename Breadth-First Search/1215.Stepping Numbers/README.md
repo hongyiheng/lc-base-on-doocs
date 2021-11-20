@@ -1,6 +1,6 @@
 # [1215. 步进数](https://leetcode-cn.com/problems/stepping-numbers)
 
-[English Version](/solution/1200-1299/1215.Stepping%20Numbers/README_EN.md)
+
 
 ## 题目描述
 

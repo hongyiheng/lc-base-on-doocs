@@ -1,6 +1,6 @@
 # [1921. 消灭怪物的最大数量](https://leetcode-cn.com/problems/eliminate-maximum-number-of-monsters)
 
-[English Version](/solution/1900-1999/1921.Eliminate%20Maximum%20Number%20of%20Monsters/README_EN.md)
+
 
 ## 题目描述
 

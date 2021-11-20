@@ -1,6 +1,6 @@
 # [941. 有效的山脉数组](https://leetcode-cn.com/problems/valid-mountain-array)
 
-[English Version](/solution/0900-0999/0941.Valid%20Mountain%20Array/README_EN.md)
+
 
 ## 题目描述
 

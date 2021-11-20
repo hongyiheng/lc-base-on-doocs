@@ -1,6 +1,6 @@
 # [1905. 统计子岛屿](https://leetcode-cn.com/problems/count-sub-islands)
 
-[English Version](/solution/1900-1999/1905.Count%20Sub%20Islands/README_EN.md)
+
 
 ## 题目描述
 

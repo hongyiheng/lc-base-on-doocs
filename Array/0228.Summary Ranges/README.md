@@ -1,6 +1,6 @@
 # [228. 汇总区间](https://leetcode-cn.com/problems/summary-ranges)
 
-[English Version](/solution/0200-0299/0228.Summary%20Ranges/README_EN.md)
+
 
 ## 题目描述
 

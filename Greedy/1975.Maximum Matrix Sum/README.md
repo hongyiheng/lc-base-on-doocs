@@ -1,6 +1,6 @@
 # [1975. 最大方阵和](https://leetcode-cn.com/problems/maximum-matrix-sum)
 
-[English Version](/solution/1900-1999/1975.Maximum%20Matrix%20Sum/README_EN.md)
+
 
 ## 题目描述
 

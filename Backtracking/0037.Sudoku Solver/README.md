@@ -1,6 +1,6 @@
 # [37. 解数独](https://leetcode-cn.com/problems/sudoku-solver)
 
-[English Version](/solution/0000-0099/0037.Sudoku%20Solver/README_EN.md)
+
 
 ## 题目描述
 

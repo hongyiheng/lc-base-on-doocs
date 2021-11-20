@@ -1,6 +1,6 @@
 # [1187. 使数组严格递增](https://leetcode-cn.com/problems/make-array-strictly-increasing)
 
-[English Version](/solution/1100-1199/1187.Make%20Array%20Strictly%20Increasing/README_EN.md)
+
 
 ## 题目描述
 

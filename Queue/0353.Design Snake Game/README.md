@@ -1,6 +1,6 @@
 # [353. 贪吃蛇](https://leetcode-cn.com/problems/design-snake-game)
 
-[English Version](/solution/0300-0399/0353.Design%20Snake%20Game/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1861. 旋转盒子](https://leetcode-cn.com/problems/rotating-the-box)
 
-[English Version](/solution/1800-1899/1861.Rotating%20the%20Box/README_EN.md)
+
 
 ## 题目描述
 

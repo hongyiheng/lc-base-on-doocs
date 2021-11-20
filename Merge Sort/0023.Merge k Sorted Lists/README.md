@@ -1,6 +1,6 @@
 # [23. 合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists)
 
-[English Version](/solution/0000-0099/0023.Merge%20k%20Sorted%20Lists/README_EN.md)
+
 
 ## 题目描述
 

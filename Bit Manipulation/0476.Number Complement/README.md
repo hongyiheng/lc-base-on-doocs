@@ -1,6 +1,6 @@
 # [476. 数字的补数](https://leetcode-cn.com/problems/number-complement)
 
-[English Version](/solution/0400-0499/0476.Number%20Complement/README_EN.md)
+
 
 ## 题目描述
 

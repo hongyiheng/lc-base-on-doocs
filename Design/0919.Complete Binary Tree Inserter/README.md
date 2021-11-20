@@ -1,6 +1,6 @@
 # [919. 完全二叉树插入器](https://leetcode-cn.com/problems/complete-binary-tree-inserter)
 
-[English Version](/solution/0900-0999/0919.Complete%20Binary%20Tree%20Inserter/README_EN.md)
+
 
 ## 题目描述
 

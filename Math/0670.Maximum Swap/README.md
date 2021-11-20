@@ -1,6 +1,6 @@
 # [670. 最大交换](https://leetcode-cn.com/problems/maximum-swap)
 
-[English Version](/solution/0600-0699/0670.Maximum%20Swap/README_EN.md)
+
 
 ## 题目描述
 

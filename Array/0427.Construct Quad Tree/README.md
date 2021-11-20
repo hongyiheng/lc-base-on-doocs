@@ -1,6 +1,6 @@
 # [427. 建立四叉树](https://leetcode-cn.com/problems/construct-quad-tree)
 
-[English Version](/solution/0400-0499/0427.Construct%20Quad%20Tree/README_EN.md)
+
 
 ## 题目描述
 

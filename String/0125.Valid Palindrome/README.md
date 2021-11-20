@@ -1,6 +1,6 @@
 # [125. 验证回文串](https://leetcode-cn.com/problems/valid-palindrome)
 
-[English Version](/solution/0100-0199/0125.Valid%20Palindrome/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [196. 删除重复的电子邮箱](https://leetcode-cn.com/problems/delete-duplicate-emails)
 
-[English Version](/solution/0100-0199/0196.Delete%20Duplicate%20Emails/README_EN.md)
+
 
 ## 题目描述
 

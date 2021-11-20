@@ -1,6 +1,6 @@
 # [771. 宝石与石头](https://leetcode-cn.com/problems/jewels-and-stones)
 
-[English Version](/solution/0700-0799/0771.Jewels%20and%20Stones/README_EN.md)
+
 
 ## 题目描述
 

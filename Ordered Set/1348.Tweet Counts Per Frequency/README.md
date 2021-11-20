@@ -1,6 +1,6 @@
 # [1348. 推文计数](https://leetcode-cn.com/problems/tweet-counts-per-frequency)
 
-[English Version](/solution/1300-1399/1348.Tweet%20Counts%20Per%20Frequency/README_EN.md)
+
 
 ## 题目描述
 

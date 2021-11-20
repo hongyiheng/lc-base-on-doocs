@@ -1,6 +1,6 @@
 # [869. 重新排序得到 2 的幂](https://leetcode-cn.com/problems/reordered-power-of-2)
 
-[English Version](/solution/0800-0899/0869.Reordered%20Power%20of%202/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares)
 
-[English Version](/solution/0200-0299/0279.Perfect%20Squares/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [968. 监控二叉树](https://leetcode-cn.com/problems/binary-tree-cameras)
 
-[English Version](/solution/0900-0999/0968.Binary%20Tree%20Cameras/README_EN.md)
+
 
 ## 题目描述
 

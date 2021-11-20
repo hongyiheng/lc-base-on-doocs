@@ -1,6 +1,6 @@
 # [1747. 应该被禁止的Leetflex账户](https://leetcode-cn.com/problems/leetflex-banned-accounts)
 
-[English Version](/solution/1700-1799/1747.Leetflex%20Banned%20Accounts/README_EN.md)
+
 
 ## 题目描述
 

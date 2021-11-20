@@ -1,6 +1,6 @@
 # [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst)
 
-[English Version](/solution/0400-0499/0450.Delete%20Node%20in%20a%20BST/README_EN.md)
+
 
 ## 题目描述
 

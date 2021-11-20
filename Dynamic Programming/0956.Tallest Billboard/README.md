@@ -1,6 +1,6 @@
 # [956. 最高的广告牌](https://leetcode-cn.com/problems/tallest-billboard)
 
-[English Version](/solution/0900-0999/0956.Tallest%20Billboard/README_EN.md)
+
 
 ## 题目描述
 

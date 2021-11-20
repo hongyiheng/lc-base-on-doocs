@@ -1,6 +1,6 @@
 # [25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group)
 
-[English Version](/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/README_EN.md)
+
 
 ## 题目描述
 

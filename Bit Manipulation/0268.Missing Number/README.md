@@ -1,6 +1,6 @@
 # [268. 丢失的数字](https://leetcode-cn.com/problems/missing-number)
 
-[English Version](/solution/0200-0299/0268.Missing%20Number/README_EN.md)
+
 
 ## 题目描述
 

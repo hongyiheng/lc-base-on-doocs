@@ -1,6 +1,6 @@
 # [1079. 活字印刷](https://leetcode-cn.com/problems/letter-tile-possibilities)
 
-[English Version](/solution/1000-1099/1079.Letter%20Tile%20Possibilities/README_EN.md)
+
 
 ## 题目描述
 

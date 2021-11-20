@@ -1,6 +1,6 @@
 # [1932. 合并多棵二叉搜索树](https://leetcode-cn.com/problems/merge-bsts-to-create-single-bst)
 
-[English Version](/solution/1900-1999/1932.Merge%20BSTs%20to%20Create%20Single%20BST/README_EN.md)
+
 
 ## 题目描述
 

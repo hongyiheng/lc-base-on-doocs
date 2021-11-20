@@ -1,6 +1,6 @@
 # [143. 重排链表](https://leetcode-cn.com/problems/reorder-list)
 
-[English Version](/solution/0100-0199/0143.Reorder%20List/README_EN.md)
+
 
 ## 题目描述
 

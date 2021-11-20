@@ -1,6 +1,6 @@
 # [336. 回文对](https://leetcode-cn.com/problems/palindrome-pairs)
 
-[English Version](/solution/0300-0399/0336.Palindrome%20Pairs/README_EN.md)
+
 
 ## 题目描述
 

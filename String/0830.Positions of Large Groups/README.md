@@ -1,6 +1,6 @@
 # [830. 较大分组的位置](https://leetcode-cn.com/problems/positions-of-large-groups)
 
-[English Version](/solution/0800-0899/0830.Positions%20of%20Large%20Groups/README_EN.md)
+
 
 ## 题目描述
 

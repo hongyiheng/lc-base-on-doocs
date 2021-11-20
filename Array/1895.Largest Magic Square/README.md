@@ -1,6 +1,6 @@
 # [1895. 最大的幻方](https://leetcode-cn.com/problems/largest-magic-square)
 
-[English Version](/solution/1800-1899/1895.Largest%20Magic%20Square/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [115. 不同的子序列](https://leetcode-cn.com/problems/distinct-subsequences)
 
-[English Version](/solution/0100-0199/0115.Distinct%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

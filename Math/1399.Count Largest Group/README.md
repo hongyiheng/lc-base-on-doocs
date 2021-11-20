@@ -1,6 +1,6 @@
 # [1399. 统计最大组的数目](https://leetcode-cn.com/problems/count-largest-group)
 
-[English Version](/solution/1300-1399/1399.Count%20Largest%20Group/README_EN.md)
+
 
 ## 题目描述
 

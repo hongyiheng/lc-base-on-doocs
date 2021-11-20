@@ -1,6 +1,6 @@
 # [789. 逃脱阻碍者](https://leetcode-cn.com/problems/escape-the-ghosts)
 
-[English Version](/solution/0700-0799/0789.Escape%20The%20Ghosts/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [459. 重复的子字符串](https://leetcode-cn.com/problems/repeated-substring-pattern)
 
-[English Version](/solution/0400-0499/0459.Repeated%20Substring%20Pattern/README_EN.md)
+
 
 ## 题目描述
 

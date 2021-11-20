@@ -1,6 +1,6 @@
 # [1017. 负二进制转换](https://leetcode-cn.com/problems/convert-to-base-2)
 
-[English Version](/solution/1000-1099/1017.Convert%20to%20Base%20-2/README_EN.md)
+
 
 ## 题目描述
 

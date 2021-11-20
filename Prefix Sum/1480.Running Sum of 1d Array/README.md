@@ -1,6 +1,6 @@
 # [1480. 一维数组的动态和](https://leetcode-cn.com/problems/running-sum-of-1d-array)
 
-[English Version](/solution/1400-1499/1480.Running%20Sum%20of%201d%20Array/README_EN.md)
+
 
 ## 题目描述
 

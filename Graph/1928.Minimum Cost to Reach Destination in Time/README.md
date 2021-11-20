@@ -1,6 +1,6 @@
 # [1928. 规定时间内到达终点的最小花费](https://leetcode-cn.com/problems/minimum-cost-to-reach-destination-in-time)
 
-[English Version](/solution/1900-1999/1928.Minimum%20Cost%20to%20Reach%20Destination%20in%20Time/README_EN.md)
+
 
 ## 题目描述
 

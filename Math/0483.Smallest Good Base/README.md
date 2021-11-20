@@ -1,6 +1,6 @@
 # [483. 最小好进制](https://leetcode-cn.com/problems/smallest-good-base)
 
-[English Version](/solution/0400-0499/0483.Smallest%20Good%20Base/README_EN.md)
+
 
 ## 题目描述
 

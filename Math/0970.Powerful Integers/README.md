@@ -1,6 +1,6 @@
 # [970. 强整数](https://leetcode-cn.com/problems/powerful-integers)
 
-[English Version](/solution/0900-0999/0970.Powerful%20Integers/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [18. 四数之和](https://leetcode-cn.com/problems/4sum)
 
-[English Version](/solution/0000-0099/0018.4Sum/README_EN.md)
+
 
 ## 题目描述
 

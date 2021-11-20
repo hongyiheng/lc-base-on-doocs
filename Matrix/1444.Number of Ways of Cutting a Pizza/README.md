@@ -1,6 +1,6 @@
 # [1444. 切披萨的方案数](https://leetcode-cn.com/problems/number-of-ways-of-cutting-a-pizza)
 
-[English Version](/solution/1400-1499/1444.Number%20of%20Ways%20of%20Cutting%20a%20Pizza/README_EN.md)
+
 
 ## 题目描述
 

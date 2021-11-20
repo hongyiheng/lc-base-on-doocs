@@ -1,6 +1,6 @@
 # [1405. 最长快乐字符串](https://leetcode-cn.com/problems/longest-happy-string)
 
-[English Version](/solution/1400-1499/1405.Longest%20Happy%20String/README_EN.md)
+
 
 ## 题目描述
 

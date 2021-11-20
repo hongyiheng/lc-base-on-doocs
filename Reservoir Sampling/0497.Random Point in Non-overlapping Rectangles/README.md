@@ -1,6 +1,6 @@
 # [497. 非重叠矩形中的随机点](https://leetcode-cn.com/problems/random-point-in-non-overlapping-rectangles)
 
-[English Version](/solution/0400-0499/0497.Random%20Point%20in%20Non-overlapping%20Rectangles/README_EN.md)
+
 
 ## 题目描述
 

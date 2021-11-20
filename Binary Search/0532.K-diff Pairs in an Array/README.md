@@ -1,6 +1,6 @@
 # [532. 数组中的 k-diff 数对](https://leetcode-cn.com/problems/k-diff-pairs-in-an-array)
 
-[English Version](/solution/0500-0599/0532.K-diff%20Pairs%20in%20an%20Array/README_EN.md)
+
 
 ## 题目描述
 

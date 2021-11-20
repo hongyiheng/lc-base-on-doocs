@@ -1,6 +1,6 @@
 # [1037. 有效的回旋镖](https://leetcode-cn.com/problems/valid-boomerang)
 
-[English Version](/solution/1000-1099/1037.Valid%20Boomerang/README_EN.md)
+
 
 ## 题目描述
 

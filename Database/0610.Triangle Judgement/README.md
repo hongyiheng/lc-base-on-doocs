@@ -1,6 +1,6 @@
 # [610. 判断三角形](https://leetcode-cn.com/problems/triangle-judgement)
 
-[English Version](/solution/0600-0699/0610.Triangle%20Judgement/README_EN.md)
+
 
 ## 题目描述
 

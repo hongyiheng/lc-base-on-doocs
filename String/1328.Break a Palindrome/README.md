@@ -1,6 +1,6 @@
 # [1328. 破坏回文串](https://leetcode-cn.com/problems/break-a-palindrome)
 
-[English Version](/solution/1300-1399/1328.Break%20a%20Palindrome/README_EN.md)
+
 
 ## 题目描述
 

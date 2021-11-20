@@ -1,6 +1,6 @@
 # [1048. 最长字符串链](https://leetcode-cn.com/problems/longest-string-chain)
 
-[English Version](/solution/1000-1099/1048.Longest%20String%20Chain/README_EN.md)
+
 
 ## 题目描述
 

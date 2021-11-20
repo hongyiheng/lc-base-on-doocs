@@ -1,6 +1,6 @@
 # [645. 错误的集合](https://leetcode-cn.com/problems/set-mismatch)
 
-[English Version](/solution/0600-0699/0645.Set%20Mismatch/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [879. 盈利计划](https://leetcode-cn.com/problems/profitable-schemes)
 
-[English Version](/solution/0800-0899/0879.Profitable%20Schemes/README_EN.md)
+
 
 ## 题目描述
 

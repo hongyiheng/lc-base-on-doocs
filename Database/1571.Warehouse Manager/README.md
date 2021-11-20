@@ -1,6 +1,6 @@
 # [1571. 仓库经理](https://leetcode-cn.com/problems/warehouse-manager)
 
-[English Version](/solution/1500-1599/1571.Warehouse%20Manager/README_EN.md)
+
 
 ## 题目描述
 

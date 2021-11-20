@@ -1,6 +1,6 @@
 # [887. 鸡蛋掉落](https://leetcode-cn.com/problems/super-egg-drop)
 
-[English Version](/solution/0800-0899/0887.Super%20Egg%20Drop/README_EN.md)
+
 
 ## 题目描述
 

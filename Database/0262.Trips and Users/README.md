@@ -1,6 +1,6 @@
 # [262. 行程和用户](https://leetcode-cn.com/problems/trips-and-users)
 
-[English Version](/solution/0200-0299/0262.Trips%20and%20Users/README_EN.md)
+
 
 ## 题目描述
 

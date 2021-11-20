@@ -1,6 +1,6 @@
 # [922. 按奇偶排序数组 II](https://leetcode-cn.com/problems/sort-array-by-parity-ii)
 
-[English Version](/solution/0900-0999/0922.Sort%20Array%20By%20Parity%20II/README_EN.md)
+
 
 ## 题目描述
 

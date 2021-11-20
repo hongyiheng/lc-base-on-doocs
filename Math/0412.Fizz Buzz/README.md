@@ -1,6 +1,6 @@
 # [412. Fizz Buzz](https://leetcode-cn.com/problems/fizz-buzz)
 
-[English Version](/solution/0400-0499/0412.Fizz%20Buzz/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [393. UTF-8 编码验证](https://leetcode-cn.com/problems/utf-8-validation)
 
-[English Version](/solution/0300-0399/0393.UTF-8%20Validation/README_EN.md)
+
 
 ## 题目描述
 

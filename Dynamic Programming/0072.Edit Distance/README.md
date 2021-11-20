@@ -1,6 +1,6 @@
 # [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance)
 
-[English Version](/solution/0000-0099/0072.Edit%20Distance/README_EN.md)
+
 
 ## 题目描述
 

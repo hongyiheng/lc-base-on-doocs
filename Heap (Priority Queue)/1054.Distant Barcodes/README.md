@@ -1,6 +1,6 @@
 # [1054. 距离相等的条形码](https://leetcode-cn.com/problems/distant-barcodes)
 
-[English Version](/solution/1000-1099/1054.Distant%20Barcodes/README_EN.md)
+
 
 ## 题目描述
 

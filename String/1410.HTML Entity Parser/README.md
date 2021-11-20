@@ -1,6 +1,6 @@
 # [1410. HTML 实体解析器](https://leetcode-cn.com/problems/html-entity-parser)
 
-[English Version](/solution/1400-1499/1410.HTML%20Entity%20Parser/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [461. 汉明距离](https://leetcode-cn.com/problems/hamming-distance)
 
-[English Version](/solution/0400-0499/0461.Hamming%20Distance/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [187. 重复的DNA序列](https://leetcode-cn.com/problems/repeated-dna-sequences)
 
-[English Version](/solution/0100-0199/0187.Repeated%20DNA%20Sequences/README_EN.md)
+
 
 ## 题目描述
 

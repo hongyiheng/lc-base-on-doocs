@@ -1,6 +1,6 @@
 # [1892. 页面推荐Ⅱ](https://leetcode-cn.com/problems/page-recommendations-ii)
 
-[English Version](/solution/1800-1899/1892.Page%20Recommendations%20II/README_EN.md)
+
 
 ## 题目描述
 

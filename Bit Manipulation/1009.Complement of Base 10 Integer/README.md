@@ -1,6 +1,6 @@
 # [1009. 十进制整数的反码](https://leetcode-cn.com/problems/complement-of-base-10-integer)
 
-[English Version](/solution/1000-1099/1009.Complement%20of%20Base%2010%20Integer/README_EN.md)
+
 
 ## 题目描述
 

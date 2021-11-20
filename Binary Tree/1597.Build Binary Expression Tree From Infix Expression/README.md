@@ -1,6 +1,6 @@
 # [1597. 根据中缀表达式构造二叉表达式树](https://leetcode-cn.com/problems/build-binary-expression-tree-from-infix-expression)
 
-[English Version](/solution/1500-1599/1597.Build%20Binary%20Expression%20Tree%20From%20Infix%20Expression/README_EN.md)
+
 
 ## 题目描述
 

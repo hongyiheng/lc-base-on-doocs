@@ -1,6 +1,6 @@
 # [967. 连续差相同的数字](https://leetcode-cn.com/problems/numbers-with-same-consecutive-differences)
 
-[English Version](/solution/0900-0999/0967.Numbers%20With%20Same%20Consecutive%20Differences/README_EN.md)
+
 
 ## 题目描述
 

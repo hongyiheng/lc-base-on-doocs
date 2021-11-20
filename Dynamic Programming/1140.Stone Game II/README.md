@@ -1,6 +1,6 @@
 # [1140. 石子游戏 II](https://leetcode-cn.com/problems/stone-game-ii)
 
-[English Version](/solution/1100-1199/1140.Stone%20Game%20II/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [99. 恢复二叉搜索树](https://leetcode-cn.com/problems/recover-binary-search-tree)
 
-[English Version](/solution/0000-0099/0099.Recover%20Binary%20Search%20Tree/README_EN.md)
+
 
 ## 题目描述
 

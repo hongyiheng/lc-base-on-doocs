@@ -1,6 +1,6 @@
 # [827. 最大人工岛](https://leetcode-cn.com/problems/making-a-large-island)
 
-[English Version](/solution/0800-0899/0827.Making%20A%20Large%20Island/README_EN.md)
+
 
 ## 题目描述
 

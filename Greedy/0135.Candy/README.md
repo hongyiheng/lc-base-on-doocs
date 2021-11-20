@@ -1,6 +1,6 @@
 # [135. 分发糖果](https://leetcode-cn.com/problems/candy)
 
-[English Version](/solution/0100-0199/0135.Candy/README_EN.md)
+
 
 ## 题目描述
 

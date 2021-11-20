@@ -1,6 +1,6 @@
 # [622. 设计循环队列](https://leetcode-cn.com/problems/design-circular-queue)
 
-[English Version](/solution/0600-0699/0622.Design%20Circular%20Queue/README_EN.md)
+
 
 ## 题目描述
 

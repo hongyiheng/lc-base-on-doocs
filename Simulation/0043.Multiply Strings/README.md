@@ -1,6 +1,6 @@
 # [43. 字符串相乘](https://leetcode-cn.com/problems/multiply-strings)
 
-[English Version](/solution/0000-0099/0043.Multiply%20Strings/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [824. 山羊拉丁文](https://leetcode-cn.com/problems/goat-latin)
 
-[English Version](/solution/0800-0899/0824.Goat%20Latin/README_EN.md)
+
 
 ## 题目描述
 

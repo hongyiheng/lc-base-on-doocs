@@ -1,6 +1,6 @@
 # [127. 单词接龙](https://leetcode-cn.com/problems/word-ladder)
 
-[English Version](/solution/0100-0199/0127.Word%20Ladder/README_EN.md)
+
 
 ## 题目描述
 

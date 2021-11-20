@@ -1,6 +1,6 @@
 # [104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree)
 
-[English Version](/solution/0100-0199/0104.Maximum%20Depth%20of%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

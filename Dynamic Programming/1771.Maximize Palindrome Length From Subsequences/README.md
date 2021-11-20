@@ -1,6 +1,6 @@
 # [1771. 由子序列构造的最长回文串的长度](https://leetcode-cn.com/problems/maximize-palindrome-length-from-subsequences)
 
-[English Version](/solution/1700-1799/1771.Maximize%20Palindrome%20Length%20From%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

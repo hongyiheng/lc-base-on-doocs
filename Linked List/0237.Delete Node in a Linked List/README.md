@@ -1,6 +1,6 @@
 # [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list)
 
-[English Version](/solution/0200-0299/0237.Delete%20Node%20in%20a%20Linked%20List/README_EN.md)
+
 
 ## 题目描述
 

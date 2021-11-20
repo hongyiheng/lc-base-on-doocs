@@ -1,6 +1,6 @@
 # [658. 找到 K 个最接近的元素](https://leetcode-cn.com/problems/find-k-closest-elements)
 
-[English Version](/solution/0600-0699/0658.Find%20K%20Closest%20Elements/README_EN.md)
+
 
 ## 题目描述
 

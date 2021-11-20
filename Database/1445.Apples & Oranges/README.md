@@ -1,6 +1,6 @@
 # [1445. 苹果和桔子](https://leetcode-cn.com/problems/apples-oranges)
 
-[English Version](/solution/1400-1499/1445.Apples%20%26%20Oranges/README_EN.md)
+
 
 ## 题目描述
 

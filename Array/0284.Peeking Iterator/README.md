@@ -1,6 +1,6 @@
 # [284. 顶端迭代器](https://leetcode-cn.com/problems/peeking-iterator)
 
-[English Version](/solution/0200-0299/0284.Peeking%20Iterator/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [627. 变更性别](https://leetcode-cn.com/problems/swap-salary)
 
-[English Version](/solution/0600-0699/0627.Swap%20Salary/README_EN.md)
+
 
 ## 题目描述
 

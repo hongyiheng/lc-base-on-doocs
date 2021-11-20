@@ -1,6 +1,6 @@
 # [486. 预测赢家](https://leetcode-cn.com/problems/predict-the-winner)
 
-[English Version](/solution/0400-0499/0486.Predict%20the%20Winner/README_EN.md)
+
 
 ## 题目描述
 

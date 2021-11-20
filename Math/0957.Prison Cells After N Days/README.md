@@ -1,6 +1,6 @@
 # [957. N 天后的牢房](https://leetcode-cn.com/problems/prison-cells-after-n-days)
 
-[English Version](/solution/0900-0999/0957.Prison%20Cells%20After%20N%20Days/README_EN.md)
+
 
 ## 题目描述
 

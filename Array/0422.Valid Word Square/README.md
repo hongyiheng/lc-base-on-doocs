@@ -1,6 +1,6 @@
 # [422. 有效的单词方块](https://leetcode-cn.com/problems/valid-word-square)
 
-[English Version](/solution/0400-0499/0422.Valid%20Word%20Square/README_EN.md)
+
 
 ## 题目描述
 

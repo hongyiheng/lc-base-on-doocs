@@ -1,6 +1,6 @@
 # [310. 最小高度树](https://leetcode-cn.com/problems/minimum-height-trees)
 
-[English Version](/solution/0300-0399/0310.Minimum%20Height%20Trees/README_EN.md)
+
 
 ## 题目描述
 

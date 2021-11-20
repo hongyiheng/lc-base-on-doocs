@@ -1,6 +1,6 @@
 # [140. 单词拆分 II](https://leetcode-cn.com/problems/word-break-ii)
 
-[English Version](/solution/0100-0199/0140.Word%20Break%20II/README_EN.md)
+
 
 ## 题目描述
 

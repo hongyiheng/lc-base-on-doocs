@@ -1,6 +1,6 @@
 # [566. 重塑矩阵](https://leetcode-cn.com/problems/reshape-the-matrix)
 
-[English Version](/solution/0500-0599/0566.Reshape%20the%20Matrix/README_EN.md)
+
 
 ## 题目描述
 

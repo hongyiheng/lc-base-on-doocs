@@ -1,6 +1,6 @@
 # [1930. 长度为 3 的不同回文子序列](https://leetcode-cn.com/problems/unique-length-3-palindromic-subsequences)
 
-[English Version](/solution/1900-1999/1930.Unique%20Length-3%20Palindromic%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

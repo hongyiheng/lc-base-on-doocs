@@ -1,6 +1,6 @@
 # [1238. 循环码排列](https://leetcode-cn.com/problems/circular-permutation-in-binary-representation)
 
-[English Version](/solution/1200-1299/1238.Circular%20Permutation%20in%20Binary%20Representation/README_EN.md)
+
 
 ## 题目描述
 

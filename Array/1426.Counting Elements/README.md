@@ -1,6 +1,6 @@
 # [1426. 数元素](https://leetcode-cn.com/problems/counting-elements)
 
-[English Version](/solution/1400-1499/1426.Counting%20Elements/README_EN.md)
+
 
 ## 题目描述
 

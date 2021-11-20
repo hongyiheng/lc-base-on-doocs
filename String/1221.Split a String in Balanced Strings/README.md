@@ -1,6 +1,6 @@
 # [1221. 分割平衡字符串](https://leetcode-cn.com/problems/split-a-string-in-balanced-strings)
 
-[English Version](/solution/1200-1299/1221.Split%20a%20String%20in%20Balanced%20Strings/README_EN.md)
+
 
 ## 题目描述
 

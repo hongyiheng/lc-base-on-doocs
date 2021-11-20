@@ -1,6 +1,6 @@
 # [541. 反转字符串 II](https://leetcode-cn.com/problems/reverse-string-ii)
 
-[English Version](/solution/0500-0599/0541.Reverse%20String%20II/README_EN.md)
+
 
 ## 题目描述
 

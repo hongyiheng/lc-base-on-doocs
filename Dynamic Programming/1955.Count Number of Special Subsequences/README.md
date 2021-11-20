@@ -1,6 +1,6 @@
 # [1955. 统计特殊子序列的数目](https://leetcode-cn.com/problems/count-number-of-special-subsequences)
 
-[English Version](/solution/1900-1999/1955.Count%20Number%20of%20Special%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

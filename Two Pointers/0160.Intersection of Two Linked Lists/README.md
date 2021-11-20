@@ -1,6 +1,6 @@
 # [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists)
 
-[English Version](/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/README_EN.md)
+
 
 ## 题目描述
 

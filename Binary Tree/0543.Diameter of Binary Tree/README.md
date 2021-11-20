@@ -1,6 +1,6 @@
 # [543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree)
 
-[English Version](/solution/0500-0599/0543.Diameter%20of%20Binary%20Tree/README_EN.md)
+
 
 ## 题目描述
 

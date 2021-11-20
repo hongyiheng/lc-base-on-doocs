@@ -1,6 +1,6 @@
 # [344. 反转字符串](https://leetcode-cn.com/problems/reverse-string)
 
-[English Version](/solution/0300-0399/0344.Reverse%20String/README_EN.md)
+
 
 ## 题目描述
 

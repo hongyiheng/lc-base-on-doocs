@@ -1,6 +1,6 @@
 # [1138. 字母板上的路径](https://leetcode-cn.com/problems/alphabet-board-path)
 
-[English Version](/solution/1100-1199/1138.Alphabet%20Board%20Path/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list)
 
-[English Version](/solution/0000-0099/0083.Remove%20Duplicates%20from%20Sorted%20List/README_EN.md)
+
 
 ## 题目描述
 

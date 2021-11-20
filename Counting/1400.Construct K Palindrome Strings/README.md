@@ -1,6 +1,6 @@
 # [1400. 构造 K 个回文字符串](https://leetcode-cn.com/problems/construct-k-palindrome-strings)
 
-[English Version](/solution/1400-1499/1400.Construct%20K%20Palindrome%20Strings/README_EN.md)
+
 
 ## 题目描述
 

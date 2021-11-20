@@ -1,6 +1,6 @@
 # [626. 换座位](https://leetcode-cn.com/problems/exchange-seats)
 
-[English Version](/solution/0600-0699/0626.Exchange%20Seats/README_EN.md)
+
 
 ## 题目描述
 

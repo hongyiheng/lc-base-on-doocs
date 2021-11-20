@@ -1,6 +1,6 @@
 # [517. 超级洗衣机](https://leetcode-cn.com/problems/super-washing-machines)
 
-[English Version](/solution/0500-0599/0517.Super%20Washing%20Machines/README_EN.md)
+
 
 ## 题目描述
 

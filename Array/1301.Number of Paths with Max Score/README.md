@@ -1,6 +1,6 @@
 # [1301. 最大得分的路径数目](https://leetcode-cn.com/problems/number-of-paths-with-max-score)
 
-[English Version](/solution/1300-1399/1301.Number%20of%20Paths%20with%20Max%20Score/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [508. 出现次数最多的子树元素和](https://leetcode-cn.com/problems/most-frequent-subtree-sum)
 
-[English Version](/solution/0500-0599/0508.Most%20Frequent%20Subtree%20Sum/README_EN.md)
+
 
 ## 题目描述
 

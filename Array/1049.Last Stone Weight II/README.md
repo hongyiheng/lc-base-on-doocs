@@ -1,6 +1,6 @@
 # [1049. 最后一块石头的重量 II](https://leetcode-cn.com/problems/last-stone-weight-ii)
 
-[English Version](/solution/1000-1099/1049.Last%20Stone%20Weight%20II/README_EN.md)
+
 
 ## 题目描述
 

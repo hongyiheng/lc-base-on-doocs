@@ -1,6 +1,6 @@
 # [916. 单词子集](https://leetcode-cn.com/problems/word-subsets)
 
-[English Version](/solution/0900-0999/0916.Word%20Subsets/README_EN.md)
+
 
 ## 题目描述
 

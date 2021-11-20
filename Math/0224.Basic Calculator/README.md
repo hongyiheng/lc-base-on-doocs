@@ -1,6 +1,6 @@
 # [224. 基本计算器](https://leetcode-cn.com/problems/basic-calculator)
 
-[English Version](/solution/0200-0299/0224.Basic%20Calculator/README_EN.md)
+
 
 ## 题目描述
 

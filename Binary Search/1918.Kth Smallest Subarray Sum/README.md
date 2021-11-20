@@ -1,6 +1,6 @@
 # [1918. Kth Smallest Subarray Sum](https://leetcode-cn.com/problems/kth-smallest-subarray-sum)
 
-[English Version](/solution/1900-1999/1918.Kth%20Smallest%20Subarray%20Sum/README_EN.md)
+
 
 ## 题目描述
 

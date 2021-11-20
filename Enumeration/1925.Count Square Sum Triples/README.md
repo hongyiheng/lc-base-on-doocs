@@ -1,6 +1,6 @@
 # [1925. 统计平方和三元组的数目](https://leetcode-cn.com/problems/count-square-sum-triples)
 
-[English Version](/solution/1900-1999/1925.Count%20Square%20Sum%20Triples/README_EN.md)
+
 
 ## 题目描述
 

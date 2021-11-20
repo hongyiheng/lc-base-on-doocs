@@ -1,6 +1,6 @@
 # [1165. 单行键盘](https://leetcode-cn.com/problems/single-row-keyboard)
 
-[English Version](/solution/1100-1199/1165.Single-Row%20Keyboard/README_EN.md)
+
 
 ## 题目描述
 

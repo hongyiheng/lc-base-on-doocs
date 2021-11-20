@@ -1,6 +1,6 @@
 # [1885. Count Pairs in Two Arrays](https://leetcode-cn.com/problems/count-pairs-in-two-arrays)
 
-[English Version](/solution/1800-1899/1885.Count%20Pairs%20in%20Two%20Arrays/README_EN.md)
+
 
 ## 题目描述
 

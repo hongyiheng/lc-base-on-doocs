@@ -1,6 +1,6 @@
 # [783. 二叉搜索树节点最小距离](https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes)
 
-[English Version](/solution/0700-0799/0783.Minimum%20Distance%20Between%20BST%20Nodes/README_EN.md)
+
 
 ## 题目描述
 

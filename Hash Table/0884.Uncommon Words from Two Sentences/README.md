@@ -1,6 +1,6 @@
 # [884. 两句话中的不常见单词](https://leetcode-cn.com/problems/uncommon-words-from-two-sentences)
 
-[English Version](/solution/0800-0899/0884.Uncommon%20Words%20from%20Two%20Sentences/README_EN.md)
+
 
 ## 题目描述
 

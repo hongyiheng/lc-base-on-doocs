@@ -1,6 +1,6 @@
 # [391. 完美矩形](https://leetcode-cn.com/problems/perfect-rectangle)
 
-[English Version](/solution/0300-0399/0391.Perfect%20Rectangle/README_EN.md)
+
 
 ## 题目描述
 

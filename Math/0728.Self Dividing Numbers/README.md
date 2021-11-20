@@ -1,6 +1,6 @@
 # [728. 自除数](https://leetcode-cn.com/problems/self-dividing-numbers)
 
-[English Version](/solution/0700-0799/0728.Self%20Dividing%20Numbers/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [319. 灯泡开关](https://leetcode-cn.com/problems/bulb-switcher)
 
-[English Version](/solution/0300-0399/0319.Bulb%20Switcher/README_EN.md)
+
 
 ## 题目描述
 

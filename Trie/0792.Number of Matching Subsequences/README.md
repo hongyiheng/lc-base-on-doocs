@@ -1,6 +1,6 @@
 # [792. 匹配子序列的单词数](https://leetcode-cn.com/problems/number-of-matching-subsequences)
 
-[English Version](/solution/0700-0799/0792.Number%20of%20Matching%20Subsequences/README_EN.md)
+
 
 ## 题目描述
 

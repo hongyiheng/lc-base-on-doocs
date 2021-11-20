@@ -1,6 +1,6 @@
 # [299. 猜数字游戏](https://leetcode-cn.com/problems/bulls-and-cows)
 
-[English Version](/solution/0200-0299/0299.Bulls%20and%20Cows/README_EN.md)
+
 
 ## 题目描述
 

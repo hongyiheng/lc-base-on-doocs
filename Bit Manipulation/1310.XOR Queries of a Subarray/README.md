@@ -1,6 +1,6 @@
 # [1310. 子数组异或查询](https://leetcode-cn.com/problems/xor-queries-of-a-subarray)
 
-[English Version](/solution/1300-1399/1310.XOR%20Queries%20of%20a%20Subarray/README_EN.md)
+
 
 ## 题目描述
 

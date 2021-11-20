@@ -1,6 +1,6 @@
 # [482. 密钥格式化](https://leetcode-cn.com/problems/license-key-formatting)
 
-[English Version](/solution/0400-0499/0482.License%20Key%20Formatting/README_EN.md)
+
 
 ## 题目描述
 

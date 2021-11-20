@@ -1,6 +1,6 @@
 # [1868. 两个行程编码数组的积](https://leetcode-cn.com/problems/product-of-two-run-length-encoded-arrays)
 
-[English Version](/solution/1800-1899/1868.Product%20of%20Two%20Run-Length%20Encoded%20Arrays/README_EN.md)
+
 
 ## 题目描述
 

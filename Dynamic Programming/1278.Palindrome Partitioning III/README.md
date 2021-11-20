@@ -1,6 +1,6 @@
 # [1278. 分割回文串 III](https://leetcode-cn.com/problems/palindrome-partitioning-iii)
 
-[English Version](/solution/1200-1299/1278.Palindrome%20Partitioning%20III/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence)
 
-[English Version](/solution/0500-0599/0516.Longest%20Palindromic%20Subsequence/README_EN.md)
+
 
 ## 题目描述
 

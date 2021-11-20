@@ -1,6 +1,6 @@
 # [1901. 找出顶峰元素 II](https://leetcode-cn.com/problems/find-a-peak-element-ii)
 
-[English Version](/solution/1900-1999/1901.Find%20a%20Peak%20Element%20II/README_EN.md)
+
 
 ## 题目描述
 

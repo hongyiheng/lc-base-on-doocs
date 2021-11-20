@@ -1,6 +1,6 @@
 # [630. 课程表 III](https://leetcode-cn.com/problems/course-schedule-iii)
 
-[English Version](/solution/0600-0699/0630.Course%20Schedule%20III/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [859. 亲密字符串](https://leetcode-cn.com/problems/buddy-strings)
 
-[English Version](/solution/0800-0899/0859.Buddy%20Strings/README_EN.md)
+
 
 ## 题目描述
 

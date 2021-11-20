@@ -1,6 +1,6 @@
 # [888. 公平的糖果棒交换](https://leetcode-cn.com/problems/fair-candy-swap)
 
-[English Version](/solution/0800-0899/0888.Fair%20Candy%20Swap/README_EN.md)
+
 
 ## 题目描述
 

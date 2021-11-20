@@ -1,6 +1,6 @@
 # [173. 二叉搜索树迭代器](https://leetcode-cn.com/problems/binary-search-tree-iterator)
 
-[English Version](/solution/0100-0199/0173.Binary%20Search%20Tree%20Iterator/README_EN.md)
+
 
 ## 题目描述
 

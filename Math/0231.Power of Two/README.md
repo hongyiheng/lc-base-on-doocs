@@ -1,6 +1,6 @@
 # [231. 2 的幂](https://leetcode-cn.com/problems/power-of-two)
 
-[English Version](/solution/0200-0299/0231.Power%20of%20Two/README_EN.md)
+
 
 ## 题目描述
 

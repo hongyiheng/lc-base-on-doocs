@@ -1,6 +1,6 @@
 # [191. 位1的个数](https://leetcode-cn.com/problems/number-of-1-bits)
 
-[English Version](/solution/0100-0199/0191.Number%20of%201%20Bits/README_EN.md)
+
 
 ## 题目描述
 

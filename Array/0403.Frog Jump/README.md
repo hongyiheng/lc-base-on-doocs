@@ -1,6 +1,6 @@
 # [403. 青蛙过河](https://leetcode-cn.com/problems/frog-jump)
 
-[English Version](/solution/0400-0499/0403.Frog%20Jump/README_EN.md)
+
 
 ## 题目描述
 

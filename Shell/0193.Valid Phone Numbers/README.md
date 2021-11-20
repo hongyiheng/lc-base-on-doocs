@@ -1,6 +1,6 @@
 # [193. 有效电话号码](https://leetcode-cn.com/problems/valid-phone-numbers)
 
-[English Version](/solution/0100-0199/0193.Valid%20Phone%20Numbers/README_EN.md)
+
 
 ## 题目描述
 

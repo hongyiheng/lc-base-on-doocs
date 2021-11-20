@@ -1,6 +1,6 @@
 # [60. 排列序列](https://leetcode-cn.com/problems/permutation-sequence)
 
-[English Version](/solution/0000-0099/0060.Permutation%20Sequence/README_EN.md)
+
 
 ## 题目描述
 

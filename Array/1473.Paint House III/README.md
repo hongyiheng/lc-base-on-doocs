@@ -1,6 +1,6 @@
 # [1473. 粉刷房子 III](https://leetcode-cn.com/problems/paint-house-iii)
 
-[English Version](/solution/1400-1499/1473.Paint%20House%20III/README_EN.md)
+
 
 ## 题目描述
 

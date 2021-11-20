@@ -1,6 +1,6 @@
 # [126. 单词接龙 II](https://leetcode-cn.com/problems/word-ladder-ii)
 
-[English Version](/solution/0100-0199/0126.Word%20Ladder%20II/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [868. 二进制间距](https://leetcode-cn.com/problems/binary-gap)
 
-[English Version](/solution/0800-0899/0868.Binary%20Gap/README_EN.md)
+
 
 ## 题目描述
 

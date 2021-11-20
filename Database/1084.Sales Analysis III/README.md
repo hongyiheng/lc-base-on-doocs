@@ -1,6 +1,6 @@
 # [1084. 销售分析III](https://leetcode-cn.com/problems/sales-analysis-iii)
 
-[English Version](/solution/1000-1099/1084.Sales%20Analysis%20III/README_EN.md)
+
 
 ## 题目描述
 

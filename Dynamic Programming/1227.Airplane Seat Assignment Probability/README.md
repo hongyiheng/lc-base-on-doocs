@@ -1,6 +1,6 @@
 # [1227. 飞机座位分配概率](https://leetcode-cn.com/problems/airplane-seat-assignment-probability)
 
-[English Version](/solution/1200-1299/1227.Airplane%20Seat%20Assignment%20Probability/README_EN.md)
+
 
 ## 题目描述
 

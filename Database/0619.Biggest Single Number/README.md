@@ -1,6 +1,6 @@
 # [619. 只出现一次的最大数字](https://leetcode-cn.com/problems/biggest-single-number)
 
-[English Version](/solution/0600-0699/0619.Biggest%20Single%20Number/README_EN.md)
+
 
 ## 题目描述
 

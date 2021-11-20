@@ -1,6 +1,6 @@
 # [394. 字符串解码](https://leetcode-cn.com/problems/decode-string)
 
-[English Version](/solution/0300-0399/0394.Decode%20String/README_EN.md)
+
 
 ## 题目描述
 

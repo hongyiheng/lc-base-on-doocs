@@ -1,6 +1,6 @@
 # [155. 最小栈](https://leetcode-cn.com/problems/min-stack)
 
-[English Version](/solution/0100-0199/0155.Min%20Stack/README_EN.md)
+
 
 ## 题目描述
 

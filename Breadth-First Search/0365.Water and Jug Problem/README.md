@@ -1,6 +1,6 @@
 # [365. 水壶问题](https://leetcode-cn.com/problems/water-and-jug-problem)
 
-[English Version](/solution/0300-0399/0365.Water%20and%20Jug%20Problem/README_EN.md)
+
 
 ## 题目描述
 

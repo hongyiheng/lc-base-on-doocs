@@ -1,6 +1,6 @@
 # [870. 优势洗牌](https://leetcode-cn.com/problems/advantage-shuffle)
 
-[English Version](/solution/0800-0899/0870.Advantage%20Shuffle/README_EN.md)
+
 
 ## 题目描述
 

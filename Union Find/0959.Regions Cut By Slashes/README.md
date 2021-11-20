@@ -1,6 +1,6 @@
 # [959. 由斜杠划分区域](https://leetcode-cn.com/problems/regions-cut-by-slashes)
 
-[English Version](/solution/0900-0999/0959.Regions%20Cut%20By%20Slashes/README_EN.md)
+
 
 ## 题目描述
 

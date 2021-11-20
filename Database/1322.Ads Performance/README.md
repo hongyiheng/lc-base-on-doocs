@@ -1,6 +1,6 @@
 # [1322. 广告效果](https://leetcode-cn.com/problems/ads-performance)
 
-[English Version](/solution/1300-1399/1322.Ads%20Performance/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1578. 避免重复字母的最小删除成本](https://leetcode-cn.com/problems/minimum-deletion-cost-to-avoid-repeating-letters)
 
-[English Version](/solution/1500-1599/1578.Minimum%20Deletion%20Cost%20to%20Avoid%20Repeating%20Letters/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1782. 统计点对的数目](https://leetcode-cn.com/problems/count-pairs-of-nodes)
 
-[English Version](/solution/1700-1799/1782.Count%20Pairs%20Of%20Nodes/README_EN.md)
+
 
 ## 题目描述
 

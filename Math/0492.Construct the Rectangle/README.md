@@ -1,6 +1,6 @@
 # [492. 构造矩形](https://leetcode-cn.com/problems/construct-the-rectangle)
 
-[English Version](/solution/0400-0499/0492.Construct%20the%20Rectangle/README_EN.md)
+
 
 ## 题目描述
 

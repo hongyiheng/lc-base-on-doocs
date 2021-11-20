@@ -1,6 +1,6 @@
 # [577. 员工奖金](https://leetcode-cn.com/problems/employee-bonus)
 
-[English Version](/solution/0500-0599/0577.Employee%20Bonus/README_EN.md)
+
 
 ## 题目描述
 

@@ -1,6 +1,6 @@
 # [1416. 恢复数组](https://leetcode-cn.com/problems/restore-the-array)
 
-[English Version](/solution/1400-1499/1416.Restore%20The%20Array/README_EN.md)
+
 
 ## 题目描述
 

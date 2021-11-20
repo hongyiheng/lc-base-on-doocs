@@ -1,6 +1,6 @@
 # [779. 第K个语法符号](https://leetcode-cn.com/problems/k-th-symbol-in-grammar)
 
-[English Version](/solution/0700-0799/0779.K-th%20Symbol%20in%20Grammar/README_EN.md)
+
 
 ## 题目描述
 

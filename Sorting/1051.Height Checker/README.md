@@ -1,6 +1,6 @@
 # [1051. 高度检查器](https://leetcode-cn.com/problems/height-checker)
 
-[English Version](/solution/1000-1099/1051.Height%20Checker/README_EN.md)
+
 
 ## 题目描述
 

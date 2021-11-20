@@ -1,6 +1,6 @@
 # [132. 分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii)
 
-[English Version](/solution/0100-0199/0132.Palindrome%20Partitioning%20II/README_EN.md)
+
 
 ## 题目描述
 

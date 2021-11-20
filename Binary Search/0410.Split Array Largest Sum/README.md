@@ -1,6 +1,6 @@
 # [410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum)
 
-[English Version](/solution/0400-0499/0410.Split%20Array%20Largest%20Sum/README_EN.md)
+
 
 ## 题目描述
 

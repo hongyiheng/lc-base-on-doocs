@@ -1,6 +1,6 @@
 # [1539. 第 k 个缺失的正整数](https://leetcode-cn.com/problems/kth-missing-positive-number)
 
-[English Version](/solution/1500-1599/1539.Kth%20Missing%20Positive%20Number/README_EN.md)
+
 
 ## 题目描述
 

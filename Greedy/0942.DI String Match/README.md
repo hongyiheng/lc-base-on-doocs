@@ -1,6 +1,6 @@
 # [942. 增减字符串匹配](https://leetcode-cn.com/problems/di-string-match)
 
-[English Version](/solution/0900-0999/0942.DI%20String%20Match/README_EN.md)
+
 
 ## 题目描述
 

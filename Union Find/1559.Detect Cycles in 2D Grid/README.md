@@ -1,6 +1,6 @@
 # [1559. 二维网格图中探测环](https://leetcode-cn.com/problems/detect-cycles-in-2d-grid)
 
-[English Version](/solution/1500-1599/1559.Detect%20Cycles%20in%202D%20Grid/README_EN.md)
+
 
 ## 题目描述
 

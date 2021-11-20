@@ -1,6 +1,6 @@
 # [1149. 文章浏览 II](https://leetcode-cn.com/problems/article-views-ii)
 
-[English Version](/solution/1100-1199/1149.Article%20Views%20II/README_EN.md)
+
 
 ## 题目描述
 

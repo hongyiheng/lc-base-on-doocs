@@ -1,6 +1,6 @@
 # [475. 供暖器](https://leetcode-cn.com/problems/heaters)
 
-[English Version](/solution/0400-0499/0475.Heaters/README_EN.md)
+
 
 ## 题目描述
 

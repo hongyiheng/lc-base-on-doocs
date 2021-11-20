@@ -1,6 +1,6 @@
 # [915. 分割数组](https://leetcode-cn.com/problems/partition-array-into-disjoint-intervals)
 
-[English Version](/solution/0900-0999/0915.Partition%20Array%20into%20Disjoint%20Intervals/README_EN.md)
+
 
 ## 题目描述
 

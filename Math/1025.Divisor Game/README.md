@@ -1,6 +1,6 @@
 # [1025. 除数博弈](https://leetcode-cn.com/problems/divisor-game)
 
-[English Version](/solution/1000-1099/1025.Divisor%20Game/README_EN.md)
+
 
 ## 题目描述
 

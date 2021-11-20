@@ -1,6 +1,6 @@
 # [1860. 增长的内存泄露](https://leetcode-cn.com/problems/incremental-memory-leak)
 
-[English Version](/solution/1800-1899/1860.Incremental%20Memory%20Leak/README_EN.md)
+
 
 ## 题目描述
 

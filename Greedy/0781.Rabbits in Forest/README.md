@@ -1,6 +1,6 @@
 # [781. 森林中的兔子](https://leetcode-cn.com/problems/rabbits-in-forest)
 
-[English Version](/solution/0700-0799/0781.Rabbits%20in%20Forest/README_EN.md)
+
 
 ## 题目描述
 

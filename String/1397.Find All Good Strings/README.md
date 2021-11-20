@@ -1,6 +1,6 @@
 # [1397. 找到所有好字符串](https://leetcode-cn.com/problems/find-all-good-strings)
 
-[English Version](/solution/1300-1399/1397.Find%20All%20Good%20Strings/README_EN.md)
+
 
 ## 题目描述
 

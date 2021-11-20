@@ -1,6 +1,6 @@
 # [22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses)
 
-[English Version](/solution/0000-0099/0022.Generate%20Parentheses/README_EN.md)
+
 
 ## 题目描述
 

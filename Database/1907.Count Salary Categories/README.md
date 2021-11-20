@@ -1,6 +1,6 @@
 # [1907. 按分类统计薪水](https://leetcode-cn.com/problems/count-salary-categories)
 
-[English Version](/solution/1900-1999/1907.Count%20Salary%20Categories/README_EN.md)
+
 
 ## 题目描述
 

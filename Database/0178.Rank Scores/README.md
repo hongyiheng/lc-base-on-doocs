@@ -1,6 +1,6 @@
 # [178. 分数排名](https://leetcode-cn.com/problems/rank-scores)
 
-[English Version](/solution/0100-0199/0178.Rank%20Scores/README_EN.md)
+
 
 ## 题目描述
 

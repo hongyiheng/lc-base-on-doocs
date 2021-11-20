@@ -1,6 +1,6 @@
 # [1591. 奇怪的打印机 II](https://leetcode-cn.com/problems/strange-printer-ii)
 
-[English Version](/solution/1500-1599/1591.Strange%20Printer%20II/README_EN.md)
+
 
 ## 题目描述
 

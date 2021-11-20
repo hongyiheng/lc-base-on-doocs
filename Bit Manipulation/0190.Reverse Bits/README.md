@@ -1,6 +1,6 @@
 # [190. 颠倒二进制位](https://leetcode-cn.com/problems/reverse-bits)
 
-[English Version](/solution/0100-0199/0190.Reverse%20Bits/README_EN.md)
+
 
 ## 题目描述
 

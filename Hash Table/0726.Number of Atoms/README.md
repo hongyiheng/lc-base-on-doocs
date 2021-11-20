@@ -1,6 +1,6 @@
 # [726. 原子的数量](https://leetcode-cn.com/problems/number-of-atoms)
 
-[English Version](/solution/0700-0799/0726.Number%20of%20Atoms/README_EN.md)
+
 
 ## 题目描述
 
