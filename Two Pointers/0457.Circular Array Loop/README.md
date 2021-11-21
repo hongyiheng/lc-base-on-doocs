@@ -77,7 +77,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def circularArrayLoop(self, nums: List[int]) -> bool:
+        n = len(nums)
 
+        def next(index):
+            n = len(nums)
+            return (index + nums[index] + n) % n
+
+        for i in range(n):
+            slow = i
+            fast = next(slow)
+            while nums[fast] * nums[i] > 0 and nums[next(fast)] * nums[i] > 0:
+                if fast == slow:
+                    if slow == next(slow):
+                        break
+                    return True
+                slow = next(slow)
+                fast = next(next(fast))
+        return False
 ```
 
 ### **Java**
@@ -85,7 +103,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int n;
+    public boolean circularArrayLoop(int[] nums) {
+        n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (check(i, nums)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private boolean check(int i, int[] nums) {
+        int slow = i;
+        int fast = next(slow, nums);
+        while (nums[fast] * nums[i] > 0 && nums[next(fast, nums)] * nums[i] > 0) {
+            if (slow == fast) {
+                if (slow == next(slow, nums)) {
+                    break;
+                }
+                return true;
+            }
+            slow = next(slow, nums);
+            fast = next(next(fast, nums), nums);
+        }
+        return false;
+    }
+
+    private int next(int index, int[] nums) {
+        int res = index + nums[index];
+        while (res < 0) {
+            res += n;
+        }
+        return res % n;
+    }
+}
 ```
 
 ### **...**
