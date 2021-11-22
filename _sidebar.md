@@ -1,4 +1,5 @@
 - [数组](Array/)
+- [树状数组](Binary%20Indexed%20Tree/)
 - [二分搜索](Binary%20Search/)
 - [二叉树](Binary%20Tree/)
 - [二分搜索树](Binary%20Search%20Tree/)
