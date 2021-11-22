@@ -44,7 +44,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+"""
+# Definition for Employee.
+class Employee:
+    def __init__(self, id: int, importance: int, subordinates: List[int]):
+        self.id = id
+        self.importance = importance
+        self.subordinates = subordinates
+"""
 
+class Solution:
+    def getImportance(self, employees: List['Employee'], id: int) -> int:
+        mp = dict()
+
+        def dfs(item_id):
+            if item_id in mp:
+                return mp[item_id]
+            res = 0
+            for e in employees:
+                if e.id == item_id:
+                    res = e.importance
+                    if e.subordinates:
+                        for subordinate_id in e.subordinates:
+                            res += dfs(subordinate_id)
+                    else:
+                        break
+            mp[item_id] = res
+            return res
+        
+        return dfs(id)
 ```
 
 ### **Java**
@@ -52,7 +80,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/*
+// Definition for Employee.
+class Employee {
+    public int id;
+    public int importance;
+    public List<Integer> subordinates;
+};
+*/
 
+class Solution {
+    Map<Integer, Integer> mp = new HashMap<>();
+    public int getImportance(List<Employee> employees, int id) {
+        if (mp.containsKey(id)) {
+            return mp.get(id);
+        }
+        int res = 0;
+        for (Employee e : employees) {
+            if (e.id == id) {
+                res = e.importance;
+                if (e.subordinates.isEmpty()) {
+                    break;
+                } else {   
+                    for (Integer itemId : e.subordinates) {
+                        res += getImportance(employees, itemId);
+                    }
+                }
+            }
+        }
+        mp.put(id, res);
+        return res;
+    } 
+}
 ```
 
 ### **...**
