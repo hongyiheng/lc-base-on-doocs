@@ -1,2 +1,3 @@
 - [数组](Array/)
 - [二分搜索](Binary%20Search/)
+- [二分搜索树](Binary%20Search%20Tree/)
