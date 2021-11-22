@@ -4,3 +4,4 @@
 - [二叉树](Binary%20Tree/)
 - [二分搜索树](Binary%20Search%20Tree/)
 - [回溯](Backtracking/)
+- [双连通分量](Biconnected%20Component/)
