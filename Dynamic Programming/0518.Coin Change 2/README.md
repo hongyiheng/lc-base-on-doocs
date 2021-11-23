@@ -69,7 +69,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        dp = [1] + [0] * amount
+        for v in coins:
+            for j in range(v, amount + 1):
+                dp[j] += dp[j - v]
+        return dp[amount]
 ```
 
 ### **Java**
@@ -77,7 +83,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int change(int amount, int[] coins) {
+        int n = coins.length;
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for (int v : coins) {
+            for (int j = v; j < amount + 1; j++) {
+                dp[j] += dp[j - v];
+            }
+        }
+        return dp[amount];
+    }
+}
 ```
 
 ### **...**
