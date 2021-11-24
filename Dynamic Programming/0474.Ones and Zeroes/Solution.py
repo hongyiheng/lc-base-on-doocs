@@ -12,15 +12,10 @@ class Solution:
                     one += 1
             cnt[k][0] = zero
             cnt[k][1] = one
-        dp = [[[0 for _ in range(n + 1)] for _ in range(m + 1)] for _ in range(strs_len)]
-        for i in range(m + 1):
-            for j in range(n + 1):
-                dp[0][i][j] = 1 if i >= cnt[0][0] and j >= cnt[0][1] else 0
-        for k in range(1, strs_len):
+        dp = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+        for k in range(strs_len):
             zero, one = cnt[k][0], cnt[k][1]
-            for i in range(m + 1):
-                for j in range(n + 1):
-                    a = dp[k - 1][i][j]
-                    b = dp[k - 1][i - zero][j - one] + 1 if i >= zero and j >= one else 0
-                    dp[k][i][j] = max(a, b)
-        return dp[strs_len - 1][m][n]
+            for i in range(m, zero - 1, -1):
+                for j in range(n, one - 1, -1):
+                    dp[i][j] = max(dp[i][j], dp[i - zero][j - one] + 1)
+        return dp[m][n]

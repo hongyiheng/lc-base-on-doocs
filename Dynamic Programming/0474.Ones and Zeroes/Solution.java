@@ -15,22 +15,15 @@ class Solution {
             cnt[i][0] = zero;
             cnt[i][1] = one;
         }
-        int[][][] dp = new int[len][m + 1][n + 1];
-        for (int i = 0; i <= m; i++) {
-            for (int j = 0; j <= n; j++) {
-                dp[0][i][j] = i >= cnt[0][0] && j >= cnt[0][1] ? 1 : 0;
-            }
-        }
-        for (int k = 1; k < len; k++) {
+        int[][] dp = new int[m + 1][n + 1];
+        for (int k = 0; k < len; k++) {
             int zero = cnt[k][0], one = cnt[k][1];
-            for (int i = 0; i <= m; i++) {
-                for (int j = 0; j <= n; j++) {
-                    int a = dp[k - 1][i][j];
-                    int b = i >= zero && j >= one ? dp[k - 1][i - zero][j - one] + 1 : 0;
-                    dp[k][i][j] = Math.max(a, b);
+            for (int i = m; i >= zero; i--) {
+                for (int j = n; j >= one; j--) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - zero][j - one] + 1);
                 }
             }
         }
-        return dp[len - 1][m][n];
+        return dp[m][n];
     }
 }

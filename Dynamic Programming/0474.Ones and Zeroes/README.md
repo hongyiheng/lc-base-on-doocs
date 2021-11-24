@@ -56,6 +56,7 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# 二维dp:
 class Solution:
     def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
         strs_len = len(strs)
@@ -82,6 +83,29 @@ class Solution:
                     b = dp[k - 1][i - zero][j - one] + 1 if i >= zero and j >= one else 0
                     dp[k][i][j] = max(a, b)
         return dp[strs_len - 1][m][n]
+
+# 一维dp:
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        strs_len = len(strs)
+        cnt = [[0 for _ in range(2)] for _ in range(strs_len)]
+        for k in range(strs_len):
+            item = strs[k]
+            zero, one = 0, 0
+            for i in range(len(item)):
+                if '0' == item[i]:
+                    zero += 1
+                else:
+                    one += 1
+            cnt[k][0] = zero
+            cnt[k][1] = one
+        dp = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+        for k in range(strs_len):
+            zero, one = cnt[k][0], cnt[k][1]
+            for i in range(m, zero - 1, -1):
+                for j in range(n, one - 1, -1):
+                    dp[i][j] = max(dp[i][j], dp[i - zero][j - one] + 1)
+        return dp[m][n]
 ```
 
 ### **Java**
@@ -89,6 +113,7 @@ class Solution:
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+// 二维dp:
 class Solution {
     public int findMaxForm(String[] strs, int m, int n) {
         int len = strs.length;
@@ -123,6 +148,37 @@ class Solution {
             }
         }
         return dp[len - 1][m][n];
+    }
+}
+
+// 一维dp:
+class Solution {
+    public int findMaxForm(String[] strs, int m, int n) {
+        int len = strs.length;
+        int[][] cnt = new int[len][2];
+        for (int i = 0; i < len; i++) {
+            char[] chars = strs[i].toCharArray();
+            int zero = 0, one = 0;
+            for (char c : chars) {
+                if (c == '0') {
+                    zero++;
+                } else {
+                    one++;
+                }
+            }
+            cnt[i][0] = zero;
+            cnt[i][1] = one;
+        }
+        int[][] dp = new int[m + 1][n + 1];
+        for (int k = 0; k < len; k++) {
+            int zero = cnt[k][0], one = cnt[k][1];
+            for (int i = m; i >= zero; i--) {
+                for (int j = n; j >= one; j--) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - zero][j - one] + 1);
+                }
+            }
+        }
+        return dp[m][n];
     }
 }
 ```
