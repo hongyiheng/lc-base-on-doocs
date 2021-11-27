@@ -56,7 +56,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nthPersonGetsNthSeat(self, n: int) -> float:
+        return 1 if n == 1 else 0.5
 ```
 
 ### **Java**
@@ -64,7 +66,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double nthPersonGetsNthSeat(int n) {
+        return n == 1 ? 1 : 0.5;
+    }
+}
 ```
 
 ### **...**
