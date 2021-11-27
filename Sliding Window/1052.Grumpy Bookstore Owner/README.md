@@ -47,7 +47,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        n = len(customers)
+        pre = [0] * (n + 1)
+        basic = 0
+        for i in range(1, n + 1):
+            pre[i] = pre[i - 1]
+            if grumpy[i - 1] == 1:
+                pre[i] += customers[i - 1]
+            else:
+                basic += customers[i - 1]
+        res = 0
+        for i in range(n + 1):
+            right = i + minutes if i + minutes < n else n
+            res = max(res, basic + pre[right] - pre[i])
+        return res
 ```
 
 ### **Java**
@@ -55,7 +70,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
+        int n = customers.length;
+        int[] preSum = new int[n + 1];
+        int basic = 0;
+        for (int i = 1; i <= n; i++) {
+            preSum[i] = preSum[i - 1];
+            if (grumpy[i - 1] == 1) {
+                preSum[i] += customers[i - 1];
+            } else {
+                basic += customers[i - 1];
+            }
+        }
+        int res = 0;
+        for (int i = 0; i <= n; i++) {
+            int right = i + minutes >= n ? n : i + minutes;
+            int diff = preSum[right] - preSum[i];
+            res = Math.max(res, basic + diff);
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
