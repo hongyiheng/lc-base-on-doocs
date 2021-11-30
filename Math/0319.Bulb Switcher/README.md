@@ -72,7 +72,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def bulbSwitch(self, n: int) -> int:
+        return int(sqrt(n))
 ```
 
 ### **Java**
@@ -80,7 +82,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int bulbSwitch(int n) {
+        return (int)Math.sqrt(n);
+    }
+}
 ```
 
 ### **...**
