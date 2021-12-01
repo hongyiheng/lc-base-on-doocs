@@ -65,7 +65,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxPower(self, s: str) -> int:
+        res, cur_count, cur = 1, 1, s[0]
+        for i in range(1, len(s)):
+            if cur == s[i]:
+                cur_count += 1
+            else:
+                cur = s[i]
+                cur_count = 1
+            res = max(cur_count, res)
+        return res
 ```
 
 ### **Java**
@@ -73,7 +83,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxPower(String s) {
+        int res = 1, curCount = 1;
+        char[] chars = s.toCharArray();
+        char cur = chars[0];
+        for (int i = 1; i < chars.length; i++) {
+            if (chars[i] == cur) {
+                curCount++;
+            } else {
+                cur = chars[i];
+                curCount = 1;
+            }
+            res = Math.max(res, curCount);
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
