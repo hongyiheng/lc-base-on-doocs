@@ -49,7 +49,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        stk = list()
+        n = len(temperatures)
+        res = [0] * n
+        for i in range(n):   
+            while stk and temperatures[stk[-1]] < temperatures[i]:
+                j = stk.pop()
+                res[j] = i - j
+            stk.append(i)
+        return res
 ```
 
 ### **Java**
@@ -57,7 +67,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        Deque<Integer> stk = new LinkedList<>();
+        int n = temperatures.length;
+        int[] res = new int[n];
+        for (int i = 0; i < n; ++i) {
+            while (!stk.isEmpty() && temperatures[stk.peekLast()] < temperatures[i]) {
+                int j = stk.pollLast();
+                res[j] = i - j;
+            }
+            stk.offerLast(i);
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
