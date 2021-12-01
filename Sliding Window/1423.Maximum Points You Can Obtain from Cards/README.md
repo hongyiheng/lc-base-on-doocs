@@ -72,7 +72,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        n = len(cardPoints)
+        pre = [0] * (n + 1)
+        for i in range(1, n + 1):
+            pre[i] = pre[i - 1] + cardPoints[i - 1]
+        w, m = n - k, float("inf")
+        for l in range(n - w + 1):
+            r = l + w
+            m = min(m, pre[r] - pre[l])
+        return pre[n] - m
 ```
 
 ### **Java**
@@ -80,7 +90,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+        int w = n - k;
+        int[] pre = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            pre[i] = pre[i - 1] + cardPoints[i - 1];
+        }
+        int m = Integer.MAX_VALUE;
+        for (int l = 0; l + w <= n; l++) {
+            int right = l + w;
+            m = Math.min(m, pre[right] - pre[l]);
+        }
+        return pre[n] - m;
+    }
+}
 ```
 
 ### **...**
