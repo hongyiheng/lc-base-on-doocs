@@ -55,7 +55,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largestSumAfterKNegations(self, nums: List[int], k: int) -> int:
+        arr = [0] * 201
+        n = len(nums)
+        for i in range(n):
+            index = nums[i] + 100
+            arr[index] += 1
+        for i in range(k):
+            for j in range(201):
+                if arr[j]:
+                    arr[j] -= 1
+                    index = -1 * (j - 100) + 100
+                    arr[index] += 1
+                    break
+        res = 0
+        for i in range(201):
+            res += arr[i] * (i - 100)
+        return res
 ```
 
 ### **Java**
@@ -63,7 +80,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        int[] arr = new int[201];
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int index = nums[i] + 100;
+            arr[index] += 1;
+        }
+        for (int i = 0; i < k; i++) {
+            for (int j = 0; j < 201; j++) {
+                if (arr[j] != 0) {
+                    arr[j] -= 1;
+                    int index = -1 * (j - 100) + 100;
+                    arr[index] += 1;
+                    j = 201;
+                }
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < 201; i++) {
+            res += arr[i] * (i - 100);
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
