@@ -61,7 +61,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def superPow(self, a: int, b: List[int]) -> int:
+        mod = 1337
 
+        def pow(a, b):
+            nonlocal mod
+            ans = 1
+            a %= mod
+            while b > 0:
+                ans = ans * a % mod
+                b -= 1
+            return ans
+        
+        def dfs(index):
+            nonlocal a, b
+            if index < 0:
+                return 1
+            return pow(dfs(index - 1), 10) * pow(a, b[index]) % mod
+        
+        return dfs(len(b) - 1)
 ```
 
 ### **Java**
@@ -69,6 +88,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int mod = 1337;
+    public int superPow(int a, int[] b) {   
+        return dfs(a, b, b.length - 1);
+    }
+
+    public int dfs (int a, int[] b, int index) {
+        if (index < 0) {
+            return 1;
+        } 
+        return pow(dfs(a, b, index - 1), 10) * pow(a, b[index]) % mod;
+    }
+
+    public int pow(int a, int b) {
+        int ans = 1;
+        a %= mod;
+        while (b-- > 0) {
+            ans = ans * a % mod;
+        }
+        return ans;
+    }
+}
 
 ```
 
