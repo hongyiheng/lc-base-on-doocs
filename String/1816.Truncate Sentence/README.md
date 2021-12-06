@@ -65,7 +65,17 @@ s 中的单词为 ["What", "is" "the", "solution", "to", "this", "problem"]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def truncateSentence(self, s: str, k: int) -> str:
+        n, index = len(s), 0
+        for i in range(n):
+            if k <= 0:
+                break
+            if s[i] == ' ':
+                k -= 1
+            else:
+                index = i
+        return s[:index + 1]
 ```
 
 ### **Java**
@@ -73,7 +83,20 @@ s 中的单词为 ["What", "is" "the", "solution", "to", "this", "problem"]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String truncateSentence(String s, int k) {
+        char[] chars = s.toCharArray();
+        int index = 0;
+        for (int i = 0; i < chars.length && k > 0; i++) {
+            if (chars[i] == ' ') {
+                k--;
+            } else {
+                index = i;
+            }
+        }
+        return s.substring(0, index + 1);
+    }
+}
 ```
 
 ### **...**
