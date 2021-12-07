@@ -53,7 +53,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        arr = [0] * 26
+        for i in range(len(magazine)):
+            index = ord(magazine[i]) - ord('a')
+            arr[index] += 1
+        for i in range(len(ransomNote)):
+            index = ord(ransomNote[i]) - ord('a')
+            if arr[index] < 1:
+                return False
+            arr[index] -= 1     
+        return True
 ```
 
 ### **Java**
@@ -61,12 +72,6 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
-```
-
-### **...**
-
-```
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] arr = new int[26];
@@ -85,6 +90,12 @@ class Solution {
         return true;
     }
 }
+```
+
+### **...**
+
+```
+
 ```
 
 <!-- tabs:end -->
