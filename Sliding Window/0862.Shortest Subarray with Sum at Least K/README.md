@@ -55,7 +55,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestSubarray(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        for i in range(n):
+            if nums[i] >= k:
+                return 1
+            pre[i + 1] = pre[i] + nums[i]
+        lefts = deque()
+        ans = float("inf")
+        for r in range(n + 1):
+            while lefts and pre[r] <= pre[lefts[-1]]:
+                lefts.pop()
+            while lefts and pre[r] - pre[lefts[0]] >= k:
+                ans = min(ans, r - lefts.popleft())
+            lefts.append(r)
+        return -1 if ans == float("inf") else ans
 ```
 
 ### **Java**
@@ -63,7 +79,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int shortestSubarray(int[] nums, int k) {
+        int n = nums.length;
+        long[] pre = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            if (nums[i] >= k) {
+                return 1;
+            }
+            pre[i + 1] = pre[i] + nums[i];
+        }
+        int ans = Integer.MAX_VALUE;
+        Deque<Integer> lefts = new ArrayDeque<>();
+        for (int r = 0; r < pre.length; r++) {
+            while (!lefts.isEmpty() && pre[r] <= pre[lefts.getLast()]) {
+                lefts.removeLast();
+            }
+            while (!lefts.isEmpty() && pre[r] - pre[lefts.peek()] >= k) {
+                ans = Math.min(ans, r - lefts.poll());
+            }
+            lefts.add(r);
+        }
 
+        return ans == Integer.MAX_VALUE ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
