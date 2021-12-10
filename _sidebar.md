@@ -5,3 +5,6 @@
 - [二分搜索树](Binary%20Search%20Tree/)
 - [回溯](Backtracking/)
 - [双连通分量](Biconnected%20Component/)
+- [位运算](Bit%20Manipulation/)
+- [状态压缩](Bitmask/)
+- [脑筋急转弯](Brainteaser/)

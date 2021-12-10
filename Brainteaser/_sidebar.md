@@ -1,0 +1,8 @@
+- [0292.Nim Game](Brainteaser/0292.Nim%20Game\README.md)
+- [0319.Bulb Switcher](Brainteaser/0319.Bulb%20Switcher\README.md)
+- [0810.Chalkboard XOR Game](Brainteaser/0810.Chalkboard%20XOR%20Game\README.md)
+- [1025.Divisor Game](Brainteaser/1025.Divisor%20Game\README.md)
+- [1033.Moving Stones Until Consecutive](Brainteaser/1033.Moving%20Stones%20Until%20Consecutive\README.md)
+- [1227.Airplane Seat Assignment Probability](Brainteaser/1227.Airplane%20Seat%20Assignment%20Probability\README.md)
+- [1503.Last Moment Before All Ants Fall Out of a Plank](Brainteaser/1503.Last%20Moment%20Before%20All%20Ants%20Fall%20Out%20of%20a%20Plank\README.md)
+- [1908.Game of Nim](Brainteaser/1908.Game%20of%20Nim\README.md)
