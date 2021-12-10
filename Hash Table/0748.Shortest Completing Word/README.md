@@ -84,7 +84,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        licensePlate = licensePlate.lower()
+        mp = [0] * 26
+        for i in range(len(licensePlate)):
+            index = ord(licensePlate[i]) - ord('a')
+            if 0 <= index < 26:
+                mp[index] += 1
+        min_len, ans = float("inf"), None
+        for word in words:
+            if len(word) >= min_len:
+                continue
+            temp = mp[:]
+            flag = True
+            for i in range(len(word)):
+                index = ord(word[i]) - ord('a')
+                temp[index] -= 1
+            for num in temp:
+                if num > 0:
+                    flag = False
+                    break
+            if flag:
+                min_len = len(word)
+                ans = word
+        return ans
 ```
 
 ### **Java**
@@ -92,7 +116,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        int[] mp = new int[26];
+        for (char c : licensePlate.toLowerCase().toCharArray()) {
+            if (c - 'a' >= 0 && c - 'a' < 26) {
+                mp[c - 'a'] += 1;
+            }
+        }
+        int minLen = Integer.MAX_VALUE;
+        String ans = null;
+        for (String word : words) {
+            if (word.length() >= minLen) {
+                continue;
+            }
+            int[] temp = mp.clone();
+            boolean flag = true;
+            for (int i = 0; i < word.length(); i++) {
+                int index = word.charAt(i) - 'a';
+                temp[index]--;
+            }
+            for (int num : temp) {
+                if (num > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                ans = word;
+                minLen = word.length();
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
