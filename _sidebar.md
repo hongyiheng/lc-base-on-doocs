@@ -9,3 +9,4 @@
 - [状态压缩](Bitmask/)
 - [脑筋急转弯](Brainteaser/)
 - [广度优先搜索](Breadth-First%20Search/)
+- [桶排序](Bucket%20Sort/)
