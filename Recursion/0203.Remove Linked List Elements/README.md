@@ -52,7 +52,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        pre = ListNode()
+        pre.next = head
 
+        def dfs(root):
+            nonlocal val
+            if not root or not root.next:
+                return
+            if root.next.val == val:
+                root.next = root.next.next
+                dfs(root)
+            else:
+                dfs(root.next)
+
+        dfs(pre)
+        return pre.next
 ```
 
 ### **Java**
@@ -60,7 +81,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode pre = new ListNode();
+        pre.next = head;
+        dfs(pre, val);
+        return pre.next;
+    }   
 
+    public void dfs(ListNode root, int val) {
+        if (root == null || root.next == null) {
+            return;
+        }
+        if (root.next.val == val) {
+            root.next = root.next.next;
+            dfs(root, val);
+        } else {
+            dfs(root.next, val);
+        }
+    }
+}
 ```
 
 ### **...**
