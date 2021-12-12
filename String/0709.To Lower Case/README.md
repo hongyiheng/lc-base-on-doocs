@@ -52,7 +52,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def toLowerCase(self, s: str) -> str:
+        return s.lower()
 ```
 
 ### **Java**
@@ -60,7 +62,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String toLowerCase(String str) {
+        return str.toLowerCase();
+    }
+}
 ```
 
 ### **...**
