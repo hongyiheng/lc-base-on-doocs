@@ -54,7 +54,23 @@ gridNew = [ [8, 4, 8, 7],
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxIncreaseKeepingSkyline(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        rows, cols = [0] * m, [0] * n
+        for i in range(m):
+            rows[i] = max(grid[i])
+        for j in range(n):
+            high = 0
+            for i in range(m):
+                high = max(high, grid[i][j])
+            cols[j] = high
+        res = 0
+        for i in range(m):
+            for j in range(n):
+                max_high = min(rows[i], cols[j])
+                res += max_high - grid[i][j]
+        return res
 ```
 
 ### **Java**
@@ -62,7 +78,35 @@ gridNew = [ [8, 4, 8, 7],
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxIncreaseKeepingSkyline(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[] rows = new int[m];
+        int[] cols = new int[n];
+        for (int i = 0; i < m; i++) {
+            int high = 0;
+            for (int j = 0; j < n; j++) {
+                high = Math.max(high, grid[i][j]);
+            }
+            rows[i] = high;
+        }
+        for (int j = 0; j < n; j++) {
+            int high = 0;
+            for (int i = 0; i < m; i++) {
+                high = Math.max(high, grid[i][j]);
+            }
+            cols[j] = high;
+        }
+        int res = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int maxHigh = Math.min(rows[i], cols[j]);
+                res += maxHigh - grid[i][j];
+            }
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
