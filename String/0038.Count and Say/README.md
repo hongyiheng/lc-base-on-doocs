@@ -81,7 +81,28 @@ countAndSay(4) = 读 "21" = 一 个 2 + 一 个 1 = "12" + "11" = "1211"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        def dfs(s):
+            ans = ""
+            cur, count = ord(s[0]) - ord('0'), 1
+            for i in range(1, len(s)):
+                num = ord(s[i]) - ord('0')
+                if cur == num:
+                    count += 1
+                else:
+                    ans += str(count)
+                    ans += str(cur)
+                    cur = num
+                    count = 1
+            ans += str(count)
+            ans += str(cur)
+            return ans
 
+        ans = "1"
+        for _ in range(n - 1):
+            ans = dfs(ans)
+        return ans
 ```
 
 ### **Java**
@@ -89,7 +110,36 @@ countAndSay(4) = 读 "21" = 一 个 2 + 一 个 1 = "12" + "11" = "1211"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public String countAndSay(int n) {
+        String ans = "1";
+        for (int i = 0; i < n - 1; i++) {
+            ans = dfs(ans);
+        }
+        return ans;
+    }
 
+    public String dfs(String n) {
+        StringBuffer ans = new StringBuffer();
+        char[] chars = n.toCharArray();
+        int cur = chars[0] - '0';
+        int count = 1;
+        for (int i = 1; i < chars.length; i++) {
+            int num = chars[i] - '0';
+            if (cur != num) {
+                ans.append(count);
+                ans.append(cur);
+                cur = num;
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+        ans.append(count);
+        ans.append(cur);
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
