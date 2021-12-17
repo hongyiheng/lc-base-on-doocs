@@ -67,7 +67,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        ans, exchange, bottle = numBottles, numBottles // numExchange, numBottles % numExchange
+        while exchange != 0 or bottle >= numExchange:
+            ans += exchange
+            bottle += exchange
+            exchange = bottle // numExchange
+            bottle -= (exchange * numExchange)
+        return int(ans)
 ```
 
 ### **Java**
@@ -75,7 +83,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int ans = numBottles;
+        int exchange = numBottles / numExchange;
+        int bottle = numBottles % numExchange;
+        while (exchange != 0 || bottle >= numExchange) {
+            ans += exchange;
+            bottle += exchange;
+            exchange = bottle / numExchange;
+            bottle -= exchange * numExchange;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
