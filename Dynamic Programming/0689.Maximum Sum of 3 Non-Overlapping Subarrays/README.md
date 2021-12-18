@@ -41,7 +41,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        for i in range(1, n + 1):
+            pre[i] = pre[i - 1] + nums[i - 1]
+        dp = [[0 for _ in range(4)] for _ in range(n + 1)]
+        for i in range(k, n + 1):
+            s = pre[i] - pre[i - k]
+            for j in range(1, 4):
+                dp[i][j] = max(dp[i - 1][j], dp[i - k][j - 1] + s)
+        index, ans = n, [0] * 3
+        for i in range(2, -1, -1):
+            while dp[index - 1][i + 1] >= dp[index][i + 1]:
+                index -= 1
+            ans[i] = index - k
+            index -= k
+        return ans
 ```
 
 ### **Java**
@@ -49,7 +66,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
+        int n = nums.length;
+        int[] pre = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            pre[i] = pre[i - 1] + nums[i - 1];
+        }
+        int[][] dp = new int[n + 1][4];
+        for (int i = k; i < n + 1; i++) {
+            int s = pre[i] - pre[i - k];
+            for (int j = 1; j < 4; j++) {
+                dp[i][j] = Math.max(dp[i - 1][j], dp[i - k][j - 1] + s);
+            }
+        }
+        int[] ans = new int[3];
+        int index = n;
+        for (int i = 2; i >= 0; i--) {
+            while (dp[index - 1][i + 1] >= dp[index][i + 1]) {
+                index--;
+            }
+            ans[i] = index - k;
+            index -= k;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
