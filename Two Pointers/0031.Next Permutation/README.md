@@ -63,6 +63,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        l, r = -1, -1
+        for i in range(n - 1, -1, -1):
+            for j in range(i + 1, n):
+                if nums[i] < nums[j]:
+                    l = i
+                    r = j
+            if l != -1:
+                break
+        if l != -1:
+            nums[l], nums[r] = nums[r], nums[l]
+        i = 0 if l == -1 else l + 1
+        j = n - 1
+        while i < j:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            j -= 1
 
 ```
 
@@ -71,7 +93,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;
+        int l = -1, r = -1;
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i + 1; j <= n - 1; j++) {
+                if (nums[i] < nums[j]) {
+                    l = i;
+                    r = j;
+                }
+            }
+            if (l != -1) {
+                break;
+            }
+        }
+        if (l != -1) {
+            int temp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = temp;
+        }
+        int i = l == -1 ? 0 : l + 1;
+        int j = n - 1;
+        while (i < j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+            i++;
+            j--;
+        }
+    }
+}
 ```
 
 ### **...**
