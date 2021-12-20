@@ -57,7 +57,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def dayOfYear(self, date: str) -> int:
+        months = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        strs = date.split('-')
+        year, month, day = int(strs[0]), int(strs[1]), int(strs[2])
+        if year % 4 == 0:
+            months[2] += 1
+        ans = 0
+        while month > 0:
+            month -= 1
+            ans += months[month]
+        return ans + day
 ```
 
 ### **Java**
@@ -65,7 +76,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int dayOfYear(String date) {
+        int[] months = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        String[] strs = date.split("-");
+        int year = Integer.parseInt(strs[0]), month = Integer.parseInt(strs[1]), day = Integer.parseInt(strs[2]);
+        if (year % 4 == 0) {
+            months[2]++;
+        }
+        int ans = 0;
+        while (--month > 0) {
+            ans += months[month];
+        }
+        return ans + day;
+    }
+}
 ```
 
 ### **...**
