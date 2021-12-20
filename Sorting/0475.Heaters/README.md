@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        houses.sort()
+        heaters.sort()
+        ans, heater_index, n = 0, 0, len(heaters)
+        for house in houses:
+            while heater_index < n - 1 and abs(heaters[heater_index + 1] - house) <= abs(heaters[heater_index] - house):
+                heater_index += 1
+            if abs(heaters[heater_index] - house) > ans:
+                ans = abs(heaters[heater_index] - house)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +78,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findRadius(int[] houses, int[] heaters) {
+        Arrays.sort(houses);
+        Arrays.sort(heaters);
+        int ans = 0;
+        int heaterIndex = 0;
+        for (int house : houses) {
+            while (heaterIndex <= heaters.length - 2 && Math.abs(heaters[heaterIndex + 1] - house) <= Math.abs(heaters[heaterIndex] - house)) {
+                ++heaterIndex;
+            }
+            if (Math.abs(heaters[heaterIndex] - house) > ans) {
+                ans = Math.abs(heaters[heaterIndex] - house);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
