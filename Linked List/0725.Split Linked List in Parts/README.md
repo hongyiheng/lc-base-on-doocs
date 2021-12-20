@@ -63,7 +63,42 @@ root = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def splitListToParts(self, head: ListNode, k: int) -> List[ListNode]:
+        dummp = ListNode()
+        dummp.next = head
 
+        def get_len(node, n):
+            if not node:
+                return n
+            return get_len(node.next, n + 1)
+
+        n = get_len(dummp.next, 0)
+        num, extra = n // k, n % k
+        ans = []
+        for _ in range(k):
+            if n > 0:
+                son_len = num if extra <= 0 else num + 1
+                extra -= 1
+                cur, temp = ListNode(), ListNode()
+                cur.next = head
+                while son_len > 1 and head:
+                    head = head.next
+                    son_len -= 1
+                if head:
+                    temp.next = head.next
+                    head.next = None
+                head = temp.next
+                ans.append(cur.next)
+            else:
+                ans.append(None)
+            n -= 1
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +106,51 @@ root = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode[] splitListToParts(ListNode head, int k) {
+        ListNode dummp = new ListNode();
+        dummp.next = head;
+        int n = getLen(dummp.next, 0);
+        ListNode[] ans = new ListNode[k];
+        int num = n / k;
+        int extra = n % k;
+        for (int i = 0; i < k; i++) {
+            if (n-- > 0) {
+                int sonLen = extra-- <= 0 ? num : num + 1;
+                ListNode cur = new ListNode();
+                cur.next = head;
+                while (sonLen-- > 1 && head != null) {
+                    head = head.next;
+                }
+                ListNode temp = new ListNode();
+                if (head != null) {
+                    temp.next = head.next;
+                    head.next = null;
+                }
+                head = temp.next;
+                ans[i] = cur.next;
+            }
+        }
+        return ans;
+    }
 
+    public int getLen(ListNode node, int len) {
+        if (node == null) {
+            return len;
+        } 
+        return getLen(node.next, len + 1);
+    }
+}
 ```
 
 ### **...**
