@@ -48,7 +48,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        d1, d2 = ListNode(), ListNode()
+        t1, t2 = d1, d2
+        while head:
+            if head.val < x:
+                t1.next = head
+                t1 = t1.next
+            else:
+                t2.next = head
+                t2 = t2.next
+            head = head.next
+        t1.next = d2.next
+        t2.next = None
+        return d1.next
 ```
 
 ### **Java**
@@ -56,7 +75,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode d1 = new ListNode(), d2 = new ListNode();
+        ListNode t1 = d1, t2 = d2;
+        while (head != null) {
+            if (head.val < x) {
+                t1.next = head;
+                t1 = t1.next;
+            } else {
+                t2.next = head;
+                t2 = t2.next;
+            }
+            head = head.next;
+        }
+        t2.next = null;
+        t1.next = d2.next;
+        return d1.next;
+    }
+}
 ```
 
 ### **...**
