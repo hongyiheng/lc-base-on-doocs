@@ -59,7 +59,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def repeatedStringMatch(self, a: str, b: str) -> int:
+        ans, cur = 0, ""
+        while len(cur) < len(b):
+            cur += a
+            ans += 1
+        if b in cur:
+            return ans
+        cur += a
+        ans += 1
+        if b in cur:
+            return ans
+        return -1
 ```
 
 ### **Java**
@@ -67,7 +79,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int repeatedStringMatch(String a, String b) {
+        StringBuilder cur = new StringBuilder();
+        int ans = 0;
+        while (cur.length() < b.length()) {
+            ans++;
+            cur.append(a);
+        }
+        if (cur.toString().contains(b)) {
+            return ans;
+        }
+        ans++;
+        cur.append(a);
+        if (cur.toString().contains(b)) {
+            return ans;
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
