@@ -70,15 +70,15 @@ root = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 3
 #         self.next = next
 class Solution:
     def splitListToParts(self, head: ListNode, k: int) -> List[ListNode]:
-        dummp = ListNode()
-        dummp.next = head
+        dummy = ListNode()
+        dummy.next = head
 
         def get_len(node, n):
             if not node:
                 return n
             return get_len(node.next, n + 1)
 
-        n = get_len(dummp.next, 0)
+        n = get_len(dummy.next, 0)
         num, extra = n // k, n % k
         ans = []
         for _ in range(k):
@@ -118,9 +118,9 @@ class Solution:
  */
 class Solution {
     public ListNode[] splitListToParts(ListNode head, int k) {
-        ListNode dummp = new ListNode();
-        dummp.next = head;
-        int n = getLen(dummp.next, 0);
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        int n = getLen(dummy.next, 0);
         ListNode[] ans = new ListNode[k];
         int num = n / k;
         int extra = n % k;

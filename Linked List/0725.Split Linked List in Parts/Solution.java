@@ -10,9 +10,9 @@
  */
 class Solution {
     public ListNode[] splitListToParts(ListNode head, int k) {
-        ListNode dummp = new ListNode();
-        dummp.next = head;
-        int n = getLen(dummp.next, 0);
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        int n = getLen(dummy.next, 0);
         ListNode[] ans = new ListNode[k];
         int num = n / k;
         int extra = n % k;

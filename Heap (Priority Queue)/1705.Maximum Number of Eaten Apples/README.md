@@ -59,7 +59,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def eatenApples(self, apples: List[int], days: List[int]) -> int:
+        cur, ans, n = 0, 0, len(apples)
+        stk = []
+        while cur < n:
+            if apples[cur] > 0:
+                heapq.heappush(stk, [cur + days[cur], apples[cur]])
+            while stk and (stk[0][0] <= cur or stk[0][1] == 0):
+                heapq.heappop(stk)
+            if stk:
+                stk[0][1] -= 1
+                ans += 1
+            cur += 1
+        while stk:
+            while stk and (stk[0][0] <= cur or stk[0][1] == 0):
+                heapq.heappop(stk)
+            if stk:
+                stk[0][1] -= 1
+                ans += 1
+            cur += 1
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +87,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int eatenApples(int[] apples, int[] days) {
+        PriorityQueue<int[]> stk = new PriorityQueue<>(Comparator.comparingInt(o -> o[0]));
+        int n = apples.length, cur = 0, ans = 0;
+        while (cur < n) {
+            if (apples[cur] > 0) {
+                stk.offer(new int[]{cur + days[cur], apples[cur]});
+            }
+            while (!stk.isEmpty() && (stk.peek()[1] == 0 || stk.peek()[0] <= cur)) {
+                stk.poll();
+            }
+            if (!stk.isEmpty()) {
+                stk.peek()[1]--;
+                ans++;
+            }
+            cur++;
+        }
+        while (!stk.isEmpty()) {
+            while (!stk.isEmpty() && (stk.peek()[1] == 0 || stk.peek()[0] <= cur)) {
+                stk.poll();
+            }
+            if (!stk.isEmpty()) {
+                stk.peek()[1]--;
+                ans++;
+            }
+            cur++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**

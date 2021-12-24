@@ -5,15 +5,15 @@
 #         self.next = next
 class Solution:
     def splitListToParts(self, head: ListNode, k: int) -> List[ListNode]:
-        dummp = ListNode()
-        dummp.next = head
+        dummy = ListNode()
+        dummy.next = head
 
         def get_len(node, n):
             if not node:
                 return n
             return get_len(node.next, n + 1)
 
-        n = get_len(dummp.next, 0)
+        n = get_len(dummy.next, 0)
         num, extra = n // k, n % k
         ans = []
         for _ in range(k):
