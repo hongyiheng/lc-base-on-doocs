@@ -92,7 +92,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
+        stk, cur = [root], True
+        while stk:
+            childs = stk[:]
+            stk = []
+            order = float('-inf') if cur else float('inf')
+            for node in childs:
+                if cur:
+                    if node.val % 2 == 0 or order >= node.val:
+                        return False
+                else:
+                    if node.val % 2 != 0 or order <= node.val:
+                        return False
+                order = node.val
+                if node.left:
+                    stk.append(node.left)
+                if node.right:
+                    stk.append(node.right)
+            cur = not cur
+        return True
 ```
 
 ### **Java**
@@ -100,7 +126,55 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isEvenOddTree(TreeNode root) {
+        Deque<TreeNode> stk = new ArrayDeque();
+        boolean cur = true;
+        stk.offer(root);
+        while (!stk.isEmpty()) {
+            List<TreeNode> childs = new ArrayList<>();
+            int order = cur ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            while (!stk.isEmpty()) {
+                TreeNode tmp = stk.poll();
+                if (cur) {
+                    if (tmp.val % 2 == 0 || order >= tmp.val) {
+                        return false;
+                    }
+                } else {
+                    if (tmp.val % 2 != 0 || order <= tmp.val) {
+                        return false;
+                    }
+                }
+                order = tmp.val;
+                childs.add(tmp.left);
+                childs.add(tmp.right);
+            }
+            for (TreeNode item : childs) {
+                if (item == null) {
+                    continue;
+                }
+                stk.offer(item);
+            }
+            cur = !cur;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
