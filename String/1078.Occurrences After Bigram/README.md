@@ -47,7 +47,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findOcurrences(self, text: str, first: str, second: str) -> List[str]:
+        sec, fst, res, words = '', '', [], text.split()
+        for word in words:
+            if sec == second and fst == first: 
+                res.append(word)
+            sec, fst = word, sec
+        return res
 ```
 
 ### **Java**
@@ -55,7 +62,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String[] findOcurrences(String text, String first, String second) {
+        List<String> ans = new ArrayList<>();
+        String sec = "", fst = "";
+        String[] words = text.split(" ");
+        for (String word : words) {
+            if (second.equals(sec) && first.equals(fst)) {
+                ans.add(word);
+            }
+            fst = sec;
+            sec = word;    
+        }
+        String[] res = new String[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
+        }
+        return res;  
+    }
+}
 ```
 
 ### **...**
