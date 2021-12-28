@@ -51,7 +51,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.children = [None] * 26
+        self.end = False
 
+class Solution:
+    def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
+        root = Node()
+        words.sort(key=lambda x:len(x))
+
+        def insert(word):
+            node = root
+            for c in word:
+                index = ord(c) - ord('a')
+                if node.children[index] is None:
+                    node.children[index] = Node()
+                node = node.children[index]
+            node.end = True
+        
+        def dfs(word, i):
+            n = len(word)
+            if i == n:
+                return True
+            node = root
+            while i < n:
+                index = ord(word[i]) - ord('a')
+                if node.children[index] is None:
+                    return False
+                node = node.children[index]
+                if node.end and dfs(word, i + 1):
+                    return True
+                i += 1
+            return False
+        
+        ans = []
+        for word in words:
+            if word:
+                if dfs(word, 0):
+                    ans.append(word)
+                else:
+                    insert(word)
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +100,63 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    class Node {
+        boolean end;
+        Node[] children;
 
+        Node() {
+            this.end = false;
+            this.children = new Node[26];
+        }
+    }
+
+    Node root = new Node();
+    
+    public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        List<String> ans = new ArrayList<>();
+        Arrays.sort(words, Comparator.comparingInt(String::length));
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                if (dfs(word, 0)) {
+                    ans.add(word);
+                } else {
+                    insert(word);
+                }
+            }
+        }
+        return ans;
+    }
+
+    private void insert(String word) {
+        Node node = root;
+        for (char c : word.toCharArray()) {
+            if (node.children[c - 'a'] == null) {
+                node.children[c - 'a'] = new Node();
+            }
+            node = node.children[c - 'a'];
+        }
+        node.end = true;
+    }
+
+    private boolean dfs(String word, int i) {
+        if (i == word.length()) {
+            return true;
+        }
+        Node node = root;
+        while (i < word.length()) {
+            if (node.children[word.charAt(i) - 'a'] == null) {
+                return false;
+            }
+            node = node.children[word.charAt(i) - 'a'];
+            if (node.end && dfs(word, i + 1)) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
