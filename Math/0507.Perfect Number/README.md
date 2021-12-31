@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkPerfectNumber(self, num: int) -> bool:
+        if num == 1:
+            return False
+        ans = 1
+        for i in range(2, num):
+            if i > num // i:
+                break
+            if num % i == 0:
+                ans += i + num // i
+        return ans == num
 ```
 
 ### **Java**
@@ -71,7 +81,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+        int ans = 1;
+        for (int i = 2; i <= num / i; i++) {
+            if (num % i == 0) {
+                ans += i + num / i;
+            }
+        }
+        return ans == num;
+    }
+}
 ```
 
 ### **...**
