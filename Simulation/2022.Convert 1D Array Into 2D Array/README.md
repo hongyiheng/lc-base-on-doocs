@@ -71,7 +71,9 @@ original 中只有 1 个元素。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
+        return [original[i * n:i * n + n] for i in range(m)] if len(original) == m * n else []
 ```
 
 ### **Java**
@@ -79,7 +81,21 @@ original 中只有 1 个元素。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] construct2DArray(int[] original, int m, int n) {
+        int l = original.length;
+        if (m * n != l) {
+            return new int[][]{};
+        }
+        int[][] ans = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                ans[i][j] = original[i * n + j];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
