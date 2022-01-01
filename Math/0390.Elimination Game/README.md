@@ -37,7 +37,9 @@ n = 9,
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lastRemaining(self, n: int) -> int:
+        return 1 if n == 1 else 2 * (n // 2 + 1 - self.lastRemaining(n // 2))
 ```
 
 ### **Java**
@@ -45,7 +47,11 @@ n = 9,
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lastRemaining(int n) {
+        return n == 1 ? 1 : 2 * (n / 2 + 1 - lastRemaining(n / 2));
+    }
+}
 ```
 
 ### **...**
