@@ -69,7 +69,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def getFactors(self, n: int) -> List[List[int]]:
+        nums, path, res = [], [], []
+        for i in range(2, n // 2 + 1):
+            if n % i == 0:
+                nums.append(i)
 
+        def back_trace(cur, index):
+            if cur == 1:
+                res.append(path[:])
+                return
+            for i in range(index, len(nums)):
+                if cur % nums[i] == 0:
+                    path.append(nums[i])
+                    back_trace(cur // nums[i], i)
+                    path.pop()
+
+        if nums:
+            back_trace(n, 0)
+        return res
 ```
 
 ### **Java**
@@ -77,7 +96,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    List<Integer> nums;
+    List<List<Integer>> res;
+    Deque<Integer> path;
 
+    public List<List<Integer>> getFactors(int n) {
+        nums = new ArrayList();
+        res = new ArrayList();
+        path = new ArrayDeque();
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) {
+                nums.add(i);
+            }
+        }
+        if (!nums.isEmpty()) {
+            backTrace(n, 0);
+        }
+        return res;
+    }
+
+    public void backTrace(int n, int index) {
+        if (n == 1) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = index; i < nums.size(); i++) {
+            if (n % nums.get(i) == 0) {
+                path.addLast(nums.get(i));
+                backTrace(n / nums.get(i), i);
+                path.removeLast();
+            }
+        }
+    }
+}
 ```
 
 ### **...**
