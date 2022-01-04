@@ -66,7 +66,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def modifyString(self, s: str) -> str:
+        mp = ["a", "b", "c"]       
+        ans, n = "", len(s)
+        for i, c in enumerate(s):
+            if c == '?':
+                for v in mp:
+                    if (i > 0 and v == ans[-1]) or (i < n - 1 and v == s[i + 1]):
+                        continue
+                    c = v
+                    break
+            ans += c
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +86,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String modifyString(String s) {
+        char[] mp = new char[]{'a', 'b', 'c'};
+        char[] chars = s.toCharArray();
+        int n = chars.length;
+        for (int i = 0; i < n; i++) {
+            if (chars[i] == '?') {
+                for (char v : mp) {
+                    if ((i > 0 && v == chars[i - 1]) || (i < n - 1 && v == chars[i + 1])) {
+                        continue;
+                    }
+                    chars[i] = v;
+                }
+            }
+        }
+        return new String(chars);
+    }
+}
 ```
 
 ### **...**
