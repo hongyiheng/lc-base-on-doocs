@@ -38,7 +38,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT
+	( SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1, 1 ) 
+AS SecondHighestSalary
 ```
 
 <!-- tabs:end -->
