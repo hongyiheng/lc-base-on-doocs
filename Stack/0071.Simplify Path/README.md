@@ -75,7 +75,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        paths, stk = path.split("/"), []
+        for item in paths:
+            if item == "." or item == "/" or item == "":
+                continue
+            if item == "..":
+                if stk:
+                    stk.pop(-1)
+                continue
+            stk.append(item)
+        ans = "/".join(stk)
+        return "/" + ans
 ```
 
 ### **Java**
@@ -83,7 +95,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String simplifyPath(String path) {
+        Deque<String> stk = new ArrayDeque<>();
+        String[] paths = path.split("/");
+        for (String item : paths) {
+            if ("".equals(item) || "/".equals(item) || ".".equals(item)) {
+                continue;
+            }
+            if ("..".equals(item)) {
+                stk.pollLast();
+                continue;
+            }
+            stk.addLast(item);
+        }
+        String ans = String.join("/", stk);
+        return "/" + ans;
+    }
+}
 ```
 
 ### **...**
