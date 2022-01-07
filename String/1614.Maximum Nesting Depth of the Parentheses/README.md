@@ -80,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        cur, ans = 0, 0
+        for c in s:
+            if c == '(':
+                cur += 1
+            elif c == ')':
+                cur -= 1
+            ans = max(cur, ans)
+        return ans
 ```
 
 ### **Java**
@@ -88,7 +97,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxDepth(String s) {
+        int cur = 0, ans = 0;
+        char[] chars = s.toCharArray();
+        for (char c : chars) {
+            if (c == '(') {
+                cur++;
+            } else if (c == ')') {
+                cur--;
+            }
+            ans = Math.max(cur, ans);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
