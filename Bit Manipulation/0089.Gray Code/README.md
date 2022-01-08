@@ -53,7 +53,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        ans = []
+        for i in range(2 ** n):
+            ans.append(i ^ (i >> 1))
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +66,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> grayCode(int n) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < Math.pow(2, n); i++) {
+            ans.add(i ^ (i >> 1));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
