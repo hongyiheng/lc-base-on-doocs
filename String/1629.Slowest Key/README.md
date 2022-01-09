@@ -70,7 +70,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def slowestKey(self, releaseTimes: List[int], keysPressed: str) -> str:
+        ans, max_time = keysPressed[0], releaseTimes[0]
+        for i in range(1, len(releaseTimes)):
+            cur_time = releaseTimes[i] - releaseTimes[i - 1]
+            if max_time < cur_time:
+                ans = keysPressed[i]
+                max_time = cur_time
+            elif max_time == cur_time and keysPressed[i] > ans:
+                ans = keysPressed[i]
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +88,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+        int maxTime = releaseTimes[0];
+        char ans = keysPressed.charAt(0);
+        for (int i = 1; i < releaseTimes.length; i++) {
+            int curTime = releaseTimes[i] - releaseTimes[i - 1];
+            if (maxTime < curTime) {
+                ans = keysPressed.charAt(i);
+                maxTime = curTime;
+            } else if (maxTime == curTime && ans < keysPressed.charAt(i)) {
+                ans = keysPressed.charAt(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
