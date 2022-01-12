@@ -60,7 +60,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        n, ans = len(nums), 1
+        dp = [float('inf')] * (n + 1)
+        for i in range(n):
+            cur = nums[i]
+            l, r = 1, i + 1
+            while l < r:
+                mid = (l + r) >> 1
+                if dp[mid] >= cur:
+                    r = mid
+                else:
+                    l = mid + 1
+            dp[r] = cur
+            ans = max(ans, r)
+        return ans >= 3
 ```
 
 ### **Java**
@@ -68,7 +83,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        int n = nums.length, ans = 1;
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        for (int i = 0; i < n; i++) {
+            int cur = nums[i];
+            int l = 1, r = i + 1;
+            while (l < r) {
+                int mid = (l + r) >> 1;
+                if (dp[mid] >= cur) {
+                    r = mid;
+                } else {
+                    l = mid + 1;
+                }
+            }
+            dp[r] = cur;
+            ans = Math.max(ans, r);
+        }
+        return ans >= 3;
+    }
+}
 ```
 
 ### **...**
