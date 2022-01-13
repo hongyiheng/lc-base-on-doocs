@@ -57,7 +57,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def dominantIndex(self, nums: List[int]) -> int:
+        a, b, ans = 0, 0, 0
+        for i, v in enumerate(nums):
+            if v > a:
+                a, b = v, a
+                ans = i
+            elif v > b:
+                b = v
+        return ans if a >= 2 * b else -1
 ```
 
 ### **Java**
@@ -65,7 +74,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int dominantIndex(int[] nums) {
+        int a = 0, b = -1, ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > a) {
+                b = a;
+                a = nums[i];
+                ans = i;
+            } else if (nums[i] > b) {
+                b = nums[i];
+            }
+        }
+        return a >= b * 2 ? ans : -1;
+    }
+}
 ```
 
 ### **...**
