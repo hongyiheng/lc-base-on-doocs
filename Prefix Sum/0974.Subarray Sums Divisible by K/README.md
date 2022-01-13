@@ -41,7 +41,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        mp = {0: 1}
+        s, ans = 0, 0
+        for v in nums:
+            s += v
+            same = mp.get(s % k, 0)
+            ans += same
+            mp[s % k] = same + 1
+        return ans
 ```
 
 ### **Java**
@@ -49,7 +58,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        int s = 0, ans = 0;
+        mp.put(0, 1);
+        for (int num : nums) {
+            s += num;
+            while (s < 0) {
+                s += k;
+            }
+            int same = mp.getOrDefault(s % k, 0);
+            ans += same;
+            mp.put(s % k, same + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
