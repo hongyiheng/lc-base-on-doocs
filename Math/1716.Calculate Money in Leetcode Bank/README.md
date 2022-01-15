@@ -55,7 +55,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def totalMoney(self, n: int) -> int:
+        week, rest = n // 7, n % 7
+        m = [1, 2, 3, 4, 5, 6, 7]
+        ans = 0
+        while week > 0:
+            for i, v in enumerate(m):
+                ans += v
+                m[i] += 1
+            week -= 1
+        for i in range(rest):
+            ans += m[i]
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +75,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int totalMoney(int n) {
+        int[] m = new int[]{1, 2, 3, 4, 5, 6, 7};
+        int week = n / 7, rest = n % 7;
+        int ans = 0;
+        while (week-- > 0) {
+            for (int i = 0; i < m.length; i++) {
+                ans += m[i];
+                m[i] += 1;
+            }
+        }
+        for (int i = 0; i < rest; i++) {
+            ans += m[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
