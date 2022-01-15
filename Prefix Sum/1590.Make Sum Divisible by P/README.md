@@ -70,7 +70,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minSubarray(self, nums: List[int], p: int) -> int:
+        ans, n = len(nums), len(nums)
+        pre = [0] * (n + 1)
+        k = sum(nums) % p
+        for i in range(1, n + 1):
+            pre[i] = (pre[i - 1] + nums[i - 1]) % p
+        mp = {}
+        for i in range(n + 1):
+            mp[pre[i]] = i
+            x = (pre[i] - k + p) % p
+            if x in mp:
+                ans = min(i - mp[x], ans)
+        return -1 if ans == n else ans
 ```
 
 ### **Java**
@@ -78,7 +91,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minSubarray(int[] nums, int p) {
+        int ans = nums.length, n = nums.length;
+        int pre[] = new int[n + 1];
+        int k = 0;
+        for (int num : nums) {
+            k = (k + num) % p;
+        }
+        for (int i = 1; i <= nums.length; i++) {
+            pre[i] = (pre[i - 1] + nums[i - 1]) % p;
+        }
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int i = 0; i <= nums.length; i++) {
+            mp.put(pre[i], i);
+            int x = (pre[i] - k + p) % p;
+            if (mp.containsKey(x)) {
+                ans = Math.min(ans, i - mp.get(x));
+            }            
+        }
+        return ans == n ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
