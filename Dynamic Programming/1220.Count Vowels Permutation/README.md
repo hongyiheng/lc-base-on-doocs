@@ -60,7 +60,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countVowelPermutation(self, n: int) -> int:
+        mod = 10 ** 9 + 7
+        a, e, i, o, u = 1, 1, 1, 1, 1
+        for _ in range(2, n + 1):
+            na = (e + i + u) % mod
+            ne = (a + i) % mod
+            ni = (e + o) % mod
+            no = i % mod
+            nu = (i + o) % mod
+            a, e, i, o, u = na, ne, ni, no, nu
+        return (a + e + i + o + u) % mod
 ```
 
 ### **Java**
@@ -68,7 +79,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countVowelPermutation(int n) {
+        int mod = (int)1e9 + 7;
+        long a = 1, e = 1, i = 1, o = 1, u = 1;
+        for (int k = 2; k <= n; k++) {
+            long na = (e + i + u) % mod;
+            long ne = (a + i) % mod;
+            long ni = (e + o) % mod;
+            long no = i % mod;
+            long nu = (i + o) % mod;
+            a = na;
+            e = ne;
+            i = ni;
+            o = no;
+            u = nu;
+        }
+        return (int) ((a + e + i + o + u) % mod);
+    }
+}
 ```
 
 ### **...**
