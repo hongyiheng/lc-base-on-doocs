@@ -72,7 +72,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getMaximumGenerated(self, n: int) -> int:
+        arr = [0] * (n + 1)
+        ans = 0
+        for i in range(n + 1):
+            if i == 0 or i == 1:
+                arr[i] = i
+            if 2 <= 2 * i and 2 * i <= n:
+                arr[2 * i] = arr[i]
+            if 2 <= 2 * i + 1 and 2 * i + 1 <= n:
+                arr[2 * i + 1] = arr[i] + arr[i + 1]
+            ans = max(ans, arr[i])
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +92,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int getMaximumGenerated(int n) {
+        int[] arr = new int[n + 1];
+        int ans = 0;
+        for (int i = 0; i < n + 1; i++) {
+            if (i == 0 || i == 1) {
+                arr[i] = i;
+            }
+            if (2 <= 2 * i && 2 * i <= n) {
+                arr[2 * i] = arr[i];
+            }
+            if (2 <= 2 * i + 1 && 2 * i + 1 <= n) {
+                arr[2 * i + 1] = arr[i] + arr[i + 1];
+            }
+            ans = Math.max(ans, arr[i]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
