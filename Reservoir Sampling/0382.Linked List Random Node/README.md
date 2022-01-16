@@ -36,7 +36,31 @@ solution.getRandom();
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
 
+    def __init__(self, head: Optional[ListNode]):
+        self.head = head
+
+    def getRandom(self) -> int:
+        ans, i = 0, 1
+        t = self.head
+        while t:
+            if randrange(i) == 0:
+                ans = t.val
+            t = t.next
+            i += 1
+        return ans
+
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(head)
+# param_1 = obj.getRandom()
 ```
 
 ### **Java**
@@ -44,7 +68,41 @@ solution.getRandom();
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    ListNode head;
+    Random r = new Random(20220116);
+    public Solution(ListNode head) {
+        this.head = head;
+    }
+    
+    public int getRandom() {
+        int ans = 0, i = 0;
+        ListNode t = head;
+        while (t != null) {
+            if (r.nextInt(++i) == 0) {
+                ans = t.val;
+            }
+            t = t.next;
+        }
+        return ans;
+    }
+}
 
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(head);
+ * int param_1 = obj.getRandom();
+ */
 ```
 
 ### **...**
