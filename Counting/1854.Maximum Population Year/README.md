@@ -50,7 +50,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumPopulation(self, logs: List[List[int]]) -> int:
+        pre = [0] * 2060
+        for log in logs:
+            pre[log[0]] += 1
+            pre[log[1]] -= 1
+        max_sum, cur_sum, ans = 0, 0, 0
+        for i in range(len(pre)):
+            cur_sum += pre[i]
+            if max_sum < cur_sum:
+                max_sum = cur_sum
+                ans = i
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +70,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumPopulation(int[][] logs) {
+        int[] pre = new int[2060];
+        for (int[] log : logs) {
+            pre[log[0]] += 1;
+            pre[log[1]] -= 1;
+        }
+        int maxSum = 0, ans = 0, curSum = 0;;
+        for (int i = 0; i < pre.length; i++) {
+            curSum += pre[i];
+            if (curSum > maxSum) {
+                maxSum = curSum;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
