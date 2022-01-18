@@ -60,7 +60,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        i, j = 0, int(math.sqrt(c))
+        while i <= j:
+            cur = i * i + j * j
+            if cur == c:
+                return True
+            if cur > c:
+                j -= 1
+            else:
+                i += 1
+        return False
 ```
 
 ### **Java**
@@ -68,7 +79,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean judgeSquareSum(int c) {
+        int i = 0, j = (int) Math.sqrt(c);
+        while (i <= j) {
+            long cur = (long) i * i + (long) j * j;
+            if (cur == c) {
+                return true;
+            }
+            if (cur > c) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
