@@ -48,7 +48,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        ans, pre = float('inf'), -1
 
+        def dfs(root):
+            nonlocal pre, ans
+            if root is None:
+                return
+            dfs(root.left)
+            if pre != -1:
+                ans = min(ans, root.val - pre)
+            pre = root.val
+            dfs(root.right)
+        
+        dfs(root)
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +77,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int ans = Integer.MAX_VALUE;
+    int pre = -1;
 
+    public int getMinimumDifference(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.left);
+        if (pre != -1) {
+            ans = Math.min(ans, root.val - pre);
+        }
+        pre = root.val;
+        dfs(root.right);
+    }
+}
 ```
 
 ### **...**
