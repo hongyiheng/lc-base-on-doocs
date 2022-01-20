@@ -72,7 +72,14 @@ Alice 输掉游戏，因为已移除石子值总和（15）可以被 3 整除，
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def stoneGameIX(self, stones: List[int]) -> bool:
+        m = [0, 0, 0]
+        for stone in stones:
+            m[stone % 3] += 1
+        if m[0] % 2 == 0:
+            return m[1] > 0 and m[2] > 0
+        return abs(m[1] - m[2]) > 2
 ```
 
 ### **Java**
@@ -80,7 +87,18 @@ Alice 输掉游戏，因为已移除石子值总和（15）可以被 3 整除，
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean stoneGameIX(int[] stones) {
+        int[] m = new int[]{0, 0, 0};
+        for (int stone : stones) {
+            m[stone % 3]++;
+        }
+        if (m[0] % 2 == 0) {
+            return m[1] > 0 && m[2] > 0;
+        }
+        return Math.abs(m[1] - m[2]) > 2;
+    }
+}
 ```
 
 ### **...**
