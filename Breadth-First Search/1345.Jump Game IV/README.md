@@ -76,7 +76,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        n = len(arr)
+        mp = defaultdict(list)
+        for i, v in enumerate(arr):
+            mp[v].append(i)
+        steps = [float('inf')] * n
+        q = deque([0])
+        steps[0] = 0
+        while q:
+            cur = q.popleft()
+            step = steps[cur]
+            if cur == n - 1:
+                return step
+            for index in mp[arr[cur]]:
+                if steps[index] == float('inf'):
+                    q.append(index)
+                    steps[index] = step + 1
+            mp.pop(arr[cur])
+            if cur and steps[cur - 1] == float('inf'):
+                q.append(cur - 1)
+                steps[cur - 1] = step + 1
+            if steps[cur + 1] == float('inf'):
+                q.append(cur + 1)
+                steps[cur + 1] = step + 1
+        return -1
 ```
 
 ### **Java**
@@ -84,7 +109,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minJumps(int[] arr) {
+        int n = arr.length;
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            mp.computeIfAbsent(arr[i], k -> new ArrayList<>()).add(i);
+        }
+        int[] steps = new int[n];
+        Arrays.fill(steps, Integer.MAX_VALUE);
+        Deque<Integer> q = new ArrayDeque<>();
+        q.add(0);
+        steps[0] = 0;
+        while (!q.isEmpty()) {
+            int cur = q.pollFirst(), step = steps[cur];
+            if (cur == n - 1) {
+                return step;
+            }
+            if (cur - 1 >= 0 && steps[cur - 1] == Integer.MAX_VALUE) {
+                q.addLast(cur - 1);
+                steps[cur - 1] = step + 1;
+            }
+            if (cur + 1 < n && steps[cur + 1] == Integer.MAX_VALUE) {
+                q.addLast(cur + 1);
+                steps[cur + 1] = step + 1;
+            }
+            List<Integer> same = mp.getOrDefault(arr[cur], Collections.emptyList());
+            for (int index : same) {
+                if (steps[index] == Integer.MAX_VALUE) {
+                    q.addLast(index);
+                    steps[index] = step + 1;
+                }
+            }
+            mp.remove(arr[cur]);
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
