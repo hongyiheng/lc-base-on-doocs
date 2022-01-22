@@ -66,7 +66,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removePalindromeSub(self, s: str) -> int:
+        if "" == s:
+            return 0
+        elif s == s[::-1]:
+            return 1
+        return 2
 ```
 
 ### **Java**
@@ -74,7 +80,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int removePalindromeSub(String s) {
+        if ("".equals(s)) {
+            return 0;
+        }
+        int l = 0, r = s.length() - 1;
+        while (l < r) {
+            if (s.charAt(l++) != s.charAt(r--)) {
+                return 2;
+            }
+        }
+        return 1;
+    }
+}
 ```
 
 ### **...**
