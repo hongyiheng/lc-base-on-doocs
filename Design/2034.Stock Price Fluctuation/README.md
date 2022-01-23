@@ -72,7 +72,42 @@ stockPrice.minimum();     // 返回 2 ，最低价格时间戳为 4 ，价格为
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedList
 
+class StockPrice:
+    
+    def __init__(self):
+        self.st = SortedList()
+        self.mp = dict()
+        self.cur = 0
+
+
+    def update(self, timestamp: int, price: int) -> None:
+        if timestamp in self.mp:
+            self.st.remove(self.mp[timestamp])
+        self.mp[timestamp] = price
+        self.st.add(price)
+        self.cur = max(self.cur, timestamp)
+
+    def current(self) -> int:
+        return self.mp[self.cur]
+
+
+    def maximum(self) -> int:
+        return self.st[-1]
+
+
+    def minimum(self) -> int:
+        return self.st[0]
+
+
+
+# Your StockPrice object will be instantiated and called as such:
+# obj = StockPrice()
+# obj.update(timestamp,price)
+# param_2 = obj.current()
+# param_3 = obj.maximum()
+# param_4 = obj.minimum()
 ```
 
 ### **Java**
@@ -80,7 +115,53 @@ stockPrice.minimum();     // 返回 2 ，最低价格时间戳为 4 ，价格为
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class StockPrice {
+    int cur;
+    Map<Integer, Integer> mp;
+    TreeMap<Integer, Integer> ts;
 
+    public StockPrice() {
+        cur = 0;
+        mp = new HashMap<>();
+        ts = new TreeMap<>();
+    }
+
+    public void update(int timestamp, int price) {
+        cur = Math.max(cur, timestamp);
+        if (mp.containsKey(timestamp)) {
+            int old = mp.get(timestamp);
+            int cnt = ts.get(old);
+            if (cnt == 1) {
+                ts.remove(old);
+            } else {
+                ts.put(old, cnt - 1);
+            }
+        }
+        mp.put(timestamp, price);
+        ts.put(price, ts.getOrDefault(price, 0) + 1);
+    }
+    
+    public int current() {
+        return mp.get(cur);
+    }
+    
+    public int maximum() {
+        return ts.lastKey();
+    }
+    
+    public int minimum() {
+        return ts.firstKey();
+    }
+}
+
+/**
+ * Your StockPrice object will be instantiated and called as such:
+ * StockPrice obj = new StockPrice();
+ * obj.update(timestamp,price);
+ * int param_2 = obj.current();
+ * int param_3 = obj.maximum();
+ * int param_4 = obj.minimum();
+ */
 ```
 
 ### **...**
