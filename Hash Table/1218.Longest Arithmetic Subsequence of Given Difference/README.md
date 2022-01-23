@@ -56,7 +56,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestSubsequence(self, arr: List[int], difference: int) -> int:
+        mp = dict()
+        n = len(arr)
+        for i in range(n - 1, -1, -1):
+            cur = mp.get(arr[i] + difference, 0) + 1
+            mp[arr[i]] = cur
+        return max(mp.values())
 ```
 
 ### **Java**
@@ -64,7 +71,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestSubsequence(int[] arr, int difference) {
+        int n = arr.length;
+        Map<Integer, Integer> mp = new HashMap<>();
+        int ans = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            int cur = mp.getOrDefault(arr[i] + difference, 0) + 1;
+            mp.put(arr[i], cur);
+            ans = Math.max(ans, cur);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
