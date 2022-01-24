@@ -60,7 +60,12 @@ Result 表:
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+# Write your MySQL query statement below
+select round (
+    (select count(*) from Delivery where order_date = customer_pref_delivery_date) / 
+    (select count(*) from Delivery) * 100,
+    2
+) as immediate_percentage
 ```
 
 <!-- tabs:end -->
