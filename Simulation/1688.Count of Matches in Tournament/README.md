@@ -60,7 +60,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        ans = 0
+        while n > 1:
+            ans += n // 2
+            n = n % 2 + n // 2
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +74,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfMatches(int n) {
+        int ans = 0;
+        while (n > 1) {
+            ans += n / 2;
+            n = n % 2 + n / 2;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
