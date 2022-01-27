@@ -50,7 +50,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = [[0] * 2 for _ in range(n + 1)]
+        for i in range(1, n + 1):
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1])
+            dp[i][1] = dp[i - 1][0] + nums[i - 1]
+        return max(dp[n][0], dp[n][1])
 ```
 
 ### **Java**
@@ -60,17 +67,14 @@
 ```java
 class Solution {
     public int rob(int[] nums) {
-        int len = nums.length;
-        if (len == 1) {
-            return nums[0];
+        int n = nums.length;
+        int[][] dp = new int[n + 1][2];
+        int ans = 0;
+        for (int i = 1; i < n + 1; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1]);
+            dp[i][1] = dp[i - 1][0] + nums[i - 1];
         }
-        int[] dp = new int[len];
-        dp[0] = nums[0];
-        dp[1] = Math.max(nums[0], nums[1]);
-        for (int i = 2; i < len; i++) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
-        }
-        return dp[len - 1];
+        return Math.max(dp[n][0], dp[n][1]);
     }
 }
 ```
