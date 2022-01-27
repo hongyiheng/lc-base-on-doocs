@@ -73,7 +73,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countValidWords(self, sentence: str) -> int:
+        def check(w):
+            if ' ' == w or len(w) == 0:
+                return False
+            link = -1
+            for i, c in enumerate(w):
+                if 'a' <= c <= 'z':
+                    continue
+                elif '0' <= c <= '9':
+                    return False
+                elif c == '-':
+                    if link == -1:
+                        link = i
+                    else:
+                        return False
+                else:
+                    if i != len(w) - 1:
+                        return False
+            if link != -1:
+                if link - 1 >= 0 and link + 1 < len(w) and 'a' <= w[link + 1] <= 'z' and 'a' <= w[link - 1] <= 'z':
+                    return True
+                else:
+                    return False
+            return True
 
+        ans = 0
+        for w in sentence.split(" "):
+            if check(w):
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +111,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int countValidWords(String sentence) {
+        String[] words = sentence.split(" ");
+        int ans = 0;
+        for (String w : words) {
+            if (check(w)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
 
+    public boolean check(String w) {
+        if (" ".equals(w) || w.length() == 0) {
+            return false;
+        }
+        char[] chars = w.toCharArray();
+        int linkIndex = -1;
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            if ('a' <= c && 'z' >= c) {
+                continue;
+            } else if ('0' <= c && '9' >= c) {
+                return false;
+            } else if (c == '-') {
+                if (linkIndex == -1) {
+                    linkIndex = i;
+                } else {
+                    return false;
+                }
+            } else {
+                if (i != chars.length - 1) {
+                    return false;
+                }
+            }
+        }
+        if (linkIndex != -1) {
+            int pre = linkIndex - 1;
+            int next = linkIndex + 1;
+            if (pre >= 0 && next < chars.length && chars[pre] >= 'a' && chars[pre] <= 'z' && chars[next] >= 'a' && chars[next] <= 'z') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
