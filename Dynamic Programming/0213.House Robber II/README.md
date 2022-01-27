@@ -56,7 +56,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        dp1 = [[0] * 2 for _ in range(n + 1)]
+        for i in range(1, n):
+            dp1[i][0] = max(dp1[i - 1][0], dp1[i - 1][1])
+            dp1[i][1] = dp1[i - 1][0] + nums[i - 1]
+        dp2 = [[0] * 2 for _ in range(n + 1)]
+        for i in range(2, n + 1):
+            dp2[i][0] = max(dp2[i - 1][0], dp2[i - 1][1])
+            dp2[i][1] = dp2[i - 1][0] + nums[i - 1]
+        return max(max(dp1[n - 1][0], dp1[n - 1][1]), max(dp2[n][0], dp2[n][1]))
 ```
 
 ### **Java**
@@ -66,38 +79,21 @@
 ```java
 class Solution {
     public int rob(int[] nums) {
-        int len = nums.length;
-        if (len == 1) {
+        int n = nums.length;
+        if (n == 1) {
             return nums[0];
         }
-        if (len == 2) {
-            return Math.max(nums[0], nums[1]);
+        int[][] dp1 = new int[n + 1][2];  
+        for (int i = 1; i < n; i++) {
+            dp1[i][0] = Math.max(dp1[i - 1][0], dp1[i - 1][1]);
+            dp1[i][1] = dp1[i - 1][0] + nums[i - 1];
         }
-
-        int[] chooseFirst = new int[len - 1];
-        for (int i = 0; i < len - 1; i++) {
-            chooseFirst[i] = nums[i];
+        int[][] dp2 = new int[n + 1][2];
+        for (int i = 2; i < n + 1; i++) {
+            dp2[i][0] = Math.max(dp2[i - 1][0], dp2[i - 1][1]);
+            dp2[i][1] = dp2[i - 1][0] + nums[i - 1];
         }
-        int[] chooseLast = new int[len - 1];
-        for (int i = 1; i < len; i++) {
-            chooseLast[i - 1] = nums[i];
-        }
-        return Math.max(handle(chooseFirst), handle(chooseLast));
-    }
-
-    public int handle(int[] nums) {
-        int len = nums.length;
-        if (len == 1) {
-            return nums[0];
-        }
-        int[] dp = new int[len];
-        dp[0] = nums[0];
-        dp[1] = Math.max(nums[0], nums[1]);
-        for (int i = 2; i < len; i++) {
-            dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
-            
-        }
-        return dp[len - 1];
+        return Math.max(Math.max(dp1[n - 1][0], dp1[n - 1][1]), Math.max(dp2[n][0], dp2[n][1]));
     }
 }
 ```
