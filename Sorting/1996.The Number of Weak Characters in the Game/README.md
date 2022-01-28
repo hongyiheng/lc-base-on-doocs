@@ -60,7 +60,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
+        properties.sort(key=lambda x: (-x[0], x[1]))
+        ans, maxDefense = 0, -1
+        for i in range(len(properties)):
+            if maxDefense > properties[i][1]:
+                ans += 1
+            else:
+                maxDefense = properties[i][1]
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +77,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfWeakCharacters(int[][] properties) {
+        Arrays.sort(properties, (o1, o2) -> o1[0] == o2[0] ? o1[1] - o2[1] : o2[0] - o1[0]);
+        int ans = 0, maxDefense = -1;
+        for (int i = 0; i < properties.length; i++) {
+            if (maxDefense > properties[i][1]) {
+                ans++;
+            } else {
+                maxDefense = properties[i][1];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
