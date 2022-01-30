@@ -53,7 +53,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        mp = dict()
+        for w in s1.split(" "):
+            mp[w] = mp.get(w, 0) + 1
+        for w in s2.split(" "):
+            mp[w] = mp.get(w, 0) + 1
+        ans = []
+        for k in mp.keys():
+            if mp[k] == 1:
+                ans.append(k) 
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +72,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String[] uncommonFromSentences(String A, String B) {
+        Map<String, Integer> mp = new HashMap<>();
+        for (String w : A.split(" ")) {
+            mp.put(w, mp.getOrDefault(w, 0) + 1);
+        }
+        for (String w : B.split(" ")) {
+            mp.put(w, mp.getOrDefault(w, 0) + 1);
+        }
+        List<String> ans = new ArrayList<>();
+        for (String k : mp.keySet()) {
+            if (mp.get(k) == 1) {
+                ans.add(k);
+            }
+        }
+        return ans.toArray(new String[ans.size()]);
+    }
+}
 ```
 
 ### **...**
