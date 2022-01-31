@@ -60,7 +60,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfSteps(self, num: int) -> int:
+        ans = 0
+        while num > 0:
+            if num % 2 == 0:
+                num /= 2
+            else:
+                num -= 1
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +77,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfSteps(int num) {
+        int ans = 0;
+        while (num > 0) {
+            if (num % 2 == 0) {
+                num /= 2;
+            } else {
+                num--;
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
