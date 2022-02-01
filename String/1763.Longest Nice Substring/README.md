@@ -64,7 +64,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestNiceSubstring(self, s: str) -> str:
+        def check(son):
+            up, low = [0] * 26, [0] * 26
+            for c in son:
+                if 'a' <= c and 'z' >= c:
+                    low[ord(c) - ord('a')] += 1
+                else:
+                    up[ord(c) - ord('A')] += 1
+            for i in range(26):
+                if up[i] > 0 or low[i] > 0:
+                    if up[i] > 0 and low[i] > 0:
+                        continue
+                    return False
+            return True
+        
+        n = len(s)
+        ans = ''
+        for i in range(n):
+            for j in range(i + 1, n):
+                if len(ans) < j - i + 1 and check(s[i:j + 1]):
+                    ans = s[i:j + 1]
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +94,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public String longestNiceSubstring(String s) {
+        String ans = new String();
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (j - i + 1 > ans.length() && check(s.substring(i, j + 1))) {
+                    ans = s.substring(i, j + 1);
+                }
+            }
+        }
+        return ans;
+    }
 
+    public boolean check(String s) {
+        char[] chars = s.toCharArray();
+        int[] up = new int[26];
+        int[] low = new int[26];
+        for (char c : chars) {
+            if ('a' <= c && 'z' >= c) {
+                low[c - 'a']++;
+            } else {
+                up[c - 'A']++;
+            }
+        }
+        for (int i = 0; i < 26; i++) {
+            if (up[i] > 0 || low[i] > 0) {
+                if (up[i] > 0 && low[i] > 0) {
+                    continue;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
