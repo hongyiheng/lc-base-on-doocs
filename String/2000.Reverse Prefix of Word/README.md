@@ -62,7 +62,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        i = word.find(ch)
+        if i == -1:
+            return word
+        return word[i::-1] + word[i + 1:]
 ```
 
 ### **Java**
@@ -70,7 +75,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String reversePrefix(String word, char ch) {
+        int i = word.indexOf(ch);
+        if (i == -1) {
+            return word;
+        }
+        String suffix = word.substring(0, i + 1);
+        StringBuilder ans = new StringBuilder(suffix);
+        ans.reverse();
+        ans.append(word.substring(i + 1, word.length()));
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
