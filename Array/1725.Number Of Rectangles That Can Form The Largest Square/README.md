@@ -55,7 +55,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countGoodRectangles(self, rectangles: List[List[int]]) -> int:
+        max_len = 0
+        for r in rectangles:
+            max_len = max(max_len, min(r[0], r[1]))
+        ans = 0
+        for r in rectangles:
+            if min(r[0], r[1]) == max_len:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +72,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countGoodRectangles(int[][] rectangles) {
+        int maxLen = 0;
+        for (int[] r : rectangles) {
+            maxLen = Math.max(maxLen, Math.min(r[0], r[1]));
+        }
+        int ans = 0;
+        for (int[] r : rectangles) {
+            if (Math.min(r[0], r[1]) == maxLen) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
