@@ -64,6 +64,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        q = deque()
+        m, n, count = len(grid), len(grid[0]), 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 2:
+                    q.append([i, j])
+                if grid[i][j] == 1:
+                    count += 1
+        ans = 0
+        while q and count > 0:
+            ans += 1
+            k = len(q)
+            for i in range(k):
+                cur = q.popleft()
+                for d in dirs:
+                    nx, ny = cur[0] + d[0], cur[1] + d[1]
+                    if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                        continue
+                    if grid[nx][ny] == 1:
+                        grid[nx][ny] = 2
+                        count -= 1
+                        q.append([nx, ny])
+        return ans if count == 0 else -1
+
 
 ```
 
@@ -91,25 +118,24 @@ class Solution {
             }
         }
         int ans = 0;
-        while (!q.isEmpty() || !temp.isEmpty()) {
-            if (q.isEmpty()) {
-                q.addAll(temp);
-                temp.clear();
-                ans++;
-            }
-            int[] cur = q.pollFirst();
-            for (int[] dir : dirs) {
-                int nx = cur[0] + dir[0];
-                int ny = cur[1] + dir[1];
-                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
-                    continue;
+        while (count > 0 && !q.isEmpty()) {
+            ans++;
+            int k = q.size();
+            for (int i = 0; i < k; i++) {
+                int[] cur = q.pollFirst();
+                for (int[] dir : dirs) {
+                    int nx = cur[0] + dir[0];
+                    int ny = cur[1] + dir[1];
+                    if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                        continue;
+                    }
+                    if (grid[nx][ny] == 1) {
+                        grid[nx][ny] = 2;
+                        q.addLast(new int[]{nx, ny});
+                        count--;
+                    }
                 }
-                if (grid[nx][ny] == 1) {
-                    grid[nx][ny] = 2;
-                    temp.add(new int[]{nx, ny});
-                    count--;
-                }
-            }
+            }  
         }
         return count == 0 ? ans : -1;
     }

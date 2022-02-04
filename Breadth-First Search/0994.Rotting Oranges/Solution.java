@@ -17,23 +17,22 @@ class Solution {
             }
         }
         int ans = 0;
-        while (!q.isEmpty() || !temp.isEmpty()) {
-            if (q.isEmpty()) {
-                q.addAll(temp);
-                temp.clear();
-                ans++;
-            }
-            int[] cur = q.pollFirst();
-            for (int[] dir : dirs) {
-                int nx = cur[0] + dir[0];
-                int ny = cur[1] + dir[1];
-                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
-                    continue;
-                }
-                if (grid[nx][ny] == 1) {
-                    grid[nx][ny] = 2;
-                    temp.add(new int[]{nx, ny});
-                    count--;
+        while (count > 0 && !q.isEmpty()) {
+            ans++;
+            int k = q.size();
+            for (int i = 0; i < k; i++) {
+                int[] cur = q.pollFirst();
+                for (int[] dir : dirs) {
+                    int nx = cur[0] + dir[0];
+                    int ny = cur[1] + dir[1];
+                    if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                        continue;
+                    }
+                    if (grid[nx][ny] == 1) {
+                        grid[nx][ny] = 2;
+                        q.addLast(new int[]{nx, ny});
+                        count--;
+                    }
                 }
             }
         }
