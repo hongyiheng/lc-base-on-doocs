@@ -66,7 +66,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def getMaximumGold(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        vis = [[False] * n for _ in range(m)]
 
+        def dfs(x, y):
+            if grid[x][y] == 0 or vis[x][y]:
+                return 0
+            vis[x][y] = True
+            ans = 0
+            for d in dirs:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                    continue
+                if grid[nx][ny] == 0 or vis[nx][ny]:
+                    continue
+                ans = max(ans, dfs(nx, ny))
+            vis[x][y] = False
+            return grid[x][y] + ans
+        
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] != 0:
+                    ans = max(ans, dfs(i, j))
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +100,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    boolean[][] vis;
+    int[][] g;
+    int m, n;
+    public int getMaximumGold(int[][] grid) {
+        m = grid.length; 
+        n = grid[0].length;
+        vis = new boolean[m][n];
+        g = grid;
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (g[i][j] != 0) {
+                    ans = Math.max(ans, dfs(i, j));
+                }
+            }
+        }
+        return ans;
+    }
 
+    public int dfs(int x, int y) {
+        if (g[x][y] == 0 || vis[x][y]) {
+            return 0;
+        }
+        vis[x][y] = true;
+        int ans = 0;
+        for (int[] d : dirs) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                continue;
+            }
+            if (g[nx][ny] == 0 || vis[nx][ny]) {
+                continue;
+            }
+            ans = Math.max(ans, dfs(nx, ny));
+        }
+         vis[x][y] = false;
+        return g[x][y] + ans;
+    }
+}
 ```
 
 ### **...**
