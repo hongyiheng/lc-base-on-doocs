@@ -54,7 +54,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumOfUnique(self, nums: List[int]) -> int:
+        cnt = [0] * 110
+        for num in nums:
+            cnt[num] += 1
+        ans = 0
+        for i in range(110):
+            if cnt[i] == 1:
+                ans += i
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +71,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumOfUnique(int[] nums) {
+        int[] cnt = new int[110];
+        for (int num : nums) {
+            cnt[num]++;
+        }
+        int ans = 0;
+        for (int i = 0; i < 110; i++) {
+            if (cnt[i] == 1) {
+                ans += i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
