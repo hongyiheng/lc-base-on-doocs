@@ -43,7 +43,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        q = deque()
+        q.append(root)
+        while q:
+            n = len(q)
+            for _ in range(n):
+                cur = q.pop()
+                cur.left, cur.right = cur.right, cur.left
+                if cur.left:
+                    q.append(cur.left)
+                if cur.right:
+                    q.append(cur.right)
+        return root
 ```
 
 ### **Java**
@@ -51,7 +72,46 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.addLast(root);
+        while (!q.isEmpty()) {
+            int n = q.size();
+            for (int i = 0; i < n; i++) {
+                TreeNode cur = q.pollFirst();
+                TreeNode tmp = cur.left;
+                cur.left = cur.right;
+                cur.right = tmp;
+                if (cur.left != null) {
+                    q.addLast(cur.left);
+                }
+                if (cur.right != null) {
+                    q.addLast(cur.right);
+                }
+            }  
+        }
+        return root;
+    }
+}
 ```
 
 ### **...**
