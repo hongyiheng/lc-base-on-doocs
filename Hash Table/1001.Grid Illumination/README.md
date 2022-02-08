@@ -67,7 +67,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def gridIllumination(self, n: int, lamps: List[List[int]], queries: List[List[int]]) -> List[int]:
+        dirs = [[0, 0], [1, 0], [0, 1], [1, 1], [-1, -1], [1, -1], [-1, 1], [-1, 0], [0, -1]]
+        row, col, left, right = dict(), dict(), dict(), dict()
+        light = set()
+        for lamp in lamps:
+            x, y = lamp
+            l, r = y - x, x + y
+            if (x * n + y) in light:
+                continue
+            light.add(x * n + y)
+            row[x] = row.get(x, 0) + 1
+            col[y] = col.get(y, 0) + 1
+            left[l] = left.get(l, 0) + 1
+            right[r] = right.get(r, 0) + 1
+        k = len(queries)
+        ans = [0] * k
+        for i in range(k):
+            x, y = queries[i]
+            if x in row or y in col or (y - x) in left or (x + y) in right:
+                ans[i] = 1
+            for dir in dirs:
+                nx, ny = x + dir[0], y + dir[1]
+                if (nx * n + ny) in light:
+                    light.remove(nx * n + ny)
+                    nl, nr = ny - nx, nx + ny
+                    if row.get(nx, 0) > 1:
+                        row[nx] -= 1
+                    else:
+                        row.pop(nx, "")
+                    if col.get(ny, 0) > 1:
+                        col[ny] -= 1
+                    else:
+                        col.pop(ny, "")
+                    if left.get(nl, 0) > 1:
+                        left[nl] -= 1
+                    else:
+                        left.pop(nl, "")
+                    if right.get(nr, 0) > 1:
+                        right[nr] -= 1
+                    else:
+                        right.pop(nr, "")
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +117,67 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    int[][] dirs = new int[][]{{1, 0}, {0, 1}, {1, 1}, {-1, -1}, {-1, 0}, {0, -1}, {0, 0}, {-1, 1}, {1, -1}};
+    public int[] gridIllumination(int n, int[][] lamps, int[][] queries) {
+        Map<Integer, Integer> row = new HashMap<>();
+        Map<Integer, Integer> col = new HashMap<>();
+        Map<Integer, Integer> left = new HashMap<>();
+        Map<Integer, Integer> right = new HashMap<>();
+        Set<Integer> light = new HashSet<>();
+        for (int[] lamp : lamps) {
+            int x = lamp[0], y = lamp[1];
+            int l = y - x, r = x + y;
+            if (light.contains(x * n + y)) {
+                continue;
+            }
+            row.put(x, row.getOrDefault(x, 0) + 1);
+            col.put(y, col.getOrDefault(y, 0) + 1);
+            left.put(l, left.getOrDefault(l, 0) + 1);
+            right.put(r, right.getOrDefault(r, 0) + 1);
+            light.add(x * n + y);
+        }
+        int k = queries.length;
+        int[] ans = new int[k];
+        for (int i = 0; i < k; i++) {
+            int x = queries[i][0], y = queries[i][1];
+            if (row.containsKey(x) || col.containsKey(y) || left.containsKey(y - x) || right.containsKey(x + y)) {
+                ans[i] = 1;
+            }
+            for (int[] d : dirs) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 0 || nx >= n || ny < 0 || ny >= n) {
+                    continue;
+                }
+                if (light.contains(nx * n + ny)) {
+                    int nl = ny - nx, nr = nx + ny;
+                    light.remove(nx * n + ny);
+                    if (row.getOrDefault(nx, 0) > 1) {
+                        row.put(nx, row.get(nx) - 1);
+                    } else {
+                        row.remove(nx);
+                    }
+                    if (col.getOrDefault(ny, 0) > 1) {
+                        col.put(ny, col.get(ny) - 1);
+                    } else {
+                        col.remove(ny);
+                    }
+                    if (left.getOrDefault(nl, 0) > 1) {
+                        left.put(nl, left.get(nl) - 1);
+                    } else {
+                        left.remove(nl);
+                    }
+                    if (right.getOrDefault(nr, 0) > 1) {
+                        right.put(nr, right.get(nr) - 1);
+                    } else {
+                        right.remove(nr);
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
