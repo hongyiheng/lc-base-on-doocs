@@ -67,7 +67,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countKDifference(self, nums: List[int], k: int) -> int:
+        n, ans = len(nums), 0
+        for i in range(n - 1, -1, -1):
+            for j in range(i - 1, -1, -1):
+                if abs(nums[i] - nums[j]) == k:
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +82,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countKDifference(int[] nums, int k) {
+        int n = nums.length;
+        int ans = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (Math.abs(nums[i] - nums[j]) == k) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
