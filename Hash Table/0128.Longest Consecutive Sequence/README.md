@@ -47,7 +47,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        s = set()
+        for num in nums:
+            s.add(num)
+        ans = 0
+        for num in s:
+            left, right = num, num
+            if (left - 1) not in s:
+                while (right + 1) in s:
+                    right += 1
+            ans = max(ans, right - left + 1)
+        return ans
 ```
 
 ### **Java**
@@ -55,7 +67,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int ans = 0;
+        for (int num : set) {
+            int left = num;
+            int right = num;
+            if (!set.contains(left - 1)) {
+                while(set.contains(right + 1)) {
+                    ++right;
+                }
+            }
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
