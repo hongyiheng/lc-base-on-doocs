@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countBalls(self, lowLimit: int, highLimit: int) -> int:
+        cnt = [0] * 46
+        for i in range(lowLimit, highLimit + 1):
+            num, index = i, 0
+            while num :
+                index += num % 10
+                num //= 10
+            cnt[index] += 1
+        return max(cnt)
 ```
 
 ### **Java**
@@ -74,7 +83,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countBalls(int lowLimit, int highLimit) {
+        int[] cnt = new int[46];
+        for (int i = lowLimit; i < highLimit + 1; i++) {
+            int num = i, index = 0;
+            while (num > 0) {
+                index += num % 10;
+                num /= 10;
+            }
+            cnt[index]++;
+        }
+        int ans = 0;
+        for (int v : cnt) {
+            ans = Math.max(ans, v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
