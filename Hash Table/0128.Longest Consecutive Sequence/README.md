@@ -49,9 +49,7 @@
 ```python
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        s = set()
-        for num in nums:
-            s.add(num)
+        s = set(nums)
         ans = 0
         for num in s:
             left, right = num, num
