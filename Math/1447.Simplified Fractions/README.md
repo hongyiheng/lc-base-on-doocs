@@ -54,7 +54,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def simplifiedFractions(self, n: int) -> List[str]:
+        def gcd(a, b):
+            if b == 0:
+                return a
+            return gcd(b, a % b)
 
+        ans = []
+        for i in range(2, n + 1):
+            for j in range(1, i):
+                if gcd(i, j) == 1:
+                    ans.append(str(j) + "/" + str(i))
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +74,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<String> simplifiedFractions(int n) {
+        List<String> ans = new ArrayList<>();
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j < i; j++) {
+                if (gcd(i, j) == 1) {
+                    ans.add(j + "/" + i);
+                }
+            }
+        }
+        return ans;
+    }
 
+    public int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+}
 ```
 
 ### **...**
