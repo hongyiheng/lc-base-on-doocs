@@ -55,7 +55,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        cnt = Counter(text)
+        ans = min(cnt['a'], cnt['b'])
+        ans = min(ans, cnt['n'])
+        ans = min(ans, cnt['l'] // 2)
+        ans = min(ans, cnt['o'] // 2)
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +70,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int[] cnt = new int[26];
+        char[] chars = text.toCharArray();
+        for (char c : chars) {
+            cnt[c - 'a']++;
+        }
+        int ans = Math.min(cnt[0], cnt[1]);
+        ans = Math.min(ans, cnt['n' - 'a']);
+        ans = Math.min(ans, cnt['l' - 'a'] / 2);
+        ans = Math.min(ans, cnt['o' - 'a'] / 2);
+        return ans;
+    }
+}
 ```
 
 ### **...**
