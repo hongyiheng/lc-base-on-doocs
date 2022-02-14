@@ -42,7 +42,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        n = len(s)
+        ans = []
 
+        def backTracking(path, cur):
+            nonlocal s
+            if len(path) == n:
+                ans.append(path)
+                return
+            path += s[cur]
+            backTracking(path, cur + 1)
+            path = path[:-1]
+            if not s[cur].isdigit():
+                c = chr(ord(s[cur]) - 32) if ord(s[cur]) - ord('a') >= 0 else chr(ord(s[cur]) + 32)
+                path += c
+                backTracking(path, cur + 1)
+
+        backTracking("", 0)
+        return ans
 ```
 
 ### **Java**
@@ -50,7 +69,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    List<String> ans;
+    int n;
+    String s;
 
+    public List<String> letterCasePermutation(String s) {
+        ans = new ArrayList<>();
+        n = s.length();
+        this.s = s;
+        backTracking(new StringBuilder(), 0);
+        return ans;
+    }
+
+    public void backTracking(StringBuilder path, int cur) {
+        if (path.length() == n) {
+            ans.add(path.toString());
+            return;
+        }
+        path.append(s.charAt(cur));
+        backTracking(path, cur + 1);
+        path.deleteCharAt(path.length() - 1);
+        if (!Character.isDigit(s.charAt(cur))) {
+            char c = s.charAt(cur) - 'a' >= 0 ? (char)(s.charAt(cur) - 32) : (char)(s.charAt(cur) + 32);
+            path.append(c);
+            backTracking(path, cur + 1);
+            path.deleteCharAt(path.length() - 1);
+        }
+    }
+}
 ```
 
 ### **...**
