@@ -1,0 +1,84 @@
+# [540. 有序数组中的单一元素](https://leetcode-cn.com/problems/single-element-in-a-sorted-array)
+
+
+
+## 题目描述
+
+<!-- 这里写题目描述 -->
+
+<p>给定一个只包含整数的有序数组，每个元素都会出现两次，唯有一个数只会出现一次，找出这个数。</p>
+
+<p> </p>
+
+<p><strong>示例 1:</strong></p>
+
+<pre>
+<strong>输入:</strong> nums = [1,1,2,3,3,4,4,8,8]
+<strong>输出:</strong> 2
+</pre>
+
+<p><strong>示例 2:</strong></p>
+
+<pre>
+<strong>输入:</strong> nums =  [3,3,7,7,10,11,11]
+<strong>输出:</strong> 10
+</pre>
+
+<p> </p>
+
+<p><meta charset="UTF-8" /></p>
+
+<p><strong>提示:</strong></p>
+
+<ul>
+	<li><code>1 <= nums.length <= 10<sup>5</sup></code></li>
+	<li><code>0 <= nums[i] <= 10<sup>5</sup></code></li>
+</ul>
+
+<p> </p>
+
+<p><strong>进阶:</strong> 采用的方案可以在 <code>O(log n)</code> 时间复杂度和 <code>O(1)</code> 空间复杂度中运行吗？</p>
+
+
+## 解法
+
+<!-- 这里可写通用的实现逻辑 -->
+
+<!-- tabs:start -->
+
+### **Python3**
+
+<!-- 这里可写当前语言的特殊实现逻辑 -->
+
+```python
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        ans = 0
+        for v in nums:
+            ans ^= v
+        return ans
+```
+
+### **Java**
+
+<!-- 这里可写当前语言的特殊实现逻辑 -->
+
+```java
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        int ans = 0;
+        for (int num : nums) {
+            ans ^= num;
+        }
+        return ans;
+    }
+}
+```
+
+### **...**
+
+```
+
+```
+
+<!-- tabs:end -->
