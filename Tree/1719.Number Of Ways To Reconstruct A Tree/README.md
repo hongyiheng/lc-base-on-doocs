@@ -82,6 +82,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def checkWays(self, pairs: List[List[int]]) -> int:
+        mp = defaultdict(set)
+        for son, p in pairs:
+            mp[son].add(p)
+            mp[p].add(son)
+        root_cnt, root_val = -1, -1
+        for son in mp:
+            mp[son].add(son)
+            if len(mp[son]) > root_cnt:
+                root_cnt = len(mp[son])
+                root_val = son
+        if root_cnt != len(mp):
+            return 0
+        ans = 1
+        for son in mp:
+            if son == root_val:
+                continue
+            son_cnt = len(mp[son])
+            parent_cnt = float('inf')
+            parent_val = -1
+            for p in mp[son]:
+                if p != son and son_cnt <= len(mp[p]) < parent_cnt:
+                    parent_cnt = len(mp[p])
+                    parent_val = p
+            if parent_val == -1 or not mp[son].issubset(mp[parent_val]):
+                return 0
+            if parent_cnt == son_cnt:
+                ans = 2
+        return ans
 
 ```
 
@@ -90,7 +120,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int checkWays(int[][] pairs) {
+        Map<Integer, Set<Integer>> mp = new HashMap<>();
+        for (int[] p : pairs) {
+            mp.computeIfAbsent(p[0], k -> new HashSet<>()).add(p[1]);
+            mp.computeIfAbsent(p[1], k -> new HashSet<>()).add(p[0]);
+        }
+        int rootCnt = -1, rootVal = -1;
+        for (int a : mp.keySet()) {
+            mp.get(a).add(a);
+            if (mp.get(a).size() > rootCnt) {
+                rootCnt = mp.get(a).size();
+                rootVal = a;
+            }
+        }
+        if (rootCnt != mp.size()) {
+            return 0;
+        }
+        int ans = 1;
+        for (int son : mp.keySet()) {
+            if (son == rootVal) {
+                continue;
+            }
+            int sonCnt = mp.get(son).size();
+            int parentCnt = Integer.MAX_VALUE;
+            int parentVal = -1;
+            for (int p : mp.get(son)) {
+                if (p != son && mp.get(p).size() >= sonCnt && mp.get(p).size() < parentCnt) {
+                    parentCnt = mp.get(p).size();
+                    parentVal = p;
+                }
+            }
+            if (parentVal == -1 || !mp.get(parentVal).containsAll(mp.get(son))) {
+                return 0;
+            }
+            if (parentCnt == sonCnt) {
+                ans = 2;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
