@@ -67,7 +67,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        n = len(arr)
+        
+        def get_max_index(target):
+            nonlocal arr
+            for i, v in enumerate(arr):
+                if v == target:
+                    return i
+            return -1
+        
+        def reverse(right):
+            nonlocal arr
+            arr = arr[:right][::-1] + arr[right:]
+        
+        ans = []
+        while n > 1:
+            index = get_max_index(n)
+            reverse(index + 1)
+            reverse(n)
+            ans.append(index + 1)
+            ans.append(n)
+            n -= 1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +98,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<Integer> pancakeSort(int[] arr) {
+        int n = arr.length;
+        List<Integer> ans = new ArrayList<>();
+        int[] tmp = new int[n + 1];
+        while (n > 1) {
+            int index = getIndex(arr, n--);
+            reverse(arr, index, tmp);
+            reverse(arr, n, tmp);
+            ans.add(index + 1);
+            ans.add(n + 1);
+        }
+        return ans;
+    }
 
+    public int getIndex(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    } 
+
+    public void reverse(int[] arr, int right, int[] tmp) {
+        int tmpIndex = -1;
+        for (int i = right; i >= 0; i--) {
+            tmp[++tmpIndex] = arr[i]; 
+        }
+        while (tmpIndex >= 0) {
+            arr[tmpIndex] = tmp[tmpIndex--];
+        }
+    }
+}
 ```
 
 ### **...**
