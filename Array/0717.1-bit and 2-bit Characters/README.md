@@ -49,7 +49,16 @@ bits = [1, 1, 1, 0]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isOneBitCharacter(self, bits: List[int]) -> bool:
+        n, i = len(bits), 0
+        while i < n:
+            if bits[i] == 1:
+                i += 1
+            elif bits[i] == 0 and i == n - 1:
+                return True
+            i += 1
+        return False
 ```
 
 ### **Java**
@@ -57,7 +66,20 @@ bits = [1, 1, 1, 0]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        while (i < n) {
+            if (bits[i] == 1) {
+                i++;
+            } else if (bits[i] == 0 && i == n - 1) {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
