@@ -76,7 +76,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        path = deque()
+        n = len(graph)
+        ans = list()
 
+        def dfs(path, cur):
+            nonlocal graph
+            if cur == n - 1:
+                ans.append(list(path))
+                return
+            for v in graph[cur]:
+                path.append(v)
+                dfs(path, v)
+                path.pop()
+
+        path.append(0)
+        dfs(path, 0)
+        return ans
 ```
 
 ### **Java**
@@ -84,7 +102,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    List<List<Integer>> ans;
+    int n;
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        ans = new ArrayList<>();
+        n = graph.length;
+        Deque<Integer> path = new ArrayDeque<>();
+        path.addLast(0);
+        dfs(graph, path, 0);
+        return ans;
+    }
 
+    public void dfs(int[][] graph, Deque<Integer> path, int cur) {
+        if (cur == n - 1) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = 0; i < graph[cur].length; i++) {
+            path.addLast(graph[cur][i]);
+            dfs(graph, path, graph[cur][i]);
+            path.removeLast();
+        }
+    }
+}
 ```
 
 ### **...**
