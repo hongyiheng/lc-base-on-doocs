@@ -53,7 +53,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        people.sort()
+        cur, num = limit, 2
+        left, right = 0, len(people) - 1
+        ans = 1
+        while left <= right:
+            num -= 1
+            if num >= 0 and cur >= people[right]:
+                cur -= people[right]
+                right -= 1
+            elif num >= 0 and cur >= people[left]:
+                cur -= people[left]
+                left += 1
+            else:
+                cur = limit
+                num = 2
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +79,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        Arrays.sort(people);
+        int left = 0, right = people.length - 1;
+        int ans = 1;
+        int cur = limit, num = 2;
+        while (left <= right) {
+            num--;
+            if (num >= 0 && cur >= people[right]) {
+                cur -= people[right--];
+            } else if (num >= 0 && cur >= people[left]) {
+                cur -= people[left++];
+            } else {
+                cur = limit;
+                num = 2;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
