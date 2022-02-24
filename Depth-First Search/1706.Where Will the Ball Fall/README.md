@@ -74,6 +74,32 @@ b4 球开始放在第 4 列上，会卡在第 2、3 列和第 1 行之间的 "V"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findBall(self, grid: List[List[int]]) -> List[int]:
+        m, n = len(grid), len(grid[0])
+        ans = []
+
+        def dfs(x, y):
+            nonlocal grid, m, n
+            if x == m - 1:
+                if grid[x][y] == 1:
+                    if y < n - 1 and grid[x][y + 1] == 1:
+                        return y + 1
+                else:
+                    if y > 0 and grid[x][y - 1] == -1:
+                        return y - 1
+                return -1
+            if grid[x][y] == 1:
+                if y < n - 1 and grid[x][y + 1] == 1:
+                    return dfs(x + 1, y + 1)
+            else:
+                if y > 0 and grid[x][y - 1] == -1:
+                    return dfs(x + 1, y - 1)
+            return -1
+
+        for i in range(n):
+            ans.append(dfs(0, i))
+        return ans
 
 ```
 
@@ -82,7 +108,43 @@ b4 球开始放在第 4 列上，会卡在第 2、3 列和第 1 行之间的 "V"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int m, n;
+    public int[] findBall(int[][] grid) {
+        m = grid.length;
+        n = grid[0].length;
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = dfs(grid, 0, i);
+        }
+        return ans;
+    }
 
+    public int dfs(int[][] grid, int x, int y) {
+        if (x == m - 1) {
+            if (grid[x][y] == 1) {
+                if (y < n - 1 && grid[x][y + 1] == 1) {
+                    return y + 1;
+                }
+            } else {
+                if (y > 0 && grid[x][y - 1] == -1) {
+                    return y - 1;
+                }
+            }
+            return -1;
+        }
+        if (grid[x][y] == 1) {
+            if (y < n - 1 && grid[x][y + 1] == 1) {
+                return dfs(grid, x + 1, y + 1);
+            }
+        } else {
+            if (y > 0 && grid[x][y - 1] == -1) {
+                return dfs(grid, x + 1, y - 1);
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
