@@ -47,7 +47,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def optimalDivision(self, nums: List[int]) -> str:
+        n = len(nums)
+        ans = ""
+        if n == 1:
+            ans = str(nums[0])
+        elif n == 2:
+            ans = str(nums[0]) + "/" + str(nums[1])
+        else:
+            ans = str(nums[0]) + "/(" + str(nums[1])
+            for i in range(2, n):
+                ans += "/" + str(nums[i])
+            ans += ")"
+        return ans
+            
 ```
 
 ### **Java**
@@ -55,7 +69,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String optimalDivision(int[] nums) {
+        int n = nums.length;
+        StringBuilder ans = new StringBuilder();
+        if (n == 1) {
+            ans.append(nums[0]);
+        } else if (n == 2) {
+            ans.append(nums[0] + "/" + nums[1]);
+        } else {
+            ans.append(nums[0] + "/(" + nums[1]);
+            for (int i = 2; i < n; i++) {
+                ans.append("/" + nums[i]);
+            }
+            ans.append(")");
+        } 
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
