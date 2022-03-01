@@ -48,7 +48,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        if head.val != head.next.val:
+            head.next = self.deleteDuplicates(head.next)
+        else:
+            dup = head
+            while dup and dup.val == head.val:
+                dup = dup.next
+            return self.deleteDuplicates(dup)
+        return head
 ```
 
 ### **Java**
@@ -56,7 +72,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        if (head.val != head.next.val) {
+            head.next = deleteDuplicates(head.next);
+        } else {
+            ListNode dup = head;
+            while (dup != null && dup.val == head.val) {
+                dup = dup.next;
+            }
+            return deleteDuplicates(dup);
+        }
+        return head;
+    }
+}
 ```
 
 ### **...**
