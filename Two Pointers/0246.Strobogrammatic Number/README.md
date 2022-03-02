@@ -46,7 +46,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isStrobogrammatic(self, num: str) -> bool:
+        mp = dict()
+        mp['9'] = '6'
+        mp['6'] = '9'
+        mp['8'] = '8'
+        mp['1'] = '1'
+        mp['0'] = '0'
+        l, r = 0, len(num) - 1
+        while l <= r:
+            if mp.get(num[l], 'a') != num[r] or mp.get(num[r], 'b') != num[l]:
+                return False
+            l += 1
+            r -= 1
+        return True 
 ```
 
 ### **Java**
@@ -54,7 +68,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isStrobogrammatic(String num) {
+        Map<Character, Character> mp = new HashMap<>();
+        mp.put('6', '9');
+        mp.put('9', '6');
+        mp.put('8', '8');
+        mp.put('1', '1');
+        mp.put('0', '0');
+        char[] chars = num.toCharArray();
+        int l = 0, r = chars.length - 1;
+        while (l <= r) {
+            if (mp.getOrDefault(chars[l], 'a') != chars[r] || mp.getOrDefault(chars[r], 'b') != chars[l]) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
