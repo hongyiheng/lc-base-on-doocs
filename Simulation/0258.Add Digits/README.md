@@ -30,7 +30,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def addDigits(self, num: int) -> int:
+        def dfs(num):
+            if num < 10:
+                return num
+            ans = 0
+            while num > 0:
+                ans += num % 10
+                num //= 10
+            return dfs(ans)
+        return dfs(num)
+            
 ```
 
 ### **Java**
@@ -38,7 +49,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int addDigits(int num) {
+        return dfs(num);
+    }
 
+    public int dfs(int num) {
+        if (num < 10) {
+            return num;
+        }
+        int ans = 0;
+        while (num > 0) {
+            ans += num % 10;
+            num /= 10;
+        }
+        return dfs(ans);
+    }
+}
 ```
 
 ### **...**
