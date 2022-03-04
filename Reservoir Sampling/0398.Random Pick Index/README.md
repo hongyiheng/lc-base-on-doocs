@@ -36,7 +36,25 @@ solution.pick(1);
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
 
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+
+    def pick(self, target: int) -> int:
+        cnt, ans = 0, 0
+        for i, v in enumerate(self.nums):
+            if v == target:
+                cnt += 1
+                if randrange(cnt) == 0:
+                    ans = i
+        return ans
+
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(nums)
+# param_1 = obj.pick(target)
 ```
 
 ### **Java**
@@ -44,7 +62,33 @@ solution.pick(1);
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] nums;
 
+    public Solution(int[] nums) {
+        this.nums = nums;
+    }
+    
+    public int pick(int target) {
+        Random r = new Random();
+        int count = 0, ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                count++;
+                if (r.nextInt(count) == 0) {
+                    ans = i;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(nums);
+ * int param_1 = obj.pick(target);
+ */
 ```
 
 ### **...**
