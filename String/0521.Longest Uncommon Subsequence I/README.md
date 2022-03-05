@@ -55,7 +55,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLUSlength(self, a: str, b: str) -> int:
+        if a == b:
+            return -1
+        return len(a) if len(a) > len(b) else len(b)
 ```
 
 ### **Java**
@@ -63,7 +67,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findLUSlength(String a, String b) {
+        if (a.equals(b)) {
+            return -1;
+        }
+        return a.length() > b.length() ? a.length() : b.length();
+    }
+}
 ```
 
 ### **...**
