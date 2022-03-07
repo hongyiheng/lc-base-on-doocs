@@ -36,7 +36,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def convertToBase7(self, num: int) -> str:
+        if num == 0:
+            return "0"
+        flag = num > 0
+        num = abs(num)
+        ans = ""
+        while num > 0:
+            ans += str(num % 7)
+            num //= 7
+        return ans[::-1] if flag else "-" + ans[::-1]
 ```
 
 ### **Java**
@@ -44,7 +54,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String convertToBase7(int num) {
+        if (num == 0) {
+            return "0";
+        }
+        boolean flag = num > 0;
+        num = Math.abs(num);
+        StringBuilder sb = new StringBuilder();
+        while (num > 0) {
+            sb.append(num % 7);
+            num = num / 7;
+        }
+        String ans = sb.reverse().toString();
+        return flag ? ans : "-" + ans;
+    }
+}
 ```
 
 ### **...**
