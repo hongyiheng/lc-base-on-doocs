@@ -62,6 +62,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def platesBetweenCandles(self, s: str, queries: List[List[int]]) -> List[int]:
+        n, m = len(s), len(queries)
+        left, right, cnt = [0] * n, [0] * n, [0] * n
+        l = r = -1
+        num = 0
+        for i in range(n):
+            j = n - i - 1
+            if s[i] == '*':
+                num += 1
+            if s[i] == '|':
+                l = i
+            if s[j] == '|':
+                r = j
+            left[i] = l
+            right[j] = r
+            cnt[i] = num
+        ans = [0] * m
+        for i in range(m):
+            a = right[queries[i][0]]
+            b = left[queries[i][1]]
+            if a != -1 and b != -1 and a < b:
+                ans[i] = cnt[b] - cnt[a]
+        return ans
+
+            
 
 ```
 
@@ -70,7 +96,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] platesBetweenCandles(String s, int[][] queries) {
+        int n = s.length();
+        int[] left = new int[n], right = new int[n], sum = new int[n];
+        char[] chars = s.toCharArray();
+        int l = -1, r = -1, cnt = 0;
+        for (int i = 0, j = n - 1; i < n && j >= 0; i++, j--) {
+            if (chars[i] == '*') {
+                ++cnt;
+            }
+            if (chars[i] == '|') {
+                l = i;
+            }
+            if (chars[j] == '|') {
+                r = j;
+            }
+            left[i] = l;
+            right[j] = r;
+            sum[i] = cnt;
+        }
+        int m = queries.length;
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            int a = queries[i][0], b = queries[i][1];
+            if (right[a] != -1 && left[b] != -1 && right[a] < left[b]) {
+                ans[i] = sum[left[b]] - sum[right[a]];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
