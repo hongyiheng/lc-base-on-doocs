@@ -54,7 +54,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        q = []
+        for i, v in enumerate(points):
+            dis = v[0] * v[0] + v[1] * v[1]
+            heapq.heappush(q, [dis, i])
+        ans = list()
+        for _ in range(k):
+            ans.append(points[heapq.heappop(q)[1]])
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +71,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        int n = points.length;
+        for (int i = 0; i < n; i++) {
+            int dis = points[i][0] * points[i][0] + points[i][1] * points[i][1];
+            q.offer(new int[]{dis, i});
+        }
+        int[][] ans = new int[k][2];
+        while (k-- > 0) {
+            ans[k] = points[q.poll()[1]];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
