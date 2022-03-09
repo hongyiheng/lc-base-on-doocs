@@ -57,7 +57,20 @@ A 无论怎么变化总是有 3 分。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def bestRotation(self, nums: List[int]) -> int:
+        n = len(nums)
+        cnt = [0] * n
+        for i in range(n):
+            cnt[(i + 1) % n] += 1
+            cnt[(n + i + 1 - nums[i]) % n] -= 1
+        mx, cur, ans = -1, 0, 0
+        for i in range(n):
+            cur += cnt[i]
+            if mx < cur:
+                mx = cur
+                ans = i
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +78,25 @@ A 无论怎么变化总是有 3 分。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int bestRotation(int[] nums) {
+        int n = nums.length;
+        int[] cnt = new int[n];
+        for (int i = 0; i < n; i++) {
+            cnt[(i + 1) % n]++;
+            cnt[(n + i - nums[i] + 1) % n]--;
+        }
+        int cur = 0, mx = -1, ans = 0;
+        for (int i = 0; i < n; i++) {
+            cur += cnt[i];
+            if (cur > mx) {
+                mx = cur;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
