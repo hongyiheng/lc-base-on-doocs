@@ -60,7 +60,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
 
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        ans = []
+        if root is None:
+            return ans
+
+        def dfs(root):
+            nonlocal ans
+            if root is None:
+                return
+            for child in root.children:
+                ans.append(child.val)
+                dfs(child)
+        
+        ans.append(root.val)
+        dfs(root)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +92,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
 
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+    List<Integer> ans;
+    public List<Integer> preorder(Node root) {
+        ans = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+        ans.add(root.val);
+        dfs(root);
+        return ans;
+    }
+
+    public void dfs(Node root) {
+        if (root == null) {
+            return;
+        }
+        for (Node child : root.children) {
+            ans.add(child.val);
+            dfs(child); 
+        }
+    }
+}
 ```
 
 ### **...**
