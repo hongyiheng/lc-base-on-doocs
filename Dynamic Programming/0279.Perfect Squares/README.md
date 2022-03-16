@@ -47,7 +47,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numSquares(self, n: int) -> int:
+        dp = [0] * (n + 1)
+        for i in range(1, n + 1):
+            dp[i] = i
+            for j in range(1, int(math.sqrt(i)) + 1):
+                dp[i] = min(dp[i], dp[i - j * j] + 1)
+        return dp[n]
 ```
 
 ### **Java**
@@ -55,7 +62,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            dp[i] = i;
+            for (int j = 1; j * j <= i; j++) {
+                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+            }
+        }
+        return dp[n];
+    }
+}
 ```
 
 ### **...**
