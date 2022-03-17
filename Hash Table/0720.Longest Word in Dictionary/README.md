@@ -52,7 +52,25 @@ words = [&quot;a&quot;, &quot;banana&quot;, &quot;app&quot;, &quot;appl&quot;, &
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestWord(self, words: List[str]) -> str:
+        ans = ""
+        w_set = set(words)
+        for s in w_set:
+            n, m = len(s), len(ans)
+            if n < m:
+                continue
+            if n == m and s > ans:
+                continue
+            flag = True
+            for i in range(1, n + 1):
+                sub = s[:i]
+                if sub not in w_set:
+                    flag = False
+                    break
+            if flag:
+                ans = s
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +78,33 @@ words = [&quot;a&quot;, &quot;banana&quot;, &quot;app&quot;, &quot;appl&quot;, &
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String longestWord(String[] words) {
+        String ans = "";
+        Set<String> set = new HashSet<>(Arrays.asList(words));
+        for (String s : set) {
+            int n = s.length(), m = ans.length();
+            if (n < m) {
+                continue;
+            }
+            if (n == m && s.compareTo(ans) > 0) {
+                continue;
+            }
+            boolean flag = true;
+            for (int i = 1; i <= n; i++) {
+                String sub = s.substring(0, i);
+                if (!set.contains(sub)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                ans = s;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
