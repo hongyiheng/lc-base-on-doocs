@@ -55,7 +55,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def tree2str(self, root: Optional[TreeNode]) -> str:
+        ans = ""
 
+        def dfs(root):
+            nonlocal ans
+            if root is None:
+                return
+            ans += str(root.val)
+            if root.left is None and root.right is None:
+                return
+            ans += "("
+            dfs(root.left)
+            ans += ")"
+            if root.right:
+                ans += "("
+                dfs(root.right)
+                ans += ")"
+        
+        dfs(root)
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +89,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    StringBuilder ans = new StringBuilder();
 
+    public String tree2str(TreeNode root) {
+        dfs(root);
+        return ans.toString();
+    }
+
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        ans.append(root.val);
+        if (root.left == null && root.right == null) {
+            return;
+        }
+        ans.append("(");
+        dfs(root.left);
+        ans.append(")");
+        if (root.right != null) {
+            ans.append("(");
+            dfs(root.right);
+            ans.append(")");
+        }
+    }
+}
 ```
 
 ### **...**
