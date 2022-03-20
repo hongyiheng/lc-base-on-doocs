@@ -92,7 +92,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def networkBecomesIdle(self, edges: List[List[int]], patience: List[int]) -> int:
+        N = 100010
+        M = 2 * N
+        head, next, edge = [-1] * N, [0] * M, [0] * M
+        dist = [float('inf')] * N
+        idx = 0
 
+        def add(a, b):
+            nonlocal head, next, edge, idx
+            edge[idx] = b
+            next[idx] = head[a]
+            head[a] = idx
+            idx += 1
+        
+        n = len(patience)
+        for e in edges:
+            add(e[0], e[1])
+            add(e[1], e[0])
+        
+        q = deque()
+        q.append(0)
+        dist[0] = 0
+        while q:
+            t = q.popleft()
+            i = head[t]
+            while i != -1:
+                j = edge[i]
+                if dist[j] == float('inf'):
+                    dist[j] = dist[t] + 1
+                    q.append(j)
+                i = next[i]
+        ans = 0
+        for i in range(1, n):
+            di, t = dist[i] * 2, patience[i]
+            cur = di if di <= t else (di - 1) // t * t + di
+            ans = max(ans, cur)
+        return ans + 1
 ```
 
 ### **Java**
@@ -100,7 +137,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int N = 100010, M = N * 2;
+    int[] edge = new int[M], head = new int[N], next = new int[M];
+    int[] dist = new int[N];
+    int idx = 0;
 
+    void add(int a, int b) {
+        edge[idx] = b;
+        next[idx] = head[a];
+        head[a] = idx++;
+    }
+
+    public int networkBecomesIdle(int[][] edges, int[] patience) {
+        Arrays.fill(head, -1);
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        int n = patience.length;
+        for (int[] e : edges) {
+            add(e[0], e[1]);
+            add(e[1], e[0]);
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        q.addLast(0);
+        dist[0] = 0;
+        while (!q.isEmpty()) {
+            int t = q.pollFirst();
+            for (int i = head[t]; i != -1; i = next[i]) {
+                int j = edge[i];
+                if (dist[j] != Integer.MAX_VALUE) {
+                    continue;
+                }
+                dist[j] = dist[t] + 1;
+                q.addLast(j);
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < n; i++) {
+            int di = dist[i] * 2, t = patience[i];
+            int cur = di <= t ? di : (di - 1) / t * t + di;
+            ans = Math.max(ans, cur);
+        }
+        return ans + 1;
+    }
+}
 ```
 
 ### **...**
