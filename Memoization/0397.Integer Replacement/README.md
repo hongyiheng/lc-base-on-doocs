@@ -61,7 +61,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def integerReplacement(self, n: int) -> int:
+        mp = dict()
 
+        def dfs(n):
+            if n == 1:
+                return 0
+            if n % 2 == 0:
+                if n // 2 in mp:
+                    ans = mp[n // 2]
+                else:
+                    ans = dfs(n // 2)
+                    mp[n // 2] = ans
+                return 1 + ans
+            else:
+                if n + 1 in mp:
+                    ans1 = mp[n + 1]
+                else:
+                    ans1 = dfs(n + 1)
+                    mp[n + 1] = ans1
+                if n - 1 in mp:
+                    ans2 = mp[n - 1]
+                else:
+                    ans2 = dfs(n - 1)
+                    mp[n - 1] = ans2
+                return 1 + min(ans1, ans2)
+
+        return dfs(n)
 ```
 
 ### **Java**
@@ -69,7 +96,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    Map<Long, Long> mp = new HashMap<>();
 
+    public int integerReplacement(int n) {
+        return (int) dfs((long) n);
+    }
+
+    public long dfs(long n) {
+        if (n == 1) {
+            return 0;
+        }
+        if (n % 2 == 0) {
+            long ans = 0;
+            if (!mp.containsKey(n / 2)) {
+                ans = dfs(n / 2);
+                mp.put(n / 2, ans);
+            } else {
+                ans = mp.get(n / 2);
+            }
+            return 1 + ans;
+        } else {
+            long ans1 = 0, ans2 = 0;
+            if (!mp.containsKey(n + 1)) {
+                ans1 = dfs(n + 1);
+                mp.put(n + 1, ans1);
+            } else {
+                ans1 = mp.get(n + 1);
+            }
+            if (!mp.containsKey(n - 1)) {
+                ans2 = dfs(n - 1);
+                mp.put(n - 1, ans2);
+            } else {
+                ans2 = mp.get(n - 1);
+            }
+            return 1 + Math.min(ans1, ans2);
+        }
+    }
+}
 ```
 
 ### **...**
