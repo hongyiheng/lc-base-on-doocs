@@ -68,7 +68,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        s = set()
 
+        def dfs(root):
+            nonlocal s, k
+            if root is None:
+                return False
+            if root.val in s:
+                return True
+            s.add(k - root.val)
+            left = dfs(root.left)
+            right = dfs(root.right)
+            return left or right
+        
+        return dfs(root)
 ```
 
 ### **Java**
@@ -76,7 +97,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    Set<Integer> s = new HashSet<>();
+    int k;
+    public boolean findTarget(TreeNode root, int k) {
+        this.k = k;
+        return dfs(root);
+    }
 
+    public boolean dfs(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        if (s.contains(root.val)) {
+            return true;
+        }
+        s.add(k - root.val);
+        boolean left = dfs(root.left);
+        boolean right = dfs(root.right);
+        return left || right;
+    }
+}
 ```
 
 ### **...**
