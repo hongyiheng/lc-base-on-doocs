@@ -81,7 +81,23 @@ ABBBB<strong><em>B</em></strong>BBAA -&gt; ABBBBBBAA
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def winnerOfGame(self, colors: str) -> bool:
+        a_time, b_time = 0, 0
+        cur = '.'
+        cur_len = 0
+        for c in colors:
+            if c != cur:
+                cur = c
+                cur_len = 1
+            else:
+                cur_len += 1
+                if cur_len >= 3:
+                    if cur == 'A':
+                        a_time += 1
+                    else:
+                        b_time += 1
+        return a_time > b_time
 ```
 
 ### **Java**
@@ -89,7 +105,30 @@ ABBBB<strong><em>B</em></strong>BBAA -&gt; ABBBBBBAA
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean winnerOfGame(String colors) {
+        int aTime = 0, bTime = 0;
+        char[] chars = colors.toCharArray();
+        int curLen = 0;
+        char cur = '.';
+        for (char c : chars) {
+            if (cur != c) {
+                cur = c;
+                curLen = 1;
+            } else {
+                curLen++;
+                if (curLen >= 3) {
+                    if (cur == 'A') {
+                        aTime++;
+                    } else {
+                        bTime++;
+                    }
+                }
+            }
+        }
+        return aTime > bTime;
+    }
+}
 ```
 
 ### **...**
