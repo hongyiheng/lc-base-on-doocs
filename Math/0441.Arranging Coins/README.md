@@ -51,7 +51,29 @@ n = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findKthNumber(self, n: int, k: int) -> int:
+        def getNodes(cur):
+            nonlocal n
+            node_count = 0
+            next = cur + 1
+            while cur <= n:
+                node_count += min(n - cur + 1, next - cur)
+                next *= 10
+                cur *= 10
+            return node_count
+        
+        cur = 1
+        k -= 1
+        while k > 0:
+            node_count = getNodes(cur)
+            if k >= node_count:
+                k -= node_count
+                cur += 1
+            else:
+                k -= 1
+                cur *= 10
+        return cur
 ```
 
 ### **Java**
@@ -59,7 +81,34 @@ n = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int findKthNumber(int n, int k) {
+        int cur = 1;
+        k--;
+        while (k > 0) {
+            int nodeCount = getNodeCount(n, cur);
+            if (k >= nodeCount) {
+                k -= nodeCount;
+                cur ++;
+            } else {
+                k--;
+                cur *= 10;
+            }
+        }
+        return cur;
+    }
 
+    public int getNodeCount(int n, long cur) {
+        int nodeCount = 0;
+        long next = cur + 1;
+        while (cur <= n) {
+            nodeCount += Math.min(n - cur + 1, next - cur);
+            next *= 10;
+            cur *= 10;
+        }
+        return nodeCount;
+    }
+}
 ```
 
 ### **...**
