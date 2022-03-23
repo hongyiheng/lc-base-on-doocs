@@ -63,7 +63,43 @@ numArray.sumRange(0, 2); // 返回 8 ，sum([1,2,5]) = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class NumArray:
+    def lowbit(self, x):
+        return x & -x
+    
+    def add(self, index, incr):
+        i = index
+        while i < len(self.tree):
+            self.tree[i] += incr
+            i += self.lowbit(i)
+    
+    def query(self, x):
+        ans = 0
+        i = x
+        while i > 0:
+            ans += self.tree[i]
+            i -= self.lowbit(i)
+        return ans
 
+    def __init__(self, nums: List[int]):
+        n = len(nums)
+        self.tree = [0] * (n + 1)
+        for i, v in enumerate(nums, 1):
+            self.add(i, v)
+
+    def update(self, index: int, val: int) -> None:
+        prev = self.query(index + 1) - self.query(index)
+        self.add(index + 1, val - prev)
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self.query(right + 1) - self.query(left)
+
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# obj.update(index,val)
+# param_2 = obj.sumRange(left,right)
 ```
 
 ### **Java**
@@ -71,7 +107,52 @@ numArray.sumRange(0, 2); // 返回 8 ，sum([1,2,5]) = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class NumArray {
+    int[] tree;
+    int[] nums;
 
+    public int lowbit(int x) {
+        return x & -x;
+    }
+    
+    public int query(int x) {
+        int ans = 0;
+        for (int i = x; i > 0; i -= lowbit(i)) {
+            ans += tree[i];
+        }
+        return ans;
+    }
+
+    public void add(int index, int incr) {
+        for (int i = index; i < tree.length; i += lowbit(i)) {
+            tree[i] += incr;
+        }
+    }
+
+    public NumArray(int[] nums) {
+        this.nums = nums;
+        tree = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            add(i + 1, nums[i]);
+        }
+    }
+    
+    public void update(int index, int val) {
+        add(index + 1, val - nums[index]);
+        nums[index] = val;
+    }
+    
+    public int sumRange(int left, int right) {
+        return query(right + 1) - query(left);
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * obj.update(index,val);
+ * int param_2 = obj.sumRange(left,right);
+ */
 ```
 
 ### **...**
