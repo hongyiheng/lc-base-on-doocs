@@ -34,7 +34,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        ans = 0
+        while n >= 5:
+            ans += n // 5
+            n //= 5
+        return ans
 ```
 
 ### **Java**
@@ -42,7 +48,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int trailingZeroes(int n) {
+        int ans = 0;
+        while (n >= 5) {
+            ans += n / 5;
+            n /= 5;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
