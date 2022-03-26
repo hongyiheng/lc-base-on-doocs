@@ -49,7 +49,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
+        def lowbit(x):
+            return x & -x
+        
+        def query(x):
+            ans = 0
+            while x > 0:
+                ans += self.tree[x]
+                x -= lowbit(x)
+            return ans
+        
+        def add(x, incr):
+            while x < len(self.tree):
+                self.tree[x] += incr
+                x += lowbit(x)
+        
+        n = len(nums)
+        pre = [0] * (n + 1)
+        for i, v in enumerate(nums, 1):
+            pre[i] = pre[i - 1] + nums[i - 1]
+        s = set()
+        for v in pre:
+            s.add(v)
+            s.add(v - upper)
+            s.add(v - lower)
+        mp = dict()
+        idx = 1
+        for v in sorted(s):
+            mp[v] = idx
+            idx += 1
+        self.tree = [0] * (len(mp) + 1)
+        ans = 0
+        for v in pre:
+            l, r = mp[v - upper] - 1, mp[v - lower]
+            ans += query(r) - query(l)
+            add(mp[v], 1)
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +94,57 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    long[] tree;
+    
+    public int countRangeSum(int[] nums, int lower, int upper) {
+        int n = nums.length;
+        long[] pre = new long[n + 1];
+        for (int i = 1; i <= n; i++) {
+            pre[i] = pre[i - 1] + nums[i - 1];
+        }
+        TreeSet<Long> ts = new TreeSet<>();
+        for (long s : pre) {
+            ts.add(s);
+            ts.add(s - upper);
+            ts.add(s - lower);
+        }
+        Map<Long, Integer> mp = new HashMap<>();
+        int idx = 1;
+        for (long s : ts) {
+            mp.put(s, idx++);
+        }
+        tree = new long[mp.size() + 1];
+        int ans = 0;
+        for (long s : pre) {
+            int l = mp.get(s - upper) - 1;
+            int r = mp.get(s - lower);
+            ans += query(r) - query(l);
+            add(mp.get(s), 1);
+        }
+        return ans;    
+    }
 
+    public int lowbit(int x) {
+        return x & -x;
+    }
+
+    public int query(int x) {
+        int ans = 0;
+        while (x > 0) {
+            ans += tree[x];
+            x -= lowbit(x);
+        }
+        return ans;
+    }
+
+    public void add(int x, int incr) {
+        while (x < tree.length) {
+            tree[x] += incr;
+            x += lowbit(x);
+        }
+    }
+}
 ```
 
 ### **...**
