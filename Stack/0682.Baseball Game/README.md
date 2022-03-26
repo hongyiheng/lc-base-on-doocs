@@ -82,7 +82,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        ans = 0
+        stk = []
+        for o in ops:
+            num = 0
+            if "+" == o:
+                num += stk[-2]
+                num += stk[-1]
+            elif "D" == o:
+                num = stk[-1] * 2
+            elif "C" == o:
+                num = -stk.pop()
+            else:
+                num = int(o)
+            ans += num
+            if "C" != o:
+                stk.append(num)
+        return ans
 ```
 
 ### **Java**
@@ -92,26 +110,28 @@
 ```java
 class Solution {
     public int calPoints(String[] ops) {
+        int ans = 0;
         Deque<Integer> stk = new ArrayDeque<>();
-        for (String item: ops) {
-            if (item.equals("C")) {
-                stk.pollLast();
-            } else if (item.equals("D")) {
-                stk.addLast(stk.peekLast() * 2);
-            } else if (item.equals("+")) {
-                int first = stk.pollLast();
-                int second = stk.peekLast();
-                stk.addLast(first);
-                stk.addLast(first + second);
+        for (String o : ops) {
+            int num = 0;
+            if ("+".equals(o)) {
+                int last = stk.pollLast();
+                num += last;
+                num += stk.peekLast();
+                stk.addLast(last);
+            } else if ("D".equals(o)) {
+                num = stk.peekLast() * 2;
+            } else if ("C".equals(o)) {
+                num = -stk.pollLast();
             } else {
-                stk.addLast(Integer.parseInt(item));
+                num = Integer.parseInt(o);
+            }
+            ans += num;
+            if (!"C".equals(o)) {
+                stk.addLast(num);
             }
         }
-        int res = 0;
-        while (!stk.isEmpty()) {
-            res += stk.pollLast();
-        }
-        return res;
+        return ans;
     }
 }
 ```
