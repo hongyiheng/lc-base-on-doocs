@@ -38,7 +38,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findNumberOfLIS(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp, cnt = [1] * n, [1] * n
+        mx = 1
+        for i in range(1, n):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    if dp[i] < dp[j] + 1:
+                        dp[i] = dp[j] + 1
+                        cnt[i] = cnt[j]
+                    elif dp[i] == dp[j] + 1:
+                        cnt[i] += cnt[j]
+            mx = max(mx, dp[i])
+        ans = 0
+        for i in range(n):
+            if dp[i] == mx:
+                ans += cnt[i]
+        return ans
 ```
 
 ### **Java**
@@ -46,7 +64,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findNumberOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        int[] count = new int[n];
+        Arrays.fill(dp, 1);
+        Arrays.fill(count, 1);
+        int mx = 1;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    if (dp[i] < dp[j] + 1) {
+                        dp[i] = dp[j] + 1;
+                        count[i] = count[j];
+                    } else if (dp[i] == dp[j] + 1) {
+                        count[i] += count[j];
+                    }
+                }
+            }
+            mx = Math.max(mx, dp[i]);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] == mx) {
+                ans += count[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
