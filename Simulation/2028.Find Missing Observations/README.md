@@ -70,7 +70,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
+        m = len(rolls)
+        target = (m + n) * mean
+        for v in rolls:
+            target -= v
+        if target > 6 * n or target < n:
+            return []
+        avg_num = target // n
+        other = target % n
+        ans = [avg_num] * n
+        for i in range(other):
+            ans[i] += 1
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +91,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] missingRolls(int[] rolls, int mean, int n) {
+        int m = rolls.length;
+        int target = (m + n) * mean;
+        for (int num : rolls) {
+            target -= num;
+        }
+        if (target > n * 6 || target < n) {
+            return new int[0];
+        }
+        int[] ans = new int[n];
+        int avgNum = target / n;
+        int other = target % n;
+        Arrays.fill(ans, avgNum);
+        for (int i = 0; i < other; i++) {
+            ans[i]++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
