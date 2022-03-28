@@ -66,7 +66,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        m = n ^ (n >> 1)
+        return m & (m + 1) == 0
 ```
 
 ### **Java**
@@ -74,7 +77,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+        int m = n ^ (n >> 1);
+        return (m & (m + 1)) == 0;
+    }
+}
 ```
 
 ### **...**
