@@ -42,7 +42,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        s = set()
+        for v in nums:
+            if v in s:
+                return True
+            s.add(v)
+        return False
 ```
 
 ### **Java**
@@ -50,7 +57,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        for (int num : nums) {
+            if (s.contains(num)) {
+                return true;
+            }
+            s.add(num);
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
