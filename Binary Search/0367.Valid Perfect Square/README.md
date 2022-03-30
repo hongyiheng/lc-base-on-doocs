@@ -46,7 +46,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        left, right = 1, num // 2
+        while left < right:
+            mid = (left + right) >> 1
+            if mid * mid < num:
+                left = mid  +1
+            else:
+                right = mid
+        return left * left == num
 ```
 
 ### **Java**
@@ -54,7 +63,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        int left = 1, right = num / 2;
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            if ((long)mid * mid < num) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left * left == num;
+    }
+}
 ```
 
 ### **...**
