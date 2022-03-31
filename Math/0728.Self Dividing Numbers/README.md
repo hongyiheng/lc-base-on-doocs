@@ -40,7 +40,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        def check(num):
+            tmp = num
+            while tmp:
+                v = tmp % 10
+                if v == 0:
+                    return False
+                if num % v == 0:
+                    tmp //= 10
+                else:
+                    return False
+            return True
+        
+        ans = []
+        for i in range(left, right + 1):
+            if check(i):
+                ans.append(i)
+        return ans
 ```
 
 ### **Java**
@@ -48,7 +66,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = left; i <= right; i++) {
+            if (check(i)) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
 
+    public boolean check(int num) {
+        int tmp = num;
+        while (tmp > 0) {
+            int v = tmp % 10;
+            if (v == 0) {
+                return false;
+            }
+            if (num % v == 0) {
+                tmp /= 10;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
