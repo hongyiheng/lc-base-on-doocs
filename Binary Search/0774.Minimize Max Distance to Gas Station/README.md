@@ -52,7 +52,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        left, right = 0, len(letters) - 1
+        while left < right:
+            mid = (left + right) >> 1
+            if letters[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid
+        return letters[left] if letters[left] > target else letters[0]S
 ```
 
 ### **Java**
@@ -60,7 +69,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        int left = 0, right = letters.length - 1;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (letters[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return letters[left] > target ? letters[left] : letters[0];
+    }
+}
 ```
 
 ### **...**
