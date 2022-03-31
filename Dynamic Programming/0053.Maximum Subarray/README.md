@@ -71,7 +71,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = [0] * n
+        ans = dp[0] = nums[0]
+        for i in range(1, n):
+            dp[i] = max(nums[i], nums[i] + dp[i - 1])
+            ans = max(ans, dp[i])
+        return ans
 ```
 
 ### **Java**
@@ -81,12 +89,13 @@
 ```java
 class Solution {
     public int maxSubArray(int[] nums) {
-        int len = nums.length;
-        int last = nums[0];
-        int ans = last;
-        for (int i = 1; i < len; i++) {
-            last = Math.max(nums[i], last + nums[i]);
-            ans = Math.max(ans, last);
+        int n = nums.length;
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        int ans = nums[0];
+        for (int i = 1; i < n; i++) {
+            dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+            ans = Math.max(ans, dp[i]);
         }
         return ans;
     }
