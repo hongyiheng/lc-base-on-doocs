@@ -61,7 +61,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        mp = dict()
+        for i, v in enumerate(nums):
+            if v in mp:
+                return [mp[v], i]
+            mp[target - v] = i
+        return []
 ```
 
 ### **Java**
@@ -69,7 +76,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (mp.containsKey(nums[i])) {
+                return new int[]{mp.get(nums[i]), i};
+            }
+            mp.put(target - nums[i], i);
+        }
+        return new int[2];
+    }
+}
 ```
 
 ### **...**
