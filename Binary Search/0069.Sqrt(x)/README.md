@@ -38,7 +38,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left, right = 0, x
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if mid * mid <= x:
+                left = mid
+            else:
+                right = mid - 1
+        return left
 ```
 
 ### **Java**
@@ -46,7 +55,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int mySqrt(int x) {
+        int left = 0, right = x;
+        while (left < right) {
+            int mid = (left + right + 1) >>> 1;
+            if ((long)mid * mid <= x) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+}
 ```
 
 ### **...**
