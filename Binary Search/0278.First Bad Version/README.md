@@ -52,7 +52,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# The isBadVersion API is already defined for you.
+# @param version, an integer
+# @return an integer
+# def isBadVersion(version):
 
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        left, right = 1, n
+        while left < right:
+            mid = (left + right) >> 1
+            if isBadVersion(mid):
+                right = mid
+            else:
+                left = mid + 1
+        return left
 ```
 
 ### **Java**
@@ -60,7 +78,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
 
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int left = 1, right = n;
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            if (isBadVersion(mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+}
 ```
 
 ### **...**
