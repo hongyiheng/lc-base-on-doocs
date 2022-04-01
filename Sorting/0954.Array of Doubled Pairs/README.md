@@ -61,7 +61,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canReorderDoubled(self, arr: List[int]) -> bool:
+        n, m = 100010, 2 * 100010
+        cnt = [0] * 2 * m
+        nums = []
+        for v in arr:
+            cnt[v + n] += 1
+            if cnt[v + n] == 1:
+                nums.append(v)
+        nums.sort(key=lambda x: abs(x))
+        for v in nums:
+            if cnt[v + n] > cnt[2 * v + n]:
+                return False
+            cnt[2 * v + n] -= cnt[v + n]
+        return True
 ```
 
 ### **Java**
@@ -69,7 +83,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canReorderDoubled(int[] arr) {
+        int n = 100010;
+        int m = 2 * n;
+        int[] cnt = new int[m * 2];
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> Math.abs(a) - Math.abs(b));
+        for (int num : arr) {
+            if (++cnt[num + n] == 1) {
+                q.add(num);
+            }
+        }
+        while (!q.isEmpty()) {
+            int idx = q.poll();
+            if (cnt[idx + n] > cnt[idx * 2 + n]) {
+                return false;
+            }
+            cnt[idx * 2 + n] -= cnt[idx + n];
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
