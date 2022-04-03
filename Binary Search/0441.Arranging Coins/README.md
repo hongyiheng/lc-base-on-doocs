@@ -51,7 +51,16 @@ n = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        left, right = 0, n
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if (1 + mid) * mid // 2 > n:
+                right = mid - 1
+            else:
+                left = mid
+        return left
 ```
 
 ### **Java**
@@ -59,7 +68,20 @@ n = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int arrangeCoins(int n) {
+        int left = 0, right = n;
+        while (left < right) {
+            int mid = (left + right + 1) >>> 1;
+            if ((long)(1 + mid) * mid / 2 > n) {
+                right = mid - 1;
+            } else {
+                left = mid;
+            }
+        }
+        return left;
+    }
+}
 ```
 
 ### **...**
