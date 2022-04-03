@@ -65,7 +65,21 @@ x 不能取更大的值，因为 nums 中只有两个元素。</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def specialArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        nums.sort()
+        for i in range(n + 1):
+            left, right = 0, n
+            while left < right:
+                mid = (left + right) >> 1
+                if nums[mid] < i:
+                    left = mid + 1
+                else:
+                    right = mid
+            if n - left == i:
+                return i
+        return -1
 ```
 
 ### **Java**
@@ -73,7 +87,27 @@ x 不能取更大的值，因为 nums 中只有两个元素。</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int specialArray(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        for (int i = 0; i <= n; i++) {
+            int left = 0, right = n;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (nums[mid] < i) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            if (n - left == i) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
