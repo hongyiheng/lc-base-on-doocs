@@ -70,7 +70,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countNegatives(self, grid: List[List[int]]) -> int:
+        ans, n = 0, len(grid[0])
+        for row in grid:
+            left, right = 0, n - 1
+            while left < right:
+                mid = (left + right) >> 1
+                if row[mid] >= 0:
+                    left = mid + 1
+                else:
+                    right = mid
+            if row[left] < 0:
+                ans += n - left
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +91,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countNegatives(int[][] grid) {
+        int ans = 0;
+        int n = grid[0].length;
+        for (int[] row : grid) {
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (row[mid] >= 0) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            if (row[left] < 0) {
+                ans += n - left;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**

@@ -1,14 +1,19 @@
 class Solution:
-    def countNegatives(self, grid: List[List[int]]) -> int:
-        ans, n = 0, len(grid[0])
-        for row in grid:
-            left, right = 0, n - 1
-            while left < right:
-                mid = (left + right) >> 1
-                if row[mid] >= 0:
-                    left = mid + 1
-                else:
-                    right = mid
-            if row[left] < 0:
-                ans += n - left
-        return ans
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m, n = len(matrix), len(matrix[0])
+        left, right = 0, m - 1
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if matrix[mid][0] > target:
+                right = mid - 1
+            else:
+                left = mid
+        row = matrix[left]
+        left, right = 0, n - 1
+        while left < right:
+            mid = (left + right) >> 1
+            if row[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+        return row[left] == target

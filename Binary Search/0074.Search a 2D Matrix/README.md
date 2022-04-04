@@ -53,19 +53,24 @@
 
 ```python
 class Solution:
-    def countNegatives(self, grid: List[List[int]]) -> int:
-        ans, n = 0, len(grid[0])
-        for row in grid:
-            left, right = 0, n - 1
-            while left < right:
-                mid = (left + right) >> 1
-                if row[mid] >= 0:
-                    left = mid + 1
-                else:
-                    right = mid
-            if row[left] < 0:
-                ans += n - left
-        return ans
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m, n = len(matrix), len(matrix[0])
+        left, right = 0, m - 1
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if matrix[mid][0] > target:
+                right = mid - 1
+            else:
+                left = mid 
+        row = matrix[left]
+        left, right = 0, n - 1
+        while left < right:
+            mid = (left + right) >> 1
+            if row[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+        return row[left] == target
 ```
 
 ### **Java**
@@ -74,24 +79,28 @@ class Solution:
 
 ```java
 class Solution {
-    public int countNegatives(int[][] grid) {
-        int ans = 0;
-        int n = grid[0].length;
-        for (int[] row : grid) {
-            int left = 0, right = n - 1;
-            while (left < right) {
-                int mid = (left + right) >> 1;
-                if (row[mid] >= 0) {
-                    left = mid + 1;
-                } else {
-                    right = mid;
-                }
-            }
-            if (row[left] < 0) {
-                ans += n - left;
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length, n = matrix[0].length;
+        int left = 0, right = m - 1;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (matrix[mid][0] > target) {
+                right = mid - 1;
+            } else {
+                left = mid;
             }
         }
-        return ans;
+        int[] row = matrix[left];
+        left = 0; right = n - 1;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (row[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return row[left] == target;
     }
 }
 ```
