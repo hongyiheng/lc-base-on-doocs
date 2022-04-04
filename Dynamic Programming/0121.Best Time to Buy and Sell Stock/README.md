@@ -52,7 +52,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        last_min, ans = float('inf'), 0
+        for v in prices:
+            ans = max(ans, v - last_min)
+            last_min = min(last_min, v)
+        return ans
 ```
 
 ### **Java**
@@ -62,11 +68,10 @@
 ```java
 class Solution {
     public int maxProfit(int[] prices) {
-        int len = prices.length;
-        int lastMax = prices[len - 1], ans = 0;
-        for (int i = len - 1; i >= 0; i--) {
-            ans = Math.max(ans, lastMax - prices[i]);
-            lastMax = Math.max(lastMax, prices[i]);
+        int lastMin = Integer.MAX_VALUE, ans = 0;
+        for (int price : prices) {
+            ans = Math.max(ans, price - lastMin);
+            lastMin = Math.min(lastMin, price);
         }
         return ans;
     }
