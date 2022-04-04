@@ -50,7 +50,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        mp = dict()
+        for v in nums1:
+            mp[v] = mp.get(v, 0) + 1
+        ans = []
+        for v in nums2:
+            cnt = mp.get(v, 0)
+            if cnt > 0:
+                ans.append(v)
+                cnt -= 1
+                mp[v] = cnt
+        return ans
+                
 ```
 
 ### **Java**
@@ -58,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int num : nums1) {
+            mp.put(num, mp.getOrDefault(num, 0) + 1);
+        }
+        List<Integer> tmp = new ArrayList<>();
+        for (int num : nums2) {
+            int cnt = mp.getOrDefault(num, 0);
+            if (cnt > 0) {
+                tmp.add(num);
+                mp.put(num, --cnt);
+            } 
+        }
+        int[] ans = new int[tmp.size()];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = tmp.get(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
