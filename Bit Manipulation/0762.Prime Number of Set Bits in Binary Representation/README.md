@@ -55,7 +55,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countPrimeSetBits(self, left: int, right: int) -> int:
+        dic = [False] * 32
+        for i in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]:
+            dic[i] = True
+        ans = 0
+        for v in range(left, right + 1):
+            x, cnt = v, 0
+            while x:
+                x -= (x & -x)
+                cnt += 1
+            if dic[cnt]:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +76,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countPrimeSetBits(int left, int right) {
+        boolean[] dic = new boolean[32];
+        int[] nums = new int[]{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        for (int i : nums) {
+            dic[i] = true;
+        }
+        int ans = 0;
+        for (int i = left; i <= right; i++) {
+            int x = i, cnt = 0;
+            while (x != 0) {
+                x -= (x & -x);
+                cnt++;
+            }
+            if (dic[cnt]) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
