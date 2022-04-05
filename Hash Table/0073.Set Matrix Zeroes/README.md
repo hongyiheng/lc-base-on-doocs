@@ -55,7 +55,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        m, n = len(matrix), len(matrix[0])
+        row, col = set(), set()
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    row.add(i)
+                    col.add(j)
+        for i in range(m):
+            for j in range(n):
+                if i in row or j in col:
+                    matrix[i][j] = 0
 ```
 
 ### **Java**
@@ -63,7 +78,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        Set<Integer> row = new HashSet<>();
+        Set<Integer> col = new HashSet<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row.add(i);
+                    col.add(j);
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row.contains(i) || col.contains(j)) {
+                    matrix[i][j] = 0; 
+                }
+            }
+        }
+    }
+}
 ```
 
 ### **...**
