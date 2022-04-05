@@ -60,7 +60,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkIfExist(self, arr: List[int]) -> bool:
+        arr.sort()
+        n = len(arr)
+        for i, v in enumerate(arr):
+            left, right = 0, n - 1
+            while left < right:
+                mid = (left + right) >> 1
+                if arr[mid] < 2 * v:
+                    left = mid + 1
+                else:
+                    right = mid
+            if left < n and left != i and arr[left] == 2 * v:
+                return True
+        return False
 ```
 
 ### **Java**
@@ -68,7 +82,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkIfExist(int[] arr) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        for (int i = 0; i < n; i++) {
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (arr[mid] < arr[i] * 2) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            if (left < n && left != i && arr[left] == arr[i] * 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
