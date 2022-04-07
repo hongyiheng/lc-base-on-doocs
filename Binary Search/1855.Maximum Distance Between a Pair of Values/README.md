@@ -73,7 +73,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxDistance(self, nums1: List[int], nums2: List[int]) -> int:
+        n, m = len(nums1), len(nums2)
+        ans = 0
+        for i, v in enumerate(nums1):
+            left, right = i, m - 1
+            if right - left <= ans:
+                break
+            while left < right:
+                mid = (left + right + 1) >> 1
+                if v <= nums2[mid]:
+                    left = mid
+                else:
+                    right = mid - 1
+            if i <= left and v <= nums2[left]:
+                ans = max(ans, left - i)
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +97,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxDistance(int[] nums1, int[] nums2) {
+        int n = nums1.length, m = nums2.length;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            int left = i, right = m - 1;
+            if (right - left <= ans) {
+                break;
+            }
+            while (left < right) {
+                int mid = (left + right + 1) >> 1;
+                if (nums2[mid] >= nums1[i]) {
+                    left = mid;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            if (nums2[left] >= nums1[i] && left >= i) {
+                ans = Math.max(ans, left - i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
