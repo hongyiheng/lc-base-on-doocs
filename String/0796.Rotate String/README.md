@@ -37,7 +37,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        if len(s) != len(goal):
+            return False
+        s += s
+        return goal in s
 ```
 
 ### **Java**
