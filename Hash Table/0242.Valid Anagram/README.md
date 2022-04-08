@@ -50,7 +50,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        cnt = [0] * 26
+        for i in range(len(s)):
+            cnt[ord(s[i]) - ord('a')] += 1
+            cnt[ord(t[i]) - ord('a')] -= 1
+        for v in cnt:
+            if v != 0:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -58,7 +69,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            cnt[s.charAt(i) - 'a']++;
+            cnt[t.charAt(i) - 'a']--;
+        }
+        for (int v : cnt) {
+            if (v != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
