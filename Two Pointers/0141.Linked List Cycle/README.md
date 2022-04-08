@@ -69,7 +69,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head or not head.next:
+            return False
+        fast, low = head.next, head
+        while fast != low:
+            if not fast or not fast.next:
+                return False
+            low = low.next
+            fast = fast.next.next
+        return True
 ```
 
 ### **Java**
@@ -77,7 +93,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode fast = head.next, low = head;
+        while (fast != low) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            fast = fast.next.next;
+            low = low.next;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
