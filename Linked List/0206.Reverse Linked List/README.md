@@ -59,7 +59,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        node = ListNode()
+        ans = node
+        
+        def dfs(head):
+            nonlocal node
+            if not head:
+                return
+            if head.next:
+                dfs(head.next)
+            node.next = ListNode(head.val)
+            node = node.next
+        
+        dfs(head)
+        return ans.next
+            
 ```
 
 ### **Java**
@@ -67,7 +88,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    ListNode node;
 
+    public ListNode reverseList(ListNode head) {
+        node = new ListNode();
+        ListNode ans = node;
+        dfs(head);
+        return ans.next;
+    }
+
+    public void dfs(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        if (head.next != null) {
+            dfs(head.next);
+        }
+        node.next = new ListNode(head.val);
+        node = node.next;
+    }
+}
 ```
 
 ### **...**
