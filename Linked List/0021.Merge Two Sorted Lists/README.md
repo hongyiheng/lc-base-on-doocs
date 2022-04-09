@@ -53,7 +53,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        head = ListNode()
+        ans = head
+        while list1 or list2:
+            if list1 and list2:
+                if list1.val < list2.val:
+                    head.next = ListNode(list1.val)
+                    list1 = list1.next
+                else:
+                    head.next = ListNode(list2.val)
+                    list2 = list2.next
+            elif list1:
+                head.next = ListNode(list1.val)
+                list1 = list1.next
+            else:
+                head.next = ListNode(list2.val)
+                list2 = list2.next
+            head = head.next
+        return ans.next
 ```
 
 ### **Java**
@@ -61,7 +85,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode head = new ListNode();
+        ListNode ans = head;
+        while (list1 != null || list2 != null) {
+            if (list1 != null && list2 != null) {
+                if (list1.val < list2.val) {
+                    head.next = new ListNode(list1.val);
+                    list1 = list1.next;
+                } else {
+                    head.next = new ListNode(list2.val);
+                    list2 = list2.next;
+                }
+            } else if (list1 != null) {
+                head.next = new ListNode(list1.val);
+                list1 = list1.next;
+            } else {
+                head.next = new ListNode(list2.val);
+                list2 = list2.next;
+            }
+            head = head.next;
+        }
+        return ans.next;
+    }
+}
 ```
 
 ### **...**
