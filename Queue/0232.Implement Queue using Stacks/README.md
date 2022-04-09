@@ -79,7 +79,33 @@ myQueue.empty(); // return false
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MyQueue:
 
+    def __init__(self):
+        self.stk = deque()
+
+
+    def push(self, x: int) -> None:
+        self.stk.append(x)
+
+
+    def pop(self) -> int:
+        return self.stk.popleft()
+
+    def peek(self) -> int:
+        return self.stk[0]
+
+
+    def empty(self) -> bool:
+        return len(self.stk) == 0
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
 ```
 
 ### **Java**
@@ -87,7 +113,38 @@ myQueue.empty(); // return false
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MyQueue {
+    Deque<Integer> stk;
 
+    public MyQueue() {
+        stk = new ArrayDeque();
+    }
+    
+    public void push(int x) {
+        stk.offer(x);
+    }
+    
+    public int pop() {
+        return stk.poll();
+    }
+    
+    public int peek() {
+        return stk.peek();
+    }
+    
+    public boolean empty() {
+        return stk.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
 ```
 
 ### **...**
