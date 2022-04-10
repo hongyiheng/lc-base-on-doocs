@@ -27,7 +27,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countNumbersWithUniqueDigits(self, n: int) -> int:
+        dp = [0] * 10
+        dp[0] = 1
+        dp[1] = 9
+        cur, num = 9, 9
+        for i in range(2, n + 1):
+            cur *= num
+            dp[i] = cur
+            num -= 1
+        ans = 0
+        for i in range(n + 1):
+            ans += dp[i]
+        return ans
 ```
 
 ### **Java**
@@ -35,7 +48,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+        int[] dp = new int[10];
+        dp[0] = 1;
+        dp[1] = 9;
+        int cur = 9, num = 9;
+        for (int i = 2; i <= n; i++) {
+            cur *= num--;
+            dp[i] = cur;
+        }
+        int ans = 0;
+        for (int i = 0; i <= n; i++) {
+            ans += dp[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
