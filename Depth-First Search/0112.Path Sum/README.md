@@ -55,7 +55,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        def dfs(root, target):
+            if not root:
+                return False
+            target -= root.val
+            if target == 0 and not root.left and not root.right:
+                return True
+            return dfs(root.left, target) or dfs(root.right, target)
+        return dfs(root, targetSum)
 ```
 
 ### **Java**
@@ -63,15 +78,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 public class Solution {
     public boolean hasPathSum(TreeNode root, int sum) {
-        if(root == null){
+        return dfs(root, sum);
+    }
+
+    public boolean dfs(TreeNode root, int target) {
+        if (root == null) {
             return false;
         }
-        if(root.left == null && root.right == null){
-            return root.val == sum;
+        target -= root.val;
+        if (target == 0 && root.left == null && root.right == null) {
+            return true;
         }
-        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);  
+        return dfs(root.left, target) || dfs(root.right, target);
     }
 }
 ```
