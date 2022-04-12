@@ -50,7 +50,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        pre = float('-inf')
 
+        def dfs(root):
+            nonlocal pre
+            if not root:
+                return True
+            if not dfs(root.left):
+                return False       
+            if root.val <= pre:
+                return False
+            pre = root.val
+            return dfs(root.right)
+        
+        return dfs(root)
 ```
 
 ### **Java**
@@ -58,7 +79,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    long pre;
 
+    public boolean isValidBST(TreeNode root) {
+        pre = Long.MIN_VALUE;
+        return dfs(root);
+    }
+
+    public boolean dfs(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!dfs(root.left)) {
+            return false;
+        }
+        if (root.val <= pre) {
+            return false;
+        }
+        pre = root.val;
+        return dfs(root.right);
+    }
+}
 ```
 
 ### **...**
