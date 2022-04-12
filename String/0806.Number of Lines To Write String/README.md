@@ -56,7 +56,17 @@ S = &quot;bbbcccdddaaa&quot;
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfLines(self, widths: List[int], s: str) -> List[int]:
+        row, residue = 1, 0
+        for c in s:
+            w = widths[ord(c) - ord('a')]
+            if residue + w > 100:
+                row += 1
+                residue = w
+            else:
+                residue += w
+        return [row, residue]
 ```
 
 ### **Java**
@@ -64,7 +74,21 @@ S = &quot;bbbcccdddaaa&quot;
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+       public int[] numberOfLines(int[] widths, String s) {
+           int row = 1, residue = 0;
+           for (char c : s.toCharArray()) {
+               int w = widths[c - 'a'];
+               if (residue + w > 100) {
+                   row++;
+                   residue = w;
+               } else {
+                   residue += w;
+               }
+           }
+           return new int[]{row, residue};
+       }
+   }
 ```
 
 ### **...**
