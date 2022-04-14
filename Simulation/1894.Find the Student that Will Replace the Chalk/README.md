@@ -67,7 +67,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def chalkReplacer(self, chalk: List[int], k: int) -> int:
+        row = sum(chalk)
+        k %= row
+        for i, v in enumerate(chalk):
+            if k < v:
+                return i
+            k -= v
+        return 0
 ```
 
 ### **Java**
@@ -75,7 +83,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+        long row = 0;
+        for (int num : chalk) {
+            row += num;
+        }
+        k %= row;
+        for (int i = 0; i < chalk.length; i++) {
+            if (k < chalk[i]) {
+                return i;
+            }
+            k -= chalk[i];
+        }
+        return 0;
+    }
+}
 ```
 
 ### **...**
