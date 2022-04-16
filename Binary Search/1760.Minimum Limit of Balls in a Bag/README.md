@@ -77,7 +77,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+        def check(x, k):
+            nonlocal nums
+            for v in nums:
+                k -= (v - 1) // x
+            return k >= 0
+        
+        left, right = 1, max(nums)
+        while left < right:
+            mid = (left + right) >> 1
+            if check(mid, maxOperations):
+                right = mid
+            else:
+                left = mid + 1
+        return left
 ```
 
 ### **Java**
@@ -85,7 +100,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minimumSize(int[] nums, int maxOperations) {
+        int ans = 0, n = nums.length;
+        int left = 1, right = 1;
+        for (int num : nums) {
+            right = Math.max(right, num);
+        }
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (check(nums, mid, maxOperations)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
 
+    public boolean check(int[] nums, int x, int k) {
+        for (int num : nums) {
+            k -= (num - 1) / x;
+        }
+        return k >= 0;
+    }
+}
 ```
 
 ### **...**
