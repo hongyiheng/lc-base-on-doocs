@@ -69,7 +69,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumRemovals(self, s: str, p: str, removable: List[int]) -> int:
+        def check(x):
+            nonlocal removable
+            del_set = set(removable[:x])
+            idx = 0
+            for i, c in enumerate(s):
+                if idx == len(p):
+                    break
+                if i in del_set:
+                    continue
+                if c == p[idx]:
+                    idx += 1
+            return idx == len(p)
+        
+        n = len(removable)
+        left, right = 0, n
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if check(mid):
+                left = mid
+            else:
+                right = mid - 1
+        return left
 ```
 
 ### **Java**
@@ -77,7 +100,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    String s;
+    String p;
+    int[] removable;
+    public int maximumRemovals(String s, String p, int[] removable) {
+        this.s = s;
+        this.p = p;
+        this.removable = removable;
+        int left = 0, right = removable.length;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (check(mid)) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
 
+    public boolean check(int x) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < x; i++) {
+            set.add(removable[i]);
+        }
+        char[] sChars = s.toCharArray();
+        char[] pChars = p.toCharArray();
+        int idx = 0;
+        for (int i = 0; i < sChars.length; i++) {
+            if (idx == pChars.length) {
+                break;
+            }
+            if (set.contains(i)) {
+                continue;
+            }
+            if (sChars[i] == pChars[idx]) {
+                idx++;
+            }
+        }
+        return idx == pChars.length;
+    }
+}
 ```
 
 ### **...**
