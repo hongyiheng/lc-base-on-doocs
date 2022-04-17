@@ -61,7 +61,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        def check(x):
+            nonlocal nums, threshold
+            ans = 0
+            for v in nums:
+                ans += (v + x - 1) // x
+            return ans <= threshold
+        
+        left, right = 1, max(nums)
+        while left < right:
+            mid = (left + right) >> 1
+            if check(mid):
+                right = mid
+            else:
+                left = mid + 1
+        return left
 ```
 
 ### **Java**
@@ -69,7 +85,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] nums;
+    int threshold;
+    public int smallestDivisor(int[] nums, int threshold) {
+        this.nums = nums;
+        this.threshold = threshold;
+        int left = 1, right = 1;
+        for (int v : nums) {
+            right = Math.max(right, v);
+        }
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (check(mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
 
+    public boolean check(int x) {
+        int ans = 0;
+        for (int v : nums) {
+            ans += (v + x - 1) / x;
+        }
+        return ans <= threshold;
+    }
+}
 ```
 
 ### **...**
