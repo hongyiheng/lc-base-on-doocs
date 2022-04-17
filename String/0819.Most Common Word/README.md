@@ -53,7 +53,26 @@ banned = [&quot;hit&quot;]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        ban = set(banned)
+        paragraph = paragraph.lower()
+        cnt = dict()
+        ans, cur = "", ""
+        for c in paragraph:
+            if c.isalpha():
+                cur += c
+                continue
+            word = cur
+            cur = ""
+            if word == "" or word in ban:
+                continue
+            cnt[word] = cnt.get(word, 0) + 1
+            if cnt.get(ans, 0) < cnt[word]:
+                ans = word
+        if cur != "" and cnt.get(ans, 0) < cnt.get(cur, 0) + 1:
+            ans = cur
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +80,38 @@ banned = [&quot;hit&quot;]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        paragraph = paragraph.toLowerCase();
+        char[] chars = paragraph.toCharArray();
+        Set<String> ban = new HashSet<>();
+        for (String w : banned) {
+            ban.add(w);
+        }
+        Map<String, Integer> cnt = new HashMap<>();
+        String cur = "";
+        String ans = "";
+        for (char c : chars) {
+            if (Character.isLetter(c)) {
+                cur += c;
+                continue;
+            }
+            String word = cur;
+            cur = "";
+            if (word == "" || ban.contains(word)) {
+                continue;
+            }
+            cnt.put(word, cnt.getOrDefault(word, 0) + 1);
+            if (cnt.getOrDefault(ans, 0) < cnt.get(word)) {
+                ans = word;
+            }
+        }
+        if (cur != "" && cnt.getOrDefault(ans, 0) < cnt.getOrDefault(cur, 0) + 1) {
+            ans = cur;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**

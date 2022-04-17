@@ -8,7 +8,7 @@ class Solution:
                 if v <= mid:
                     cnt += 1
             if cnt <= mid:
-                left = mid + 1;
+                left = mid + 1
             else:
                 right = mid
         return left
