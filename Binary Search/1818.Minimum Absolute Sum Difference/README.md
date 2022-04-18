@@ -74,7 +74,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minAbsoluteSumDiff(self, nums1: List[int], nums2: List[int]) -> int:
+        mod = 1e9 + 7
+        nums = nums1[:]
+        nums.sort()
+        s, max_diff, n = 0, 0, len(nums1)
+        for i in range(n):
+            cur = abs(nums1[i] - nums2[i])
+            s += cur
+            if cur > max_diff:
+                left, right = 0, n - 1
+                while left < right:
+                    mid = (left + right) >> 1
+                    if nums[mid] < nums2[i]:
+                        left = mid + 1
+                    else:
+                        right = mid
+                diff = abs(nums[left] - nums2[i])
+                if left > 0:
+                    diff = min(diff, abs(nums[left - 1] - nums2[i]))
+                max_diff = max(max_diff, cur - diff)
+        return int((s - max_diff) % mod)
 ```
 
 ### **Java**
@@ -82,7 +103,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minAbsoluteSumDiff(int[] nums1, int[] nums2) {
+        double mod = 1e9 + 7;
+        int[] nums = nums1.clone();
+        Arrays.sort(nums);
+        int n = nums1.length;
+        long s = 0, maxDiff = 0;
+        for (int i = 0; i < n; i++) {
+            int cur = Math.abs(nums1[i] - nums2[i]);
+            s += cur;
+            if (cur > maxDiff) {
+                int left = 0, right = n - 1;
+                while (left < right) {
+                    int mid = (left + right) >> 1;
+                    if (nums[mid] < nums2[i]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                int diff = Math.abs(nums[left] - nums2[i]);
+                if (left > 0) {
+                    diff = Math.min(diff, Math.abs(nums[left - 1] - nums2[i]));
+                }
+                maxDiff = Math.max(maxDiff, cur - diff);
+            }
+        }
+        return (int)((s - maxDiff) % mod);
+    }
+}
 ```
 
 ### **...**
