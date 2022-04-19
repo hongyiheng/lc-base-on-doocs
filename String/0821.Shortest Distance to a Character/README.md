@@ -54,7 +54,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestToChar(self, s: str, c: str) -> List[int]:
+        chars = []
+        for i, v in enumerate(s):
+            if v == c:
+                chars.append(i)
+        n = len(s)
+        ans = [0] * n
+        idx = 0
+        left, right = float("-inf"), chars[idx]
+        for i, v in enumerate(s):
+            if right < i and idx < len(chars) - 1:
+                idx += 1
+                left = right
+                right = chars[idx]
+            ans[i] = min(abs(left - i), abs(right - i))
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +78,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] shortestToChar(String s, char c) {
+        List<Integer> chars = new ArrayList<>();
+        char[] cs = s.toCharArray();
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (cs[i] == c) {
+                chars.add(i);
+            }
+        }
+        int[] ans = new int[n];
+        int idx = 0, left = -10010, right = chars.get(0);
+        for (int i = 0; i < n; i++) {
+            if (right < i && idx < chars.size() - 1) {
+                left = right;
+                right = chars.get(++idx);
+            }
+            ans[i] = Math.min(Math.abs(left - i), Math.abs(right - i));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
