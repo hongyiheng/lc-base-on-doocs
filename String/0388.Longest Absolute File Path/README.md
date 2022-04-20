@@ -88,7 +88,29 @@ dir
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lengthLongestPath(self, input: str) -> int:
+        mp = dict()
+        i, ans, n = 0, 0, len(input)
+        while i < n:
+            level = 0
+            while i < n and input[i] == '\t':
+                i += 1
+                level += 1
+            j = i
+            is_dir = True
+            while j < n and input[j] != '\n':
+                if input[j] == '.':
+                    is_dir = False
+                j += 1
+            cur = mp.get(level - 1, 0)
+            cur += j - i if level == 0 else j - i + 1
+            if is_dir:
+                mp[level] = cur
+            else:
+                ans = max(ans, cur)
+            i = j + 1
+        return ans
 ```
 
 ### **Java**
@@ -96,7 +118,37 @@ dir
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lengthLongestPath(String input) {
+        char[] chars = input.toCharArray();
+        int ans = 0;
+        int i = 0, n = input.length();
+        Map<Integer, Integer> mp = new HashMap<>();
+        while (i < n) {
+            int level = 0;
+            while (i < n && chars[i] == '\t') {
+                i++;
+                level++;
+            }
+            int j = i;
+            boolean isDir = true;
+            while (j < n && chars[j] != '\n') {
+                if (chars[j++] == '.') {
+                    isDir = false;
+                }
+            }
+            int cur = level == 0 ? j - i : j - i + 1;
+            int curLen = mp.getOrDefault(level - 1, 0) + cur;
+            if (isDir) {
+                mp.put(level, curLen); 
+            } else {
+                ans = Math.max(ans, curLen);
+            }
+            i = j + 1;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
