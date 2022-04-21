@@ -58,7 +58,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def toGoatLatin(self, sentence: str) -> str:
+        words = sentence.split(" ")
+        for i, w in enumerate(words):
+            c = w[0].lower()
+            if c == 'a' or c == 'e' or c == 'i' or c == 'o' or c == 'u':
+                words[i] = w + "ma"
+            else:
+                words[i] = w[1:] + w[0] + "ma"
+            for _ in range(i + 1):
+                words[i] += "a"
+        return " ".join(words)
 ```
 
 ### **Java**
@@ -66,7 +77,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String toGoatLatin(String sentence) {
+        String[] words = sentence.split(" ");
+        int idx = 0;
+        for (String w : words) {
+            char c = Character.toLowerCase(w.charAt(0));
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                words[idx] = w + "ma";
+            } else {
+                words[idx] = w.substring(1) + w.charAt(0) + "ma";
+            }
+            for (int i = 0; i <= idx; i++) {
+                words[idx] += "a";
+            }
+            idx++;
+        }
+        return String.join(" ", words);
+    }
+}
 ```
 
 ### **...**
