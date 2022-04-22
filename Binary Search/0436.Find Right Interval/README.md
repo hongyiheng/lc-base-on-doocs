@@ -63,6 +63,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        def hash(x):
+            return x[0] * 13331 + x[1]
+
+        n = len(intervals)
+        ans = [-1] * n
+        mp = dict()
+        for i, v in enumerate(intervals):
+            mp[hash(v)] = i
+        intervals.sort(key=lambda x: x[0])
+        for v in intervals:
+            target = v[1]
+            left, right = 0, n - 1
+            while left < right:
+                mid = (left + right) >> 1
+                if intervals[mid][0] < target:
+                    left = mid + 1
+                else:
+                    right = mid
+            if intervals[left][0] >= target:
+                ans[mp[hash(v)]] = mp[hash(intervals[left])]
+        return ans
 
 ```
 
@@ -71,7 +94,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+        int n = intervals.length;
+        Map<int[], Integer> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            mp.put(intervals[i], i);
+        }
+        Arrays.sort(intervals, (a, b) -> {
+            return a[0] - b[0];
+        });
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int idx = mp.get(intervals[i]);
+            int target = intervals[i][1];
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (intervals[mid][0] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            if (intervals[left][0] >= target) {
+                ans[idx] = mp.get(intervals[left]);
+            } else {
+                ans[idx] = -1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
