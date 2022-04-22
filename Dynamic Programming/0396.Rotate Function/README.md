@@ -42,7 +42,20 @@ F(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxRotateFunction(self, nums: List[int]) -> int:
+        n = len(nums)
+        s, cur = 0, 0
+        for i, v in enumerate(nums):
+            s += v
+            cur += i * v
+        ans = cur
+        last = n - 1
+        for _ in range(n):
+            cur = cur - n * nums[last] + s
+            ans = max(ans, cur)
+            last = (last - 1 + n) % n
+        return ans 
 ```
 
 ### **Java**
@@ -50,7 +63,25 @@ F(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxRotateFunction(int[] nums) {
+        int n = nums.length;
+        int s = 0;
+        long cur = 0;
+        for (int i = 0; i < n; i++) {
+            s += nums[i];
+            cur += i * nums[i];
+        }
+        long ans = cur;
+        int last = n - 1;
+        for (int k = 1; k < n; k++) {
+            cur = cur - n * nums[last] + s;
+            ans = Math.max(ans, cur);
+            last = (last - 1 + n) % n;
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
