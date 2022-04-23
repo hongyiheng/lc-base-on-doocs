@@ -34,7 +34,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        n, cur, ans = len(nums), 0, 0
+        mp = dict()
+        mp[0] = 1
+        for v in nums:
+            cur += v
+            if (cur - k) in mp:
+                ans += mp[cur - k]
+            mp[cur] = mp.get(cur, 0) + 1
+        return ans
 ```
 
 ### **Java**
@@ -42,7 +52,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int cur = 0, n = nums.length, ans = 0;
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        mp.put(0, 1);
+        for (int i = 0; i < n; i++) {
+            cur += nums[i];
+            if (mp.containsKey(cur - k)) {
+                ans += mp.get(cur - k);
+            }
+            mp.put(cur, mp.getOrDefault(cur, 0) + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
