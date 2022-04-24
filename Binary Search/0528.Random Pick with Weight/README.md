@@ -75,7 +75,32 @@ solution.pickIndex(); // 返回 0，返回下标 0，返回该下标概率为 1/
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+import random
+class Solution:
+    def __init__(self, w: List[int]):
+        n = len(w)
+        self.pre = [0] * (n + 1)
+        for i in range(n):
+            self.pre[i + 1] = self.pre[i] + w[i]
 
+    def pickIndex(self) -> int:
+        n = len(self.pre)
+        t = random.randrange(1, self.pre[n - 1] + 1)
+        left, right = 0, n - 1
+        while left < right:
+            mid = (left + right) >> 1
+            if self.pre[mid] >= t:
+                right = mid
+            else:
+                left = mid + 1
+        return right - 1
+
+
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(w)
+# param_1 = obj.pickIndex()
 ```
 
 ### **Java**
@@ -83,7 +108,39 @@ solution.pickIndex(); // 返回 0，返回下标 0，返回该下标概率为 1/
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] pre;
+    Random r;
+    public Solution(int[] w) {
+        int n = w.length;
+        pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + w[i];
+        }
+        r = new Random();
+    }
+    
+    public int pickIndex() {
+        int n = pre.length;
+        int t = r.nextInt(pre[n - 1]) + 1;
+        int left = 1, right = n - 1;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (pre[mid] < t) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return right - 1;
+    }
+}
 
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(w);
+ * int param_1 = obj.pickIndex();
+ */
 ```
 
 ### **...**
