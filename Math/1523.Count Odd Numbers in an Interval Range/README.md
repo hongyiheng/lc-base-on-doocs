@@ -42,7 +42,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countOdds(self, low: int, high: int) -> int:
+        return ((high + 1) >> 1) - (low >> 1)
 ```
 
 ### **Java**
@@ -50,7 +52,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countOdds(int low, int high) {
+        return ((high + 1) >> 1) - (low >> 1);
+    }
+}
 ```
 
 ### **...**
