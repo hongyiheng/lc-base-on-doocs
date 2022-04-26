@@ -86,7 +86,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def projectionArea(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        row, col = [0] * m, [0] * n
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]:
+                    ans += 1
+                row[i] = max(row[i], grid[i][j])
+                col[j] = max(col[j], grid[i][j])
+        return ans + sum(row) + sum(col)
 ```
 
 ### **Java**
@@ -94,7 +105,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int projectionArea(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int ans = 0;
+        int[] row = new int[m];
+        int[] col = new int[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] != 0) {
+                    ans++;
+                }
+                row[i] = Math.max(grid[i][j], row[i]);
+                col[j] = Math.max(grid[i][j], col[j]);
+            }
+        }
+        for (int num : row) {
+            ans += num;
+        }
+        for (int num : col) {
+            ans += num;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
