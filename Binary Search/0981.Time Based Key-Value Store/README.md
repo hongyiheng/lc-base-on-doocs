@@ -66,7 +66,37 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class TimeMap:
+    def __init__(self):
+        self.mp = dict()
+        self.ts = dict()
 
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        self.mp[key + str(timestamp)] = value
+        all_ts = self.ts.get(key, [])
+        all_ts.append(timestamp)
+        self.ts[key] = all_ts
+
+    def get(self, key: str, timestamp: int) -> str:
+        if (key + str(timestamp)) in self.mp:
+            return self.mp[key + str(timestamp)]
+        if key not in self.ts:
+            return ""
+        all_ts = self.ts[key]
+        left, right = 0, len(all_ts) - 1
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if all_ts[mid] <= timestamp:
+                left = mid
+            else:
+                right = mid - 1
+        return self.mp[key + str(all_ts[left])] if all_ts[left] <= timestamp else ""
+
+
+# Your TimeMap object will be instantiated and called as such:
+# obj = TimeMap()
+# obj.set(key,value,timestamp)
+# param_2 = obj.get(key,timestamp)
 ```
 
 ### **Java**
@@ -74,7 +104,47 @@ timeMap.get("foo", 5);         // 返回 "bar2"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class TimeMap {
+    Map<String, String> mp;
+    Map<String, List<Integer>> ts;
 
+    public TimeMap() {
+        mp = new HashMap<>();
+        ts = new HashMap<>();
+    }
+    
+    public void set(String key, String value, int timestamp) {
+        mp.put(key + timestamp, value);
+        ts.computeIfAbsent(key, k -> new ArrayList<>()).add(timestamp);
+    }
+    
+    public String get(String key, int timestamp) {
+        if (mp.containsKey(key + timestamp)) {
+            return mp.get(key + timestamp);
+        }
+        if (!ts.containsKey(key)) {
+            return "";
+        }
+        List<Integer> allTs = ts.get(key);
+        int left = 0, right = allTs.size() - 1;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (allTs.get(mid) <= timestamp) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return allTs.get(left) <= timestamp ? mp.get(key + allTs.get(left)) : "";
+    }
+}
+
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * TimeMap obj = new TimeMap();
+ * obj.set(key,value,timestamp);
+ * String param_2 = obj.get(key,timestamp);
+ */
 ```
 
 ### **...**
