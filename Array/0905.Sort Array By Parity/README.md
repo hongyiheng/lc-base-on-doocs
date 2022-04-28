@@ -40,7 +40,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        left, right = 0, len(nums) - 1
+        while left < right:
+            if nums[left] % 2 == 1:
+                nums[left], nums[right] = nums[right], nums[left]
+                right -= 1
+            else:
+                left += 1
+        return nums
 ```
 
 ### **Java**
@@ -48,7 +57,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] % 2 == 1) {
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return nums;
+    }
+}
 ```
 
 ### **...**
