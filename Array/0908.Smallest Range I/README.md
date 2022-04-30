@@ -70,7 +70,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestRangeI(self, nums: List[int], k: int) -> int:
+        diff = max(nums) - min(nums) - 2 * k
+        return max(diff, 0)
 ```
 
 ### **Java**
@@ -78,7 +81,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int smallestRangeI(int[] A, int K) {
+        int minVal = Integer.MAX_VALUE, maxVal = Integer.MIN_VALUE;
+        for (int num : A) {
+            minVal = Math.min(minVal, num);
+            maxVal = Math.max(maxVal, num);
+        }
+        int diff = maxVal - minVal - 2 * K;
+        return Math.max(diff, 0);
+    }
+}
 ```
 
 ### **...**
