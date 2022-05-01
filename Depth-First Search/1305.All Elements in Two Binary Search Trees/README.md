@@ -67,7 +67,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+        def dfs(root, nums):
+            if not root:
+                return
+            dfs(root.left, nums)
+            nums.append(root.val)
+            dfs(root.right, nums)
+        
+        nums1, nums2 = [], []
+        dfs(root1, nums1)
+        dfs(root2, nums2)
+        ans = []
+        idx1, idx2 = 0, 0
+        while idx1 < len(nums1) or idx2 < len(nums2):
+            if idx1 < len(nums1) and idx2 < len(nums2):
+                if nums1[idx1] <= nums2[idx2]:
+                    ans.append(nums1[idx1])
+                    idx1 += 1
+                else:
+                    ans.append(nums2[idx2])
+                    idx2 += 1
+                continue
+            if idx1 < len(nums1):
+                ans.append(nums1[idx1])
+                idx1 += 1
+            else:
+                ans.append(nums2[idx2])
+                idx2 += 1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +110,60 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> nums1 = new ArrayList<>();
+        List<Integer> nums2 = new ArrayList<>();
+        dfs(root1, nums1);
+        dfs(root2, nums2);
+        int idx1 = 0, idx2 = 0;
+        List<Integer> ans = new ArrayList<>();
+        while (idx1 < nums1.size() || idx2 < nums2.size()) {
+            if (idx1 < nums1.size() && idx2 < nums2.size()) {
+                if (nums1.get(idx1) <= nums2.get(idx2)) {
+                    ans.add(nums1.get(idx1));
+                    idx1++;   
+                } else {
+                    ans.add(nums2.get(idx2));
+                    idx2++;
+                }
+                continue;
+            }
+            if (idx1 < nums1.size()) {
+                ans.add(nums1.get(idx1));
+                idx1++;
+            } else {
+                ans.add(nums2.get(idx2));
+                idx2++;
+            }
+        }
+        return ans;
+    }
 
+    public void dfs(TreeNode root, List<Integer> nums) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.left, nums);
+        nums.add(root.val);
+        dfs(root.right, nums);
+    }
+}
 ```
 
 ### **...**
