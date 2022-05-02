@@ -57,7 +57,33 @@ minStack.getMin();   --&gt; 返回 -2.
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MinStack:
+    def __init__(self):
+        self.q = []
 
+    def push(self, val: int) -> None:
+        if len(self.q) == 0:
+            self.q.append([val, val])
+        else:
+            self.q.append([val, min(val, self.q[-1][1])])
+
+    def pop(self) -> None:
+        self.q.pop()
+
+    def top(self) -> int:
+        return self.q[-1][0]
+
+    def getMin(self) -> int:
+        return self.q[-1][1]
+
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
 ```
 
 ### **Java**
@@ -65,7 +91,42 @@ minStack.getMin();   --&gt; 返回 -2.
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MinStack {
+    Deque<int[]> q;
+    /** initialize your data structure here. */
+    public MinStack() {
+        q = new ArrayDeque<>();
+    }
+    
+    public void push(int x) {
+        if (q.isEmpty()) {
+            q.offer(new int[]{x, x});
+        } else {
+            q.offer(new int[]{x, Math.min(x, q.peekLast()[1])});
+        }
+    }
+    
+    public void pop() {
+        q.pollLast();
+    }
+    
+    public int top() {
+        return q.peekLast()[0];
+    }
+    
+    public int getMin() {
+        return q.peekLast()[1];
+    }
+}
 
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
 ```
 
 ### **...**
