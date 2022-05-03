@@ -54,7 +54,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isMajorityElement(self, nums: List[int], target: int) -> bool:
+        left, right = 0, len(nums) - 1
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if nums[mid] < target:
+                left = mid
+            else:
+                right = mid - 1
+        t_start = left if nums[left] == target else left + 1
+        left, right = 0, len(nums) - 1
+        while left < right:
+            mid = (left + right) >> 1
+            if nums[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid
+        t_end = left if nums[left] == target else left - 1
+        return (t_end - t_start + 1) * 2 > len(nums)
 ```
 
 ### **Java**
@@ -62,7 +80,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isMajorityElement(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0, right = n - 1;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (nums[mid] >= target) {
+                right = mid - 1;
+            } else {
+                left = mid;
+            }
+        }
+        int tStart = nums[left] < target ? left + 1 : left;
+        left = 0;
+        right = n - 1;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (nums[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        int tEnd = nums[left] > target ? left - 1 : left;
+        return (tEnd - tStart + 1) * 2 > n;
+    }
+}
 ```
 
 ### **...**
