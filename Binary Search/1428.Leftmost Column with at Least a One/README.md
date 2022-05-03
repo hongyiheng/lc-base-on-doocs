@@ -84,7 +84,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# """
+# This is BinaryMatrix's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+#class BinaryMatrix(object):
+#    def get(self, row: int, col: int) -> int:
+#    def dimensions(self) -> list[]:
 
+class Solution:
+    def leftMostColumnWithOne(self, binaryMatrix: 'BinaryMatrix') -> int:
+        m, n = binaryMatrix.dimensions()
+        ans = -1
+        for i in range(m):
+            left, right = 0, n - 1
+            while left < right:
+                mid = (left + right) >> 1
+                if binaryMatrix.get(i, mid) == 0:
+                    left = mid + 1
+                else:
+                    right = mid
+            if binaryMatrix.get(i, left) == 1:
+                ans = left if ans == -1 else min(ans, left);
+        return ans
 ```
 
 ### **Java**
@@ -92,7 +114,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * // This is the BinaryMatrix's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * interface BinaryMatrix {
+ *     public int get(int row, int col) {}
+ *     public List<Integer> dimensions {}
+ * };
+ */
 
+class Solution {
+    public int leftMostColumnWithOne(BinaryMatrix binaryMatrix) {
+        List<Integer> info = binaryMatrix.dimensions();
+        int m = info.get(0), n = info.get(1);
+        int ans = -1;
+        for (int i = 0; i < m; i++) {
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (binaryMatrix.get(i, mid) == 0) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            if (binaryMatrix.get(i, left) == 1) {
+                ans = ans == -1 ? left : Math.min(ans, left);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
