@@ -66,7 +66,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        nums = [0] + [1] * n
+        idx, step, left = 1, 0, n
+        while left > 1:
+            if nums[idx] == 1:
+                step += 1
+            if step == k:
+                nums[idx] = 0
+                step = 0
+                left -= 1
+            idx = 1 if idx == n else idx + 1
+        for i, v in enumerate(nums):
+            if v == 1:
+                return i
+        return 1
 ```
 
 ### **Java**
@@ -74,7 +89,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findTheWinner(int n, int k) {
+        int[] nums = new int[n + 1];
+        Arrays.fill(nums, 1);
+        nums[0] = 0;
+        int idx = 1, step = 0, left = n;
+        while (left > 1) {
+            if (nums[idx] == 1) {
+                step++;
+            }
+            if (step == k) {
+                step = 0;
+                nums[idx] = 0;
+                left--;
+            }
+            idx = idx == n ? 1 : idx + 1;
+        }
+        for (int i = 0; i < n + 1; i++) {
+            if (nums[i] == 1) {
+                return i;
+            }
+        }
+        return 1;
+    }
+}
 ```
 
 ### **...**
