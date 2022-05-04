@@ -1,9 +1,11 @@
 class Solution {
+    int[] weights;
     public int shipWithinDays(int[] weights, int days) {
-        int left = 1, right = Integer.MAX_VALUE;
+        this.weights = weights;
+        int left = 0, right = Integer.MAX_VALUE;
         while (left < right) {
-            int mid = (left + right) >> 1;
-            if (canCarry(weights, days, mid)) {
+            int mid = (left + right) >>> 1;
+            if (check(mid, days)) {
                 right = mid;
             } else {
                 left = mid + 1;
@@ -12,18 +14,15 @@ class Solution {
         return left;
     }
 
-
-    public boolean canCarry(int[] weights, int days, int carry) {
-        int useDay = 1;
-        int curCarry = 0;
-        for (int weight : weights) {
-            if (weight > carry) {
+    public boolean check(int k, int days) {
+        int cur = 0, useDay = 1;
+        for (int w : weights) {
+            if (w > k) {
                 return false;
             }
-            if ((carry - curCarry) >= weight) {
-                curCarry += weight;
-            } else {
-                curCarry = weight;
+            cur += w;
+            if (cur > k) {
+                cur = w;
                 useDay++;
             }
         }
