@@ -49,7 +49,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
+        cur, left, ans = 1, 0, 0
+        for i, v in enumerate(nums):
+            cur *= v
+            while left < i and cur >= k:
+                cur //= nums[left]
+                left += 1
+            if cur < k:
+                ans += i - left + 1
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +67,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        long cur = 1;
+        int ans = 0, left = 0;
+        for (int i = 0; i < nums.length; i++) {
+            cur *= nums[i];
+            while (left < i && cur >= k) {
+                cur /= nums[left];
+                left++;
+            }
+            if (cur < k) {
+                ans += i - left + 1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
