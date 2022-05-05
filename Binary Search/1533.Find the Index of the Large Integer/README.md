@@ -73,7 +73,42 @@ reader.compareSub(4, 4, 5, 5) // 返回 1。因此，可以确定 arr[4] 是数�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# """
+# This is ArrayReader's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+#class ArrayReader(object):
+#	 # Compares the sum of arr[l..r] with the sum of arr[x..y]
+#	 # return 1 if sum(arr[l..r]) > sum(arr[x..y])
+#	 # return 0 if sum(arr[l..r]) == sum(arr[x..y])
+#	 # return -1 if sum(arr[l..r]) < sum(arr[x..y])
+#    def compareSub(self, l: int, r: int, x: int, y: int) -> int:
+#
+#	 # Returns the length of the array
+#    def length(self) -> int:
+#
 
+
+class Solution:
+    def getIndex(self, reader: 'ArrayReader') -> int:
+        left, right = 0, reader.length() - 1
+        while left < right:
+            mid = (left + right) >> 1
+            if (right - left + 1) % 2 == 0:
+                compare = reader.compareSub(left, mid, mid + 1, right)
+                if compare == 1:
+                    right = mid
+                else:
+                    left = mid + 1
+            else:
+                compare = reader.compareSub(left, mid - 1, mid + 1, right)
+                if compare == 0:
+                    return mid
+                elif compare == 1:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+        return left
 ```
 
 ### **Java**
@@ -81,7 +116,48 @@ reader.compareSub(4, 4, 5, 5) // 返回 1。因此，可以确定 arr[4] 是数�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * // This is ArrayReader's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * interface ArrayReader {
+ *     // Compares the sum of arr[l..r] with the sum of arr[x..y] 
+ *     // return 1 if sum(arr[l..r]) > sum(arr[x..y])
+ *     // return 0 if sum(arr[l..r]) == sum(arr[x..y])
+ *     // return -1 if sum(arr[l..r]) < sum(arr[x..y])
+ *     public int compareSub(int l, int r, int x, int y) {}
+ *
+ *     // Returns the length of the array
+ *     public int length() {}
+ * }
+ */
 
+class Solution {
+    public int getIndex(ArrayReader reader) {
+        int n = reader.length();
+        int left = 0, right = n - 1;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if ((right - left + 1) % 2 == 0) {
+                int compare = reader.compareSub(left, mid, mid + 1, right);
+                if (compare == 1) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                int compare = reader.compareSub(left, mid - 1, mid + 1, right);
+                if (compare == 0) {
+                    return mid;
+                } else if (compare == 1) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } 
+        }
+        return left;        
+    }
+}
 ```
 
 ### **...**
