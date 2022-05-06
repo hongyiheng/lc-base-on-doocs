@@ -58,7 +58,23 @@ recentCounter.ping(3002);  // requests = [1, <strong>100</strong>, <strong>3001<
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class RecentCounter:
 
+    def __init__(self):
+        self.q = deque()
+
+
+    def ping(self, t: int) -> int:
+        self.q.append(t)
+        while self.q and self.q[0] < t - 3000:
+            self.q.popleft()
+        return len(self.q)
+
+
+
+# Your RecentCounter object will be instantiated and called as such:
+# obj = RecentCounter()
+# param_1 = obj.ping(t)
 ```
 
 ### **Java**
@@ -66,7 +82,27 @@ recentCounter.ping(3002);  // requests = [1, <strong>100</strong>, <strong>3001<
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class RecentCounter {
+    Deque<Integer> q;
+    
+    public RecentCounter() {
+        q = new ArrayDeque<>();
+    }
+    
+    public int ping(int t) {
+        q.offer(t);
+        while (!q.isEmpty() && q.peekFirst() < t - 3000) {
+            q.pollFirst();
+        }
+        return q.size();
+    }
+}
 
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
 ```
 
 ### **...**
