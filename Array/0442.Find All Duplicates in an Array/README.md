@@ -34,7 +34,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        for i in range(len(nums)):
+            while nums[i] - 1 != i:
+                if nums[i] == nums[nums[i] - 1]:
+                    break
+                nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
+        ans = []
+        for i, v in enumerate(nums):
+            if v - 1 != i:
+                ans.append(v)
+        return ans
 ```
 
 ### **Java**
@@ -42,7 +53,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            while (nums[i] - 1 != i) {
+                if (nums[i] == nums[nums[i] - 1]) {
+                    break;
+                }
+                int tmp = nums[nums[i] - 1];
+                nums[nums[i] - 1] = nums[i];
+                nums[i] = tmp;
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (nums[i] - 1 != i) {
+                ans.add(nums[i]); 
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
