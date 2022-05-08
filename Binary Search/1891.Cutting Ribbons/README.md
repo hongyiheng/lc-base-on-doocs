@@ -74,7 +74,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxLength(self, ribbons: List[int], k: int) -> int:
+        def check(m):
+            nonlocal ribbons, k
+            cnt = 0
+            for v in ribbons:
+                cnt += v // m
+                if cnt >= k:
+                    return True
+            return False
+        
+        left, right = 0, 100000
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if check(mid):
+                left = mid
+            else:
+                right = mid - 1
+        return left
 ```
 
 ### **Java**
@@ -82,7 +100,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] ribbons;
+    int k;
 
+    public int maxLength(int[] ribbons, int k) {
+        this.ribbons = ribbons;
+        this.k = k;
+        int left = 0, right = 100000;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (check(mid)) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+
+    public boolean check(int m) {
+        int cnt = 0;
+        for (int v : ribbons) {
+            cnt += v / m;
+            if (cnt >= k) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
