@@ -55,7 +55,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def diStringMatch(self, s: str) -> List[int]:
+        n = len(s)
+        left, right, idx = 0, n, 0
+        ans = [0] * (n + 1)
+        for c in s:
+            if c == 'I':
+                ans[idx] = left
+                left += 1
+            else:
+                ans[idx] = right
+                right -= 1
+            idx += 1
+        ans[idx] = left 
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +77,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] diStringMatch(String s) {
+        int n = s.length();
+        int left = 0, right = n, idx = 0;
+        int[] ans = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            ans[idx++] = s.charAt(i) == 'I' ? left++ : right--;
+        }
+        ans[idx] = left;
+        return ans;
+    }
+}
 ```
 
 ### **...**
