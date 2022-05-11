@@ -54,7 +54,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Codec:
+
+    def serialize(self, root: TreeNode) -> str:
+        """Encodes a tree to a single string.
+        """
+        if not root:
+            return "#"
+        return str(root.val) + "," + self.serialize(root.left) + "," + self.serialize(root.right)
+        
+
+    def deserialize(self, data: str) -> TreeNode:
+        """Decodes your encoded data to tree.
+        """
+        def build_tree(q):
+            if q and q[0] == "#":
+                q.popleft()
+                return None
+            ans = TreeNode(int(q.popleft()))
+            ans.left = build_tree(q)
+            ans.right = build_tree(q)
+            return ans
+
+        q = deque()
+        for v in data.split(","):
+            q.append(v)
+        return build_tree(q)
+    
+
+
+        
+
+# Your Codec object will be instantiated and called as such:
+# Your Codec object will be instantiated and called as such:
+# ser = Codec()
+# deser = Codec()
+# tree = ser.serialize(root)
+# ans = deser.deserialize(tree)
+# return ans
 ```
 
 ### **Java**
@@ -62,7 +106,60 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
 
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if (root == null) {
+            return "#";
+        }
+        return new StringBuilder()
+                .append(root.val)
+                .append(",")
+                .append(serialize(root.left))
+                .append(",")
+                .append(serialize(root.right))
+                .toString();
+    }
+
+    // Decodes your encoded data to tree.
+    Deque<String> q;
+
+    public TreeNode deserialize(String data) {
+        q = new ArrayDeque<>();
+        for (String v : data.split(",")) {
+            q.offer(v);
+        }
+        return buildTree(q);
+    }
+
+    public TreeNode buildTree(Deque<String> q) {
+        if (q.isEmpty() || ("#").equals(q.peekFirst())) {
+            q.pollFirst();
+            return null;
+        }
+        TreeNode ans = new TreeNode(Integer.parseInt(q.pollFirst()));
+        ans.left = buildTree(q);
+        ans.right = buildTree(q);
+        return ans;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// String tree = ser.serialize(root);
+// TreeNode ans = deser.deserialize(tree);
+// return ans;
 ```
 
 ### **...**
