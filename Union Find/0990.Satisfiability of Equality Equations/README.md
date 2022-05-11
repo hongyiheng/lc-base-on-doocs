@@ -71,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def equationsPossible(self, equations: List[str]) -> bool:
+        p = [i for i in range(26)]
 
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+        
+        def union(a, b):
+            r1, r2 = find(a), find(b)
+            if r1 != r2:
+                p[r1] = r2
+        
+        for s in equations:
+            if s[1] == "=":
+                union(ord(s[0]) - ord('a'), ord(s[3]) - ord('a'))
+        for s in equations:
+            if s[1] == '!' and find(ord(s[0]) - ord('a')) == find(ord(s[3]) - ord('a')):
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -79,7 +99,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] p;
 
+    public void union(int a, int b) {
+        int r1 = find(a), r2 = find(b);
+        if (r1 != r2) {
+            p[r1] = r2;
+        }
+    }
+
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    public boolean equationsPossible(String[] equations) {
+        p = new int[26];
+        for (int i = 0; i < 26; i++) {
+            p[i] = i;
+        }
+        for (String s : equations) {
+            if (s.charAt(1) == '=') {
+                union(s.charAt(0) - 'a', s.charAt(3) - 'a');
+            }
+        }
+        for (String s : equations) {
+            if (s.charAt(1) == '!') {
+                if (find(s.charAt(0) - 'a') == find(s.charAt(3) - 'a')) {
+                    return false;
+                }
+            }
+        } 
+        return true;
+    }
+}
 ```
 
 ### **...**
