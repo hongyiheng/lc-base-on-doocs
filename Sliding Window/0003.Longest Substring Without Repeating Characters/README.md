@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        cnt = dict()
+        left, n, ans = 0, len(s), 0
+        for right in range(n):
+            while cnt.get(s[right], 0) == 1:
+                cnt[s[left]] = 0
+                left += 1
+            cnt[s[right]] = 1
+            ans = max(ans, right - left + 1)
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +81,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> cnt = new HashMap<>();
+        int left = 0, n = s.length(), ans = 0;
+        for (int right = 0; right < n; right++) {
+            while (cnt.getOrDefault(s.charAt(right), 0) == 1) {
+                cnt.put(s.charAt(left++), 0);
+            }
+            cnt.put(s.charAt(right), 1);
+            ans = Math.max(right - left + 1, ans);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
