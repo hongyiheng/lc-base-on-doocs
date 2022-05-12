@@ -79,7 +79,18 @@ cae</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minDeletionSize(self, strs: List[str]) -> int:
+        m, n = len(strs), len(strs[0])
+        ans = 0
+        for j in range(n):
+            last = strs[0][j]
+            for i in range(1, m):
+                if strs[i][j] < last:
+                    ans += 1
+                    break
+                last = strs[i][j]
+        return ans
 ```
 
 ### **Java**
@@ -87,7 +98,24 @@ cae</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minDeletionSize(String[] strs) {
+        int m = strs.length, n = strs[0].length();
+        int ans = 0;
+        for (int j = 0; j < n; j++) {
+            char last = strs[0].charAt(j);
+            for (int i = 1; i < m; i++) {
+                char cur = strs[i].charAt(j);
+                if (cur < last) {
+                    ans++;
+                    break;
+                }
+                last = cur;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
