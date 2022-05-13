@@ -47,7 +47,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minSwapsCouples(self, row: List[int]) -> int:
+        n = len(row)
+        m = n >> 1
+        p = [i for i in range(m)]
+        
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
 
+        def union(a, b):
+            r1, r2 = find(a), find(b)
+            if r1 != r2:
+                p[r1] = r2
+        
+        for i in range(0, n, 2):
+            union(row[i] >> 1, row[i + 1] >> 1)
+        cnt = 0
+        for i, v in enumerate(p):
+            if i == v:
+                cnt += 1
+        return m - cnt
 ```
 
 ### **Java**
@@ -55,7 +77,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] p;
 
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    public void union(int a, int b) {
+        int r1 = find(a), r2 = find(b);
+        if (r1 != r2) {
+            p[r1] = r2;
+        }
+    }
+
+    public int minSwapsCouples(int[] row) {
+        int n = row.length;
+        int m = n / 2;
+        p = new int[m];
+        for (int i = 0; i < m; i++) {
+            p[i] = i;
+        }
+        for (int i = 0; i < n; i += 2) {
+            union(row[i] / 2, row[i + 1] / 2);
+        }
+        int cnt = 0;
+        for (int i = 0; i < m; i++) {
+            if (p[i] == i) {
+                cnt++;
+            }
+        }
+        return m - cnt;
+    }
+}
 ```
 
 ### **...**
