@@ -85,7 +85,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        a, b = headA, headB
+        while a != b:
+            a = a.next if a else headB
+            b = b.next if b else headA
+        return a
 ```
 
 ### **Java**
@@ -93,7 +105,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode a = headA, b = headB;
+        while (a != b) {
+            a = a != null ? a.next : headB;
+            b = b != null ? b.next : headA;
+        }
+        return a;
+    }
+}
 ```
 
 ### **...**
