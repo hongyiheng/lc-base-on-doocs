@@ -39,7 +39,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def largestTriangleArea(self, points: List[List[int]]) -> float:
+        def edge(u, v):
+            a, b = u[0] - v[0], u[1] - v[1]
+            return sqrt(a * a + b * b)
 
+        def get_area(a, b, c):
+            p = (a + b + c) * 0.5
+            num = p * (p - a) * (p - b) * (p - c)
+            if num <= 0:
+                return 0
+            return sqrt(num)
+
+        n = len(points)
+        ans = 0
+        for i in range(n):
+            for j in range(i, n):
+                for k in range(j, n):
+                    p1, p2, p3 = points[i], points[j], points[k]
+                    a, b, c = edge(p1, p2), edge(p1, p3), edge(p2, p3)
+                    ans = max(ans, get_area(a, b, c))
+        return ans
 ```
 
 ### **Java**
@@ -47,7 +68,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public double largestTriangleArea(int[][] points) {
+        int n = points.length;
+        double ans = 0.0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                for (int k = j; k < n; k++) {
+                    double a = edge(points[i], points[j]);
+                    double b = edge(points[j], points[k]);
+                    double c = edge(points[i], points[k]);
+                    ans = Math.max(ans, getArea(a, b, c));
+                }
+            }
+        }
+        return ans;
+    }
 
+    public double edge(int[] u, int[] v) {
+        double a = u[0] - v[0], b = u[1] - v[1];
+        return Math.sqrt(a * a + b * b);
+    }
+
+    public double getArea(double a, double b, double c) {
+        double p = (a + b + c) * 0.5;
+        double num = p * (p - a) * (p - b) * (p - c);
+        if (num <= 0) {
+            return 0;
+        }
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    }
+}
 ```
 
 ### **...**
