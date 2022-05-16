@@ -15,7 +15,6 @@ class Solution:
         for e in flights:
             add_edge(e[0], e[1], e[2])
         dist = [float('inf')] * n
-        ans = float('inf')
         q = SortedList(key=lambda x: x[1])
         q.add([src, 0])
         while k >= 0 and q:
