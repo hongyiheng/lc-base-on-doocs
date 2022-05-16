@@ -63,7 +63,53 @@ src = 0, dst = 2, k = 0
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedList
 
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        edges = [Edge(0, 0, 0)] * (n * n)
+        head = [0] * n
+        idx = 1
+
+        def add_edge(a, b, w):
+            nonlocal edges, head, idx
+            edges[idx] = Edge(b, head[a], w)
+            head[a] = idx
+            idx += 1
+        
+        for e in flights:
+            add_edge(e[0], e[1], e[2])
+        dist = [float('inf')] * n
+        ans = float('inf')
+        q = SortedList(key=lambda x: x[1])
+        q.add([src, 0])
+        while k >= 0 and q:
+            tmp = list()
+            while q:
+                p, w = q.pop()
+                j = head[p]
+                while j != 0:
+                    if dist[edges[j].to] > w + edges[j].w:
+                        dist[edges[j].to] = w + edges[j].w
+                        tmp.append([edges[j].to, w + edges[j].w])
+                    j = edges[j].next
+            for v in tmp:
+                q.add([v[0], v[1]])
+            k -= 1
+        return dist[dst] if dist[dst] != float('inf') else -1
+
+class Edge:
+    to = 0
+    next = 0
+    w = 0
+
+    def __init__(self):
+        return
+        
+    def __init__(self, to, next, w):
+        self.to = to
+        self.next = next
+        self.w = w
 ```
 
 ### **Java**
@@ -71,7 +117,59 @@ src = 0, dst = 2, k = 0
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    Edge[] edge;
+    int[] head;
+    int idx = 1;
 
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        edge = new Edge[n * n];
+        head = new int[n];
+        for (int[] e : flights) {
+            addEdge(e[0], e[1], e[2]);
+        }
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        q.add(new int[]{src, 0});
+        while (k >= 0 && !q.isEmpty()) {
+            List<int[]> tmp = new ArrayList<>();
+            k--;
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                int[] cur = q.poll();
+                for (int j = head[cur[0]]; j != 0; j = edge[j].next) {
+                    if (dist[edge[j].to] <= edge[j].w + cur[1]) {
+                        continue;
+                    }
+                    dist[edge[j].to] = edge[j].w + cur[1];
+                    tmp.add(new int[]{edge[j].to, edge[j].w + cur[1]});
+                }
+            }
+            for (int[] item : tmp) {
+                q.add(item);
+            }
+        }
+        return dist[dst] == Integer.MAX_VALUE ? -1 : dist[dst];
+    }
+
+    public void addEdge(int a, int b, int w) {
+        edge[idx] = new Edge(b, head[a], w);
+        head[a] = idx++;
+    }
+
+    class Edge {
+        int to;
+        int next;
+        int w;
+
+        public Edge(int to, int next, int w) {
+            this.to = to;
+            this.next = next;
+            this.w = w;
+        }
+    }
+}
 ```
 
 ### **...**
