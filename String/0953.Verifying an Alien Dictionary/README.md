@@ -57,7 +57,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+        mp = [0] * 26
+        for i in range(26):
+            idx = ord(order[i]) - ord('a')
+            mp[idx] = i
+        pre = ""
+        for w in words:
+            eq = True
+            for a, b in zip(pre, w):
+                idx1 = ord(a) - ord('a')
+                idx2 = ord(b) - ord('a')
+                if mp[idx1] < mp[idx2]:
+                    eq = False
+                    break
+                elif mp[idx1] > mp[idx2]:
+                    return False
+            if eq and len(pre) > len(w):
+                return False
+            pre = w
+        return True
 ```
 
 ### **Java**
@@ -65,7 +85,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        int[] mp = new int[26];
+        for (int i = 0; i < 26; i++) {
+            mp[order.charAt(i) - 'a'] = i;
+        }
+        String pre = "";
+        for (String w : words) {
+            boolean eq = true;
+            for (int i = 0; i < Math.min(pre.length(), w.length()); i++) {
+                int idx1 = pre.charAt(i) - 'a', idx2 = w.charAt(i) - 'a';
+                if (mp[idx1] > mp[idx2]) {
+                    return false;
+                } else if (mp[idx1] < mp[idx2]) {
+                    eq = false;
+                    break;
+                }
+            }
+            if (eq && pre.length() > w.length()) {
+                return false;
+            }
+            pre = w;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
