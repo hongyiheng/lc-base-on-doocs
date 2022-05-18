@@ -49,7 +49,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def generatePossibleNextMoves(self, currentState: str) -> List[str]:
+        ans = []
+        for i in range(1, len(currentState)):
+            if currentState[i] == '+' and currentState[i - 1] == '+':
+                cur = currentState[:i - 1] + "--" + currentState[i + 1:]
+                ans.append(cur)
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +64,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> generatePossibleNextMoves(String currentState) {
+        List<String> ans = new ArrayList<>();
+        char[] chars = currentState.toCharArray();
+        for (int i = 1; i < chars.length; i++) {
+            if (chars[i - 1] == '+' && chars[i] == '+') {
+                chars[i - 1] = '-';
+                chars[i] = '-';
+                ans.add(new String(chars));
+                chars[i - 1] = '+';
+                chars[i] = '+';
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
