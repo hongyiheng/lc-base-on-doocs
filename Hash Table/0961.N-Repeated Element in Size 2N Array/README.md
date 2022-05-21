@@ -58,7 +58,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def repeatedNTimes(self, nums: List[int]) -> int:
+        n = len(nums) // 2
+        cnt = [0] * 10001
+        for v in nums:
+            cnt[v] += 1
+            if cnt[v] == n:
+                return v
+        return -1
 ```
 
 ### **Java**
@@ -66,7 +74,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        int n = nums.length / 2;
+        int[] cnt = new int[10001];
+        for (int v : nums) {
+            cnt[v]++;
+            if (cnt[v] == n) {
+                return v;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
