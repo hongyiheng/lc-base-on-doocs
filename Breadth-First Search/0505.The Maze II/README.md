@@ -76,7 +76,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestDistance(self, maze: List[List[int]], start: List[int], destination: List[int]) -> int:
+        m, n = len(maze), len(maze[0])
+        dis = [[float('inf')] * n for _ in range(m)]
+        q = deque()
+        q.append(start)
+        dis[start[0]][start[1]] = 0
+        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        while q:
+            cur = q.popleft()
+            for d in dirs:     
+                nx, ny = cur[0] + d[0], cur[1] + d[1]
+                step = 0
+                while 0 <= nx < m and 0 <= ny < n and maze[nx][ny] == 0:
+                    nx += d[0]
+                    ny += d[1]
+                    step += 1
+                nx -= d[0]
+                ny -= d[1]
+                if dis[cur[0]][cur[1]] + step < dis[nx][ny]:
+                    dis[nx][ny] = dis[cur[0]][cur[1]] + step
+                    q.append([nx, ny])
+        return dis[destination[0]][destination[1]] if dis[destination[0]][destination[1]] != float('inf') else -1
 ```
 
 ### **Java**
@@ -84,7 +106,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int shortestDistance(int[][] maze, int[] start, int[] destination) {
+        int m = maze.length, n = maze[0].length;
+        int[][] dis = new int[m][n];
+        for (int[] row : dis) {
+            Arrays.fill(row, Integer.MAX_VALUE);
+        } 
+        Deque<int[]> q = new ArrayDeque<>();
+        q.offerLast(start);
+        dis[start[0]][start[1]] = 0;
+        int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        while (!q.isEmpty()) {
+            int[] cur = q.pollFirst();
+            int x = cur[0], y = cur[1];
+            for (int[] d : dirs) {
+                int nx = x + d[0], ny = y + d[1];
+                int step = 0;
+                while (nx >= 0 && nx < m && ny >= 0 && ny < n && maze[nx][ny] == 0) {
+                    nx += d[0];
+                    ny += d[1];
+                    step++;
+                }
+                nx -= d[0];
+                ny -= d[1];
+                if (dis[nx][ny] > dis[x][y] + step) {
+                    dis[nx][ny] = dis[x][y] + step;
+                    q.offerLast(new int[]{nx, ny});
+                }
+            }
+        }
+        return dis[destination[0]][destination[1]] == Integer.MAX_VALUE ? -1 : dis[destination[0]][destination[1]];
+    }
+}
 ```
 
 ### **...**
