@@ -58,7 +58,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        n = len(rooms)
+        vis = [False] * n
+        q = deque()
+        for v in rooms[0]:
+            q.append(v)
+        vis[0] = True
+        while q:
+            cur = q.popleft()
+            if vis[cur]:
+                continue
+            for v in rooms[cur]:
+                q.append(v)
+            vis[cur] = True
+        for v in vis:
+            if not v:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -66,7 +84,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int n = rooms.size();
+        boolean[] vis = new boolean[n];
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int v : rooms.get(0)) {
+            q.offer(v);
+        }
+        vis[0] = true;
+        while (!q.isEmpty()) {
+            int cur = q.pollFirst();
+            if (vis[cur]) {
+                continue;
+            }
+            vis[cur] = true;
+            for (int v : rooms.get(cur)) {
+                q.offer(v);
+            }
+        }
+        for (boolean v : vis) {
+            if (!v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
