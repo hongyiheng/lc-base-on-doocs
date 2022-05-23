@@ -64,7 +64,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        i, j, ans = 0, len(height) - 1, 0
+        while i < j:
+            if height[i] < height[j]:
+                ans = max(ans, height[i] * (j - i))
+                i += 1
+            else:
+                ans = max(ans, height[j] * (j - i))
+                j -= 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +82,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxArea(int[] height) {
+        int left = 0, right = height.length - 1;
+        int ans = 0;
+        while (left < right) {
+            int area = Math.min(height[left], height[right]) * (right - left);
+            ans = Math.max(ans, area);
+            if (height[left] <= height[right]) {
+                ++left;
+            } else {
+                --right;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
