@@ -49,7 +49,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isUnivalTree(self, root: TreeNode) -> bool:
+        val = root.val
+        pre = TreeNode()
+        while root:
+            if not root.left:
+                if root.val != val:
+                    return False
+                root = root.right
+            else:
+                pre = root.left
+                while pre.right and pre.right != root:
+                    pre = pre.right
+                if not pre.right:
+                    if root.val != val:
+                        return False
+                    pre.right = root
+                    root = root.left
+                else:
+                    root = root.right
+                    pre.right = None
+        return True
 ```
 
 ### **Java**
@@ -57,7 +84,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isUnivalTree(TreeNode root) {
+        int val = root.val;
+        TreeNode pre;
+        while (root != null) {
+            if (root.left == null) {
+                if (root.val != val) {
+                    return false;
+                }
+                root = root.right;
+            } else {
+                pre = root.left;
+                while (pre.right != null && pre.right != root) {
+                    pre = pre.right;
+                }
+                if (pre.right == null) {
+                    if (root.val != val) {
+                        return false;
+                    }
+                    pre.right = root;
+                    root = root.left;
+                } else {
+                    root = root.right;
+                    pre.right = null;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
