@@ -62,7 +62,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        p = KMP(needle)
+        return p.search(haystack)
 
+
+class KMP:
+    def __init__(self, pat):
+        self.pat = pat
+        m = len(pat)
+        self.dp = [[0] * 256 for _ in range(m)]
+        self.dp[0][ord(pat[0])] = 1
+        x = 0
+        for j in range(1, m):
+            for c in range(256):
+                if ord(pat[j]) == c:
+                    self.dp[j][c] = j + 1
+                else:
+                    self.dp[j][c] = self.dp[x][c]
+            x = self.dp[x][ord(pat[j])]
+        
+    def search(self, txt):
+        m = len(self.pat)
+        n = len(txt)
+        j = 0
+        for i in range(n):
+            j = self.dp[j][ord(txt[i])]
+            if j == m:
+                return i - m + 1
+        return -1
 ```
 
 ### **Java**
@@ -70,7 +99,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        KMP p = new KMP(needle);
+        return p.search(haystack);
+    }
+}
 
+public class KMP {
+    int[][] dp;
+    private String pat;
+
+    public KMP(String pat) {
+        this.pat = pat;
+        int m = pat.length();
+        dp = new int[m][256];
+        dp[0][pat.charAt(0)] = 1;
+        int x = 0;
+        for (int j = 1; j < m; j++) {
+            for (int c = 0; c < 256; c++) {
+                if (pat.charAt(j) == c) {
+                    dp[j][c] = j + 1;
+                } else {
+                    dp[j][c] = dp[x][c];
+                }
+            }
+            x = dp[x][pat.charAt(j)];
+        }
+    }
+
+    public int search(String txt) {
+        int m = pat.length(), n = txt.length();
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            j = dp[j][txt.charAt(i)];
+            if (j == m) {
+                return i - m + 1;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
