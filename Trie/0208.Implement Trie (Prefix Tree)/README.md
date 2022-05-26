@@ -60,7 +60,47 @@ trie.search("app");     // 返回 True
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Trie:
 
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word: str) -> None:
+        head = self.root
+        for c in word:
+            if not head.childrens[ord(c) - ord('a')]:
+                head.childrens[ord(c) - ord('a')] = Node()
+            head = head.childrens[ord(c) - ord('a')]
+        head.is_word = True
+
+    def search(self, word: str) -> bool:
+        head = self.root
+        for c in word:
+            if not head.childrens[ord(c) - ord('a')]:
+                return False
+            head = head.childrens[ord(c) - ord('a')]
+        return head.is_word
+
+
+    def startsWith(self, prefix: str) -> bool:
+        head = self.root
+        for c in prefix:
+            if not head.childrens[ord(c) - ord('a')]:
+                return False
+            head = head.childrens[ord(c) - ord('a')]
+        return True
+
+class Node:
+    def __init__(self):
+        self.childrens = [None] * 26
+        self.is_word = False
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
 ```
 
 ### **Java**
@@ -68,7 +108,64 @@ trie.search("app");     // 返回 True
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Trie {
+    Node root;
 
+    public Trie() {
+        root = new Node();
+    }
+    
+    public void insert(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.childrens[c - 'a'] == null) {
+                head.childrens[c - 'a'] = new Node();
+            }
+            head = head.childrens[c - 'a'];
+        }
+        head.isWord = true;
+    }
+    
+    public boolean search(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.childrens[c - 'a'] == null) {
+                return false;
+            }
+            head = head.childrens[c - 'a'];
+        }
+        return head.isWord;
+    }
+    
+    public boolean startsWith(String prefix) {
+        Node head = root;
+        for (char c : prefix.toCharArray()) {
+            if (head.childrens[c - 'a'] == null) {
+                return false;
+            }
+            head = head.childrens[c - 'a'];
+        }
+        return true;
+    }
+}
+
+class Node {
+    Node[] childrens;
+    boolean isWord;
+
+    public Node() {
+        childrens = new Node[26];
+        isWord = false;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
 ```
 
 ### **...**
