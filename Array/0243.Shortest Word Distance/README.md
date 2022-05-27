@@ -34,7 +34,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
+        nums = []
+        for i, w in enumerate(wordsDict):
+            if w == word1:
+                nums.append(i)
+        ans = len(wordsDict)
+        for i, w in enumerate(wordsDict):
+            if w == word2:
+                left, right = 0, len(nums) - 1
+                while left < right:
+                    mid = (left + right) >> 1
+                    if nums[mid] < i:
+                        left = mid + 1
+                    else:
+                        right = mid
+                if left > 0 and abs(nums[left - 1] - i) < abs(nums[left] - i):
+                    left = left - 1
+                ans = min(ans, abs(nums[left] - i))
+        return ans
 ```
 
 ### **Java**
@@ -42,7 +61,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int shortestDistance(String[] wordsDict, String word1, String word2) {
+        List<Integer> nums = new ArrayList<>();
+        for (int i = 0; i < wordsDict.length; i++) {
+            if (wordsDict[i].equals(word1)) {
+                nums.add(i);
+            }
+        }
+        int ans = wordsDict.length;
+        for (int i = 0; i < wordsDict.length; i++) {
+            if (wordsDict[i].equals(word2)) {
+                int left = 0, right = nums.size() - 1;
+                while (left < right) {
+                    int mid = (left + right) >> 1;
+                    if (nums.get(mid) < i) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                if (left > 0 && Math.abs(nums.get(left - 1) - i) < Math.abs(nums.get(left) - i)) {
+                    left = left - 1;
+                }
+                ans = Math.min(ans, Math.abs(nums.get(left) - i));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
