@@ -71,7 +71,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeOuterParentheses(self, s: str) -> str:
+        ans = ""
+        cnt = 0
+        for c in s:
+            if c == '(':
+                if cnt:
+                    ans += c 
+                cnt += 1  
+            else:
+                cnt -= 1
+                if cnt:
+                    ans += c 
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +92,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String removeOuterParentheses(String s) {
+        int cnt = 0;
+        char[] chars = s.toCharArray();
+        StringBuilder ans = new StringBuilder();;
+        for (char c : chars) {
+            if (c == '(') {
+                if (cnt++ > 0) {
+                    ans.append(c);
+                }
+            } else {
+                if (--cnt > 0) {
+                    ans.append(c);
+                }
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
