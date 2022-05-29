@@ -89,7 +89,79 @@ _aa___a
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self, l, r):
+        self.left = None
+        self.right = None
+        self.l = l
+        self.r = r
+        self.mid = (l + r) >> 1
+        self.v = 0
+        self.add = 0
 
+class Segment_Tree:
+    def __init__(self):
+        self.root = Node(1, int(1e9))
+    
+    def query(self, l, r):
+        return self.query_range(l, r, self.root)
+    
+    def query_range(self, l, r, node):
+        if l > r:
+            return 0
+        if l <= node.l and node.r <= r:
+            return node.v
+        self.push_down(node)
+        ans = 0
+        if l <= node.mid:
+            ans = max(ans, self.query_range(l, r, node.left))
+        if node.mid < r:
+            ans = max(ans, self.query_range(l, r, node.right))
+        return ans
+
+    def modify(self, l, r, v):
+        self.modify_range(l, r, v, self.root)
+
+    def modify_range(self, l, r, v, node):
+        if l > r:
+            return
+        if l <= node.l and node.r <= r:
+            node.v = v
+            node.add = v
+            return
+        self.push_down(node)
+        if l <= node.mid:
+            self.modify_range(l, r, v, node.left)
+        if node.mid < r:
+            self.modify_range(l, r, v, node.right)
+        self.push_up(node)
+
+    def push_up(self, node):
+        node.v = max(node.left.v, node.right.v)
+    
+    def push_down(self, node):
+        if not node.left:
+            node.left = Node(node.l, node.mid)
+        if not node.right:
+            node.right = Node(node.mid + 1, node.r)
+        if node.add:
+            node.left.add = node.add
+            node.right.add = node.add
+            node.left.v = node.v
+            node.right.v = node.v
+            node.add = 0
+
+class Solution:
+    def fallingSquares(self, positions: List[List[int]]) -> List[int]:
+        ans = []
+        cur = 0
+        st = Segment_Tree()
+        for l, w in positions:
+            h = st.query(l, l + w - 1)
+            st.modify(l, l + w - 1, h + w)
+            cur = max(cur, h + w)
+            ans.append(cur)
+        return ans
 ```
 
 ### **Java**
@@ -97,7 +169,109 @@ _aa___a
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<Integer> fallingSquares(int[][] positions) {
+        SegmentTree st = new SegmentTree();
+        List<Integer> ans = new ArrayList<>();
+        int cur = 0;
+        for (int[] item : positions) {
+            int h = st.query(item[0], item[0] + item[1] - 1);
+            st.modify(item[0], item[0] + item[1] - 1, h + item[1]);
+            cur = Math.max(cur, h + item[1]);
+            ans.add(cur);
+        }
+        return ans;
+    }
+}
 
+class SegmentTree {
+    private Node root = new Node(1, (int)1e9);
+
+    public SegmentTree() {
+    }
+
+    public int query(int l, int r) {
+        return query(l, r, root);
+    }
+
+    public int query(int l, int r, Node node) {
+        if (l > r) {
+            return 0;
+        }
+        if (node.l >= l && node.r <= r) {
+            return node.v;
+        }
+        pushDown(node);
+        int v = 0;
+        if (l <= node.mid) {
+            v = Math.max(v, query(l, r, node.left));
+        }
+        if (r > node.mid) {
+            v = Math.max(v, query(l, r, node.right));
+        }
+        return v;
+    }
+
+    public void modify(int l, int r, int v) {
+        modify(l, r, v, root);
+    }
+
+    public void modify(int l, int r, int v, Node node) {
+        if (l > r) {
+            return;
+        }
+        if (node.l >= l && node.r <= r) {
+            node.v = v;
+            node.add = v;
+            return;
+        }
+        pushDown(node);
+        if (l <= node.mid) {
+            modify(l, r, v, node.left);
+        }
+        if (r > node.mid) {
+            modify(l, r, v, node.right);
+        }
+        pushUp(node);
+    }
+
+    public void pushUp(Node node) {
+        node.v = Math.max(node.left.v, node.right.v);
+    }
+
+    public void pushDown(Node node) {
+        if (node.left == null) {
+            node.left = new Node(node.l, node.mid);
+        }
+        if (node.right == null) {
+            node.right = new Node(node.mid + 1, node.r);
+        }
+        if (node.add != 0) {
+            Node left = node.left, right = node.right;
+            left.add = node.add;
+            right.add = node.add;
+            left.v = node.v;
+            right.v = node.v;
+            node.add = 0;
+        }
+    }
+}
+
+class Node {
+    Node left;
+    Node right;
+    int l;
+    int r;
+    int mid;
+    int v;
+    int add;
+
+    public Node(int l, int r) {
+        this.l = l;
+        this.r = r;
+        this.mid = (l + r) >> 1;
+    }
+}
 ```
 
 ### **...**
