@@ -64,7 +64,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        ans = 0
 
+        def dfs(root, cur):
+            nonlocal ans
+            if not root:
+                return
+            cur = cur << 1 | root.val
+            if not root.left and not root.right:
+                ans += cur
+                return
+            dfs(root.left, cur)
+            dfs(root.right, cur)
+        
+        dfs(root, 0)
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +94,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int ans = 0;
 
+    public int sumRootToLeaf(TreeNode root) {
+        dfs(root, 0);
+        return ans;
+    }
+
+    public void dfs(TreeNode root, int cur) {
+        if (root == null) {
+            return;
+        }
+        cur = cur << 1 | root.val;
+        if (root.left == null && root.right == null) {
+            ans += cur;
+            return;
+        }
+        dfs(root.left, cur);
+        dfs(root.right, cur);
+    }
+}
 ```
 
 ### **...**
