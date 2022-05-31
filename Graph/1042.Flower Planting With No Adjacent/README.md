@@ -67,7 +67,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def gardenNoAdj(self, n: int, paths: List[List[int]]) -> List[int]:
+        head = [0] * (n + 1)
+        edges = [Edge] * (len(paths) * 2 + 1)
+        idx = 1
 
+        def add_edge(a, b):
+            nonlocal edges, head, idx
+            edges[idx] = Edge(b, head[a])
+            head[a] = idx
+            idx += 1
+        
+        for a, b in paths:
+            add_edge(a - 1, b - 1)
+            add_edge(b - 1, a - 1)
+        ans = [0] * n
+        cnt = [0] * n
+        for i in range(n):
+            k = 1
+            while k <= 4:
+                if cnt[i] & (1 << k) == 0:
+                    ans[i] = k
+                    break
+                k += 1
+            j = head[i]
+            while j:
+                cnt[edges[j].to] |= (1 << k)
+                j = edges[j].next
+        return ans
+
+class Edge:
+    to = 0
+    next = 0
+
+    def __init__(self, to, next):
+        self.to = to
+        self.next = next
 ```
 
 ### **Java**
@@ -75,7 +111,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] head;
+    Edge[] edges;
+    int idx = 1;
 
+    public void addEdge(int a, int b) {
+        edges[idx] = new Edge(b, head[a]);
+        head[a] = idx++;
+    }
+
+    public int[] gardenNoAdj(int n, int[][] paths) {
+        head = new int[n + 1];
+        edges = new Edge[paths.length * 2 + 1];
+        for (int[] path : paths) {
+            addEdge(path[0] - 1, path[1] - 1);
+            addEdge(path[1] - 1, path[0] - 1);
+        }
+        int[] cnt = new int[n];
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int k = 1;
+            while (k <= 4) {
+                if ((cnt[i] & (1 << k)) == 0) {
+                    ans[i] = k;
+                    break;
+                }
+                k++;
+            }
+            for (int j = head[i]; j != 0; j = edges[j].next) {
+                cnt[edges[j].to] |= (1 << k);
+            }
+        }
+        return ans;
+    }
+}
+
+class Edge {
+    int to;
+    int next;
+
+    public Edge(int to, int next) {
+        this.to = to;
+        this.next = next;
+    }
+}
 ```
 
 ### **...**
