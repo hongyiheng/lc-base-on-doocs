@@ -47,7 +47,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def makesquare(self, matchsticks: List[int]) -> bool:
+        all = sum(matchsticks)
+        if all % 4 != 0:
+            return False
+        t = all // 4
+        if max(matchsticks) > t:
+            return False
+        n = len(matchsticks)
+        matchsticks.sort()
+        vis = [False] * n
 
+        def dfs(k, target, idx):
+            nonlocal t, matchsticks, n
+            if target == 0:
+                k -= 1
+                if k == 0:
+                    return True
+                else:
+                    return dfs(k, t, n - 1)
+
+            for i in range(idx, -1, -1):
+                if target < matchsticks[i] or vis[i]:
+                    continue
+                vis[i] = True
+                if dfs(k, target - matchsticks[i], i - 1):
+                    return True
+                vis[i] = False
+                if target == t:
+                    return False
+            return False
+        
+        return dfs(4, t, n - 1)
 ```
 
 ### **Java**
@@ -55,7 +87,55 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int t;
+    boolean[] vis;
+    int n;
+    int[] matchsticks;
 
+    public boolean makesquare(int[] matchsticks) {
+        this.matchsticks = matchsticks;
+        n = matchsticks.length;
+        int mx = 0, all = 0;
+        for (int v : matchsticks) {
+            mx = Math.max(v, mx);
+            all += v;
+        }
+        if (all % 4 != 0) {
+            return false;
+        }
+        t = all / 4;
+        if (mx > t) {
+            return false;
+        }
+        Arrays.sort(matchsticks);
+        vis = new boolean[n];
+        return dfs(t, 4, n - 1);
+    }
+
+    public boolean dfs(int target, int k, int idx) {
+        if (target == 0) {
+            if (--k == 0) {
+                return true;
+            }
+            return dfs(t, k, n -1);
+        }
+        for (int i = idx; i >= 0; i--) {
+            if (matchsticks[i] > target || vis[i]) {
+                continue;
+            }
+            vis[i] = true;
+            if (dfs(target - matchsticks[i], k, idx - 1)) {
+                return true;
+            }
+            vis[i] = false;
+            if (target == t) {
+                return false;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
