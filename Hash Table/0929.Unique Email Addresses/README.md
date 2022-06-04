@@ -51,7 +51,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        ans = set()
+        for s in emails:
+            pre, tail = s.split("@")
+            new_pre = ""
+            for c in pre:
+                if c == '+':
+                    break
+                elif c == '.':
+                    continue
+                else:
+                    new_pre += c
+            ans.add(new_pre + "@" + tail)
+        return len(ans)
 ```
 
 ### **Java**
@@ -59,7 +73,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        Set<String> ans = new HashSet<>();
+        for (String w : emails) {
+            String[] ws = w.split("@");
+            String pre = ws[0], tail = ws[1];
+            StringBuilder newPre = new StringBuilder();
+            for (char c : pre.toCharArray()) {
+                if (c == '+') {
+                    break;
+                }
+                if (c == '.') {
+                    continue;
+                } else {
+                    newPre.append(c);
+                }
+            }
+            newPre.append("@");
+            ans.add(newPre.toString() + tail);
+        }
+        return ans.size();
+    }
+}
 ```
 
 ### **...**
