@@ -50,7 +50,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
 
+    def __init__(self, radius: float, x_center: float, y_center: float):
+        self.r = radius
+        self.x = x_center
+        self.y = y_center
+
+    def randPoint(self) -> List[float]:
+        while True:
+            nx = random.random() * 2 * self.r - self.r
+            ny = random.random() * 2 * self.r - self.r
+            if math.sqrt(nx * nx + ny * ny) <= self.r:
+                return [nx + self.x, ny + self.y]
+
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(radius, x_center, y_center)
+# param_1 = obj.randPoint()
 ```
 
 ### **Java**
@@ -58,7 +76,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    private double r;
+    private double x;
+    private double y;
+    Random random;
 
+    public Solution(double radius, double x_center, double y_center) {
+        r = radius;
+        x = x_center;
+        y = y_center;
+        random = new Random();
+    }
+    
+    public double[] randPoint() {
+        while (true) {
+            double nx = random.nextDouble() * 2 * r - r;
+            double ny = random.nextDouble() * 2 * r - r;
+            if (Math.sqrt(nx * nx + ny * ny) < r) {
+                return new double[]{nx + x, ny + y};
+            }
+        }
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(radius, x_center, y_center);
+ * double[] param_1 = obj.randPoint();
+ */
 ```
 
 ### **...**
