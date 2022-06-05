@@ -63,7 +63,20 @@ exection -> execution (插入 'u')
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1) + 1, len(word2) + 1
+        dp = [[0] * n for _ in range(m)]
+        for i in range(m):
+            dp[i][0] = i
+        for j in range(n):
+            dp[0][j] = j
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = min(min(dp[i - 1][j] + 1, dp[i][j - 1] + 1), dp[i - 1][j - 1] + 1)
+                if word1[i - 1] == word2[j - 1]:
+                    dp[i][j] = min(dp[i][j], dp[i - 1][j - 1])
+        return dp[m - 1][n - 1]
 ```
 
 ### **Java**
@@ -71,7 +84,27 @@ exection -> execution (插入 'u')
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int m = word1.length() + 1, n = word2.length() + 1;
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j < n; j++) {
+            dp[0][j] = j;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = Math.min(Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1), dp[i - 1][j - 1] + 1);
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i][j]);
+                }
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+}
 ```
 
 ### **...**
