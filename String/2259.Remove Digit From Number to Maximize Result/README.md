@@ -59,7 +59,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeDigit(self, number: str, digit: str) -> str:
+        idx = -1
+        n = len(number)
+        for i, c in enumerate(number):
+            if c == digit:
+                if i < n - 1 and number[i + 1] > c:
+                    return number[0:i] + number[i + 1:n]
+                idx = i
+        return number[0:idx] + number[idx + 1:n]
 ```
 
 ### **Java**
@@ -67,7 +76,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String removeDigit(String number, char digit) {
+        char[] chars = number.toCharArray();
+        int n = chars.length;
+        int idx = -1;
+        for (int i = 0; i < n; i++) {
+            if (chars[i] == digit) {
+                if (i < n - 1 && chars[i + 1] > digit) {
+                    return number.substring(0, i) + number.substring(i + 1, n);
+                }
+                idx = i;
+            }
+        }
+        return number.substring(0, idx) + number.substring(idx + 1, n);
+    }
+}
 ```
 
 ### **...**
