@@ -61,7 +61,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        stk = deque()
+        mp = dict()
+        for v in nums2:
+            while stk and stk[-1] < v:
+                mp[stk.pop()] = v
+            stk.append(v)
+        ans = []
+        for v in nums1:
+            ans.append(mp.get(v, -1))
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +80,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        Deque<Integer> stk = new ArrayDeque<>();
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            while (!stk.isEmpty() && stk.peekLast() < nums2[i]) {
+                mp.put(stk.pollLast(), nums2[i]);
+            }
+            stk.offerLast(nums2[i]);
+        }
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            ans[i] = mp.getOrDefault(nums1[i], -1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
