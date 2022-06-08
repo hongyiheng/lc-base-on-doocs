@@ -61,7 +61,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        s = 0
+        for v in nums:
+            s += abs(v)
+        if abs(target) > s:
+            return 0
+        f = [[0] * (2 * s + 1) for _ in range(n + 1)]
+        f[0][s] = 1
+        for i in range(1, n + 1):
+            cur = nums[i - 1]
+            for j in range(-s, s + 1):
+                if j - cur + s >= 0:
+                    f[i][j + s] += f[i - 1][j - cur + s]
+                if j + cur + s <= 2 * s:
+                    f[i][j + s] += f[i - 1][j + cur + s]
+        return f[n][s + target]
 ```
 
 ### **Java**
@@ -69,7 +86,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        int n = nums.length;
+        int s = 0;
+        for (int v : nums) {
+            s += Math.abs(v);
+        }
+        if (Math.abs(target) > s) {
+            return 0;
+        }
+        int[][] f = new int[n + 1][2 * s + 1];
+        f[0][s] = 1;
+        for (int i = 1; i <= n; i++) {
+            int cur = nums[i - 1];
+            for (int j = -s; j <= s; j++) {
+                if (j - cur + s >= 0) {
+                    f[i][j + s] += f[i - 1][j - cur + s];
+                }
+                if (j + cur + s <= 2 * s) {
+                    f[i][j + s] += f[i - 1][j + cur + s];
+                }
+            }
+        }
+        return f[n][s + target];
+    }
+}
 ```
 
 ### **...**
