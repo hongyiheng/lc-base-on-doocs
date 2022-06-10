@@ -51,6 +51,39 @@ words 中是 s = "abc" 前缀的字符串为：
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countPrefixes(self, words: List[str], s: str) -> int:
+        tr = Trie()
+        tr.insert(s)
+        ans = 0
+        for w in words:
+            if tr.start_with(w):
+                ans += 1
+        return ans
+
+
+class Node:
+    def __init__(self):
+        self.children = [None] * 26
+
+class Trie:
+    def __init__(self):
+        self.root = Node()
+    
+    def insert(self, word):
+        head = self.root
+        for c in word:
+            if not head.children[ord(c) - ord('a')]:
+                head.children[ord(c) - ord('a')] = Node()
+            head = head.children[ord(c) - ord('a')]
+    
+    def start_with(self, prefix):
+        head = self.root
+        for c in prefix:
+            if not head.children[ord(c) - ord('a')]:
+                return False
+            head = head.children[ord(c) - ord('a')]
+        return True
 
 ```
 
@@ -59,7 +92,56 @@ words 中是 s = "abc" 前缀的字符串为：
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int countPrefixes(String[] words, String s) {
+        Trie tr = new Trie();
+        tr.insert(s);
+        int ans = 0;
+        for (String w : words) {
+            if (tr.startsWith(w)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 
+class Trie {
+    Node root;
+
+    public Trie() {
+        root = new Node();
+    }
+    
+    public void insert(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.childrens[c - 'a'] == null) {
+                head.childrens[c - 'a'] = new Node();
+            }
+            head = head.childrens[c - 'a'];
+        }
+    }
+
+    public boolean startsWith(String prefix) {
+        Node head = root;
+        for (char c : prefix.toCharArray()) {
+            if (head.childrens[c - 'a'] == null) {
+                return false;
+            }
+            head = head.childrens[c - 'a'];
+        }
+        return true;
+    }
+}
+
+class Node {
+    Node[] childrens;
+
+    public Node() {
+        childrens = new Node[26];
+    }
+}
 ```
 
 ### **...**
