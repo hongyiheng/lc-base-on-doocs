@@ -64,7 +64,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumAverageDifference(self, nums: List[int]) -> int:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        for i in range(n):
+            pre[i + 1] = pre[i] + nums[i]
+        ans, cur = 0, float('inf')
+        for i in range(n):
+            pre_avg = pre[i + 1] // (i + 1)
+            tail_avg = 0 if (n - i - 1) == 0 else (pre[n] - pre[i + 1]) // (n - i - 1)
+            diff = abs(pre_avg - tail_avg)
+            if diff < cur:
+                cur = diff
+                ans = i
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +86,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumAverageDifference(int[] nums) {
+        int n = nums.length;
+        long[] pre = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+        }
+        int ans = 0;
+        long cur = Long.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            long preAvg = pre[i + 1] / (i + 1);
+            long tailAvg = (n - i - 1) == 0 ? 0 : (pre[n] - pre[i + 1]) / (n - i - 1);
+            long diff = Math.abs(tailAvg - preAvg);
+            if (diff < cur) {
+                cur = diff;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
