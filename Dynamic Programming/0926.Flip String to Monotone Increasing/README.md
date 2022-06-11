@@ -59,7 +59,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minFlipsMonoIncr(self, s: str) -> int:
+        ans, cnt = 0, 0
+        for c in s:
+            if c == '1':
+                cnt += 1
+            else:
+                ans = min(ans + 1, cnt)
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +75,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minFlipsMonoIncr(String s) {
+        int ans = 0, cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '1') {
+                cnt++;
+            } else {
+                ans = Math.min(ans + 1, cnt);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
