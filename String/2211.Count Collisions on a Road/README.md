@@ -64,7 +64,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countCollisions(self, directions: str) -> int:
+        n = len(directions)
+        l, r = 0, n - 1
+        for i in range(n):
+            if directions[i] == 'L':
+                l += 1
+            else:
+                break
+        for i in range(n - 1, -1, -1):
+            if directions[i] == 'R':
+                r -= 1
+            else:
+                break
+        cnt = 0
+        for i in range(l, r + 1):
+            if directions[i] == 'S':
+                cnt += 1
+        return r - l + 1 - cnt
 ```
 
 ### **Java**
@@ -72,7 +90,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countCollisions(String directions) {
+        int n = directions.length();
+        int l = 0, r = n - 1;
+        char[] chars = directions.toCharArray();
+        for (int i = 0; i < n; i++) {
+            if (chars[i] == 'L') {
+                l++;
+            } else {
+                break;
+            }
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            if (chars[i] == 'R') {
+                r--;
+            } else {
+                break;
+            }
+        }
+        int cnt = 0;
+        for (int i = l; i <= r; i++) {
+            if (chars[i] == 'S') {
+                cnt++;
+            }
+        }
+        return r - l + 1 - cnt;
+    }
+}
 ```
 
 ### **...**
