@@ -62,7 +62,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countHillValley(self, nums: List[int]) -> int:
+        n = len(nums)
+        i, ans = 0, 0
+        while i < n:
+            left, right = i - 1, i + 1
+            while left > 0 and nums[left] == nums[i]:
+                left -= 1
+            while right < n and nums[right] == nums[i]:
+                right += 1
+            if left < 0 or right >= n:
+                i += 1
+                continue
+            if nums[left] < nums[i] and nums[right] < nums[i]:
+                ans += 1
+            if nums[left] > nums[i] and nums[right] > nums[i]:
+                ans += 1
+            i = right
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +88,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countHillValley(int[] nums) {
+        int n = nums.length;
+        int i = 0, ans = 0;
+        while (i < n) {
+            int left = i - 1, right = i + 1;
+            while (left > 0 && nums[left] == nums[i]) {
+                left--;
+            }
+            while (right < n && nums[right] == nums[i]) {
+                right++;
+            }
+            if (left < 0 || right >= n) {
+                i++;
+                continue;
+            }
+            if (nums[left] < nums[i] && nums[right] < nums[i]) {
+                ans ++;
+            }
+            if (nums[left] > nums[i] && nums[right] > nums[i]) {
+                ans ++;
+            }
+            i = right;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
