@@ -61,7 +61,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        cnt = [0] * 101
+        for v in heights:
+            cnt[v] += 1
+        idx, ans = 1, 0
+        for v in heights:
+            while cnt[idx] == 0:
+                idx += 1
+            if idx != v:
+                ans += 1
+            cnt[idx] -= 1
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +81,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int heightChecker(int[] heights) {
+        int ans = 0;
+        int[] cnt = new int[101];
+        for (int v : heights) {
+            cnt[v]++;
+        }
+        int idx = 1;
+        for (int v : heights) {
+            while (cnt[idx] == 0) {
+                idx++;
+            }
+            if (idx != v) {
+                ans++;
+            }
+            cnt[idx]--;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
