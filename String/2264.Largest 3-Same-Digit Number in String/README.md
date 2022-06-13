@@ -68,7 +68,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largestGoodInteger(self, num: str) -> str:
+        ans, cur, cnt = -1, 0, 0
+        cnt = 0
+        for c in num:
+            if cur == int(c):
+                cnt += 1
+            else:
+                cur = int(c)
+                cnt = 1
+            if cnt == 3:
+                ans = max(ans, int(c))
+        return "" if ans == -1 else str(ans) + str(ans) + str(ans)
 ```
 
 ### **Java**
@@ -76,7 +88,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String largestGoodInteger(String num) {
+        int cnt = 0, ans = -1;
+        char cur = ' ';
+        for (char c : num.toCharArray()) {
+            if (cur != c) {
+                cnt = 1;
+                cur = c;
+            } else {
+                cnt++;
+            }
+            if (cnt == 3) {
+                ans = Math.max(c - '0', ans);
+            }
+        }
+        return ans == -1 ? "" : "" + ans + ans + ans;
+    }
+}
 ```
 
 ### **...**
