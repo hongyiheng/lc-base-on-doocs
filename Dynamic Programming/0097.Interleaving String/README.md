@@ -64,7 +64,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        m, n, t = len(s1), len(s2), len(s3)
+        if m + n != t:
+            return False
+        f = [[False] * (n + 1) for _ in range(m + 1)]
+        f[0][0] = True
+        for i in range(1, m + 1):
+            if f[i - 1][0] and s3[i - 1] == s1[i - 1]:
+                f[i][0] = True
+        for j in range(1, n + 1):
+            if f[0][j - 1] and s3[j - 1] == s2[j - 1]:
+                f[0][j] = True
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                c = s3[i + j - 1]
+                if f[i - 1][j] and s1[i - 1] == c:
+                    f[i][j] = True
+                if f[i][j - 1] and s2[j - 1] == c:
+                    f[i][j] = True
+        return f[m][n]
 ```
 
 ### **Java**
@@ -72,7 +92,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int m = s1.length(), n = s2.length(), t = s3.length();
+        if (m + n != t) {
+            return false;
+        }
+        boolean[][] f = new boolean[m + 1][n + 1];
+        f[0][0] = true;
+        for (int i = 1; i < m + 1; i++) {
+            f[i][0] = f[i - 1][0] && s1.charAt(i - 1) == s3.charAt(i - 1);
+        }
+        for (int j = 1; j < n + 1; j++) {
+            f[0][j] = f[0][j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1);
+        }
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                char c = s3.charAt(i + j - 1);
+                if (f[i - 1][j] && s1.charAt(i - 1) == c) {
+                    f[i][j] = true;
+                }
+                if (f[i][j - 1] && s2.charAt(j - 1) == c) {
+                    f[i][j] = true;
+                }
+            }
+        }
+        return f[m][n];
+    }
+}
 ```
 
 ### **...**
