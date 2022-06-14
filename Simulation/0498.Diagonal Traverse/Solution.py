@@ -5,7 +5,6 @@ class Solution:
         x = y = 0
         up = True
         for _ in range(m * n):
-            print("x", x , " y", y)
             ans.append(mat[x][y])
             nx, ny = x, y
             nx += -1 if up else 1
