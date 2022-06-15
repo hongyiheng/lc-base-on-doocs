@@ -58,7 +58,16 @@ nums 可以划分成 (2, 2) ，(3, 3) 和 (2, 2) ，满足所有要求。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        cnt = [0] * 501
+        t = len(nums) // 2
+        for v in nums:
+            cnt[v] += 1
+            if cnt[v] >= 2:
+                cnt[v] -= 2
+                t -= 1
+        return t == 0
 ```
 
 ### **Java**
@@ -66,7 +75,19 @@ nums 可以划分成 (2, 2) ，(3, 3) 和 (2, 2) ，满足所有要求。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean divideArray(int[] nums) {
+        int[] cnt = new int[501];
+        int t = nums.length / 2;
+        for (int v : nums) {
+            if (++cnt[v] >= 2) {
+                cnt[v] -= 2;
+                t--;
+            }
+        }
+        return t == 0;
+    }
+}
 ```
 
 ### **...**
