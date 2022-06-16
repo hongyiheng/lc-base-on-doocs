@@ -57,7 +57,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumSubsequenceCount(self, text: str, pattern: str) -> int:
+        a, b = pattern[0], pattern[1]
+        if a == b:
+            cnt = 0
+            for c in text:
+                if c == a:
+                    cnt += 1
+            return (cnt + 1) * cnt // 2
+        cnt_a, cnt_b, ans = 0, 0, 0
+        for c in text:
+            if c == a:
+                cnt_a += 1
+            elif c == b:
+                cnt_b += 1
+                ans += cnt_a
+        ans += max(cnt_a, cnt_b)
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +82,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumSubsequenceCount(String text, String pattern) {
+        char a = pattern.charAt(0), b = pattern.charAt(1);
+        if (a == b) {
+            long cnt = 0;
+            for (char c : text.toCharArray()) {
+                if (c == a) {
+                    cnt++;
+                }
+            }
+            return (cnt + 1) * cnt / 2;
+        }
+        long cntA = 0, cntB = 0, ans = 0;
+        for (char c : text.toCharArray()) {
+            if (c == a) {
+                cntA++;
+            } else if (c == b) {
+                cntB++;
+                ans += cntA;
+            }
+        }
+        ans += Math.max(cntA, cntB);
+        return ans;
+    }
+}
 ```
 
 ### **...**
