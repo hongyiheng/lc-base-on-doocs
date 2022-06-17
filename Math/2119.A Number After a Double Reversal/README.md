@@ -54,7 +54,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isSameAfterReversals(self, num: int) -> bool:
+        if num == 0:
+            return True
+        s = str(num)
+        cur, ans = 1, 0
+        for i in range(len(s) - 1, -1, -1):
+            if ans == 0 and s[i] == '0':
+                return False
+            ans += int(s[i]) * cur
+            cur *= 10
+        return str(ans)[-1] != '0'
 ```
 
 ### **Java**
@@ -62,7 +73,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isSameAfterReversals(int num) {
+        if (num == 0) {
+            return true;
+        }
+        String s = String.valueOf(num);
+        int n = s.length();
+        int cur = 1, ans = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            if (ans == 0 && s.charAt(i) == '0') {
+                return false;
+            }
+            ans += cur * (s.charAt(i) - '0');
+            cur *= 10;
+        }
+        return String.valueOf(ans).charAt(n - 1) != '0';
+    }
+}
 ```
 
 ### **...**
