@@ -63,7 +63,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumEvenSplit(self, finalSum: int) -> List[int]:
+        ans = []
+        if finalSum % 2 != 0:
+            return ans
+        cur = 2
+        while cur * 2 < finalSum:
+            finalSum -= cur
+            ans.append(cur)
+            cur += 2
+        if finalSum > 0:
+            ans.append(finalSum)
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +83,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Long> maximumEvenSplit(long finalSum) {
+        List<Long> ans = new ArrayList<>();
+        if (finalSum % 2 != 0) {
+            return ans;
+        }
+        long cur = 2;
+        while (cur * 2 < finalSum) {
+            ans.add(cur);
+            finalSum -= cur;
+            cur += 2;
+        }
+        if (finalSum > 0) {
+            ans.add(finalSum);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
