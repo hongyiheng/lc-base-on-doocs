@@ -43,7 +43,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumOfThree(self, num: int) -> List[int]:
+        if num % 3 != 0:
+            return []
+        mid = num // 3
+        return [mid - 1, mid, mid + 1]
 ```
 
 ### **Java**
@@ -51,7 +56,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long[] sumOfThree(long num) {
+        if (num % 3 != 0) {
+            return new long[]{};
+        }
+        long mid = num / 3;
+        return new long[]{mid - 1, mid, mid + 1};
+    }
+}
 ```
 
 ### **...**
