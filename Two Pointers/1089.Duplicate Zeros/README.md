@@ -49,7 +49,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def duplicateZeros(self, arr: List[int]) -> None:
+        """
+        Do not return anything, modify arr in-place instead.
+        """
+        n = len(arr)
+        ans = [0] * n
+        cnt = 0
+        for i in range(n):
+            if arr[i] == 0:
+                cnt += 1
+            elif i + cnt < n:
+                ans[i + cnt] = arr[i]
+        for i in range(n):
+            arr[i] = ans[i]
 ```
 
 ### **Java**
@@ -57,7 +71,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void duplicateZeros(int[] arr) {
+        int n = arr.length;
+        int cnt = 0;
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 0) {
+                cnt++;
+            } else if (i + cnt < n) {
+                ans[i + cnt] = arr[i];
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            arr[i] = ans[i];
+        }
+    }
+}
 ```
 
 ### **...**

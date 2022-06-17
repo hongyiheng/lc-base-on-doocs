@@ -61,7 +61,22 @@ nums 的和减小了 31 - 14.5 = 16.5 ，减小的部分超过了初始数组和
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedList
 
+class Solution:
+    def halveArray(self, nums: List[int]) -> int:
+        s = 0
+        q = SortedList()
+        for v in nums:
+            s += v
+            q.add(v)
+        target, ans = s / 2, 0
+        while s > target:
+            cur = q.pop()
+            s -= cur / 2
+            q.add(cur / 2)
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +84,31 @@ nums 的和减小了 31 - 14.5 = 16.5 ，减小的部分超过了初始数组和
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int halveArray(int[] nums) {
+        PriorityQueue<Double> q = new PriorityQueue<>((a, b) -> {
+            if (a > b) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+        double s = 0;
+        for (int v : nums) {
+            q.add((double) v);
+            s += v;
+        }
+        double target = s / 2;
+        int ans = 0;
+        while (s > target) {
+            double cur = q.poll();
+            s -= cur / 2;
+            q.add(cur / 2);
+            ans++;
+        }
+        return ans;     
+    }
+}
 ```
 
 ### **...**
