@@ -64,7 +64,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, next=None):
+        self.val = val
+        self.next = next
+"""
 
+class Solution:
+    def insert(self, head: 'Node', insertVal: int) -> 'Node':
+        t = Node(insertVal)
+        t.next = t
+        if not head:
+            return t
+        ans = head
+        max_val = min_val = head.val
+        while head.next != ans:
+            head = head.next
+            max_val = max(max_val, head.val)
+            min_val = min(min_val, head.val)
+        if max_val == min_val:
+            t.next = ans.next
+            ans.next = t
+            return ans
+        while not (head.val == max_val and head.next.val == min_val):
+            head = head.next
+        if insertVal >= max_val or insertVal <= min_val:
+            t.next = head.next
+            head.next = t
+        else:
+            while not (head.val <= insertVal <= head.next.val):
+                head = head.next
+            t.next = head.next
+            head.next = t    
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +106,60 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node next;
 
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _next) {
+        val = _val;
+        next = _next;
+    }
+};
+*/
+
+class Solution {
+    public Node insert(Node head, int insertVal) {
+        Node t = new Node(insertVal);
+        t.next = t;
+        if (head == null) {
+            return t;
+        }
+        Node ans = head;
+        int minVal = ans.val, maxVal = ans.val;
+        while (head.next != ans) {
+            head = head.next;
+            maxVal = Math.max(maxVal, head.val);
+            minVal = Math.min(minVal, head.val);
+        }
+        if (maxVal == minVal) {
+            t.next = head.next;
+            head.next = t;
+            return ans;
+        }
+        while (head.val != maxVal && head.next.val != minVal) {
+            head = head.next;
+        }
+        if (insertVal <= minVal || insertVal >= maxVal) {
+            t.next = head.next;
+            head.next = t;
+        } else {
+            while (head.val > insertVal || head.next.val < insertVal) {
+                head = head.next;
+            }
+            t.next = head.next;
+            head.next = t;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
