@@ -83,6 +83,38 @@ class Solution:
 ### **Java**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
+```java
+class Solution {
+    public int minSwaps(int[] nums) {
+        int cnt0 = 0, cnt1 = 0, n = nums.length;
+        int[] pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i];
+            if (nums[i] == 1) {
+                cnt1++;
+                pre[i + 1] = pre[i] + 1;
+            } else {
+                cnt0++;
+            }
+        }
+        if (cnt1 == 0 || cnt1 == n) {
+            return 0;
+        }
+        int ans = Integer.MAX_VALUE;
+        for (int l = 0; l < n - cnt1; l++) {
+            int r = l + cnt1;
+            int count1 = pre[r] - pre[l];
+            ans = Math.min(cnt1 - count1, ans);
+        }
+        for (int l = 0; l < n - cnt0; l++) {
+            int r = l + cnt0;
+            int count0 = cnt0 - (pre[r] - pre[l]);
+            ans = Math.min(cnt0 - count0, ans);
+        }
+        return ans;
+    }
+}
+```
 
 ```java
 class Solution {
@@ -95,7 +127,7 @@ class Solution {
             return 0;
         }
         int[] count = new int[n + win];
-        for (int i= 0; i < win; i++) {
+        for (int i = 0; i < win; i++) {
             count[0] += nums[i];
         }
         for (int i = 1; i < n; i++) {

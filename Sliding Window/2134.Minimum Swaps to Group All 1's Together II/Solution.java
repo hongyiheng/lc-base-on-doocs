@@ -8,7 +8,7 @@ class Solution {
             return 0;
         }
         int[] count = new int[n + win];
-        for (int i= 0; i < win; i++) {
+        for (int i = 0; i < win; i++) {
             count[0] += nums[i];
         }
         for (int i = 1; i < n; i++) {
