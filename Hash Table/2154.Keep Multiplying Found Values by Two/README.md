@@ -60,7 +60,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findFinalValue(self, nums: List[int], original: int) -> int:
+        cnt = [False] * 2001
+        for v in nums:
+            cnt[v] = True
+        while cnt[original]:
+            original *= 2
+        return original
 ```
 
 ### **Java**
@@ -68,7 +75,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findFinalValue(int[] nums, int original) {
+        boolean[] cnt = new boolean[2001];
+        for (int v : nums) {
+            cnt[v] = true;
+        }
+        while (cnt[original]) {
+            original *= 2;
+        }
+        return original;
+    }
+}
 ```
 
 ### **...**
