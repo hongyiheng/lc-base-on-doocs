@@ -62,7 +62,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def subStrHash(self, s: str, power: int, modulo: int, k: int, hashValue: int) -> str:
+        def ksm(a, b, m):
+            ans, base = 1, a
+            while b:
+                if b & 1:
+                    ans = ans * base % m
+                base = base * base % m
+                b >>= 1
+            return ans % m
+        
+        n, cur, base = len(s), 0, 1
+        for i in range(n - k, n):
+            cur = cur + (ord(s[i]) - ord('a') + 1) * base
+            base = base * power % modulo
+        cur %= modulo
+        last_power = ksm(power, k - 1, modulo)
+        ans = n - k
+        for i in range(n - k - 1, -1, -1):
+            cur = (cur - (ord(s[i + k]) - ord('a') + 1) * last_power % modulo + modulo) % modulo
+            cur = ((ord(s[i]) - ord('a') + 1) % modulo + cur * power + modulo) % modulo
+            if cur == hashValue:
+                ans = i
+        return s[ans:ans + k]
 ```
 
 ### **Java**
@@ -70,7 +93,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public String subStrHash(String s, int power, int modulo, int k, int hashValue) {
+       int n = s.length();
+        long cur = 0;
+        long base = 1;
+        for (int i = n - k; i < n; i++) {
+            cur = cur + (s.charAt(i) - 'a' + 1) * base;
+            base = base * power % modulo;
+        }
+        cur %= modulo;
+        long lastPow = ksm(power, k - 1, modulo);
+        int ans = n - k;
+        for (int l = n - k - 1; l >= 0; l--) {
+            cur = (cur - (s.charAt(l + k) - 'a' + 1) * lastPow % modulo + modulo) % modulo;
+            cur = ((s.charAt(l) - 'a' + 1) % modulo + cur * power + modulo) % modulo;
+            if (cur == hashValue) {
+                ans = l;
+            }
+        }
+        return s.substring(ans, ans + k);
+    }
 
+    public static long ksm(int a, int b, int m) {
+        long ans = 1, base = a;
+        while (b != 0) {
+            if ((b & 1) != 0) {
+                ans = ans * base % m;
+            }
+            base = base * base % m;
+            b >>= 1;
+        }
+        return ans % m;
+    }
+}
 ```
 
 ### **...**
