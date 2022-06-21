@@ -87,7 +87,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findEvenNumbers(self, digits: List[int]) -> List[int]:
+        ans, cnt = [], [0] * 10
+        for v in digits:
+            cnt[v] += 1
+        for i in range(100, 1000):
+            if i % 2 == 0:
+                tmp = [0] * 10
+                cur = i
+                while cur:
+                    tmp[cur % 10] += 1
+                    cur //= 10
+                is_even = True
+                for j in range(10):
+                    if cnt[j] < tmp[j]:
+                        is_even = False
+                if is_even:
+                    ans.append(i)
+        return ans
 ```
 
 ### **Java**
@@ -95,7 +113,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findEvenNumbers(int[] digits) {
+        int[] cnt = new int[10];
+        for (int v : digits) {
+            cnt[v]++;
+        }
+        List<Integer> even = new ArrayList<>();
+        for (int i = 100; i < 1000; i++) {
+            if (i % 2 == 0) {
+                int[] tmp = new int[10];
+                int cur = i;
+                while (cur > 0) {
+                    tmp[cur % 10]++;
+                    cur /= 10;
+                }
+                boolean isEven = true;
+                for (int j = 0; j < 10; j++) {
+                    if (cnt[j] < tmp[j]) {
+                        isEven = false;
+                        break;
+                    }
+                }
+                if (isEven) {
+                    even.add(i);
+                }
+            }
+        }
+        int[] ans = new int[even.size()];
+        for (int i = 0; i < even.size(); i++) {
+            ans[i] = even.get(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
