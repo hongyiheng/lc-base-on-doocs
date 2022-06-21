@@ -66,7 +66,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfWays(self, corridor: str) -> int:
+        mod = int(1e9 + 7)
+        ans = s_cnt = p_cnt = 0
+        for c in corridor:
+            if c == 'S':
+                s_cnt += 1
+                if s_cnt % 2 == 0:
+                    if ans == 0:
+                        ans = 1
+                    if p_cnt:
+                        ans = ans * (p_cnt + 1) % mod
+                        p_cnt = 0
+            else:
+                if s_cnt and s_cnt % 2 == 0:
+                    p_cnt += 1
+        return ans % mod if s_cnt % 2 == 0 else 0
 ```
 
 ### **Java**
@@ -74,7 +90,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfWays(String corridor) {
+        int mod = (int)1e9 + 7;
+        char[] chars = corridor.toCharArray();
+        long ans = 0, sCnt = 0, pCnt = 0;
+        for (char c : chars) {
+            if (c == 'S' && ++sCnt % 2 == 0) {
+                ans = ans == 0 ? 1 : ans;
+                if (pCnt != 0) {
+                    ans = ans * (pCnt + 1) % mod;
+                    pCnt = 0;          
+                }  
+            }
+            if (sCnt != 0 && sCnt % 2 == 0) {
+                if (c == 'P') {
+                    pCnt++;
+                }
+            }
+        }
+        return sCnt % 2 == 0 ? (int) ans % mod: 0;
+    }
+}
 ```
 
 ### **...**
