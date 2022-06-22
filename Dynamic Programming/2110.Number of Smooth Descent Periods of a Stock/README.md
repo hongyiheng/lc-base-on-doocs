@@ -57,7 +57,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getDescentPeriods(self, prices: List[int]) -> int:
+        ans, cur = 1, 1
+        for i in range(1, len(prices)):
+            if prices[i] == prices[i - 1] - 1:
+                cur += 1
+            else:
+                cur = 1
+            ans += cur
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +74,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long getDescentPeriods(int[] prices) {
+        long ans = 1, cur = 1;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] == prices[i - 1] - 1) {
+                cur++;
+            } else {
+                cur = 1;
+            }
+            ans += cur;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
