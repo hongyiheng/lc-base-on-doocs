@@ -75,7 +75,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
+        n = len(differences)
+        last_hidden = min_val = max_val = lower
+        for i in range(1, n + 1):
+            last_hidden = last_hidden + differences[i - 1]
+            max_val = max(max_val, last_hidden)
+            min_val = min(min_val, last_hidden)
+        ans = 0
+        for _ in range(lower, upper + 1):
+            if lower <= min_val and max_val <= upper:
+                ans += 1
+            min_val += 1
+            max_val += 1
+        return ans 
 ```
 
 ### **Java**
@@ -83,7 +97,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfArrays(int[] differences, int lower, int upper) {
+        int n = differences.length;
+        int lastHidden = lower, minVal = lower, maxVal = lower;
+        for (int i = 1; i < n + 1; i++) {
+            lastHidden = lastHidden + differences[i - 1];
+            minVal = Math.min(minVal, lastHidden);
+            maxVal = Math.max(maxVal, lastHidden);
+        }
+        int ans = 0;
+        for (int i = lower; i <= upper; i++) {
+            if (lower <= minVal && maxVal <= upper) {
+                ans++;
+            }
+            minVal++;
+            maxVal++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
