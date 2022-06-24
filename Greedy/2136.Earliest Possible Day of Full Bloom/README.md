@@ -72,7 +72,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def earliestFullBloom(self, plantTime: List[int], growTime: List[int]) -> int:
+        n = len(plantTime)
+        q = [(plantTime[i], growTime[i]) for i in range(n)]
+        q.sort(key=lambda x:x[1])
+        idx = ans = 0
+        while q:  
+            cur = q.pop()
+            idx += cur[0]
+            ans = max(idx + cur[1], ans)
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +90,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int earliestFullBloom(int[] plantTime, int[] growTime) {
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+        for (int i = 0; i < plantTime.length; i++) {
+            q.add(new int[]{plantTime[i], growTime[i]});
+        }
+        int idx = 0, ans = 0;;
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            idx += cur[0];
+            ans = Math.max(idx + cur[1], ans);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
