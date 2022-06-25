@@ -62,7 +62,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
+        mp = dict()
+        child = set()
+        for d in descriptions:
+            p_val, c_val = d[0], d[1]
+            left = d[2] == 1
+            p = mp.get(p_val, TreeNode(p_val))
+            c = mp.get(c_val, TreeNode(c_val))
+            if left:
+                p.left = c
+            else:
+                p.right = c
+            mp[p_val] = p
+            mp[c_val] = c
+            child.add(c_val)
+        for v in mp.keys():
+            if v not in child:
+                return mp[v]
+        return None
 ```
 
 ### **Java**
@@ -70,7 +95,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode createBinaryTree(int[][] descriptions) {
+        Map<Integer, TreeNode> mp = new HashMap<>();
+        Set<Integer> child = new HashSet<>();
+        for (int[] d : descriptions) {
+            int pVal = d[0], cVal = d[1];
+            boolean left = d[2] == 1;
+            TreeNode p = mp.getOrDefault(pVal, new TreeNode(pVal));
+            TreeNode c = mp.getOrDefault(cVal, new TreeNode(cVal));  
+            if (left) {
+                p.left = c;
+            } else {
+                p.right = c;
+            }
+            mp.put(pVal, p);
+            mp.put(cVal, c);
+            child.add(cVal);
+        }
+        for (int v : mp.keySet()) {
+            if (!child.contains(v)) {
+                return mp.get(v);
+            }
+        }
+        return null;
+    }
+}
 ```
 
 ### **...**
