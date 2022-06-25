@@ -53,7 +53,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minDeletion(self, nums: List[int]) -> int:
+        n, ans = len(nums), 0
+        for i in range(n - 1):
+            if (i - ans) % 2 == 0 and nums[i] == nums[i + 1]:
+                ans += 1
+        return ans if (n - ans) % 2 == 0 else ans + 1
 ```
 
 ### **Java**
@@ -61,7 +67,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minDeletion(int[] nums) {
+        int n = nums.length;
+        int ans = 0;
+        for (int i = 0; i < n - 1; i++) {
+            if ((i - ans) % 2 == 0 && nums[i] == nums[i + 1]) {
+                ans++;
+            }
+        }
+        return (n - ans) % 2 == 0 ? ans : ans + 1;
+    }
+}
 ```
 
 ### **...**
