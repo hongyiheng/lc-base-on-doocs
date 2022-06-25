@@ -55,7 +55,20 @@ nums2 中的每个整数都在 nums1 中出现，因此，answer[1] = [] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
+        cnt1, cnt2 = [0] * 2001, [0] * 2001
+        for v in nums1:
+            cnt1[v + 1000] += 1
+        for v in nums2:
+            cnt2[v + 1000] += 1
+        diff1, diff2 = [], []
+        for i in range(2001):
+            if cnt1[i] != 0 and cnt2[i] == 0:
+                diff1.append(i - 1000)
+            if cnt2[i] != 0 and cnt1[i] == 0:
+                diff2.append(i - 1000)
+        return [diff1, diff2]
 ```
 
 ### **Java**
@@ -63,7 +76,31 @@ nums2 中的每个整数都在 nums1 中出现，因此，answer[1] = [] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        int[] cnt1 = new int[2001], cnt2 = new int[2001];
+        for (int v : nums1) {
+            cnt1[v + 1000]++;
+        }
+        for (int v : nums2) {
+            cnt2[v + 1000]++;
+        }
+        List<Integer> diff1 = new ArrayList<>();
+        List<Integer> diff2 = new ArrayList<>();
+        for (int i = 0; i < 2001; i++) {
+            if (cnt1[i] != 0 && cnt2[i] == 0) {
+                diff1.add(i - 1000);
+            }
+            if (cnt2[i] != 0 && cnt1[i] == 0) {
+                diff2.add(i - 1000);
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(diff1);
+        ans.add(diff2);
+        return ans;
+    }
+}
 ```
 
 ### **...**
