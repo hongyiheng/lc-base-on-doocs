@@ -68,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxConsecutiveAnswers(self, answerKey: str, k: int) -> int:
+        def get_cnt(c):
+            left, right, n = 0, 0, len(answerKey)
+            cnt, ans = 0, 0
+            while left <= right and right < n:
+                if answerKey[right] != c:
+                    cnt += 1
+                while cnt > k:
+                    if answerKey[left] != c:
+                        cnt -= 1
+                    left += 1
+                right += 1
+                ans = max(ans, right - left)
+            return ans
+        return max(get_cnt('F'), get_cnt('T'))
 ```
 
 ### **Java**
@@ -76,7 +91,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int n, k;
+    String s;
 
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        n = answerKey.length();
+        this.k = k;
+        s = answerKey;
+        return Math.max(getCnt('F'), getCnt('T'));
+    }
+
+    public int getCnt(char c) {
+        int left = 0, right = 0;
+        int cnt = 0, ans = 0;
+        while (left <= right && right < n) {
+            if (s.charAt(right) != c) {
+                cnt++;
+            }
+            while (cnt > k) {
+                if (s.charAt(left++) != c) {
+                    cnt--;
+                }
+            }
+            right++;
+            ans = Math.max(ans, right - left);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
