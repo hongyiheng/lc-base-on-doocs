@@ -65,7 +65,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numOfPairs(self, nums: List[str], target: str) -> int:
+        n, ans = len(target), 0
+        mp = {}
+        for w in nums:
+            mp[w] = mp.get(w, 0) + 1
+        for i in range(n):
+            pre, tail = target[:i], target[i:]
+            pre_num = mp.get(pre, 0)
+            if pre != tail:
+                ans += pre_num * mp.get(tail, 0)
+            else:
+                ans += pre_num * (pre_num - 1)
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +86,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numOfPairs(String[] nums, String target) {
+        Map<String, Integer> mp = new HashMap<>();
+        int n = target.length(), ans = 0;
+        for (String w : nums) {
+            mp.put(w, mp.getOrDefault(w, 0) + 1);
+        }
+        for (int i = 0; i < n; i++) {
+            String pre = target.substring(0, i), tail = target.substring(i);
+            int preNum = mp.getOrDefault(pre, 0);
+            if (!pre.equals(tail)) {
+                ans += preNum * mp.getOrDefault(tail, 0);
+            } else {
+                ans += preNum * (preNum - 1);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
