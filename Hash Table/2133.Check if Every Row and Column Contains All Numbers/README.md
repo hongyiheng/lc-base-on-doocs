@@ -54,7 +54,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkValid(self, matrix: List[List[int]]) -> bool:
+        n = len(matrix)
+        row, col = [0] * (n + 1), [0] * (n + 1)
+        for i in range(n):
+            for j in range(n):
+                a, b = matrix[i][j], matrix[j][i]
+                row[a] += 1
+                col[b] += 1
+                if row[a] != 1 or col[b] != 1:
+                    return False
+            row, col = [0] * (n + 1), [0] * (n + 1)
+        return True     
 ```
 
 ### **Java**
@@ -62,7 +74,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkValid(int[][] matrix) {
+        int n = matrix.length;
+        int[] row = new int[n + 1];
+        int[] col = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int a = matrix[i][j];
+                int b = matrix[j][i];
+                if (++row[a] != 1 || ++col[b] != 1) {
+                    return false;
+                }
+            }
+            row = new int[n + 1];
+            col = new int[n + 1];
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
