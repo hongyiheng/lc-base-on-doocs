@@ -54,7 +54,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLonely(self, nums: List[int]) -> List[int]:
+        cnt = {}
+        for v in nums:
+            cnt[v] = cnt.get(v, 0) + 1
+        ans = []
+        for v in nums:
+            if cnt.get(v, 0) == 1:
+                if (v - 1) not in cnt and (v + 1) not in cnt:
+                    ans.append(v)
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +72,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> findLonely(int[] nums) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int v : nums) {
+            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int v : nums) {
+            if (cnt.getOrDefault(v, 0) == 1) {
+                if (!cnt.containsKey(v - 1) && !cnt.containsKey(v + 1)) {
+                    ans.add(v);
+                }
+            } 
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
