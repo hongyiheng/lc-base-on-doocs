@@ -25,7 +25,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        less = True
+        for i in range(len(nums) - 1):
+            if less:
+                if nums[i] > nums[i + 1]:
+                    nums[i], nums[i + 1] = nums[i + 1], nums[i]
+            else:
+                if nums[i] < nums[i + 1]:
+                    nums[i], nums[i + 1] = nums[i + 1], nums[i]
+            less = not less
+        
 ```
 
 ### **Java**
@@ -33,7 +47,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void wiggleSort(int[] nums) {
+        boolean less = true;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (less) {
+                if (nums[i] > nums[i + 1]) {
+                    int tmp = nums[i];
+                    nums[i] = nums[i + 1];
+                    nums[i + 1] = tmp;
+                }
+            } else {
+                if (nums[i] < nums[i + 1]) {
+                    int tmp = nums[i];
+                    nums[i] = nums[i + 1];
+                    nums[i + 1] = tmp;
+                }
+            } 
+            less = !less;
+        }
+    }
+}
 ```
 
 ### **...**
