@@ -48,7 +48,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        def insert(root, w):
+            head = root
+            for c in w:
+                if not head.child[ord(c) - ord('a')]:
+                    head.child[ord(c) - ord('a')] = Node()
+                head = head.child[ord(c) - ord('a')]
+        
+        def start_with(root, w):
+            head = root
+            for c in w:
+                if not head.child[ord(c) - ord('a')]:
+                    for i in range(26):
+                        if head.child[i]:
+                            return False
+                    return True
+                head = head.child[ord(c) - ord('a')]
+            return True
+        
+        root = Node()
+        insert(root, pref)
+        ans = 0
+        for w in words:
+            if len(w) < len(pref):
+                continue
+            if start_with(root, w):
+                ans += 1
+        return ans
 
+
+class Node:
+    def __init__(self):
+        self.child = [None] * 26
 ```
 
 ### **Java**
@@ -56,7 +89,59 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int prefixCount(String[] words, String pref) {
+        Node root = new Node();
+        insert(root, pref);
+        int ans = 0;
+        for (String w : words) {
+            if (w.length() < pref.length()) {
+                continue;
+            }
+            if (startWith(root, w)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    public void insert(Node root, String w) {
+        Node head = root;
+        for (char c : w.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                head.children[c - 'a'] = new Node();
+            }
+            head = head.children[c - 'a'];
+        }
+    }
+
+    public boolean startWith(Node root, String w) {
+        Node head = root;
+        for (char c : w.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                for (int i = 0; i < 26; i++) {
+                    if (head.children[i] != null) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            head = head.children[c - 'a'];
+        }
+        return true;
+    }
+
+
+}
+
+class Node {
+    Node[] children;
+
+    public Node() {
+        children = new Node[26];
+    }
+}
 ```
 
 ### **...**
