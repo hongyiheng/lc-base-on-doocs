@@ -51,7 +51,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+        ans = []
+        arr.sort()
+        min_val = float('inf')
+        for i in range(1, len(arr)):
+            cur = abs(arr[i - 1] - arr[i])
+            if min_val >= cur:
+                if min_val > cur:
+                    min_val = cur
+                    ans.clear()
+                ans.append([arr[i - 1], arr[i]])
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(arr);
+        int n = arr.length, min = Integer.MAX_VALUE;
+        for (int i = 1; i < n; i++) {
+            int cur = Math.abs(arr[i] - arr[i - 1]);
+            if (min >= cur) {
+                if (min > cur) {
+                    min = cur;
+                    ans.clear();
+                }
+                List<Integer> item = new ArrayList<>();
+                item.add(arr[i - 1]);
+                item.add(arr[i]);
+                ans.add(item);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
