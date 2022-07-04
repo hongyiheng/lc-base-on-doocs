@@ -67,7 +67,15 @@ nums 中的数字按非递减顺序排列为 ["0","0"]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kthLargestNumber(self, nums: List[str], k: int) -> str:
+        def cmp(a, b):
+            if len(a) != len(b):
+                return len(b) - len(a)
+            return 1 if b > a else -1
+        
+        nums.sort(key=cmp_to_key(cmp))
+        return nums[k - 1]
 ```
 
 ### **Java**
@@ -75,7 +83,17 @@ nums 中的数字按非递减顺序排列为 ["0","0"]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String kthLargestNumber(String[] nums, int k) {
+        Arrays.sort(nums, (a, b) -> {
+            if (a.length() != b.length()) {
+                return b.length() - a.length();
+            }
+            return b.compareTo(a);
+        });
+        return nums[k - 1];
+    }
+}
 ```
 
 ### **...**
