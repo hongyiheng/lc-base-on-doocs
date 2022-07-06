@@ -59,7 +59,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countPaths(self, grid: List[List[int]]) -> int:
+        mod = int(1e9 + 7)
+        m, n = len(grid), len(grid[0])
 
+        @cache
+        def dfs(x, y):
+            cnt = 1
+            for d in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                    continue
+                if grid[nx][ny] > grid[x][y]:
+                    cnt += dfs(nx, ny)          
+            return cnt
+
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                ans += dfs(i, j)
+        return ans % mod
 ```
 
 ### **Java**
@@ -67,7 +87,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[][] grid;
+    Map<Integer, Long> mp;
+    int m, n;
+    int mod = (int)1e9 + 7;
 
+    public int countPaths(int[][] grid) {
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
+        mp = new HashMap<>();
+        long ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mp.containsKey(i * n + j)) {
+                    ans = (ans + mp.get(i * n + j)) % mod;
+                } else {
+                    ans = (ans + dfs(i, j)) % mod;
+                }  
+            }
+        }
+        return (int)(ans % mod);
+    }
+
+    public long dfs(int x, int y) {
+        int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        long ans = 1;
+        for (int[] d : dirs) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                continue;
+            }
+            if (grid[nx][ny] <= grid[x][y]) {
+                continue;
+            }
+            if (!mp.containsKey(nx * n + ny)) {
+                mp.put(nx * n + ny, dfs(nx, ny));
+            } 
+            ans += mp.get(nx * n + ny);
+        }
+        ans %= mod;
+        mp.put(x * n + y, ans);
+        return ans;
+    }
+}
 ```
 
 ### **...**
