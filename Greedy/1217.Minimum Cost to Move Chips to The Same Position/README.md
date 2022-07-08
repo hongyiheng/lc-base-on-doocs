@@ -56,7 +56,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minCostToMoveChips(self, position: List[int]) -> int:
+        a = b = 0
+        for p in position:
+            if p % 2:
+                a += 1
+            else:
+                b += 1
+        return min(a, b)
 ```
 
 ### **Java**
@@ -64,7 +72,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minCostToMoveChips(int[] position) {
+        int a = 0, b = 0;
+        for (int i = 0; i < position.length; i++) {
+            if (position[i] % 2 == 0) {
+                a++;
+            } else {
+                b++;
+            }
+        }
+        return Math.min(a, b);
+    }
+}
 ```
 
 ### **...**
