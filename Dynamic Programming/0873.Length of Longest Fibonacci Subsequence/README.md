@@ -61,7 +61,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lenLongestFibSubseq(self, arr: List[int]) -> int:
+        n = len(arr)
+        mp = dict()
+        for i, v in enumerate(arr):
+            mp[v] = i
+        ans = 0
+        dp = [[0] * n for _ in range(n)]
+        for i in range(2, n):
+            for j in range(1, i):
+                t = arr[i] - arr[j]
+                idx = mp.get(t, float('inf'))
+                if idx < j:
+                    dp[i][j] = max(dp[i][j], 3)
+                    dp[i][j] = max(dp[i][j], dp[j][idx] + 1)
+                    ans = max(ans, dp[i][j])
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +85,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lenLongestFibSubseq(int[] arr) {
+        int n = arr.length;
+        int ans = 0;
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            mp.put(arr[i], i);
+        }
+        int[][] dp = new int[n][n];
+        for (int i = 2; i < n; i++) {
+            for (int j = 1; j < i; j++) {
+                int t = arr[i] - arr[j];
+                int idx = mp.getOrDefault(t, Integer.MAX_VALUE);
+                if (idx < j) {
+                    dp[i][j] = Math.max(3, dp[i][j]);
+                    dp[i][j] = Math.max(dp[i][j], dp[j][idx] + 1);
+                    ans = Math.max(ans, dp[i][j]);
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
