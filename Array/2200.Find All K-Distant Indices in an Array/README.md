@@ -58,7 +58,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+        s = []
+        for i, v in enumerate(nums):
+            if v == key:
+                s.append(i)
+        ans = []
+        for i in range(len(nums)):
+            l, r = 0, len(s) - 1
+            while l < r:
+                mid = (l + r) >> 1
+                if s[mid] < i:
+                    l = mid + 1
+                else:
+                    r = mid
+            diff = abs(i - s[l])
+            if l > 0:
+                diff = min(diff, abs(i - s[l - 1]))
+            if diff <= k:
+                ans.append(i)
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +86,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
+        int n = nums.length;
+        List<Integer> s = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == key) {
+                s.add(i);
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int l = 0, r = s.size() - 1;
+            while (l < r) {
+                int mid = (l + r) >> 1;
+                if (s.get(mid) < i) {
+                    l = mid + 1;
+                } else {
+                    r = mid;
+                }
+            }
+            int diff = Math.abs(i - s.get(l));
+            if (l > 0) {
+                diff = Math.min(Math.abs(i - s.get(l - 1)), diff);
+            }
+            if (diff <= k) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
