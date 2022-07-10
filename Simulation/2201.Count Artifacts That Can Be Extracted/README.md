@@ -72,7 +72,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def digArtifacts(self, n: int, artifacts: List[List[int]], dig: List[List[int]]) -> int:
+        g = [[False] * n for _ in range(n)]
+        for i, j in dig:
+            g[i][j] = True
+        ans = 0
+        for a in artifacts:
+            flag = True
+            for i in range(a[0], a[2] + 1):
+                if not flag:
+                    break
+                for j in range(a[1], a[3] + 1):
+                    if not g[i][j]:
+                        flag = False
+                        break
+            if flag:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +97,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int digArtifacts(int n, int[][] artifacts, int[][] dig) {
+        boolean[][] g = new boolean[n][n];
+        for (int[] d : dig) {
+            g[d[0]][d[1]] = true;
+        }
+        int ans = 0;
+        for (int[] a : artifacts) {
+            boolean flag = true;
+            for (int i = a[0]; i <= a[2] && flag; i++) {
+                for (int j = a[1]; j <= a[3] && flag; j++) {
+                    if (!g[i][j]) {
+                        flag = false;
+                    }
+                }
+            }
+            if (flag) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
