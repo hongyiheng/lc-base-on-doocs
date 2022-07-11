@@ -73,7 +73,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
+        while head:
+            q = deque()
+            cnt = k
+            while head and cnt:
+                q.append(head)
+                head = head.next
+                cnt -= 1
+            if cnt:
+                while q:
+                    cur.next = q.popleft()
+                    cur = cur.next
+            else:
+                while q:
+                    cur.next = q.pop()
+                    cur = cur.next
+            if not head:
+                cur.next = None
+        return dummy.next
 ```
 
 ### **Java**
@@ -81,7 +107,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode cur = dummy;
+        while (head != null) {
+            Deque<ListNode> q = new ArrayDeque<>();
+            int cnt = k;
+            while (head != null && cnt > 0) {
+                q.addLast(head);
+                head = head.next;
+                cnt--;
+            }
+            if (cnt > 0) {
+                while (!q.isEmpty()) {
+                    cur.next = q.pollFirst();
+                    cur = cur.next;
+                }
+            } else {
+                while (!q.isEmpty()) {
+                    cur.next = q.pollLast();
+                    cur = cur.next;
+                }
+            }
+            if (head == null) {
+                cur.next = null;
+            }
+        }
+        return dummy.next;   
+    }
+}
 ```
 
 ### **...**
