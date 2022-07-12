@@ -54,7 +54,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        ans = []
+        g = [[False] * n for _ in range(n)]
 
+        def dfs(g, x):
+            nonlocal n, ans
+            if x == n:
+                item = []
+                for row in g:
+                    s = ""
+                    for b in row:
+                        s += "Q" if b else "."
+                    item.append(s)
+                ans.append(item)
+                return
+            for j in range(n):
+                if is_valid(g, x, j):
+                    g[x][j] = True
+                    dfs(g, x + 1)
+                    g[x][j] = False
+        
+        def is_valid(g, x, y):
+            for d in [[-1, 1], [-1, -1], [-1, 0]]:
+                nx, ny = x + d[0], y + d[1]
+                while 0 <= nx < n and 0 <= ny < n:
+                    if g[nx][ny]:
+                        return False
+                    nx += d[0]
+                    ny += d[1]
+            return True
+        
+        dfs(g, 0)
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +95,55 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    List<List<String>> ans;
+    int n;
 
+    public List<List<String>> solveNQueens(int n) {
+        ans = new ArrayList<>();
+        this.n = n;
+        boolean[][] g = new boolean[n][n];
+        dfs(g, 0);
+        return ans;
+    }
+
+    public void dfs(boolean[][] g, int x) {
+        if (x == n) {
+            List<String> item = new ArrayList<>();
+            for (boolean[] row : g) {
+                StringBuilder sb = new StringBuilder();
+                for (boolean b : row) {
+                    sb.append(b ? "Q" : ".");
+                }
+                item.add(sb.toString());
+            }
+            ans.add(item);
+            return;
+        }
+        for (int j = 0; j < n; j++) {
+            if (isValid(g, x, j)) {
+                g[x][j] = true;
+                dfs(g, x + 1);
+                g[x][j] = false;
+            }
+        }
+    }
+
+    public boolean isValid(boolean[][] g, int x, int y) {
+        int[][] dir = new int[][]{{-1, 1}, {-1, -1}, {-1, 0}};
+        for (int [] d : dir) {
+            int nx = x + d[0], ny = y + d[1];
+            while (nx >= 0 && nx < n && ny >= 0 && ny < n) {
+                if (g[nx][ny]) {
+                    return false;
+                }
+                nx += d[0];
+                ny += d[1];
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
