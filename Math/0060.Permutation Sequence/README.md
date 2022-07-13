@@ -65,7 +65,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        cnt = [0] * (n + 1)
+        cnt[0] = 1
+        for i in range(1, n + 1):
+            cnt[i] = cnt[i - 1] * i
+        used = [False] * (n + 1)
+        ans = ""
+        for i in range(n - 1, -1, -1):
+            num = cnt[i]
+            for j in range(1, n + 1):
+                if used[j]:
+                    continue
+                if k > num:
+                    k -= num
+                    continue
+                ans += str(j)
+                used[j] = True
+                break
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +92,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String getPermutation(int n, int k) {
+        int[] cnt = new int[10];
+        cnt[0] = 1;
+        for (int i = 1; i < 10; i++) {
+            cnt[i] = cnt[i - 1] * i;
+        }
+        StringBuilder ans = new StringBuilder();
+        boolean[] used = new boolean[n + 1];
+        for (int i = n - 1; i >= 0; i--) {
+            int num = cnt[i];
+            for (int j = 1; j <= n; j++) {
+                if (used[j]) {
+                    continue;
+                }
+                if (k > num) {
+                    k -= num;
+                    continue;
+                }
+                used[j] = true;
+                ans.append(j);
+                break;
+            }
+        }
+        return ans.toString();
+    }   
+}
 ```
 
 ### **...**
