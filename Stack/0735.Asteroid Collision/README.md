@@ -64,7 +64,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        n = len(asteroids)
+        ans = []
+        for v in asteroids:
+            if v > 0:
+                ans.append(v)
+            else:
+                exist = True
+                while ans and exist:
+                    if ans[-1] < 0:
+                        break
+                    if ans[-1] > abs(v):
+                        exist = False
+                    elif ans[-1] == abs(v):
+                        ans.pop()
+                        exist = False
+                    else:
+                        ans.pop()
+                if exist:
+                    ans.append(v)
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +93,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int v : asteroids) {
+            if (v > 0) {
+                q.addLast(v);
+            } else {
+                boolean exist = true;
+                while (!q.isEmpty() && exist) {
+                    if (q.peekLast() < 0) {
+                        break;
+                    }
+                    if (q.peekLast() > Math.abs(v)) {
+                        exist = false;
+                    } else if (q.peekLast() == Math.abs(v)) {
+                        exist = false;
+                        q.pollLast();
+                    } else {
+                        q.pollLast();
+                    }
+                }
+                if (exist) {
+                    q.addLast(v);
+                }
+            }  
+        }
+        int[] ans = new int[q.size()];
+        int idx = 0;
+        while (!q.isEmpty()) {
+            ans[idx++] = q.pollFirst();
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
