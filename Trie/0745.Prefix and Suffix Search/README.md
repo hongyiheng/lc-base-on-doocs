@@ -54,7 +54,62 @@ wordFilter.f("a", "e"); // 返回 0 ，因为下标为 0 的单词的 prefix = "
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class WordFilter:
+    def __init__(self, words: List[str]):
+        self.pre = Node()
+        self.tail = Node()
+        self.words = words
+        for i in range(len(words)):
+            self.insert(i, False)
+            self.insert(i, True)
+            
+    def f(self, pref: str, suff: str) -> int:
+        pre_ids = self.query(pref, False)
+        tail_ids = self.query(suff, True)
+        i, j = len(pre_ids) - 1, len(tail_ids) - 1
+        while i >= 0 and j >= 0:
+            if pre_ids[i] == tail_ids[j]:
+                return pre_ids[i]
+            elif pre_ids[i] > tail_ids[j]:
+                i -= 1
+            else:
+                j -= 1
+        return -1
 
+    def query(self, w, desc):
+        head = self.pre
+        if desc:
+            head = self.tail
+            w = w[::-1]
+        for c in w:
+            if not head.child[ord(c) - ord('a')]:
+                return []
+            head = head.child[ord(c) - ord('a')]
+        return head.ids
+    
+    def insert(self, i, desc):
+        head = self.pre
+        w = self.words[i]
+        if desc:
+            head = self.tail
+            w = w[::-1]
+        for c in w:
+            if not head.child[ord(c) - ord('a')]:
+                head.child[ord(c) - ord('a')] = Node()
+            head = head.child[ord(c) - ord('a')]
+            head.ids.append(i)
+
+
+class Node:
+    def __init__(self):
+        self.ids = []
+        self.child = [None] * 26
+
+
+
+# Your WordFilter object will be instantiated and called as such:
+# obj = WordFilter(words)
+# param_1 = obj.f(pref,suff)
 ```
 
 ### **Java**
@@ -62,7 +117,85 @@ wordFilter.f("a", "e"); // 返回 0 ，因为下标为 0 的单词的 prefix = "
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class WordFilter {
+    Node pre;
+    Node tail;
+    String[] words;
 
+    public WordFilter(String[] words) {
+        pre = new Node();
+        tail = new Node();
+        this.words = words;
+        for (int i = 0; i < words.length; i++) {
+            insert(i, false);
+            insert(i, true);
+        }
+    }
+    
+    public int f(String pref, String suff) {
+        List<Integer> preList = query(pref, false);
+        List<Integer> tailList = query(suff, true);
+        int i = preList.size() - 1, j = tailList.size() - 1;
+        while (i >= 0 && j >= 0) {
+            int a = preList.get(i), b = tailList.get(j);
+            if (a == b) {
+                return preList.get(i);
+            } else if (a > b) {
+                i--;
+            } else {
+                j--;
+            }
+        }
+        return -1;
+    }
+
+    public void insert(int i, boolean desc) {
+        Node head = pre;
+        String w = words[i];
+        if (desc) {
+            head = tail;
+            w = new StringBuilder(w).reverse().toString();
+        }
+        for (char c : w.toCharArray()) {
+            if (head.child[c - 'a'] == null) {
+                head.child[c - 'a'] = new Node();
+            }
+            head = head.child[c - 'a'];
+            head.ids.add(i);
+        } 
+    }
+
+    public List<Integer> query(String w, boolean desc) {
+        Node head = pre;
+        if (desc) {
+            head = tail;
+            w = new StringBuilder(w).reverse().toString();
+        }
+        for (char c : w.toCharArray()) {
+            if (head.child[c - 'a'] == null) {
+                return new ArrayList<>();
+            }
+            head = head.child[c - 'a'];
+        } 
+        return head.ids;
+    }
+}
+
+class Node {
+    List<Integer> ids;
+    Node[] child;
+
+    public Node() {
+        ids = new ArrayList<>();
+        child = new Node[26];
+    }
+}
+
+/**
+ * Your WordFilter object will be instantiated and called as such:
+ * WordFilter obj = new WordFilter(words);
+ * int param_1 = obj.f(pref,suff);
+ */
 ```
 
 ### **...**
