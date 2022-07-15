@@ -46,7 +46,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reachingPoints(self, sx: int, sy: int, tx: int, ty: int) -> bool:
+        while (tx > 0 and ty > 0) and (sx < tx or sy < ty):
+            if tx >= ty:
+                tx = tx - max((tx - sx) // ty, 1) * ty
+            else:
+                ty = ty - max((ty - sy) // tx, 1) * tx
+        return sx == tx and sy == ty
 ```
 
 ### **Java**
@@ -54,7 +61,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        while ((tx > 0 && ty > 0) && (tx > sx || ty > sy)) {
+            if (tx >= ty) {
+                tx = tx - Math.max(1, (tx - sx) / ty) * ty;
+            } else {
+                ty = ty - Math.max(1, (ty - sy) / tx) * tx;
+            }
+        }
+        return sx == tx && sy == ty;
+    }
+}
 ```
 
 ### **...**
