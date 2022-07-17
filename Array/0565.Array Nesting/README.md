@@ -45,7 +45,18 @@ S[0] = {A[0], A[5], A[6], A[2]} = {5, 6, 2, 0}
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def arrayNesting(self, nums: List[int]) -> int:
+        ans, n = 0, len(nums)
+        used = [False] * n
+        for i in range(n):
+            cur, cnt = nums[i], 0
+            while not used[cur]:
+                cnt += 1
+                used[cur] = True
+                cur = nums[cur]
+            ans = max(ans, cnt)
+        return ans
 ```
 
 ### **Java**
@@ -53,7 +64,22 @@ S[0] = {A[0], A[5], A[6], A[2]} = {5, 6, 2, 0}
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int arrayNesting(int[] nums) {
+        int n = nums.length, ans = 0;
+        boolean[] used = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            int cur = nums[i], cnt = 0;
+            while (!used[cur]) {
+                used[cur] = true;
+                cur = nums[cur];
+                cnt++;
+            }
+            ans = Math.max(ans, cnt);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
