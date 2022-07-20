@@ -70,7 +70,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shiftGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
+        m, n = len(grid), len(grid[0])
+        k %= (m * n)
+        cur = 0 if k == 0 else m * n - k
+        ans = []
+        while len(ans) < m:
+            row = []
+            for _ in range(n):
+                x, y = cur // n, cur % n
+                row.append(grid[x][y])
+                if cur + 1 == m * n:
+                    cur = 0
+                else:
+                    cur += 1
+            ans.append(row)
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +94,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+        int m = grid.length, n = grid[0].length;
+        k %= (m * n);
+        List<List<Integer>> ans = new ArrayList<>();
+        int cur = k == 0 ? 0 : m * n - k;
+        while (ans.size() < m) {
+            List<Integer> row = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                int x = cur / n, y = cur % n;
+                row.add(grid[x][y]);
+                if (++cur == m * n) {
+                    cur = 0;
+                }
+            }
+            ans.add(row);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
