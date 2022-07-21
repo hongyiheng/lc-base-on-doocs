@@ -72,7 +72,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
+        M, N = 1010, 2010
+        g = [[None] * N for _ in range(M)]
+        q = deque()
+        q.append((0, 1000, root))
+        while q:
+            m = len(q)
+            for _ in range(m):
+                cur = q.popleft()
+                x, y, node = cur[0], cur[1], cur[2]
+                if not g[x][y]:
+                    g[x][y] = []
+                heapq.heappush(g[x][y], node.val)
+                if node.left:
+                    q.append((x + 1, y - 1, node.left))
+                if node.right:
+                    q.append((x + 1, y + 1, node.right))
+        ans = []
+        for j in range(N):
+            col = []
+            for i in range(M):
+                while g[i][j]:
+                    col.append(heapq.heappop(g[i][j]))
+            if col:
+                ans.append(col)
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +112,63 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        int M = 1010, N = 2010;
+        PriorityQueue<Integer>[][] g = new PriorityQueue[M][N];
+        Deque<Pair<int[], TreeNode>> q = new ArrayDeque<>();
+        q.addLast(new Pair(new int[]{0, 1000}, root));
+        while (!q.isEmpty()) {
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                Pair<int[], TreeNode> cur = q.pollFirst();
+                int x = cur.getKey()[0], y = cur.getKey()[1];
+                TreeNode node = cur.getValue();
+                if (g[x][y] == null) {
+                    g[x][y] = new PriorityQueue();
+                }
+                g[x][y].add(node.val);
+                if (node.left != null) {
+                    q.addLast(new Pair(new int[]{x + 1, y - 1}, node.left));
+                }
+                if (node.right != null) {
+                    q.addLast(new Pair(new int[]{x + 1, y + 1}, node.right));
+                }
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int j = 0; j < N; j++) {
+            List<Integer> col = new ArrayList<>();
+            for (int i = 0; i < M; i++) {
+                if (g[i][j] != null) {
+                    while (!g[i][j].isEmpty()) {
+                        col.add(g[i][j].poll());
+                    }   
+                }
+            }
+            if (!col.isEmpty()) {
+                ans.add(col);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
