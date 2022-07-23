@@ -63,7 +63,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumRemoval(self, beans: List[int]) -> int:
+        beans.sort()
+        s, n = sum(beans), len(beans)
+        ans = float('inf')
+        for i, v in enumerate(beans):
+            t = s - (n - i) * v
+            ans = min(ans, t)
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +79,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minimumRemoval(int[] beans) {
+        Arrays.sort(beans);
+        int n = beans.length;
+        long s = 0;
+        for (int v : beans) {
+            s += v;
+        }
+        long ans = Long.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            long t = s - 1L * (n - i) * beans[i];
+            ans = Math.min(ans, t);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
