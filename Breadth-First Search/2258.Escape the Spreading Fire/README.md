@@ -79,6 +79,78 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximumMinutes(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        f = []
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    f.append([i, j])
+        dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+
+        def infect(g, q):
+            nonlocal grid, m, n, dirs
+            ans = []
+            while q:
+                x, y = q.pop()
+                g[x][y] = True
+                for d in dirs:
+                    nx, ny = x + d[0], y + d[1]
+                    if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                        continue
+                    if g[nx][ny] or grid[nx][ny] == 2:
+                        continue
+                    g[nx][ny] = True
+                    ans.append([nx, ny])
+            return ans
+
+        def check(x):
+            nonlocal f, grid, dirs, m, n
+            cur_fire = f[:]
+            fire = [[False] * n for _ in range(m)]
+            while x > 0:
+                cur_fire = infect(fire, cur_fire)
+                x -= 1
+            if fire[0][0]:
+                return False
+            vis = [[False] * n for _ in range(m)]
+            vis[0][0] = True
+            q = deque()
+            q.append([0, 0])
+            while q:
+                if fire[m - 1][n - 1]:
+                    return False
+                k = len(q)
+                for _ in range(k):
+                    x, y = q.popleft()
+                    if fire[x][y]:
+                        continue
+                    for d in dirs:
+                        nx, ny = x + d[0], y + d[1]
+                        if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                            continue
+                        if vis[nx][ny] or fire[nx][ny] or grid[nx][ny] == 2:
+                            continue
+                        if nx == m - 1 and ny == n - 1:
+                            return True
+                        vis[nx][ny] = True
+                        q.append([nx, ny])
+                cur_fire = infect(fire, cur_fire)
+            return False
+            
+        left, right = 0, m * n
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if check(mid):
+                left = mid
+            else:
+                right = mid - 1
+        if left == m * n:
+            return int(1e9)
+        return left if check(left) else -1
+
+
 
 ```
 
@@ -87,7 +159,101 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int m, n;
+    int[][] grid;
+    int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
+    public int maximumMinutes(int[][] grid) {
+        m = grid.length;
+        n = grid[0].length;
+        this.grid = grid;
+        int left = 0, right = m * n;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (check(mid)) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if (left == m * n) {
+            return (int)1e9;
+        }
+        return check(left) ? left : -1;
+    }
+
+    public boolean check(int t) {
+        boolean[][] fire = new boolean[m][n];
+        List<int[]> curFire = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    fire[i][j] = true;
+                    curFire.add(new int[]{i, j});
+                }
+            }
+        }
+        while (t-- > 0) {
+            curFire = infect(fire, curFire);
+        }
+        if (fire[0][0]) {
+            return false;
+        }
+        boolean[][] vis = new boolean[m][n];
+        Deque<int[]> q = new ArrayDeque<>();
+        q.addLast(new int[]{0, 0});
+        vis[0][0] = true;
+        while (!q.isEmpty()) {
+            if (fire[m - 1][n - 1]) {
+                return false;
+            }
+            int k = q.size();
+            for (int i = 0; i < k; i++) {
+                int[] cur = q.pollFirst();
+                int x = cur[0], y = cur[1];
+                if (fire[x][y]) {
+                    continue;
+                }
+                for (int[] d : dirs) {
+                    int nx = x + d[0], ny = y + d[1];
+                    if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                        continue;
+                    }
+                    if (vis[nx][ny] || fire[nx][ny] || grid[nx][ny] == 2) {
+                        continue;
+                    }
+                    if (nx == m - 1 && ny == n - 1) {
+                        return true;
+                    }
+                    vis[nx][ny] = true;
+                    q.addLast(new int[]{nx, ny});
+                }
+            }
+            curFire = infect(fire, curFire);
+        }
+        return false;
+    }
+
+    public List<int[]> infect(boolean[][] fire, List<int[]> f) {
+        List<int[]> next = new ArrayList<>();
+        for (int[] v : f) {
+            int x = v[0], y = v[1];
+            for (int[] d : dirs) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                    continue;
+                }
+                if (fire[nx][ny] || grid[nx][ny] == 2) {
+                    continue;
+                }
+                fire[nx][ny] = true;
+                next.add(new int[]{nx, ny});
+            }
+        }
+        return next;
+    }
+}
 ```
 
 ### **...**
