@@ -59,7 +59,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedList
 
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        def cmp(a, b):
+            if a[0] != b[0]:
+                return a[0] - b[0]
+            return 1 if b[1] > a[1] else -1
+            
+        mp = {}
+        for w in words:
+            mp[w] = mp.get(w, 0) + 1
+        q = SortedList(key=cmp_to_key(cmp))
+        for key in mp.keys():
+            q.add((mp[key], key))
+            if len(q) > k:
+                q.pop(0)
+        ans = deque()
+        for _, w in q:
+            ans.appendleft(w)
+        return list(ans)
 ```
 
 ### **Java**
@@ -67,7 +87,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> mp = new HashMap<>();
+        for (String w : words) {
+            mp.put(w, mp.getOrDefault(w, 0) + 1);
+        }
+        PriorityQueue<Pair<Integer, String>> q = new PriorityQueue<>((a, b) -> {
+            if (!a.getKey().equals(b.getKey())) {
+                return a.getKey() - b.getKey();
+            }
+            return b.getValue().compareTo(a.getValue()) > 0 ? 1 : -1;
+        });
+        for (String w : mp.keySet()) {
+            q.add(new Pair<>(mp.get(w), w));
+            if (q.size() > k) {
+                q.poll();
+            }
+        }
+        Deque<String> ans = new ArrayDeque<>();
+        while (!q.isEmpty()) {
+            ans.addFirst(q.poll().getValue());
+        }
+        return new ArrayList<>(ans);
+    }
+}
 ```
 
 ### **...**
