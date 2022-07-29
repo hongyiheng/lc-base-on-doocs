@@ -55,7 +55,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        stk = []
+        for v in num:
+            while k and stk and stk[-1] > v:
+                stk.pop()
+                k-= 1
+            stk.append(v)
+        ans = "".join(stk)
+        if k:
+            ans = ans[:-min(k, len(ans))]
+        while ans and ans[0] == "0":
+            ans = ans[1:]
+        return "0" if ans == "" else ans
 ```
 
 ### **Java**
@@ -63,7 +76,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String removeKdigits(String num, int k) {
+        Deque<Character> stk = new ArrayDeque<>();
+        for (char c : num.toCharArray()) {
+            while (k > 0 && !stk.isEmpty() && stk.peekLast() > c) {
+                stk.pollLast();
+                k--;
+            }
+            stk.addLast(c);
+        }
+        StringBuilder ans = new StringBuilder();
+        while (!stk.isEmpty() && stk.size() > k) {
+            char c = stk.pollFirst();
+            if (ans.length() == 0 && c == '0') {
+                continue;
+            } 
+            ans.append(c);
+        }
+        return ans.length() == 0 ? "0" : ans.toString();
+    }
+}
 ```
 
 ### **...**
