@@ -55,7 +55,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        min_ = max_ = 0
+        for c in s:
+            if c == "(":
+                min_ += 1
+                max_ += 1
+            elif c == ")":
+                min_ -= 1
+                max_ -= 1
+            else:
+                min_ -= 1
+                max_ += 1
+            min_ = max(0, min_)
+            if min_ > max_:
+                return False
+        return min_ == 0
 ```
 
 ### **Java**
@@ -63,7 +79,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkValidString(String s) {
+        char[] cs = s.toCharArray();
+        int min = 0, max = 0;
+        for (char c : cs) {
+            if (c == '(') {
+                min++; 
+                max++;
+            } else if (c == ')') {
+                min--;
+                max--;
+            } else {
+                min--;
+                max++;
+            }
+            min = Math.max(0, min);
+            if (min > max) {
+                return false;
+            }
+        }
+        return min == 0;
+    }
+}
 ```
 
 ### **...**
