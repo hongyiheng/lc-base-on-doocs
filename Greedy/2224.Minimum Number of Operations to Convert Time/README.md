@@ -53,7 +53,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def convertTime(self, current: str, correct: str) -> int:
+        cur = int(current.split(":")[0]) * 60 + int(current.split(":")[1])
+        target = int(correct.split(":")[0]) * 60 + int(correct.split(":")[1])
+        ans = 0
+        while cur < target:
+            diff = target - cur
+            if diff >= 60:
+                cur += 60
+            elif diff >= 15:
+                cur += 15
+            elif diff >= 5:
+                cur += 5
+            else:
+                cur += 1
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +77,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int convertTime(String current, String correct) {
+        int cur = Integer.parseInt(current.split(":")[0]) * 60 + Integer.parseInt(current.split(":")[1]);
+        int target = Integer.parseInt(correct.split(":")[0]) * 60 + Integer.parseInt(correct.split(":")[1]);
+        int ans = 0;
+        while (cur < target) {
+            int diff = target - cur;
+            if (diff >= 60) {
+                cur += 60;
+            } else if (diff >= 15) {
+                cur += 15;
+            } else if (diff >= 5) {
+                cur += 5;
+            } else {
+                cur++;
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
