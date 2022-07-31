@@ -50,7 +50,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximumCandies(self, candies: List[int], k: int) -> int:
+        def check(x):
+            nonlocal candies, k
+            cnt = 0
+            for v in candies:
+                cnt += v // x
+            return cnt >= k
 
+        left, right = 0, max(candies)
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if check(mid):
+                left = mid
+            else:
+                right = mid - 1
+        return left
 ```
 
 ### **Java**
@@ -58,7 +74,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] candies;
+    long k;
 
+    public int maximumCandies(int[] candies, long k) {
+        this.candies = candies;
+        this.k = k;
+        int left = 0, right = 0;
+        for (int v : candies) {
+            right = Math.max(right, v);
+        }
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (check(mid)) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+
+    public boolean check(int x) {
+        long cnt = 0;
+        for (int v : candies) {
+            cnt += v / x;
+        }
+        return cnt >= k;
+    }
+}
 ```
 
 ### **...**
