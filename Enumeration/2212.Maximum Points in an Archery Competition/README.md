@@ -78,7 +78,25 @@ Bob 获得总分 8 + 9 + 10 = 27 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumBobPoints(self, numArrows: int, aliceArrows: List[int]) -> List[int]:
+        ans = []
+        max_ = 0
+        for i in range(1 << 12):
+            cur = use = 0
+            tmp = [0] * 12
+            for j in range(12):
+                if i & (1 << j):
+                    cur += j
+                    use += aliceArrows[j] + 1
+                    tmp[j] = aliceArrows[j] + 1
+            if use > numArrows:
+                continue
+            if cur > max_:
+                max_ = cur
+                tmp[0] += numArrows - use
+                ans = tmp[:]
+        return ans
 ```
 
 ### **Java**
@@ -86,7 +104,32 @@ Bob 获得总分 8 + 9 + 10 = 27 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] maximumBobPoints(int numArrows, int[] aliceArrows) {
+        int[] ans = new int[12];
+        int mx = 0;
+        for (int i = 0; i < 1 << 12; i++) {
+            int cur = 0, use = 0;
+            int[] tmp = new int[12];
+            for (int j = 0; j < 12; j++) {
+                if ((i & (1 << j)) != 0) {
+                    cur += j;
+                    use += aliceArrows[j] + 1;
+                    tmp[j] += aliceArrows[j] + 1;
+                }
+            }
+            if (use > numArrows) {
+                continue;
+            }
+            if (cur > mx) {
+                mx = cur;
+                tmp[0] += numArrows - use;
+                ans = tmp.clone();
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
