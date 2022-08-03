@@ -43,7 +43,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxDistance(self, arrays: List[List[int]]) -> int:
+        min_, max_ = float('inf'), float('-inf')
+        ans = 0
+        for i, r in enumerate(arrays):
+            if i > 0:
+                ans = max(ans, abs(r[0] - max_))
+                ans = max(ans, abs(r[-1] - min_))
+            min_ = min(min_, r[0])
+            max_ = max(max_, r[-1])
+        return ans
 ```
 
 ### **Java**
@@ -51,7 +61,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxDistance(List<List<Integer>> arrays) {
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        int ans = 0;
+        for (int i = 0; i < arrays.size(); i++) {
+            List<Integer> cur = arrays.get(i);
+            if (i > 0) {
+                ans = Math.max(ans, Math.abs(cur.get(cur.size() - 1) - min));
+                ans = Math.max(ans, Math.abs(max - cur.get(0)));
+            }
+            max = Math.max(max, cur.get(cur.size() - 1));
+            min = Math.min(min, cur.get(0));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
