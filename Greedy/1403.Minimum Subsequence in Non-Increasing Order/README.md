@@ -57,7 +57,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minSubsequence(self, nums: List[int]) -> List[int]:
+        n, s, cur = len(nums), sum(nums), 0
+        nums.sort()
+        ans = []
+        for i in range(n - 1, -1, -1):
+            if cur > s:
+                break
+            cur += nums[i]
+            s -= nums[i]
+            ans.append(nums[i])
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +76,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> minSubsequence(int[] nums) {
+        int n = nums.length, s = 0, cur = 0;
+        for (int v : nums) {
+            s += v;
+        }
+        Arrays.sort(nums);
+        List<Integer> ans = new ArrayList<>();
+        for (int i = n - 1; i >= 0; i--) {
+            if (cur > s) {
+                break;
+            }
+            s -= nums[i];
+            cur += nums[i];
+            ans.add(nums[i]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
