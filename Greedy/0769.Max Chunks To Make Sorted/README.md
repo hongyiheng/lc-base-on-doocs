@@ -47,7 +47,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        ans = mx = 0
+        for i, v in enumerate(arr):
+            mx = max(mx, v)
+            if i == mx:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -55,7 +62,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+        int ans = 0, mx = 0;
+        for (int i = 0; i < arr.length; i++) {
+            mx = Math.max(mx, arr[i]);
+            if (i == mx) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
