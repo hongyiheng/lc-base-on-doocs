@@ -51,7 +51,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        nums = arr[::]
+        nums.sort()
+        q = []
+        ans = idx = 0
+        for v in arr:
+            if q:
+                while q and q[0] == nums[idx]:
+                    heapq.heappop(q)
+                    idx += 1
+                if not q:
+                    ans += 1
+            heapq.heappush(q, v)
+        return ans + 1 if q else ans
 ```
 
 ### **Java**
@@ -59,7 +73,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+        int[] nums = arr.clone();
+        Arrays.sort(nums);
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        int ans = 0, idx = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (!q.isEmpty()) {
+                while (!q.isEmpty() && q.peek() == nums[idx]) {
+                    q.poll();
+                    idx++;
+                }
+                if (q.isEmpty()) {
+                    ans++;
+                }
+            }
+            q.add(arr[i]);
+        }
+        return q.isEmpty() ? ans : ans + 1;
+    }
+}
 ```
 
 ### **...**
