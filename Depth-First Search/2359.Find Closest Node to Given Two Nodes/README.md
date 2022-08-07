@@ -60,7 +60,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def closestMeetingNode(self, edges: List[int], node1: int, node2: int) -> int:
+        n = len(edges)
 
+        def get_distance(x):
+            nonlocal edges, n
+            dis = [float('inf')] * n
+            d = 0
+            while x != -1 and dis[x] == float('inf'):
+                dis[x] = d
+                d += 1
+                x = edges[x]
+            return dis
+
+        d1 = get_distance(node1)
+        d2 = get_distance(node2)
+        ans, cur = -1, float('inf')
+        for i in range(n):
+            d = max(d1[i], d2[i])
+            if d < cur:
+                cur = d
+                ans = i
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +90,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int n;
+    int[] edges;
 
+    public int closestMeetingNode(int[] edges, int node1, int node2) {
+        this.edges = edges;
+        n = edges.length;
+        int[] d1 = getDistance(node1);
+        int[] d2 = getDistance(node2);
+        int ans = -1, cur = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            int d = Math.max(d1[i], d2[i]);
+            if (cur > d) {
+                cur = d;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+
+    public int[] getDistance(int x) {
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        int d = 0;
+        while (x != -1 && dist[x] == Integer.MAX_VALUE) {
+            dist[x] = d++;
+            x = edges[x];
+        }
+        return dist;
+    }
+}
 ```
 
 ### **...**
