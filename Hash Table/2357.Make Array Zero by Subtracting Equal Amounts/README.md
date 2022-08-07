@@ -54,7 +54,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        ans = set()
+        for v in nums:
+            if v == 0:
+                continue
+            ans.add(v)
+        return len(ans)
 ```
 
 ### **Java**
@@ -62,7 +69,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperations(int[] nums) {
+        Set<Integer> ans = new HashSet<>();
+        for (int v : nums) {
+            if (v == 0) {
+                continue;
+            }
+            ans.add(v);
+        }
+        return ans.size();
+    }
+}
 ```
 
 ### **...**
