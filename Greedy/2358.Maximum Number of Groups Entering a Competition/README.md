@@ -54,7 +54,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumGroups(self, grades: List[int]) -> int:
+        n, m, k, ans = len(grades), 1, 0, 0
+        for _ in range(n):
+            k += 1
+            if k == m:
+                k = 0
+                m += 1
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +71,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumGroups(int[] grades) {
+        int n = grades.length;
+        int m = 1, k = 0, ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (++k == m) {
+                k = 0;
+                m++;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
