@@ -58,7 +58,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestCycle(self, edges: List[int]) -> int: 
+        n = len(edges)
+        time = [0] * n
+        ans, cur = -1, 1
+        for i in range(n):
+            if time[i]:
+                continue
+            start_time, x = cur, i
+            while x != -1:
+                if time[x]:
+                    if time[x] >= start_time:
+                        ans = max(ans, cur - time[x])
+                    break
+                time[x] = cur
+                cur += 1
+                x = edges[x]
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +83,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestCycle(int[] edges) {
+        int n = edges.length;
+        int[] time = new int[n];
+        int cur = 1, ans = -1;
+        for (int i = 0; i < n; i++) {
+            if (time[i] != 0) {
+                continue;
+            }
+            int startTime = cur, x = i;
+            while (x != -1) {
+                if (time[x] != 0) {
+                    if (time[x] >= startTime) {
+                        ans = Math.max(ans, cur - time[x]);
+                    }   
+                    break;
+                }
+                time[x] = cur++;
+                x = edges[x];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
