@@ -80,6 +80,14 @@ class Solution:
             if (n & 1 << i) != 0:
                 ans += 1
         return ans
+
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        ans = 0
+        while n:
+            n -= (n & -n)
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -95,6 +103,18 @@ public class Solution {
             if ((n & 1 << i) != 0) {
                 ans++;
             }
+        }
+        return ans;
+    }
+}
+
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int ans = 0;
+        while (n != 0) {
+            n -= (n & -n);
+            ans++;
         }
         return ans;
     }
