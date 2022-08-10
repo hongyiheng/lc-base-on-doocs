@@ -56,7 +56,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def solveEquation(self, equation: str) -> str:
+        idx, n = 0, len(equation)
+        left_x = right_x = 0
+        left = right = 0
+        cur, left_part = "", True
+        while idx < n:
+            if "0" <= equation[idx] <= "9":
+                cur += equation[idx]
+            elif equation[idx] == "x":
+                if cur == "-":
+                    cur = "-1"
+                if left_part:
+                    left_x += 1 if cur == "" else int(cur)
+                else:
+                    right_x += 1 if cur == "" else int(cur)
+                cur = ""
+            else:
+                if left_part:
+                    left += 0 if cur == "" else int(cur)
+                else:
+                    right += 0 if cur == "" else int(cur)
+                cur = ""
+                if equation[idx] == "=":
+                    left_part = False
+                if equation[idx] == "-":
+                    cur = "-"
+            idx += 1
+        if cur:
+            right += 0 if cur == "" else int(cur)
+        if left_x == right_x and left == right:
+            return "Infinite solutions"
+        if left_part or left_x == right_x:
+            return "No solution"
+        return "x=" + str(int((right - left) / (left_x - right_x)))
 ```
 
 ### **Java**
@@ -64,7 +98,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String solveEquation(String equation) {
+        char[] cs = equation.toCharArray();
+        int idx = 0, n = cs.length;
+        int leftX = 0, rightX = 0, left = 0, right = 0;
+        String cur = "";
+        boolean leftPart = true;
+        while (idx < n) {
+            if ('0' <= cs[idx] && cs[idx] <= '9') {
+                cur += cs[idx];
+            } else if (cs[idx] == 'x') {
+                if ("-".equals(cur)) {
+                    cur = "-1";
+                }
+                if (leftPart) {
+                    leftX += "".equals(cur) ? 1 : Integer.parseInt(cur);
+                } else {
+                    rightX += "".equals(cur) ? 1 : Integer.parseInt(cur);
+                }
+                cur = "";
+            } else {
+                if (leftPart) {
+                    left += "".equals(cur) ? 0 : Integer.parseInt(cur);
+                } else {
+                    right += "".equals(cur) ? 0 : Integer.parseInt(cur);
+                }
+                cur = "";
+                if (cs[idx] == '=') {
+                    leftPart = false;
+                }
+                if (cs[idx] == '-') {
+                    cur = "-";
+                }
+            }
+            idx++;
+        }
+        if (!"".equals(cur)) {
+            right += Integer.parseInt(cur);
+        }
+        if (leftX == rightX && left == right) {
+            return "Infinite solutions";
+        }
+        if (leftPart || leftX == rightX) {
+            return "No solution";
+        }
+        return "x=" + (right - left) / (leftX - rightX);
+    }
+}
 ```
 
 ### **...**
