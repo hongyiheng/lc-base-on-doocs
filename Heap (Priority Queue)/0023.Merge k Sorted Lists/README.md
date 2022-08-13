@@ -63,7 +63,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+from sortedcontainers import SortedList
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        dummy = ListNode()
+        tail = dummy
+        q = SortedList(key=lambda x: x[0])
+        for v in lists:
+            if v:
+                q.add([v.val, v])
+        while True:
+            min_root = None
+            if q:
+                min_root = q.pop(0)[1]
+            if not min_root:
+                break
+            tail.next = ListNode(min_root.val)
+            tail = tail.next
+            min_root = min_root.next
+            if min_root:
+                q.add([min_root.val, min_root])
+        return dummy.next
 ```
 
 ### **Java**
@@ -71,7 +96,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        PriorityQueue<Pair<Integer, ListNode>> q = new PriorityQueue<>((a, b) -> a.getKey() - b.getKey());
+        for (ListNode node : lists) {
+            if (node != null) {
+                q.add(new Pair<>(node.val, node));
+            }
+        }
+        while (true) {
+            ListNode minRoot = null;
+            if (!q.isEmpty()) {
+                minRoot = q.poll().getValue();
+            }
+            if (minRoot == null) {
+                break;
+            }
+            tail.next = new ListNode(minRoot.val);
+            tail = tail.next;
+            minRoot = minRoot.next;
+            if (minRoot != null) {
+                q.add(new Pair<>(minRoot.val, minRoot));
+            }
+        }
+        return dummy.next;
+    }
+}
 ```
 
 ### **...**
