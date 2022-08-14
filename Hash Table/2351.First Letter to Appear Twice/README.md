@@ -57,7 +57,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def repeatedCharacter(self, s: str) -> str:
+        cs = [False] * 26
+        for c in list(s):
+            idx = ord(c)- ord('a')
+            if cs[idx]:
+                return c
+            else:
+                cs[idx] = True
+        return ""
 ```
 
 ### **Java**
@@ -65,7 +74,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public char repeatedCharacter(String s) {
+        boolean[] cs = new boolean[26];
+        for (int i = 0; i < s.length(); i++) {
+            int idx = s.charAt(i) - 'a';
+            if (cs[idx]) {
+                return s.charAt(i);
+            } else {
+                cs[idx] = true;
+            }
+        }
+        return s.charAt(0);
+    }
+}
 ```
 
 ### **...**
