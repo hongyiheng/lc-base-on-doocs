@@ -51,7 +51,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        ans = 0
 
+        def dfs(root, t):
+            nonlocal ans
+            if not root:
+                return
+            if root.val == t:
+                ans += 1
+            dfs(root.left, t - root.val)
+            dfs(root.right, t - root.val)
+        
+        q = [root]
+        while q:
+            cur = q.pop()
+            if not cur:
+                continue
+            dfs(cur, targetSum)
+            q.append(cur.left)
+            q.append(cur.right)
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +86,55 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int ans;
 
+    public int pathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+        ans = 0;
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode cur = q.poll();
+            dfs(cur, targetSum);
+            if (cur.left != null) {
+                q.add(cur.left);
+            }
+            if (cur.right != null) {
+                q.add(cur.right);
+            }            
+        }
+        return ans;
+    }
+
+    public void dfs(TreeNode root, long t) {
+        if (root == null) {
+            return;
+        }
+        if (root.val == t) {
+            ans++;
+        }
+        dfs(root.left, t - root.val);
+        dfs(root.right, t - root.val);
+    }
+}
 ```
 
 ### **...**
