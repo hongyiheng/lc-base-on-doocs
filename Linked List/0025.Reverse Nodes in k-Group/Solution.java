@@ -10,32 +10,24 @@
  */
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode dummy = new ListNode();
-        dummy.next = head;
-        ListNode cur = dummy;
-        while (head != null) {
-            Deque<ListNode> q = new ArrayDeque<>();
-            int cnt = k;
-            while (head != null && cnt > 0) {
-                q.addLast(head);
-                head = head.next;
-                cnt--;
-            }
-            if (cnt > 0) {
-                while (!q.isEmpty()) {
-                    cur.next = q.pollFirst();
-                    cur = cur.next;
-                }
-            } else {
-                while (!q.isEmpty()) {
-                    cur.next = q.pollLast();
-                    cur = cur.next;
-                }
-            }
-            if (head == null) {
-                cur.next = null;
-            }
+        if (k == 1) {
+            return head;
         }
-        return dummy.next;
+        ListNode tail = head, tmp = head;
+        Deque<Integer> vals = new ArrayDeque<>();
+        int cnt = 0;
+        while (tail != null) {
+            vals.addLast(tail.val);
+            if (++cnt == k) {
+                while (!vals.isEmpty()) {
+                    tmp.val = vals.pollLast();
+                    tmp = tmp.next;
+                }
+                cnt = 0;
+                tmp = tail.next;
+            }
+            tail = tail.next;
+        }
+        return head;
     }
 }
