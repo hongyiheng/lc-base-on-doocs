@@ -57,7 +57,72 @@ circularDeque.getFront();				// 返回 4
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MyCircularDeque:
 
+    def __init__(self, k: int):
+        self.q = deque()
+        self.k = k
+
+
+    def insertFront(self, value: int) -> bool:
+        if len(self.q) >= self.k:
+            return False
+        self.q.appendleft(value)
+        return True
+
+
+    def insertLast(self, value: int) -> bool:
+        if len(self.q) >= self.k:
+            return False
+        self.q.append(value)
+        return True
+
+
+    def deleteFront(self) -> bool:
+        if not self.q:
+            return False
+        self.q.popleft()
+        return True
+
+
+    def deleteLast(self) -> bool:
+        if not self.q:
+            return False
+        self.q.pop()
+        return True
+
+
+    def getFront(self) -> int:
+        if not self.q:
+            return -1
+        return self.q[0]
+
+
+    def getRear(self) -> int:
+        if not self.q:
+            return -1
+        return self.q[-1]
+
+
+    def isEmpty(self) -> bool:
+        return not self.q
+
+
+    def isFull(self) -> bool:
+        return len(self.q) >= self.k
+
+
+
+# Your MyCircularDeque object will be instantiated and called as such:
+# obj = MyCircularDeque(k)
+# param_1 = obj.insertFront(value)
+# param_2 = obj.insertLast(value)
+# param_3 = obj.deleteFront()
+# param_4 = obj.deleteLast()
+# param_5 = obj.getFront()
+# param_6 = obj.getRear()
+# param_7 = obj.isEmpty()
+# param_8 = obj.isFull()
 ```
 
 ### **Java**
@@ -65,7 +130,82 @@ circularDeque.getFront();				// 返回 4
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MyCircularDeque {
+    Deque<Integer> q;
+    int k;
 
+    public MyCircularDeque(int k) {
+        q = new ArrayDeque<>();
+        this.k = k;
+    }
+    
+    public boolean insertFront(int value) {
+        if (q.size() >= k) {
+            return false;
+        }
+        q.addFirst(value);
+        return true;
+    }
+    
+    public boolean insertLast(int value) {
+        if (q.size() >= k) {
+            return false;
+        }
+        q.addLast(value);
+        return true;
+    }
+    
+    public boolean deleteFront() {
+        if (q.isEmpty()) {
+            return false;
+        }
+        q.pollFirst();
+        return true;
+    }
+    
+    public boolean deleteLast() {
+        if (q.isEmpty()) {
+            return false;
+        }
+        q.pollLast();
+        return true;
+    }
+    
+    public int getFront() {
+        if (q.isEmpty()) {
+            return -1;
+        }
+        return q.peekFirst();
+    }
+    
+    public int getRear() {
+        if (q.isEmpty()) {
+            return -1;
+        }
+        return q.peekLast();
+    }
+    
+    public boolean isEmpty() {
+        return q.isEmpty();
+    }
+    
+    public boolean isFull() {
+        return q.size() >= k;
+    }
+}
+
+/**
+ * Your MyCircularDeque object will be instantiated and called as such:
+ * MyCircularDeque obj = new MyCircularDeque(k);
+ * boolean param_1 = obj.insertFront(value);
+ * boolean param_2 = obj.insertLast(value);
+ * boolean param_3 = obj.deleteFront();
+ * boolean param_4 = obj.deleteLast();
+ * int param_5 = obj.getFront();
+ * int param_6 = obj.getRear();
+ * boolean param_7 = obj.isEmpty();
+ * boolean param_8 = obj.isFull();
+ */
 ```
 
 ### **...**
