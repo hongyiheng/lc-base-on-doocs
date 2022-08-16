@@ -85,7 +85,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        ans = 1
+        q = deque()
+        q.append(root)
+        root.val = 0
+        while q:
+            n = len(q)
+            ans = max(ans, q[-1].val - q[0].val + 1)
+            for _ in range(n):
+                cur = q.popleft()
+                if cur.left:
+                    q.append(cur.left)
+                    cur.left.val = cur.val * 2 + 1
+                if cur.right:
+                    q.append(cur.right)
+                    cur.right.val = cur.val * 2 + 2
+        return ans
 ```
 
 ### **Java**
@@ -93,7 +118,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int ans = 1;
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.addLast(root);
+        root.val = 0;
+        while (!q.isEmpty()) {
+            int n = q.size();
+            ans = Math.max(ans, q.peekLast().val - q.peekFirst().val + 1);
+            for (int i = 0; i < n; i++) {
+                TreeNode cur = q.pollFirst();
+                if (cur.left != null) {
+                    cur.left.val = cur.val * 2 + 1;
+                    q.addLast(cur.left);
+                }
+                if (cur.right != null) {
+                    cur.right.val = cur.val * 2 + 2;
+                    q.addLast(cur.right);
+                }
+            } 
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
