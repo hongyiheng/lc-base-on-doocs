@@ -53,7 +53,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        mp = defaultdict(list)
+        for w in strs:
+            cs = list(w)
+            cs.sort()
+            mp["".join(cs)].append(w)
+        return [v for v in mp.values()]
 ```
 
 ### **Java**
@@ -61,7 +68,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> mp = new HashMap<>();
+        for (String w : strs) {
+            char[] cs = w.toCharArray();
+            Arrays.sort(cs);
+            mp.computeIfAbsent(new String(cs), k -> new ArrayList<>()).add(w);
+        }
+        return new ArrayList<>(mp.values());
+    }
+}
 ```
 
 ### **...**
