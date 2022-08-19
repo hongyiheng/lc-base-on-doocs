@@ -72,7 +72,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def busyStudent(self, startTime: List[int], endTime: List[int], queryTime: int) -> int:
+        t = [0] * 1010
+        for v in startTime:
+            t[v] += 1
+        for v in endTime:
+            t[v + 1] -= 1
+        return sum(t[:queryTime + 1])
 ```
 
 ### **Java**
@@ -80,7 +87,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
+        int[] t = new int[1010];
+        for (int v : startTime) {
+            t[v]++;
+        }
+        for (int v : endTime) {
+            t[v + 1]--;
+        }
+        int ans = 0;
+        for (int i = 0; i < 1010; i++) {
+            ans += t[i];
+            if (i == queryTime) {
+                break;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
