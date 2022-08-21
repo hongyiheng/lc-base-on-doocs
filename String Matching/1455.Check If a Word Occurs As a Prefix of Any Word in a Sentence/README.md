@@ -81,6 +81,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.child = [None] * 26
+        self.end = False
+
+class Solution:
+    def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+        root = Node()
+
+        def insert(w):
+            head = root
+            for c in w:
+                idx = ord(c) - ord('a')
+                if not head.child[idx]:
+                    head.child[idx] = Node()
+                head = head.child[idx]
+            head.end = True
+    
+        def prefix(w):
+            head = root
+            for c in w:
+                idx = ord(c) - ord('a')
+                if not head.child[idx]:
+                    break
+                head = head.child[idx]
+            return head.end
+
+        insert(searchWord)
+        ss = sentence.split(" ")
+        for i, v in enumerate(ss, 1):
+            if prefix(v):
+                return i
+        return -1
 
 ```
 
@@ -89,7 +122,53 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    Node[] child;
+    boolean end;
 
+    public Node() {
+        this.child = new Node[26];
+        this.end = false;
+    }
+}
+
+class Solution {
+    Node root;
+
+    public void insert(String w) {
+        Node head = root;
+        for (char c : w.toCharArray()) {
+            if (head.child[c - 'a'] == null) {
+                head.child[c - 'a'] = new Node();
+            }
+            head = head.child[c - 'a'];
+        }
+        head.end = true;
+    }
+
+    public boolean prefix(String w) {
+        Node head = root;
+        for (char c : w.toCharArray()) {
+            if (head.child[c - 'a'] == null) {
+                break;
+            }
+            head = head.child[c - 'a'];
+        }
+        return head.end;
+    }
+
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        root = new Node();
+        insert(searchWord);
+        String[] ss = sentence.split(" ");
+        for (int i = 0; i < ss.length; i++) {
+            if (prefix(ss[i])) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
