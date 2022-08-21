@@ -59,7 +59,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def edgeScore(self, edges: List[int]) -> int:
+        ans, n = 0, len(edges)
+        score = [0] * n
+        for i, v in enumerate(edges):
+            score[v] += i
+            if (score[v] > score[ans]) or (score[v] == score[ans] and v < ans):
+                ans = v
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +75,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int edgeScore(int[] edges) {
+        int ans = 0, n = edges.length;
+        int[] score = new int[n];
+        for (int i = 0; i < n; i++) {
+            score[edges[i]] += i;
+            if ((score[edges[i]] > score[ans]) || score[edges[i]] == score[ans] && edges[i] < ans) {
+                ans = edges[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
