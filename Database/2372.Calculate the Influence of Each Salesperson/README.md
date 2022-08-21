@@ -1,0 +1,23 @@
+# [2372.  Calculate the Influence of Each Salesperson](https://leetcode-cn.com/problems/calculate-the-influence-of-each-salesperson)
+
+## 题目描述
+
+<!-- 这里写题目描述 -->
+
+None
+
+## 解法
+
+<!-- 这里可写通用的实现逻辑 -->
+
+<!-- tabs:start -->
+
+### **SQL**
+
+<!-- 这里可写当前语言的特殊实现逻辑 -->
+
+```sql
+
+```
+
+<!-- tabs:end -->
