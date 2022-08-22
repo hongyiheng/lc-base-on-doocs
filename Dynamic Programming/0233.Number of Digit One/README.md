@@ -44,7 +44,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countDigitOne(self, n: int) -> int:
+        s = list(str(n))
 
+        def dfs(cur, cnt, limit):
+            if cur == m:
+                return cnt
+            if not limit and dp[cur][cnt] >= 0:
+                return dp[cur][cnt]
+            ans = 0
+            up = int(s[cur]) if limit else 9
+            for i in range(up + 1):
+                next_cnt = cnt
+                next_cnt += 1 if i == 1 else 0
+                ans += dfs(cur + 1, next_cnt, limit and i == up)
+            if not limit:
+                dp[cur][cnt] = ans
+            return ans
+
+        m = len(s)
+        dp = [[-1] * m for _ in range(m)]
+        return dfs(0, 0, True)
 ```
 
 ### **Java**
@@ -52,7 +73,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    char[] cs;
+    int[][] dp;
+    int m;
 
+    public int countDigitOne(int n) {
+        cs = String.valueOf(n).toCharArray();
+        m = cs.length;
+        dp = new int[m][m];
+        for (int[] r : dp) {
+            Arrays.fill(r, -1);
+        }
+        return dfs(0, 0, true);
+    }
+
+    public int dfs(int cur, int cnt, boolean limit) {
+        if (cur == m) {
+            return cnt;
+        }
+        if (!limit && dp[cur][cnt] >= 0) {
+            return dp[cur][cnt];
+        }
+        int ans = 0;
+        int up = limit ? cs[cur] - '0' : 9;
+        for (int i = 0; i < up + 1; i++) {
+            int nextCnt = cnt;
+            nextCnt += i == 1 ? 1 : 0;
+            ans += dfs(cur + 1, nextCnt, limit && i == up);
+        }
+        if (!limit) {
+            dp[cur][cnt] = ans;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
