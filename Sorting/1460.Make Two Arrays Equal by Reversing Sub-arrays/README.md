@@ -74,7 +74,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
+        target.sort()
+        arr.sort()
+        return target == arr
 ```
 
 ### **Java**
@@ -82,7 +86,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+        return Arrays.toString(target).equals(Arrays.toString(arr));
+    }
+}
 ```
 
 ### **...**
