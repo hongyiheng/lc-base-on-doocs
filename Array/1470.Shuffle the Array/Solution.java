@@ -1,14 +1,12 @@
 class Solution {
     public int[] shuffle(int[] nums, int n) {
-        int left = 0, right = n;
-        int[] res = new int[2*n];
-        for(int i = 0; i < 2*n; i++) {
-            if (i % 2 == 0) {
-                res[i] = nums[left++];
-            } else {
-                res[i] = nums[right++];
-            }
+        int[] ans = new int[2 * n];
+        int l = 0, r = n, idx = 0;
+        while (idx < 2 * n) {
+            ans[idx] = nums[l++];
+            ans[idx + 1] = nums[r++];
+            idx += 2;
         }
-        return res;
+        return ans;
     }
 }
