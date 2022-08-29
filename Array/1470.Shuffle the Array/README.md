@@ -53,7 +53,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        ans = [0] * 2 * n
+        l, r, idx = 0, n, 0
+        while idx < 2 * n:
+            ans[idx] = nums[l]
+            ans[idx + 1] = nums[r]
+            idx += 2
+            l += 1
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -63,16 +73,14 @@
 ```java
 class Solution {
     public int[] shuffle(int[] nums, int n) {
-        int left = 0, right = n;
-        int[] res = new int[2*n];
-        for(int i = 0; i < 2*n; i++) {
-            if (i % 2 == 0) {
-                res[i] = nums[left++];
-            } else {
-                res[i] = nums[right++];
-            }
+        int[] ans = new int[2 * n];
+        int l = 0, r = n, idx = 0;
+        while (idx < 2 * n) {
+            ans[idx] = nums[l++];
+            ans[idx + 1] = nums[r++];
+            idx += 2;
         }
-        return res;
+        return ans;
     }
 }
 ```
