@@ -49,7 +49,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def dailyTemperatures(self, t: List[int]) -> List[int]:
+        n = len(t)
+        ans = [0] * n
+        q = deque()
+        for i in range(n):
+            while q and t[q[-1]] < t[i]:
+                idx = q.pop()
+                ans[idx] = i - idx
+            q.append(i)
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +67,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] dailyTemperatures(int[] t) {
+        int n = t.length;
+        int[] ans = new int[n];
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            while (!q.isEmpty() && t[q.peekLast()] < t[i]) {
+                int idx = q.pollLast();
+                ans[idx] = i - idx;
+            }
+            q.addLast(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
