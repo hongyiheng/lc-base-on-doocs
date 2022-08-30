@@ -77,7 +77,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        q = deque()
+        n = len(nums)
+        ans = [0] * (n - k + 1)
+        for i in range(n):
+            while q and nums[q[-1]] <= nums[i]:
+                q.pop()
+            q.append(i)
+            if i >= k - 1:
+                while q and q[0] <= i - k:
+                    q.popleft()
+                ans[i - k + 1] = nums[q[0]]
+        return ans
 ```
 
 ### **Java**
@@ -85,7 +98,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        int[] ans = new int[n - k + 1];
+        for (int i = 0; i < n; i++) {
+            while (!q.isEmpty() && nums[q.peekLast()] <= nums[i]) {
+                q.pollLast();
+            }
+            q.addLast(i);
+            if (i >= k - 1) {
+                while (!q.isEmpty() && q.peekFirst() <= i - k) {
+                    q.pollFirst();
+                }
+                ans[i - k + 1] = nums[q.peekFirst()];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
