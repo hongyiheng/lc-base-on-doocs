@@ -59,7 +59,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def finalPrices(self, prices: List[int]) -> List[int]:
+        n = len(prices)
+        q = deque()
+        ans = [0] * n
+        for i in range(n - 1, -1, -1):
+            cur = prices[i]
+            while q and prices[q[0]] > prices[i]:
+                q.popleft()
+            if q:
+                cur -= prices[q[0]]
+            q.appendleft(i)
+            ans[i] = cur
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +80,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] finalPrices(int[] prices) {
+        int n = prices.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        int[] ans = new int[n];
+        for (int i = n - 1; i > -1; i--) {
+            int cur = prices[i];
+            while (!q.isEmpty() && prices[q.peekFirst()] > prices[i]) {
+                q.pollFirst();
+            }
+            if (!q.isEmpty()) {
+                cur -= prices[q.peekFirst()];
+            }
+            ans[i] = cur;
+            q.addFirst(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
