@@ -47,7 +47,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        ans, n = 0, len(ratings)
+        left, right = [1] * n, [1] * n
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1]:
+                left[i] = left[i - 1] + 1
+        for i in range(n - 2, -1, -1):
+            if ratings[i] > ratings[i + 1]:
+                right[i] = right[i + 1] + 1
+        for a, b in zip(left, right):
+            ans += max(a, b)
+        return ans
+        
 ```
 
 ### **Java**
@@ -55,7 +68,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int candy(int[] ratings) {
+        int ans = 0, n = ratings.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        for (int i = 1; i < n; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                left[i] = left[i - 1] + 1;
+            } 
+        }
+        for (int i = n - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                right[i] = right[i + 1] + 1;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            ans += Math.max(left[i], right[i]) + 1;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
