@@ -42,7 +42,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+        def cmp(a, b):
+            return a[1] - b[1]
 
+        pairs.sort(key=cmp_to_key(cmp))
+        ans, cur = 1, pairs[0][1]
+        for p in pairs:
+            if p[0] > cur:
+                cur = p[1]
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -50,7 +61,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findLongestChain(int[][] pairs) {
+        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);
+        int ans = 1, cur = pairs[0][1];
+        for (int[] p : pairs) {
+            if (p[0] > cur) {
+                cur = p[1];
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
