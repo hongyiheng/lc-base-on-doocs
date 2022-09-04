@@ -72,7 +72,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        m, n = len(mat), len(mat[0])
+        row, col = [0] * m, [0] * n
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 1:
+                    row[i] += 1
+                    col[j] += 1 
+        ans = 0    
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 1 and row[i] == 1 and col[j] == 1:
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +94,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numSpecial(int[][] mat) {
+        int m = mat.length, n = mat[0].length;
+        int[] row = new int[m];
+        int[] col = new int[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1) {
+                    row[i]++;
+                    col[j]++;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1 && row[i] == 1 && col[j] == 1) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
