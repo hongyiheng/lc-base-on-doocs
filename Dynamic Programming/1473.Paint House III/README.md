@@ -82,7 +82,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minCost(self, houses: List[int], cost: List[List[int]], m: int, n: int, t: int) -> int:
+        INF = 0x3f3f3f3f
+        f = [[[0] * (t + 1) for _ in range(n + 1)] for _ in range(m + 1)]
+        for i in range(m + 1):
+            for j in range(n + 1):
+                f[i][j][0] = INF
+        for i in range(1, m + 1):
+            color = houses[i - 1]
+            for j in range(1, n + 1):
+                for k in range(1, t + 1):
+                    if k > i:
+                        f[i][j][k] = INF
+                        continue
+                    if color:
+                        if j == color:
+                            tmp = INF
+                            for p in range(1, n + 1):
+                                if j != p:
+                                    tmp = min(tmp, f[i - 1][p][k - 1])
+                            f[i][j][k] = min(tmp, f[i - 1][j][k])
+                        else:
+                            f[i][j][k] = INF
+                    else:
+                        u = cost[i - 1][j - 1]
+                        tmp = INF
+                        for p in range(1, n + 1):
+                            if j != p:
+                                tmp = min(tmp, f[i - 1][p][k - 1])
+                        f[i][j][k] = min(tmp, f[i - 1][j][k]) + u
+        ans = INF
+        for i in range(1, n + 1):
+            ans = min(ans, f[m][i][t])
+        return -1 if ans == INF else ans
 ```
 
 ### **Java**
@@ -90,7 +123,55 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    int INF = 0x3f3f3f3f;
+    public int minCost(int[] houses, int[][] cost, int m, int n, int t) {
+        int[][][] f = new int[m + 1][n + 1][t + 1];
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                f[i][j][0] = INF;
+            }
+        }
+        for (int i = 1; i <= m; i++) {
+            int color = houses[i - 1];
+            for (int j = 1; j <= n; j++) {
+                for (int k = 1; k <= t; k++) {
+                    if (k > i) {
+                        f[i][j][k] = INF;
+                        continue;
+                    }
+                    if (color != 0) {
+                        if (j == color) {
+                            int tmp = INF;
+                            for (int p = 1; p <= n; p++) {
+                                if (p != j) {
+                                    tmp = Math.min(tmp, f[i - 1][p][k - 1]);
+                                }
+                            }
+                            f[i][j][k] = Math.min(f[i - 1][j][k], tmp);
+                        } else {
+                            f[i][j][k] = INF;
+                        }
+                    } else {
+                        int u = cost[i - 1][j - 1];
+                        int tmp = INF;
+                        for (int p = 1; p <= n; p++) {
+                            if (p != j) {
+                                tmp = Math.min(tmp, f[i - 1][p][k - 1]);
+                            }
+                        }
+                        f[i][j][k] = Math.min(tmp, f[i - 1][j][k]) + u;
+                    }
+                }
+            }
+        }
+        int ans = INF;
+        for (int i = 1; i <= n; i++) {
+            ans = Math.min(ans, f[m][i][t]);
+        }
+        return ans == INF ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
