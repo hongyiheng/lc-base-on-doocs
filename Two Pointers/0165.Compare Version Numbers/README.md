@@ -83,7 +83,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        s1, s2 = version1.split("."), version2.split(".")
+        i = j = 0
+        while i < len(s1) or j < len(s2):
+            v1 = int(s1[i]) if i < len(s1) else 0
+            v2 = int(s2[j]) if j < len(s2) else 0
+            if v1 == v2:
+                i += 1
+                j += 1
+                continue
+            return 1 if v1 > v2 else -1
+        return 0
 ```
 
 ### **Java**
@@ -91,7 +103,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int compareVersion(String version1, String version2) {
+        String[] s1 = version1.split("\\."), s2 = version2.split("\\.");
+        int i = 0, j = 0;
+        while (i < s1.length || j < s2.length) {
+            int v1 = i < s1.length ? Integer.parseInt(s1[i]) : 0;
+            int v2 = j < s2.length ? Integer.parseInt(s2[j]) : 0;
+            if (v1 == v2) {
+                i++;
+                j++;
+                continue;
+            }
+            return v1 > v2 ? 1 : -1;
+        }
+        return 0;
+    }
+}
 ```
 
 ### **...**
