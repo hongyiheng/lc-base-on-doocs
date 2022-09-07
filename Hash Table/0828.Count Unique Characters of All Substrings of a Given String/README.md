@@ -60,7 +60,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def uniqueLetterString(self, s: str) -> int:
+        n = len(s)
+        mp = dict()
+        l, r = [0] * n, [0] * n
+        for i, c in enumerate(s):
+            l[i] = mp.get(c, -1)
+            mp[c] = i
+        mp.clear()
+        for i in range(n - 1, -1, -1):
+            c = s[i]
+            r[i] = mp.get(c, n)
+            mp[c] = i
+        ans = 0
+        for i in range(n):
+            ans += (i - l[i]) * (r[i] - i)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +84,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int uniqueLetterString(String s) {
+        int n = s.length();
+        int[] l = new int[n], r = new int[n];
+        Map<Character, Integer> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            l[i] = mp.getOrDefault(s.charAt(i), -1);
+            mp.put(s.charAt(i), i);
+        }
+        mp.clear();
+        for (int i = n - 1; i > -1; i--) {
+            r[i] = mp.getOrDefault(s.charAt(i), n);
+            mp.put(s.charAt(i), i);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            int a = l[i], b = r[i];
+            ans += (i - a) * (b - i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
