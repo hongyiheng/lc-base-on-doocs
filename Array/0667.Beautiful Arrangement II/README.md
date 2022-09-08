@@ -54,7 +54,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def constructArray(self, n: int, k: int) -> List[int]:
+        ans = [0] * n
+        l, r, idx = 1, n, 0
+        while idx < k:
+            if idx % 2 == 0:
+                ans[idx] = l
+                l += 1
+            else:
+                ans[idx] = r
+                r -= 1
+            idx += 1
+        while idx < n:
+            if k % 2 == 0:
+                ans[idx] = r
+                r -= 1
+            else:
+                ans[idx] = l
+                l += 1
+            idx += 1
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +82,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] constructArray(int n, int k) {
+        int[] ans = new int[n];
+        int l = 1, r = n, idx = 0;
+        while (idx < k) {
+            if (idx % 2 == 0) {
+                ans[idx] = l++;
+            } else {
+                ans[idx] = r--;
+            }
+            idx++;
+        }
+        while (idx < n) {
+            if (k % 2 == 0) {
+                ans[idx++] = r--;
+            } else {
+                ans[idx++] = l++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
