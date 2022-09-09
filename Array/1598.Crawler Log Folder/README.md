@@ -71,7 +71,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, logs: List[str]) -> int:
+        depth = 0
+        for s in logs:
+            if s == "../":
+                depth = max(0, depth - 1)
+            elif s != "./":
+                depth += 1
+        return depth
 ```
 
 ### **Java**
@@ -79,7 +87,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(String[] logs) {
+        int depth = 0;
+        for (String s : logs) {
+            if (s.equals("../")) {
+                depth = Math.max(0, depth - 1);
+            } else if (!s.equals("./")) {
+                depth++;
+            } 
+        }
+        return depth;
+    }
+}
 ```
 
 ### **...**
