@@ -48,7 +48,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        return s in (s + s)[1:-1]
 ```
 
 ### **Java**
@@ -56,7 +58,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        int n = s.length();
+        return (s + s).substring(1, 2 * n - 1).indexOf(s) != -1;
+    }
+}
 ```
 
 ### **...**
