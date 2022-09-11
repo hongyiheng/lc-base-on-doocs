@@ -64,7 +64,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def stringShift(self, s: str, shift: List[List[int]]) -> str:
+        cnt = 0
+        for a, b in shift:
+            if a == 0:
+                cnt += b
+            else:
+                cnt -= b
+        cnt = cnt % len(s)
+        return s[cnt:] + s[:cnt]
 ```
 
 ### **Java**
@@ -72,7 +81,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        int cnt = 0;
+        for (int[] v : shift) {
+            cnt = v[0] == 0 ? cnt + v[1] : cnt - v[1];
+        }
+        int n = s.length();
+        while (cnt < n) {
+            cnt += n;
+        }
+        cnt = cnt % n;
+        return s.substring(cnt) + s.substring(0, cnt);
+    }
+}
 ```
 
 ### **...**
