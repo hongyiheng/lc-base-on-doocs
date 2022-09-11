@@ -57,7 +57,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
+        n = len(quality)
+        ds = [[0] * 2 for _ in range(n)]
+        for i in range(n):
+            ds[i][0] = wage[i] / quality[i]
+            ds[i][1] = quality[i]
+        ds.sort(key=lambda x:x[0])
+        ans = float('inf')
+        q = []
+        cnt = 0
+        for i in range(n):
+            cnt += ds[i][1]
+            heapq.heappush(q, -ds[i][1])
+            if len(q) > k:
+                cnt += heapq.heappop(q)
+            if len(q) == k:
+                ans = min(ans, cnt * ds[i][0])
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +83,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double mincostToHireWorkers(int[] quality, int[] wage, int k) {
+        int n = quality.length;
+        double[][] ds = new double[n][2];
+        for (int i = 0; i < n; i++) {
+            ds[i][0] = wage[i] * 1.0 / quality[i] * 1.0;
+            ds[i][1] = quality[i] * 1.0;
+        }
+        Arrays.sort(ds, (a, b) -> Double.compare(a[0], b[0]));
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        double ans = Double.MAX_VALUE;
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            cnt += (int)ds[i][1];
+            q.add((int)ds[i][1]);
+            if (q.size() > k) {
+                cnt -= q.poll();
+            }
+            if (q.size() == k) {
+                ans = Math.min(ans, cnt * ds[i][0]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
