@@ -87,7 +87,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
+        f = s = 0
+        f_idx = last_idx = -1
+        min_dis, max_dis = float('inf'), float('-inf')
+        idx = 1
+        while head:
+            if f == 0:
+                f = head.val
+            elif s == 0:
+                s = head.val
+            else:
+                if f > s < head.val or f < s > head.val:
+                    if f_idx == -1:
+                        f_idx = idx - 1
+                    if last_idx != -1:
+                        min_dis = min(min_dis, abs(last_idx - idx + 1))
+                        max_dis = max(max_dis, abs(f_idx - idx + 1))
+                    last_idx = idx - 1
+                f = s
+                s = head.val
+            head = head.next
+            idx += 1
+        return [-1, -1] if min_dis == float('inf') else [min_dis, max_dis]
 ```
 
 ### **Java**
@@ -95,7 +123,46 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int[] nodesBetweenCriticalPoints(ListNode head) {
+        int f = 0, s = 0, idx = 1;
+        int firstIdx = -1, lastIdx = -1;
+        int minDis = Integer.MAX_VALUE, maxDis = Integer.MIN_VALUE;
+        while (head != null) {
+            if (f == 0) {
+                f = head.val;
+            } else if (s == 0) {
+                s = head.val;
+            } else {
+                if ((f > s && s < head.val) || (f < s && s > head.val)) {
+                    if (firstIdx == -1) {
+                        firstIdx = idx - 1;
+                    }
+                    if (lastIdx != -1) {
+                        minDis = Math.min(minDis, Math.abs(lastIdx - idx + 1));
+                        maxDis = Math.max(maxDis, Math.abs(firstIdx - idx + 1));
+                    }
+                    lastIdx = idx - 1;
+                }
+                f = s;
+                s = head.val;
+            }
+            head = head.next;
+            idx++;
+        }
+        return minDis == Integer.MAX_VALUE ? new int[]{-1, -1} : new int[]{minDis, maxDis};
+    }
+}
 ```
 
 ### **...**
