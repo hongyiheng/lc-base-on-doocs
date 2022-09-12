@@ -72,7 +72,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        ans = []
+        idx, n = 0, len(intervals)
+        while idx < n and newInterval[0] > intervals[idx][1]:
+            ans.append(intervals[idx])
+            idx += 1
+        left, right = newInterval[0], newInterval[1]
+        if idx < n:
+            while idx < n and right >= intervals[idx][0]:
+                left = min(intervals[idx][0], left)
+                right = max(intervals[idx][1], right)
+                idx += 1  
+        ans.append([left, right])
+        while idx < n:
+            ans.append(intervals[idx])
+            idx += 1
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +97,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> arr = new ArrayList<>();
+        int idx = 0, n = intervals.length;
+        while (idx < n && intervals[idx][1] < newInterval[0]) {
+            arr.add(intervals[idx]);
+            idx++;
+        }
+        int left = newInterval[0], right = newInterval[1];
+        while (idx < n && right >= intervals[idx][0]) {
+            left = Math.min(left, intervals[idx][0]);
+            right = Math.max(right, intervals[idx][1]);
+            idx++;
+        }
+        arr.add(new int[]{left, right});
+        while(idx < n) {
+            arr.add(intervals[idx]);
+            idx++;
+        }
+        int[][] ans = new int[arr.size()][2];
+        for (int i = 0; i < arr.size(); i++) {
+            ans[i][0] = arr.get(i)[0];
+            ans[i][1] = arr.get(i)[1];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
