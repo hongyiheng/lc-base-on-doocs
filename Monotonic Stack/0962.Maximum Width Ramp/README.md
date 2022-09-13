@@ -51,7 +51,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxWidthRamp(self, nums: List[int]) -> int:
+        q = []
+        for i, v in enumerate(nums):
+            if not q or q[-1][1] > v:
+                q.append((i, v))
+        ans, n = 0, len(nums)
+        for j in range(n - 1, -1, -1):
+            while q and q[-1][0] >= j:
+                q.pop()
+            while q and q[-1][1] <= nums[j]:
+                ans = max(ans, j - q.pop()[0])
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxWidthRamp(int[] nums) {
+        int n = nums.length;
+        Deque<int[]> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            if (q.isEmpty() || q.peekLast()[1] > nums[i]) {
+                q.addLast(new int[]{i, nums[i]});
+            }
+        }
+        int ans = 0;
+        for (int j = n - 1; j > -1; j--) {
+            while (!q.isEmpty() && q.peekLast()[0] >= j) {
+                q.pollLast();
+            } 
+            while (!q.isEmpty() && q.peekLast()[1] <= nums[j]) {
+                ans = Math.max(ans, j - q.pollLast()[0]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
