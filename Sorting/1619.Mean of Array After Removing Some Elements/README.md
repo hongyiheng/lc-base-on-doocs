@@ -70,7 +70,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def trimMean(self, arr: List[int]) -> float:
+        arr.sort()
+        n, ans, cnt = len(arr), 0, 0
+        for i in range(int(n * 0.05), int(n * 0.95)):
+            ans += arr[i]
+            cnt += 1
+        return ans / cnt
 ```
 
 ### **Java**
@@ -78,7 +85,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double trimMean(int[] arr) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        int val = 0, cnt = 0;
+        for (int i = (int)(n * 0.05); i < (int)(n * 0.95); i++) {
+            val += arr[i];
+            cnt ++;
+        }
+        return val * 1.0 / cnt * 1.0;
+    }
+}
 ```
 
 ### **...**
