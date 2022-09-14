@@ -61,7 +61,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def calculate(self, s: str) -> int:
+        def cal_num(a, b, cal):
+            if cal == "*":
+                return a * b
+            elif cal == "/":
+                return a // b
+            elif cal == "+":
+                return a + b
+            return a - b
 
+        num, cal = deque(), deque()
+        idx, n = 0, len(s)
+        while idx < n:
+            if s[idx] == " ":
+                idx += 1
+                continue
+            elif "0" <= s[idx] <= "9":
+                cur = 0
+                while idx < n and "0" <= s[idx] <= "9":
+                    cur = cur * 10 + int(s[idx])
+                    idx += 1
+                num.append(cur)
+                if cal and (cal[-1] == "*" or cal[-1] == "/"):
+                    b, a = num.pop(), num.pop()
+                    num.append(cal_num(a, b, cal.pop()))
+                continue
+            cal.append(s[idx])
+            idx += 1
+        while cal:
+            num.appendleft(cal_num(num.popleft(), num.popleft(), cal.popleft()))
+        return num[0]
 ```
 
 ### **Java**
@@ -69,7 +100,50 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int calculate(String s) {
+        char[] cs = s.toCharArray();
+        Deque<Integer> nums = new ArrayDeque<>();
+        Deque<Character> cals = new ArrayDeque<>();
+        int idx = 0, n = cs.length;
+        while (idx < n) {
+            if (cs[idx] == ' ') {
+                idx++;
+                continue;
+            } else if ('0' <= cs[idx] && cs[idx] <= '9') {
+                int num = 0;
+                while (idx < n && '0' <= cs[idx] && cs[idx] <= '9') {
+                    num = num * 10 + cs[idx] - '0';
+                    idx++;
+                }
+                nums.addLast(num);
+                if (!cals.isEmpty() && (cals.peekLast() == '*' || cals.peekLast() == '/')) {
+                    int b = nums.pollLast(), a = nums.pollLast();
+                    nums.addLast(calNum(a, b, cals.pollLast()));
+                }
+                continue;
+            } else {
+                cals.addLast(cs[idx]);
+            }
+            idx++;
+        }
+        while (!cals.isEmpty()) {
+            nums.addFirst(calNum(nums.pollFirst(), nums.pollFirst(), cals.pollFirst()));
+        }
+        return nums.pollLast();
+    }
 
+    public int calNum(int a, int b, Character cal) {
+        if (cal == '*') {
+            return a * b;
+        } else if (cal == '/') {
+            return a / b;
+        } else if (cal == '+') {
+            return a + b;
+        }
+        return a - b;
+    }
+}
 ```
 
 ### **...**
