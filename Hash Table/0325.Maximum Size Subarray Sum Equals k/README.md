@@ -52,7 +52,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSubArrayLen(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        mp = dict()
+        for i in range(n):
+            pre[i + 1] = pre[i] + nums[i]
+            if pre[i + 1] not in mp:
+                mp[pre[i + 1]] = i
+        ans = 0
+        for i in range(n):
+            cur = pre[i + 1]
+            if cur == k:
+                ans = max(ans, i + 1)
+                continue
+            j = mp.get(cur - k, -1)
+            if j != -1 and j < i:
+                ans = max(ans, i - j)
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +78,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxSubArrayLen(int[] nums, int k) {
+        int ans = 0, n = nums.length;
+        long[] pre = new long[n + 1];
+        Map<Long, Integer> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+            if (!mp.containsKey(pre[i + 1])) {
+                mp.put(pre[i + 1], i);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            long cur = pre[i + 1];
+            if (cur == k) {
+                ans = Math.max(ans, i + 1);
+            }
+            int j = mp.getOrDefault(cur - k, -1);
+            if (j != -1 && j < i) {
+                ans = Math.max(ans, i - j);  
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
