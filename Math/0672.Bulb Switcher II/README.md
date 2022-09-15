@@ -52,7 +52,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def flipLights(self, n: int, presses: int) -> int:
+        if presses == 0:
+            return 1
+        if n == 1:
+            return 2
+        if n == 2:
+            return 3 if presses == 1 else 4
+        if presses == 1:
+            return 4
+        return 7 if presses == 2 else 8
 ```
 
 ### **Java**
@@ -60,7 +70,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int flipLights(int n, int presses) {
+        if (presses == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 2;
+        }
+        if (n == 2) {
+            return presses == 1 ? 3 : 4;
+        }
+        if (presses == 1) {
+            return 4;
+        }
+        return presses == 2 ? 7 : 8;
+    }
+}
 ```
 
 ### **...**
