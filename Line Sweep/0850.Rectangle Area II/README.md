@@ -47,7 +47,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def rectangleArea(self, rectangles: List[List[int]]) -> int:
+        def cmp(a, b):
+            if a[0] != b[0]:
+                return a[0] - b[0]
+            return a[1] - b[1]
 
+        xs = []
+        for v in rectangles:
+            xs.append(v[0])
+            xs.append(v[2])
+        xs.sort()
+        ans = 0
+        for i in range(1, len(xs)):
+            left, right = xs[i - 1], xs[i]
+            if right == left:
+                continue
+            ys = []
+            for v in rectangles:
+                if v[0] <= left and right <= v[2]:
+                    ys.append([v[1], v[3]])
+            ys.sort(key=cmp_to_key(cmp))
+            h, d, t = 0, -1, -1
+            for y in ys:
+                if y[0] > t:
+                    h += t - d    
+                    d, t = y[0], y[1]
+                elif y[1] > t:
+                    t = y[1]
+            h += t - d
+            ans += (right - left) * h
+        return ans % int(1e9 + 7)
 ```
 
 ### **Java**
@@ -55,7 +86,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int rectangleArea(int[][] rectangles) {
+        int mod = (int)1e9 + 7;
+        List<Integer> xs = new ArrayList<>();
+        for (int[] v : rectangles) {
+            xs.add(v[0]);
+            xs.add(v[2]);
+        }
+        Collections.sort(xs);
+        long ans = 0;
+        for (int i = 1; i < xs.size(); i++) {
+            int left = xs.get(i - 1), right = xs.get(i);
+            if (right == left) {
+                continue;
+            }
+            List<int[]> ys = new ArrayList<>();
+            for (int[] v : rectangles) {
+                if (v[0] <= left && right <= v[2]) {
+                    ys.add(new int[]{v[1], v[3]});
+                }
+            }
+            Collections.sort(ys, (a, b) -> {
+                if (a[0] != b[0]) {
+                    return a[0] - b[0];
+                }
+                return a[1] - b[1];
+            });
+            int h = 0, d = -1, t = -1;
+            for (int[] y : ys) {
+                if (t < y[0]) {
+                    h += t - d;
+                    d = y[0];
+                    t = y[1];
+                } else if (t < y[1]) {
+                    t = y[1];
+                }
+            }
+            h += t - d;
+            ans = (ans + (right - left) * 1L * h % mod) % mod;
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
