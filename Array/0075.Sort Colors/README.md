@@ -74,7 +74,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        cnt = Counter(nums)
+        for i in range(len(nums)):
+            if i < cnt.get(0, 0):
+                nums[i] = 0
+            elif i < cnt.get(0, 0) + cnt.get(1, 0):
+                nums[i] = 1
+            else:
+                nums[i] = 2
 ```
 
 ### **Java**
@@ -82,7 +94,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void sortColors(int[] nums) {
+        int[] cnt = new int[3];
+        for (int v : nums) {
+            cnt[v]++;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (cnt[0] != 0) {
+                nums[i] = 0;
+                cnt[0]--;
+            } else if (cnt[1] != 0) {
+                nums[i] = 1;
+                cnt[1]--;
+            } else {
+                nums[i] = 2;
+            } 
+        }
+    }
+}
 ```
 
 ### **...**
