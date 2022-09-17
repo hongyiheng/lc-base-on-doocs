@@ -1,9 +1,8 @@
 class Solution {
     public int hIndex(int[] citations) {
-        int len = citations.length;
-        int left = 0, right = len;
+        int left = 0, right = citations.length;
         while (left < right) {
-            int mid = left + right + 1 >> 1;
+            int mid = (left + right + 1) >> 1;
             if (check(citations, mid)) {
                 left = mid;
             } else {
@@ -13,13 +12,13 @@ class Solution {
         return left;
     }
 
-    public boolean check(int[] nums, int mid) {
-        int ans = 0;
-        for (int num : nums) {
-            if (num >= mid) {
-                ans++;
+    public boolean check(int[] nums, int x) {
+        int cnt = 0;
+        for (int v : nums) {
+            if (v >= x) {
+                cnt++;
             }
         }
-        return ans >= mid;
+        return cnt >= x;
     }
 }
