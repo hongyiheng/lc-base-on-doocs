@@ -60,7 +60,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxLengthBetweenEqualCharacters(self, s: str) -> int:
+        mp = dict()
+        ans = -1
+        for i, c in enumerate(s):
+            if c in mp:
+                ans = max(i - mp.get(c) - 1, ans)
+            else:
+                mp[c] = i
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +77,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxLengthBetweenEqualCharacters(String s) {
+        char[] cs = s.toCharArray();
+        Map<Character, Integer> mp = new HashMap<>();
+        int ans = -1;
+        for (int i = 0; i < cs.length; i++) {
+            if (mp.containsKey(cs[i])) {
+                ans = Math.max(ans, i - mp.get(cs[i]) - 1);
+            } else {
+                mp.put(cs[i], i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
