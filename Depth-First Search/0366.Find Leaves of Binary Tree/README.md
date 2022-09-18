@@ -65,7 +65,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
+        mp = defaultdict(list)
 
+        def dfs(root):
+            if not root:
+                return 0
+            l = dfs(root.left)
+            r = dfs(root.right)
+            mp[max(l, r) + 1].append(root.val)
+            return max(l, r) + 1
+        
+        ans = []
+        n = dfs(root)
+        for i in range(1, n + 1):
+            ans.append(mp[i])
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +95,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    Map<Integer, List<Integer>> mp = new HashMap<>();
 
+    public List<List<Integer>> findLeaves(TreeNode root) {
+        int n = dfs(root);
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 1; i < n + 1; i++) {
+            ans.add(mp.get(i));
+        }
+        return ans;
+    }
+
+    public int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = dfs(root.left), r = dfs(root.right);
+        mp.computeIfAbsent(Math.max(l, r) + 1, k -> new ArrayList<>()).add(root.val);
+        return Math.max(l, r) + 1;
+    }
+}
 ```
 
 ### **...**
