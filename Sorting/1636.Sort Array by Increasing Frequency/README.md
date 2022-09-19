@@ -52,7 +52,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        mp = Counter(nums)
 
+        def cmp(a, b):
+            if mp[a] != mp[b]:
+                return mp[a] - mp[b]
+            return b - a
+
+        nums.sort(key=cmp_to_key(cmp))
+        return nums
 ```
 
 ### **Java**
@@ -60,7 +70,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        List<Integer> arr = new ArrayList<>(); 
+        for (int v : nums) {
+            mp.put(v, mp.getOrDefault(v, 0) + 1);
+            arr.add(v);
+        }
+        Collections.sort(arr, (a, b) -> {
+            if (mp.get(a) != mp.get(b)) {
+                return mp.get(a) - mp.get(b);
+            }
+            return b - a;
+        });
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = arr.get(i);
+        }
+        return nums;
+    }
+}
 ```
 
 ### **...**
