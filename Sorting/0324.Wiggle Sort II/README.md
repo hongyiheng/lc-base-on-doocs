@@ -53,7 +53,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        cnt = [0] * 5010
+        for v in nums:
+            cnt[v] += 1
+        idx, n, j = 0, len(nums), 5000
+        for i in range(1, n, 2):
+            while cnt[j] == 0:
+                j -= 1
+            nums[i] = j
+            cnt[j] -= 1
+        for i in range(0, n, 2):
+            while cnt[j] == 0:
+                j -= 1
+            nums[i] = j
+            cnt[j] -= 1
 ```
 
 ### **Java**
@@ -61,7 +79,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public void wiggleSort(int[] nums) {
+        int n = nums.length;
+        int[] cnt = new int[5010];
+        for (int v : nums) {
+            cnt[v]++;
+        }
+        int j = 5000;
+        for (int i = 1; i < n; i += 2) {
+            while (cnt[j] == 0) {
+                j--;
+            }
+            nums[i] = j;
+            cnt[j]--;
+        }
+        for (int i = 0; i < n; i += 2) {
+            while (cnt[j] == 0) {
+                j--;
+            }
+            nums[i] = j;
+            cnt[j]--;
+        }
+    }
+}
 ```
 
 ### **...**
