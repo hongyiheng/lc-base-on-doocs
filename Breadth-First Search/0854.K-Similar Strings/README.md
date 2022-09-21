@@ -56,7 +56,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def kSimilarity(self, s1: str, s2: str) -> int:
+        def next(s):
+            idx = 0
+            while idx < n and s[idx] == s2[idx]:
+                idx += 1
+            ans = []
+            for i in range(idx + 1, n):
+                if s[i] == s2[idx] and s[i] != s2[i]:
+                    cs = list(s)
+                    cs[i], cs[idx] = cs[idx], cs[i]
+                    ans.append("".join(cs))
+            return ans
 
+        ans, n = 0, len(s1)
+        q = deque()
+        q.append(s1)
+        vis = {s1}
+        while True:
+            m = len(q)
+            for _ in range(m):
+                cur = q.popleft()
+                if cur == s2:
+                    return ans
+                for ns in next(cur):
+                    if ns in vis:
+                        continue
+                    vis.add(ns)
+                    q.append(ns)
+            ans += 1
 ```
 
 ### **Java**
@@ -64,7 +93,53 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int n;
+    char[] t;
 
+    public int kSimilarity(String s1, String s2) {
+        n = s1.length();
+        t = s2.toCharArray();
+        Deque<String> q = new ArrayDeque<>();
+        q.addLast(s1);
+        int ans = 0;
+        Set<String> vis = new HashSet<>();
+        while (true) {
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                String cur = q.pollFirst();
+                if (cur.equals(s2)) {
+                    return ans;
+                }
+                if (vis.contains(cur)) {
+                    continue;
+                }
+                for (String ns : next(cur)) {
+                    q.addLast(ns);
+                }
+            }
+            ans++;
+        }
+    }
+
+    public List<String> next(String s) {
+        int idx = 0;
+        while (s.charAt(idx) == t[idx]) {
+            idx++;
+        }
+        List<String> ans = new ArrayList<>();
+        for (int i = idx + 1; i < n; i++) {
+            if (s.charAt(i) == t[idx] && s.charAt(i) != t[i]) {
+                char[] cs = s.toCharArray();
+                char tmp = cs[i];
+                cs[i] = cs[idx];
+                cs[idx] = tmp;
+                ans.add(new String(cs));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
