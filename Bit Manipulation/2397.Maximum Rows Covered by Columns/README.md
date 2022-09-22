@@ -58,7 +58,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
+        def cnt(x):
+            ans = 0
+            while x > 0:
+                x &= x - 1
+                ans += 1
+            return ans
 
+        def cover(mask):
+            ans = 0
+            for s in rows:
+                if mask == (1 << n) - 1 or (mask | s) == mask:
+                    ans += 1
+            return ans
+
+        m, n = len(matrix), len(matrix[0])
+        rows = [0] * m
+        for i in range(m):
+            s = 0
+            for j in range(n):
+                if matrix[i][j] == 1:
+                    s |= (1 << j)
+            rows[i] = s
+        s = 1 << n
+        ans = 0
+        for i in range(s):
+            if cnt(i) != numSelect:
+                continue
+            ans = max(ans, cover(i))
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +96,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[][] g;
+    int m, n;
+    int[] rows;
 
+    public int maximumRows(int[][] matrix, int numSelect) {
+        this.g = matrix;
+        m = matrix.length;
+        n = matrix[0].length;
+        rows = new int[m];
+        for (int i = 0; i < m; i++) {
+            int s = 0;
+            for (int j = 0; j < n; j++) {
+                if (g[i][j] != 0) {
+                    s |= (1 << j);
+                }
+            }
+            rows[i] = s;
+        }
+        int ans = 0;
+        for (int i = 0; i < (1 << n); i++) {
+            if (cnt(i) != numSelect) {
+                continue;
+            }
+            ans = Math.max(cover(i), ans);
+        }
+        return ans;
+    }
+
+    public int cover(int mask) {
+        int ans = 0;
+        for (int s : rows) {
+            if (mask == (1 << n) - 1 || (mask | s) == mask) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    public int cnt(int x) {
+        int ans = 0;
+        while (x > 0) {
+            x &= x - 1;
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
