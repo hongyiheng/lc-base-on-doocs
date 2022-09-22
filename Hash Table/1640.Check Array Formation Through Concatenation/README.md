@@ -74,7 +74,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:
+        mp = dict()
+        for v in pieces:
+            mp[v[0]] = v
+        idx, n = 0, len(arr)
+        while idx < n:
+            if arr[idx] not in mp:
+                return False
+            nums = mp.pop(arr[idx])
+            for v in nums:
+                if v == arr[idx]:
+                    idx += 1
+                else:
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -82,7 +97,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canFormArray(int[] arr, int[][] pieces) {
+        Map<Integer, int[]> mp = new HashMap<>();
+        for (int[] v : pieces) {
+            mp.put(v[0], v);
+        }
+        int n = arr.length, idx = 0;
+        while (idx < n) {
+            if (!mp.containsKey(arr[idx])) {
+                return false;
+            }
+            int[] nums = mp.remove(arr[idx]);
+            for (int v : nums) {
+                if (v == arr[idx]) {
+                    idx++;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
