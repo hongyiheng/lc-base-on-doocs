@@ -60,7 +60,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
+class Solution:
+    def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
+        mp = defaultdict(list)
+        q = deque()
+        vis = set()
+
+        def dfs(parent, root):
+            if not root:
+                return
+            if root.val == start:
+                q.append(root)
+                vis.add(root)
+            if parent:
+                mp[parent].append(root)
+                mp[root].append(parent)
+            dfs(root, root.left)
+            dfs(root, root.right)
+
+        dfs(None, root)
+        ans = -1
+        while q:
+            m = len(q)
+            for _ in range(m):
+                cur = q.popleft()
+                for v in mp[cur]:
+                    if v in vis:
+                        continue
+                    q.append(v)
+                    vis.add(v)
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +105,67 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    Map<TreeNode, List<TreeNode>> mp;
+    int t;
+    Deque<TreeNode> q;
+    Set<Integer> vis;
 
+    public int amountOfTime(TreeNode root, int start) {
+        mp = new HashMap<>();
+        q = new ArrayDeque<>();
+        vis = new HashSet<>();
+        t = start;
+        dfs(null, root);
+        int ans = -1;
+        while (!q.isEmpty()) {
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                TreeNode cur = q.pollFirst();
+                for (TreeNode v : mp.getOrDefault(cur, new ArrayList<>())) {
+                    if (vis.contains(v.val)) {
+                        continue;
+                    }
+                    q.addLast(v);
+                    vis.add(v.val);
+                }
+            }
+            ans++;
+        }
+        return ans;
+    }
+
+    public void dfs(TreeNode parent, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        if (parent != null) {
+            mp.computeIfAbsent(root, k -> new ArrayList<>()).add(parent);
+            mp.computeIfAbsent(parent, k -> new ArrayList<>()).add(root);
+        }
+        if (root.val == t) {
+            q.addLast(root);
+            vis.add(root.val);
+        }
+        dfs(root, root.left);
+        dfs(root, root.right);
+    }
+}
 ```
 
 ### **...**
