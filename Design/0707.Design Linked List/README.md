@@ -53,7 +53,59 @@ linkedList.get(1);            //返回3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MyLinkedList:
 
+    def __init__(self):
+        self.q = deque()
+
+    def get(self, index: int) -> int:
+        if index >= len(self.q):
+            return -1
+        nums = []
+        while len(nums) < index:
+            nums.append(self.q.popleft())
+        ans = self.q[0]
+        while nums:
+            self.q.appendleft(nums.pop())
+        return ans
+
+    def addAtHead(self, val: int) -> None:
+        self.q.appendleft(val)
+
+    def addAtTail(self, val: int) -> None:
+        self.q.append(val)
+
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        if index <= 0:
+            self.q.appendleft(val)
+            return
+        if index > len(self.q):
+            return
+        nums = []
+        while len(nums) < index:
+            nums.append(self.q.popleft())
+        self.q.appendleft(val)
+        while nums:
+            self.q.appendleft(nums.pop())
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= len(self.q):
+            return
+        nums = []
+        while len(nums) < index:
+            nums.append(self.q.popleft())
+        self.q.popleft()
+        while nums:
+            self.q.appendleft(nums.pop())
+
+# Your MyLinkedList object will be instantiated and called as such:
+# obj = MyLinkedList()
+# param_1 = obj.get(index)
+# obj.addAtHead(val)
+# obj.addAtTail(val)
+# obj.addAtIndex(index,val)
+# obj.deleteAtIndex(index)
 ```
 
 ### **Java**
@@ -61,7 +113,80 @@ linkedList.get(1);            //返回3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MyLinkedList {
+    Deque<Integer> q;
 
+    public MyLinkedList() {
+        q = new ArrayDeque<>();
+    }
+    
+    public int get(int index) {
+        if (index < 0 || index >= q.size()) {
+            return -1;
+        }
+        Deque<Integer> tmp = new ArrayDeque<>();
+        while (tmp.size() < index) {
+            tmp.addLast(q.pollFirst());
+        }
+        int ans = q.peekFirst();
+        while (!tmp.isEmpty()) {
+            q.addFirst(tmp.pollLast());
+        }
+        return ans;
+    }
+    
+    public void addAtHead(int val) {
+        q.addFirst(val);
+    }
+    
+    public void addAtTail(int val) {
+        q.addLast(val);
+    }
+    
+    public void addAtIndex(int index, int val) {
+        if (index > q.size()) {
+            return;
+        }
+        if (index == q.size()) {
+            addAtTail(val);
+        } else if (index <= 0) {
+            addAtHead(val);
+        } else {
+            Deque<Integer> tmp = new ArrayDeque<>();
+            while (tmp.size() < index) {
+                tmp.addLast(q.pollFirst());
+            }
+            q.addFirst(val);
+            while (!tmp.isEmpty()) {
+                q.addFirst(tmp.pollLast());
+            }
+        }
+    }
+    
+    public void deleteAtIndex(int index) {
+        if (index < 0 || index >= q.size()) {
+            return;
+        }
+        Deque<Integer> tmp = new ArrayDeque<>();
+        while (tmp.size() < index) {
+            tmp.addLast(q.pollFirst());
+        }
+        q.pollFirst();
+        while (!tmp.isEmpty()) {
+            q.addFirst(tmp.pollLast());
+        }
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
 ```
 
 ### **...**
