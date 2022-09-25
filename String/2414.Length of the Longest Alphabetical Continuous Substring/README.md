@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestContinuousSubstring(self, s: str) -> int:
+        ans = start = 0
+        for i in range(1, len(s)):
+            if ord(s[i]) - ord(s[i - 1]) == 1:
+                continue
+            ans = max(ans, i - start)
+            start = i     
+        return max(ans, len(s) - start)
 ```
 
 ### **Java**
@@ -58,7 +66,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestContinuousSubstring(String s) {
+        int ans = 0, start = 0, n = s.length();
+        char[] cs = s.toCharArray();
+        for (int i = 1; i < n; i++) {
+            if (cs[i] - cs[i - 1] == 1) {
+                continue;
+            }
+            ans = Math.max(ans, i - start);
+            start = i;
+        }
+        return Math.max(ans, n - start);
+    }
+}
 ```
 
 ### **...**
