@@ -68,7 +68,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.child = [None] * 26
+        self.val = 0
 
+class Solution:
+    def sumPrefixScores(self, words: List[str]) -> List[int]:
+        def insert(w):
+            head = root
+            for c in w:
+                idx = ord(c) - ord('a')
+                if not head.child[idx]:
+                    head.child[idx] = Node()
+                head.child[idx].val += 1
+                head = head.child[idx]
+
+        def query(w):
+            ans = 0
+            head = root
+            for c in w:
+                idx = ord(c) - ord('a')
+                ans += head.child[idx].val
+                head = head.child[idx]
+            return ans
+
+        root = Node()
+        for w in words:
+            insert(w)
+        n = len(words)
+        ans = [0] * n
+        for i in range(n):
+            ans[i] = query(words[i])
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +108,53 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    Node[] child;
+    int val;
 
+    public Node() {
+        child = new Node[26];
+        val = 0;
+    }
+}
+
+class Solution {
+    public void insert(Node root, String w) {
+        Node head = root;
+        for (char c : w.toCharArray()) {
+            int idx = c - 'a';
+            if (head.child[idx] == null) {
+                head.child[idx] = new Node();
+            }
+            head.child[idx].val++;
+            head = head.child[idx];
+        }
+    }
+
+    public int query(Node root, String w) {
+        int ans = 0;
+        Node head = root;
+        for (char c : w.toCharArray()) {
+            int idx = c - 'a';
+            ans += head.child[idx].val;
+            head = head.child[idx];
+        }
+        return ans;
+    }
+
+    public int[] sumPrefixScores(String[] words) {
+        Node root = new Node();
+        for (String w : words) {
+            insert(root, w);
+        }
+        int n = words.length;
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = query(root, words[i]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
