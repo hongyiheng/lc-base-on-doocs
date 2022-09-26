@@ -39,7 +39,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        n, ans = len(nums), float('inf')
+        for i in range(n):
+            left, right = i + 1, n - 1
+            while left < right:
+                cur = nums[i] + nums[left] + nums[right]
+                if abs(cur - target) <= abs(ans - target):
+                    ans = cur
+                if cur < target:
+                    left += 1
+                else:
+                    right -= 1
+        return ans
 ```
 
 ### **Java**
@@ -47,7 +61,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int ans = Integer.MAX_VALUE, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int left = i + 1, right = n - 1;
+            while (left < right) {
+                int cur = nums[i] + nums[left] + nums[right];
+                if (Math.abs(cur - target) <= Math.abs(ans - target)) {
+                    ans = cur;
+                }
+                if (cur < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        } 
+        return ans;
+    }
+}
 ```
 
 ### **...**
