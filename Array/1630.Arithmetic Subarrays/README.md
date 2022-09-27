@@ -65,7 +65,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+        n, m = len(nums), len(l)
+        ans = [True] * m
+        for i in range(m):
+            left, right = l[i], r[i]
+            max_, min_ = float('-inf'), float('inf')
+            s = set()
+            for j in range(left, right + 1):
+                s.add(nums[j])
+                max_ = max(max_, nums[j])
+                min_ = min(min_, nums[j])
+            if (max_ - min_) % (right - left) != 0:
+                ans[i] = False
+                continue
+            k = (max_ - min_) // (right - left)
+            while min_ < max_:
+                if min_ + k not in s:
+                    ans[i] = False
+                    break
+                min_ += k
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +94,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
+        int n = nums.length, m = l.length;
+        List<Boolean> ans = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            int left = l[i], right = r[i];
+            Set<Integer> s = new HashSet();
+            int maxVal = Integer.MIN_VALUE, minVal = Integer.MAX_VALUE;
+            for (int j = left; j <= right; j++) {
+                s.add(nums[j]);
+                maxVal = Math.max(maxVal, nums[j]);
+                minVal = Math.min(minVal, nums[j]);
+            }
+            if ((maxVal - minVal) % (right - left) != 0) {
+                ans.add(false);
+                continue;
+            }
+            int k = (maxVal - minVal) / (right - left);
+            boolean flag = true;
+            while (minVal < maxVal) {
+                if (!s.contains(minVal + k)) {
+                    flag = false;
+                    break;
+                }
+                minVal += k;
+            }
+            ans.add(flag);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
