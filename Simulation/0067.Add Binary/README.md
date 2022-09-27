@@ -44,7 +44,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        n, m = len(a) - 1, len(b) - 1
+        e = False
+        ans = ""
+        while n >= 0 or m >= 0:
+            cur = 1 if e else 0
+            e = False
+            if n >= 0 and a[n] == "1":
+                cur += 1
+            if m >= 0 and b[m] == "1":
+                cur += 1
+            if cur >= 2:
+                cur -= 2
+                e = True
+            ans = str(cur) + ans
+            n -= 1
+            m -= 1
+        return "1" + ans if e else ans
 ```
 
 ### **Java**
@@ -52,7 +70,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String addBinary(String a, String b) {
+        int n = a.length() - 1, m = b.length() - 1;
+        String ans = "";
+        boolean e = false;
+        while (n >= 0 || m >= 0) {
+            int cur = e ? 1 : 0;
+            e = false;
+            if (n >= 0 && a.charAt(n) == '1') {
+                cur++;
+            }
+            if (m >= 0 && b.charAt(m) == '1') {
+                cur++;
+            }
+            if (cur >= 2) {
+                cur -= 2;
+                e = true;
+            }
+            ans = String.valueOf(cur) + ans;
+            m--;
+            n--;
+        }
+        return e ? "1" + ans : ans;
+    }
+}
 ```
 
 ### **...**
