@@ -55,7 +55,46 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class CBTInserter:
 
+    def __init__(self, root: TreeNode):
+        self.idx = 0
+        self.tr = [root]
+        cur = 0
+        while cur < len(self.tr):
+            node = self.tr[cur] 
+            if node.left:
+                self.tr.append(node.left)
+            if node.right:
+                self.tr.append(node.right)
+            cur += 1
+
+    def insert(self, val: int) -> int:
+        while self.tr[self.idx].left and self.tr[self.idx].right:
+            self.idx += 1
+        p, node = self.tr[self.idx], TreeNode(val)
+        if not p.left:
+            p.left = node
+        else:
+            p.right = node
+        self.tr.append(node)
+        return p.val
+    
+    def get_root(self) -> TreeNode:
+        return self.tr[0]
+
+
+
+# Your CBTInserter object will be instantiated and called as such:
+# obj = CBTInserter(root)
+# param_1 = obj.insert(val)
+# param_2 = obj.get_root()
 ```
 
 ### **Java**
@@ -63,7 +102,65 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class CBTInserter {
+    List<TreeNode> tr = new ArrayList<>();
+    int idx = 0;
 
+    public CBTInserter(TreeNode root) {
+        int cur = 0;
+        tr.add(root);
+        while (cur < tr.size()) {
+            TreeNode node = tr.get(cur);
+            if (node.left != null) {
+                tr.add(node.left);
+            }
+            if (node.right != null) {
+                tr.add(node.right);
+            }
+            cur++;
+        }
+    }
+    
+    public int insert(int val) {
+        while (tr.get(idx).left != null && tr.get(idx).right != null) {
+            idx++;
+        }
+        TreeNode node = new TreeNode(val);
+        if (tr.get(idx).left == null) {
+            tr.get(idx).left = node;
+        } else {
+            tr.get(idx).right = node;
+        }
+        tr.add(node);
+        return tr.get(idx).val;
+    }
+    
+    public TreeNode get_root() {
+        return tr.get(0);
+    }
+}
+
+/**
+ * Your CBTInserter object will be instantiated and called as such:
+ * CBTInserter obj = new CBTInserter(root);
+ * int param_1 = obj.insert(val);
+ * TreeNode param_2 = obj.get_root();
+ */
 ```
 
 ### **...**
