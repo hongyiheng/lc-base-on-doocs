@@ -68,7 +68,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
+        q = []
+        f, ans = startFuel, 0
+        for v in stations:
+            if f >= target:
+                return ans
+            while q and f < v[0]:
+                f += -heapq.heappop(q)
+                ans += 1
+            if f >= v[0]:
+                heapq.heappush(q, -v[1])
+            else:
+                return -1
+        while f < target and q:
+            f += -heapq.heappop(q)
+            ans += 1
+        return ans if f >= target else -1
 ```
 
 ### **Java**
@@ -76,7 +93,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        int f = startFuel, ans = 0;
+        for (int[] v : stations) {
+            if (f >= target) {
+                return ans;
+            }
+            while (f < v[0] && !q.isEmpty()) {
+                f += q.poll();
+                ans++;
+            }
+            if (f >= v[0]) {
+                q.add(v[1]);
+            } else {
+                return -1;
+            }
+        }
+        while (f < target && !q.isEmpty()) {
+            f += q.poll();
+            ans++;
+        }
+        return f >= target ? ans : -1;
+    }
+}
 ```
 
 ### **...**
