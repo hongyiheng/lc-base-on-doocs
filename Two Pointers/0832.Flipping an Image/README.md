@@ -53,7 +53,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        n = len(image)
+        for i in range(n):
+            l, r = 0, n - 1
+            while l < r:
+                image[i][l], image[i][r] = image[i][r] ^ 1, image[i][l] ^ 1
+                l += 1
+                r -= 1
+            if l == r:
+                image[i][l] ^= 1
+        return image
 ```
 
 ### **Java**
@@ -61,7 +72,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        int n = image.length;
+        for (int i = 0; i < n; i++) {
+            int l = 0, r = n - 1;
+            while (l < r) {
+                int tmp = image[i][l];
+                image[i][l] = image[i][r] ^ 1;
+                image[i][r] = tmp ^ 1;
+                l++;
+                r--;
+            }
+            if (l == r) {
+                image[i][l] ^= 1;
+            }
+        }
+        return image;
+    }
+}
 ```
 
 ### **...**
