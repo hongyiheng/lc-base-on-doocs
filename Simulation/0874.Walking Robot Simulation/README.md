@@ -92,7 +92,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
+        x = y = ans = 0
+        d = 1
+        s = set()
+        for a, b in obstacles:
+            s.add((a, b))
+        for c in commands:
+            if c < 0:
+                if c == -2:
+                    d -= 1
+                elif c == -1:
+                    d += 1
+                d = (d + 4) % 4
+            else:
+                while c > 0:
+                    if d == 1:
+                        if (x, y + 1) in s:
+                            break
+                        y += 1
+                    elif d == 3:
+                        if (x, y - 1) in s:
+                            break
+                        y -= 1
+                    elif d == 0:
+                        if (x - 1, y) in s:
+                            break
+                        x -= 1
+                    else:
+                        if (x + 1, y) in s:
+                            break
+                        x += 1
+                    c -= 1
+                ans = max(ans, x * x + y * y)
+        return ans
 ```
 
 ### **Java**
@@ -100,7 +134,53 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int robotSim(int[] commands, int[][] obstacles) {
+        int x = 0, y = 0, d = 1;
+        long ans = 0;
+        Set<String> s = new HashSet<>();
+        for (int[] v : obstacles) {
+            s.add(v[0] + "-" + v[1]);
+        }
+        for (int c : commands) {
+            if (c < 0) {
+                if (c == -2) {
+                    d--;
+                } else if (c == -1) {
+                    d++;
+                }
+                d = (d + 4) % 4;
+            } else {
+                while (c > 0) {
+                    if (d == 1) {
+                        if (s.contains(x + "-" + (y + 1))) {
+                            break;
+                        }
+                        y++;
+                    } else if (d == 3) {
+                        if (s.contains(x + "-" + (y - 1))) {
+                            break;
+                        }
+                        y--;
+                    } else if (d == 0) {
+                        if (s.contains((x - 1) + "-" + y)) {
+                            break;
+                        }
+                        x--;
+                    } else {
+                        if (s.contains((x + 1) + "-" + y)) {
+                            break;
+                        }
+                        x++;
+                    }
+                    c--;
+                }
+                ans = Math.max(ans, 1L * x * x + 1L * y * y);
+            }
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
