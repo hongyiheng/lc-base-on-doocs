@@ -46,7 +46,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestSubsequence(self, s: str) -> str:
+        cnt = Counter(list(s))
+        q = []
+        used = set()
+        for c in s:
+            if c not in used:
+                while q and q[-1] > c and cnt[q[-1]] > 0:
+                    used.remove(q.pop())
+                q.append(c)
+                used.add(c)
+            cnt[c] -= 1
+        return "".join(q)
 ```
 
 ### **Java**
@@ -54,7 +66,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String smallestSubsequence(String s) {
+        Map<Character, Integer> cnt = new HashMap<>();
+        char[] cs = s.toCharArray();
+        for (char c : cs) {
+            cnt.put(c, cnt.getOrDefault(c, 0) + 1);
+        }
+        Deque<Character> q = new ArrayDeque<>();
+        Set<Character> used = new HashSet<>();
+        for (char c : cs) {
+            if (!used.contains(c)) {
+                while (!q.isEmpty() && q.peekLast() > c && cnt.get(q.peekLast()) > 0) {
+                    used.remove(q.pollLast());
+                }
+                q.addLast(c);
+                used.add(c);
+            }
+            cnt.put(c, cnt.get(c) - 1);          
+        }
+        String ans = "";
+        for (char c : q) {
+            ans += String.valueOf(c);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
