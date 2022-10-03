@@ -48,7 +48,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkOnesSegment(self, s: str) -> bool:
+        ans = idx = 0
+        n = len(s)
+        while idx < n:
+            if s[idx] == '1':
+                ans += 1
+                while idx < n and s[idx] == '1':
+                    idx += 1
+            else:
+                idx += 1
+        return ans <= 1
 ```
 
 ### **Java**
@@ -56,7 +67,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkOnesSegment(String s) {
+        int ans = 0, n = s.length(), idx = 0;
+        while (idx < n) {
+            if (s.charAt(idx) == '1') {
+                ans++;
+                while (idx < n && s.charAt(idx) == '1') {
+                    idx++;
+                }
+            } else {
+                idx++;
+            }
+        }
+        return ans <= 1;
+    }
+}
 ```
 
 ### **...**
