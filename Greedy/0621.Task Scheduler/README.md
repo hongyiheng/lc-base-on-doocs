@@ -66,7 +66,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        mp = dict()
+        for t in tasks:
+            mp[t] = mp.get(t, 0) + 1
+        q = []
+        for k in mp:
+            q.append([k, mp[k]])
+        q.sort(key=lambda x:-x[1]) 
+        cnt, mx = 0, q[0][1]
+        for v in q:
+            if v[1] == mx:
+                cnt += 1
+            else:
+                break
+        ans = (mx - 1) * (n + 1) + cnt
+        return max(ans, len(tasks))
 ```
 
 ### **Java**
@@ -74,7 +90,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        Map<Character, Integer> mp = new HashMap<>();
+        for (char t : tasks) {
+            mp.put(t, mp.getOrDefault(t, 0) + 1);
+        }
+        List<Integer> q = new ArrayList<>();
+        for (Character k : mp.keySet()) {
+            q.add(mp.get(k));
+        }
+        q.sort(Comparator.comparingInt(o -> -o));
+        int cnt = 0, mx = q.get(0);
+        for (int v : q) {
+            if (v == mx) {
+                cnt++;
+            } else {
+                break;
+            }
+        }
+        int ans = (mx - 1) * (n + 1) + cnt;
+        return Math.max(ans, tasks.length);
+    }
+}
 ```
 
 ### **...**
