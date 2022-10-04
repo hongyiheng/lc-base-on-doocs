@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minAddToMakeValid(self, s: str) -> int:
+        q = deque()
+        for c in s:
+            if c == ')':
+                if q and q[-1] == '(':
+                    q.pop()
+                    continue
+            q.append(c)
+        return len(q)
 ```
 
 ### **Java**
@@ -74,7 +83,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minAddToMakeValid(String s) {
+        Deque<Character> q = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {
+            if (c == ')') {
+                if (!q.isEmpty() && q.peekLast() == '(') {
+                    q.pollLast();
+                    continue;
+                }
+            }
+            q.addLast(c);
+        }
+        return q.size();
+    }
+}
 ```
 
 ### **...**
