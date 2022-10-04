@@ -38,7 +38,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        s = set()
+        n = len(nums)
 
+        def dfs(path, vis, idx):
+            if len(path) >= 2:
+                h = str(path)
+                if h not in s:
+                    ans.append(path[::])
+                    s.add(h)
+            if idx >= n:
+                return
+            for i in range(idx, n):
+                if vis[i]:
+                    continue
+                if path and path[-1] > nums[i]:
+                    continue
+                path.append(nums[i])
+                vis[i] = True
+                dfs(path, vis, i + 1)
+                vis[i] = False
+                path.pop()
+        
+        dfs(list(), [False] * n, 0)
+        return ans
 ```
 
 ### **Java**
@@ -46,7 +72,57 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    List<List<Integer>> ans;
+    Set<String> s;
+    int[] nums;
+    int n;
 
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        ans = new ArrayList<>();
+        this.nums = nums;
+        n = nums.length;
+        Deque<Integer> path = new ArrayDeque<>();
+        boolean[] vis = new boolean[n];
+        s = new HashSet<>();
+        dfs(path, vis, 0);
+        return ans;
+    }
+
+    public void dfs(Deque<Integer> path, boolean[] vis, int idx) {
+        if (path.size() >= 2) {
+            String h = hash(path);
+            if (!s.contains(h)) {
+                ans.add(new ArrayList(path));
+                s.add(h);
+            }
+        }
+        if (idx >= n) {
+            return;
+        }
+        for (int i = idx; i < n; i++) {
+            if (!path.isEmpty() && path.peekLast() > nums[i]) {
+                continue;
+            }
+            if (vis[i]) {
+                continue;
+            }
+            vis[i] = true;
+            path.addLast(nums[i]);
+            dfs(path, vis, i + 1);
+            path.pollLast();
+            vis[i] = false;
+        }
+    }
+
+    public String hash(Deque<Integer> q) {
+        StringBuilder sb = new StringBuilder();
+        for (int v : q) {
+            sb.append(String.valueOf(v) + "-");
+        }
+        return sb.toString();
+    }
+}
 ```
 
 ### **...**
