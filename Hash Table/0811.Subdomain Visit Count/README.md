@@ -54,6 +54,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        mp = dict()
+        for s in cpdomains:
+            ss = s.split(" ")
+            num = int(ss[0])
+            sss = ss[1].split(".")
+            n = len(sss)
+            k = sss[n - 1]
+            mp[k] = mp.get(k, 0) + num
+            for i in range(n - 2, -1, -1):
+                k = sss[i] + "." + k
+                mp[k] = mp.get(k, 0) + num
+        ans = []
+        for k in mp.keys():
+            ans.append(str(mp[k]) + " " + k)
+        return ans
 
 ```
 
@@ -62,6 +79,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<String> subdomainVisits(String[] cpdomains) {
+        Map<String, Integer> mp = new HashMap<>();
+        for (String s : cpdomains) {
+            String[] ss = s.split(" ");
+            int num = Integer.valueOf(ss[0]);
+            String[] sss = ss[1].split("\\.");
+            int n = sss.length;
+            String k = sss[n - 1];
+            mp.put(k, mp.getOrDefault(k, 0) + num);
+            for (int i = n - 2; i >= 0; i--) {
+                k = sss[i] + "." + k;
+                mp.put(k, mp.getOrDefault(k, 0) + num);
+            }
+        }
+        List<String> ans = new ArrayList<>();
+        for (String k : mp.keySet()) {
+            ans.add(mp.get(k) + " " + k);
+        }
+        return ans;
+    }
+}
 
 ```
 
