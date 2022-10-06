@@ -57,7 +57,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def threeEqualParts(self, arr: List[int]) -> List[int]:
+        def find(end, k):
+            cur = 0
+            for i in range(end, -1, -1):
+                cur += arr[i]
+                if cur == k:
+                    return i
+            return -1
 
+        n, cnt = len(arr), 0
+        for v in arr:
+            cnt += v
+        ans = [-1, -1]
+        if cnt % 3 != 0:
+            return ans
+        if cnt == 0:
+            return [0, n - 1]
+        k = cnt // 3
+        c = find(n - 1, k)
+        b = find(c - 1, k)
+        a = find(b - 1, k)
+        if a == -1 or b == -1 or c == -1:
+            return ans
+        while c < n:
+            if arr[a] != arr[b] or arr[b] != arr[c]:
+                return ans
+            a += 1
+            b += 1
+            c += 1
+        return [a - 1, b]
 ```
 
 ### **Java**
@@ -65,7 +95,52 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int[] threeEqualParts(int[] arr) {
+        int cnt = 0, n = arr.length;
+        int[] ans = new int[]{-1, -1};
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 1) {
+                cnt++;
+            }
+        }
+        if (cnt % 3 != 0) {
+            return ans;
+        }
+        if (cnt == 0) {
+            return new int[]{0, n - 1};
+        }
+        int k = cnt / 3;
+        int c = find(n - 1, k, arr);
+        int b = find(c - 1, k, arr);
+        int a = find(b - 1, k, arr);
+        if (a == -1 || b == -1 || c == -1) {
+            return ans;
+        }
+        while (c < n) {
+            if (arr[a] != arr[b] || arr[b] != arr[c]) {
+                return ans;
+            }
+            a++;
+            b++;
+            c++;
+        }
+        return new int[]{a - 1, b};
+    }
 
+
+    public int find(int end, int k, int[] arr) {
+        int cur = 0;
+        for (int i = end; i >= 0; i--) {
+            cur += arr[i];
+            if (cur == k) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+}
 ```
 
 ### **...**
