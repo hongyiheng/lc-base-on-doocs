@@ -32,7 +32,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        ans = [-1] * n
+        q = deque()
+        for i, v in enumerate(nums):
+            while q and q[-1][1] < v:
+                ans[q.pop()[0]] = v
+            q.append([i, v])
+        for i, v in enumerate(nums):
+            while q and q[-1][1] < v:
+                ans[q.pop()[0]] = v
+        return ans
 ```
 
 ### **Java**
@@ -40,7 +52,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        Deque<int[]> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            while (!q.isEmpty() && q.peekLast()[1] < nums[i]) {
+                ans[q.pollLast()[0]] = nums[i];
+            }
+            q.addLast(new int[]{i, nums[i]});
+        }
+        for (int i = 0; i < n; i++) {
+            while (!q.isEmpty() && q.peekLast()[1] < nums[i]) {
+                ans[q.pollLast()[0]] = nums[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
