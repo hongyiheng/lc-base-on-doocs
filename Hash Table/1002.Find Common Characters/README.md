@@ -46,7 +46,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        cnt = [-1] * 26
+        for s in words:
+            cur = [0] * 26
+            for c in s:
+                cur[ord(c) - ord('a')] += 1
+            for i in range(26):
+                if cnt[i] == -1 or cnt[i] == cur[i]:
+                    cnt[i] = cur[i]
+                else:
+                    cnt[i] = min(cnt[i], cur[i])
+        ans = []
+        for i in range(26):
+            while cnt[i] > 0:
+                ans.append(str(chr(ord('a') + i)))
+                cnt[i] -= 1
+        return ans
+                
 ```
 
 ### **Java**
@@ -54,7 +72,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> commonChars(String[] words) {
+        int[] cnt = new int[26];
+        Arrays.fill(cnt, -1);
+        for (String s : words) {
+            char[] cs = s.toCharArray();
+            int[] cur = new int[26];
+            for (char c : cs) {
+                cur[c - 'a']++;
+            }
+            for (int i = 0; i < 26; i++) {
+                if (cnt[i] == -1 || cnt[i] == cur[i]) {
+                    cnt[i] = cur[i];
+                } else {
+                    cnt[i] = Math.min(cnt[i], cur[i]);
+                }
+            }
+        }
+        List<String> ans = new ArrayList<>();
+        for (int i = 0; i < 26; i++) {
+            while (cnt[i] > 0) {
+                ans.add(String.valueOf((char)('a' + i))); 
+                cnt[i]--;
+            }  
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
