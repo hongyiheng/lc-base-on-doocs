@@ -54,7 +54,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+        dp = [[0] * n for _ in range(m)]
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == '0':
+                    continue
+                dp[i][j] = 1
+                if i > 0 and j > 0:
+                    dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
+                ans = max(ans, dp[i][j])
+        return ans * ans
 ```
 
 ### **Java**
@@ -62,7 +75,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == '0') {
+                    continue;
+                }
+                dp[i][j] = 1;
+                if (i > 0 && j > 0) {
+                    dp[i][j] = Math.min(Math.min(dp[i - 1][j - 1], dp[i - 1][j]), dp[i][j - 1]) + 1;
+                }
+                ans = Math.max(ans, dp[i][j]);
+            }
+        }
+        return ans * ans;
+    }
+}
 ```
 
 ### **...**
