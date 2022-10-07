@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxAscendingSum(self, nums: List[int]) -> int:
+        ans = cur = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] > nums[i - 1]:
+                cur += nums[i]
+            else:
+                ans = max(cur, ans)
+                cur = nums[i]
+        return max(ans, cur)
 ```
 
 ### **Java**
@@ -74,7 +83,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxAscendingSum(int[] nums) {
+        int ans = 0, cur = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                cur += nums[i];
+            } else {
+                ans = Math.max(ans, cur);
+                cur = nums[i];
+            }
+        }
+        return Math.max(ans, cur);
+    }
+}
 ```
 
 ### **...**
