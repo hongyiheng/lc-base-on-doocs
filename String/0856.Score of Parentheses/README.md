@@ -61,7 +61,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def scoreOfParentheses(self, s: str) -> int:
+        ans = d = 0
+        for i, c in enumerate(s):
+            if c == '(':
+                d += 1
+            else:
+                d -= 1
+                if s[i - 1] == '(':  
+                    ans += 1 << d
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +79,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int scoreOfParentheses(String s) {
+        int ans = 0, d = 0, n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == '(') {
+                d++;
+            } else {
+                d--;
+                if (s.charAt(i - 1) == '(') {
+                    ans += 1 << d;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
