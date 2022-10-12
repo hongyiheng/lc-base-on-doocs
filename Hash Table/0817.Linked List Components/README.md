@@ -55,7 +55,27 @@ G = [0, 3, 1, 4]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def numComponents(self, head: Optional[ListNode], nums: List[int]) -> int:
+        s = set()
+        for v in nums:
+            s.add(v)
+        ans = 0
+        while head:
+            if head.val not in s:
+                head = head.next
+                continue
+            tmp = head
+            while tmp and tmp.val in s:
+                tmp = tmp.next
+            ans += 1
+            head = tmp
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +83,38 @@ G = [0, 3, 1, 4]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int numComponents(ListNode head, int[] nums) {
+        int ans = 0;
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            s.add(v);
+        }
+        while (head != null) {
+            if (!s.contains(head.val)) {
+                head = head.next;
+                continue;
+            }
+            ListNode tmp = head;
+            while (tmp != null && s.contains(tmp.val)) {
+                tmp = tmp.next;
+            }
+            ans++;
+            head = tmp;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
