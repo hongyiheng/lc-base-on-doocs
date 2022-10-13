@@ -76,7 +76,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        def gcd(a, b):
+            return a if b == 0 else gcd(b, a % b)
 
+        cnt = Counter(deck)
+        x = 0
+        for v in cnt.values():
+            x = gcd(v, x)
+            if x == 1:
+                return False
+        return x >= 2
 ```
 
 ### **Java**
@@ -84,7 +95,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean hasGroupsSizeX(int[] deck) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int k : deck) {
+            int v = cnt.getOrDefault(k, 0) + 1;
+            cnt.put(k, v);
+        }
+        int x = 0;
+        for (int v : cnt.values()) {
+            x = gcd(x, v);
+            if (x == 1) {
+                return false;
+            }
+        }
+        return x >= 2;
+    }
 
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
 ```
 
 ### **...**
