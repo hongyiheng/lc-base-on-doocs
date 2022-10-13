@@ -66,7 +66,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        s, n = sum(stones), len(stones)
+        t = s // 2
+        dp = [[0] * (t + 1) for _ in range(n + 1)]
+        for i in range(1, n + 1):
+            for j in range(t + 1):
+                dp[i][j] = dp[i - 1][j]
+                v = stones[i - 1]
+                if j >= v:
+                    dp[i][j] = max(dp[i][j], dp[i - 1][j - v] + v)
+        return abs(s - dp[n][t] - dp[n][t])
 ```
 
 ### **Java**
@@ -74,7 +85,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int lastStoneWeightII(int[] stones) {
+        int n = stones.length, s = 0;
+        for (int v : stones) {
+            s += v;
+        }
+        int t = s / 2;
+        int[][] dp = new int[n + 1][t + 1];
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 0; j < t + 1; j++) {
+                int v = stones[i - 1];
+                dp[i][j] = dp[i - 1][j];
+                if (j >= v) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - v] + v);
+                }
+            }
+        }
+        return Math.abs(s - dp[n][t] - dp[n][t]);
+    }
+}
 ```
 
 ### **...**
