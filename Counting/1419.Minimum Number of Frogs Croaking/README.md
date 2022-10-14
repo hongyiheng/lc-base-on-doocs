@@ -68,7 +68,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minNumberOfFrogs(self, croakOfFrogs: str) -> int:
+        def get_cur():
+            cur = float('inf')
+            for c in s:
+                if cur >= mp[c]:
+                    cur = mp[c]
+                else:
+                    return -1
+            return mp['c'] - mp['k']
 
+        s = ['c', 'r', 'o', 'a', 'k']
+        mp = dict()
+        for c in s:
+            mp[c] = 0
+        ans = 0
+        for c in croakOfFrogs:
+            if c not in croakOfFrogs:
+                return -1
+            mp[c] += 1
+            cur = get_cur()
+            if cur == -1:
+                return -1
+            ans = max(ans, cur)
+        return ans if mp['c'] == mp['k'] else -1
 ```
 
 ### **Java**
@@ -76,7 +100,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    char[] s = new char[]{'c', 'r', 'o', 'a', 'k'};
+    Map<Character, Integer> cnt = new HashMap<>();
 
+    public int minNumberOfFrogs(String croakOfFrogs) {
+        for (char c : s) {
+            cnt.put(c, 0);
+        }
+        int ans = 0;
+        for (char c : croakOfFrogs.toCharArray()) {
+            cnt.put(c, cnt.get(c) + 1);
+            int cur = getCur();
+            if (cur == -1) {
+                return -1;
+            }
+            ans = Math.max(ans, cur);
+        }
+        return cnt.get('c').equals(cnt.get('k')) ? ans : -1;
+    }
+
+    public int getCur() {
+        int cur = Integer.MAX_VALUE;
+        for (char c : s) {
+            if (cnt.get(c) <= cur) {
+                cur = cnt.get(c);
+            } else {
+                return -1;
+            }
+        }
+        return cnt.get('c') - cnt.get('k');
+    }
+}
 ```
 
 ### **...**
