@@ -50,7 +50,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def pathInZigZagTree(self, label: int) -> List[int]:
+        def get_p(cur, row):
+            cur_min, cur_max = 1 << row, (1 << row + 1) - 1
+            p_min, p_max = 1 << row - 1, (1 << row) - 1
+            if row % 2 == 0:
+                idx = cur_max - cur
+                return p_min + idx // 2
+            else:
+                idx = cur - cur_min
+                return p_max - idx // 2
 
+        row = 0
+        while label >= 1 << row:
+            row += 1
+        ans = [label]
+        while label != 1:
+            label = get_p(label, row - 1)
+            ans.append(label)
+            row -= 1
+        return ans[::-1]
 ```
 
 ### **Java**
@@ -58,7 +78,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int getParent(int cur, int row) {
+        int curMin = 1 << row, curMax = (1 << row + 1) - 1;
+        int pMin = 1 << row - 1, pMax = (1 << row) - 1;
+        if (row % 2 == 0) {
+            int idx = curMax - cur;
+            return pMin + idx / 2;
+        } else {
+            int idx = cur - curMin;
+            return pMax - idx / 2;
+        }
+    }
 
+    public List<Integer> pathInZigZagTree(int label) {
+        int row = 0;
+        while (label >= (1 << row)) {
+            row++;
+        }
+        List<Integer> ans = new ArrayList<>();
+        ans.add(label);
+        while (label != 1) {
+            label = getParent(label, --row);
+            ans.add(label);
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+}
 ```
 
 ### **...**
