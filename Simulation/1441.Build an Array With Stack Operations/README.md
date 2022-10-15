@@ -80,7 +80,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def buildArray(self, target: List[int], n: int) -> List[str]:
+        ans = []
+        idx, m = 0, len(target)
+        for i in range(1, n + 1):
+            if idx == m:
+                break
+            if target[idx] != i:
+                ans.append("Push")
+                ans.append("Pop")
+            else:
+                idx += 1
+                ans.append("Push")
+        return ans
 ```
 
 ### **Java**
@@ -88,7 +101,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> ans = new ArrayList<>();
+        int idx = 0, m = target.length;
+        for (int i = 1; i < n + 1; i++) {
+            if (idx == m) {
+                break;
+            }
+            if (target[idx] != i) {
+                ans.add("Push");
+                ans.add("Pop");
+            } else {
+                idx++;
+                ans.add("Push");
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
