@@ -66,7 +66,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
+        def dfs(i, c):
+            color[i] = c
+            for j in g[i]:
+                if color[j] == c:
+                    return False
+                if color[j] == -1 and not dfs(j, c ^ 1):
+                    return False
+            return True
+        
+        g = defaultdict(list)
+        for a, b in dislikes:
+            g[a].append(b)
+            g[b].append(a)
+        color = [-1] * (n + 1)
+        for i in range(1, n + 1):
+            if color[i] == -1:
+                if not dfs(i, 1):
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -74,7 +94,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    Map<Integer, List<Integer>> g = new HashMap<>();
+    int[] color;
 
+    public boolean dfs(int i, int c) {
+        color[i] = c;
+        for (int j : g.getOrDefault(i, new ArrayList<>())) {
+            if (color[j] == c) {
+                return false;
+            }
+            if (color[j] == -1 && !dfs(j, c ^ 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean possibleBipartition(int n, int[][] dislikes) {
+        for (int[] v : dislikes) {
+            g.computeIfAbsent(v[0], k -> new ArrayList()).add(v[1]);
+            g.computeIfAbsent(v[1], k -> new ArrayList()).add(v[0]);
+        }
+        color = new int[n + 1];
+        Arrays.fill(color, -1);
+        for (int i = 1; i < n + 1; i++) {
+            if (color[i] == -1) {
+                if (!dfs(i, 1)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
