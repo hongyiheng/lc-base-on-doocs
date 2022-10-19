@@ -49,7 +49,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        nums = [False] * n
+        for i in range(2, n):
+            if not nums[i]:
+                x = i * i
+                while x < n:
+                    nums[x] = True
+                    x += i
+        ans = 0
+        for i in range(2, n):
+            if not nums[i]:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +70,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countPrimes(int n) {
+        boolean[] nums = new boolean[n];
+        for (int i = 2; i < n; i++) {
+            if (!nums[i]) {
+                long x = 1L * i * i;
+                while (x < n) {
+                    nums[(int)x] = true;
+                    x += i;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 2; i < n; i++) {
+            if (!nums[i]) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
