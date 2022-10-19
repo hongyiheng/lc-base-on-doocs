@@ -62,7 +62,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canChange(self, start: str, target: str) -> bool:
+        if start.replace("_", "") != target.replace("_", ""):
+            return False
+        j, n = 0, len(start)
+        for i in range(n):
+            if start[i] == '_':
+                continue
+            while j < n and target[j] == '_':
+                j += 1
+            if j >= n or start[i] != target[j]:
+                return False
+            if start[i] == 'L' and i < j:
+                return False
+            if start[i] == 'R' and i > j:
+                return False
+            j += 1
+        return True
 ```
 
 ### **Java**
@@ -70,7 +87,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canChange(String start, String target) {
+        if (!start.replace("_", "").equals(target.replace("_", ""))) {
+            return false;
+        }
+        int j = 0, n = start.length();
+        for (int i = 0; i < n; i++) {
+            if (start.charAt(i) == '_') {
+                continue;
+            }
+            while (j < n && target.charAt(j) == '_') {
+                j++;
+            }
+            if (j >= n || start.charAt(i) != target.charAt(j)) {
+                return false;
+            }
+            if (start.charAt(i) == 'L' && i < j) {
+                return false;
+            }
+            if (start.charAt(i) == 'R' && i > j) {
+                return false;
+            }
+            j++;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
