@@ -52,7 +52,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kthGrammar(self, n: int, k: int) -> int:
+        if n == 1:
+            return 0
+        if n == 2:
+            return 0 if k == 1 else 1
+        if k <= (1 << (n - 1)) / 2:
+            return self.kthGrammar(n - 1, k)
+        return self.kthGrammar(n - 1, k - (1 << (n - 2))) ^ 1
 ```
 
 ### **Java**
@@ -60,7 +68,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int kthGrammar(int n, int k) {
+        if (n == 1) {
+            return 0;
+        }
+        if (n == 2) {
+            return k == 1 ? 0 : 1;
+        }
+        if (k <= (1 << n - 1) / 2) {
+            return kthGrammar(n - 1, k);
+        }
+        return kthGrammar(n - 1, k - (1 << n - 1) / 2) ^ 1;
+    }
+}
 ```
 
 ### **...**
