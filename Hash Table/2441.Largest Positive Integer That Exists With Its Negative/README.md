@@ -56,7 +56,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMaxK(self, nums: List[int]) -> int:
+        s = set()
+        for v in nums:
+            if v < 0:
+                s.add(v)
+        ans = -1
+        for v in nums:
+            if -v in s:
+                ans = max(ans, v)
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +74,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findMaxK(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            if (v < 0) {
+                s.add(v);
+            }
+        }
+        int ans = -1;
+        for (int v : nums) {
+            if (s.contains(-v)) {
+                ans = Math.max(ans, v);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
