@@ -51,7 +51,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countDistinctIntegers(self, nums: List[int]) -> int:
+        s = set()
+        for v in nums:
+            s.add(v)
+            s.add(int(str(v)[::-1]))
+        return len(s)
 ```
 
 ### **Java**
@@ -59,7 +65,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countDistinctIntegers(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            StringBuilder sb = new StringBuilder(String.valueOf(v));
+            s.add(Integer.parseInt(sb.toString()));
+            s.add(Integer.parseInt(sb.reverse().toString()));
+        }
+        return s.size();
+    }
+}
 ```
 
 ### **...**
