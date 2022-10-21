@@ -80,7 +80,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        s = dict()
+        for v in nums:
+            s[v] = s.get(v, 0) + 1
+        ans = 0
+        for v in s:
+            if k != 0 and v + k in nums:
+                ans += 1
+            if k == 0 and s[v] > 1:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -88,7 +99,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findPairs(int[] nums, int k) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int v : nums) {
+            mp.put(v, mp.getOrDefault(v, 0) + 1);
+        }
+        int ans = 0;
+        for (int v : mp.keySet()) {
+            if (k == 0) {
+                if (mp.get(v) > 1) {
+                    ans++;
+                }  
+            } else if (mp.containsKey(v + k)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
