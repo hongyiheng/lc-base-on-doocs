@@ -55,7 +55,26 @@ S.next(85) 被调用并返回 6。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class StockSpanner:
 
+    def __init__(self):
+        self.q = []
+        self.idx = 0
+
+    def next(self, price: int) -> int:
+        while self.q and self.q[-1][1] <= price:
+            self.q.pop()
+        l = -1 if not self.q else self.q[-1][0]
+        ans = self.idx - l
+        self.q.append([self.idx, price])
+        self.idx += 1
+        return ans
+
+
+
+# Your StockSpanner object will be instantiated and called as such:
+# obj = StockSpanner()
+# param_1 = obj.next(price)
 ```
 
 ### **Java**
@@ -63,7 +82,33 @@ S.next(85) 被调用并返回 6。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class StockSpanner {
 
+    Deque<int[]> q;
+    int idx ;
+
+    public StockSpanner() {
+        q = new ArrayDeque<>();
+        idx = 0;
+    }
+    
+    public int next(int price) {
+        while (!q.isEmpty() && q.peekLast()[1] <= price) {
+            q.pollLast();
+        }
+        int l = q.isEmpty() ? -1 : q.peekLast()[0];
+        int ans = idx - l;
+        q.addLast(new int[]{idx, price});
+        idx++;
+        return ans;
+    }
+}
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner obj = new StockSpanner();
+ * int param_1 = obj.next(price);
+ */
 ```
 
 ### **...**
