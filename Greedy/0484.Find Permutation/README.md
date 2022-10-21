@@ -50,7 +50,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findPermutation(self, s: str) -> List[int]:
+        n = len(s)
+        ans = [0] * (n + 1)
+        for i in range(1, n + 2):
+            ans[i - 1] = i 
+        idx = 0
+        while idx < n:
+            if s[idx] == 'I':
+                idx += 1
+            else:
+                l = idx
+                while idx < n and s[idx] == 'D':
+                    idx += 1
+                r = idx
+                while l < r:
+                    ans[l], ans[r] = ans[r], ans[l]
+                    r -= 1
+                    l += 1
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +77,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findPermutation(String s) {
+        int n = s.length();
+        int[] ans = new int[n + 1];
+        for (int i = 1; i <= n + 1; i++) {
+            ans[i - 1] = i;
+        }
+        int idx = 0;
+        while (idx < n) {
+            if (s.charAt(idx) == 'I') {
+                idx++;
+            } else {
+                int l = idx;
+                while (idx < n && s.charAt(idx) == 'D') {
+                    idx++;
+                }
+                int r = idx;
+                while (l < r) {
+                    int tmp = ans[l];
+                    ans[l] = ans[r];
+                    ans[r] = tmp;
+                    r--;
+                    l++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
