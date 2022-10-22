@@ -50,7 +50,15 @@ B = [50, 12, 32, 46, 28]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def anagramMappings(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        mp = defaultdict(list)
+        for i, v in enumerate(nums2):
+            mp[v].append(i)
+        ans = [0] * len(nums1)
+        for i, v in enumerate(nums1):
+            ans[i] = mp[v].pop()
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +66,20 @@ B = [50, 12, 32, 46, 28]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] anagramMappings(int[] nums1, int[] nums2) {
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        int n = nums1.length;
+        for (int i = 0; i < n; i++) {
+            mp.computeIfAbsent(nums2[i], k -> new ArrayList<>()).add(i);
+        }
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = mp.get(nums1[i]).remove(0);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
