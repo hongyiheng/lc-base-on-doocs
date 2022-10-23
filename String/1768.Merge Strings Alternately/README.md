@@ -66,7 +66,17 @@ word2：    p   q
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        n, m, idx = len(word1), len(word2), 0
+        ans = ""
+        while idx < n or idx < m:
+            if idx < n:
+                ans += word1[idx]
+            if idx < m:
+                ans += word2[idx]
+            idx += 1
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +84,22 @@ word2：    p   q
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        int n = word1.length(), m = word2.length(), idx = 0;
+        StringBuilder ans = new StringBuilder();
+        while (idx < n || idx < m) {
+            if (idx < n) {
+                ans.append(word1.charAt(idx));
+            }
+            if (idx < m) {
+                ans.append(word2.charAt(idx));
+            }
+            idx++;
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
