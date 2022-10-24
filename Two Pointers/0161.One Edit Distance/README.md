@@ -49,7 +49,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isOneEditDistance(self, s: str, t: str) -> bool:
+        n, m = len(s), len(t)
+        if abs(n - m) > 1:
+            return False
+        i = j = diff = 0
+        while i < n and j < m:
+            if s[i] == t[j]:
+                i += 1
+                j += 1
+            else:
+                diff += 1
+                if n > m:
+                    i += 1
+                elif m > n:
+                    j += 1
+                else:
+                    i += 1
+                    j += 1
+        return diff == 1 or (diff == 0 and abs(m - n) == 1)
 ```
 
 ### **Java**
@@ -57,7 +76,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isOneEditDistance(String s, String t) {
+        int n = s.length(), m = t.length();
+        if (Math.abs(m - n) > 1) {
+            return false;
+        }
+        int i = 0, j = 0, diff = 0;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                diff++;
+                if (m == n) {
+                    i++;
+                    j++;
+                } else if (n > m) {
+                    i++;
+                } else {
+                    j++;
+                }
+            }
+        }
+        return diff == 1 || (diff == 0 && Math.abs(m - n) == 1);
+    }
+}
 ```
 
 ### **...**
