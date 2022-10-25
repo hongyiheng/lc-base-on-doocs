@@ -55,7 +55,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def shortestBridge(self, grid: List[List[int]]) -> int:
+        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        n = len(grid)
+        q = deque()
 
+        def dfs(x, y):
+            if grid[x][y] != 1:
+                return
+            q.append((x, y))
+            grid[x][y] = 2
+            for d in dirs:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= n or ny < 0 or ny >= n:
+                    continue
+                dfs(nx, ny)
+
+        for i in range(n):
+            end = False
+            for j in range(n):
+                if grid[i][j] == 1:
+                    dfs(i, j)
+                    end = True
+                    break
+            if end:
+                break
+        ans = 0
+        while q:
+            m = len(q)
+            for _ in range(m):
+                x, y = q.popleft()
+                for d in dirs:
+                    nx, ny = x + d[0], y + d[1]
+                    if nx < 0 or nx >= n or ny < 0 or ny >= n:
+                        continue
+                    if grid[nx][ny] == 1:
+                        return ans
+                    if grid[nx][ny] == 0:
+                        grid[nx][ny] = 2
+                        q.append((nx, ny))
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +104,66 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    Deque<int[]> q = new ArrayDeque<>();
+    int n;
 
+    public void dfs(int[][] g, int x, int y) {
+        if (g[x][y] != 1) {
+            return;
+        }
+        q.addLast(new int[]{x, y});
+        g[x][y] = 2;
+        for (int[] d : dirs) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx < 0 || nx >= n || ny < 0 || ny >= n) {
+                continue;
+            }
+            dfs(g, nx, ny);
+        }
+    }
+
+    public int shortestBridge(int[][] grid) {
+        n = grid.length;
+        for (int i = 0; i < n; i++) {
+            boolean end = false;
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    dfs(grid, i, j);
+                    end = true;
+                    break;
+                }
+            }
+            if (end) {
+                break;
+            }
+        }
+        int ans = 0;
+        while (!q.isEmpty()) {
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                int[] cur = q.pollFirst();
+                int x = cur[0], y = cur[1];
+                for (int[] d : dirs) {
+                    int nx = x + d[0], ny = y + d[1];
+                    if (nx < 0 || nx >= n || ny < 0 || ny >= n) {
+                        continue;
+                    }
+                    if (grid[nx][ny] == 1) {
+                        return ans;
+                    }
+                    if (grid[nx][ny] == 0) {
+                        grid[nx][ny] = 2;
+                        q.addLast(new int[]{nx, ny});
+                    }
+                }
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
