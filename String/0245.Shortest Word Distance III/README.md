@@ -36,7 +36,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestWordDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
+        mp = dict()
+        ans = float('inf')
+        for i, v in enumerate(wordsDict):
+            if v != word1 and v != word2:
+                continue
+            if v == word1:
+                if word2 in mp:
+                    ans = min(ans, i - mp[word2])
+            else:
+                if word1 in mp:
+                    ans = min(ans, i - mp[word1])
+            mp[v] = i
+        return ans
 ```
 
 ### **Java**
@@ -44,7 +58,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int shortestWordDistance(String[] wordsDict, String word1, String word2) {
+        Map<String, Integer> mp = new HashMap<>();
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < wordsDict.length; i++) {
+            String w = wordsDict[i];
+            if (!w.equals(word1) && !w.equals(word2)) {
+                continue;
+            }
+            if (w.equals(word1)) {
+                if (mp.containsKey(word2)) {
+                    ans = Math.min(ans, i - mp.get(word2));
+                } 
+            } else {
+                if (mp.containsKey(word1)) {
+                    ans = Math.min(ans, i - mp.get(word1));
+                } 
+            }
+            mp.put(w, i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
