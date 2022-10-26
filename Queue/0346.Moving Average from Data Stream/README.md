@@ -56,7 +56,27 @@ movingAverage.next(5); // 返回 6.0 = (10 + 3 + 5) / 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MovingAverage:
 
+    def __init__(self, size: int):
+        self.q = deque()
+        self.size = size
+        self.s = 0
+
+    def next(self, val: int) -> float:
+        if len(self.q) >= self.size:
+            self.s -= self.q.popleft()
+        self.q.append(val)
+        self.s += val
+        return self.s / len(self.q)
+        
+
+
+
+
+# Your MovingAverage object will be instantiated and called as such:
+# obj = MovingAverage(size)
+# param_1 = obj.next(val)
 ```
 
 ### **Java**
@@ -64,7 +84,33 @@ movingAverage.next(5); // 返回 6.0 = (10 + 3 + 5) / 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MovingAverage {
+    
+    Deque<Integer> q;
+    int size;
+    double s;
 
+    public MovingAverage(int size) {
+        q = new ArrayDeque<>();
+        this.size = size;
+        s = 0;
+    }
+    
+    public double next(int val) {
+        if (q.size() >= size) {
+            s -= q.pollFirst();
+        }
+        q.addLast(val);
+        s += val;
+        return s == 0 ? 0 : s / q.size();
+    }
+}
+
+/**
+ * Your MovingAverage object will be instantiated and called as such:
+ * MovingAverage obj = new MovingAverage(size);
+ * double param_1 = obj.next(val);
+ */
 ```
 
 ### **...**
