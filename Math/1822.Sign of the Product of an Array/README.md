@@ -65,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def arraySign(self, nums: List[int]) -> int:
+        pos = True
+        for v in nums:
+            if v < 0:
+                pos = not pos
+            if v == 0:
+                return 0
+        return 1 if pos else -1
 ```
 
 ### **Java**
@@ -73,7 +81,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int arraySign(int[] nums) {
+        boolean pos = true;
+        for (int v : nums) {
+            if (v < 0) {
+                pos = !pos;
+            }
+            if (v == 0) {
+                return 0;
+            }
+        }
+        return pos ? 1 : -1;
+    }
+}
 ```
 
 ### **...**
