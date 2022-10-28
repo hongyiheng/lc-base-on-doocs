@@ -72,7 +72,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumDeviation(self, nums: List[int]) -> int:
+        q = []
+        min_val = float('inf')
+        for v in nums:
+            if v % 2 != 0:
+                v *= 2
+            min_val = min(v, min_val)
+            heapq.heappush(q, -v)
+        ans = float('inf')
+        while q and -q[0] % 2 == 0:
+            v = -heapq.heappop(q) // 2
+            min_val = min(v, min_val)
+            heapq.heappush(q, -v)
+            ans = min(ans, -q[0] - min_val)
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +95,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumDeviation(int[] nums) {
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        int minVal = nums[0] * 2;
+        for (int v : nums) {
+            if (v % 2 != 0) {
+                v *= 2;
+            }
+            minVal = Math.min(minVal, v);
+            q.add(v);
+        }
+        int ans = Integer.MAX_VALUE;
+        while (q.peek() % 2 == 0) {
+            int v = q.poll();
+            v /= 2;
+            minVal = Math.min(minVal, v);
+            q.add(v);
+            ans = Math.min(ans, q.peek() - minVal);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
