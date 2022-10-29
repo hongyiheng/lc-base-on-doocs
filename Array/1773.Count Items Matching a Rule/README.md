@@ -60,7 +60,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
+        i = 0
+        if ruleKey == 'color':
+            i = 1
+        elif ruleKey == 'name':
+            i = 2
+        ans = 0
+        for s in items:
+            if s[i] == ruleValue:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +79,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        int i = 0;
+        if (ruleKey.equals("color")) {
+            i = 1;
+        } else if (ruleKey.equals("name")) {
+            i = 2;
+        }
+        int ans = 0;
+        for (List<String> item : items) {
+            if (item.get(i).equals(ruleValue)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
