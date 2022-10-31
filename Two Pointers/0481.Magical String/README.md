@@ -47,7 +47,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def magicalString(self, n: int) -> int:
+        ans, cur = 0, 2
+        nums = [1, 2, 2] + [0] * n
+        for i in range(n):
+            if nums[i] == 0:
+                v = 2 if nums[i - 1] == 1 else 1
+                nums[i] = v
+                if nums[cur] == 2:
+                    nums[i + 1] = v
+                cur += 1
+            if nums[i] == 1:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -55,7 +68,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int magicalString(int n) {
+        int[] nums = new int[n + 2];
+        nums[0] = 1;
+        nums[1] = 2;
+        nums[2] = 2;
+        int ans = 0, cur = 2;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
+                int v = nums[i - 1] == 2 ? 1 : 2;
+                nums[i] = v;
+                if (nums[cur] == 2) {
+                    nums[i + 1] = v;
+                }
+                cur++;
+            }
+            if (nums[i] == 1) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
