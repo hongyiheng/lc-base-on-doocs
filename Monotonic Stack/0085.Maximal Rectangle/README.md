@@ -69,7 +69,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        def max_area(hs):
+            hs.append(-1)
+            ans = 0
+            q = []
+            for i, v in enumerate(hs):
+                while q and hs[q[-1]] > v:
+                    h = hs[q.pop()]
+                    l = q[-1] if q else -1
+                    ans = max(ans, (i - 1 - l) * h)
+                q.append(i)
+            return ans
 
+        n, m = len(matrix), len(matrix[0])
+        g = [[0] * m for _ in range(n)]
+        for i in range(n):
+            for j in range(m):
+                if matrix[i][j] == '1':
+                    last = g[i - 1][j] if i > 0 else 0
+                    g[i][j] = last + 1
+        ans = 0
+        for i in range(n):
+            ans = max(ans, max_area(g[i]))
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +101,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        int n = matrix.length, m = matrix[0].length;
+        int[][] g = new int[n][m + 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == '1') {
+                    g[i][j] = i > 0 ? g[i - 1][j] + 1 : 1;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans = Math.max(ans, maxArea(g[i]));
+        }
+        return ans;
+    }
 
+    public int maxArea(int[] hs) {
+        int ans = 0;
+        hs[hs.length - 1] = -1;
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < hs.length; i++) {
+            while (!q.isEmpty() && hs[q.peekLast()] > hs[i]) {
+                int h = hs[q.pollLast()];
+                int l = q.isEmpty() ? -1 : q.peekLast();
+                ans = Math.max(ans, (i - 1 - l) * h);
+            }
+            q.addLast(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
