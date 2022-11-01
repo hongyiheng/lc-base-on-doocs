@@ -59,7 +59,9 @@ word2 表示的字符串为 "a" + "bc" -> "abc"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        return "".join(word1) == "".join(word2)
 ```
 
 ### **Java**
@@ -67,7 +69,11 @@ word2 表示的字符串为 "a" + "bc" -> "abc"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        return String.join("", word1).equals(String.join("",word2));
+    }
+}
 ```
 
 ### **...**
