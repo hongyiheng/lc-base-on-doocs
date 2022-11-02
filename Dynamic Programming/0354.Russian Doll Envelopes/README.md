@@ -51,7 +51,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+        def cmp(a, b):
+            if a[0] != b[0]:
+                return a[0] - b[0]
+            return b[1] - a[1]
 
+        envelopes.sort(key=cmp_to_key(cmp))
+        nums = [v[1] for v in envelopes]
+        ans, n = 0, len(nums)
+        dp = [0] * n
+        for i in range(n):
+            l, r = 0, ans
+            while l < r:
+                mid = (l + r) >> 1
+                if dp[mid] < nums[i]:
+                    l = mid + 1
+                else:
+                    r = mid
+            dp[l] = nums[i]
+            if l == ans:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +81,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, (a, b) -> {
+            if (a[0] != b[0]) {
+                return a[0] - b[0];
+            }
+            return b[1] - a[1];
+        });
+        int n = envelopes.length, ans = 0;
+        int[] dp = new int[n], nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = envelopes[i][1];
+        }
+        for (int i = 0; i < n; i++) {
+            int left = 0, right = ans;
+            while (left < right) {
+                int mid = (left + right) >> 1;
+                if (dp[mid] < nums[i]) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+            dp[left] = nums[i];
+            if (left == ans) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
