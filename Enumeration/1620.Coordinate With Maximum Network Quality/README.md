@@ -80,7 +80,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def bestCoordinate(self, towers: List[List[int]], radius: int) -> List[int]:
+        M = 55
+        g = [[0] * M for _ in range(M)]
+        ans = [0, 0]
+        cur = 0
+        for i in range(M):
+            for j in range(M):
+                for x, y, w in towers:
+                    d = math.sqrt((x - i) * (x - i) + (y - j) * (y - j))
+                    if d <= radius:
+                        g[i][j] += w // (1 + d)
+                if g[i][j] > cur:
+                    cur = g[i][j]
+                    ans = [i, j ]
+        return ans
 ```
 
 ### **Java**
@@ -88,7 +103,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] bestCoordinate(int[][] towers, int radius) {
+        int M = 55;
+        int[][] g = new int[M][M];
+        int[] ans = new int[]{0, 0};
+        int cur = 0;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < M; j++) {
+                for (int[] t : towers) {
+                    int x = t[0], y = t[1], w = t[2];
+                    double d = Math.sqrt((x - i) * (x - i) + (y - j) * (y - j));
+                    if (d <= radius) {
+                        g[i][j] += w / (1 + d);
+                    }
+                }
+                if (g[i][j] > cur) {
+                    cur = g[i][j];
+                    ans[0] = i;
+                    ans[1] = j;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
