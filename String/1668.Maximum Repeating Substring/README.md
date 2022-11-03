@@ -58,7 +58,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxRepeating(self, sequence: str, word: str) -> int:
+        ori = word
+        ans = 0
+        while word in sequence:
+            word += ori
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +73,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxRepeating(String sequence, String word) {
+        String ori = word;
+        int ans = 0;
+        while (sequence.contains(word)) {
+            word += ori;
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
