@@ -51,7 +51,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reachNumber(self, target: int) -> int:
+        target = abs(target)
+        ans, cur = 1, 1
+        while cur < target:
+            ans += 1
+            cur += ans
+        diff = cur - target
+        while diff % 2 != 0:
+            ans += 1
+            cur += ans
+            diff = cur - target
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +71,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int reachNumber(int target) {
+        target = Math.abs(target);
+        int ans = 1, cur = 1;
+        while (cur < target) {
+            cur += ++ans;
+        }
+        int diff = cur - target;
+        while (diff % 2 != 0) {
+            cur += ++ans;
+            diff = cur - target;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
