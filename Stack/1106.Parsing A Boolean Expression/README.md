@@ -66,7 +66,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def parseBoolExpr(self, expression: str) -> bool:
+        cs = {'t', 'f', '&', '|', "!"}
+        q = []
+        for c in expression:
+            if c in cs or c in cs:
+                q.append(c)
+                continue
+            if c == ')':
+                t = f = 0
+                while q[-1] in {'t', 'f'}:
+                    if q[-1] == 't':
+                        t += 1
+                    if q[-1] == 'f':
+                        f += 1
+                    q.pop()
+                v = 'f'
+                c = q.pop()
+                if (c == '&' and f == 0) or (c == '!' and f > 0) or (c == '|' and t > 0):
+                    v = 't'
+                q.append(v)
+        return True if q.pop() == 't' else False
 ```
 
 ### **Java**
@@ -74,7 +95,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean parseBoolExpr(String expression) {
+        Set<Character> cs = new HashSet<>();
+        for (char c : new char[]{'t', 'f', '!', '&', '|'}) {
+            cs.add(c);
+        }
+        Deque<Character> q = new ArrayDeque<>();
+        for (char c : expression.toCharArray()) {
+            if (cs.contains(c)) {
+                q.addLast(c);
+            }
+            int t = 0, f = 0;
+            if (c == ')') {
+                while (q.peekLast() == 't' || q.peekLast() == 'f') {
+                    if (q.peekLast() == 't') {
+                        t++;
+                    } else {
+                        f++;
+                    }
+                    q.pollLast();
+                }
+                c = q.pollLast();
+                char v = 'f';
+                if ((c == '!' && f > 0) || (c == '&' && f == 0) || (c == '|' && t > 0)) {
+                    v = 't';
+                }
+                q.addLast(v);
+            }
+        }
 
+        return q.pollLast() == 't' ? true : false;
+    }
+}
 ```
 
 ### **...**
