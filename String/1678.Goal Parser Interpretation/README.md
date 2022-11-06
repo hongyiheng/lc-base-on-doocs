@@ -56,7 +56,11 @@ G -&gt; G
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def interpret(self, command: str) -> str:
+        command = command.replace("()", "o")
+        command = command.replace("(al)", "al")
+        return command
 ```
 
 ### **Java**
@@ -64,7 +68,13 @@ G -&gt; G
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String interpret(String command) {  
+        command = command.replace("()", "o");
+        command = command.replace("(al)", "al");
+        return command;
+    }
+}
 ```
 
 ### **...**
