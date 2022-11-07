@@ -60,7 +60,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        s = [False] * 26
+        for c in allowed:
+            s[ord(c) - ord('a')] = True
+        ans = 0
+        for w in words:
+            same = True
+            for c in w:
+                if not s[ord(c) - ord('a')]:
+                    same = False
+                    break
+            ans += same
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +81,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countConsistentStrings(String allowed, String[] words) {
+        boolean[] s = new boolean[26];
+        for (char c : allowed.toCharArray()) {
+            s[c - 'a'] = true;
+        }
+        int ans = 0;
+        for (String w : words) {
+            boolean same = true;
+            for (char c : w.toCharArray()) {
+                if (!s[c - 'a']) {
+                    same = false;
+                    break;
+                }
+            }
+            if (same) {
+                ans += 1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
