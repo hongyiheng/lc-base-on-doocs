@@ -70,7 +70,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def makeSimilar(self, nums: List[int], target: List[int]) -> int:
+        nums.sort(key=lambda x : (x % 2, x))
+        target.sort(key=lambda x : (x % 2, x))
+        return sum(abs(a - b) for a, b in zip(nums, target)) // 4
 ```
 
 ### **Java**
@@ -78,7 +82,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long makeSimilar(int[] nums, int[] target) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] % 2 != 0) {
+                nums[i] = -nums[i];
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (target[i] % 2 != 0) {
+                target[i] = -target[i];
+            }
+        }
+        Arrays.sort(nums);
+        Arrays.sort(target);
+        long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += Math.abs(nums[i] - target[i]);
+        }
+        return sum / 4;
+    }
+}
 ```
 
 ### **...**
