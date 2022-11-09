@@ -23,7 +23,7 @@ class LCSpider:
         self.difficulty_mapper = dict(Easy='简单', Medium='中等', Hard='困难')
 
         self.result = []
-        self.cookie = 'gr_user_id=015df5b5-b9f8-44c9-a176-ec419cde7b02; a2873925c34ecbd2_gr_last_sent_cs1=hongyiheng-5; _ga=GA1.2.2121844293.1652282277; csrftoken=qp2iWbPrxmt7XUanjJOGse2adWpVIlFiAksChCuSr1x2mIn6NC0rIVbrAwpPrkbO; __atuvc=0%7C38%2C0%7C39%2C0%7C40%2C4%7C41%2C3%7C42; Hm_lvt_fa218a3ff7179639febdb15e372f411c=1666193319,1666278114,1666489724,1667232380; _bl_uid=jLleFavj4R7rpOmnvyvkqsFtntX5; NEW_PROBLEMLIST_PAGE=1; acw_tc=0a362b4e16677112893255837e0b9f2fa8255d3885e40aa8a43a1aa01e6c2b; a2873925c34ecbd2_gr_session_id=55cba982-07c7-44b8-a55a-0fb0981980f6; a2873925c34ecbd2_gr_last_sent_sid_with_cs1=55cba982-07c7-44b8-a55a-0fb0981980f6; a2873925c34ecbd2_gr_session_id_55cba982-07c7-44b8-a55a-0fb0981980f6=true; LEETCODE_SESSION=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuZXh0X2FmdGVyX29hdXRoIjoiL3ByZW1pdW0tZGV0YWlsLz9pZnJhbWU9MSZzb3VyY2VUeXBlPWhvbWVfcGFnZV9wcm9tb3RlX2J1dHRvbiIsIl9hdXRoX3VzZXJfaWQiOiIxNTE3OTcxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjMzFmMTdmZGVmMTk4ZTcyNjEyNjBiMjJiOTE1NzE1MGMzOGJhMDZmMTYwMDBkMGY3M2QxNmJlYjNhNjc4YjA3IiwiaWQiOjE1MTc5NzEsImVtYWlsIjoiaG9uZ3lpaGVuZ2dAZ21haWwuY29tIiwidXNlcm5hbWUiOiJob25neWloZW5nLTUiLCJ1c2VyX3NsdWciOiJob25neWloZW5nLTUiLCJhdmF0YXIiOiJodHRwczovL2Fzc2V0cy5sZWV0Y29kZS5jbi9hbGl5dW4tbGMtdXBsb2FkL3VzZXJzL2hvbmd5aWhlbmctNS9hdmF0YXJfMTYyNjM1Mzk1NC5wbmciLCJwaG9uZV92ZXJpZmllZCI6dHJ1ZSwiX3RpbWVzdGFtcCI6MTY2NzcwMzkyNi43MTY2NzY3LCJleHBpcmVkX3RpbWVfIjoxNjcwMjY2ODAwLCJ2ZXJzaW9uX2tleV8iOjAsImxhdGVzdF90aW1lc3RhbXBfIjoxNjY3NzA1NTgwfQ.uYw1pcOxXFCt1wRDlt-FDrqcayjLpa59gEHZRK2Isdg; a2873925c34ecbd2_gr_cs1=hongyiheng-5'
+        self.cookie = ''
 
     def get_question_detail(self, question_title_slug):
         """fetch question detail from lc's api"""
@@ -310,10 +310,39 @@ class LCSpider:
                     company_names.append((v['company']['slug'], v['company']['name']))
             self.company_names = company_names
 
+        def get_company_questions_info():
+            self.company_question_info = dict()
+            for name_en, name_cn in self.company_names:
+                form_data = {
+                    'operationName': 'problemsetQuestionsDynamicInfos',
+                    'query': 'query problemsetQuestionsDynamicInfos {\n  problemsetQuestionsDynamicInfos {\n   '
+                             ' questionId\n    frequency\n    solutionNum\n    isFavor\n    status\n  '
+                             '  __typename\n  }\n}\n',
+                    'variables': {}
+                }
+                headers = {
+                    'User-Agent': LCSpider.user_agent,
+                    'Connection': 'keep-alive',
+                    'Content-Type': 'application/json',
+                    'Referer': 'https://leetcode.cn/company/' + name_en + '/problemset/',
+                    # lc-cn cookie here
+                    'cookie': self.cookie
+                }
+                res = self.session.post(url=LCSpider.graph_url,
+                                        data=json.dumps(form_data),
+                                        headers=headers,
+                                        timeout=10,
+                                        verify=False)
+                res = res.json()
+                qs_info = dict()
+                for info in res['data']['problemsetQuestionsDynamicInfos']:
+                    self.company_question_info[info['questionId']] = info
+
         def get_company_question():
             company_questions = list()
             for name_en, name_cn in self.company_names:
                 """fetch question detail from lc's api"""
+                print("--------generate " + name_en + " question-----------")
                 form_data = {
                     'operationName': 'companyQuestions',
                     'query': 'query companyQuestions($slug: String!) {\n  companyTag(slug: $slug) {\n    frequencies\n   '
@@ -335,23 +364,65 @@ class LCSpider:
                                         timeout=10,
                                         verify=False)
                 res = res.json()
+                qs = list()
                 for question in res['data']['companyTag']['questions']:
-                    company_questions.append({
-                        'company_name_en': name_en,
-                        'company_name_cn': name_cn,
-                        'content': self.get_question_detail(question['titleSlug'])
-                    })
-                with open('company.json', 'w', encoding='utf-8') as f:
-                    f.write(json.dumps(company_questions))
+                    print("---generate " + name_en + " question:" + question['titleSlug'])
+                    info = self.company_question_info.get(question['questionId'], None)
+                    if not info:
+                        continue
+                    frequency = info['frequency']
+                    freq_bar = str(round(info['freqBar'], 2)) + "%"
+                    ac_rate = info['acRate']
+                    slug = question['titleSlug']
+                    qs.append({'slug': slug, 'frequency': frequency, 'freq_bar': freq_bar, 'ac_rate': ac_rate})
+                company_questions.append({
+                    'company_name_en': name_en,
+                    'company_name_cn': name_cn,
+                    'qs': qs
+                })
+            with open('company.json', 'w', encoding='utf-8') as f:
+                f.write(json.dumps(company_questions))
 
-        get_hot_company_name()
-        get_company_question()
+        def generate_company_readme():
+            with open('./result.json', 'r', encoding='utf-8') as f:
+                result = json.loads(f.read())
+                m = {item['question_title_slug']: item for item in result}
+            with open('company.json', 'r', encoding='utf-8') as f:
+                company_list = list(json.loads(f.read()))
+
+            for v in company_list:
+                name_en, name_cn, qs = v['company_name_en'], v['company_name_cn'], v['qs']
+                company_readme_en_prefix = "# " + name_en + "\n\n"
+                company_readme_cn_prefix = "# " + name_cn + "\n\n"
+                items = []
+                en_items = []
+                for q in qs:
+                    slug = q['slug']
+                    data = m.get(slug)
+                    if data is None:
+                        continue
+                    items.append(
+                        f'- [{str(int(data["frontend_question_id"])) + ". " + data["title_cn"]}]({data["relative_path_cn"]}) (出题频率: {q["freq_bar"]} / 通过率: {q["ac_rate"]})')
+                    en_items.append(
+                        f'- [{str(int(data["frontend_question_id"])) + ". " + data["title_en"]}]({data["relative_path_en"]}) (freqBar:{q["freq_bar"]} / acRate: {q["ac_rate"]})')
+
+                if items and en_items:
+                    company_en = company_readme_en_prefix + "\n".join(en_items)
+                    company_cn = company_readme_cn_prefix + "\n".join(items)
+                    with open("Company/" + str.upper(name_en) + "_README.md", 'w', encoding='utf-8') as f:
+                        f.write(company_cn)
+                    with open("Company/" + str.upper(name_en) + "_README_EN.md", 'w', encoding='utf-8') as f:
+                        f.write(company_en)
+
+        # get_hot_company_name()
+        # get_company_questions_info()
+        # get_company_question()
+        generate_company_readme()
 
 
 if __name__ == '__main__':
     spider = LCSpider()
-    spider.generate_company_questions()
     # spider.get_all_questions()
+    spider.generate_company_questions()
     # spider.save_result()
-    #
     # spider.generate_question_readme()
