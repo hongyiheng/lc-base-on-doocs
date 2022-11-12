@@ -48,7 +48,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        cnt = [0] * 26
+        for c in s1:
+            cnt[ord(c) - ord('a')] += 1
+        l, r, n = 0, 0, len(s2)
+        while r < n:
+            while l < r and cnt[ord(s2[r]) - ord('a')] == 0:
+                cnt[ord(s2[l]) - ord('a')] += 1
+                l += 1
+            if cnt[ord(s2[r]) - ord('a')] == 0:
+                l += 1
+            else:
+                cnt[ord(s2[r]) - ord('a')] -= 1
+                if r - l + 1 == len(s1):
+                    return True
+            r += 1
+        return False
 ```
 
 ### **Java**
@@ -56,7 +73,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] cnt = new int[26];
+        for (char c : s1.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        int l = 0, r = 0, n = s2.length();
+        while (r < n) {
+            char c = s2.charAt(r);
+            while (l < r && cnt[c - 'a'] == 0) {
+                cnt[s2.charAt(l) - 'a']++;
+                l++;
+            }
+            if (cnt[c - 'a'] == 0) {
+                l++;
+            } else {
+                cnt[c - 'a']--;
+                if (r - l + 1 == s1.length()) {
+                    return true;
+                }
+            }
+            r++;
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
