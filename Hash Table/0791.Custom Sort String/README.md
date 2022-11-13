@@ -43,7 +43,22 @@ S中出现了字符 &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 所以 &quot;a&
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+        cnt = [0] * 26
+        for c in s:
+            cnt[ord(c) - ord('a')] += 1
+        n = len(s)
+        ans = list()
+        for c in order:
+            while cnt[ord(c) - ord('a')] > 0:
+                cnt[ord(c) - ord('a')] -= 1
+                ans.append(c)
+        for i in range(26):
+            while cnt[i] > 0:
+                ans.append(chr(ord('a') + i))
+                cnt[i] -= 1
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -51,7 +66,28 @@ S中出现了字符 &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 所以 &quot;a&
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String customSortString(String order, String s) {
+        int[] cnt = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        StringBuilder ans = new StringBuilder();
+        for (char c : order.toCharArray()) {
+            while (cnt[c - 'a'] > 0) {
+                cnt[c - 'a']--;
+                ans.append(c);
+            }
+        }
+        for (int i = 0; i < 26; i++) {
+            while (cnt[i] > 0) {
+                ans.append((char)('a' + i));
+                cnt[i]--;
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
