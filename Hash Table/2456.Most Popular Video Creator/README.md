@@ -65,7 +65,27 @@ id 为 "b" 和 "c" 的视频都满足播放量最高的条件。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mostPopularCreator(self, creators: List[str], ids: List[str], views: List[int]) -> List[List[str]]:
+        n = len(creators)
+        mp = dict()
+        for i in range(n):
+            id, idv, cnt = mp.get(creators[i], (None, 0, 0))
+            if not id or idv < views[i] or (idv == views[i] and ids[i] < id):
+                id = ids[i]
+                idv = views[i]
+            cnt += views[i]
+            mp[creators[i]] = (id, idv, cnt)
+        
+        ans = list()
+        mx = 0
+        for k, v in mp.items():
+            if v[2] >= mx:
+                if v[2] > mx:
+                    ans.clear()
+                ans.append([k, v[0]])
+                mx = v[2]
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +93,34 @@ id 为 "b" 和 "c" 的视频都满足播放量最高的条件。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
+        Map<String, long[]> mp = new HashMap<>();
+        int n = creators.length;
+        for (int i = 0; i < n; i++) {
+            long[] cur = mp.getOrDefault(creators[i], new long[]{-1, 0, 0});
+            if (cur[0] == -1 || cur[1] < views[i] || (cur[1] == views[i] && ids[(int) cur[0]].compareTo(ids[i]) > 0)) {
+                cur[0] = i;
+                cur[1] = views[i];
+            }
+            cur[2] += views[i];
+            mp.put(creators[i], cur);
+        }
+        List<List<String>> ans = new ArrayList<>();
+        long mx = 0;
+        for (Map.Entry<String, long[]> entry : mp.entrySet()) {
+            long[] cur = entry.getValue();
+            if (cur[2] > mx) {
+                mx = cur[2];
+                ans.clear();
+                ans.add(Arrays.asList(entry.getKey(), ids[(int) cur[0]]));
+            } else if (cur[2] == mx) {
+                ans.add(Arrays.asList(entry.getKey(), ids[(int) cur[0]]));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
