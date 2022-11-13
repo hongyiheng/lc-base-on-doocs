@@ -47,7 +47,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def averageValue(self, nums: List[int]) -> int:
+        s = c = 0
+        for v in nums:
+            if v % 6 == 0:
+                s += v
+                c += 1
+        return s // c if c else 0
 ```
 
 ### **Java**
@@ -55,7 +62,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int averageValue(int[] nums) {
+        int s = 0, c = 0;
+        for (int v : nums) {
+            if (v % 6 == 0) {
+                s += v;
+                c++;
+            }
+        }
+        return c == 0 ? 0 : s / c;
+    }
+}
 ```
 
 ### **...**
