@@ -54,7 +54,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def makeIntegerBeautiful(self, n: int, target: int) -> int:
+        s = ['0'] + list(str(n))
+        cnt, n = 0, len(s)
+        for c in s:
+            cnt += int(c)
+        ans = 0
+        for i in range(n - 1, 0, -1):
+            if cnt <= target:
+                break
+            if s[i] != 0:
+                idx = 1 if n - i - 1 == 0 else 10 ** (n - i - 1)
+                ans += (10 - int(s[i])) * idx
+                cnt -= (int(s[i]) - 1)
+                s[i] = '0'
+                s[i - 1] = str(int(s[i - 1]) + 1)
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +78,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long makeIntegerBeautiful(long n, int target) {
+        char[] cs = ("0" + n).toCharArray();
+        long ans = 0, cnt = 0;
+        for (char c : cs) {
+            cnt += c - '0';
+        }
+        int m = cs.length;
+        for (int i = m - 1; i > 0; i--) {
+            if (cnt <= target) {
+                break;
+            }
+            if (cs[i] != '0') {
+                long idx = (long) Math.pow(10, m - i - 1);
+                ans += idx * (10 - (cs[i] - '0'));
+                cnt -= (cs[i] - '0' - 1);
+                cs[i] = '0';
+                cs[i - 1] += 1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
