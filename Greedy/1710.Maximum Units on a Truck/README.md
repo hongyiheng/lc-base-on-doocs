@@ -60,7 +60,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+        boxTypes.sort(key=lambda x: -x[1])
+        ans = 0
+        for n, s in boxTypes:
+            ans += min(n, truckSize) * s
+            truckSize -= n
+            if truckSize <= 0:
+                break
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +77,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+        Arrays.sort(boxTypes, (a, b) -> b[1] - a[1]);
+        int ans = 0;
+        for (int[] v : boxTypes) {
+            int n = v[0], s = v[1];
+            ans += Math.min(n, truckSize) * s;
+            truckSize -= n;
+            if (truckSize <= 0) {
+                break;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
