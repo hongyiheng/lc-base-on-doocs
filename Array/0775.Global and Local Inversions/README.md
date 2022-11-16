@@ -65,7 +65,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isIdealPermutation(self, nums: List[int]) -> bool:
+        i, n = 0, len(nums)
+        mx = float('-inf')
+        while i < n:
+            if i < n - 1 and nums[i] > nums[i + 1]:
+                if mx > nums[i + 1]:
+                    return False
+                mx = nums[i]
+                i += 1
+            else:
+                if mx > nums[i]:
+                    return False
+                mx = nums[i]
+            i += 1
+        return True
 ```
 
 ### **Java**
@@ -73,7 +88,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isIdealPermutation(int[] nums) {
+        int n = nums.length, i = 0;
+        int mx = -1;
+        while (i < n) {
+            if (i < n - 1 && nums[i] > nums[i + 1]) {
+                if (mx > nums[i + 1]) {
+                    return false;
+                }
+                mx = nums[i];
+                i++;
+            } else {
+                if (mx > nums[i]) {
+                    return false;
+                }
+                mx = nums[i];
+            }
+            i++;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
