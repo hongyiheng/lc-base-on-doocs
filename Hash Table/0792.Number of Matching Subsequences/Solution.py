@@ -5,9 +5,9 @@ class Solution:
             ws[ord(w[0]) - ord('a')].append(w)
         ans = 0
         for c in s:
-            ss = ws[ord(c) - ord('a')]
-            for _ in range(len(ss)):
-                v = ss.popleft()
+            q = ws[ord(c) - ord('a')]
+            for _ in range(len(q)):
+                v = q.popleft()
                 if len(v) == 1:
                     ans += 1
                 else:
