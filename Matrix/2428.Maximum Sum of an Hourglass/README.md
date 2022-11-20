@@ -51,7 +51,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSum(self, grid: List[List[int]]) -> int:
+        ans, m, n = 0, len(grid), len(grid[0])
+        for i in range(1, m - 1):
+            for j in range(1, n - 1):
+                cur = grid[i - 1][j - 1] + grid[i - 1][j] + grid[i - 1][j + 1] + grid[i][j] + grid[i + 1][j - 1] + grid[i + 1][j] + grid[i + 1][j + 1]
+                ans = max(ans, cur)
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +66,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxSum(int[][] grid) {
+        int ans = 0, m = grid.length, n = grid[0].length;
+        for (int i = 1; i < m - 1; i++) {
+            for (int j = 1; j < n - 1; j++) {
+                int cur = grid[i - 1][j - 1] + grid[i - 1][j] + grid[i - 1][j + 1] + grid[i][j] + grid[i + 1][j - 1] + grid[i + 1][j] + grid[i + 1][j + 1];
+                ans = Math.max(ans, cur);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
