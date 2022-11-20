@@ -43,6 +43,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def commonFactors(self, a: int, b: int) -> int:
+        ans = 0
+        for i in range(1, min(a, b) + 1):
+            if a % i == 0 and b % i == 0:
+                ans += 1
+        return ans
 
 ```
 
@@ -51,7 +58,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int commonFactors(int a, int b) {
+        int ans = 0;
+        for (int i = 1; i < Math.min(a, b) + 1; i++) {
+            if (a % i == 0 && b % i == 0) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
