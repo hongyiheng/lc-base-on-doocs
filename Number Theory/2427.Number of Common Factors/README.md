@@ -43,7 +43,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def commonFactors(self, a: int, b: int) -> int:
+        def gcd(x, y):
+            if not y:
+                return x
+            return gcd(y, x % y)
+        
+        g = gcd(a, b)
+        i, ans = 1, 0
+        while i * i <= g:
+            if g % i == 0:
+                ans += 1
+                if i * i != g:
+                    ans += 1
+            i += 1
+        return ans
 ```
 
 ### **Java**
@@ -51,7 +66,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int commonFactors(int a, int b) {
+        int ans = 0, g = gcd(a, b), i = 1;
+        while (i * i <= g) {
+            if (g % i == 0) {
+                ans++;
+                if (i * i != g) {
+                    ans++;
+                }
+            }
+            i++;
+        }
+        return ans;
+    }
 
+    public int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+}
 ```
 
 ### **...**
