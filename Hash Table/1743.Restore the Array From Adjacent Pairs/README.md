@@ -66,7 +66,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+        cnt = defaultdict(list)
+        for a, b in adjacentPairs:
+            cnt[a].append(b)
+            cnt[b].append(a)
+        n = len(cnt)
+        ans = [0] * n
+        for k in cnt.keys():
+            if len(cnt[k]) == 1:
+                ans[0] = k
+                ans[1] = cnt[k][0]
+                break
+        for i in range(2, n):
+            a, b = cnt.get(ans[i - 1])
+            if a == ans[i - 2]:
+                ans[i] = b
+            else:
+                ans[i] = a
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +93,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] restoreArray(int[][] adjacentPairs) {
+        Map<Integer, List<Integer>> cnt = new HashMap<>();
+        for (int[] v : adjacentPairs) {
+            cnt.computeIfAbsent(v[0], k -> new ArrayList<>()).add(v[1]);
+            cnt.computeIfAbsent(v[1], k -> new ArrayList<>()).add(v[0]);
+        }
+        int n = cnt.size();
+        int[] ans = new int[n];
+        for (var entry : cnt.entrySet()) {
+            if (entry.getValue().size() == 1) {
+                ans[0] = entry.getKey();
+                ans[1] = entry.getValue().get(0);
+            }
+        }
+        for (int i = 2; i < n; i++) {
+            List<Integer> v = cnt.get(ans[i - 1]);
+            if (v.get(0) == ans[i - 2]) {
+                ans[i] = v.get(1);
+            } else {
+                ans[i] = v.get(0);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
