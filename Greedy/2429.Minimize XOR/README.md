@@ -57,7 +57,31 @@ num1 和 num2 的二进制表示分别是 0001 和 1100 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimizeXor(self, num1: int, num2: int) -> int:
+        def lowbit(x):
+            ans = 0
+            while x > 0:
+                x -= x & -x
+                ans += 1
+            return ans
 
+        cnt = [0] * 32
+        k = lowbit(num2)
+        for i in range(31, -1, -1):
+            if (1 << i) & num1:
+                cnt[i] = 1
+                k -= 1
+                if k == 0:
+                    break
+        ans = 0
+        for i in range(31):
+            if cnt[i] == 0 and k > 0:
+                cnt[i] = 1
+                k -= 1
+            if cnt[i] == 1:
+                ans += (1 << i)
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +89,38 @@ num1 和 num2 的二进制表示分别是 0001 和 1100 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minimizeXor(int num1, int num2) {
+        int k = lowbit(num2);
+        int[] cnt = new int[32];
+        for (int i = 31; i >= 0; i--) {
+            if (((1 << i) & num1) != 0 && k > 0) {
+                cnt[i] = 1;
+                k--;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            if (k > 0 && cnt[i] == 0) {
+                cnt[i] = 1;
+                k--;
+            }
+            if (cnt[i] == 1) {
+                ans += (1 << i);
+            }
+        }
+        return ans;
+    }
 
+    public int lowbit(int x) {
+        int ans = 0;
+        while (x > 0) {
+            x -= x & -x;
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
