@@ -38,7 +38,20 @@ R = 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numSubarrayBoundedMax(self, nums: List[int], left: int, right: int) -> int:
+        q = []
+        ans = cnt = 0
+        for v in nums:
+            if v <= right:
+                q.append(v)
+                if left <= v:
+                    cnt = len(q)
+                ans += cnt
+            else:
+                q.clear()
+                cnt = 0
+        return ans
 ```
 
 ### **Java**
@@ -46,7 +59,25 @@ R = 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        Deque<Integer> q = new ArrayDeque<>();
+        int ans = 0, cnt = 0;
+        for (int v : nums) {
+            if (v <= right) {
+                q.add(v);
+                if (v >= left) {
+                    cnt = q.size();
+                }
+                ans += cnt;
+            } else {
+                q.clear();
+                cnt = 0;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
