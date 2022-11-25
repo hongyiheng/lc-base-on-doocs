@@ -73,7 +73,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxEvents(self, events: List[List[int]]) -> int:
+        mp = defaultdict(list)
+        n = 0
+        for a, b in events:
+            mp[a].append(b)
+            n = max(n, b)
+        q = []
+        ans = 0
+        for i in range(n + 1):
+            if i in mp:
+                for v in mp[i]:
+                    heapq.heappush(q, (v, i))
+            while q and q[0][0] < i:
+                heapq.heappop(q)
+            if q and q[0][1] <= i:
+                ans += 1
+                heapq.heappop(q)
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +99,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int maxEvents(int[][] events) {
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        int n = 0;
+        for (int[] v : events) {
+            mp.computeIfAbsent(v[0], k -> new ArrayList<>()).add(v[1]);
+            n = Math.max(n, v[1]);
+        }
+        int ans = 0;
+        PriorityQueue<int[]> q = new PriorityQueue<>(n, (a, b) -> a[0] - b[0]);
+        for (int i = 1; i <= n; i++) {
+            if (mp.containsKey(i)) {
+                for (int v : mp.get(i)) {
+                    q.offer(new int[]{v, i});
+                }
+            }
+            while (!q.isEmpty() && q.peek()[0] < i) {
+                q.poll();
+            }
+            if (!q.isEmpty() && q.peek()[1] <= i) {
+                ans++;
+                q.poll();
+            }
+        }
+        return ans; 
 
+    }
+}
 ```
 
 ### **...**
