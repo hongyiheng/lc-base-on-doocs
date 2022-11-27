@@ -81,7 +81,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        n = len(nums)
+        turn = False
+        for i in range(1, n):
+            if nums[i] < nums[i - 1]:
+                if turn:
+                    return False
+                turn = True
+        return nums[n - 1] <= nums[0] or not turn
 ```
 
 ### **Java**
@@ -89,7 +98,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean check(int[] nums) {
+        int n = nums.length;
+        boolean turn = false;
+        for (int i = 1; i < n; i++) {
+            if (nums[i] < nums[i - 1]) {
+                if (turn) {
+                    return false;
+                }
+                turn = true;
+            }
+        }
+        return !turn || nums[n - 1] <= nums[0];
+    }
+}
 ```
 
 ### **...**
