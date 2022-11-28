@@ -43,7 +43,21 @@ A 的最优分组是[9], [1, 2, 3], [9]. 得到的分数是 9 + (1 + 2 + 3) / 3 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largestSumOfAverages(self, nums: List[int], k: int) -> float:
+        n = len(nums)
+        pre = [0] * (n + 10)
+        for i in range(1, n + 1):
+            pre[i] = pre[i - 1] + nums[i - 1]
+        f = [[0] * (k + 10) for _ in range(n + 10)]
+        for i in range(1, n + 1):
+            for j in range(1, min(i, k) + 1):
+                if j == 1:
+                    f[i][j] = pre[i] / i
+                    continue                
+                for t in range(2, i + 1):
+                    f[i][j] = max(f[i][j], f[t - 1][j - 1] + (pre[i] - pre[t - 1]) / (i - t + 1))
+        return f[n][k]
 ```
 
 ### **Java**
@@ -51,7 +65,28 @@ A 的最优分组是[9], [1, 2, 3], [9]. 得到的分数是 9 + (1 + 2 + 3) / 3 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double largestSumOfAverages(int[] nums, int k) {
+        int n = nums.length;
+        double[] pre = new double[n + 10];
+        for (int i = 1; i < n + 1; i++) {
+            pre[i] = pre[i - 1] + nums[i - 1];
+        }
+        double[][] f = new double[n + 10][k + 10];
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < Math.min(i, k) + 1; j++) {
+                if (j == 1) {
+                    f[i][j] = pre[i] / i;
+                    continue;
+                }
+                for (int t = 2; t < i + 1; t++) {
+                    f[i][j] = Math.max(f[i][j], f[t - 1][j - 1] + (pre[i] - pre[t - 1]) / (i - t + 1));
+                }
+            }
+        }
+        return f[n][k];
+    }
+}
 ```
 
 ### **...**
