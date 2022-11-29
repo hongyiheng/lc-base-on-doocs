@@ -56,7 +56,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, s: str) -> int:
+        ans1 = ans2 = 0
+        cur = '0'
+        for c in s:
+            if c == cur:
+                ans1 += 1
+            else:
+                ans2 += 1
+            cur = '1' if cur == '0' else '0'
+        return min(ans1, ans2)
 ```
 
 ### **Java**
@@ -64,7 +74,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(String s) {
+        int ans1 = 0, ans2 = 0;
+        char cur = '0';
+        for (char c : s.toCharArray()) {
+            if (cur == c) {
+                ans1++;
+            } else {
+                ans2++;
+            }
+            cur = cur == '0' ? '1' : '0';
+        }
+        return Math.min(ans1, ans2);
+    }
+}
 ```
 
 ### **...**
