@@ -78,7 +78,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def wonderfulSubstrings(self, word: str) -> int:
+        cnt = [0] * (1 << 10)
+        cnt[0] = 1
+        mask = ans = 0
+        for c in word:
+            mask ^= (1 << (ord(c) - ord('a')))
+            ans += cnt[mask]
+            for i in range(10):
+                ans += cnt[(1 << i) ^ mask]
+            cnt[mask] += 1
+        return ans
 ```
 
 ### **Java**
@@ -86,7 +97,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long wonderfulSubstrings(String word) {
+        int[] cnt = new int[1 << 10];
+        cnt[0] = 1;
+        int mask = 0;
+        long ans = 0;
+        for (char c : word.toCharArray()) {
+            mask ^= (1 << (c - 'a'));
+            ans += cnt[mask];
+            for (int i = 0; i < 10; i++) {
+                ans += cnt[mask ^ (1 << i)];
+            }
+            cnt[mask]++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
