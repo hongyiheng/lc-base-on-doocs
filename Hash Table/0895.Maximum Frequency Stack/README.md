@@ -69,7 +69,33 @@ pop() -&gt; 返回 4 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class FreqStack:
 
+    def __init__(self):
+        self.stacks = []
+        self.cnt = dict()
+
+
+    def push(self, val: int) -> None:
+        idx = self.cnt.get(val, 0)
+        if len(self.stacks) < idx + 1:
+            self.stacks.append(list())
+        self.stacks[idx].append(val)
+        self.cnt[val] = idx + 1
+
+    def pop(self) -> int:
+        if len(self.stacks[-1]) == 0:
+            self.stacks.pop()
+        val = self.stacks[-1].pop()
+        self.cnt[val] -= 1
+        return val
+
+
+
+# Your FreqStack object will be instantiated and called as such:
+# obj = FreqStack()
+# obj.push(val)
+# param_2 = obj.pop()
 ```
 
 ### **Java**
@@ -77,7 +103,42 @@ pop() -&gt; 返回 4 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class FreqStack {
 
+    Map<Integer, Integer> cnt;
+    List<Deque<Integer>> stacks;
+
+    public FreqStack() {
+        cnt = new HashMap<>();
+        stacks = new ArrayList<>();
+    }
+
+    public void push(int val) {
+        int idx = cnt.getOrDefault(val, 0) + 1;
+        cnt.put(val, idx);
+        if (idx > stacks.size()) {
+            stacks.add(new ArrayDeque<>());
+        }
+        stacks.get(idx - 1).addLast(val);
+    }
+
+    public int pop() {
+        int idx = stacks.size();
+        int val = stacks.get(idx - 1).removeLast();
+        if (stacks.get(idx - 1).isEmpty()) {
+            stacks.remove(idx - 1);
+        }
+        cnt.put(val, idx - 1);
+        return val;
+    }
+}
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack obj = new FreqStack();
+ * obj.push(val);
+ * int param_2 = obj.pop();
+ */
 ```
 
 ### **...**
