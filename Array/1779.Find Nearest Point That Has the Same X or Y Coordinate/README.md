@@ -54,7 +54,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
+        ans, d = -1, float('inf')
+        for i, v in enumerate(points):
+            if v[0] != x and v[1] != y:
+                continue
+            dis = abs(x - v[0]) + abs(y - v[1])
+            if dis < d:
+                d = dis
+                ans = i
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +72,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int nearestValidPoint(int x, int y, int[][] points) {
+        int ans = -1, d = Integer.MAX_VALUE;
+        for (int i = 0; i < points.length; i++) {
+            if (points[i][0] != x && points[i][1] != y) {
+                continue;
+            }
+            int dist = Math.abs(points[i][0] - x) + Math.abs(points[i][1] - y);
+            if (dist < d) {
+                d = dist;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
