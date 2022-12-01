@@ -41,7 +41,17 @@ B: [3,2,1,4,7]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLength(self, nums1: List[int], nums2: List[int]) -> int:
+        n, m = len(nums1), len(nums2)
+        dp = [[0] * (m + 1) for _ in range(n + 1)]
+        ans = 0
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+                if nums1[i - 1] == nums2[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1] + 1 
+                ans = max(ans, dp[i][j])
+        return ans
 ```
 
 ### **Java**
@@ -51,14 +61,15 @@ B: [3,2,1,4,7]
 ```java
 class Solution {
     public int findLength(int[] nums1, int[] nums2) {
+        int n = nums1.length, m = nums2.length;
+        int[][] dp = new int[n + 1][m + 1];
         int ans = 0;
-        int len1 = nums1.length;
-        int len2 = nums2.length;
-        int[][] dp = new int[len1 + 1][len2 + 1];
-        for (int i = len1 - 1; i >= 0; i--) {
-            for (int j = len2 - 1; j >= 0; j--) {
-                dp[i][j] = nums1[i] == nums2[j] ? dp[i + 1][j + 1] + 1 : 0;
-                ans = Math.max(dp[i][j], ans);
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < m + 1; j++) {
+                if (nums1[i - 1] == nums2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    ans = Math.max(ans, dp[i][j]);
+                }
             }
         }
         return ans;
