@@ -49,7 +49,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def secondHighest(self, s: str) -> int:
+        nums = [False] * 10
+        for c in s:
+            if '0' <= c <= '9':
+                nums[ord(c) - ord('0')] = True
+        flag = False
+        for i in range(9, -1, -1):
+            if nums[i]:
+                if flag:
+                    return i
+                flag = True
+        return -1
 ```
 
 ### **Java**
@@ -57,7 +69,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int secondHighest(String s) {
+        boolean[] nums = new boolean[10];
+        for (char c : s.toCharArray()) {
+            if ('0' <= c && c <= '9') {
+                nums[c - '0'] = true;
+            }
+        }
+        boolean flag = false;
+        for (int i = 9; i > -1; i--) {
+            if (nums[i]) {
+                if (flag) {
+                    return i;
+                }
+                flag = true;    
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
