@@ -77,7 +77,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
+        n, m = len(grid), len(grid[0])
+        row, col = [[0] * 2 for _ in range(n)], [[0] * 2 for _ in range(m)]
+        for i in range(n):
+            for j in range(m):
+                row[i][grid[i][j]] += 1
+                col[j][grid[i][j]] += 1
+        diff = [[0] * m for _ in range(n)]
+        for i in range(n):
+            for j in range(m):
+                diff[i][j] = row[i][1] + col[j][1] - row[i][0] - col[j][0]
+        return diff
 ```
 
 ### **Java**
@@ -85,7 +97,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] onesMinusZeros(int[][] grid) {
+        int n = grid.length, m = grid[0].length;
+        int[][] row = new int[n][2], col = new int[m][2];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                row[i][grid[i][j]]++;
+                col[j][grid[i][j]]++;
+            }
+        }
+        int[][] diff = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                diff[i][j] = row[i][1] + col[j][1] - row[i][0] - col[j][0];
+            }
+        }
+        return diff;
+    }
+}
 ```
 
 ### **...**
