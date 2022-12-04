@@ -63,7 +63,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfCuts(self, n: int) -> int:
+        if n == 1:
+            return 0
+        return n // 2 if n % 2 == 0 else n
 ```
 
 ### **Java**
@@ -71,7 +75,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfCuts(int n) {
+        if (n == 1) {
+            return 0;
+        }
+        return n % 2 == 0 ? n / 2 : n;
+    }
+}
 ```
 
 ### **...**
