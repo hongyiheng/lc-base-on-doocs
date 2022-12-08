@@ -74,7 +74,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        n = y = 0
+        customers = customers + "N"
+        for c in customers:
+            if c == 'Y':
+                y += 1
+        ans, cur = 0, float('inf')
+        for i, c in enumerate(customers):
+            if cur > n + y:
+                cur = n + y
+                ans = i
+            if c == 'Y':
+                y -= 1
+            else:
+                n += 1
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +98,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int bestClosingTime(String customers) {
+        int n = 0, y = 0;
+        for (char c : customers.toCharArray()) {
+            if (c == 'Y') {
+                y++;
+            }
+        }
+        customers += "N";
+        int ans = 0, cur = 0x3f3f3f3f;
+        for (int i = 0; i < customers.length(); i++) {
+            if (cur > n + y) {
+                cur = n + y;
+                ans = i;
+            }
+            if (customers.charAt(i) == 'Y') {
+                y--;
+            } else {
+                n++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
