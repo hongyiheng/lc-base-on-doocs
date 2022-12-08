@@ -61,7 +61,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def squareIsWhite(self, coordinates: str) -> bool:
+        r, c = ord(coordinates[0]) - ord('a'), ord(coordinates[1]) - ord('1')
+        return c % 2 != 0 if r % 2 == 0 else c % 2 == 0
 ```
 
 ### **Java**
@@ -69,7 +72,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean squareIsWhite(String coordinates) {
+        int r = coordinates.charAt(0) - 'a';
+        int c = coordinates.charAt(1) - '1';
+        return r % 2 == 0 ? c % 2 != 0 : c % 2 == 0;
+    }
+}
 ```
 
 ### **...**
