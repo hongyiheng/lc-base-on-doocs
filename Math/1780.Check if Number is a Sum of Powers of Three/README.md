@@ -52,7 +52,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkPowersOfThree(self, n: int) -> bool:
+        while n:
+            if n % 3 > 1:
+                return False
+            n //= 3
+        return True
 ```
 
 ### **Java**
@@ -60,7 +66,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkPowersOfThree(int n) {
+        while (n > 0) {
+            if (n % 3 > 1) {
+                return false;
+            }
+            n /= 3;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
