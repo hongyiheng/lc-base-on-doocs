@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+        cnt = [False] * 26
+        for c in sentence:
+            cnt[ord(c) - ord('a')] = True
+        ans = True
+        for v in cnt:
+            ans = ans and v
+        return ans
 ```
 
 ### **Java**
@@ -60,16 +68,15 @@
 ```java
 class Solution {
     public boolean checkIfPangram(String sentence) {
-        int[] res = new int[26];
-        for (int i = 0; i < sentence.length(); i++) {
-            res[sentence.charAt(i) - 'a']++; 
+        boolean[] cnt = new boolean[26];
+        for (char c : sentence.toCharArray()) {
+            cnt[c - 'a'] = true;
         }
-        for (int num : res) {
-            if (num <= 0) {
-                return false;
-            }
+        boolean ans = true;
+        for (boolean v : cnt) {
+            ans &= v;
         }
-        return true;
+        return ans;
     }
 }
 ```
