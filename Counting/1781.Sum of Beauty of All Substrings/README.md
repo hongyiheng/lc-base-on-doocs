@@ -51,7 +51,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def beautySum(self, s: str) -> int:
+        ans = 0
+        for i in range(len(s)):
+            cnt = dict()
+            for j in range(i, len(s)):
+                idx = ord(s[j]) - ord('a')
+                cnt[idx] = cnt.get(idx, 0) + 1
+                ans += max(cnt.values()) - min(cnt.values())
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +68,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int beautySum(String s) {
+        int ans = 0, n = s.length();
+        for (int i = 0; i < n; i++) {
+            int[] cnt = new int[26];
+            for (int j = i; j < n; j++) {
+                cnt[s.charAt(j) - 'a']++;
+                int mx = 0, mi = 500;
+                for (int v : cnt) {
+                    if (v == 0) {
+                        continue;
+                    }
+                    mx = Math.max(mx, v);
+                    mi = Math.min(mi, v);
+                }
+                ans += mx - mi;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
