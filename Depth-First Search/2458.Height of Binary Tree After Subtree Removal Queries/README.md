@@ -75,7 +75,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def treeQueries(self, root: Optional[TreeNode], queries: List[int]) -> List[int]:
+        def get_height(node):
+            if not node:
+                return 0
+            cur = 1 + max(get_height(node.left), get_height(node.right))
+            h[node] = cur
+            return cur
 
+        def dfs(node, depth, rest_h):
+            if not node:
+                return
+            res[node.val] = rest_h
+            depth += 1
+            dfs(node.left, depth, max(depth + h.get(node.right, 0), rest_h))
+            dfs(node.right, depth, max(depth + h.get(node.left, 0), rest_h))
+
+        h, res = defaultdict(int), defaultdict(int)
+        get_height(root)
+        dfs(root, -1, 0)
+        ans = []
+        for v in queries:
+            ans.append(res[v])
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +112,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    Map<TreeNode, Integer> h = new HashMap<>();
+    Map<Integer, Integer> res = new HashMap<>();
+    
+    public int[] treeQueries(TreeNode root, int[] queries) {
+        getHeight(root);
+        dfs(root, -1, 0);
+        int[] ans = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            ans[i] = res.get(queries[i]);
+        }
+        return ans;
+    }
+    
+    public void dfs(TreeNode node, int depth, int restHeight) {
+        if (node == null) {
+            return;
+        }
+        res.put(node.val, restHeight);
+        depth++;
+        dfs(node.left, depth, Math.max(restHeight, depth + h.getOrDefault(node.right, 0)));
+        dfs(node.right, depth, Math.max(restHeight, depth + h.getOrDefault(node.left, 0)));
+    }
 
+    public int getHeight(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int ans = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+        h.put(node, ans);
+        return ans;
+    }
+}
 ```
 
 ### **...**
