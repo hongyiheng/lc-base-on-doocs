@@ -52,7 +52,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minElements(self, nums: List[int], limit: int, goal: int) -> int:
+        s = sum(nums)
+        t = abs(goal - s)
+        return (t + limit - 1) // limit
 ```
 
 ### **Java**
@@ -60,7 +64,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minElements(int[] nums, int limit, int goal) {
+        long s = 0;
+        for (int v : nums) {
+            s += v;
+        }
+        long t = Math.abs(goal - s);
+        return (int)((t + limit - 1) / limit);
+    }
+}
 ```
 
 ### **...**
