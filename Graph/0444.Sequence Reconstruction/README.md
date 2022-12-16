@@ -71,7 +71,31 @@ true
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sequenceReconstruction(self, nums: List[int], sequences: List[List[int]]) -> bool:
+        mp = defaultdict(set)
+        in_deg = [0] * (len(nums) + 1)
+        for seq in sequences:
+            for i in range(1, len(seq)):
+                mp[seq[i - 1]].add(seq[i])
+                in_deg[seq[i]] += 1
+        q = []
+        for i in range(1, len(nums) + 1):
+            if in_deg[i] == 0:
+                q.append(i)
+        idx = 0
+        while q:
+            if len(q) != 1:
+                return False
+            cur = q.pop(0)
+            if cur != nums[idx]:
+                return False
+            idx += 1
+            for nxt in mp[cur]:
+                in_deg[nxt] -= 1
+                if in_deg[nxt] == 0:
+                    q.append(nxt)
+        return True
 ```
 
 ### **Java**
@@ -79,7 +103,42 @@ true
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean sequenceReconstruction(int[] nums, List<List<Integer>> sequences) {
+        Map<Integer, Set<Integer>> mp = new HashMap<>();
+        int n = nums.length;
+        int[] in = new int[n + 1];
+        for (List<Integer> seq : sequences) {
+            for (int i = 1; i < seq.size(); i++) {
+                mp.computeIfAbsent(seq.get(i - 1), k -> new HashSet<>()).add(seq.get(i));
+                in[seq.get(i)]++;
+            }
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 1; i < n + 1; i++) {
+            if (in[i] == 0) {
+                q.add(i);
+            }
+        }
+        int idx = 0;
+        while (!q.isEmpty()) {
+            if (q.size() != 1) {
+                return false;
+            }
+            int cur = q.poll();
+            if (cur != nums[idx++]) {
+                return false;
+            }
+            for (int nxt : mp.getOrDefault(cur, new HashSet<>())) {
+                in[nxt]--;
+                if (in[nxt] == 0) {
+                    q.add(nxt);
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
