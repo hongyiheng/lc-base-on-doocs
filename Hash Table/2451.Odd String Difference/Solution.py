@@ -12,4 +12,4 @@ class Solution:
             if mp[k] == 1:
                 ans = k
                 break
-        return ws[k]
+        return ws[ans]

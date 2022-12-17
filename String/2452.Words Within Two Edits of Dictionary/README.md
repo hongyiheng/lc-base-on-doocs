@@ -56,7 +56,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def twoEditWords(self, queries: List[str], dictionary: List[str]) -> List[str]:
+        ans = list()
+        for q in queries:
+            for d in dictionary:
+                diff = 0
+                for a, b in zip(q, d):
+                    if a != b:
+                        diff += 1
+                        if diff > 2:
+                            break
+                if diff <= 2:
+                    ans.append(q)
+                    break
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +78,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> twoEditWords(String[] queries, String[] dictionary) {
+        List<String> ans = new ArrayList<>();
+        for (String q : queries) {
+            for (String d : dictionary) {
+                int diff = 0;
+                for (int i = 0; i < q.length(); i++) {
+                    if (q.charAt(i) != d.charAt(i)) {
+                        if (++diff > 2) {
+                            break;
+                        }
+                    }
+                }
+                if (diff <= 2) {
+                    ans.add(q);
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
