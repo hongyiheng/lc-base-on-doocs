@@ -61,7 +61,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def oddString(self, words: List[str]) -> str:
+        mp, ws = defaultdict(int), dict()
+        for w in words:
+            q = []
+            for i in range(1, len(w)):
+                q.append(ord(w[i]) - ord(w[i - 1]))
+            mp[str(q)] += 1
+            ws[str(q)] = w
+        ans = ""
+        for k in mp.keys():
+            if mp[k] == 1:
+                ans = k
+                break
+        return ws[k]
 ```
 
 ### **Java**
@@ -69,7 +83,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String oddString(String[] words) {
+        Map<String, Integer> mp = new HashMap<>();
+        Map<String, String> ws = new HashMap<>();
+        for (String w : words) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i < w.length(); i++) {
+                sb.append(w.charAt(i) - w.charAt(i - 1) + ",");
+            }
+            String k = sb.toString();
+            mp.put(k, mp.getOrDefault(k, 0) + 1);
+            ws.put(k, w);
+        }
+        String ans = "";
+        for (String k : mp.keySet()) {
+            if (mp.get(k) == 1) {
+                ans = k;
+                break;
+            }
+        }
+        return ws.get(ans);
+    }
+}
 ```
 
 ### **...**
