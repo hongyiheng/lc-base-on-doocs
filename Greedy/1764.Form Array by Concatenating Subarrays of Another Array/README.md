@@ -67,7 +67,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canChoose(self, groups: List[List[int]], nums: List[int]) -> bool:
+        m, n = len(groups), len(nums)
+        i = j = 0
+        while j < n:
+            if i >= m:
+                break
+            if j + len(groups[i]) <= n and groups[i] == nums[j:j + len(groups[i])]:
+                j += len(groups[i])
+                i += 1
+            else:
+                j += 1
+        return i == m
 ```
 
 ### **Java**
@@ -75,7 +87,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canChoose(int[][] groups, int[] nums) {
+        int m = groups.length, n = nums.length;
+        int i = 0, j = 0;
+        while (j < n) {
+            if (i >= m) {
+                break;
+            }
+            if (nums[j] == groups[i][0]) {
+                int k = 0, y = j;
+                while (k < groups[i].length && y < n && nums[y] == groups[i][k]) {
+                    y++;
+                    k++;
+                }
+                if (k == groups[i].length) {
+                    j = y - 1;
+                    i++;
+                }
+            }
+            j++;
+        }
+        return i == m;
+    }
+}
 ```
 
 ### **...**
