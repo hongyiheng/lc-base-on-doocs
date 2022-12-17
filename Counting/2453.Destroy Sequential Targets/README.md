@@ -59,7 +59,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def destroyTargets(self, nums: List[int], space: int) -> int:
+        g = defaultdict(list)
+        for v in nums:
+            g[v % space].append(v)
+        ans = mx = 0
+        for q in g.values():
+            cur, mi = len(q), min(q)
+            if cur > mx or (cur == mx and mi < ans):
+                ans = mi
+                mx = cur
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +78,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int destroyTargets(int[] nums, int space) {
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        for (int v : nums) {
+            mp.computeIfAbsent(v % space, k -> new ArrayList<>()).add(v);
+        }
+        int ans = Integer.MAX_VALUE, mx = 0;
+        for (List<Integer> q : mp.values()) {
+            if (q.size() >= mx) {
+                int mi = Integer.MAX_VALUE;
+                for (int v : q) {
+                    mi = Math.min(v, mi);
+                }
+                if (q.size() > mx || (q.size() == mx && mi < ans)) {
+                   ans = mi;
+                }
+                mx = q.size();
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
