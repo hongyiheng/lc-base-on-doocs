@@ -47,7 +47,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestNumber(self, num: int) -> int:
+        s = str(num)
+        ne = False
+        if s[0] == '-':
+            ne = True
+            s = s[1:]
+        cnt = [0] * 10
+        for v in s:
+            cnt[ord(v) - ord('0')] += 1
+        ans = 0
+        if ne:
+            for i in range(9, -1, -1):
+                while cnt[i]:
+                    ans = ans * 10 + i
+                    cnt[i] -= 1
+        else:
+            for i in range(1, 10):
+                if cnt[i]:
+                    ans = i
+                    cnt[i] -= 1
+                    break
+            for i in range(10):
+                while cnt[i]:
+                    ans = ans * 10 + i
+                    cnt[i] -= 1
+        return -ans if ne else ans
 ```
 
 ### **Java**
@@ -55,7 +81,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long smallestNumber(long num) {
+        String s = String.valueOf(num);
+        boolean ne = false;
+        if (num < 0) {
+            ne = true;
+            s = s.substring(1);
+        }
+        int[] cnt = new int[10];
+        for (char c : s.toCharArray()) {
+            cnt[c - '0']++;
+        }
+        long ans = 0;
+        if (ne) {
+            for (int i = 9; i >= 0; i--) {
+                while (cnt[i]-- > 0) {
+                    ans = ans * 10 + i;
+                }         
+            }
+        } else {
+            for (int i = 1; i < 10; i++) {
+                if (cnt[i]-- > 0) {
+                    ans = i;
+                    break;
+                }
+            }
+            for (int i = 0; i < 10; i++) {
+                while (cnt[i]-- > 0) {
+                    ans = ans * 10 + i;
+                }
+            }
+        }
+        return ne ? -ans : ans;
+    }
+}
 ```
 
 ### **...**
