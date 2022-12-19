@@ -61,7 +61,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        def get_mx_cnt(id, x):
+            nonlocal n
+            mp = defaultdict(int)
+            for i in range(id, n, 2):
+                mp[nums[i]] += 1
+            mx = cnt = 0
+            for k in mp.keys():
+                if k != x and mp[k] > cnt:
+                    mx = k
+                    cnt = mp[k]
+            return [mx, cnt]
+        
+        n = len(nums)
+        a, a_cnt = get_mx_cnt(0, -1)
+        b, b_cnt = get_mx_cnt(1, a)
+        c, c_cnt = get_mx_cnt(1, -1)
+        d, d_cnt = get_mx_cnt(0, c)
+        return n - max(a_cnt + b_cnt, c_cnt + d_cnt)
 ```
 
 ### **Java**
@@ -69,7 +88,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minimumOperations(int[] nums) {
+        int[] a = getMaxCnt(nums, 0, -1);
+        int[] b = getMaxCnt(nums, 1, a[0]);
+        int[] c = getMaxCnt(nums, 1, -1);
+        int[] d = getMaxCnt(nums, 0, c[0]);
+        return nums.length - Math.max(a[1] + b[1], c[1] + d[1]);
+    }
 
+    public int[] getMaxCnt(int[] nums, int idx, int x) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        int[] ans = new int[2];
+        for (int i = idx; i < nums.length; i += 2) {
+            if (nums[i] == x) {
+                continue;
+            }
+            mp.put(nums[i], mp.getOrDefault(nums[i], 0) + 1);
+            if (mp.get(nums[i]) > ans[1]) {
+                ans[1] = mp.get(nums[i]);
+                ans[0] = nums[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
