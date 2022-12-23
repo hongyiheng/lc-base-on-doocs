@@ -77,7 +77,9 @@ X--：X 减 1 ，X = 1 - 1 = 0
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def finalValueAfterOperations(self, operations: List[str]) -> int:
+        return sum(v[1] == '+' for v in operations) - sum(v[1] == '-' for v in operations)
 ```
 
 ### **Java**
@@ -85,7 +87,19 @@ X--：X 减 1 ，X = 1 - 1 = 0
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int finalValueAfterOperations(String[] operations) {
+        int ans = 0;
+        for (String s : operations) {
+            if (s.charAt(1) == '+') {
+                ans++;
+            } else {
+                ans--;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
