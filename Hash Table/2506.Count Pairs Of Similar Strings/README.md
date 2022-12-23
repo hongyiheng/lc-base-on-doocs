@@ -64,7 +64,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def similarPairs(self, words: List[str]) -> int:
+        mp = defaultdict(int)
+        ans = 0
+        for w in words:
+            mask = 0
+            for c in w:
+                mask |= (1 << (ord(c) - ord('a')))
+            ans += mp[mask]
+            mp[mask] += 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +82,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int similarPairs(String[] words) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        int ans = 0;
+        for (String w : words) {
+            int mask = 0;
+            for (char c : w.toCharArray()) {
+                mask |= (1 << (c - 'a'));
+            }
+            ans += mp.getOrDefault(mask, 0);
+            mp.put(mask, mp.getOrDefault(mask, 0) + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
