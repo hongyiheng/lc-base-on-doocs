@@ -69,7 +69,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumBoxes(self, n: int) -> int:
+        bottom = incr = s = 0
+        while s < n:
+            incr += 1
+            bottom += incr
+            s += bottom
+        if s == n:
+            return bottom
+        s -= bottom
+        bottom -= incr
+        extra = 0
+        while s < n:
+            extra += 1
+            s += extra
+        return extra + bottom
 ```
 
 ### **Java**
@@ -77,7 +92,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumBoxes(int n) {
+        int bottom = 0, incr = 0, s = 0;
+        while (s < n) {
+            ++incr;
+            bottom += incr;
+            s += bottom;
+        }
+        if (s == n) {
+            return bottom;
+        }
+        s -= bottom;
+        bottom -= incr;
+        int extra = 0;
+        while (s < n) {
+            ++extra;
+            s += extra;
+        }
+        return extra + bottom;
+    }
+}
 ```
 
 ### **...**
