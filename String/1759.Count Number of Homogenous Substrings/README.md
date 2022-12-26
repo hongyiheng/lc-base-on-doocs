@@ -61,7 +61,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countHomogenous(self, s: str) -> int:
+        ans = k = 1
+        for i in range(1, len(s)):
+            if s[i - 1] == s[i]:
+                k += 1
+            else:
+                k = 1
+            ans += k
+        return ans % int(1e9 + 7)
 ```
 
 ### **Java**
@@ -69,7 +78,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countHomogenous(String s) {
+        int ans = 1, k = 1, mod = (int)1e9 + 7;
+        char[] cs = s.toCharArray();
+        for (int i = 1; i < cs.length; i++) {
+            if (cs[i - 1] == cs[i]) {
+                k++;
+            } else {
+                k = 1;
+            }
+            ans = (ans + k) % mod;
+        }
+        return ans % mod;
+    }
+}
 ```
 
 ### **...**
