@@ -59,7 +59,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumMoves(self, s: str) -> int:
+        n, i, ans = len(s), 0, 0
+        while i < n:
+            if s[i] == 'X':
+                i += 3
+                ans += 1
+            else:
+                i += 1
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +76,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumMoves(String s) {
+        int i = 0, ans = 0, n = s.length();
+        while (i < n) {
+            if (s.charAt(i) == 'X') {
+                i += 3;
+                ans++;
+            } else {
+                i++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
