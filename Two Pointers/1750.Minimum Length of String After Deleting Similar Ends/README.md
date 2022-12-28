@@ -70,7 +70,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        l, r = 0, len(s) - 1
+        while l < r:
+            if s[l] != s[r]:
+                break
+            c = s[l]
+            while l <= r and s[l] == c:
+                l += 1
+            while l <= r and s[r] == c:
+                r -= 1
+        return r - l + 1
 ```
 
 ### **Java**
@@ -78,7 +89,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumLength(String s) {
+            int l = 0, r = s.length() - 1;
+        while (l < r) {
+            if (s.charAt(l) != s.charAt(r)) {
+                break;
+            }
+            char c = s.charAt(l);
+            while (l < r && s.charAt(l) == c) {
+                l++;
+            }
+            while (r >= l && s.charAt(r) == c) {
+                r--;
+            }
+        }
+        return r - l + 1;
+    }
+}
 ```
 
 ### **...**
