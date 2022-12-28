@@ -51,7 +51,19 @@ coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        n = len(nums)
+        nums = [1] + nums + [1]
+        f = [[0] * (n + 2) for _ in range(n + 2)]
+        for m in range(3, n + 3):
+            for i in range(n + 2):
+                j = i + m - 1
+                if j > n + 1:
+                    break
+                for k in range(i + 1, j):
+                    f[i][j] = max(f[i][j], f[i][k] + f[k][j] + nums[i] * nums[k] * nums[j])
+        return f[0][n + 1]
 ```
 
 ### **Java**
@@ -59,7 +71,30 @@ coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int maxCoins(int[] nums) {
+        int n = nums.length;
+        int[] arr = new int[n + 2];
+        arr[0] = arr[n + 1] = 1;
+        for (int i = 0; i < n; i++) {
+            arr[i + 1] = nums[i];
+        }
+        int[][] f = new int[n + 2][n + 2];
+        for (int m = 3; m <= n + 2; m++) {
+            for (int i = 0; i < n + 2; i++) {
+                int j = i + m - 1;
+                if (j > n + 1) {
+                    break;
+                }
+                for (int k = i + 1; k < j; k++) {
+                    f[i][j] = Math.max(f[i][j], f[i][k] + f[k][j] + arr[i] * arr[k] * arr[j]);
+                }
 
+            }
+        }
+        return f[0][n + 1];
+    }
+}
 ```
 
 ### **...**
