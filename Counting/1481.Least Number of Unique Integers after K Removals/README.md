@@ -48,7 +48,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
+        mp = dict()
+        for v in arr:
+            mp[v] = mp.get(v, 0) + 1
+        nums = [mp[k] for k in mp.keys()]
+        nums.sort()
+        ans = len(nums)
+        for v in nums:
+            if k < v:
+                break
+            k -= v
+            ans -= 1
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +69,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int v : arr) {
+            mp.put(v, mp.getOrDefault(v, 0) + 1);
+        }
+        List<Integer> nums = new ArrayList<>();
+        for (int v : mp.values()) {
+            nums.add(v);
+        }
+        Collections.sort(nums);
+        int ans = nums.size();
+        for (int v : nums) {
+            if (k < v) {
+                break;
+            }
+            k -= v;
+            ans--;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
