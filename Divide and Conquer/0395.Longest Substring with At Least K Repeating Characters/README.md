@@ -47,7 +47,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        cnt = Counter(s)
+        for c in cnt.keys():
+            if cnt[c] < k:
+                ans = 0
+                for ss in s.split(c):
+                    ans = max(ans, self.longestSubstring(ss, k))
+                return ans
+        return len(s)
 ```
 
 ### **Java**
@@ -55,7 +64,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestSubstring(String s, int k) {
+        int[] cnt = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] == 0) {
+                continue;
+            }
+            if (cnt[i] < k) {
+                char c = (char)('a' + i);
+                int ans = 0;
+                for (String ss : s.split(String.valueOf(c))) {
+                    ans = Math.max(ans, longestSubstring(ss, k));
+                }
+                return ans;
+            }
+        }
+        return s.length();
+    }
+}
 ```
 
 ### **...**
