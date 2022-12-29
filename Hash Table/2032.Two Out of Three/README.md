@@ -57,7 +57,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def twoOutOfThree(self, nums1: List[int], nums2: List[int], nums3: List[int]) -> List[int]:
+        s1, s2, s3 = set(nums1), set(nums2), set(nums3)
+        ans = set()
+        for v in s1 & s2:
+            ans.add(v)
+        for v in s1 & s3:
+            ans.add(v)
+        for v in s2 & s3:
+            ans.add(v)
+        return list(ans)
 ```
 
 ### **Java**
@@ -65,7 +75,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> twoOutOfThree(int[] nums1, int[] nums2, int[] nums3) {
+        Set<Integer> s1 = new HashSet<>();
+        Set<Integer> s2 = new HashSet<>();
+        Set<Integer> s3 = new HashSet<>();
+        for (int v : nums1) {
+            s1.add(v);
+        }
+        for (int v : nums2) {
+            s2.add(v);
+        }
+        for (int v : nums3) {
+            s3.add(v);
+        }
+        Set<Integer> ans = new HashSet<>();
+        for (int i : s1) {
+            if (s2.contains(i) || s3.contains(i)) {
+                ans.add(i);
+            }
+        }
+        for (int i : s2) {
+            if (s3.contains(i)) {
+                ans.add(i);
+            }
+        }
+        return new ArrayList<>(ans);
+    }
+}
 ```
 
 ### **...**
