@@ -50,7 +50,46 @@ seat() -&gt; 5，学生最后坐在 5 号座位上。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedList
 
+class ExamRoom:
+
+    def __init__(self, n: int):
+        self.q = SortedList(key=lambda x: x)
+        self.n = n
+
+
+    def seat(self) -> int:
+        if len(self.q) == 0:
+            self.q.add(0)
+            return 0
+        elif len(self.q) == 1:
+            x = self.q[0]
+            ans = 0 if x - 0 > self.n - 1 - x else self.n - 1
+            self.q.add(ans)
+            return ans
+        pre = self.q[0]
+        d, ans = pre, 0
+        for x in self.q:
+            if d < (x - pre) // 2:
+                d = (x - pre) // 2
+                ans = (x + pre) // 2
+            pre = x
+        if d < self.n - 1 - pre:
+            ans = self.n - 1
+        self.q.add(ans)
+        return ans
+
+
+    def leave(self, p: int) -> None:
+        self.q.remove(p)
+
+
+
+# Your ExamRoom object will be instantiated and called as such:
+# obj = ExamRoom(n)
+# param_1 = obj.seat()
+# obj.leave(p)
 ```
 
 ### **Java**
@@ -58,7 +97,54 @@ seat() -&gt; 5，学生最后坐在 5 号座位上。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class ExamRoom {
 
+    TreeSet<Integer> s;
+    int n;
+
+    public ExamRoom(int n) {
+        this.n = n;
+        s = new TreeSet<>();
+    }
+
+    public int seat() {
+        if (s.size() == 0) {
+            s.add(0);
+            return 0;
+        } else if (s.size() == 1) {
+            int x = s.first();
+            int ans = x > n - 1 - x ? 0 : n - 1;
+            s.add(ans);
+            return ans;
+        }
+        int pre = s.first();
+        int d = pre, ans = 0;
+        for (int x : s) {
+            if (d < (x - pre) / 2) {
+                d = (x - pre) / 2;
+                ans = (x + pre) / 2;
+            }
+            pre = x;
+        }
+        if (d < n - 1 - pre) {
+            ans = n - 1;
+        }
+        s.add(ans);
+        return ans;
+    }
+
+    public void leave(int p) {
+        s.remove(p);
+    }
+}
+
+
+/**
+ * Your ExamRoom object will be instantiated and called as such:
+ * ExamRoom obj = new ExamRoom(n);
+ * int param_1 = obj.seat();
+ * obj.leave(p);
+ */
 ```
 
 ### **...**
