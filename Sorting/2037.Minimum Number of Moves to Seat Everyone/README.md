@@ -75,7 +75,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minMovesToSeat(self, seats: List[int], students: List[int]) -> int:
+        seats.sort()
+        students.sort()
+        ans = 0
+        for s, t in zip(students, seats):
+            ans += abs(t - s)
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +90,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minMovesToSeat(int[] seats, int[] students) {
+        Arrays.sort(seats);
+        Arrays.sort(students);
+        int ans = 0;
+        for (int i = 0; i < seats.length; i++) {
+            ans += Math.abs(seats[i] - students[i]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
