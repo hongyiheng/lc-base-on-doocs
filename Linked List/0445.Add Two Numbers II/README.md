@@ -61,7 +61,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        s1, s2 = list(), list()
+        while l1:
+            s1.append(l1.val)
+            l1 = l1.next
+        while l2:
+            s2.append(l2.val)
+            l2 = l2.next
+        i, j, carry = len(s1) - 1, len(s2) - 1, 0
+        head = None
+        while i >= 0 or j >= 0 or carry:
+            cur = carry
+            if i >= 0:
+                cur += s1[i]
+            if j >= 0:
+                cur += s2[j]
+            carry = cur // 10
+            tmp = ListNode(cur % 10)
+            tmp.next = head
+            head = tmp
+            i -= 1
+            j -= 1
+        return head
 ```
 
 ### **Java**
@@ -69,7 +97,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        List<Integer> s1 = new ArrayList<>(), s2 = new ArrayList<>();
+        while (l1 != null) {
+            s1.add(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            s2.add(l2.val);
+            l2 = l2.next;
+        }
+        int i = s1.size() - 1, j = s2.size() - 1, carry = 0;
+        ListNode head = null;
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int a = i >= 0 ? s1.get(i--) : 0;
+            int b = j >= 0 ? s2.get(j--) : 0;
+            int sum = a + b + carry;
+            carry = sum / 10;
+            ListNode node = new ListNode(sum % 10);
+            node.next = head;
+            head = node;
+        }
+        return head;
+    }
+}
 ```
 
 ### **...**
