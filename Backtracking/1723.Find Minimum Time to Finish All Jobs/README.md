@@ -53,7 +53,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumTimeRequired(self, jobs: List[int], k: int) -> int:
+        cnt = [0] * k
+        ans, n = float('inf'), len(jobs)
+        
+        def dfs(i, used, cur):
+            nonlocal ans
+            if cur >= ans:
+                return
+            if i == n:
+                ans = min(ans, cur)
+                return
+            if used < k:
+                cnt[used] = jobs[i]
+                dfs(i + 1, used + 1, max(cur, jobs[i]))
+                cnt[used] = 0
+            for j in range(used):
+                cnt[j] += jobs[i]
+                dfs(i + 1, used, max(cur, cnt[j]))
+                cnt[j] -= jobs[i]
+        
+        dfs(0, 0, 0)
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +83,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] jobs, cnt;
+    int k, ans, n;
+
+    public int minimumTimeRequired(int[] jobs, int k) {
+        this.jobs = jobs;
+        this.k = k;
+        ans = Integer.MAX_VALUE;
+        n = jobs.length;
+        cnt = new int[k];
+        dfs(0, 0, 0);
+        return ans;
+    }
+
+    public void dfs(int i, int used, int cur) {
+        if (cur >= ans) {
+            return;
+        }
+        if (i == n) {
+            ans = Math.min(ans, cur);
+            return;
+        }
+        if (used < k) {
+            cnt[used] += jobs[i];
+            dfs(i + 1, used + 1, Math.max(cnt[used], cur));
+            cnt[used] -= jobs[i];
+        }
+        for (int j = 0; j < used; j++) {
+            cnt[j] += jobs[i];
+            dfs(i + 1, used, Math.max(cnt[j], cur));
+            cnt[j] -= jobs[i];
+        }
+    }
+}
 ```
 
 ### **...**
