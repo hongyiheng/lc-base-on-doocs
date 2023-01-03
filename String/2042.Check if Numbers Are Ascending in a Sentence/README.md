@@ -80,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def areNumbersAscending(self, s: str) -> bool:
+        last = -1
+        for w in s.split(" "):
+            if '0' <= w[0] <= '9':
+                cur = int(w)
+                if cur <= last:
+                    return False
+                last = cur
+        return True
 ```
 
 ### **Java**
@@ -88,7 +97,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        int last = -1;
+        for (String w : s.split(" ")) {
+            if (w.charAt(0) >= '0' && w.charAt(0) <= '9') {
+                int cur = Integer.parseInt(w);
+                if (cur <= last) {
+                    return false;
+                }
+                last = cur;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
