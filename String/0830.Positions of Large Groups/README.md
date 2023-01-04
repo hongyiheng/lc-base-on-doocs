@@ -68,7 +68,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largeGroupPositions(self, s: str) -> List[List[int]]:
+        ans = []
+        left = right = 0
+        n = len(s)
+        while right < n:
+            if s[right] != s[left]:
+                if right - left >= 3:
+                    ans.append([left, right - 1])
+                left = right
+            right += 1
+        if right - left >= 3:
+            ans.append([left, right - 1])
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +89,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> largeGroupPositions(String s) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int left = 0, right = 0, n = s.length();
+        while (right < n) {
+            if (s.charAt(right) != s.charAt(left)) {
+                if (right - left >= 3) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(left);
+                    list.add(right - 1);
+                    ans.add(list);
+                }
+                left = right;
+            }
+            right++;
+        }
+        if (right - left >= 3) {
+            List<Integer> list = new ArrayList<>();
+            list.add(left);
+            list.add(right - 1);
+            ans.add(list);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
