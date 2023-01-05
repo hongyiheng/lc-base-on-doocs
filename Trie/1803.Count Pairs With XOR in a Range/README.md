@@ -61,7 +61,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Trie:
+    def __init__(self):
+        self.children = [None, None]
+        self.cnt = 0
 
+    def insert(self, x):
+        node = self
+        for i in range(15, -1, -1):
+            v = x >> i & 1
+            if not node.children[v]:
+                node.children[v] = Trie()
+            node = node.children[v]
+            node.cnt += 1
+
+    def search(self, x, mx):
+        node = self
+        ans = 0
+        for i in range(15, -1, -1):
+            if not node:
+                return ans
+            v = x >> i & 1
+            if mx >> i & 1:
+                if node.children[v]:
+                    ans += node.children[v].cnt
+                node = node.children[v ^ 1]
+            else:
+                node = node.children[v]
+        return ans
+
+class Solution:
+    def countPairs(self, nums: List[int], low: int, high: int) -> int:
+        ans = 0
+        tree = Trie()
+        for v in nums:
+            ans += tree.search(v, high + 1) - tree.search(v, low)
+            tree.insert(v)
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +105,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Trie {
+    Trie[] children = new Trie[2];
+    int cnt = 0;
 
+    public void insert(int x) {
+        Trie node = this;
+        for (int i = 15; i >= 0; i--) {
+            int v = x >> i & 1;
+            if (node.children[v] == null) {
+                node.children[v] = new Trie();
+            }
+            node = node.children[v];
+            node.cnt++;
+        }
+    }
+
+    public int search(int x, int mx) {
+        Trie node = this;
+        int ans = 0;
+        for (int i = 15; i >= 0; i--) {
+            if (node == null) {
+                return ans;
+            }
+            int v = x >> i & 1;
+            if ((mx >> i & 1) == 1) {
+                if (node.children[v] != null) {
+                    ans += node.children[v].cnt;
+                }
+                node = node.children[v ^ 1];
+            } else {
+                node = node.children[v];
+            }
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public int countPairs(int[] nums, int low, int high) {
+        Trie tree = new Trie();
+        int n = nums.length, ans = 0;
+        for (int v : nums) {
+            ans += tree.search(v, high + 1) - tree.search(v, low);
+            tree.insert(v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
