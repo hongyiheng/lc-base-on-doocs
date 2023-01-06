@@ -49,7 +49,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countEven(self, num: int) -> int:
+        ans = 0
+        for i in range(2, num + 1):
+            v, cnt = i, 0
+            while v:
+                cnt += v % 10
+                v //= 10
+            if cnt % 2 == 0:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +67,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countEven(int num) {
+        int ans = 0;
+        for (int i = 2; i <= num; i++) {
+            int v = i, cnt = 0;
+            while (v > 0) {
+                cnt += v % 10;
+                v /= 10;
+            }
+            if (cnt % 2 == 0) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
