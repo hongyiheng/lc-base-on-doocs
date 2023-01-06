@@ -52,7 +52,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        edges = defaultdict(list)
+        q = [root]
+        while q:
+            cur = q.pop()
+            if cur.left:
+                edges[cur.val].append(cur.left.val)
+                edges[cur.left.val].append(cur.val)
+                q.append(cur.left)
+            if cur.right:
+                edges[cur.val].append(cur.right.val)
+                edges[cur.right.val].append(cur.val)
+                q.append(cur.right)
+        q = [target.val]
+        vis = set()
+        vis.add(target.val)
+        ans = []
+        while q:
+            for _ in range(len(q)):
+                cur = q.pop(0)
+                if k == 0:
+                    ans.append(cur)
+                    continue
+                for to in edges[cur]:
+                    if to in vis:
+                        continue
+                    vis.add(to)
+                    q.append(to)
+            k -= 1
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +96,59 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        Map<Integer, List<Integer>> edges = new HashMap<>();
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.addLast(root);
+        while (!q.isEmpty()) {
+            TreeNode cur = q.pollLast();
+            if (cur.left != null) {
+                edges.computeIfAbsent(cur.val, e -> new ArrayList<>()).add(cur.left.val);
+                edges.computeIfAbsent(cur.left.val, e -> new ArrayList<>()).add(cur.val);
+                q.addLast(cur.left);
+            }
+            if (cur.right != null) {
+                edges.computeIfAbsent(cur.val, e -> new ArrayList<>()).add(cur.right.val);
+                edges.computeIfAbsent(cur.right.val, e -> new ArrayList<>()).add(cur.val);
+                q.addLast(cur.right);
+            }
+        }
+        Deque<Integer> q2 = new ArrayDeque<>();
+        q2.addLast(target.val);
+        Set<Integer> vis = new HashSet<>();
+        vis.add(target.val);
+        List<Integer> ans = new ArrayList<>();
+        while (!q2.isEmpty()) {
+            int m = q2.size();
+            for (int i = 0; i < m; i++) {
+                int cur = q2.pollFirst();
+                if (k == 0) {
+                    ans.add(cur);
+                    continue;
+                }
+                for (int to : edges.getOrDefault(cur, new ArrayList<>())) {
+                    if (vis.contains(to)) {
+                        continue;
+                    }
+                    vis.add(to);
+                    q2.addLast(to);
+                }
+            }
+            k--;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
