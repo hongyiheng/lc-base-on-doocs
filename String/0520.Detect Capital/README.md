@@ -46,7 +46,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        n = len(word)
+        if n == 1:
+            return True
+        if "a" <= word[0] <= "z":
+            for c in word:
+                if "a" <= c <= "z":
+                    continue
+                return False
+        elif "a" <= word[1] <= "z":
+            for i in range(1, n):
+                if "a" <= word[i] <= "z":
+                    continue
+                return False
+        else:
+            for c in word:
+                if "A" <= c <= "Z":
+                    continue
+                return False
+        return True
 ```
 
 ### **Java**
@@ -54,7 +74,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        int n = word.length();
+        if (n == 1) {
+            return true;
+        }
+        char[] cs = word.toCharArray();
+        if ('a' <= cs[0] && cs[0] <= 'z') {
+            for (char c : cs) {
+                if ('a' <= c && c <= 'z') {
+                    continue;
+                }
+                return false;
+            }
+        } else if ('a' <= cs[1] && cs[1] <= 'z') {
+            for (int i = 1; i < n; i++) {
+                if ('a' <= cs[i] && cs[i] <= 'z') {
+                    continue;
+                }
+                return false;
+            }
+        } else {
+            for (char c : cs) {
+                if ('A' <= c && c <= 'Z') {
+                    continue;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
