@@ -48,7 +48,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        ans = 0
+        for w in words:
+            if len(w) < len(pref):
+                continue
+            flag = True
+            for a, b in zip(pref, w):
+                if a != b:
+                    flag = False
+                    break
+            if flag:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +69,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int prefixCount(String[] words, String pref) {
+        int ans = 0;
+        for (String w : words) {
+            if (w.length() < pref.length()) {
+                continue;
+            }
+            boolean flag = true;
+            for (int i = 0; i < pref.length(); i++) {
+                if (pref.charAt(i) != w.charAt(i)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
