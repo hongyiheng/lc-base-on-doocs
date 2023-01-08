@@ -62,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minPairSum(self, nums: List[int]) -> int:
+        nums.sort()
+        l, r = 0, len(nums) - 1
+        ans = 0
+        while l < r:
+            ans = max(nums[l] + nums[r], ans)
+            l += 1
+            r -= 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +79,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int l = 0, r = nums.length - 1, ans = 0;
+        while (l < r) {
+            ans = Math.max(nums[l++] + nums[r--], ans);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
