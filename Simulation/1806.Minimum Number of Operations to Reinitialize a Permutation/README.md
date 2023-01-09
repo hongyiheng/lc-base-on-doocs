@@ -68,7 +68,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reinitializePermutation(self, n: int) -> int:
+        ans, idx = 1, n // 2
+        while True:
+            if idx == 1:
+                return ans
+            if idx % 2 == 0:
+                idx /= 2
+            else:
+                idx = n // 2 + (idx - 1) // 2
+            ans += 1
 ```
 
 ### **Java**
@@ -76,7 +86,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int reinitializePermutation(int n) {
+        int ans = 1, idx = n / 2;
+        while (true) {
+            if (idx == 1) {
+                return ans;
+            }
+            if (idx % 2 == 0) {
+                idx /= 2;
+            } else {
+                idx = n / 2 + (idx - 1) / 2;
+            }
+            ans++;
+        }
+    }
+}
 ```
 
 ### **...**
