@@ -55,7 +55,16 @@ num[2] = '0' 。数字 2 在 num 中出现了 0 次。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def digitCount(self, num: str) -> bool:
+        cnt = [0] * 10
+        for i, v in enumerate(num):
+            cnt[i] += int(v)
+            cnt[int(v)] -= 1
+        for v in cnt:
+            if v != 0:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -63,7 +72,21 @@ num[2] = '0' 。数字 2 在 num 中出现了 0 次。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean digitCount(String num) {
+        int[] cnt = new int[10];
+        for (int i = 0; i < num.length(); i++) {
+            cnt[i] += num.charAt(i) - '0';
+            cnt[num.charAt(i) - '0']--;
+        }
+        for (int v : cnt) {
+            if (v != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
