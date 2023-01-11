@@ -63,7 +63,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumPartition(self, s: str, k: int) -> int:
+        ans, cur, n = 0, 0, len(s)
+        for c in s:
+            v = int(c)
+            if v > k:
+                return -1
+            if cur * 10 + v > k:
+                ans += 1
+                cur = v
+            else:
+                cur = cur * 10 + v
+        if cur:
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +85,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumPartition(String s, int k) {
+        int ans = 0;
+        long cur = 0;
+        for (char c : s.toCharArray()) {
+            int v = c - '0';
+            if (v > k) {
+                return -1;
+            }
+            if (cur * 10 + v > k) {
+                cur = v;
+                ans++;
+            } else {
+                cur = cur * 10 + v;
+            }
+        }
+        if (cur != 0) {
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
