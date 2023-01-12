@@ -65,7 +65,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        last = pre = 0
+        s = set()
+        for v in nums:
+            last = pre
+            pre = (pre + v) % k
+            if pre in s:
+                return True
+            s.add(last)
+        return False
 ```
 
 ### **Java**
@@ -73,7 +83,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        int last = 0, pre = 0;
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            last = pre;
+            pre = (pre + v) % k;
+            if (s.contains(pre)) {
+                return true;
+            }
+            s.add(last);
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
