@@ -62,7 +62,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def rearrangeCharacters(self, s: str, target: str) -> int:
+        cnt = [0] * 26
+        for c in s:
+            cnt[ord(c) - ord('a')] += 1
+        t = [0] * 26
+        for c in target:
+            t[ord(c) - ord('a')] += 1
+        ans = 100
+        for i, v in enumerate(t):
+            if not v:
+                continue
+            ans = min(ans, cnt[i] // v)
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +83,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int rearrangeCharacters(String s, String target) {
+        int[] cnt = new int[26], t = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (char c : target.toCharArray()) {
+            t[c - 'a']++;
+        }
+        int ans = 100;
+        for (int i = 0; i < 26; i++) {
+            if (t[i] == 0) {
+                continue;
+            }
+            ans = Math.min(ans, cnt[i] / t[i]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
