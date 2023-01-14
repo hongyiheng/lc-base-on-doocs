@@ -61,7 +61,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countDifferentSubsequenceGCDs(self, nums: List[int]) -> int:
+        def gcd(a, b):
+            if b == 0:
+                return a
+            return gcd(b, a % b)
+        
+        s = set(nums)
+        mx = max(nums)
+        ans = len(s)
+        for i in range(1, (mx + 1) // 2):
+            if i in s:
+                continue
+            g = 0
+            for j in range(i * 2, mx + 1, i):
+                if j in s:
+                    g = gcd(g, j)
+                    if g == i:
+                        ans += 1
+                        break
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +89,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
 
+    public int countDifferentSubsequenceGCDs(int[] nums) {
+        int n = nums.length;
+        int mx = 0;
+        Set<Integer> s = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            mx = Math.max(mx, nums[i]);
+            s.add(nums[i]);
+        }
+        int ans = s.size();
+        for (int i = 1; i < (mx + 1) / 2; i++) {
+            if (s.contains(i)) {
+                continue;
+            }
+            int g = 0;
+            for (int j = i * 2; j < mx + 1; j += i) {
+                if (!s.contains(j)) {
+                    continue;
+                }
+                g = gcd(g, j);
+                if (g == i) {
+                    ans++;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
