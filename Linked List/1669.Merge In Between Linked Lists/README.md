@@ -56,7 +56,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeInBetween(self, list1: ListNode, a: int, b: int, list2: ListNode) -> ListNode:
+        pre = list1
+        for i in range(a - 1):
+            pre = pre.next
+        tail = list1
+        for i in range(b + 1):
+            tail = tail.next
+        pre.next = list2
+        while list2.next:
+            list2 = list2.next
+        list2.next = tail
+        return list1
 ```
 
 ### **Java**
@@ -64,7 +81,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        ListNode pre = list1;
+        for (int i = 0; i < a - 1; i++) {
+            pre = pre.next;
+        }
+        ListNode tail = list1;
+        for (int i = 0; i < b + 1; i++) {
+            tail = tail.next;
+        }
+        pre.next = list2;
+        while (list2.next != null) {
+            list2 = list2.next;
+        }
+        list2.next = tail;
+        return list1;
+    }
+}
 ```
 
 ### **...**
