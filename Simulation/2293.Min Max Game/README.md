@@ -64,7 +64,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minMaxGame(self, nums: List[int]) -> int:
+        while len(nums) > 1:
+            tmp = []
+            flag = True
+            for i in range(0, len(nums), 2):
+                tmp.append(min(nums[i], nums[i + 1]) if flag else max(nums[i], nums[i + 1]))
+                flag = not flag
+            nums = tmp
+        return nums[0]
 ```
 
 ### **Java**
@@ -72,7 +81,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minMaxGame(int[] nums) {
+        while (nums.length > 1) {
+            boolean flag = true;
+            int[] tmp = new int[nums.length / 2];
+            for (int i = 0; i < tmp.length; i++) {
+                tmp[i] = flag ? Math.min(nums[i * 2], nums[i * 2 + 1]) : Math.max(nums[i * 2], nums[i * 2 + 1]);
+                flag = !flag;
+            }
+            nums = tmp;
+        }
+        return nums[0];
+    }
+}
 ```
 
 ### **...**
