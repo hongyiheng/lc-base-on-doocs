@@ -63,7 +63,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def areSentencesSimilar(self, sentence1: str, sentence2: str) -> bool:
+        if len(sentence1) < len(sentence2):
+            sentence1, sentence2 = sentence2, sentence1
+        if sentence1 == sentence2 or sentence1.startswith(sentence2 + " ") or sentence1.endswith(" " + sentence2):
+            return True
+        for i in range(len(sentence2)):
+            if sentence2[i] != ' ':
+                continue
+            if sentence1.startswith(sentence2[:i] + ' ') and sentence1.endswith(sentence2[i:]):
+                return True
+        return False
 ```
 
 ### **Java**
@@ -71,7 +82,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+        if (sentence1.length() < sentence2.length()) {
+            return areSentencesSimilar(sentence2, sentence1);
+        }
+        if (sentence1.equals(sentence2)) {
+            return true;
+        }
+        if (sentence1.startsWith(sentence2 + " ")) {
+            return true;
+        }
+        if (sentence1.endsWith(" " + sentence2)) {
+            return true;
+        }
+        for (int i = 0; i < sentence2.length(); i++) {
+            if (sentence2.charAt(i) != ' ') {
+                continue;
+            }
+            if (sentence1.startsWith(sentence2.substring(0, i) + " ") && sentence1.endsWith(sentence2.substring(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
