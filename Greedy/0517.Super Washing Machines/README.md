@@ -70,7 +70,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findMinMoves(self, machines: List[int]) -> int:
+        n = len(machines)
+        t = sum(machines)
+        if t % n:
+            return -1
+        avg = t // n
+        diff = [0] * n
+        ans = 0
+        for i in range(n):
+            diff[i] = machines[i] - avg
+            ans = max(ans, diff[i])
 
+        for i in range(n):
+            ans = max(ans, abs(diff[i]))
+            if i < n - 1:
+                diff[i + 1] += diff[i]
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +95,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public static int findMinMoves(int[] machines) {
+        int t = 0, n = machines.length;
+        for (int v : machines) {
+            t += v;
+        }
+        if (t % n != 0) {
+            return -1;
+        }
+        int avg = t / n;
+        int[] diff = new int[n];
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            diff[i] = machines[i] - avg;
+            ans = Math.max(ans, diff[i]);
+        }
+        for (int i = 0; i < n; i++) {
+            if (i < n - 1) {
+                diff[i + 1] += diff[i];
+            }
+            ans = Math.max(ans, Math.abs(diff[i]));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
