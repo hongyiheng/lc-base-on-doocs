@@ -53,7 +53,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countNicePairs(self, nums: List[int]) -> int:
+        mp = dict()
+        for v in nums:
+            t = v - int(str(v)[::-1])
+            mp[t] = mp.get(t, 0) + 1
+        ans = 0
+        for v in mp.values():
+            ans += v * (v - 1) // 2
+        return ans % (10 ** 9 + 7)
 ```
 
 ### **Java**
@@ -61,7 +70,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countNicePairs(int[] nums) {
+        int mod = (int) 1e9 + 7;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int v : nums) {
+            int rev = Integer.parseInt(new StringBuilder(String.valueOf(v)).reverse().toString());
+            map.put(v - rev, map.getOrDefault(v - rev, 0) + 1);
+        }
+        long ans = 0;
+        for (int key : map.keySet()) {
+            int val = map.get(key);
+            ans = (ans + (long) val * (val - 1) / 2 % mod) % mod;
+        }
+        return (int) ans;
+    }
+}
 ```
 
 ### **...**
