@@ -63,7 +63,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
+        n = len(s)
+        cost = [0] * n
+        for i in range(n):
+            cost[i] = abs(ord(t[i]) - ord(s[i]))
+        l = r = cur = ans = 0
+        while r < n:
+            cur += cost[r]
+            while cur > maxCost:
+                cur -= cost[l]
+                l += 1
+            ans = max(ans, r - l + 1)
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +85,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int equalSubstring(String s, String t, int maxCost) {
+        int n = s.length();
+        int[] cost = new int[n];
+        for (int i = 0; i < n; i++) {
+            cost[i] = Math.abs(t.charAt(i) - s.charAt(i));
+        }
+        int l = 0, r = 0, cur = 0, ans = 0;
+        while (r < n) {
+            cur += cost[r];
+            while (cur > maxCost) {
+                cur -= cost[l++];
+            }
+            ans = Math.max(ans, r - l + 1);
+            r++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
