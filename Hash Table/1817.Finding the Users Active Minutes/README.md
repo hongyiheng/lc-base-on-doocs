@@ -64,7 +64,15 @@ ID=2 的用户执行操作的分钟分别是：2 和 3 。因此，该用户的�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findingUsersActiveMinutes(self, logs: List[List[int]], k: int) -> List[int]:
+        mp = defaultdict(set)
+        for u, t in logs:
+            mp[u].add(t)
+        ans = [0] * k
+        for v in mp.values():
+            ans[len(v) - 1] += 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +80,19 @@ ID=2 的用户执行操作的分钟分别是：2 和 3 。因此，该用户的�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findingUsersActiveMinutes(int[][] logs, int k) {
+        Map<Integer, Set<Integer>> mp = new HashMap<>();
+        for (int[] log : logs) {
+            mp.computeIfAbsent(log[0], q -> new HashSet<>()).add(log[1]);
+        }
+        int[] ans = new int[k];
+        for (var v : mp.values()) {
+            ans[v.size() - 1]++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
