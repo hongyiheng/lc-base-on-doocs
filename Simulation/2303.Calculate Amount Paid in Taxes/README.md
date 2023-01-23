@@ -74,7 +74,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def calculateTax(self, brackets: List[List[int]], income: int) -> float:
+        last = ans = 0
+        for u, p in brackets:
+            if income <= last:
+                break
+            ans += (min(income, u) - last) * p / 100
+            last = u
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +90,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double calculateTax(int[][] brackets, int income) {
+        double last = 0, ans = 0;
+        for (int[] b : brackets) {
+            if (income <= last) {
+                break;
+            }
+            int u = b[0], p = b[1];
+            ans += (Math.min(u, income) - last) * p / 100;
+            last = u;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
