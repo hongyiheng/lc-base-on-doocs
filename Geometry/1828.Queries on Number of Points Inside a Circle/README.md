@@ -59,7 +59,17 @@ queries[0] 是绿色的圆，queries[1] 是红色的圆，queries[2] 是蓝色�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countPoints(self, points: List[List[int]], queries: List[List[int]]) -> List[int]:
+        ans = []
+        for x, y, r in queries:
+            num = 0
+            for i, j in points:
+                d = math.sqrt(abs(x - i) ** 2 + abs(y - j) ** 2)
+                if d <= r:
+                    num += 1
+            ans.append(num)
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +77,23 @@ queries[0] 是绿色的圆，queries[1] 是红色的圆，queries[2] 是蓝色�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] countPoints(int[][] points, int[][] queries) {
+        int n = queries.length;
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int x = queries[i][0], y = queries[i][1], r = queries[i][2];
+            for (int[] p : points) {
+                int dx = Math.abs(x - p[0]), dy = Math.abs(y - p[1]);
+                double d = Math.sqrt(dx * dx + dy * dy);
+                if (d <= r) {
+                    ans[i]++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
