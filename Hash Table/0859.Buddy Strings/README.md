@@ -70,7 +70,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def buddyStrings(self, s: str, goal: str) -> bool:
+        if len(s) != len(goal):
+            return False
+        if s == goal and len(set(s)) < len(goal):
+            return True
+        diff = [(a, b) for a, b in zip(s, goal) if a != b]
+        return len(diff) == 2 and diff[0][0] == diff[1][1] and diff[0][1] == diff[1][0]
 ```
 
 ### **Java**
@@ -78,7 +85,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean buddyStrings(String s, String goal) {
+        int n = s.length();
+        if (n != goal.length()) {
+            return false;
+        }
+        Set<Character> ss = new HashSet();
+        List<char[]> diff = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ss.add(s.charAt(i));
+            if (s.charAt(i) != goal.charAt(i)) {
+                diff.add(new char[]{s.charAt(i), goal.charAt(i)});
+            }
+        }
+        if (s.equals(goal) && ss.size() != n) {
+            return true;
+        }
+        return diff.size() == 2 && diff.get(0)[0] == diff.get(1)[1] && diff.get(0)[1] == diff.get(1)[0];
+    }
+}
 ```
 
 ### **...**
