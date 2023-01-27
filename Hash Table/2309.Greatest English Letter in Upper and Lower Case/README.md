@@ -60,7 +60,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def greatestLetter(self, s: str) -> str:
+        cs = [[False] * 2 for _ in range(26)]
+        for c in s:
+            if 'a' <= c <= 'z':
+                cs[ord(c) - ord('a')][0] = True
+            else:
+                cs[ord(c) - ord('A')][1] = True
+        for i in range(25, -1, -1):
+            if cs[i][0] and cs[i][1]:
+                return chr(ord('A') + i)
+        return ""
 ```
 
 ### **Java**
@@ -68,7 +79,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String greatestLetter(String s) {
+        boolean[][] cs = new boolean[26][2];
+        for (char c : s.toCharArray()) {
+            if (c >= 'a') {
+                cs[c - 'a'][0] = true;
+            } else {
+                cs[c - 'A'][1] = true;
+            }
+        }
+        for (int i = 25; i > -1; i--) {
+            if (cs[i][0] && cs[i][1]) {
+                return String.valueOf((char)(i + 'A'));
+            }
+        }
+        return "";
+    }
+}
 ```
 
 ### **...**
