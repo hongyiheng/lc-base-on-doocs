@@ -57,7 +57,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        n = len(nums)
+        ans = ["0"] * n
+        for i in range(n):
+            if nums[i][i] == '0':
+                ans[i] = "1"
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -65,7 +72,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String findDifferentBinaryString(String[] nums) {
+        int n = nums.length;
+        char[] ans = new char[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = nums[i].charAt(i) == '0' ? '1' : '0';
+        }
+        return new String(ans);
+    }
+}
 ```
 
 ### **...**
