@@ -77,7 +77,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minInsertions(self, s: str) -> int:
+        ans = l = i = 0
+        n = len(s)
+        while i < n:
+            if s[i] == '(':
+                l += 1
+            else:
+                cnt = 1
+                while i + 1 < n and s[i + 1] == ')':
+                    cnt += 1
+                    i += 1
+                if cnt % 2 != 0:
+                    ans += 1
+                    cnt += 1
+                l -= cnt // 2
+                if l < 0:
+                    ans += abs(l)
+                    l = 0
+            i += 1
+        if l:
+            ans += 2 * l  
+        return ans
 ```
 
 ### **Java**
@@ -85,7 +107,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minInsertions(String s) {
+        int ans = 0, l = 0, i = 0, n = s.length();
+        while (i < n) {
+            if (s.charAt(i) == '(') {
+                l++;
+            } else {
+                int cnt = 1;
+                while (i + 1 < n && s.charAt(i + 1) == ')') {
+                    cnt++;
+                    i++;
+                }
+                if (cnt % 2 != 0) {
+                    cnt++;
+                    ans++;
+                }
+                l -= cnt / 2;
+                if (l < 0) {
+                    ans += -l;
+                    l = 0;
+                }
+            }
+            i++;
+        }
+        if (l > 0) {
+            ans += 2 * l;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
