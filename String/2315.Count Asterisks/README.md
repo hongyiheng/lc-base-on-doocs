@@ -56,7 +56,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countAsterisks(self, s: str) -> int:
+        ans = cur = 0
+        mid = False
+        for c in s:
+            if c == '*':
+                cur += 1
+            if c == '|':
+                if not mid:
+                    ans += cur
+                mid = not mid
+                cur = 0
+        return ans + cur
 ```
 
 ### **Java**
@@ -64,7 +76,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countAsterisks(String s) {
+        int ans = 0, cur = 0;
+        boolean mid = false;
+        for (char c : s.toCharArray()) {
+            if (c == '*') {
+                cur++;
+            }
+            if (c == '|') {
+                if (!mid) {
+                    ans += cur;
+                }
+                mid = !mid;
+                cur = 0;
+            }
+        }
+        return ans + cur;
+    }
+}
 ```
 
 ### **...**
