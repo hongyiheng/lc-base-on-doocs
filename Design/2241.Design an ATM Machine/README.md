@@ -66,7 +66,36 @@ atm.withdraw(550);        // 返回 [0,1,0,0,1] ，机器会返回 1 张 $50 的
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class ATM:
 
+    def __init__(self):
+        self.cnt = [0] * 5
+        self.cash = [20, 50, 100, 200, 500]
+
+    def deposit(self, banknotesCount: List[int]) -> None:
+        for i in range(5):
+            self.cnt[i] += banknotesCount[i]
+
+    def withdraw(self, amount: int) -> List[int]:
+        _cnt = self.cnt
+        ans = [0] * 5
+        for i in range(4, -1, -1):
+            if amount >= self.cash[i]:
+                cost = min(_cnt[i], amount // self.cash[i])
+                amount -= cost * self.cash[i]
+                ans[i] = cost
+        if amount == 0:
+            for i in range(5):
+                _cnt[i] -= ans[i]
+            return ans
+        return [-1]
+
+
+
+# Your ATM object will be instantiated and called as such:
+# obj = ATM()
+# obj.deposit(banknotesCount)
+# param_2 = obj.withdraw(amount)
 ```
 
 ### **Java**
@@ -74,7 +103,46 @@ atm.withdraw(550);        // 返回 [0,1,0,0,1] ，机器会返回 1 张 $50 的
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class ATM {
 
+    long[] cash, cnt;
+
+    public ATM() {
+        cash = new long[]{20, 50, 100, 200, 500};
+        cnt = new long[5];
+    }
+    
+    public void deposit(int[] banknotesCount) {
+        for (int i = 0; i < 5; i++) {
+            cnt[i] += banknotesCount[i];
+        }
+    }
+    
+    public int[] withdraw(int amount) {
+        int[] ans = new int[5];
+        for (int i = 4; i > -1; i--) {
+            if (amount >= cash[i]) {
+                long cost = Math.min(cnt[i], amount / cash[i]);
+                amount -= cost * cash[i];
+                ans[i] = (int)cost;
+            }
+        }
+        if (amount > 0) {
+            return new int[]{-1};
+        }
+        for (int i = 0; i < 5; i++) {
+            cnt[i] -= ans[i];
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your ATM object will be instantiated and called as such:
+ * ATM obj = new ATM();
+ * obj.deposit(banknotesCount);
+ * int[] param_2 = obj.withdraw(amount);
+ */
 ```
 
 ### **...**
