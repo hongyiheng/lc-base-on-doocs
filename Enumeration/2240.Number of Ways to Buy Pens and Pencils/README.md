@@ -48,7 +48,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def waysToBuyPensPencils(self, total: int, cost1: int, cost2: int) -> int:
+        ans = i = 0
+        while i * cost1 <= total:
+            ans += (total - i * cost1) // cost2 + 1
+            i += 1
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long waysToBuyPensPencils(int total, int cost1, int cost2) {
+        long ans = 0, i = 0;
+        while (i * cost1 <= total) {
+            ans += (total - i * cost1) / cost2 + 1;
+            i++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
