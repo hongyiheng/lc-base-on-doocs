@@ -64,7 +64,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countLatticePoints(self, circles: List[List[int]]) -> int:
+        s = set()
+        for x, y, r in circles:
+            for i in range(x - r, x + r + 1):
+                for j in range(y - r, y + r + 1):
+                    if math.sqrt(abs(i - x) ** 2 + abs(j - y) ** 2) <= r:
+                        s.add((i, j))
+        return len(s)
 ```
 
 ### **Java**
@@ -72,7 +80,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countLatticePoints(int[][] circles) {
+        Set<String> s = new HashSet<>();
+        for (int[] c : circles) {
+            int x = c[0], y = c[1], r = c[2];
+            for (int i = x - r; i <= x + r; i++) {
+                for (int j = y - r; j <= y + r; j++) {
+                    if (1L * (i - x) * (i - x) + 1L * (j - y) * (j - y) <= 1L * r * r) {
+                        s.add(i + "," + j);
+                    }
+                }
+            }
+        }
+        return s.size();
+    }
+}
 ```
 
 ### **...**
