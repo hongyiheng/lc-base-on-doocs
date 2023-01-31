@@ -55,7 +55,16 @@ X 矩阵应该满足：绿色元素（对角线上）都不是 0 ，红色元素
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkXMatrix(self, grid: List[List[int]]) -> bool:
+        n = len(grid)
+        for i in range(n):
+            for j in range(n):
+                if (i == j or i == n - j - 1) and grid[i][j] == 0:
+                    return False
+                if (i != j and i != n - j - 1)  and grid[i][j] != 0:
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -63,7 +72,22 @@ X 矩阵应该满足：绿色元素（对角线上）都不是 0 ，红色元素
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkXMatrix(int[][] grid) {
+        int n = grid.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i == j || i == n - j - 1) && grid[i][j] == 0) {
+                    return false;
+                }
+                if ((i != j && i != n - j - 1) && grid[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
