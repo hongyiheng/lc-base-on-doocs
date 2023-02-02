@@ -68,7 +68,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestAlternatingPaths(self, n: int, redEdges: List[List[int]], blueEdges: List[List[int]]) -> List[int]:
+        r, b = defaultdict(list), defaultdict(list)
+        for u, v in redEdges:
+            r[u].append(v)
+        for u, v in blueEdges:
+            b[u].append(v)
+        dist = [[-1] * 2 for _ in range(n)]
+        dist[0] = [0, 0]
+        q = deque()
+        q.append(0)
+        while q:
+            u = q.popleft()
+            if dist[u][0] != -1:
+                for v in r[u]:
+                    if dist[v][1] == -1 or dist[v][1] > dist[u][0] + 1:
+                        dist[v][1] = dist[u][0] + 1
+                        q.append(v)
+            if dist[u][1] != -1:
+                for v in b[u]:
+                    if dist[v][0] == -1 or dist[v][0] > dist[u][1] + 1:
+                        dist[v][0] = dist[u][1] + 1
+                        q.append(v)
+        ans = list()
+        for a, b in dist:
+            if a != -1 and b != -1:
+                ans.append(min(a, b))
+            elif a != -1:
+                ans.append(a)
+            elif b != -1:
+                ans.append(b)
+            else:
+                ans.append(-1)
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +109,53 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] shortestAlternatingPaths(int n, int[][] redEdges, int[][] blueEdges) {
+        Map<Integer, List<Integer>> r = new HashMap<>(), b = new HashMap<>();
+        for (int[] e : redEdges) {
+            r.computeIfAbsent(e[0], k -> new ArrayList<>()).add(e[1]);
+        }
+        for (int[] e : blueEdges) {
+            b.computeIfAbsent(e[0], k -> new ArrayList<>()).add(e[1]);
+        }
+        int[][] dist = new int[n][2];
+        for (int i = 1; i < n; i++) {
+            dist[i][0] = dist[i][1] = -1;
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        q.addLast(0);
+        while (!q.isEmpty()) {
+            int u = q.removeFirst();
+            if (dist[u][0] != -1) {
+                for (int v : r.getOrDefault(u, Collections.emptyList())) {
+                    if (dist[v][1] == -1 || dist[v][1] > dist[u][0] + 1) {
+                        dist[v][1] = dist[u][0] + 1;
+                        q.addLast(v);
+                    }
+                }
+            }
+            if (dist[u][1] != -1) {
+                for (int v : b.getOrDefault(u, Collections.emptyList())) {
+                    if (dist[v][0] == -1 || dist[v][0] > dist[u][1] + 1) {
+                        dist[v][0] = dist[u][1] + 1;
+                        q.addLast(v);
+                    }
+                }
+            }
+        }
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (dist[i][0] == -1) {
+                ans[i] = dist[i][1];
+            } else if (dist[i][1] == -1) {
+                ans[i] = dist[i][0];
+            } else {
+                ans[i] = Math.min(dist[i][0], dist[i][1]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
