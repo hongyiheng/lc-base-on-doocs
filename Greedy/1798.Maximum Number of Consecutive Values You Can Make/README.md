@@ -68,7 +68,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getMaximumConsecutive(self, coins: List[int]) -> int:
+        ans = 1
+        coins.sort()
+        for v in coins:
+            if v > ans:
+                break
+            ans += v
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +84,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int getMaximumConsecutive(int[] coins) {
+        int ans = 1;
+        Arrays.sort(coins);
+        for (int v : coins) {
+            if (v > ans) {
+                break;
+            }
+            ans += v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
