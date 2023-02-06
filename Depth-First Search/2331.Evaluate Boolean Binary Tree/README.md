@@ -68,7 +68,22 @@ OR 运算节点的值为 True OR False = True 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def evaluateTree(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        l, r = self.evaluateTree(root.left), self.evaluateTree(root.right)
+        if root.val == 2:
+            return l or r
+        elif root.val == 3:
+            return l and r
+        return True if root.val == 1 else False
 ```
 
 ### **Java**
@@ -76,7 +91,35 @@ OR 运算节点的值为 True OR False = True 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean evaluateTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean l = evaluateTree(root.left), r = evaluateTree(root.right);
+        if (root.val == 2) {
+            return l || r;
+        } else if (root.val == 3) {
+            return l && r;
+        }
+        return root.val == 1 ? true : false;
+    }
+}
 ```
 
 ### **...**
