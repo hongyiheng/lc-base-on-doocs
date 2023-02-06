@@ -75,7 +75,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfWeeks(self, milestones: List[int]) -> int:
+        s = sum(milestones)
+        mx = max(milestones)
+        if s - mx >= mx - 1:
+            return s
+        return (s - mx) * 2 + 1
 ```
 
 ### **Java**
@@ -83,7 +89,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long numberOfWeeks(int[] milestones) {
+        long s = 0, ans = 0, mx = 0;
+        for (int v : milestones) {
+            s += v;
+            mx = Math.max(mx, v);
+        }
+        if (s - mx >= mx - 1) {
+            return s;
+        }
+        return (s - mx) * 2 + 1;
+    }
+}
 ```
 
 ### **...**
