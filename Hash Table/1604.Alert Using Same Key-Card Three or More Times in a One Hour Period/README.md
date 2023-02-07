@@ -73,7 +73,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def alertNames(self, keyName: List[str], keyTime: List[str]) -> List[str]:
+        t = [list() for _ in range(24 * 60)]
+        for name, time in zip(keyName, keyTime):
+            m = int(time[:2]) * 60 + int(time[3:])
+            t[m].append(name)
+        cnt = defaultdict(int)
+        ans = list()
+        l = r = 0
+        while r < 24 * 60:
+            if r - l > 60:
+                for name in t[l]:
+                    cnt[name] -= 1
+                l += 1
+            for name in t[r]:
+                cnt[name] += 1
+                if cnt[name] >= 3:
+                    ans.append(name)
+                    cnt[name] = -0x3f3f3f3f
+            r += 1
+        ans.sort()
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +102,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> alertNames(String[] keyName, String[] keyTime) {
+        List<String>[] t = new ArrayList[24 * 60];
+        for (int i = 0; i < keyName.length; i++) {
+            String[] time = keyTime[i].split(":");
+            int h = Integer.parseInt(time[0]), m = Integer.parseInt(time[1]);
+            int idx = h * 60 + m;
+            if (t[idx] == null) {
+                t[idx] = new ArrayList<>();
+            }
+            t[idx].add(keyName[i]);
+        }
+        Map<String, Integer> cnt = new HashMap<>();
+        List<String> ans = new ArrayList<>();
+        int l = 0, r = 0;
+        while (r < 24 * 60) {
+            if (r - l > 60) {
+                if (t[l] != null) {
+                    for (String name : t[l]) {
+                        cnt.put(name, cnt.get(name) - 1);
+                    }
+                }
+                l++;
+            }
+            if (t[r] != null) {
+                for (String name : t[r]) {
+                    cnt.put(name, cnt.getOrDefault(name, 0) + 1);
+                    if (cnt.get(name) == 3) {
+                        ans.add(name);
+                        cnt.put(name, -0x3f3f3f3f);
+                    }
+                }
+            }
+            r++;
+        }
+        Collections.sort(ans);
+        return ans;
+    }
+}
 ```
 
 ### **...**
