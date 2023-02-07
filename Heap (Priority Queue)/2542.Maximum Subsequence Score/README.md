@@ -65,7 +65,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        arr = [[a, b] for a, b in zip(nums1, nums2)]
+        arr.sort(key=lambda x: -x[1])
+        q = [v[0] for v in arr[:k]]
+        heapq.heapify(q)
+        s = sum(q)
+        ans = s * arr[k - 1][1]
+        for i in range(k, len(nums1)):
+            v = arr[i][0]
+            if q and v > q[0]:
+                heapq.heappush(q, v)
+                s -= heapq.heappop(q)
+                s += v
+                ans = max(ans, s * arr[i][1])
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +88,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maxScore(int[] nums1, int[] nums2, int k) {
+        int n = nums1.length;
+        int[][] arr = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            arr[i][0] = nums1[i];
+            arr[i][1] = nums2[i];
+        }
+        Arrays.sort(arr, (a, b) -> b[1] - a[1]);
+        long s = 0;
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int i = 0; i < k; i++) {
+            q.add(arr[i][0]);
+            s += arr[i][0];
+        }
+        long ans = s * arr[k - 1][1];
+        for (int i = k; i < n; i++) {
+            int v = arr[i][0];
+            if (!q.isEmpty() && v > q.peek()) {
+                s -= q.poll();
+                q.add(v);
+                s += v;
+                ans = Math.max(ans, s * arr[i][1]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
