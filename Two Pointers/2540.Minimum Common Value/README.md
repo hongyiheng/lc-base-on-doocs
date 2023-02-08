@@ -48,7 +48,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getCommon(self, nums1: List[int], nums2: List[int]) -> int:
+        i = j = 0
+        m, n = len(nums1), len(nums2)
+        while i < m and j < n:
+            if nums1[i] < nums2[j]:
+                i += 1
+            elif nums1[i] > nums2[j]:
+                j += 1
+            else:
+                return nums1[i]
+        return -1
 ```
 
 ### **Java**
@@ -56,7 +67,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+        int i = 0, j = 0, m = nums1.length, n = nums2.length;
+        while (i < m && j < n) {
+            if (nums1[i] < nums2[j]) {
+                i++;
+            } else if (nums1[i] > nums2[j]) {
+                j++;
+            } else {
+                return nums1[i];
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
