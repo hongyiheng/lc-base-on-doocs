@@ -57,7 +57,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        if k == 0:
+            return 0 if nums1 == nums2 else -1
+        diff = ans = 0
+        for a, b in zip(nums1, nums2):
+            if abs(a - b) % k:
+                return -1
+            if a - b > 0:
+                ans += (a - b) // k
+            diff += a - b
+        return ans if diff == 0 else -1
 ```
 
 ### **Java**
@@ -65,7 +76,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minOperations(int[] nums1, int[] nums2, int k) {
+        int n = nums1.length;
+        if (k == 0) {
+            for (int i = 0; i < n; i++) {
+                if (nums1[i] != nums2[i]) {
+                    return -1;
+                }
+            }
+            return 0;
+        }
+        long ans = 0, diff = 0;
+        for (int i = 0; i < n; i++) {
+            if (Math.abs(nums1[i] - nums2[i]) % k != 0) {
+                return -1;
+            }
+            if (nums1[i] - nums2[i] > 0) {
+                ans += (nums1[i] - nums2[i]) / k;
+            }
+            diff += nums1[i] - nums2[i];
+        }
+        return diff == 0 ? ans : -1;
+    }
+}
 ```
 
 ### **...**
