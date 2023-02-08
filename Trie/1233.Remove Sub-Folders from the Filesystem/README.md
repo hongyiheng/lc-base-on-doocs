@@ -68,7 +68,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.children = [None] * 27
+        self.end = False
 
+class Solution:
+    def removeSubfolders(self, folder: List[str]) -> List[str]:
+        def find_and_save(s):
+            son = False
+            r = root
+            for i, c in enumerate(s):
+                idx = 26 if c == '/' else ord(c) - ord('a')
+                if not r.children[idx]:
+                    r.children[idx] = Node()
+                if r.children[idx].end and s[i + 1] == '/':
+                    son = True
+                r = r.children[idx]
+            r.end = True
+            return son
+
+        root = Node()
+        folder.sort(key=lambda x: len(x))
+        ans = list()
+        for s in folder:
+            is_son = find_and_save(s[1:])
+            if not is_son:
+                ans.append(s)
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +103,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    class Node {
+        private Node[] children;
+        private boolean end;
 
+        public Node() {
+            children = new Node[27];
+            end = false;
+        }
+    }
+
+    Node root = new Node();
+
+    public List<String> removeSubfolders(String[] folder) {
+        Arrays.sort(folder, Comparator.comparingInt(String::length));
+        List<String> ans = new ArrayList<>();
+        for (String s :folder) {
+            boolean son = findAndSave(s);
+            if (!son) {
+                ans.add(s);
+            }
+        }
+        return ans;
+    }
+
+    public boolean findAndSave(String s) {
+        boolean son = false;
+        Node r = root;
+        for (int i = 0; i < s.length(); i++) {
+            int idx = '/' == s.charAt(i) ? 26 : s.charAt(i) - 'a';
+            if (r.children[idx] == null) {
+                r.children[idx] = new Node();
+            }
+            if (r.children[idx].end && s.charAt(i + 1) == '/') {
+                son = true;
+            }
+            r = r.children[idx];
+        }
+        r.end = true;
+        return son;
+    }
+}
 ```
 
 ### **...**
