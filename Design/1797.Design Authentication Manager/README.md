@@ -67,7 +67,36 @@ authenticationManager.<code>countUnexpiredTokens</code>(15); // tokenId 为 "bbb
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class AuthenticationManager:
 
+    def __init__(self, timeToLive: int):
+        self.t = timeToLive
+        self.mp = dict()
+
+
+    def generate(self, tokenId: str, currentTime: int) -> None:
+        self.mp[tokenId] = currentTime + self.t
+
+
+    def renew(self, tokenId: str, currentTime: int) -> None:
+        if self.mp.get(tokenId, -1) > currentTime:
+            self.mp[tokenId] = currentTime + self.t
+
+
+    def countUnexpiredTokens(self, currentTime: int) -> int:
+        ans = 0
+        for v in self.mp.values():
+            if v > currentTime:
+                ans += 1
+        return ans
+
+
+
+# Your AuthenticationManager object will be instantiated and called as such:
+# obj = AuthenticationManager(timeToLive)
+# obj.generate(tokenId,currentTime)
+# obj.renew(tokenId,currentTime)
+# param_3 = obj.countUnexpiredTokens(currentTime)
 ```
 
 ### **Java**
@@ -75,7 +104,44 @@ authenticationManager.<code>countUnexpiredTokens</code>(15); // tokenId 为 "bbb
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class AuthenticationManager {
 
+    Map<String, Long> mp;
+    int t;
+
+    public AuthenticationManager(int timeToLive) {
+        mp = new HashMap<>();
+        t = timeToLive;
+    }
+    
+    public void generate(String tokenId, int currentTime) {
+        mp.put(tokenId, (long)currentTime + t);
+    }
+    
+    public void renew(String tokenId, int currentTime) {
+        if (mp.getOrDefault(tokenId, -1L) > currentTime) {
+            mp.put(tokenId, (long)currentTime + t);
+        }
+    }
+    
+    public int countUnexpiredTokens(int currentTime) {
+        int ans = 0;
+        for (long v : mp.values()) {
+            if (v > currentTime) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your AuthenticationManager object will be instantiated and called as such:
+ * AuthenticationManager obj = new AuthenticationManager(timeToLive);
+ * obj.generate(tokenId,currentTime);
+ * obj.renew(tokenId,currentTime);
+ * int param_3 = obj.countUnexpiredTokens(currentTime);
+ */
 ```
 
 ### **...**
