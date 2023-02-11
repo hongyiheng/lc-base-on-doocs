@@ -66,7 +66,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def fillCups(self, amount: List[int]) -> int:
+        ans = 0
+        while amount[0] and amount[1] and amount[2]:
+            amount.sort()
+            amount[2] -= 1
+            amount[0] -= 1
+            ans += 1
+        return ans + max(amount)
 ```
 
 ### **Java**
@@ -74,7 +82,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int fillCups(int[] amount) {
+        int ans = 0;
+        while (amount[0] > 0 && amount[1] > 0 && amount[2] > 0) {
+            Arrays.sort(amount);
+            amount[2]--;
+            amount[0]--;
+            ans++;
+        }
+        Arrays.sort(amount);
+        return ans + Math.max(amount[1], amount[2]);
+    }
+}
 ```
 
 ### **...**
