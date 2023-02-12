@@ -60,7 +60,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        ans = ListNode()
+        tmp = ans
+        cur = 0
+        while head:
+            if head.val == 0 and cur:
+                tmp.next = ListNode(cur)
+                tmp = tmp.next
+                cur = 0
+            cur += head.val
+            head = head.next
+        return ans.next
 ```
 
 ### **Java**
@@ -68,7 +85,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+        ListNode ans = new ListNode();
+        ListNode tmp = ans;
+        int cur = 0;
+        while (head != null) {
+            if (head.val == 0 && cur > 0) {
+                tmp.next = new ListNode(cur);
+                tmp = tmp.next;
+                cur = 0;
+            }
+            cur += head.val;
+            head = head.next;
+        }
+        return ans.next;
+    }
+}
 ```
 
 ### **...**
