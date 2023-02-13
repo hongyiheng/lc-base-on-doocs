@@ -71,7 +71,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def balancedString(self, s: str) -> int:
+        def check(cnt, cur):
+            nonlocal t
+            ans = True
+            for a, b in zip(cnt, cur):
+                ans = ans and (a - t <= 0 or b >= a - t)
+            return ans
 
+        mp = {'Q': 0, 'W':1, 'E':2, 'R': 3}
+        n, t = len(s), len(s) // 4
+        cnt = [0] * 4
+        for c in s:
+            cnt[mp[c]] += 1
+        cur = [0] * 4
+        if check(cnt, cur):
+            return 0
+        ans = 0x3f3f3f3f
+        l = r = 0
+        while r < n:
+            cur[mp[s[r]]] += 1
+            while l <= r and check(cnt, cur):
+                ans = min(ans, r - l + 1)
+                cur[mp[s[l]]] -= 1
+                l += 1
+            r += 1
+        check(cnt, cur)
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +106,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Character, Integer> mp = new HashMap<>();
+    int t = 0;
+
+    public int balancedString(String s) {
+        mp.put('Q', 0);
+        mp.put('W', 1);
+        mp.put('E', 2);
+        mp.put('R', 3);
+        
+        int n = s.length();
+        t = n / 4;
+        int[] cnt = new int[4];
+        for (int i = 0; i < n; i++) {
+            cnt[mp.get(s.charAt(i))]++;
+        }
+        int[] cur = new int[4];
+        if (check(cnt, cur)) {
+            return 0;
+        }
+        int ans = n;
+        int l = 0, r = 0;
+        while (r < n) {
+            cur[mp.get(s.charAt(r))]++;
+            while (l <= r && check(cnt, cur)) {
+                ans = Math.min(ans, r - l + 1);
+                cur[mp.get(s.charAt(l++))]--;
+            }
+            r++;
+        }
+        return ans;
+    }
+    
+    public boolean check(int[] cnt, int[] cur) {
+        boolean ans = true;
+        for (int i = 0; i < 4; i++) {
+            ans &= (cnt[i] < t || cur[i] >= cnt[i] - t);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
