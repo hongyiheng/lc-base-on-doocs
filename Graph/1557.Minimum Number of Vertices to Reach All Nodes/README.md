@@ -55,7 +55,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+        vis = set()
+        for _, v in edges:
+            vis.add(v)
+        ans = []
+        for i in range(n):
+            if i not in vis:
+                ans.append(i)
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +72,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
+        Set<Integer> vis = new HashSet();
+        for (List<Integer> e : edges) {
+            int v = e.get(1);
+            vis.add(v);
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (!vis.contains(i)) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
