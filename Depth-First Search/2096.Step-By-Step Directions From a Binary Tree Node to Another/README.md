@@ -61,7 +61,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
+        def dfs(root, t, s):
+            if not root:
+                return False
+            if root.val == t:
+                return True
+            s.append('L')
+            if dfs(root.left, t, s):
+                return True
+            s.pop()
+            s.append('R')
+            if dfs(root.right, t, s):
+                return True
+            s.pop()
+            return False
+        
+        s_path = []
+        dfs(root, startValue, s_path)
+        t_path = []
+        dfs(root, destValue, t_path)
+        while s_path and t_path and s_path[0] == t_path[0]:
+            s_path = s_path[1:]
+            t_path = t_path[1:]
+        return len(s_path) * 'U' + "".join(t_path)
 ```
 
 ### **Java**
@@ -69,7 +99,59 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public String getDirections(TreeNode root, int startValue, int destValue) {
+        StringBuilder sp = new StringBuilder(), tp = new StringBuilder();
+        dfs(root, startValue, sp);
+        dfs(root, destValue, tp);
+        String s = sp.toString(), t = tp.toString();
+        while (s.length() > 0 && t.length() > 0 && s.charAt(0) == t.charAt(0)) {
+            s = s.substring(1);
+            t = t.substring(1);
+        }
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            ans.append("U");
+        }
+        ans.append(t);
+        return ans.toString();
+    }
 
+    public boolean dfs(TreeNode root, int t, StringBuilder s) {
+        if (root == null) {
+            return false;
+        }
+        if (root.val == t) {
+            return true;
+        }
+        s.append("L");
+        if (dfs(root.left, t, s)) {
+            return true;
+        }
+        s.deleteCharAt(s.length() - 1);
+        s.append("R");
+        if (dfs(root.right, t, s)) {
+            return true;
+        }
+        s.deleteCharAt(s.length() - 1);
+        return false;
+    }
+}
 ```
 
 ### **...**
