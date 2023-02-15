@@ -55,7 +55,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isGoodArray(self, nums: List[int]) -> bool:
+        return reduce(gcd, nums) == 1
 ```
 
 ### **Java**
@@ -63,7 +65,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean isGoodArray(int[] nums) {
+        int cur = nums[0];
+        for (int v : nums) {
+            cur = gcd(cur, v);
+            if (cur == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
 ```
 
 ### **...**
