@@ -62,7 +62,16 @@ nums[0] 和 nums[1] 形成一个数对，并从 nums 中移除，nums = [2] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfPairs(self, nums: List[int]) -> List[int]:
+        cnt = [0] * 110
+        for v in nums:
+            cnt[v] += 1
+        ans = [0, 0]
+        for i, v in enumerate(cnt):
+            ans[0] += v // 2
+            ans[1] += v % 2
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +79,20 @@ nums[0] 和 nums[1] 形成一个数对，并从 nums 中移除，nums = [2] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+        int[] cnt = new int[110];
+        for (int v : nums) {
+            cnt[v]++;
+        }
+        int[] ans = new int[2];
+        for (int i = 0; i < 110; i++) {
+            ans[0] += cnt[i] / 2;
+            ans[1] += cnt[i] % 2;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
