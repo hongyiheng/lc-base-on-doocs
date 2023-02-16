@@ -72,7 +72,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxPower(self, stations: List[int], r: int, k: int) -> int:
+        def check(arr, r, t, k):
+            nonlocal n
+            cur = sum(arr[:r + 1])
+            left, right = 0, r
+            for _ in range(n):
+                if cur < t:
+                    if t - cur > k:
+                        return False
+                    arr[min(right, n - 1)] += (t - cur)
+                    k -= (t - cur)
+                    cur = t
+                right += 1
+                if right < n:
+                    cur += arr[right]
+                if right - left + 1 > 2 * r + 1:
+                    cur -= arr[left]
+                    left += 1
+            return True
 
+        n = len(stations)
+        left, right = 0, 0x3f3f3f3f3f3f
+        while left < right:
+            mid = (left + right + 1) >> 1
+            if check(stations[::], r, mid, k):
+                left = mid
+            else:
+                right = mid - 1
+        return left
 ```
 
 ### **Java**
@@ -80,7 +109,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public long maxPower(int[] stations, int r, int k) {
+        long left = 0, right = 0x3f3f3f3f3fL;
+        while (left < right) {
+            long mid = (left + right + 1) >>> 1;
+            if (check(stations.clone(), r, k, mid)) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
 
+    public boolean check(int[] nums, int r, int k, long t) {
+        int n = nums.length;
+        long cur = 0;
+        for (int i = 0; i <= r; i++) {
+            cur += nums[i];
+        }
+        int left = 0, right = r;
+        for (int i = 0; i < n; i++) {
+            if (cur < t) {
+                long diff = t - cur;
+                if (diff > k) {
+                    return false;
+                }
+                nums[Math.min(right, n - 1)] += diff;
+                k -= diff;
+                cur = t;
+            }
+            if (++right < n) {
+                cur += nums[right];
+            }
+            if (right - left + 1 > 2 * r + 1) {
+                cur -= nums[left++];
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
