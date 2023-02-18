@@ -94,7 +94,6 @@ x=5, y=1 -> f(5, 1) = 5 * 1 = 5</pre>
 
 class Solution:
     def findSolution(self, customfunction: 'CustomFunction', z: int) -> List[List[int]]:
-        customfunction.f
         M = 1000
         ans = []
         for i in range(1, M + 1):
