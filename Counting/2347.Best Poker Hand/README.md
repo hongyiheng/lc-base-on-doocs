@@ -67,7 +67,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def bestHand(self, ranks: List[int], suits: List[str]) -> str:
+        c_cnt = [0] * 4
+        for c in suits:
+            c_cnt[ord(c) - ord('a')] += 1
+            if c_cnt[ord(c) - ord('a')] == 5:
+                return "Flush"
+        v_cnt = [0] * 14
+        for v in ranks:
+            v_cnt[v] += 1
+        mx = max(v_cnt)
+        if mx >= 3:
+            return "Three of a Kind"
+        if mx == 2:
+            return "Pair"
+        return "High Card"
 ```
 
 ### **Java**
@@ -75,7 +90,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String bestHand(int[] ranks, char[] suits) {
+        int[] cs = new int[5];
+        for (char c : suits){
+            if (++cs[c - 'a'] == 5) {
+                return "Flush";
+            }
+        }
+        int[] rs = new int[14];
+        int mx = 0;
+        for (int r : ranks) {
+            mx = Math.max(mx, ++rs[r]);
+        }
+        if (mx >= 3) {
+            return "Three of a Kind";
+        }
+        if (mx == 2) {
+            return "Pair";
+        }
+        return "High Card";
+    }
+}
 ```
 
 ### **...**
