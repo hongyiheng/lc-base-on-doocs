@@ -52,7 +52,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def circularPermutation(self, n: int, start: int) -> List[int]:
+        ans = []
+        for i in range(2 ** n):
+            ans.append(i ^ (i >> 1))
+        for i, v in enumerate(ans):
+            if v == start:
+                ans = ans[i:] + ans[:i]
+                break
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +69,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> circularPermutation(int n, int start) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < 1 << n; i++) {
+            ans.add(i ^ i >> 1);
+        }
+        int k = 0;
+        for (int i = 0; i < ans.size(); i++) {
+            if (ans.get(i) == start) {
+                k = i;
+                break;
+            }
+        }
+        Collections.rotate(ans, -k);
+        return ans;
+    }
+}
 ```
 
 ### **...**
