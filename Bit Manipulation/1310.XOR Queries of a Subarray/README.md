@@ -63,7 +63,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def xorQueries(self, arr: List[int], queries: List[List[int]]) -> List[int]:
+        n = len(arr)
+        pre = [0] * (n + 1)
+        for i in range(n):
+            pre[i + 1] = pre[i] ^ arr[i]
+        ans = []
+        for l, r in queries:
+            ans.append(pre[r + 1] ^ pre[l])
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +80,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        int n = arr.length;
+        int[] pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] ^ arr[i];
+        }
+        int[] ans = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int l = queries[i][0], r = queries[i][1];
+            ans[i] = pre[r + 1] ^ pre[l];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
