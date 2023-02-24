@@ -43,7 +43,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumCardPickup(self, cards: List[int]) -> int:
+        n = len(cards)
+        ans = n + 1
+        mp = dict()
+        for i, v in enumerate(cards):
+            if v in mp:
+                ans = min(ans, i - mp[v] + 1)
+            mp[v] = i
+        return -1 if ans == n + 1 else ans
 ```
 
 ### **Java**
@@ -51,7 +60,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumCardPickup(int[] cards) {
+        Map<Integer, Integer> mp = new HashMap<>();
+        int n = cards.length, ans = cards.length + 1;
+        for (int i = 0; i < n; i++) {
+            if (mp.containsKey(cards[i])) {
+                ans = Math.min(ans, i - mp.get(cards[i]) + 1);
+            }
+            mp.put(cards[i], i);
+        }
+        return ans == n + 1 ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
