@@ -54,7 +54,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        return len(set([v for v in nums if v > 0]))
 ```
 
 ### **Java**
@@ -62,7 +64,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperations(int[] nums) {
+        boolean[] s = new boolean[101];
+        for (int v : nums) {
+            s[v] = true;
+        }
+        int ans = 0;
+        for (int i = 1; i < 101; i++) {
+            ans += s[i] ? 1 : 0;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
