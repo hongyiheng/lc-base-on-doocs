@@ -65,7 +65,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumSwap(self, s1: str, s2: str) -> int:
+        cnt = [0, 0]
+        for a, b in zip(s1, s2):
+            if a != b:
+                cnt[ord(a) % 2] += 1
+        d = cnt[0] + cnt[1]
+        return -1 if d % 2 else d // 2 + cnt[0] % 2
 ```
 
 ### **Java**
@@ -73,7 +80,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumSwap(String s1, String s2) {
+        int n = s1.length();
+        int[] cnt = new int[]{0, 0};
+        for (int i = 0; i < n; i++) {
+            if (s1.charAt(i) != s2.charAt(i)) {
+                cnt[s1.charAt(i) % 2]++;
+            }
+        }
+        int d = cnt[0] + cnt[1];
+        return d % 2 != 0 ? -1 : d / 2 + cnt[0] % 2;
+    }
+}
 ```
 
 ### **...**
