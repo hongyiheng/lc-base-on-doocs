@@ -75,7 +75,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        ans = [-1] * n
+        s = 0
+        for i in range(n):
+            s += nums[i]
+            if i >= 2 * k:
+                ans[i - k] = s // (2 * k + 1)
+                s -= nums[i - 2 * k]
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +93,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] getAverages(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        long s = 0;
+        for (int i = 0; i < n; i++) {
+            s += nums[i];
+            if (i >= 2 * k) {
+                ans[i - k] = (int)(s / (2 * k + 1));
+                s -= nums[i - 2 * k];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
