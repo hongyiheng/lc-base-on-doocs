@@ -73,7 +73,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
+        n = len(words)
+        ws = [[0] * 26 for _ in range(n)]
+        sc = [0] * 26
+        for j, w in enumerate(words):
+            for c in w:
+                ws[j][ord(c) - ord('a')] += 1
+                sc[j] += score[ord(c) - ord('a')]
+        cnt = [0] * 26
+        for c in letters:
+            cnt[ord(c) - ord('a')] += 1
+        ans = 0
+        for i in range(1 << n):
+            tmp = cnt[:]
+            s = 0
+            flag = True
+            for j in range(n):
+                if i >> j & 1 and flag:
+                    s += sc[j]
+                    for k in range(26):
+                        tmp[k] -= ws[j][k]
+                        if tmp[k] < 0:
+                            flag = False
+                            break
+            if flag:
+                ans = max(ans, s)
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +108,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxScoreWords(String[] words, char[] letters, int[] score) {
+        int n = words.length;
+        int[][] ws = new int[n][26];
+        int[] sc = new int[n];
+        for (int i = 0; i < n; i++) {
+            for (char c : words[i].toCharArray()) {
+                ws[i][c - 'a']++;
+                sc[i] += score[c - 'a'];
+            }
+        }
+        int[] cnt = new int[26];
+        for (char c : letters) {
+            cnt[c - 'a']++;
+        }
+        int ans = 0;
+        for (int i = 0; i < 1 << n; i++) {
+            int[] tmp = cnt.clone();
+            int s = 0;
+            boolean flag = true;
+            for (int j = 0; j < n; j++) {
+                if ((i >> j & 1) == 1 && flag) {
+                    s += sc[j];
+                    for (int k = 0; k < 26; k++) {
+                        tmp[k] -= ws[j][k];
+                        if (tmp[k] < 0) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (flag) {
+                ans = Math.max(ans, s);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
