@@ -46,7 +46,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        mp = defaultdict(list)
+        for w in words:
+            mp[len(w)].append(w)
+        ans = 0
 
+        @cache
+        def dfs(cur):
+            nonlocal ans
+            cnt = 1
+            for w in mp[len(cur) + 1]:
+                for i in range(len(w)):
+                    if w[:i] + w[i + 1:] == cur:
+                        cnt = max(cnt, dfs(w) + 1)
+            return cnt
+
+        for w in words:
+            ans = max(ans, dfs(w))
+        return ans
 ```
 
 ### **Java**
@@ -54,7 +73,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Integer, List<String>> ws;
+
+    Map<String, Integer> f;
+
+    public int dfs(String cur) {
+        if (f.containsKey(cur)) {
+            return f.get(cur);
+        }
+        int ans = 1;
+        for (String w : ws.getOrDefault(cur.length() + 1, new ArrayList<>())) {
+            for (int i = 0; i < w.length(); i++) {
+                if ((w.substring(0, i) + w.substring(i + 1)).equals(cur)) {
+                    ans = Math.max(ans, dfs(w) + 1);
+                }
+            }
+        }
+        f.put(cur, ans);
+        return ans;
+    }
+
+    public int longestStrChain(String[] words) {
+        ws = new HashMap<>();
+        f = new HashMap<>();
+        for (String w : words) {
+            ws.computeIfAbsent(w.length(), x -> new ArrayList<>()).add(w);
+        }
+        int ans = 0;
+        for (String w : words) {
+            ans = Math.max(ans, dfs(w));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
