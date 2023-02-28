@@ -76,7 +76,18 @@ value = 7 的物品在 items2 中 weight = 1 ，总重量为 1 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mergeSimilarItems(self, items1: List[List[int]], items2: List[List[int]]) -> List[List[int]]:
+        cnt = [0] * 1010
+        for v, w in items1:
+            cnt[v] += w
+        for v, w in items2:
+            cnt[v] += w
+        ans = []
+        for v, w in enumerate(cnt):
+            if w:
+                ans.append([v, w])
+        return ans
 ```
 
 ### **Java**
@@ -84,7 +95,24 @@ value = 7 的物品在 items2 中 weight = 1 ，总重量为 1 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> mergeSimilarItems(int[][] items1, int[][] items2) {
+        int[] cnt = new int[1010];
+        for (int[] e : items1) {
+            cnt[e[0]] += e[1];
+        }
+        for (int[] e : items2) {
+            cnt[e[0]] += e[1];
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < 1010; i++) {
+            if (cnt[i] > 0) {
+                ans.add(Arrays.asList(i, cnt[i]));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
