@@ -52,7 +52,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countDigits(self, num: int) -> int:
+        ans, v = 0, num
+        while v:
+            if num % (v % 10) == 0:
+                ans += 1
+            v //= 10
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +67,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countDigits(int num) {
+        int ans = 0, v = num;
+        while (v > 0) {
+            if (num % (v % 10) == 0) {
+                ans++;
+            }
+            v /= 10;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
