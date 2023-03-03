@@ -65,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeStars(self, s: str) -> str:
+        q = deque()
+        for c in s:
+            if c == '*':
+                q.pop()
+            else:
+                q.append(c)
+        return "".join(q)
 ```
 
 ### **Java**
@@ -73,7 +81,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String removeStars(String s) {
+        Deque<String> q = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {
+            if (c == '*') {
+                q.pollLast();
+            } else {
+                q.addLast(String.valueOf(c));
+            }
+        }
+        return String.join("", q);
+    }
+}
 ```
 
 ### **...**
