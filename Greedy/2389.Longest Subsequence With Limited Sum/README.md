@@ -53,7 +53,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+        nums.sort()
+        q = [[v, i] for i, v in enumerate(queries)]
+        q.sort()
+        ans = [0] * len(queries)
+        idx = cur = k = 0
+        for v, i in q:
+            while idx < len(nums) and cur + nums[idx] <= v:
+                cur += nums[idx]
+                idx += 1
+                k += 1
+            ans[i] = k
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +74,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] answerQueries(int[] nums, int[] queries) {
+        int n = nums.length, m = queries.length;
+        Arrays.sort(nums);
+        int[][] q = new int[m][2];
+        for (int i = 0; i < m; i++) {
+            q[i][0] = queries[i];
+            q[i][1] = i;
+        }
+        Arrays.sort(q, (a, b) -> a[0] - b[0]);
+        int idx = 0, cur = 0, k = 0;
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            int v = q[i][0], j = q[i][1];
+            while (idx < n && cur + nums[idx] <= v) {
+                cur += nums[idx++];
+                k++;
+            }
+            ans[j] = k;
+        }
+        return ans;    
+    }
+}
 ```
 
 ### **...**
