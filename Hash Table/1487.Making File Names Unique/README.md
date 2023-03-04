@@ -78,7 +78,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getFolderNames(self, names: List[str]) -> List[str]:
+        mp = dict()
+        vis = set()
+        ans = []
+        for v in names:
+            s = v
+            if v in vis:
+                idx = mp.get(v, 1)
+                s = v + "(" + str(idx) + ")"
+                while s in mp:
+                    idx += 1
+                    s = v + "(" + str(idx) + ")"
+                ans.append(s)
+                mp[v] = idx + 1
+            else:
+                ans.append(s)
+                mp[v] = 1
+            vis.add(s)
+        return ans
 ```
 
 ### **Java**
@@ -86,7 +105,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String[] getFolderNames(String[] names) {
+        int n = names.length;
+        Set<String> vis = new HashSet<>();
+        Map<String, Integer> mp = new HashMap<>();
+        String[] ans = new String[n];
+        for (int i = 0; i < n; i++) {
+            String s = names[i];
+            if (vis.contains(s)) {
+                int idx = mp.getOrDefault(s, 1);
+                while (vis.contains(s + "(" + idx +")")) {
+                    idx++;
+                }
+                s += "(" + idx +")";
+                mp.put(s, idx + 1);
+            } else {
+                mp.put(s, 1);
+            }
+            ans[i] = s;
+            vis.add(s);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
