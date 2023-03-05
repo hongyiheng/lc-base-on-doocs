@@ -58,7 +58,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def divisibilityArray(self, word: str, m: int) -> List[int]:
+        cur = 0
+        ans = []
+        for c in word:
+            cur = (cur * 10 + int(c)) % m
+            ans.append(0 if cur else 1)
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +73,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] divisibilityArray(String word, int m) {
+        int n = word.length();
+        int[] ans = new int[n];
+        long cur = 0;
+        for (int i = 0; i < n; i++) {
+            char c = word.charAt(i);
+            cur = (cur * 10 + c - '0') % m;
+            ans[i] = cur == 0 ? 1 : 0;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
