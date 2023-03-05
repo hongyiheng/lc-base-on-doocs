@@ -97,7 +97,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperationsMaxProfit(self, customers: List[int], boardingCost: int, runningCost: int) -> int:
+        i, n = 0, len(customers)
+        up, w, mx, ans = 0, 0, 0, -1
+        while i < n or w:
+            if i < n:
+                w += customers[i]
+            i += 1
+            up += min(4, w)
+            w -= min(4, w)
+            cur = up * boardingCost - i * runningCost
+            if cur > mx:
+                mx = cur
+                ans = i
+        return ans
 ```
 
 ### **Java**
@@ -105,7 +119,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperationsMaxProfit(int[] customers, int boardingCost, int runningCost) {
+        int i = 0, n = customers.length;
+        int up = 0, w = 0, mx = 0, ans = -1;
+        while (i < n || w > 0) {
+            if (i < n) {
+                w += customers[i];
+            }
+            i++;
+            up += Math.min(4, w);
+            w -= Math.min(4, w);
+            int cur = up * boardingCost - i * runningCost;
+            if (cur > mx) {
+                mx = cur;
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
