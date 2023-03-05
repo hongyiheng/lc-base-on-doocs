@@ -61,7 +61,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def leftRigthDifference(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        s = 0
+        for i in range(n):
+            pre[i + 1] = pre[i] + nums[i]
+            s += nums[i]
+        ans = [0] * n
+        for i in range(n):
+            ans[i] = abs(pre[i] - (s - pre[i + 1]))
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +80,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] leftRigthDifference(int[] nums) {
+        int n = nums.length;
+        int[] pre = new int[n + 1];
+        int s = 0;
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+            s += nums[i];
+        }
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = Math.abs(pre[i] - (s - pre[i + 1]));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
