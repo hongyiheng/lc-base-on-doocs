@@ -52,7 +52,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+        n = len(s)
+        cnt = [0] * (n + 1)
+        for l, r, d in shifts:
+            cnt[l] += 1 if d == 1 else -1
+            cnt[r + 1] -= 1 if d == 1 else -1
+        cs = list(s)
+        v = 0
+        for i in range(n):
+            v = v + cnt[i]
+            if v < 0 or v > 26:
+                v = (v + 26) % 26
+            cur = ord(cs[i]) + v
+            cs[i] = chr(cur - 26) if cur > ord('z') else chr(cur)
+        return "".join(cs)
 ```
 
 ### **Java**
@@ -60,7 +75,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String shiftingLetters(String s, int[][] shifts) {
+        int n = s.length();
+        int[] cnt = new int[n + 1];
+        for (int[] sh : shifts) {
+            cnt[sh[0]] += sh[2] == 1 ? 1 : -1;
+            cnt[sh[1] + 1] -= sh[2] == 1 ? 1 : -1;
+        }
+        int v = 0;
+        char[] cs = s.toCharArray();
+        for (int i = 0; i < n; i++) {
+            v += cnt[i];
+            while (v < 0) {
+                v += 26;
+            }
+            int cur = (cs[i] - 'a' + v) % 26;
+            cs[i] = (char) (cur + 'a');
+        }
+        return new String(cs);
+    }
+}
 ```
 
 ### **...**
