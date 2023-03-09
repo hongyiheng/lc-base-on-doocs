@@ -61,7 +61,22 @@ s 中没有 "01" 存在，整个过程花费 0 秒。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def secondsToRemoveOccurrences(self, s: str) -> int:
+        n, ans = len(s), 0
+        cs = list(s)
+        while s.find('01') != -1:
+            ans += 1
+            i = 0
+            while i < n - 1:
+                if cs[i] == '0' and cs[i + 1] == '1':
+                    cs[i] = '1'
+                    cs[i + 1] = '0'
+                    i += 2
+                else:
+                    i += 1
+            s = "".join(cs)
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +84,27 @@ s 中没有 "01" 存在，整个过程花费 0 秒。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int secondsToRemoveOccurrences(String s) {
+        char[] cs = s.toCharArray();
+        int n = s.length(), ans = 0;
+        while (s.indexOf("01") != -1) {
+            ans++;
+            int i = 0;
+            while (i < n - 1) {
+                if (cs[i] == '0' && cs[i + 1] == '1') {
+                    cs[i] = '1';
+                    cs[i + 1] = '0';
+                    i += 2;
+                } else {
+                    i++;
+                }
+            }
+            s = new String(cs);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
