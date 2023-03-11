@@ -69,7 +69,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumNumbers(self, num: int, k: int) -> int:
+        if num == 0:
+            return 0
+        for i in range(1, 11):
+            if i * k % 10 == num % 10 and i * k <= num:
+                return i
+        return -1
 ```
 
 ### **Java**
@@ -77,7 +84,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumNumbers(int num, int k) {
+        if (num == 0) {
+            return 0;
+        }
+        for (int i = 1; i < 11; i++) {
+            if (i * k % 10 == num % 10 && i * k <= num) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
