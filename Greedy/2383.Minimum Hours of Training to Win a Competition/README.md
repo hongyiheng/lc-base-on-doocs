@@ -65,7 +65,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minNumberOfHours(self, initialEnergy: int, initialExperience: int, energy: List[int], experience: List[int]) -> int:
+        ans = 0
+        for v in energy:
+            if v >= initialEnergy:
+                d = v - initialEnergy + 1
+                initialEnergy += d
+                ans += d
+            initialEnergy -= v
 
+        for v in experience:
+            if v >= initialExperience:
+                d = v - initialExperience + 1
+                initialExperience += d
+                ans += d
+            initialExperience += v
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +89,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience) {
+        int ans = 0;
+        for (int v : energy) {
+            if (v >= initialEnergy) {
+                int d = v - initialEnergy + 1;
+                ans += d;
+                initialEnergy += d;
+            }
+            initialEnergy -= v;
+        }
+        for (int v : experience) {
+            if (v >= initialExperience) {
+                int d = v - initialExperience + 1;
+                ans += d;
+                initialExperience += d;
+            }
+            initialExperience += v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
