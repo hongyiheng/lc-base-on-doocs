@@ -60,7 +60,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        n = len(graph)
+        cnt = [0] * n
+        g = defaultdict(list)
+        for u in range(n):
+            for v in graph[u]:
+                g[v].append(u)
+                cnt[u] += 1
+        q = deque()
+        for i in range(n):
+            if cnt[i] == 0:
+                q.append(i)
+        while q:
+            u = q.popleft()
+            for v in g[u]:
+                cnt[v] -= 1
+                if cnt[v] == 0:
+                    q.append(v)
+        ans = []
+        for i in range(n):
+            if cnt[i] == 0:
+                ans.append(i)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +91,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int n = graph.length;
+        int[] cnt = new int[n];
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        for (int u = 0; u < n; u++) {
+            for (int v : graph[u]) {
+                g.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
+                cnt[u]++;
+            }
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            if (cnt[i] == 0) {
+                q.addLast(i);
+            }
+        }
+        while (!q.isEmpty()) {
+            int u = q.removeFirst();
+            for (int v : g.getOrDefault(u, Collections.emptyList())) {
+                cnt[v]--;
+                if (cnt[v] == 0) {
+                    q.addLast(v);
+                }
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (cnt[i] == 0) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
