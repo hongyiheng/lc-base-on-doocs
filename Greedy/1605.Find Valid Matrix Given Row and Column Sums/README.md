@@ -84,7 +84,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def restoreMatrix(self, rowSum: List[int], colSum: List[int]) -> List[List[int]]:
+        m, n = len(rowSum), len(colSum)
+        ans = [[0] * n for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                ans[i][j] = min(rowSum[i], colSum[j])
+                rowSum[i] -= ans[i][j]
+                colSum[j] -= ans[i][j]
+        return ans
 ```
 
 ### **Java**
@@ -92,7 +101,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] restoreMatrix(int[] rowSum, int[] colSum) {
+        int m = rowSum.length, n = colSum.length;
+        int[][] ans = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                ans[i][j] = Math.min(rowSum[i], colSum[j]);
+                rowSum[i] -= ans[i][j];
+                colSum[j] -= ans[i][j];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
