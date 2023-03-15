@@ -69,7 +69,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        g = [set() for _ in range(n)]
+        for u, v in roads:
+            g[u].add(v)
+            g[v].add(u)
+        ans = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                v = len(g[i]) + len(g[j])
+                if i in g[j]:
+                    v -= 1
+                ans = max(ans, v)
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +90,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximalNetworkRank(int n, int[][] roads) {
+        Set[] g = new Set[n];
+        for (int i = 0; i < n; i++) {
+            g[i] = new HashSet<>();
+        }
+        for (int[] e : roads) {
+            g[e[0]].add(e[1]);
+            g[e[1]].add(e[0]);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int v = g[i].size() + g[j].size();
+                if (g[i].contains(j)) {
+                    v--;
+                }
+                ans = Math.max(ans, v);
+            }
+        }
+        return ans;    
+    }
+}
 ```
 
 ### **...**
