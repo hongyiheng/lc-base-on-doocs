@@ -56,7 +56,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def closestDivisors(self, num: int) -> List[int]:
+        mi = num + 1
+        ans = []
+        for i in range(1, int(math.sqrt(num + 2)) + 1):
+            if (num + 1) % i == 0 and abs(i - (num + 1) // i) < mi:
+                ans = [i, (num + 1) // i]
+                mi = abs(i - (num + 1) // i)
+            if (num + 2) % i == 0 and abs(i - (num + 2) // i) < mi:
+                ans = [i, (num + 2) // i]
+                mi = abs(i - (num + 2) // i)
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +75,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] closestDivisors(int num) {
+        int mi = num + 1;
+        int[] ans = new int[2];
+        for (int i = 1; i * i <= num + 2; i++) {
+            if ((num + 1) % i == 0) {
+                if (Math.abs(i - (num + 1) / i) < mi) {
+                    mi = Math.abs(i - (num + 1) / i);
+                    ans[0] = i;
+                    ans[1] = (num + 1) / i;
+                }
+            }
+            if ((num + 2) % i == 0) {
+                if (Math.abs(i - (num + 2) / i) < mi) {
+                    mi = Math.abs(i - (num + 2) / i);
+                    ans[0] = i;
+                    ans[1] = (num + 2) / i;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
