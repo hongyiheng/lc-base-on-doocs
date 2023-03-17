@@ -58,7 +58,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
+        def bit_cnt(x):
+            ans = 0
+            while x:
+                x -= x & - x
+                ans += 1
+            return ans
 
+        m, n = len(matrix), len(matrix[0])
+        row = [0] * m
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 1:
+                    row[i] |= (1 << j)
+        ans = 0
+        for i in range((1 << n) + 1):
+            if bit_cnt(i) != numSelect:
+                continue
+            cnt = 0
+            for r in row:
+                if r | i == i:
+                    cnt += 1
+            ans = max(cnt, ans)
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +90,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int bitCnt(int x) {
+        int ans = 0;
+        while (x > 0) {
+            x -= x & -x;
+            ans += 1;
+        }
+        return ans;
+    }
+    
+    public int maximumRows(int[][] matrix, int numSelect) {
+        int m = matrix.length, n = matrix[0].length;
+        int[] row = new int[m];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 1) {
+                    row[i] |= (1 << j);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < (1 << n) + 1; i++) {
+            if (bitCnt(i) != numSelect) {
+                continue;
+            }
+            int cnt = 0;
+            for (int r : row) {
+                if ((r | i) == i) {
+                    cnt++;
+                }
+            }
+            ans = Math.max(ans, cnt);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**

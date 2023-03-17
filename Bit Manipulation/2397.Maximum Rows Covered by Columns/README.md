@@ -60,34 +60,28 @@
 ```python
 class Solution:
     def maximumRows(self, matrix: List[List[int]], numSelect: int) -> int:
-        def cnt(x):
+        def bit_cnt(x):
             ans = 0
-            while x > 0:
-                x &= x - 1
+            while x:
+                x -= x & - x
                 ans += 1
             return ans
 
-        def cover(mask):
-            ans = 0
-            for s in rows:
-                if mask == (1 << n) - 1 or (mask | s) == mask:
-                    ans += 1
-            return ans
-
         m, n = len(matrix), len(matrix[0])
-        rows = [0] * m
+        row = [0] * m
         for i in range(m):
-            s = 0
             for j in range(n):
                 if matrix[i][j] == 1:
-                    s |= (1 << j)
-            rows[i] = s
-        s = 1 << n
+                    row[i] |= (1 << j)
         ans = 0
-        for i in range(s):
-            if cnt(i) != numSelect:
+        for i in range((1 << n) + 1):
+            if bit_cnt(i) != numSelect:
                 continue
-            ans = max(ans, cover(i))
+            cnt = 0
+            for r in row:
+                if r | i == i:
+                    cnt += 1
+            ans = max(cnt, ans)
         return ans
 ```
 
@@ -97,49 +91,37 @@ class Solution:
 
 ```java
 class Solution {
-    int[][] g;
-    int m, n;
-    int[] rows;
-
-    public int maximumRows(int[][] matrix, int numSelect) {
-        this.g = matrix;
-        m = matrix.length;
-        n = matrix[0].length;
-        rows = new int[m];
-        for (int i = 0; i < m; i++) {
-            int s = 0;
-            for (int j = 0; j < n; j++) {
-                if (g[i][j] != 0) {
-                    s |= (1 << j);
-                }
-            }
-            rows[i] = s;
-        }
-        int ans = 0;
-        for (int i = 0; i < (1 << n); i++) {
-            if (cnt(i) != numSelect) {
-                continue;
-            }
-            ans = Math.max(cover(i), ans);
-        }
-        return ans;
-    }
-
-    public int cover(int mask) {
-        int ans = 0;
-        for (int s : rows) {
-            if (mask == (1 << n) - 1 || (mask | s) == mask) {
-                ans++;
-            }
-        }
-        return ans;
-    }
-
-    public int cnt(int x) {
+    public int bitCnt(int x) {
         int ans = 0;
         while (x > 0) {
-            x &= x - 1;
-            ans++;
+            x -= x & -x;
+            ans += 1;
+        }
+        return ans;
+    }
+
+    public int maximumRows(int[][] matrix, int numSelect) {
+        int m = matrix.length, n = matrix[0].length;
+        int[] row = new int[m];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 1) {
+                    row[i] |= (1 << j);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < (1 << n) + 1; i++) {
+            if (bitCnt(i) != numSelect) {
+                continue;
+            }
+            int cnt = 0;
+            for (int r : row) {
+                if ((r | i) == i) {
+                    cnt++;
+                }
+            }
+            ans = Math.max(ans, cnt);
         }
         return ans;
     }
