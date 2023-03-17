@@ -75,7 +75,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def buildMatrix(self, k: int, rowConditions: List[List[int]], colConditions: List[List[int]]) -> List[List[int]]:
+        def topo_sort(k, arr):
+            ind = [0] * k
+            g = defaultdict(list)
+            for u, v in arr:
+                u, v = u - 1, v - 1
+                g[u].append(v)
+                ind[v] += 1
+            q = deque()
+            for i, v in enumerate(ind):
+                if v == 0:
+                    q.append(i)
+            ans = []
+            while q:
+                u = q.popleft()
+                ans.append(u)
+                for v in g[u]:
+                    ind[v] -= 1
+                    if ind[v] == 0:
+                        q.append(v)
+            return ans
 
+        row = topo_sort(k, rowConditions)
+        col = topo_sort(k, colConditions)
+        if len(row) < k or len(col) < k:
+            return []
+        pos = [0] * k
+        for i in range(k):
+            pos[col[i]] = i
+        ans = [[0] * k for _ in range(k)]
+        for i in range(k):
+            ans[i][pos[row[i]]] = row[i] + 1
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +116,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> topoSort(int k, int[][] arr) {
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        int[] ind = new int[k];
+        for (int[] e : arr) {
+            int u = e[0] - 1, v = e[1] - 1;
+            g.computeIfAbsent(u, x -> new ArrayList<>()).add(v);
+            ind[v]++;
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < k; i++) {
+            if (ind[i] == 0) {
+                q.add(i);
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        while (!q.isEmpty()) {
+            int u = q.pollFirst();
+            ans.add(u);
+            for (int v : g.getOrDefault(u, new ArrayList<>())) {
+                if (--ind[v] == 0) {
+                    q.add(v);
+                }
+            }
+        }
+        return ans;
+    }
+    
+    public int[][] buildMatrix(int k, int[][] rowConditions, int[][] colConditions) {
+        List<Integer> row = topoSort(k, rowConditions);
+        List<Integer> col = topoSort(k, colConditions);
+        if (row.size() != k || col.size() != k) {
+            return new int[][]{};
+        }
+        int[] pos = new int[k];
+        for (int i = 0; i < k; i++) {
+            pos[col.get(i)] = i;
+        }
+        int[][] ans = new int[k][k];
+        for (int i = 0; i < k; i++) {
+            ans[i][pos[row.get(i)]] = row.get(i) + 1;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
