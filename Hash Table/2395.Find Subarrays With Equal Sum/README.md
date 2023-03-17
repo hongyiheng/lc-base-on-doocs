@@ -55,7 +55,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findSubarrays(self, nums: List[int]) -> bool:
+        vis = set()
+        i, n = 0, len(nums)
+        while i + 1 < n:
+            s = nums[i] + nums[i + 1]
+            if s in vis:
+                return True
+            vis.add(s)
+            i += 1
+        return False
 ```
 
 ### **Java**
@@ -63,7 +73,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean findSubarrays(int[] nums) {
+        int n = nums.length;
+        Set<Integer> vis = new HashSet<>();
+        int i = 0;
+        while (i < n - 1) {
+            int s = nums[i] + nums[i + 1];
+            if (vis.contains(s)) {
+                return true;
+            }
+            vis.add(s);
+            i++;
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
