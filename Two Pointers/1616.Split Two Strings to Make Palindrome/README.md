@@ -73,7 +73,19 @@ b<sub>prefix</sub> = "jiz", b<sub>suffix</sub> = "alu"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def checkPalindromeFormation(self, a: str, b: str) -> bool:
+        def check(a, b):
+            l, r = 0, len(a) - 1
+            while l < r and a[l] == b[r]:
+                l += 1
+                r -= 1
+            return l >= r or check2(a, l, r) or check2(b, l, r)
+        
+        def check2(s, l, r):
+            return s[l: r + 1] == s[l: r + 1][::-1]
 
+        return check(a, b) or check(b, a)
 ```
 
 ### **Java**
@@ -81,7 +93,24 @@ b<sub>prefix</sub> = "jiz", b<sub>suffix</sub> = "alu"
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkPalindromeFormation(String a, String b) {
+        return check(a, b) || check(b, a);
+    }
+    
+    public boolean check(String a, String b) {
+        int l = 0, r = a.length() - 1;
+        while (l < r && a.charAt(l) == b.charAt(r)) {
+            l++;
+            r--;
+        }
+        return l >= r || check2(a, l, r) || check2(b, l, r);
+    }
+    
+    public boolean check2(String s, int l, int r) {
+        return s.substring(l, r + 1).equals(new StringBuilder(s.substring(l, r + 1)).reverse().toString());
+    }
+}
 ```
 
 ### **...**
