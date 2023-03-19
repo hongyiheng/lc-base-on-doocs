@@ -91,7 +91,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLexSmallestString(self, s: str, a: int, b: int) -> str:
+        q = deque()
+        q.append(s)
+        vis = {s}
+        ans = s
+        while q:
+            cur = q.popleft()
+            if cur < ans:
+                ans = cur
+            t1 = ''.join([str((int(c) + a) % 10) if i % 2 else c for i, c in enumerate(cur)])
+            t2 = cur[-b:] + cur[:-b]
+            for t in (t1, t2):
+                if t not in vis:
+                    vis.add(t)
+                    q.append(t)
+        return ans
 ```
 
 ### **Java**
@@ -99,7 +115,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String findLexSmallestString(String s, int a, int b) {
+        Deque<String> q = new ArrayDeque<>();
+        Set<String> vis = new HashSet<>();
+        q.addLast(s);
+        vis.add(s);
+        String ans = s;
+        while (!q.isEmpty()) {
+            String cur = q.removeFirst();
+            if (cur.compareTo(ans) < 0) {
+                ans = cur;
+            }
+            char[] cs = cur.toCharArray();
+            for (int i = 1; i < cs.length; i += 2) {
+                cs[i] = (char) ((cs[i] - '0' + a) % 10 + '0');
+            }
+            String t1 = new String(cs);
+            if (!vis.contains(t1)) {
+                vis.add(t1);
+                q.addLast(t1);
+            }
+            String t2 = cur.substring(cur.length() - b) + cur.substring(0, cur.length() - b);
+            if (!vis.contains(t2)) {
+                vis.add(t2);
+                q.addLast(t2);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
