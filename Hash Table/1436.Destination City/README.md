@@ -61,7 +61,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        ac, vc = set(), set()
+        for ps in paths:
+            ac.add(ps[0])
+            ac.add(ps[1])
+            vc.add(ps[0])
+        return [c for c in ac - vc][0]
 ```
 
 ### **Java**
@@ -69,7 +76,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String destCity(List<List<String>> paths) {
+        Set<String> ac = new HashSet<>(), vc = new HashSet<>();
+        for (List<String> p : paths) {
+            ac.add(p.get(0));
+            ac.add(p.get(1));
+            vc.add(p.get(0));
+        }
+        for (String s : ac) {
+            if (!vc.contains(s)) {
+                return s;
+            }
+        }
+        return null;
+    }
+}
 ```
 
 ### **...**
