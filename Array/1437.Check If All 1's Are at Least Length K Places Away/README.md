@@ -60,7 +60,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kLengthApart(self, nums: List[int], k: int) -> bool:
+        cnt = k
+        for v in nums:
+            if v == 1:
+                if cnt >= k:
+                    cnt = 0
+                else:
+                    return False
+            else:
+                cnt += 1
+        return True
 ```
 
 ### **Java**
@@ -68,7 +79,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean kLengthApart(int[] nums, int k) {
+        int cnt = k;
+        for (int v : nums) {
+            if (v == 1) {
+                if (cnt >= k) {
+                    cnt = 0;
+                } else {
+                    return false;
+                }
+            } else {
+                cnt++;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
