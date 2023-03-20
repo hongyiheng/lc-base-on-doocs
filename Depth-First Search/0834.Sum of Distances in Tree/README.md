@@ -43,7 +43,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        cnt, depth = [0] * n, [0] * n
 
+        def dfs(u, p):
+            nonlocal g, cnt, depth
+            cnt[u] = 1
+            if not g[u]:
+                return
+            for v in g[u]:
+                if v == p:
+                    continue
+                depth[v] = depth[u] + 1
+                dfs(v, u)
+                cnt[u] += cnt[v]
+
+        dfs(0, -1)
+        ans = [0] * n
+        ans[0] = sum(depth)
+
+        def dfs2(u, p):
+            nonlocal g, cnt, ans, n
+            for v in g[u]:
+                if v == p:
+                    continue
+                ans[v] = ans[u] + (n - cnt[v]) - cnt[v]
+                dfs2(v, u)
+
+        dfs2(0, -1)
+        return ans
 ```
 
 ### **Java**
@@ -51,7 +84,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Integer, List<Integer>> g = new HashMap<>();
+    int[] depth, cnt, ans;
+    int n;
+
+    public int[] sumOfDistancesInTree(int n, int[][] edges) {
+        this.n = n;
+        depth = new int[n];
+        cnt = new int[n];
+        ans = new int[n];
+        for (int[] e : edges) {
+            g.computeIfAbsent(e[0], x -> new ArrayList<>()).add(e[1]);
+            g.computeIfAbsent(e[1], x -> new ArrayList<>()).add(e[0]);
+        }
+        dfs(0, -1);
+        for (int v : depth) {
+            ans[0] += v;
+        }
+        dfs2(0, -1);
+        return ans;
+    }
+
+    public void dfs(int u, int p) {
+        cnt[u] = 1;
+        if (!g.containsKey(u)) {
+            return;
+        }
+        for (int v : g.getOrDefault(u, new ArrayList<>())) {
+            if (v == p) {
+                continue;
+            }
+            depth[v] = depth[u] + 1;
+            dfs(v, u);
+            cnt[u] += cnt[v];
+        }
+    }
+
+    public void dfs2(int u, int p) {
+        for (int v : g.getOrDefault(u, new ArrayList<>())) {
+            if (v == p) {
+                continue;
+            }
+            ans[v] = ans[u] + (n - cnt[v]) - cnt[v];
+            dfs2(v, u);
+        }
+    }
+}
 ```
 
 ### **...**
