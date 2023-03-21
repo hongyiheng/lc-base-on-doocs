@@ -92,7 +92,68 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minPushBox(self, grid: List[List[str]]) -> int:
+        def get_next(x, y, sx, sy):
+            nonlocal m, n
+            vis = {(sx, sy)}
+            q = deque([[sx, sy]])
+            while q:
+                sx, sy = q.pop()
+                for d in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
+                    nsx, nsy = sx + d[0], sy + d[1]
+                    if nsx < 0 or nsx >= m or nsy < 0 or nsy >= n:
+                        continue
+                    if (nsx, nsy) in vis or grid[nsx][nsy] == "#":
+                        continue
+                    if nsx == x and nsy == y:
+                        continue
+                    vis.add((nsx, nsy))
+                    q.append([nsx, nsy])
 
+            pos = []
+            if x - 1 >= 0 and x + 1 < m and grid[x - 1][y] != '#' and grid[x + 1][y] != '#':
+                if (x - 1, y) in vis:
+                    pos.append([x + 1, y, x, y])
+                if (x + 1, y) in vis:
+                    pos.append([x - 1, y, x, y])
+            if y - 1 >= 0 and y + 1 < n and grid[x][y - 1] != '#' and grid[x][y + 1] != '#':
+                if (x, y - 1) in vis:
+                    pos.append([x, y + 1, x, y])
+                if (x, y + 1) in vis:
+                    pos.append([x, y - 1, x, y])
+            return pos
+
+        m, n = len(grid), len(grid[0])
+        x = y = tx = ty = sx = sy = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 'B':
+                    x = i
+                    y = j
+                if grid[i][j] == 'T':
+                    tx = i
+                    ty = j
+                if grid[i][j] == 'S':
+                    sx = i
+                    sy = j
+
+        vis = {(x, y, sx, sy)}
+        q = deque([[x, y, sx, sy]])
+        ans = 0
+        while q:
+            for _ in range(len(q)):
+                x, y, sx, sy = q.popleft()
+                if x == tx and y == ty:
+                    return ans
+                next_pos = get_next(x, y, sx, sy)
+                for nx, ny, nsx, nsy in next_pos:
+                    if (nx, ny, nsx, nsy) in vis:
+                        continue
+                    q.append([nx, ny, nsx, nsy])
+                    vis.add((nx, ny, nsx, nsy))
+            ans += 1
+        return -1
 ```
 
 ### **Java**
@@ -100,7 +161,101 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minPushBox(char[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int x = 0, y = 0, tx = 0, ty = 0, sx = 0, sy = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 'T') {
+                    tx = i;
+                    ty = j;
+                } else if (grid[i][j] == 'S') {
+                    sx = i;
+                    sy = j;
+                } else if (grid[i][j] == 'B') {
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+        Set<String> vis = new HashSet<>();
+        Deque<int[]> q = new ArrayDeque<>();
+        vis.add(x + "," + y + "," + sx + "," + sy);
+        q.addLast(new int[]{x, y, sx, sy});
+        int ans = 0;
+        while (!q.isEmpty()) {
+            int k = q.size();
+            for (int i = 0; i < k; i++) {
+                int[] cur = q.pollFirst();
+                x = cur[0];
+                y = cur[1];
+                sx = cur[2];
+                sy = cur[3];
+                if (x == tx && y == ty) {
+                    return ans;
+                }
+                List<int[]> next = getNext(x, y, sx, sy, grid);
+                for (int[] p : next) {
+                    int nx = p[0], ny = p[1], nsx = p[2], nsy = p[3];
+                    if (!vis.contains(nx + "," + ny + "," + nsx + "," + nsy)) {
+                        vis.add(nx + "," + ny + "," + nsx + "," + nsy);
+                        q.addLast(new int[]{nx, ny, nsx, nsy});
+                    }
+                }
+            }
+            ans++;
+        }
+        return -1;
+    }
 
+    private List<int[]> getNext(int x, int y, int sx, int sy, char[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        Set<String> vis = new HashSet<>();
+        Deque<int[]> q = new ArrayDeque<>();
+        vis.add(sx + "," + sy);
+        q.addLast(new int[]{sx, sy});
+        while (!q.isEmpty()) {
+            int[] cur = q.pollFirst();
+            sx = cur[0];
+            sy = cur[1];
+            for (int[] dir : dirs) {
+                int nsx = sx + dir[0];
+                int nsy = sy + dir[1];
+                if (nsx < 0 || nsx >= m || nsy < 0 || nsy >= n || grid[nsx][nsy] == '#') {
+                    continue;
+                }
+                if (vis.contains(nsx + "," + nsy)) {
+                    continue;
+                }
+                if (nsx == x && nsy == y) {
+                    continue;
+                }
+                vis.add(nsx + "," + nsy);
+                q.addLast(new int[]{nsx, nsy});
+            }
+        }
+        List<int[]> ans = new ArrayList<>();
+        if (x + 1 < m && x - 1 >= 0 && grid[x + 1][y] != '#' && grid[x - 1][y] != '#') {
+            if (vis.contains(x + 1 + "," + y)) {
+                ans.add(new int[]{x - 1, y, x, y});
+            }
+            if (vis.contains(x - 1 + "," + y)) {
+                ans.add(new int[]{x + 1, y, x, y});
+            }
+        }
+        if (y + 1 < n && y - 1 >= 0 && grid[x][y + 1] != '#' && grid[x][y - 1] != '#') {
+            if (vis.contains(x + "," + (y + 1))) {
+                ans.add(new int[]{x, y - 1, x, y});
+            }
+            if (vis.contains(x + "," + (y - 1))) {
+                ans.add(new int[]{x, y + 1, x, y});
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
