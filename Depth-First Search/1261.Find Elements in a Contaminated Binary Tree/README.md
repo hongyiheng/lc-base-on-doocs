@@ -95,7 +95,38 @@ findElements.find(5); // return True
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class FindElements:
 
+    def __init__(self, root: Optional[TreeNode]):
+        def dfs(root):
+            if not root:
+                return
+            self.s.add(root.val)
+            if root.left:
+                root.left.val = root.val * 2 + 1
+                dfs(root.left)
+            if root.right:
+                root.right.val = root.val * 2 + 2
+                dfs(root.right)
+
+        self.s = set()
+        root.val = 0
+        dfs(root)
+
+    def find(self, target: int) -> bool:
+        return target in self.s
+
+
+
+# Your FindElements object will be instantiated and called as such:
+# obj = FindElements(root)
+# param_1 = obj.find(target)
 ```
 
 ### **Java**
@@ -103,7 +134,56 @@ findElements.find(5); // return True
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class FindElements {
 
+    Set<Integer> s;
+    
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        s.add(root.val);
+        if (root.left != null) {
+            root.left.val = root.val * 2 + 1;
+            dfs(root.left);
+        }
+        if (root.right != null) {
+            root.right.val = root.val * 2 + 2;
+            dfs(root.right);
+        }
+    }
+
+    public FindElements(TreeNode root) {
+        s = new HashSet<>();
+        root.val = 0;
+        dfs(root);
+    }
+
+    public boolean find(int target) {
+        return s.contains(target);
+    }
+}
+
+/**
+ * Your FindElements object will be instantiated and called as such:
+ * FindElements obj = new FindElements(root);
+ * boolean param_1 = obj.find(target);
+ */
 ```
 
 ### **...**
