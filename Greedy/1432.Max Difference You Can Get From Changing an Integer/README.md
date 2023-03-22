@@ -77,7 +77,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxDiff(self, num: int) -> int:
+        s = str(num)
+        n = len(s)
+        for i in range(n):
+            if s[i] != '9':
+                s = s.replace(s[i], '9')
+                break
+        mx = int(s)
+        s = str(num)
+        for i in range(n):
+            if i == 0 and s[i] !='1':
+                s = s.replace(s[i], '1')
+                break
+            if i != 0 and s[i] != '0' and s[i] != s[0]:
+                s = s.replace(s[i], '0')
+                break
+        mi = int(s)
+        return mx - mi
 ```
 
 ### **Java**
@@ -85,7 +103,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxDiff(int num) {
+        String s = String.valueOf(num);
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) != '9') {
+                s = s.replace(s.charAt(i), '9');
+                break;
+            }
+        }
+        int mx = Integer.parseInt(s);
+        s = String.valueOf(num);
+        for (int i = 0; i < n; i++) {
+            if (i == 0 && s.charAt(i) != '1') {
+                s = s.replace(s.charAt(i), '1');
+                break;
+            }
+            if (i != 0 && s.charAt(i) != '0' && s.charAt(i) != s.charAt(0)) {
+                s = s.replace(s.charAt(i), '0');
+                break;
+            }
+        }
+        return mx - Integer.parseInt(s);
+    }
+}
 ```
 
 ### **...**
