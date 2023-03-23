@@ -69,7 +69,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def distributeCoins(self, root: Optional[TreeNode]) -> int:
+        def dfs(root):
+            nonlocal ans
+            if not root:
+                return 0
+            l = dfs(root.left)
+            r = dfs(root.right)
+            ans += abs(l) + abs(r)
+            return root.val + l + r - 1
+        
+        ans = 0
+        dfs(root)
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +96,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int ans = 0;
 
+    public int distributeCoins(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+
+    public int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = dfs(root.left);
+        int r = dfs(root.right);
+        ans += Math.abs(l) + Math.abs(r);
+        return l + r + root.val - 1;
+    }
+}
 ```
 
 ### **...**
