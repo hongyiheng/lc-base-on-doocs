@@ -55,7 +55,49 @@ streamChecker.query(&#39;l&#39;);          // 返回 true，因为 &#39;kl&#39; 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.children = [None] * 26
+        self.end = False
 
+class Trie:
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word):
+        head = self.root
+        for c in word:
+            if not head.children[ord(c) - ord('a')]:
+                head.children[ord(c) - ord('a')] = Node()
+            head = head.children[ord(c) - ord('a')]
+        head.end = True
+
+    def start_with(self, prefix):
+        head = self.root
+        for c in prefix:
+            if not head.children[ord(c) - ord('a')]:
+                return False
+            head = head.children[ord(c) - ord('a')]
+            if head.end:
+                return True
+        return False
+
+class StreamChecker:
+
+    def __init__(self, words: List[str]):
+        self.s = ""
+        self.tr = Trie()
+        for w in words:
+            self.tr.insert(w[::-1])
+
+    def query(self, letter: str) -> bool:
+        self.s += letter
+        return self.tr.start_with(self.s[::-1])
+
+
+# Your StreamChecker object will be instantiated and called as such:
+# obj = StreamChecker(words)
+# param_1 = obj.query(letter)
 ```
 
 ### **Java**
@@ -63,7 +105,71 @@ streamChecker.query(&#39;l&#39;);          // 返回 true，因为 &#39;kl&#39; 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class StreamChecker {
 
+    class Node {
+        Node[] child = new Node[26];
+        boolean end;
+    }
+
+    class Trie {
+
+        Node root;
+
+        public Trie() {
+            root = new Node();
+        }
+
+        public void insert(String s) {
+            Node cur = root;
+            for (int i = s.length() - 1; i > -1; i--) {
+                char c = s.charAt(i);
+                if (cur.child[c - 'a'] == null) {
+                    cur.child[c - 'a'] = new Node();
+                }
+                cur = cur.child[c - 'a'];
+            }
+            cur.end = true;
+        }
+
+        public boolean search(String s) {
+            Node cur = root;
+            for (int i = s.length() - 1; i > -1; i--) {
+                char c = s.charAt(i);
+                if (cur.child[c - 'a'] == null) {
+                    return false;
+                }
+                cur = cur.child[c - 'a'];
+                if (cur.end) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    Trie tr;
+    StringBuilder s;
+
+    public StreamChecker(String[] words) {
+        s = new StringBuilder();
+        tr = new Trie();
+        for (String word : words) {
+            tr.insert(word);
+        }
+    }
+
+    public boolean query(char letter) {
+        s.append(letter);
+        return tr.search(s.toString());
+    }
+}
+
+/**
+ * Your StreamChecker object will be instantiated and called as such:
+ * StreamChecker obj = new StreamChecker(words);
+ * boolean param_1 = obj.query(letter);
+ */
 ```
 
 ### **...**
