@@ -66,7 +66,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLengthOfShortestSubarray(self, arr: List[int]) -> int:
+        n, right = len(arr), len(arr) - 1
+        while right > 0 and arr[right - 1] <= arr[right]:
+            right -= 1
+        if right == 0:
+            return 0
+        ans = right
+        for left in range(n):
+            if left > 0 and arr[left] < arr[left - 1]:
+                break
+            while right < n and arr[right] < arr[left]:
+                right += 1
+            ans = min(ans, right - left - 1)
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +88,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findLengthOfShortestSubarray(int[] arr) {
+        int n = arr.length, right = n - 1;
+        while (right > 0 && arr[right] >= arr[right - 1]) {
+            right--;
+        }
+        if (right == 0) {
+            return 0;
+        }
+        int ans = right;
+        for (int left = 0; left < n; left++) {
+            if (left > 0 && arr[left] < arr[left - 1]) {
+                break;
+            }
+            while (right < n && arr[left] > arr[right]) {
+                right++;
+            }
+            ans = Math.min(ans, right - left - 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
