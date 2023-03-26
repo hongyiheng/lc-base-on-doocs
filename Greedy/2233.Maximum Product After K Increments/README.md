@@ -51,7 +51,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumProduct(self, nums: List[int], k: int) -> int:
+        heapq.heapify(nums)
+        while k:
+            v = heapq.heappop(nums)
+            heapq.heappush(nums, v + 1)
+            k -= 1
+        ans, mod = 1, int(1e9 + 7)
+        for v in nums:
+            ans = ans * v % mod
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +69,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumProduct(int[] nums, int k) {
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int v : nums) {
+            q.offer(v);
+        }
+        while (k-- > 0) {
+            int v = q.poll();
+            q.offer(v + 1);
+        }
+        long ans = 1, mod = (long)1e9 + 7;
+        for (int v : q) {
+            ans = ans * v % mod;
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
