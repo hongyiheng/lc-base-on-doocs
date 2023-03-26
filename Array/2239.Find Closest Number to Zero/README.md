@@ -49,7 +49,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findClosestNumber(self, nums: List[int]) -> int:
+        ans, gap = nums[0], abs(nums[0])
+        for v in nums:
+            if abs(v) < gap:
+                gap = abs(v)
+                ans = v
+            elif abs(v) == gap and v > ans:
+                ans = v
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +66,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findClosestNumber(int[] nums) {
+        int ans = nums[0], gap = Math.abs(nums[0]);
+        for (int v : nums) {
+            if (Math.abs(v) < gap) {
+                gap = Math.abs(v);
+                ans = v;
+            } else if (Math.abs(v) == gap && v > ans) {
+                ans = v;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
