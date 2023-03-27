@@ -76,7 +76,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countSubstrings(self, s: str, t: str) -> int:
+        n, m = len(s), len(t)
+        ans = 0
+        for i in range(n):
+            for j in range(m):
+                w = diff = 0
+                while i + w < n and j + w < m and diff <= 1:
+                    if s[i + w] != t[j + w]:
+                        diff += 1
+                    if diff == 1:
+                        ans += 1
+                    w += 1
+        return ans
 ```
 
 ### **Java**
@@ -84,7 +97,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countSubstrings(String s, String t) {
+        int n = s.length(), m = t.length();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int w = 0, diff = 0;
+                while (i + w < n && j + w < m && diff <= 1) {
+                    if (s.charAt(i + w) != t.charAt(j + w)) {
+                        diff++;
+                    }
+                    if (diff == 1) {
+                        ans++;
+                    }
+                    w++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
