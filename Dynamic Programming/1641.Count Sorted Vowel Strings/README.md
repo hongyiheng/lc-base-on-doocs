@@ -57,7 +57,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countVowelStrings(self, n: int) -> int:
+        f = [[0] * 5 for _ in range(n)]
+        for i in range(5):
+            f[0][i] = 1
+        for i in range(1, n):
+            for j in range(5):
+                for k in range(j + 1):
+                    f[i][j] += f[i - 1][k]
+        ans = 0
+        for i in range(5):
+            ans += f[n - 1][i]
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +77,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countVowelStrings(int n) {
+        int[][] f = new int[n][5];
+        for (int i = 0; i < 5; i++) {
+            f[0][i] = 1;
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < 5; j++) {
+                for (int k = 0; k < j + 1; k++) {
+                    f[i][j] += f[i - 1][k];
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < 5; i++) {
+            ans += f[n - 1][i];
+        }
+        return ans;      
+    }
+}
 ```
 
 ### **...**
