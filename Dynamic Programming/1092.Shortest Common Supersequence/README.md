@@ -43,7 +43,36 @@ str2 = &quot;cab&quot; 是 &quot;cabac&quot; 的一个子串，因为我们可�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def shortestCommonSupersequence(self, s: str, t: str) -> str:
+        m, n = len(s), len(t)
+        f = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if s[i - 1] == t[j - 1]:
+                    f[i][j] = f[i - 1][j - 1] + 1
+                else:
+                    f[i][j] = max(f[i - 1][j], f[i][j - 1])
+        ans = ""
+        i, j = m, n
+        while i > 0 and j > 0:
+            if s[i - 1] == t[j - 1]:
+                ans += s[i - 1]
+                i -= 1
+                j -= 1
+            elif f[i - 1][j] > f[i][j - 1]:
+                ans += s[i - 1]
+                i -= 1
+            else:
+                ans += t[j - 1]
+                j -= 1
+        while i > 0:
+            ans += s[i - 1]
+            i -= 1
+        while j > 0:
+            ans += t[j - 1]
+            j -= 1
+        return ans[::-1]
 ```
 
 ### **Java**
@@ -51,7 +80,45 @@ str2 = &quot;cab&quot; 是 &quot;cabac&quot; 的一个子串，因为我们可�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String shortestCommonSupersequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int[][] f = new int[n + 1][m + 1];
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < m + 1; j++) {
+                if (s.charAt(i - 1) == t.charAt(j - 1)) {
+                    f[i][j] = f[i - 1][j - 1] + 1;
+                } else {
+                    f[i][j] = Math.max(f[i - 1][j], f[i][j - 1]);
+                }
+            }
+        }
+        StringBuilder ans = new StringBuilder();
+        int i = n, j = m;
+        while (i > 0 && j > 0) {
+            if (s.charAt(i - 1) == t.charAt(j - 1)) {
+                ans.append(s.charAt(i - 1));
+                i--;
+                j--;
+            } else if (f[i - 1][j] > f[i][j - 1]) {
+                ans.append(s.charAt(i - 1));
+                i--;
+            } else {
+                ans.append(t.charAt(j - 1));
+                j--;
+            }
+        }
+        while (i > 0) {
+            ans.append(s.charAt(i - 1));
+            i--;
+        }
+        while (j > 0) {
+            ans.append(t.charAt(j - 1));
+            j--;
+        }
+        return ans.reverse().toString();
+    }
+}
 ```
 
 ### **...**
