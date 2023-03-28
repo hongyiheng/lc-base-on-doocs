@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countSquares(self, matrix: List[List[int]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+        f = [[0] * (n + 1) for _ in range(m + 1)]
+        ans = 0
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if matrix[i - 1][j - 1]:
+                    f[i][j] = min(f[i - 1][j - 1], f[i - 1][j], f[i][j - 1]) + 1
+                    ans += f[i][j]
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +81,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countSquares(int[][] matrix) {
+        int n = matrix.length, m = matrix[0].length;
+        int[][] f = new int[n + 1][m + 1];
+        int ans = 0;
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < m + 1; j++) {
+                if (matrix[i - 1][j - 1] == 1) {
+                    f[i][j] = Math.min(f[i - 1][j - 1], Math.min(f[i - 1][j], f[i][j - 1])) + 1;
+                    ans += f[i][j];
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
