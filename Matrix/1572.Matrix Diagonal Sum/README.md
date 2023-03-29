@@ -64,7 +64,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        n = len(mat)
+        ans = 0
+        for i in range(n):
+            ans += mat[i][i] + mat[i][n - i - 1]
+            if n - i - 1 == i:
+                ans -= mat[i][i]
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +80,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int n = mat.length, ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans += mat[i][i] + mat[i][n - i - 1];
+            if (i == n - i - 1) {
+                ans -= mat[i][i];
+            }     
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
