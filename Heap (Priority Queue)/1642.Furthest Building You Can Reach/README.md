@@ -70,7 +70,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
+        q = []
+        n, cnt, use = len(heights), 0, 0
+        for i in range(1, n):
+            if heights[i - 1] >= heights[i]:
+                continue
+            gap = heights[i] - heights[i - 1]
+            heapq.heappush(q, -gap)
+            cnt += gap
+            if cnt > bricks:
+                if use < ladders:
+                    use += 1
+                    cnt += heapq.heappop(q)
+                else:
+                    return i - 1
+        return len(heights) - 1
 ```
 
 ### **Java**
@@ -78,7 +94,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int furthestBuilding(int[] heights, int bricks, int ladders) {
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        int n = heights.length, cnt = 0, useLadders = 0;
+        for (int i = 1; i < n; i++) {
+            if (heights[i - 1] >= heights[i]) {
+                continue;
+            }
+            int gap = heights[i] - heights[i - 1];
+            q.add(gap);
+            cnt += gap;
+            if (cnt > bricks) {
+                if (useLadders < ladders) {
+                    useLadders++;
+                    cnt -= q.poll();
+                } else {
+                    return i - 1;
+                }
+            }
+        }
+        return n - 1;
+    }
+}
 ```
 
 ### **...**
