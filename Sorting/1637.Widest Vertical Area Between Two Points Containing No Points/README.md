@@ -52,7 +52,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxWidthOfVerticalArea(self, points: List[List[int]]) -> int:
+        points.sort(key=lambda x:x[0])
+        ans = 0
+        for i in range(1, len(points)):
+            if points[i][0] - points[i - 1][0] > ans:
+                ans = points[i][0] - points[i - 1][0]
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +67,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxWidthOfVerticalArea(int[][] points) {
+        Arrays.sort(points, (a, b) -> a[0] - b[0]);
+        int ans = 0;
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] - points[i - 1][0] > ans) {
+                ans = points[i][0] - points[i - 1][0];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
