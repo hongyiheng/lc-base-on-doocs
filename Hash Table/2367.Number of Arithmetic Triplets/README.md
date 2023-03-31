@@ -57,7 +57,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def arithmeticTriplets(self, nums: List[int], diff: int) -> int:
+        s = {v for v in nums}
+        ans = 0
+        for v in nums:
+            if v + diff in s and v + 2 * diff in s:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +72,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int arithmeticTriplets(int[] nums, int diff) {
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            s.add(v);
+        }
+        int ans = 0;
+        for (int v : nums) {
+            if (s.contains(v + diff) && s.contains(v + 2 * diff)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
