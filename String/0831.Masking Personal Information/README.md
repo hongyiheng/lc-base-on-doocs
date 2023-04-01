@@ -98,6 +98,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maskPII(self, s: str) -> str:
+        if "@" in s:
+            s = str.lower(s)
+            idx = s.find('@')
+            return s[0] + 5 * '*' + s[idx - 1:]
+        q = []
+        for c in s:
+            if '0' <= c <= '9':
+                q.append(c)
+        ans = 3 * '*' + '-' + 3 * '*' + '-' + "".join(q)[-4:]
+        if len(q) > 10:
+            ans = '+' + (len(q) - 10) * '*' + '-' + ans
+        return ans
 
 ```
 
@@ -106,7 +120,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String maskPII(String s) {
+        if (s.contains("@")) {
+            s = s.toLowerCase();
+            int idx = s.indexOf('@');
+            return s.charAt(0) + "*****" + s.substring(idx - 1);
+        }
+        s = s.replaceAll("[^0-9]", "");
+        int n = s.length();
+        if (n == 10) {
+            return "***-***-" + s.substring(n - 4);
+        }
+        String country = "+";
+        for (int i = 0; i < n - 10; i++) {
+            country += "*";
+        }
+        return country + "-***-***-" + s.substring(n - 4);
+    }
+}
 ```
 
 ### **...**
