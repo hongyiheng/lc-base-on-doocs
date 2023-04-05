@@ -76,7 +76,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def openLock(self, deadends: List[str], target: str) -> int:
+        def get_next(s):
+            ans = set()
+            for i in range(4):
+                v = int(s[i])
+                ans.add(s[:i] + (str(v + 1) if v < 9 else '0') + s[i + 1:])
+                ans.add(s[:i] + (str(v - 1) if v > 0 else '9') + s[i + 1:])
+            return ans
 
+        dead = set(deadends)
+        if target in dead or "0000" in dead:
+            return -1
+        vis = set()
+        q = deque(["0000"])
+        ans = 0
+        while q:
+            for _ in range(len(q)):
+                cur = q.popleft()
+                if cur == target:
+                    return ans
+                for ns in get_next(cur):
+                    if ns in vis or ns in dead:
+                        continue
+                    vis.add(ns)
+                    q.append(ns)
+            ans += 1
+        return -1
 ```
 
 ### **Java**
@@ -84,7 +111,50 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public Set<String> getNext(String s) {
+        Set<String> ans = new HashSet<>();
+        for (int i = 0; i < 4; i++) {
+            int v = s.charAt(i) - '0';
+            ans.add(s.substring(0, i) + (v == 9 ? 0 : v + 1) + s.substring(i + 1));
+            ans.add(s.substring(0, i) + (v == 0 ? 9 : v - 1) + s.substring(i + 1));
+        }
+        return ans;
+    }
 
+    public int openLock(String[] deadends, String target) {
+        Set<String> dead = new HashSet<>();
+        for (String s : deadends) {
+            dead.add(s);
+        }
+        if (dead.contains("0000") || dead.contains(target)) {
+            return -1;
+        }
+        Set<String> vis = new HashSet<>();
+        Deque<String> q = new ArrayDeque<>();
+        q.addLast("0000");
+        vis.add("0000");
+        int ans = 0;
+        while (!q.isEmpty()) {
+            int k = q.size();
+            while (k-- > 0) {
+                String s = q.pollFirst();
+                if (target.equals(s)) {
+                    return ans;
+                }
+                for (String ns : getNext(s)) {
+                    if (vis.contains(ns) || dead.contains(ns)) {
+                        continue;
+                    }
+                    q.addLast(ns);
+                    vis.add(ns);
+                }
+            }
+            ans++;
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
