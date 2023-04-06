@@ -53,7 +53,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def baseNeg2(self, n: int) -> str:
+        if n == 0:
+            return '0'
+        ans = []
+        while n:
+            if n % -2:
+                ans.append('1')
+                n -= 1
+            else:
+                ans.append('0')
+            n //= -2
+        return "".join(ans)[::-1]
 ```
 
 ### **Java**
@@ -61,7 +73,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String baseNeg2(int n) {
+        if (n == 0) {
+            return "0";
+        }
+        StringBuilder ans = new StringBuilder();
+        while (n != 0) {
+            if (n % -2 != 0) {
+                ans.append("1");
+                n -= 1;
+            } else {
+                ans.append("0");
+            }
+            n /= -2;
+        }
+        return ans.reverse().toString();
+    }
+}
 ```
 
 ### **...**
