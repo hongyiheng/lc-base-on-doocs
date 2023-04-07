@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numPairsDivisibleBy60(self, time: List[int]) -> int:
+        cnt = defaultdict(int)
+        ans = 0
+        for t in time:
+            gap = 60 - t % 60
+            ans += cnt[0 if gap == 60 else gap]
+            cnt[t % 60] += 1
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +66,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numPairsDivisibleBy60(int[] time) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int ans = 0;
+        for (int t : time) {
+            int o = 60 - t % 60;
+            ans += cnt.getOrDefault(o == 60 ? 0 : o, 0);
+            cnt.put(t % 60, cnt.getOrDefault(t % 60, 0) + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
