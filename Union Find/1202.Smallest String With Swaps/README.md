@@ -65,7 +65,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
 
+        def union(a, b):
+            p[find(a)] = find(b)
+
+        n = len(s)
+        p = [i for i in range(n)]
+        for a, b in pairs:
+            union(a, b)
+        g = dict()
+        for i in range(n):
+            cnt = g.get(find(i), [0] * 26)
+            cnt[ord(s[i]) - ord('a')] += 1
+            if find(i) not in g:
+                g[find(i)] = cnt
+        ans = []
+        for i in range(n):
+            for j in range(26):
+                if g[find(i)][j]:
+                    ans.append(chr(ord('a') + j))
+                    g[find(i)][j] -= 1
+                    break
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -73,7 +100,52 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    int[] p;
 
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    public void union(int a, int b) {
+        p[find(a)] = find(b);
+    }
+
+    public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
+        int n = s.length();
+        p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = i;
+        }
+        for (List<Integer> pair : pairs) {
+            union(pair.get(0), pair.get(1));
+        }
+        Map<Integer, int[]> g = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int f = find(i);
+            if (!g.containsKey(f)) {
+                g.put(f, new int[26]);
+            }
+            g.get(f)[s.charAt(i) - 'a']++;
+        }
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            int f = find(i);
+            for (int j = 0; j < 26; j++) {
+                if (g.get(f)[j] > 0) {
+                    ans.append((char) (j + 'a'));
+                    g.get(f)[j]--;
+                    break;
+                }
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
