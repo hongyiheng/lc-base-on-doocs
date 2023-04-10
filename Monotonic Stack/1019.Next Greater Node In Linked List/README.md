@@ -55,7 +55,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def nextLargerNodes(self, head: Optional[ListNode]) -> List[int]:
+        q, ans = [], []
+        idx = 0
+        while head:
+            while q and q[-1][1] < head.val:
+                i, _ = q.pop()
+                ans[i] = head.val
+            q.append([idx, head.val])
+            ans.append(0)
+            idx += 1
+            head = head.next
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +80,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int[] nextLargerNodes(ListNode head) {
+        Deque<int[]> q = new ArrayDeque<>();
+        List<Integer> ans = new ArrayList<>();
+        int idx = 0;
+        while (head != null) {
+            while (!q.isEmpty() && q.peekLast()[1] < head.val) {
+                int[] tmp = q.pollLast();
+                ans.set(tmp[0], head.val);
+            }
+            q.add(new int[]{idx, head.val});
+            ans.add(0);
+            head = head.next;
+            idx++;
+        }
+        return ans.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
 ```
 
 ### **...**
