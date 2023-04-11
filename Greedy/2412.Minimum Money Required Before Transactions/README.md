@@ -55,7 +55,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+def minimumMoney(transactions: List[List[int]]) -> int:
+    loss = 0
+    for a, b in transactions:
+        if a > b:
+            loss += a - b
+    earn_mx_cost = loss_mx_back = 0
+    for a, b in transactions:
+        if a < b:
+            earn_mx_cost = max(earn_mx_cost, a)
+        else:
+            loss_mx_back = max(loss_mx_back, b)
+    return loss + max(loss_mx_back, earn_mx_cost)
 ```
 
 ### **Java**
@@ -63,7 +74,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minimumMoney(int[][] transactions) {
+        long loss = 0;
+        for (int[] t : transactions) {
+            if (t[0] > t[1]) {
+                loss += t[0] - t[1];
+            }
+        }
+        long earnMxCost = 0, lossMxBack = 0;
+        for (int[] t : transactions) {
+            if (t[0] < t[1]) {
+                earnMxCost = Math.max(earnMxCost, t[0]);
+            } else {
+                lossMxBack = Math.max(lossMxBack, t[1]);
+            }
+        }
+        return loss + Math.max(lossMxBack, earnMxCost);
+    }
+}
 ```
 
 ### **...**
