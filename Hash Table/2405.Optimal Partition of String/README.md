@@ -52,7 +52,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def partitionString(self, s: str) -> int:
+        ans = mask = 0
+        for c in s:
+            v = ord(c) - ord('a')
+            if mask >> v & 1:
+                ans += 1
+                mask = 0
+            mask |= 1 << v
+        return ans if mask == 0 else ans + 1
 ```
 
 ### **Java**
@@ -60,7 +69,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int partitionString(String s) {
+        int ans = 0, mask = 0;
+        for (char c : s.toCharArray()) {
+            int v = c - 'a';
+            if ((mask >> v & 1) == 1) {
+                ans++;
+                mask = 0;
+            }
+            mask |= 1 << v;
+        }
+        return mask == 0 ? ans : ans + 1;
+    }
+}
 ```
 
 ### **...**
