@@ -53,7 +53,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mostFrequentEven(self, nums: List[int]) -> int:
+        cnt = [0] * 100001
+        for v in nums:
+            cnt[v] += 1
+        ans, mx = -1, 0
+        for i, v in enumerate(cnt):
+            if v > mx and i % 2 == 0:
+                ans = i
+                mx = v         
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +71,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int mostFrequentEven(int[] nums) {
+        int[] cnt = new int[100001];
+        for (int v : nums) {
+            cnt[v]++;
+        }
+        int ans = -1, mx = 0;
+        for (int i = 0; i < 100001; i++) {
+            if (cnt[i] > mx && i % 2 == 0) {
+                mx = cnt[i];
+                ans = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
