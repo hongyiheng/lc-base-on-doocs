@@ -61,7 +61,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+        m, n = len(queries), len(pattern)
+        ans = []
+        for k, s in enumerate(queries):
+            i = j = 0
+            while i < n:
+                if j >= len(s):
+                    break
+                if pattern[i] == s[j]:
+                    i += 1
+                elif s[j].isupper():
+                    break
+                j += 1
+            while j < len(s) and s[j].islower():
+                j += 1
+            ans.append(i == n and j == len(s))
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +86,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        int n = pattern.length();
+        List<Boolean> ans = new ArrayList<>();
+        for (String s : queries) {
+            int i = 0, j = 0;
+            while (i < n) {
+                if (j >= s.length()) {
+                    break;
+                }
+                if (pattern.charAt(i) == s.charAt(j)) {
+                    i++;
+                } else if (Character.isUpperCase(s.charAt(j))) {
+                    break;
+                } 
+                j++;
+            }
+            while (j < s.length() && !Character.isUpperCase(s.charAt(j))) {
+                j++;
+            }
+            ans.add(i == n && j == s.length());
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
