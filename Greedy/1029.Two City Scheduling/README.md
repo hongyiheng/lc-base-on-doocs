@@ -63,7 +63,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        ans = 0
+        q = []
+        for a, b in costs:
+            ans += a
+            q.append(b - a)
+        q.sort()
+        ans += sum(q[:len(costs) // 2])
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +80,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int twoCitySchedCost(int[][] costs) {
+        int ans = 0, n = costs.length;
+        List<Integer> q = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ans += costs[i][0];
+            q.add(costs[i][1] - costs[i][0]);
+        }
+        Collections.sort(q);
+        for (int i = 0; i < n / 2; i++) {
+            ans += q.get(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
