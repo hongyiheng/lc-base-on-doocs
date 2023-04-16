@@ -54,7 +54,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        cnt = [0] * 26
+        for c in chars:
+            cnt[ord(c) - ord('a')] += 1
+        ans = 0
+        for w in words:
+            wc = [0] * 26
+            for c in w:
+                wc[ord(c) - ord('a')] += 1
+            flag = True
+            for a, b in zip(cnt, wc):
+                if b > a:
+                    flag = False
+                    break
+            if flag:
+                ans += len(w)
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +79,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        int[] cnt = new int[26];
+        for (char c : chars.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        int ans = 0;
+        for (String w : words) {
+            int[] wc = new int[26];
+            boolean flag = true;
+            for (char c : w.toCharArray()) {
+                if (++wc[c - 'a'] > cnt[c - 'a']) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                ans += w.length();
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
