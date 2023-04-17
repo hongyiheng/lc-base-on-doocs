@@ -52,7 +52,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countDaysTogether(self, arriveAlice: str, leaveAlice: str, arriveBob: str, leaveBob: str) -> int:
+        def get_day(s):
+            months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+            month, day = int(s.split("-")[0]) - 1, int(s.split("-")[1])
+            for i, v in enumerate(months):
+                if i >= month:
+                    break
+                day += v
+            return day
 
+        a, b = get_day(arriveAlice), get_day(leaveAlice)
+        c, d = get_day(arriveBob), get_day(leaveBob)
+        if b < c or d < a:
+            return 0
+        return min(b, d) - max(a, c) + 1
 ```
 
 ### **Java**
@@ -60,7 +75,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int getDay(String s) {
+        int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int month = Integer.parseInt(s.split("-")[0]) - 1, day = Integer.parseInt(s.split("-")[1]);
+        for (int i = 0; i < month; i++) {
+            day += days[i];
+        }
+        return day;
+    }
+    
+    public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
+        int a = getDay(arriveAlice), b = getDay(leaveAlice), c = getDay(arriveBob), d = getDay(leaveBob);
+        if (d < a || b < c) {
+            return 0;
+        }
+        return Math.min(b, d) - Math.max(a, c) + 1;
+    }
+}
 ```
 
 ### **...**
