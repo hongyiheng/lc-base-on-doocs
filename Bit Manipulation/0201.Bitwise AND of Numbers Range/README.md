@@ -51,7 +51,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        ans = 0
+        for i in range(30, -1, -1):
+            if left >= (1 << i) and right < (1 << (i + 1)):
+                ans += (1 << i)
+                left -= (1 << i)
+                right -= (1 << i)
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +67,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int rangeBitwiseAnd(int left, int right) {
+        int ans = 0;
+        for (int i = 30; i > -1; i--) {
+            if (left >= (1 << i) && right < (1L << (i + 1))) {
+                ans |= 1 << i;
+                left -= 1 << i;
+                right -= 1 << i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
