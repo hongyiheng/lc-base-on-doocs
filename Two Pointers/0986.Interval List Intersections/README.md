@@ -69,7 +69,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+        m, n = len(firstList), len(secondList)
+        i = j = 0
+        ans = []
+        while i < m and j < n:
+            a, b = firstList[i]
+            c, d = secondList[j]
+            l, r = max(a, c), min(b, d)
+            if r >= l:
+                ans.append([l, r])
+            if b < d:
+                i += 1
+            else:
+                j += 1
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +92,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        List<int[]> ans = new ArrayList<>();
+        int m = firstList.length, n = secondList.length;
+        int i = 0, j = 0;
+        while (i < m && j < n) {
+            int a = firstList[i][0], b = firstList[i][1];
+            int c = secondList[j][0], d = secondList[j][1];
+            int l = Math.max(a, c), r = Math.min(b, d);
+            if (l <= r) {
+                ans.add(new int[]{l, r});
+            }
+            if (d > b) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        int[][] res = new int[ans.size()][2];
+        for (int k = 0; k < ans.size(); k++) {
+            res[k] = ans.get(k);
+        }
+        return res;
+    }
+}
 ```
 
 ### **...**
