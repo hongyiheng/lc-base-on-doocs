@@ -72,7 +72,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        def dfs(cur, idx):
+            nonlocal mx
+            if idx == len(nums):
+                return
+            cur ^= nums[idx]
+            dfs(cur, idx + 1)
+            ans.append(cur ^ mx)
 
+        mx = (1 << maximumBit) - 1
+        ans = []
+        dfs(0, 0)
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +93,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    int[] nums;
+    int[] ans;
+    int n, mx;
 
+    public void dfs(int cur, int idx) {
+        if (idx == n) {
+            return;
+        }
+        cur ^= nums[idx];
+        dfs(cur, idx + 1);
+        ans[n - idx - 1] = cur ^ mx;
+    }
+
+
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        n = nums.length;
+        mx = (1 << maximumBit) - 1;
+        this.nums = nums;
+        ans = new int[n];
+        dfs(0, 0);
+        return ans;
+    }
+}
 ```
 
 ### **...**
