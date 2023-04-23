@@ -82,7 +82,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        n = len(arr)
+        arr.sort()
+        mid = arr[(n - 1) // 2]
+        l, r = 0, n - 1
+        ans = []
+        while k:
+            if abs(arr[r] - mid) >= abs(arr[l] - mid):
+                ans.append(arr[r])
+                r -= 1
+            else:
+                ans.append(arr[l])
+                l += 1
+            k -= 1
+        return ans
 ```
 
 ### **Java**
@@ -90,7 +105,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] getStrongest(int[] arr, int k) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        int mid = arr[(n - 1) / 2];
+        int[] ans = new int[k];
+        int l = 0, r = n - 1;
+        for (int i = 0; i < k; i++) {
+            if (Math.abs(arr[r] - mid) >= Math.abs(arr[l] - mid)) {
+                ans[i] = arr[r--];
+            } else {
+                ans[i] = arr[l++];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
