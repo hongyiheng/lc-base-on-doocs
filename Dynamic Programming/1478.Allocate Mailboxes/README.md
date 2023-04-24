@@ -70,7 +70,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minDistance(self, houses: List[int], k: int) -> int:
+        n, inf = len(houses), 0x3f3f3f3f
+        cost = [[0] * n for _ in range(n)]
+        houses.sort()
+        for i in range(n - 2, -1, -1):
+            for j in range(i + 1, n):
+                if j - i <= 2:
+                    cost[i][j] = houses[j] - houses[i]
+                else:
+                    cost[i][j] = cost[i + 1][j - 1] + houses[j] - houses[i]
+        f = [[0] * (k + 1) for _ in range(n)]
+        for i in range(n):
+            f[i][1] = cost[0][i]
+        for i in range(n):
+            for j in range(2, min(k + 1, i + 1)):
+                f[i][j] = f[i][j - 1]
+                for p in range(1, i + 1):
+                    f[i][j] = min(f[i][j], f[i - p][j - 1] + cost[i - p + 1][i])
+        return f[n - 1][k]
 ```
 
 ### **Java**
@@ -78,7 +97,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minDistance(int[] houses, int k) {
+        int n = houses.length;
+        Arrays.sort(houses);
+        int[][] cost = new int[n][n];
+        for (int i = n - 2; i > -1; i--) {
+            for (int j = i + 1; j < n; j++) {
+                if (j - i <= 2) {
+                    cost[i][j] = houses[j] - houses[i];
+                } else {
+                    cost[i][j] = cost[i + 1][j - 1] + houses[j] - houses[i];
+                }
+            }
+        }
+        int[][] f = new int[n][k + 1];
+        for (int i = 0; i < n; i++) {
+            f[i][1] = cost[0][i];
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 2; j <= Math.min(i, k); j++) {
+                f[i][j] = f[i][j - 1];
+                for (int p = 1; p <= i; p++) {
+                    f[i][j] = Math.min(f[i][j], f[i - p][j - 1] + cost[i - p + 1][i]);
+                }
+            }
+        }
+        return f[n - 1][k];
+    }
+}
 ```
 
 ### **...**
