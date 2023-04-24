@@ -72,7 +72,7 @@
 ```python
 class Solution:
     def minDistance(self, houses: List[int], k: int) -> int:
-        n, inf = len(houses), 0x3f3f3f3f
+        n = len(houses)
         cost = [[0] * n for _ in range(n)]
         houses.sort()
         for i in range(n - 2, -1, -1):
