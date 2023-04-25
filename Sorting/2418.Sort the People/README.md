@@ -51,7 +51,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
+        q = [[-h, n] for h, n in zip(heights, names)]
+        q.sort()
+        return [n for _, n in q]
 ```
 
 ### **Java**
@@ -59,7 +63,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String[] sortPeople(String[] names, int[] heights) {
+        int n = names.length;
+        Pair<Integer, String>[] q = new Pair[n];
+        for (int i = 0; i < n; i++) {
+            q[i] = new Pair<>(heights[i], names[i]);
+        }
+        Arrays.sort(q, (a, b) -> b.getKey() - a.getKey());
+        String[] ans = new String[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = q[i].getValue();
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
