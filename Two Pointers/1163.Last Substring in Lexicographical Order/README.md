@@ -44,7 +44,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lastSubstring(self, s: str) -> str:
+        i, j, k = 0, 1, 0
+        n = len(s)
+        while j + k < n:
+            if s[i + k] == s[j + k]:
+                k += 1
+            elif s[i + k] < s[j + k]:
+                i += k + 1
+                if i >= j:
+                    j = i + 1
+                k = 0
+            else:
+                j += k + 1
+                k = 0
+        return s[i:]
 ```
 
 ### **Java**
@@ -52,7 +67,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String lastSubstring(String s) {
+        int i = 0, j = 1, k = 0;
+        while (j + k < s.length()) {
+           if (s.charAt(i + k) == s.charAt(j + k)) {
+               k++;
+           } else if (s.charAt(i + k) < s.charAt(j + k)) {
+               i += k + 1;
+               if (i >= j) {
+                   j = i + 1;
+               }
+               k = 0;
+           } else {
+               j += k + 1;
+               k = 0;
+           }
+        }
+        return s.substring(i); 
+    }
+}
 ```
 
 ### **...**
