@@ -64,7 +64,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
+        times = minutesToTest // minutesToDie + 1
+        left, right = 0, 1000
+        while left < right:
+            mid = (left + right) >> 1
+            if times ** mid < buckets:
+                left = mid + 1
+            else:
+                right = mid
+        return left
 ```
 
 ### **Java**
@@ -72,7 +82,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+        int times = minutesToTest / minutesToDie + 1;
+        int left = 0, right = 1000;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (Math.pow(times, mid) < buckets) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+}
 ```
 
 ### **...**
