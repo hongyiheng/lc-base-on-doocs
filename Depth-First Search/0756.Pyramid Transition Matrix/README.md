@@ -66,7 +66,27 @@ B   C   D
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def pyramidTransition(self, bottom: str, allowed: List[str]) -> bool:
+        mp = defaultdict(list)
+        for a, b, c in allowed:
+            mp[(a, b)].append(c)
 
+        @cache
+        def dfs(row, cur):
+            if len(row) == 1:
+                return True
+            if len(cur) + 1 == len(row):
+                return dfs(cur, "")
+            a, b = row[len(cur)], row[len(cur) + 1]
+            for c in mp.get((a, b), []):
+                cur += c
+                if dfs(row, cur):
+                    return True
+                cur = cur[:-1]
+            return False
+
+        return dfs(bottom, "")
 ```
 
 ### **Java**
@@ -74,7 +94,38 @@ B   C   D
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<String, List<String>> mp = new HashMap<>();
+    Map<String, Boolean> f = new HashMap<>();
+
+    public boolean pyramidTransition(String bottom, List<String> allowed) {
+        for (String s : allowed) {
+            String key = s.substring(0, 2);
+            mp.computeIfAbsent(key, k -> new ArrayList<>()).add(s.substring(2));
+        }
+        return dfs(bottom, "");
+    }
+
+    public boolean dfs(String row, String cur) {
+        if (f.containsKey(row + cur)) {
+            return f.get(row + cur);
+        }
+        if (row.length() == 1) {
+            return true;
+        }
+        if (cur.length() + 1 == row.length()) {
+            return dfs(cur, "");
+        }
+        for (String c : mp.getOrDefault(row.substring(cur.length(), cur.length() + 2), new ArrayList<>())) {
+            if (dfs(row, cur + c)) {
+                return true;
+            }
+        }
+        f.put(row + cur, false);
+        return false;
+    }
+}
 ```
 
 ### **...**
