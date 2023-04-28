@@ -85,7 +85,43 @@ D.pop()            // 返回 -1。仍然没有栈。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class DinnerPlates:
 
+    def __init__(self, capacity: int):
+        self.cap = capacity
+        self.q = []
+        self.add_ids = []
+
+    def push(self, val: int) -> None:
+        index = len(self.q)
+        if self.add_ids:
+            index = heapq.heappop(self.add_ids)
+        if index < len(self.q):
+            self.q[index].append(val)
+        else:
+            self.q.append([val])
+        if len(self.q[index]) < self.cap:
+            heapq.heappush(self.add_ids, index)
+
+    def pop(self) -> int:
+        return self.popAtStack(len(self.q) - 1)
+
+    def popAtStack(self, index: int) -> int:
+        if index < 0 or index >= len(self.q) or not self.q[index]:
+            return -1
+        if len(self.q[index]) == self.cap:
+            heapq.heappush(self.add_ids, index)
+        ans = self.q[index].pop()
+        while self.q and not self.q[-1]:
+            self.add_ids.remove(len(self.q) - 1)
+            self.q.pop()
+        return ans
+
+# Your DinnerPlates object will be instantiated and called as such:
+# obj = DinnerPlates(capacity)
+# obj.push(val)
+# param_2 = obj.pop()
+# param_3 = obj.popAtStack(index)
 ```
 
 ### **Java**
@@ -93,7 +129,59 @@ D.pop()            // 返回 -1。仍然没有栈。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class DinnerPlates {
 
+    PriorityQueue<Integer> addIds = new PriorityQueue<>((a, b) -> a - b);
+    List<Deque<Integer>> q = new ArrayList<>();
+    int cap;
+
+    public DinnerPlates(int capacity) {
+        cap = capacity;
+    }
+
+    public void push(int val) {
+        int index = q.size();
+        if (!addIds.isEmpty()) {
+            index = addIds.poll();
+        }
+        if (index < q.size()) {
+            q.get(index).addLast(val);
+        } else {
+            Deque<Integer> tmp = new ArrayDeque<>();
+            tmp.addLast(val);
+            q.add(tmp);
+        }
+        if (q.get(index).size() < cap) {
+            addIds.add(index);
+        }
+    }
+
+    public int pop() {
+        return popAtStack(q.size() - 1);
+    }
+
+    public int popAtStack(int index) {
+        if (index < 0 || index >= q.size() || q.get(index).isEmpty()) {
+            return -1;
+        }
+        if (q.get(index).size() == cap) {
+            addIds.add(index);
+        }
+        int ans = q.get(index).pollLast();
+        while (!q.isEmpty() && q.get(q.size() - 1).isEmpty()) {
+            q.remove(q.size() - 1);
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your DinnerPlates object will be instantiated and called as such:
+ * DinnerPlates obj = new DinnerPlates(capacity);
+ * obj.push(val);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.popAtStack(index);
+ */
 ```
 
 ### **...**
