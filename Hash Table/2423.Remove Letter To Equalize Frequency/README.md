@@ -52,7 +52,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def equalFrequency(self, word: str) -> bool:
+        cnt = [0] * 26
+        for c in word:
+            cnt[ord(c) - ord('a')] += 1
+        for i, v in enumerate(cnt):
+            cnt[i] -= 1
+            if len({v for v in cnt if v}) == 1:
+                return True
+            cnt[i] += 1
+        return False
 ```
 
 ### **Java**
@@ -60,7 +70,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean equalFrequency(String word) {
+        int[] cnt = new int[26];
+        for (char c : word.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (int i = 0; i < 26; i++) {
+            cnt[i]--;
+            Set<Integer> s = new HashSet<>();
+            for (int v : cnt) {
+                if (v != 0) {
+                    s.add(v);
+                }  
+            }
+            if (s.size() == 1) {
+                return true;
+            }
+            cnt[i]++;
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
