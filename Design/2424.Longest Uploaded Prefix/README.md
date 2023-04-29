@@ -60,7 +60,27 @@ server.longest();                    // 前缀 [1,2,3] 是最长上传前缀，�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class LUPrefix:
 
+    def __init__(self, n: int):
+        self.s = set()
+        self.x = 0
+
+
+    def upload(self, video: int) -> None:
+        self.s.add(video)
+
+
+    def longest(self) -> int:
+        while self.x + 1 in self.s:
+            self.x += 1
+        return self.x
+
+
+# Your LUPrefix object will be instantiated and called as such:
+# obj = LUPrefix(n)
+# obj.upload(video)
+# param_2 = obj.longest()
 ```
 
 ### **Java**
@@ -68,7 +88,34 @@ server.longest();                    // 前缀 [1,2,3] 是最长上传前缀，�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class LUPrefix {
 
+    Set<Integer> s;
+    int x;
+
+    public LUPrefix(int n) {
+        s = new HashSet<>();
+        x = 0;
+    }
+    
+    public void upload(int video) {
+        s.add(video);
+    }
+    
+    public int longest() {
+        while (s.contains(x + 1)) {
+            x++;
+        }
+        return x;
+    }
+}
+
+/**
+ * Your LUPrefix object will be instantiated and called as such:
+ * LUPrefix obj = new LUPrefix(n);
+ * obj.upload(video);
+ * int param_2 = obj.longest();
+ */
 ```
 
 ### **...**
