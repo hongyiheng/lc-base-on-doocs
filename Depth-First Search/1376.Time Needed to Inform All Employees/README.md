@@ -93,7 +93,20 @@ id = 1 的员工将在 6 分钟内通知 id = 0 的员工。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def numOfMinutes(self, n: int, headID: int, manager: List[int], informTime: List[int]) -> int:
+        def dfs(u, cur):
+            if not g[u]:
+                return cur
+            ans = cur
+            for v in g[u]:
+                ans = max(ans, dfs(v, cur + informTime[u]))
+            return ans
 
+        g = defaultdict(list)
+        for i, v in enumerate(manager):
+            g[v].append(i)
+        return dfs(headID, 0)
 ```
 
 ### **Java**
@@ -101,7 +114,30 @@ id = 1 的员工将在 6 分钟内通知 id = 0 的员工。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Integer, List<Integer>> g = new HashMap<>();
+    int[] informTime;
+
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        this.informTime = informTime;
+        for (int i = 0; i < n; i++) {
+            g.computeIfAbsent(manager[i], k -> new ArrayList<>()).add(i);
+        }
+        return dfs(headID, 0);
+    }
+
+    public int dfs(int u, int cur) {
+        if (!g.containsKey(u)) {
+            return cur;
+        }
+        int ans = 0;
+        for (int v : g.get(u)) {
+            ans = Math.max(ans, dfs(v, cur + informTime[u]));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
