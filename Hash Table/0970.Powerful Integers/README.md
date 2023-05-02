@@ -56,7 +56,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def powerfulIntegers(self, x: int, y: int, bound: int) -> List[int]:
+        ans = set()
+        i = 1
+        while i < bound:
+            j = 1
+            while i + j <= bound:
+                ans.add(i + j)
+                if y == 1:
+                    break
+                j *= y
+            if x == 1:
+                break
+            i *= x
+        return list(ans)
 ```
 
 ### **Java**
@@ -64,7 +78,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> powerfulIntegers(int x, int y, int bound) {
+        Set<Integer> ans = new HashSet<>();
+        for (int i = 1; i < bound; i *= x) {
+            for (int j = 1; i + j <= bound; j *= y) {
+                ans.add(i + j);
+                if (y == 1) {
+                    break;
+                }
+            }
+            if (x == 1) {
+                break;
+            }
+        }
+        return new ArrayList<>(ans);
+    }
+}
 ```
 
 ### **...**
