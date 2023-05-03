@@ -48,7 +48,18 @@ nums 最终元素和为 5 + 6 + 1 + 2 + 3 + 4 + 7 + 8 = 36 ，这是所有情况
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimalKSum(self, nums: List[int], k: int) -> int:
+        ans = (1 + k) * k / 2
+        s = {v for v in nums}
+        cur = k
+        for v in s:
+            if v <= k:
+                cur += 1
+                while cur in s:
+                    cur += 1
+                ans = ans - v + cur
+        return int(ans)
 ```
 
 ### **Java**
@@ -56,7 +67,26 @@ nums 最终元素和为 5 + 6 + 1 + 2 + 3 + 4 + 7 + 8 = 36 ，这是所有情况
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minimalKSum(int[] nums, int k) {
+        long ans = 1L * (k + 1) * k / 2;
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            s.add(v);
+        }
+        int cur = k;
+        for (int v : s) {
+            if (v <= k) {
+                cur++;
+                while (s.contains(cur)) {
+                    cur++;
+                }
+                ans = ans - v + cur;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
