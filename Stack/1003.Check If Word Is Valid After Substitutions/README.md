@@ -70,7 +70,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if len(s) % 3:
+            return False
+        q = []
+        for c in s:
+            q.append(c)
+            if len(q) >= 3 and "".join(q[-3:]) == 'abc':
+                for _ in range(3):
+                    q.pop()
+        return not q
 ```
 
 ### **Java**
@@ -78,7 +88,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isValid(String s) {
+        int n = s.length();
+        if (n % 3 != 0) {
+            return false;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            sb.append(c);
+            if (sb.length() >= 3 && sb.substring(sb.length() - 3, sb.length()).equals("abc")) {
+                for (int i = 0; i < 3; i++) {
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+            }
+        }
+        return sb.length() == 0;
+    }
+}
 ```
 
 ### **...**
