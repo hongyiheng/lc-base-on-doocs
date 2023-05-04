@@ -84,21 +84,14 @@ class Solution:
         if k == 0:
             return pre[startPos + 1] - pre[startPos] if 0 <= startPos <= n else 0
 
-        l = startPos - k
         ans = 0
-        while l <= startPos and l <= n:
-            r = max(startPos, startPos + k - (startPos - l) * 2)
-            ans = max(ans, pre[min(r, n) + 1] - pre[min(max(0, l), n)])
-            l += 1
-
-        r = startPos + k
-        while r >= startPos:
-            l = min(startPos, startPos - k + (r - startPos) * 2)
+        for l in range(startPos - k, startPos + 1):
             if l > n:
                 break
+            r = max(startPos, startPos + k - (startPos - l) * 2)
             ans = max(ans, pre[min(r, n) + 1] - pre[min(max(0, l), n)])
-            r -= 1
-
+            r = max(startPos, (l + startPos + k) // 2)
+            ans = max(ans, pre[min(r, n) + 1] - pre[min(max(0, l), n)])
         return ans
 ```
 
@@ -132,12 +125,7 @@ class Solution {
             }
             int r = Math.max(startPos, startPos + k - (startPos - l) * 2);
             ans = Math.max(ans, pre[Math.min(r, n) + 1] - pre[Math.max(0, l)]);
-        }
-        for (int r = startPos + k; r >= startPos; r--) {
-            int l = Math.min(startPos, startPos - k + (r - startPos) * 2);
-            if (l > n) {
-                break;
-            }
+            r = Math.max(startPos, (l + startPos + k) / 2);
             ans = Math.max(ans, pre[Math.min(r, n) + 1] - pre[Math.max(0, l)]);
         }
         return ans;
