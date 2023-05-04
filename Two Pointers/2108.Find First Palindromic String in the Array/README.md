@@ -54,7 +54,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def firstPalindrome(self, words: List[str]) -> str:
+        for w in words:
+            l, r = 0, len(w) - 1
+            while l < r:
+                if w[l] != w[r]:
+                    break
+                l += 1
+                r -= 1
+            if l >= r:
+                return w
+        return ""
 ```
 
 ### **Java**
@@ -62,7 +73,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String firstPalindrome(String[] words) {
+        for (String w : words) {
+            int l = 0, r = w.length() - 1;
+            while (l < r) {
+                if (w.charAt(l) != w.charAt(r)) {
+                    break;
+                }
+                l++;
+                r--;
+            }
+            if (l >= r) {
+                return w;
+            }
+        }
+        return "";
+    }
+}
 ```
 
 ### **...**
