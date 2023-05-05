@@ -69,7 +69,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def addSpaces(self, s: str, spaces: List[int]) -> str:
+        q = []
+        last = 0
+        for v in spaces:
+            q.append(s[last:v])
+            last = v
+        if last != len(s):
+            q.append(s[last:])
+        return " ".join(q)
 ```
 
 ### **Java**
@@ -77,7 +86,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String addSpaces(String s, int[] spaces) {
+        StringBuilder ans = new StringBuilder();
+        int last = 0;
+        for (int v : spaces) {
+            ans.append(s.substring(last, v));
+            last = v;
+            ans.append(" ");
+        }
+        if (last != s.length()) {
+            ans.append(s.substring(last));
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
