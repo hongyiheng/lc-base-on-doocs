@@ -60,7 +60,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def printVertically(self, s: str) -> List[str]:
+        ss = s.split(" ")
+        n = 0
+        for w in ss:
+            n = max(n, len(w))
+        ans = []
+        for i in range(n):
+            col = []
+            for w in ss:
+                col.append(w[i] if i < len(w) else " ")
+            for j in range(len(col) - 1, -1, -1):
+                if col[j] != " ":
+                    ans.append("".join(col[:j + 1]))
+                    break
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +83,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> printVertically(String s) {
+        String[] ss = s.split(" ");
+        int m = ss.length, n = 0;
+        for (int i = 0; i < m; i++) {
+            n = Math.max(n, ss[i].length());
+        }
+        List<String> ans = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            StringBuilder col = new StringBuilder();
+            for (int j = 0; j < m; j++) {
+                char c = i < ss[j].length() ? ss[j].charAt(i) : ' ';
+                col.append(c);
+            }
+            for (int k = col.length() - 1; k > -1; k--) {
+                if (col.charAt(k) != ' ') {
+                    ans.add(col.toString().substring(0, k + 1));
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
