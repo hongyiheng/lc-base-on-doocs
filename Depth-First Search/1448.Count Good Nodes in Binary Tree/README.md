@@ -59,7 +59,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        def dfs(root, x):
+            if not root:
+                return 0
+            mx = max(root.val, x)
+            left = dfs(root.left, mx)
+            right = dfs(root.right, mx)
+            return left + right + 1 if root.val >= x else left + right
+        
+        return dfs(root, root.val)
 ```
 
 ### **Java**
@@ -67,7 +83,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int goodNodes(TreeNode root) {
+        return dfs(root, root.val);
+    }
 
+    public int dfs(TreeNode root, int x) {
+        if (root == null) {
+            return 0;
+        }
+        int mx = Math.max(root.val, x);
+        int left = dfs(root.left, mx), right = dfs(root.right, mx);
+        return root.val >= x ? left + right + 1 : left + right;
+    }
+}
 ```
 
 ### **...**
