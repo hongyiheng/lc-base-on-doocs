@@ -59,7 +59,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        ans = 0
+        q = [[root, root.val]]
+        while q:
+            t, x = q.pop()
+            ans += t.val >= x
+            nx = max(x, t.val)
+            if t.left:
+                q.append([t.left, nx])
+            if t.right:
+                q.append([t.right, nx])
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +85,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int goodNodes(TreeNode root) {
+        Deque<Pair<TreeNode, Integer>> q = new ArrayDeque<>();
+        q.addLast(new Pair(root, root.val));
+        int ans = 0;
+        while (!q.isEmpty()) {
+            Pair<TreeNode, Integer> cur = q.pollFirst();
+            TreeNode node = cur.getKey();
+            int nx = Math.max(node.val, cur.getValue());
+            if (node.left != null) {
+                q.addLast(new Pair<>(node.left, nx));
+            }
+            if (node.right != null) {
+                q.addLast(new Pair<>(node.right, nx));
+            }
+            ans += node.val >= cur.getValue() ? 1 : 0;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
