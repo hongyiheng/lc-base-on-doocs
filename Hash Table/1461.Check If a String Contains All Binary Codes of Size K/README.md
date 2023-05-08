@@ -72,7 +72,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def hasAllCodes(self, s: str, k: int) -> bool:
+        cnt = set()
+        cur = w = 0
+        for i in range(len(s)):
+            cur = (cur << 1) + int(s[i])
+            w += 1
+            if w >= k:
+                cnt.add(cur)
+                cur -= int(s[i - k + 1]) << (k - 1)
+                w -= 1
+        return len(cnt) == (1 << k) 
 ```
 
 ### **Java**
@@ -80,7 +91,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        Set<Integer> cnt = new HashSet<>();
+        int cur = 0, w = 0;
+        for (int i = 0; i < s.length(); i++) {
+            cur = (cur << 1) + s.charAt(i) - '0';
+            if (++w >= k) {
+                cnt.add(cur);
+                cur -= (s.charAt(i - k + 1) - '0') << (k - 1);
+                w--;
+            }
+        }
+        return cnt.size() == (1 << k);
+    }
+}
 ```
 
 ### **...**
