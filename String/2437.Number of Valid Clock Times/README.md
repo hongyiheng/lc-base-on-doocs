@@ -56,7 +56,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countTime(self, time: str) -> int:
+        ans = 1
+        if time[0] == '?' and time[1] == '?':
+            ans = 24
+        elif time[0] == '?':
+            ans = 3 if time[1] < '4' else 2
+        elif time[1] == '?':
+            ans = 10 if time[0] < '2' else 4
+        ans *= 6 if time[3] == '?' else 1
+        ans *= 10 if time[4] == '?' else 1
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +75,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countTime(String time) {
+        int ans = 1;
+        if (time.charAt(0) == '?' && time.charAt(1) == '?') {
+            ans = 24;
+        } else if (time.charAt(0) == '?') {
+            ans = time.charAt(1) < '4' ? 3 : 2;
+        } else if (time.charAt(1) == '?') {
+            ans = time.charAt(0) >= '2' ? 4 : 10;
+        }
+        ans *= time.charAt(3) == '?' ? 6 : 1;
+        ans *= time.charAt(4) == '?' ? 10 : 1;
+        return ans;
+    }
+}
 ```
 
 ### **...**
