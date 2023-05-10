@@ -43,7 +43,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def queryString(self, s: str, n: int) -> bool:
+        if n > 1 << 11:
+            return False
+        for i in range(1, n + 1):
+            if str(bin(i))[2:] not in s:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -51,7 +58,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean queryString(String s, int n) {
+        if (n > 1 << 11) {
+            return false;
+        }
+        for (int i = 1; i <= n; i++) {
+            if (!s.contains(Integer.toBinaryString(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
