@@ -50,7 +50,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestRepunitDivByK(self, k: int) -> int:
+        cur = 1
+        for i in range(1, k + 1):
+            if cur % k == 0:
+                return i
+            cur = (cur % k * 10 + 1) % k
+        return -1
 ```
 
 ### **Java**
@@ -58,7 +65,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int smallestRepunitDivByK(int k) {
+        int cur = 1;
+        for (int i = 1; i <= k; i++) {
+            if (cur % k == 0) {
+                return i;
+            }
+            cur = (cur % k * 10 + 1) % k;
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
