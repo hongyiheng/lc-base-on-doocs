@@ -43,7 +43,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minPatches(self, nums: List[int], n: int) -> int:
+        ans = idx = 0
+        cur = 1
+        while cur <= n:
+            if idx < len(nums) and nums[idx] <= cur:
+                cur += nums[idx]
+                idx += 1
+            else:
+                cur *= 2
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -51,7 +62,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minPatches(int[] nums, int n) {
+        long cur = 1;
+        int ans = 0, idx = 0;
+        while (cur <= n) {
+            if (idx < nums.length && nums[idx] <= cur) {
+                cur += nums[idx++];
+            } else {
+                cur <<= 1;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
