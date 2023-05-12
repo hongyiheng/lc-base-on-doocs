@@ -49,7 +49,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumBase(self, n: int, k: int) -> int:
+        ans = 0
+        while n:
+            ans += n % k
+            n //= k
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +63,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumBase(int n, int k) {
+        int ans = 0;
+        while (n > 0) {
+            ans += n % k;
+            n /= k;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
