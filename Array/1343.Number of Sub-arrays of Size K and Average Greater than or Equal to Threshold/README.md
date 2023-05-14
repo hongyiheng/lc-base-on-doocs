@@ -67,7 +67,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
+        cur = sum(arr[:k])
+        ans = 1 if cur / k >= threshold else 0
+        for i in range(k, len(arr)):
+            cur -= arr[i - k]
+            cur += arr[i]
+            if cur / k >= threshold:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +84,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numOfSubarrays(int[] arr, int k, int threshold) {
+        int cur = 0;
+        for (int i = 0; i < k; i++) {
+            cur += arr[i];
+        }
+        int ans = cur / k >= threshold ? 1 : 0;
+        for (int i = k; i < arr.length; i++) {
+            cur -= arr[i - k];
+            cur += arr[i];
+            if (cur / k >= threshold) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
