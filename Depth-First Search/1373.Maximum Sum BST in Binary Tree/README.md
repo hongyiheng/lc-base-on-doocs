@@ -81,7 +81,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxSumBST(self, root: Optional[TreeNode]) -> int:
+        ans = 0
+        f = dict()
 
+        def get_sum(root):
+            if root in f:
+                return f[root]
+            if not root:
+                return 0
+            l, r = get_sum(root.left), get_sum(root.right)
+            f[root] = l + r + root.val
+            return f[root]
+
+        def dfs(root):
+            nonlocal ans
+            flag = True
+            mx = mi = root.val
+            if root.left:
+                l_flag, l_mx, l_mi = dfs(root.left)
+                flag = flag and l_flag and l_mx < root.val
+                mx, mi = max(mx, l_mx), min(mi, l_mi)
+            if root.right:
+                r_flag, r_mx, r_mi = dfs(root.right)
+                flag = flag and r_flag and root.val < r_mi
+                mx, mi = max(mx, r_mx), min(mi, r_mi)
+            if flag:
+                ans = max(ans, get_sum(root))
+            return (flag, mx, mi)
+
+        dfs(root)
+        return ans
 ```
 
 ### **Java**
@@ -89,7 +126,66 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
 
+    int ans = 0;
+    Map<TreeNode, Integer> f = new HashMap<>();
+
+    public int maxSumBST(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+
+    public Pair<Boolean, int[]> dfs(TreeNode root) {
+        boolean flag = true;
+        int mx = root.val, mi = root.val;
+        if (root.left != null) {
+            Pair<Boolean, int[]> left = dfs(root.left);
+            int lMx = left.getValue()[0], lMi = left.getValue()[1];
+            flag = flag && left.getKey() && lMx < root.val;
+            mx = Math.max(mx, lMx);
+            mi = Math.min(mi, lMi);
+        }
+        if (root.right != null) {
+            Pair<Boolean, int[]> right = dfs(root.right);
+            int rMx = right.getValue()[0], rMi = right.getValue()[1];
+            flag = flag && right.getKey() && rMi > root.val;
+            mx = Math.max(mx, rMx);
+            mi = Math.min(mi, rMi);
+        }
+        if (flag) {
+            ans = Math.max(ans, getSum(root));
+        }
+        return new Pair<>(flag, new int[]{mx, mi});
+    }
+
+    private int getSum(TreeNode root) {
+        if (f.containsKey(root)) {
+            return f.get(root);
+        }
+        if (root == null) {
+            return 0;
+        }
+        int l = getSum(root.left), r = getSum(root.right);
+        f.put(root, l + r + root.val);
+        return f.get(root);
+    }
+}
 ```
 
 ### **...**
