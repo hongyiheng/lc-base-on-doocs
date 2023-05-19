@@ -70,7 +70,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, grid: List[List[int]], x: int) -> int:
+        q = []
+        for row in grid:
+            for v in row:
+                q.append(v)
+        q.sort()
+        mid = q[len(q) // 2]
+        ans = 0
+        for v in q:
+            if abs(v - mid) % x:
+                return -1
+            ans += abs(v - mid) // x
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +91,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+        List<Integer> q = new ArrayList<>();
+        for (int[] row : grid) {
+            for (int v : row) {
+                q.add(v);
+            }
+        }
+        q.sort(Integer::compareTo);
+        int mid = q.get(q.size() / 2);
+        int ans = 0;
+        for (int v : q) {
+            if (Math.abs(v - mid) % x != 0) {
+                return -1;
+            }
+            ans += Math.abs(v - mid) / x;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
