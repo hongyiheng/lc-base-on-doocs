@@ -46,7 +46,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def numTilePossibilities(self, tiles: str) -> int:
+        def dfs():
+            ans = 0
+            for k in cnt.keys():
+                if cnt[k] > 0:
+                    ans += 1
+                    cnt[k] -= 1
+                    ans += dfs()
+                    cnt[k] += 1
+            return ans
 
+        cnt = Counter(tiles)
+        return dfs()
 ```
 
 ### **Java**
@@ -54,7 +67,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] cnt = new int[26];
+
+    public int numTilePossibilities(String tiles) {
+        for (char c : tiles.toCharArray()) {
+            cnt[c - 'A']++;
+        }        
+        return dfs();
+    }
+
+    public int dfs() {
+        int ans = 0;
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i] > 0) {
+                ans++;
+                cnt[i]--;
+                ans += dfs();
+                cnt[i]++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
