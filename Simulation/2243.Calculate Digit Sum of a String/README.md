@@ -64,7 +64,21 @@ s 变为 "0" + "0" + "0" = "000" ，其长度等于 k ，所以返回 "000" 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def digitSum(self, s: str, k: int) -> str:
+        if len(s) <= k:
+            return s
+        ans = []
+        cnt = cur = 0
+        for c in s:
+            cur += ord(c) - ord('0')
+            cnt += 1
+            if cnt == k:
+                ans.append(str(cur))
+                cnt = cur = 0
+        if cnt:
+            ans.append(str(cur))
+        return self.digitSum("".join(ans), k)
 ```
 
 ### **Java**
@@ -72,7 +86,27 @@ s 变为 "0" + "0" + "0" = "000" ，其长度等于 k ，所以返回 "000" 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String digitSum(String s, int k) {
+        if (s.length() <= k) {
+            return s;
+        }
+        StringBuilder ans = new StringBuilder();
+        int cnt = 0, cur = 0;
+        for (char c : s.toCharArray()) {
+            cur += c - '0';
+            if (++cnt == k) {
+                ans.append(String.valueOf(cur));
+                cnt = 0;
+                cur = 0;
+            }
+        }
+        if (cnt > 0) {
+            ans.append(String.valueOf(cur));
+        }
+        return digitSum(ans.toString(), k);
+    }
+}
 ```
 
 ### **...**
