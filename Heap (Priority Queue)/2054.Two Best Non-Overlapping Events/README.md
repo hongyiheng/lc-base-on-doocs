@@ -61,7 +61,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxTwoEvents(self, events: List[List[int]]) -> int:
+        events.sort(key=lambda x:x[0])
+        q = []
+        ans = mx = 0
+        for u, v, w in events:
+            while q and q[0][0] < u:
+                mx = max(mx, heapq.heappop(q)[1])
+            ans = max(ans, mx + w)
+            heapq.heappush(q, [v, w])
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +79,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxTwoEvents(int[][] events) {
+        Arrays.sort(events, (a, b) -> a[0] - b[0]);
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        int ans = 0, mx = 0;
+        for (int[] e : events) {
+            int u = e[0], v = e[1], w = e[2];
+            while (!q.isEmpty() && q.peek()[0] < u) {
+                mx = Math.max(mx, q.poll()[1]);
+            }
+            ans = Math.max(ans, mx + w);
+            q.offer(new int[]{v, w});
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
