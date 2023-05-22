@@ -59,7 +59,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sufficientSubset(self, root: Optional[TreeNode], limit: int) -> Optional[TreeNode]:
+        def dfs(root, s):
+            s += root.val
+            if not root.left and not root.right:
+                return (root if s >= limit else None, s)
+            mx = -inf
+            if root.left:
+                l = dfs(root.left, s)
+                mx = max(mx, l[1])
+                root.left = l[0]
+            if root.right:
+                r = dfs(root.right, s)
+                mx = max(mx, r[1])
+                root.right = r[0]
+            return (root if mx >= limit else None, mx)
+        
+        return dfs(root, 0)[0]
 ```
 
 ### **Java**
@@ -67,7 +90,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
 
+    int limit;
+
+    public TreeNode sufficientSubset(TreeNode root, int limit) {
+        this.limit = limit;
+        return dfs(root, 0).getKey();
+    }
+
+    public Pair<TreeNode, Integer> dfs(TreeNode root, int s) {
+        s += root.val;
+        if (root.left == null && root.right == null) {
+            return new Pair<>(s < limit ? null: root, s);
+        }
+        int mx = -0x3f3f3f3f;
+        if (root.left != null) {
+            Pair<TreeNode, Integer> left = dfs(root.left, s);
+            root.left = left.getKey();
+            mx = Math.max(mx, left.getValue());
+        }
+        if (root.right != null) {
+            Pair<TreeNode, Integer> right = dfs(root.right, s);
+            root.right = right.getKey();
+            mx = Math.max(mx, right.getValue());
+        }
+        return new Pair<>(mx < limit ? null : root, mx);
+    }
+}
 ```
 
 ### **...**
