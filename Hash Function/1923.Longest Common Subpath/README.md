@@ -67,7 +67,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def longestCommonSubpath(self, n: int, paths: List[List[int]]) -> int:
+        def check(k):
+            cnt = defaultdict(int)
+            for s in paths:
+                vis = set()
+                l = r = h1 = h2 = 0
+                while r < len(s):
+                    h1 = (h1 * base1 + s[r]) % M
+                    h2 = (h2 * base2 + s[r]) % M
+                    if r - l + 1 >= k:
+                        if (h1, h2) not in vis:
+                            cnt[(h1, h2)] += 1
+                            vis.add((h1, h2))
+                        h1 -= (s[l] * p1[k - 1])
+                        h2 -= (s[l] * p2[k - 1])
+                        l += 1
+                    r += 1
+            return max(cnt.values()) == len(paths)
 
+
+        base1, base2, M = 131, 131313, int(1e9 + 7)
+        m = 100010
+        p1, p2 = [1] * m, [1] * m
+        for i in range(1, m):
+            p1[i] = p1[i - 1] * base1 % M
+            p2[i] = p2[i - 1] * base2 % M
+        l, r = 0, min([len(s) for s in paths])
+
+        while l < r:
+            mid = (l + r + 1) >> 1
+            if check(mid):
+                l = mid
+            else:
+                r = mid - 1
+        return l
 ```
 
 ### **Java**
@@ -75,7 +110,63 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    int M = (int)1e9 + 7, m = 100010;
+    long[] p1 = new long[m], p2 = new long[m];
+    int base1 = 131, base2 = 1313131;
 
+    public int longestCommonSubpath(int n, int[][] paths) {
+        p1[0] = p2[0] = 1;
+        for (int i = 1; i < m; i++) {
+            p1[i] = p1[i - 1] * base1 % M;
+            p2[i] = p2[i - 1] * base2 % M;
+        }
+        int l = 0, r = m;
+        for (int[] s : paths) {
+            r = Math.min(r, s.length);
+        }
+        while (l < r) {
+            int mid = l + r + 1 >> 1;
+            if (check(mid, paths)) {
+                l = mid;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return l;
+    }
+
+    private boolean check(int k, int[][] paths) {
+        Map<String, Integer> cnt = new HashMap<>();
+        for (int[] s : paths) {
+            long h1 = 0, h2 = 0;
+            Set<String> vis = new HashSet<>();
+            int l = 0, r = 0;
+            while (r < s.length) {
+                h1 = (h1 * base1 + s[r]) % M;
+                h2 = (h2 * base2 + s[r]) % M;
+                if (r - l + 1 >= k) {
+                    String h = h1 + "_" + h2;
+                    if (!vis.contains(h)) {
+                        vis.add(h);
+                        cnt.put(h, cnt.getOrDefault(h, 0) + 1);
+                    }
+                    h1 = (h1 - s[l] * p1[k - 1] % M + M) % M;
+                    h2 = (h2 - s[l] * p2[k - 1] % M + M) % M;
+                    l++;
+                }
+                r++;
+            }
+        }
+        for (int v : cnt.values()) {
+            if (v == paths.length) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
