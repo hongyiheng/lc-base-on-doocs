@@ -69,7 +69,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largestValsFromLabels(self, values: List[int], labels: List[int], numWanted: int, useLimit: int) -> int:
+        q = [[a, b] for a, b in zip(values, labels)]
+        q.sort(key=lambda x:-x[0])
+        ans = 0
+        cnt = defaultdict(int)
+        for a, b in q:
+            if numWanted <= 0:
+                break
+            if cnt[b] < useLimit:
+                cnt[b] += 1
+                numWanted -= 1
+                ans += a
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +90,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int largestValsFromLabels(int[] values, int[] labels, int numWanted, int useLimit) {
+        List<int[]> q = new ArrayList<>();
+        for (int i = 0; i < values.length; i++) {
+            q.add(new int[]{values[i], labels[i]});
+        }
+        q.sort((a, b) -> b[0] - a[0]);
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int ans = 0;
+        for (int[] v : q) {
+            if (numWanted <= 0) {
+                break;
+            }
+            if (cnt.getOrDefault(v[1], 0) < useLimit) {
+                ans += v[0];
+                cnt.put(v[1], cnt.getOrDefault(v[1], 0) + 1);
+                numWanted--;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
