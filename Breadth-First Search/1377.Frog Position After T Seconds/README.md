@@ -71,7 +71,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def frogPosition(self, n: int, edges: List[List[int]], t: int, target: int) -> float:
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        vis = {1}
+        q = deque([(1, 1)])
+        while q and t >= 0:
+            for _ in range(len(q)):
+                v, w = q.popleft()
+                if t == 0 and v == target:
+                    return w
+                tmp = []
+                for nv in g[v]:
+                    if nv not in vis:
+                        tmp.append(nv)
+                        vis.add(nv)
+                if not tmp and v == target:
+                    return w
+                for nv in tmp:
+                    q.append((nv, w / len(tmp)))
+            t -= 1
+        return 0
 ```
 
 ### **Java**
@@ -79,7 +102,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double frogPosition(int n, int[][] edges, int t, int target) {
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        for (int[] e : edges) {
+            g.computeIfAbsent(e[0], k -> new ArrayList<>()).add(e[1]);
+            g.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);
+        }
+        Set<Integer> vis = new HashSet<>();
+        vis.add(1);
+        Deque<double[]> q = new ArrayDeque<>();
+        q.addLast(new double[]{1, 1});
+        while (!q.isEmpty() && t >= 0) {
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                double[] cur = q.pollFirst();
+                int v = (int) cur[0];
+                double w = cur[1];
+                if (v == target && t == 0) {
+                    return w;
+                }
+                List<Integer> tmp = new ArrayList<>();
+                for (int nv : g.getOrDefault(v, new ArrayList<>())) {
+                    if (!vis.contains(nv)) {
+                        tmp.add(nv);
+                        vis.add(nv);
+                    }
+                }
+                if (tmp.isEmpty() && v == target) {
+                    return w;
+                }
+                for (int nv : tmp) {
+                    q.addLast(new double[]{nv, w / tmp.size()});
+                }
+            }
+            t--;
+        }
+        return 0;
+    }
+}
 ```
 
 ### **...**
