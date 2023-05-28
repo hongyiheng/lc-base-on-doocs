@@ -64,7 +64,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kthSmallest(self, mat: List[List[int]], k: int) -> int:
+        pre = [0]
+        for cur in mat:
+            pre = sorted(a + b for a in pre for b in cur[:k])[:k]
+        return pre[-1]
 ```
 
 ### **Java**
@@ -72,7 +77,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int kthSmallest(int[][] mat, int k) {
+        List<Integer> pre = new ArrayList<>();
+        pre.add(0);
+        for (int[] row : mat) {
+            List<Integer> q = new ArrayList<>();
+            for (int a : pre) {
+                for (int b : row) {
+                    q.add(a + b);
+                }
+            }
+            Collections.sort(q);
+            pre.clear();
+            for (int p = 0; p < Math.min(k, q.size()); p++) {
+                pre.add(q.get(p));
+            }
+        }
+        return pre.get(k - 1);
+    }
+}
 ```
 
 ### **...**
