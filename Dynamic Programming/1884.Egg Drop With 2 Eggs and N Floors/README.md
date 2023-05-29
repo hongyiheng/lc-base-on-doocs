@@ -54,7 +54,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def twoEggDrop(self, n: int) -> int:
+        f = [inf] * (n +1)
+        f[0] = 0
+        for i in range(1, n + 1):
+            for j in range(1, i + 1):
+                    f[i] = min(max(f[i - j] + 1, j), f[i])
+        return f[n]
 ```
 
 ### **Java**
@@ -62,7 +69,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int twoEggDrop(int n) {
+        int[] f = new int[n + 1];
+        Arrays.fill(f, 0x3f3f3f3f);
+        f[0] = 0;
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j <= i; j++) {
+                f[i] = Math.min(f[i], Math.max(f[i - j] + 1, j));
+            }
+        }
+        return f[n];
+    }
+}
 ```
 
 ### **...**
