@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def vowelStrings(self, words: List[str], queries: List[List[int]]) -> List[int]:
+        n = len(words)
+        s = {'a', 'e', 'i', 'o', 'u'}
+        pre = [0] * (n + 1)
+        for i in range(n):
+            pre[i + 1] = pre[i] + (1 if words[i][0] in s and words[i][-1] in s else 0)
+        ans = []
+        for x, y in queries:
+            ans.append(pre[y + 1] - pre[x])
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +78,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] vowelStrings(String[] words, int[][] queries) {
+        Set<Character> s = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        int n = words.length, m = queries.length;
+        int[] pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            int k = words[i].length();
+            pre[i + 1] = pre[i] + (s.contains(words[i].charAt(0)) && s.contains(words[i].charAt(k - 1)) ? 1 : 0);
+        }
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            ans[i] = pre[queries[i][1] + 1] - pre[queries[i][0]];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
