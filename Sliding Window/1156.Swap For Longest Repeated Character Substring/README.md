@@ -63,7 +63,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxRepOpt1(self, text: str) -> int:
+        cnt = Counter(text)
+        ans = 0
+        i, n = 0, len(text)
+        while i < n:
+            j = i + 1
+            while j < n and text[j] == text[i]:
+                j += 1
+            k = j + 1
+            while k < n and text[k] == text[i]:
+                k += 1
+            ans = max(ans, min(j - i + k - j, cnt[text[i]]))
+            i = j
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +85,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxRepOpt1(String text) {
+        int[] cnt = new int[26];
+        for (char c : text.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        int ans = 0, i = 0, n = text.length();
+        while (i < n) {
+            int j = i + 1;
+            while (j < n && text.charAt(j) == text.charAt(i)) {
+                j++;
+            }
+            int k = j + 1;
+            while (k < n && text.charAt(k) == text.charAt(i)) {
+                k++;
+            }
+            ans = Math.max(ans, Math.min(j - i + k - j, cnt[text.charAt(i) - 'a']));
+            i = j;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
