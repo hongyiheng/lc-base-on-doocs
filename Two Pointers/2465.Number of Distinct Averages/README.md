@@ -67,7 +67,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distinctAverages(self, nums: List[int]) -> int:
+        ans = set()
+        nums.sort()
+        l, r = 0, len(nums) - 1
+        while l < r:
+            ans.add((nums[l] + nums[r]) / 2)
+            l += 1
+            r -= 1
+        return len(ans)
 ```
 
 ### **Java**
@@ -75,7 +84,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distinctAverages(int[] nums) {
+        Set<Double> ans = new HashSet<>();
+        Arrays.sort(nums);
+        int l = 0, r = nums.length - 1;
+        while (l < r) {
+            ans.add((nums[l++] + nums[r--]) * 0.5);
+        }
+        return ans.size();
+    }
+}
 ```
 
 ### **...**
