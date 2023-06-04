@@ -66,7 +66,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def averageWaitingTime(self, customers: List[List[int]]) -> float:
+        cnt = cur = 0
+        for a, t in customers:
+            cur = max(cur, a) + t
+            cnt += cur - a
+        return cnt / len(customers)
 ```
 
 ### **Java**
@@ -74,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double averageWaitingTime(int[][] customers) {
+        long cnt = 0, cur = 0, n = customers.length;
+        for (int i = 0; i < n; i++) {
+            cur = Math.max(cur, customers[i][0]) + customers[i][1];
+            cnt += cur - customers[i][0];
+        }
+        return 1.0 * cnt / n;
+    }
+}
 ```
 
 ### **...**
