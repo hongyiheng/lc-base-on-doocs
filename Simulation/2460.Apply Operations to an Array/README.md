@@ -67,7 +67,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def applyOperations(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        ans = [0] * n
+        idx = 0
+        for i, v in enumerate(nums):
+            if v == 0:
+                continue
+            if i + 1 < n and nums[i + 1] == v:
+                nums[i] += v
+                nums[i + 1] = 0
+            ans[idx] = nums[i]
+            idx += 1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +88,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] applyOperations(int[] nums) {
+        int n = nums.length, idx = 0;
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
+                continue;
+            }
+            if (i + 1 < n && nums[i] == nums[i + 1]) {
+                nums[i] *= 2;
+                nums[i + 1] = 0;
+            }
+            ans[idx++] = nums[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
