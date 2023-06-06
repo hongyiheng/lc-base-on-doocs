@@ -52,7 +52,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+        def dfs(root):
+            nonlocal ans, last
+            if not root:
+                return
+            dfs(root.left)
+            ans = min(ans, root.val - last)
+            last = root.val
+            dfs(root.right)
 
+        ans, last = inf, -inf
+        dfs(root)
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +79,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    
+    int ans = 0x3f3f3f3f, last = -0x3f3f3f3f;
+    
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.left);
+        ans = Math.min(ans, root.val - last);
+        last = root.val;
+        dfs(root.right);
+    }
+    
+    public int minDiffInBST(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+}
 ```
 
 ### **...**
