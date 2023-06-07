@@ -63,7 +63,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def miceAndCheese(self, reward1: List[int], reward2: List[int], k: int) -> int:
+        n, m = len(reward1), 2010
+        gap = [0] * m
+        for i in range(n):
+            gap[reward1[i] - reward2[i] + 1000] += 1
+        for i in range(m - 1, -1, -1):
+            if gap[i] > k:
+                gap[i] = k
+            k -= gap[i]
+        ans = 0
+        for i in range(n):
+            if gap[reward1[i] - reward2[i] + 1000]:
+                gap[reward1[i] - reward2[i] + 1000] -= 1
+                ans += reward1[i]
+            else:
+                ans += reward2[i]
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +88,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int miceAndCheese(int[] reward1, int[] reward2, int k) {
+        int n = reward1.length, m = 2010;
+        int[] gap = new int[m];
+        for (int i = 0; i < n; i++) {
+            gap[reward1[i] - reward2[i] + 1000]++;
+        }
+        for (int i = m - 1; i > -1; i--) {
+            if (gap[i] > k) {
+                gap[i] = k;
+            }
+            k -= gap[i];
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (gap[reward1[i] - reward2[i] + 1000] > 0) {
+                ans += reward1[i];
+                gap[reward1[i] - reward2[i] + 1000]--;
+            } else {
+                ans += reward2[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
