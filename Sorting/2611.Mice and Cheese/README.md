@@ -63,7 +63,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def miceAndCheese(self, reward1: List[int], reward2: List[int], k: int) -> int:
+        n = len(reward1)
+        gap = []
+        for i in range(n):
+            gap.append((reward1[i] - reward2[i], i))
+        gap.sort(reverse=True)
+        pos = {gap[i][1] for i in range(k)}
+        ans = 0
+        for i in range(n):
+            if i in pos:
+                ans += reward1[i]
+            else:
+                ans += reward2[i]
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +85,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int miceAndCheese(int[] reward1, int[] reward2, int k) {
+        int n = reward1.length;
+        List<int[]> q = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            q.add(new int[]{reward1[i] - reward2[i], i});
+        }
+        q.sort((a, b) -> b[0] - a[0]);
+        Set<Integer> pos = q.stream().map(e -> e[1]).limit(k).collect(Collectors.toSet());
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (pos.contains(i)) {
+                ans += reward1[i];
+            } else {
+                ans += reward2[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
