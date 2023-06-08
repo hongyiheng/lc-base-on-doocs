@@ -1,0 +1,55 @@
+class Solution {
+
+    boolean[][] g;
+    int ans, n, m;
+
+    public int tilingRectangle(int n, int m) {
+        g = new boolean[m][n];
+        ans = n * m;
+        this.n = n;
+        this.m = m;
+        dfs(0, 0, 0);
+        return ans;
+    }
+
+    public void dfs(int x, int y, int cur) {
+        if (cur >= ans) {
+            return;
+        }
+        if (x + 1 == m && y + 1 == n) {
+            ans = Math.min(ans, cur + (g[x][y] ? 0 : 1));
+            return;
+        }
+        int nx = x, ny = y + 1;
+        if (ny == n) {
+            nx++;
+            ny = 0;
+        }
+        if (g[x][y]) {
+            dfs(nx, ny, cur);
+        } else {
+            for (int k = Math.min(m - x, n - y); k >= 1; k--) {
+                boolean blank = true;
+                for (int i = x; i < x + k && blank; i++) {
+                    for (int j = y; j < y + k && blank; j++) {
+                        blank = !g[i][j];
+                    }
+                }
+                if (!blank) {
+                    continue;
+                }
+                for (int i = x; i < x + k; i++) {
+                    for (int j = y; j < y + k; j++) {
+                        g[i][j] = true;
+                    }
+                }
+                dfs(nx, ny, cur + 1);
+                for (int i = x; i < x + k; i++) {
+                    for (int j = y; j < y + k; j++) {
+                        g[i][j] = false;
+                    }
+                }
+            }
+        }
+    }
+}
