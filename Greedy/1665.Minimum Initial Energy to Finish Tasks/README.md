@@ -79,7 +79,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumEffort(self, tasks: List[List[int]]) -> int:
+        tasks.sort(key=lambda x:-(x[1] - x[0]))
+        ans = left = 0
+        for a, m in tasks:
+            if left >= m:
+                left -= a
+            else:
+                ans += m - left
+                left = m - a
+        return ans
 ```
 
 ### **Java**
@@ -87,7 +97,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumEffort(int[][] tasks) {
+        Arrays.sort(tasks, (a, b) -> (b[1] - b[0]) - (a[1] - a[0]));
+        int ans = 0, left = 0;
+        for (int[] t : tasks) {
+            if (left >= t[1]) {
+                left -= t[0];
+            } else {
+                ans += t[1] - left;
+                left = t[1] - t[0];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
