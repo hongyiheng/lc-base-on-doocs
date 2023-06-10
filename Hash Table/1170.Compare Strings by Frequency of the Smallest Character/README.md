@@ -55,7 +55,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
+        def f(s):
+            cnt = [0] * 26
+            for c in s:
+                cnt[ord(c) - ord('a')] += 1
+            for v in cnt:
+                if v:
+                    return v
+            return 0
 
+        vs = [f(w) for w in words]
+        ans = [0] * len(queries)
+        for i, q in enumerate(queries):
+            cur = f(q)
+            for v in vs:
+                ans[i] += 1 if v > cur else 0
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +80,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int f(String s) {
+        int[] cnt = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (int v : cnt) {
+            if (v > 0) {
+                return v;
+            }
+        }
+        return 0;
+    }
 
+    public int[] numSmallerByFrequency(String[] queries, String[] words) {
+        int[] vs = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            vs[i] = f(words[i]);
+        }
+        int[] ans = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int cur = f(queries[i]);
+            for (int v : vs) {
+                ans[i] += v > cur ? 1 : 0;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
