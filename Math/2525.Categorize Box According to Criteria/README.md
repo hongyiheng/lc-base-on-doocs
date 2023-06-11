@@ -68,7 +68,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def categorizeBox(self, length: int, width: int, height: int, mass: int) -> str:
+        bulky = max(length, width, height) >= 10 ** 4 or length * width * height >= 10 ** 9
+        heavy = mass >= 100
+        if bulky and heavy:
+            return 'Both'
+        elif bulky:
+            return 'Bulky'
+        elif heavy:
+            return 'Heavy'
+        return 'Neither'
 ```
 
 ### **Java**
@@ -76,7 +86,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String categorizeBox(int length, int width, int height, int mass) {
+        long v = 1L * length * width * height;
+        boolean bulky = Math.max(Math.max(length, width), height) >= Math.pow(10, 4) || v >= Math.pow(10, 9);
+        boolean heavy = mass >= 100;
+        if (bulky && heavy) {
+            return "Both";
+        } else if (bulky) {
+            return "Bulky";
+        } else if (heavy) {
+            return "Heavy";
+        }
+        return "Neither";
+    }
+}
 ```
 
 ### **...**
