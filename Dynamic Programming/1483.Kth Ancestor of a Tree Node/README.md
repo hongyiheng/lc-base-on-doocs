@@ -57,7 +57,29 @@ treeAncestor.getKthAncestor(6, 3);  // 返回 -1 因为不存在满足要求的�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class TreeAncestor:
 
+    def __init__(self, n: int, parent: List[int]):
+        self.p = [[-1] * 17 for _ in range(n)]
+        for i, v in enumerate(parent):
+            self.p[i][0] = v
+        for i in range(n):
+            for j in range(1, 17):
+                if self.p[i][j - 1] == -1:
+                    continue
+                self.p[i][j] = self.p[self.p[i][j - 1]][j - 1]
+            
+    def getKthAncestor(self, node: int, k: int) -> int:
+        for i in range(17):
+            if k >> i & 1 and node != -1:
+                node = self.p[node][i]
+        return node
+
+
+
+# Your TreeAncestor object will be instantiated and called as such:
+# obj = TreeAncestor(n, parent)
+# param_1 = obj.getKthAncestor(node,k)
 ```
 
 ### **Java**
@@ -65,7 +87,43 @@ treeAncestor.getKthAncestor(6, 3);  // 返回 -1 因为不存在满足要求的�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class TreeAncestor {
 
+        int[][] p;
+
+        public TreeAncestor(int n, int[] parent) {
+            p = new int[n][17];
+            for (int[] r : p) {
+                Arrays.fill(r, -1);
+            }
+            for (int i = 0; i < n; i++) {
+                p[i][0] = parent[i];
+            }
+            for (int i = 0; i < n; i++) {
+                for (int j = 1; j < 17; j++) {
+                    if (p[i][j - 1] == -1) {
+                        continue;
+                    }
+                    p[i][j] = p[p[i][j - 1]][j - 1];
+                }
+            }
+        }
+
+        public int getKthAncestor(int node, int k) {
+            for (int i = 0; i < 17; i++) {
+                if ((k & (1 << i)) != 0 && node != -1) {
+                    node = p[node][i];
+                }
+            }
+            return node;
+        }
+}
+
+/**
+ * Your TreeAncestor object will be instantiated and called as such:
+ * TreeAncestor obj = new TreeAncestor(n, parent);
+ * int param_1 = obj.getKthAncestor(node,k);
+ */
 ```
 
 ### **...**
