@@ -61,6 +61,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def unequalTriplets(self, nums: List[int]) -> int:
+        cnt = [0] * 1010
+        for v in nums:
+            cnt[v] += 1
+        l, r, ans = 0, len(nums), 0
+        for v in cnt:
+            r -= v
+            ans += l * r * v
+            l += v
+        return ans
 
 ```
 
@@ -69,6 +80,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int unequalTriplets(int[] nums) {
+        int[] cnt = new int[1010];
+        for (int v : nums) {
+            cnt[v]++;
+        }
+        int l = 0, r = nums.length, ans = 0;
+        for (int v : cnt) {
+            r -= v;
+            ans += l * r * v;
+            l += v;
+        }
+        return ans;
+    }
+}
 
 ```
 
