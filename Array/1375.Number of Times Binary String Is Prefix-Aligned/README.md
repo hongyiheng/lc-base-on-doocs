@@ -62,7 +62,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numTimesAllBlue(self, flips: List[int]) -> int:
+        ans = mx = 0
+        for i, v in enumerate(flips):
+            mx = max(v, mx)
+            if mx == i + 1:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +77,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numTimesAllBlue(int[] flips) {
+        int ans = 0, mx = 0, n = flips.length;
+        for (int i = 0; i < n; i++) {
+            mx = Math.max(flips[i], mx);
+            if (mx == i + 1) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
