@@ -53,7 +53,21 @@ queries[4] :&nbsp;子串 = &quot;abcda&quot;，可以变成回文的 &quot;abcba
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canMakePaliQueries(self, s: str, queries: List[List[int]]) -> List[bool]:
+        n = len(s)
+        cnt = [0] * (n + 1)
+        for i in range(0, n):
+            cnt[i + 1] = cnt[i] ^ (1 << (ord(s[i]) - ord('a')))
+        ans = []
+        for l, r, k in queries:
+            mask = cnt[r + 1] ^ cnt[l]
+            w = 0
+            for i in range(27):
+                if 1 << i & mask:
+                    w += 1
+            ans.append(w // 2 <= k)
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +75,28 @@ queries[4] :&nbsp;子串 = &quot;abcda&quot;，可以变成回文的 &quot;abcba
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Boolean> canMakePaliQueries(String s, int[][] queries) {
+        int n = s.length();
+        int[] cnt = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            cnt[i + 1] = cnt[i] ^ (1 << (s.charAt(i) - 'a'));
+        }
+        List<Boolean> ans = new ArrayList<>();
+        for (int[] q : queries) {
+            int l = q[0], r = q[1], k = q[2];
+            int mask = cnt[r + 1] ^ cnt[l];
+            int w = 0;
+            for (int i = 0; i < 27; i++) {
+                if ((mask & (1 << i)) != 0) {
+                    w++;
+                }
+            }
+            ans.add(w / 2 <= k);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
