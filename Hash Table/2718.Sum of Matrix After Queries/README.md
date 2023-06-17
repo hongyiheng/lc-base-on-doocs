@@ -60,7 +60,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def matrixSumQueries(self, n: int, queries: List[List[int]]) -> int:
+        row, col = set(), set()
+        ans = 0
+        for i in range(len(queries) - 1, -1, -1):
+            t, idx, val = queries[i]
+            if t == 0:
+                if idx not in row:
+                    row.add(idx)
+                    ans += val * (n - len(col))
+            else:
+                if idx not in col:
+                    col.add(idx)
+                    ans += val * (n - len(row))
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +82,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long matrixSumQueries(int n, int[][] queries) {
+        Set<Integer> row = new HashSet<>(), col = new HashSet<>();
+        long ans = 0;
+        for (int i = queries.length - 1; i > -1; i--) {
+            int t = queries[i][0], idx = queries[i][1], val = queries[i][2];
+            if (t == 0) {
+                if (row.add(idx)) {
+                    ans += 1L * val * (n - col.size());
+                }
+            } else {
+                if (col.add(idx)) {
+                    ans += 1L * val * (n - row.size());
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
