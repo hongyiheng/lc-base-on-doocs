@@ -44,7 +44,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeTrailingZeros(self, num: str) -> str:
+        i = len(num)
+        while i > 0 and num[i - 1] == '0':
+            i -= 1
+        return num[:i]
 ```
 
 ### **Java**
@@ -52,7 +57,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String removeTrailingZeros(String num) {
+        int i = num.length();
+        while (i > 0 && num.charAt(i - 1) == '0') {
+            i--;
+        }
+        return num.substring(0, i);
+    }
+}
 ```
 
 ### **...**
