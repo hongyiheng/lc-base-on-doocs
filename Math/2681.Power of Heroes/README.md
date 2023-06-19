@@ -61,7 +61,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumOfPower(self, nums: List[int]) -> int:
+        MOD = int(1e9 + 7)
+        nums.sort()
+        ans = s = 0
+        for v in nums:
+            ans = (ans + v * v * (s + v)) % MOD
+            s = (2 * s + v) % MOD
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +77,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumOfPower(int[] nums) {
+        int MOD = (int)1e9 + 7;
+        Arrays.sort(nums);
+        long ans = 0, s = 0;
+        for (int v : nums) {
+            ans = (ans + (1L * v * v % MOD) * (v + s)) % MOD;
+            s = (2 * s + v) % MOD;
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
