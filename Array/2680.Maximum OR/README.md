@@ -52,7 +52,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumOr(self, nums: List[int], k: int) -> int:
+        cnt = [0] * 50
+        for v in nums:
+            for i in range(31):
+                if v >> i & 1:
+                    cnt[i] += 1
+        ans = nums[0]
+        for v in nums:
+            for i in range(31):
+                if v >> i & 1:
+                    cnt[i] -= 1
+                    cnt[i + k] += 1
+            cur = 0
+            for i in range(50):
+                if cnt[i]:
+                    cur += 1 << i
+            ans = max(ans, cur)
+            for i in range(31):
+                if v >> i & 1:
+                    cnt[i] += 1
+                    cnt[i + k] -= 1
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +82,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumOr(int[] nums, int k) {
+        int[] cnt = new int[50];
+        for (int v : nums) {
+            for (int i = 30; i > -1; i--) {
+                if ((v >> i & 1) != 0) {
+                    cnt[i]++;
+                }
+            }
+        }
+        long ans = nums[0];
+        for (int v : nums) {
+            for (int i = 30; i > -1; i--) {
+                if ((v >> i & 1) != 0) {
+                    cnt[i]--;
+                    cnt[i + k]++;
+                }
+            }
+            long cur = 0;
+            for (int i = 0; i < 50; i++) {
+                if (cnt[i] > 0) {
+                    cur |= (1L << i);
+                }
+            }
+            ans = Math.max(cur, ans);
+            for (int i = 30; i > -1; i--) {
+                if ((v >> i & 1) != 0) {
+                    cnt[i]++;
+                    cnt[i + k]--;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
