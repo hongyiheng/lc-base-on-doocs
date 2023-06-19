@@ -60,7 +60,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def punishmentNumber(self, n: int) -> int:
+        def dfs(s, t, i, cur):
+            if i == len(s) and cur == t:
+                return True
+            for j in range(i + 1, len(s) + 1):
+                if dfs(s, t, j, cur + int(s[i:j])):
+                    return True
+            return False
 
+        ans = 0
+        for i in range(1, n + 1):
+            if dfs(str(i * i), i, 0, 0):
+                ans += i * i
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +82,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    public boolean dfs(String s, int t, int i, int cur) {
+        if (i == s.length()) {
+            return cur == t;
+        }
+        for (int j = i + 1; j < s.length() + 1; j++) {
+            if (dfs(s, t, j, cur + Integer.parseInt(s.substring(i, j)))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public int punishmentNumber(int n) {
+        int ans = 0;
+        for (int i = 1; i <= n; i++) {
+            if (dfs(String.valueOf(i * i), i, 0, 0)) {
+                ans += i * i;
+            }
+        }
+        return ans;
+    }
+
+}
 ```
 
 ### **...**
