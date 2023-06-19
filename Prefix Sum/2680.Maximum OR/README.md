@@ -52,7 +52,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumOr(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        suf = [0] * (n + 1)
+        for i in range(n - 1, -1, -1):
+            suf[i] = suf[i + 1] | nums[i]
+        ans = pre = 0
+        for i, v in enumerate(nums):
+            ans = max(ans, nums[i] << k | pre | suf[i + 1])
+            pre |= v
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +70,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumOr(int[] nums, int k) {
+        int n = nums.length;
+        long[] suf = new long[n + 1];
+        for (int i = n - 1; i > -1; i--) {
+            suf[i] = suf[i + 1] | nums[i];
+        }
+        long ans = 0, pre = 0;
+        for (int i = 0; i < n; i++) {
+            ans = Math.max(ans, (long)nums[i] << k | pre | suf[i + 1]);
+            pre |= nums[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
