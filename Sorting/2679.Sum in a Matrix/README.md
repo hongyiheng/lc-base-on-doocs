@@ -54,7 +54,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def matrixSum(self, nums: List[List[int]]) -> int:
+        for row in nums:
+            row.sort()
+        m, n = len(nums), len(nums[0])
+        ans = 0
+        for j in range(n):
+            mx = 0
+            for i in range(m):
+                mx = max(mx, nums[i][j])
+            ans += mx
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +73,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int matrixSum(int[][] nums) {
+        int m = nums.length, n = nums[0].length;
+        for (int i = 0; i < m; i++) {
+            Arrays.sort(nums[i]);
+        }
+        int ans = 0;
+        for (int j = 0; j < n; j++) {
+            int mx = 0;
+            for (int i = 0; i < m; i++) {
+                mx = Math.max(mx, nums[i][j]);
+            }
+            ans += mx;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
