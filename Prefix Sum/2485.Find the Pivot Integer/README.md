@@ -57,7 +57,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def pivotInteger(self, n: int) -> int:
+        pre = suf = 0
+        suf = sum(i for i in range(n + 1))
+        for i in range(n + 1):
+            pre += i
+            if pre == suf:
+                return i
+            suf -= i
+        return -1
 ```
 
 ### **Java**
@@ -65,7 +74,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int pivotInteger(int n) {
+        int pre = 0, suf = 0;
+        for (int i = 0; i < n + 1; i++) {
+            suf += i;
+        }
+        for (int i = 0; i < n + 1; i++) {
+            pre += i;
+            if (pre == suf) {
+                return i;
+            }
+            suf -= i;
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
