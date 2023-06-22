@@ -58,7 +58,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def makeSmallestPalindrome(self, s: str) -> str:
+        cs = list(s)
+        l, r = 0, len(s) - 1
+        while l < r:
+            cs[l] = cs[r] = min(cs[l], cs[r])
+            l += 1
+            r -= 1
+        return "".join(cs)
 ```
 
 ### **Java**
@@ -66,7 +74,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String makeSmallestPalindrome(String s) {
+        char[] cs = s.toCharArray();
+        int l = 0, r = cs.length - 1;
+        while (l < r) {
+            cs[l] = cs[r] = (char)Math.min(cs[l], cs[r]);
+            l++;
+            r--;
+        }
+        return new String(cs);
+    }
+}
 ```
 
 ### **...**
