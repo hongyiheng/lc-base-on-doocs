@@ -61,7 +61,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumValue(self, strs: List[str]) -> int:
+        return max(int(s) if s.isdigit() else len(s) for s in strs)
 ```
 
 ### **Java**
@@ -69,7 +71,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumValue(String[] strs) {
+        int ans = 0;
+        for (String s : strs) {
+            boolean num = true;
+            for (char c : s.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    num = false;
+                    break;
+                }
+            }
+            int v = num ? Integer.valueOf(s) : s.length();
+            ans = Math.max(ans, v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**

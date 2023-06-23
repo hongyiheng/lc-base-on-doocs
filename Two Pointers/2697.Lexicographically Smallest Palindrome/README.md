@@ -83,7 +83,7 @@ class Solution {
             l++;
             r--;
         }
-        return new String(cs);
+        return new String(cgs);
     }
 }
 ```
