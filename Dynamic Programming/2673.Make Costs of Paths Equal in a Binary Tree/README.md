@@ -70,7 +70,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minIncrements(self, n: int, cost: List[int]) -> int:
+        ans = 0
+        for i in range(n - 1, 0, -2):
+            l, r = cost[i], cost[i - 1]
+            ans += abs(l - r)
+            cost[(i - 1) // 2] += max(l, r)
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +85,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minIncrements(int n, int[] cost) {
+        int ans = 0;
+        for (int i = n - 1; i > 0; i -= 2) {
+            int l = cost[i - 1], r = cost[i];
+            ans += Math.abs(l - r);
+            cost[(i - 1) / 2] += Math.max(l, r);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
