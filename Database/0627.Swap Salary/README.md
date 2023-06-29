@@ -42,7 +42,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+UPDATE Salary SET sex = (
+	CASE
+		sex 
+			WHEN 'm' THEN
+			'f' ELSE 'm' 
+	END 
+)
 ```
 
 <!-- tabs:end -->
