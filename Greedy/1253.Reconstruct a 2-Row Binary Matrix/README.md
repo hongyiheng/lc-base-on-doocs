@@ -64,7 +64,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reconstructMatrix(self, upper: int, lower: int, colsum: List[int]) -> List[List[int]]:
+        n = len(colsum)
+        ans = [[0] * n for _ in range(2)]
+        for i, v in enumerate(colsum):
+            if v == 2:
+                if upper > 0 and lower > 0:
+                    ans[0][i] = ans[1][i] = 1
+                    upper -= 1
+                    lower -= 1
+                else:
+                    return []
+        for i, v in enumerate(colsum):
+            if v == 1:
+                if upper > 0:
+                    upper -= 1
+                    ans[0][i] = 1
+                elif lower > 0:
+                    lower -= 1
+                    ans[1][i] = 1
+                else:
+                    return []
+        return ans if lower == 0 and upper == 0 else []
 ```
 
 ### **Java**
@@ -72,7 +94,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> reconstructMatrix(int upper, int lower, int[] colsum) {
+        int n = colsum.length;
+        int[][] ans = new int[2][n];
+        for (int i = 0; i < n; i++) {
+            if (colsum[i] == 2) {
+                if (--upper < 0 || --lower < 0) {
+                    return new ArrayList<>();
+                }
+                ans[0][i] = ans[1][i] = 1;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (colsum[i] == 1) {
+                if (upper > 0) {
+                    ans[0][i] = 1;
+                    --upper;
+                } else if (lower > 0) {
+                    ans[1][i] = 1;
+                    --lower;
+                } else {
+                    return new ArrayList<>();
+                }
+            }
+        }
+        return upper == 0 && lower == 0 ?
+                Arrays.stream(ans).map(e -> Arrays.stream(e).boxed().collect(Collectors.toList())).collect(Collectors.toList()) :
+                new ArrayList<>();
+    }
+}
 ```
 
 ### **...**
