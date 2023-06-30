@@ -80,7 +80,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isCircularSentence(self, sentence: str) -> bool:
+        ss = sentence.split(" ")
+        last = ss[-1][-1]
+        for w in ss:
+            if w[0] != last:
+                return False
+            last = w[-1]
+        return True
 ```
 
 ### **Java**
@@ -88,7 +96,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isCircularSentence(String sentence) {
+        String[] ss = sentence.split(" ");
+        int n = ss.length;
+        char last = ss[n - 1].charAt(ss[n - 1].length() - 1);
+        for (String s : ss) {
+            if (last != s.charAt(0)) {
+                return false;
+            }
+            last = s.charAt(s.length() - 1);
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
