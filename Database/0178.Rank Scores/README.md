@@ -50,7 +50,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT
+	score,
+	dense_rank() over ( ORDER BY score DESC ) AS "rank" 
+FROM
+	Scores
 ```
 
 <!-- tabs:end -->
