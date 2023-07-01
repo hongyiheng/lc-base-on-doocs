@@ -53,7 +53,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def coloredCells(self, n: int) -> int:
+        ans = 2 * n - 1
+        cur = 1
+        for i in range(n - 1):
+            ans += cur * 2
+            cur += 2
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +68,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long coloredCells(int n) {
+        long ans = 2 * n - 1, cur = 1;
+        for (int i = 0; i < n - 1; i++) {
+            ans += cur * 2;
+            cur += 2;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
