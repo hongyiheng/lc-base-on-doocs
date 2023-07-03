@@ -54,7 +54,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def evenOddBit(self, n: int) -> List[int]:
+        ans = [0, 0]
+        for i in range(10):
+            ans[i & 1] += n >> i & 1
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +67,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] evenOddBit(int n) {
+        int[] ans = new int[2];
+        for (int i = 0; i < 10; i++) {
+            ans[i & 1] += n >> i & 1;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
