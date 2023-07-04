@@ -55,7 +55,14 @@ empId 是这张表单的主关键字
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT
+	e.name,
+	b.bonus 
+FROM
+	Employee e
+	LEFT JOIN Bonus b ON b.empId = e.empId 
+WHERE
+	ifnull( bonus, 0 ) < 1000
 ```
 
 <!-- tabs:end -->
