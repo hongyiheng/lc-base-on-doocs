@@ -48,7 +48,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT name 
+FROM
+	customer 
+WHERE
+	ifnull( referee_id, 0 ) != 2
 ```
 
 <!-- tabs:end -->
