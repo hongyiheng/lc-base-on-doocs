@@ -58,7 +58,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kItemsWithMaximumSum(self, numOnes: int, numZeros: int, numNegOnes: int, k: int) -> int:
+        if k <= numOnes:
+            return k
+        elif k <= numOnes + numZeros:
+            return numOnes
+        return numOnes - (k - numOnes - numZeros)
 ```
 
 ### **Java**
@@ -66,7 +72,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {
+        if (k <= numOnes) {
+            return k;
+        } else if (k <= numOnes + numZeros) {
+            return numOnes;
+        } 
+        return numOnes - (k - numOnes - numZeros);
+    }
+}
 ```
 
 ### **...**
