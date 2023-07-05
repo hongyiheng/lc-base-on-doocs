@@ -67,7 +67,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int], queries: List[int]) -> List[int]:
+        n = len(nums)
+        nums.sort()
+        pre = [0] * (n + 1)
+        for i in range(n):
+            pre[i + 1] = pre[i] + nums[i]
+        ans = []
+        for t in queries:
+            l, r = 0, n - 1
+            while l < r:
+                mid = (l + r) >> 1
+                if nums[mid] < t:
+                    l = mid + 1
+                else:
+                    r = mid
+            k = l if nums[l] >= t else l + 1
+            ans.append(t * k - pre[k] + pre[n] - pre[k] - t * (n - k))
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +93,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Long> minOperations(int[] nums, int[] queries) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        long[] pre = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+        }
+        List<Long> ans = new ArrayList<>();
+        for (int t : queries) {
+            int l = 0, r = n - 1;
+            while (l < r) {
+                int mid = (l + r) >> 1;
+                if (nums[mid] < t) {
+                    l = mid + 1;
+                } else {
+                    r = mid;
+                }
+            }
+            int k = nums[l] >= t ? l : l + 1;
+            ans.add((long) t * k - pre[k] + pre[n] - pre[k] - (long) (n - k) * t);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
