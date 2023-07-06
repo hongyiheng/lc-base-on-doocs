@@ -58,7 +58,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def zeroFilledSubarray(self, nums: List[int]) -> int:
+        ans = cnt = 0
+        for v in nums:
+            if v == 0:
+                cnt += 1
+                ans += cnt
+            else:
+                cnt = 0
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +75,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long ans = 0, cnt = 0;
+        for (int v : nums) {
+            if (v == 0) {
+                ans += ++cnt;
+            } else {
+                cnt = 0;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
