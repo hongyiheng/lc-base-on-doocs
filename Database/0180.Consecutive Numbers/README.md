@@ -64,7 +64,20 @@ Result 表：
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+WITH t AS (
+	SELECT
+		LAG( num, 1 ) OVER ( ORDER BY Id ) AS a,
+		num AS b,
+		LEAD( num, 1 ) OVER ( ORDER BY Id ) AS c 
+	FROM
+		logs
+	) 
+SELECT 
+    DISTINCT( a ) AS ConsecutiveNums 
+FROM
+	t 
+WHERE
+	a = b AND b = c
 ```
 
 <!-- tabs:end -->
