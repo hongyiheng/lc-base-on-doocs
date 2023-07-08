@@ -59,7 +59,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        n = len(numbers)
+        for i, v in enumerate(numbers):
+            t = target - v
+            l, r = i + 1, n - 1
+            while l < r:
+                mid = (l + r) >> 1
+                if numbers[mid] < t:
+                    l = mid + 1
+                else:
+                    r = mid
+            if numbers[r] == t:
+                return [i + 1, r + 1]
+        return []
 ```
 
 ### **Java**
@@ -67,7 +81,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int n = numbers.length;
+        for (int i = 0; i < n; i++) {
+            int t = target - numbers[i];
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                int mid = (l + r) >> 1;
+                if (numbers[mid] < t) {
+                    l = mid + 1;
+                } else {
+                    r = mid;
+                }
+            }
+            if (numbers[r] == t) {
+                return new int[]{i + 1, r + 1};
+            }
+        }
+        return new int[2];
+    }
+}
 ```
 
 ### **...**
