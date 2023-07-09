@@ -53,7 +53,26 @@ nums 中所有元素的乘积是：2 * 4 * 8 * 16 = 1024 = 2<sup>10</sup> 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distinctPrimeFactors(self, nums: List[int]) -> int:
+        M = 1010
+        primes = [False] * M
+        for i in range(2, M):
+            if not primes[i]:
+                for j in range(i * i, M, i):
+                    primes[j] = True
+        ans = set()
+        for v in nums:
+            for i in range(2, M):
+                if i > v:
+                    break
+                if not primes[i] and v % i == 0:
+                    ans.add(i)
+                    while v % i == 0:
+                        v //= i
+            if v > 1:
+                ans.add(v)
+        return len(ans)
 ```
 
 ### **Java**
@@ -61,7 +80,37 @@ nums 中所有元素的乘积是：2 * 4 * 8 * 16 = 1024 = 2<sup>10</sup> 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distinctPrimeFactors(int[] nums) {
+        int M = 1010;
+        boolean[] primes = new boolean[M];
+        for (int i = 2; i < M; i++) {
+            if (!primes[i]) {
+                for (int j = i * i; j < M; j += i) {
+                    primes[j] = true;
+                }
+            }
+        }
+        Set<Integer> ans = new HashSet<>();
+        for (int v : nums) {
+            for (int i = 2; i < M; i++) {
+                if (i > v) {
+                    break;
+                }
+                if (!primes[i] && v % i == 0) {
+                    ans.add(i);
+                    while (v % i == 0) {
+                        v /= i;
+                    }
+                }
+            }
+            if (v > 1) {
+                ans.add(v);
+            }
+        }
+        return ans.size();
+    }
+}
 ```
 
 ### **...**
