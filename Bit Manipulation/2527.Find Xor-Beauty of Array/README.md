@@ -67,7 +67,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def xorBeauty(self, nums: List[int]) -> int:
+        ans = 0
+        for v in nums:
+            ans ^= v
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +80,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int xorBeauty(int[] nums) {
+        int ans = 0;
+        for (int v : nums) {
+            ans ^= v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
