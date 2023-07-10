@@ -56,7 +56,26 @@ dataStream.consec(3); // 最后 k 个整数分别是 [4,4,3] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class DataStream:
 
+    def __init__(self, value: int, k: int):
+        self.v = value
+        self.cnt = 0
+        self.k = k
+
+
+    def consec(self, num: int) -> bool:
+        if num == self.v:
+            self.cnt += 1
+        else:
+            self.cnt = 0
+        return self.cnt >= self.k
+
+
+
+# Your DataStream object will be instantiated and called as such:
+# obj = DataStream(value, k)
+# param_1 = obj.consec(num)
 ```
 
 ### **Java**
@@ -64,7 +83,27 @@ dataStream.consec(3); // 最后 k 个整数分别是 [4,4,3] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class DataStream {
 
+    int v, k, cnt;
+
+    public DataStream(int value, int k) {
+        v = value;
+        this.k = k;
+        cnt = 0;
+    }
+    
+    public boolean consec(int num) {
+        cnt = num == v ? cnt + 1 : 0;
+        return cnt >= k;
+    }
+}
+
+/**
+ * Your DataStream object will be instantiated and called as such:
+ * DataStream obj = new DataStream(value, k);
+ * boolean param_1 = obj.consec(num);
+ */
 ```
 
 ### **...**
