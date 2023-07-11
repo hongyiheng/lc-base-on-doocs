@@ -63,7 +63,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxAlternatingSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        f0, f1 = nums[0], 0
+        for i in range(1, n):
+            tmp = f0
+            f0 = max(f0, f1 + nums[i])
+            f1 = max(f1, f0 - nums[i])
+        return max(f0, f1)
 ```
 
 ### **Java**
@@ -71,7 +79,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maxAlternatingSum(int[] nums) {
+        int n = nums.length;
+        long f0 = nums[0], f1 = 0;
+        for (int i = 1; i < n; i++) {
+            long tmp = f0;
+            f0 = Math.max(f0, f1 + nums[i]);
+            f1 = Math.max(f1, tmp - nums[i]);
+        }
+        return Math.max(f0, f1);
+    }
+}
 ```
 
 ### **...**
