@@ -62,7 +62,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def alternateDigitSum(self, n: int) -> int:
+        ans = 0
+        for i, v in enumerate(str(n)):
+            ans += -int(v) if i & 1 else int(v)
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +75,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int alternateDigitSum(int n) {
+        char[] cs = String.valueOf(n).toCharArray();
+        int ans = 0;
+        for (int i = 0; i < cs.length; i++) {
+            int v = cs[i] - '0';
+            ans += i % 2 == 0 ? v : -v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
