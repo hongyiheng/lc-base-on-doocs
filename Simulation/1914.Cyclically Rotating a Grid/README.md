@@ -57,7 +57,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def rotateGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
+        def rotate(x1, y1, x2, y2):
+            nonlocal k
+            q = []
+            for j in range(y1, y2 + 1):
+                q.append(grid[x1][j])
+            for i in range(x1 + 1, x2):
+                q.append(grid[i][y2])
+            for j in range(y2, y1 - 1, -1):
+                q.append(grid[x2][j])
+            for i in range(x2 - 1, x1, -1):
+                q.append(grid[i][y1])
+            n = len(q)
+            idx = k % n
+            for j in range(y1, y2 + 1):
+                grid[x1][j] = q[idx % n]
+                idx += 1
+            for i in range(x1 + 1, x2):
+                grid[i][y2] = q[idx % n]
+                idx += 1
+            for j in range(y2, y1 - 1, -1):
+                grid[x2][j] = q[idx % n]
+                idx += 1
+            for i in range(x2 - 1, x1, -1):
+                grid[i][y1] = q[idx % n]
+                idx += 1
 
+        m, n = len(grid), len(grid[0])
+        x1, y1, x2, y2 = 0, 0, m - 1, n - 1
+        while x1 < x2 and y1 < y2:
+            rotate(x1, y1, x2, y2)
+            x1 += 1
+            y1 += 1
+            x2 -= 1
+            y2 -= 1
+        return grid
 ```
 
 ### **Java**
@@ -65,7 +101,56 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    int[][] grid;
+    int k;
 
+    public void rotate(int x1, int y1, int x2, int y2) {
+        List<Integer> q = new ArrayList<>();
+        for (int j = y1; j <= y2; j++) {
+            q.add(grid[x1][j]);
+        }
+        for (int i = x1 + 1; i < x2; i++) {
+            q.add(grid[i][y2]);
+        }
+        for (int j = y2; j >= y1; j--) {
+            q.add(grid[x2][j]);
+        }
+        for (int i = x2 - 1; i > x1; i--) {
+            q.add(grid[i][y1]);
+        }
+        int n = q.size();
+        int idx = k % n;
+        for (int j = y1; j <= y2; j++) {
+            grid[x1][j] = q.get(idx++ % n);
+        }
+        for (int i = x1 + 1; i < x2; i++) {
+            grid[i][y2] = q.get(idx++ % n);
+        }
+        for (int j = y2; j >= y1; j--) {
+            grid[x2][j] = q.get(idx++ % n);
+        }
+        for (int i = x2 - 1; i > x1; i--) {
+            grid[i][y1] = q.get(idx++ % n);
+        }
+    }
+
+
+    public int[][] rotateGrid(int[][] grid, int k) {
+        this.grid = grid;
+        this.k = k;
+        int x1 = 0, y1 = 0, x2 = grid.length - 1, y2 = grid[0].length - 1;
+        while (x1 < x2 && y1 < y2) {
+            rotate(x1, y1, x2, y2);
+            x1++;
+            y1++;
+            x2--;
+            y2--;
+        }
+        return grid;
+    }
+}
 ```
 
 ### **...**
