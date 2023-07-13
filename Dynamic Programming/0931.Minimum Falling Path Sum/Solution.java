@@ -1,29 +1,21 @@
 class Solution {
     public int minFallingPathSum(int[][] matrix) {
-        int row = matrix.length;
-        int col = matrix[0].length;
-        if (col == 1) {
-            return matrix[0][0];
-        }
-        int[][] dp = new int[row][col];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (i == 0) {
-                    dp[i][j] = matrix[i][j];
-                    continue;
+        int m = matrix.length, n = matrix[0].length;
+        for (int i = 1; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int v = matrix[i - 1][j];
+                if (j > 0) {
+                    v = Math.min(v, matrix[i - 1][j - 1]);
                 }
-                if (j == 0) {
-                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j + 1]) + matrix[i][j];
-                } else if (j == col - 1) {
-                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j - 1]) + matrix[i][j];
-                } else {
-                    dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i - 1][j + 1]) + matrix[i][j];
+                if (j < n - 1) {
+                    v = Math.min(v, matrix[i - 1][j + 1]);
                 }
+                matrix[i][j] += v;
             }
         }
         int ans = Integer.MAX_VALUE;
-        for (int num : dp[row - 1]) {
-            ans = Math.min(ans, num);
+        for (int j = 0; j < n; j++) {
+            ans = Math.min(ans, matrix[m - 1][j]);
         }
         return ans;
     }
