@@ -64,7 +64,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumCount(self, nums: List[int]) -> int:
+        n = len(nums)
+        l, r = 0, n - 1
+        while l < r:
+            mid = (l + r) >> 1
+            if nums[mid] < 0:
+                l = mid + 1
+            else:
+                r = mid
+        if nums[r] < 0:
+            return n
+        while r < n and nums[r] == 0:
+            r += 1
+        return max(l, n - r)
 ```
 
 ### **Java**
@@ -72,7 +86,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumCount(int[] nums) {
+        int n = nums.length;
+        int l = 0, r = n - 1;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (nums[mid] < 0) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        if (nums[r] < 0) {
+            return n;
+        }
+        while (r < n && nums[r] == 0) {
+            r++;
+        }
+        return Math.max(l, n - r);
+    }
+}
 ```
 
 ### **...**
