@@ -60,7 +60,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkMove(self, board: List[List[str]], rMove: int, cMove: int, color: str) -> bool:
+        m, n = len(board), len(board[0])
+        dirs = [[-1, 0], [0, 1], [1, 0], [0, -1], [-1, -1], [-1, 1], [1, 1], [1, -1]]
+        for d in dirs:
+            nx, ny = rMove + d[0], cMove + d[1]
+            mid = False
+            while 0 <= nx < m and 0 <= ny < n:
+                if board[nx][ny] == '.':
+                    break
+                if board[nx][ny] == color:
+                    if mid:
+                        return True
+                    break
+                else:
+                    mid = True
+                nx, ny = nx + d[0], ny + d[1]
+        return False
 ```
 
 ### **Java**
@@ -68,7 +85,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkMove(char[][] board, int rMove, int cMove, char color) {
+        int m = board.length, n = board[0].length;
+        int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
+        for (int[] d : dirs) {
+            int nx = rMove + d[0], ny = cMove + d[1];
+            boolean mid = false;
+            while (nx >= 0 && nx < m && ny >= 0 && ny < n) {
+                if (board[nx][ny] == '.') {
+                    break;
+                }
+                if (board[nx][ny] == color) {
+                    if (mid) {
+                        return true;
+                    }
+                    break;
+                } else {
+                    mid = true;
+                }
+                nx += d[0];
+                ny += d[1];
+            }
+        }
+        return false; 
+    }
+}
 ```
 
 ### **...**
