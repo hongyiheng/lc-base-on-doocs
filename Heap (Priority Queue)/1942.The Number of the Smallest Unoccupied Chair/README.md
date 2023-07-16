@@ -72,7 +72,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestChair(self, times: List[List[int]], targetFriend: int) -> int:
+        n = len(times)
+        ts = [[times[i][0], times[i][1], i] for i in range(n)]
+        ts.sort(key=lambda x: x[0])
+        back = []
+        ids = [i for i in range(n)]
+        for l, r, i in ts:
+            while back and back[0][0] <= l:
+                heapq.heappush(ids, heapq.heappop(back)[1])
+            id = heapq.heappop(ids)
+            if i == targetFriend:
+                return id
+            heapq.heappush(back, [r, id])
+        return -1
 ```
 
 ### **Java**
@@ -80,7 +94,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int smallestChair(int[][] times, int targetFriend) {
+        int n = times.length;
+        int[][] ts = new int[n][3];
+        PriorityQueue<Integer> ids = new PriorityQueue<>();
+        for (int i = 0; i < n; i++) {
+            ts[i] = new int[]{times[i][0], times[i][1], i};
+            ids.add(i);
+        }
+        Arrays.sort(ts, Comparator.comparingInt(a -> a[0]));
+        PriorityQueue<int[]> back = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        for (int[] v : ts) {
+            while (!back.isEmpty() && back.peek()[0] <= v[0]) {
+                ids.add(back.poll()[1]);
+            }
+            int id = ids.poll();
+            if (v[2] == targetFriend) {
+                return id;
+            }
+            back.add(new int[]{v[1], id});
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
