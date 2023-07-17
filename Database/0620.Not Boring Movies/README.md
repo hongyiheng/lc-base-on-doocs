@@ -51,7 +51,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT 
+    * 
+FROM 
+    cinema 
+WHERE
+    description != 'boring'
+    AND id % 2 != 0
+ORDER BY
+    rating DESC
 ```
 
 <!-- tabs:end -->
