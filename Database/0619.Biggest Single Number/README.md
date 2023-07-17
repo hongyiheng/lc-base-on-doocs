@@ -49,7 +49,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT (
+    SELECT 
+        num
+    FROM
+        MyNumbers 
+    GROUP BY
+        num 
+    HAVING
+        count( 0 ) = 1 
+    ORDER BY num DESC 
+    LIMIT 1
+) AS num
 ```
 
 <!-- tabs:end -->
