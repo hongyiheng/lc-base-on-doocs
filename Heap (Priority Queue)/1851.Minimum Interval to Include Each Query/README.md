@@ -62,7 +62,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minInterval(self, intervals: List[List[int]], queries: List[int]) -> List[int]:
+        qs = [[v, i] for i, v in enumerate(queries)]
+        qs.sort()
+        intervals.sort()
+        idx, n = 0, len(intervals)
+        ans = [-1] * len(queries)
+        ins = []
+        for v, i in qs:
+            while idx < n and intervals[idx][0] <= v:
+                l, r = intervals[idx]
+                heapq.heappush(ins, [r - l + 1, r])
+                idx += 1
+            while ins and ins[0][1] < v:
+                heapq.heappop(ins)
+            if ins:
+                ans[i] = ins[0][0]
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +87,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] minInterval(int[][] intervals, int[] queries) {
+        int n = intervals.length, m = queries.length;
+        int[][] qs = new int[m][2];
+        for (int i = 0; i < m; i++) {
+            qs[i][0] = queries[i];
+            qs[i][1] = i;
+        }
+        Arrays.sort(qs, Comparator.comparingInt(a -> a[0]));
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        int[] ans = new int[m];
+        Arrays.fill(ans, -1);
+        PriorityQueue<int[]> ins = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        int idx = 0;
+        for (int[] q : qs) {
+            int v = q[0], i = q[1];
+            while (idx < n && intervals[idx][0] <= v) {
+                int l = intervals[idx][0], r = intervals[idx][1];
+                ins.add(new int[]{r - l + 1, r});
+                idx++;
+            }
+            while (!ins.isEmpty() && ins.peek()[1] < v) {
+                ins.poll();
+            }
+            if (!ins.isEmpty()) {
+                ans[i] = ins.peek()[0];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
