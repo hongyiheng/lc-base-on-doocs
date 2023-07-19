@@ -55,7 +55,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        def gcd(a, b):
+            return a if not b else gcd(b, a % b)
+        
+        if str1 + str2 != str2 + str1:
+            return ""
+        return str1[0:gcd(len(str1), len(str2))]
 ```
 
 ### **Java**
@@ -63,7 +70,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        if (!(str1 + str2).equals(str2 + str1)) {
+            return "";
+        }
+        return str1.substring(0, gcd(str1.length(), str2.length()));
+    }
 
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
 ```
 
 ### **...**
