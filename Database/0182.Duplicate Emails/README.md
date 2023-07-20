@@ -42,7 +42,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT
+	email AS Email
+FROM
+	Person 
+GROUP BY
+	email 
+HAVING
+	COUNT( 0 ) > 1
 ```
 
 <!-- tabs:end -->
