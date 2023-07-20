@@ -52,7 +52,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+SELECT
+    c.name AS Customers
+FROM
+    Customers c LEFT JOIN Orders o
+    ON o.CustomerId = c.Id
+WHERE
+    o.CustomerId is null
 ```
 
 <!-- tabs:end -->
