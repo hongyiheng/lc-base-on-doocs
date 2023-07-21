@@ -52,7 +52,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMaxValueOfEquation(self, points: List[List[int]], k: int) -> int:
+        n = len(points)
+        q = deque()
+        ans = -inf
+        idx = 0
+        for i, v in enumerate(points):
+            x, y = v
+            idx = max(idx, i + 1)
+            while q and q[0][0] <= x:
+                q.popleft()
+            while idx < n and points[idx][0] - x <= k:
+                while q and q[-1][0] + q[-1][1] < points[idx][0] + points[idx][1]:
+                    q.pop()
+                q.append(points[idx])
+                idx += 1
+            if q:
+                ans = max(ans, q[0][0] - x + q[0][1] + y)
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +78,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findMaxValueOfEquation(int[][] points, int k) {
+        int n = points.length;
+        int ans = Integer.MIN_VALUE;
+        Deque<int[]> q = new ArrayDeque<>();
+        int idx = 0;
+        for (int i = 0; i < n; i++) {
+            idx = Math.max(i + 1, idx);
+            int x = points[i][0], y = points[i][1];
+            while (!q.isEmpty() && q.peekFirst()[0] <= x) {
+                q.pollFirst();
+            }
+            while (idx < n && points[idx][0] - x <= k) {
+                while (!q.isEmpty() && q.peekLast()[0] + q.peekLast()[1] < points[idx][0] + points[idx][1]) {
+                    q.pollLast();
+                }
+                q.addLast(new int[]{points[idx][0], points[idx][1]});
+                idx++;
+            }
+            if (!q.isEmpty()) {
+                ans = Math.max(ans, q.peekFirst()[0] - x + q.peekFirst()[1] + y);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
