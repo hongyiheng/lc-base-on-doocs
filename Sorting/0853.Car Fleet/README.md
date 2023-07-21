@@ -58,7 +58,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        ts = dict()
+        for p, s in zip(position, speed): 
+            ts[p] = (target - p) / s
+        position.sort()
+        ans, slow = 0, -1
+        for i in range(len(position) - 1, -1, -1):
+            if ts[position[i]] > slow:
+                ans += 1
+                slow = ts[position[i]]
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +77,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int carFleet(int target, int[] position, int[] speed) {
+        int n = position.length;
+        Map<Integer, Double> ts = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            ts.put(position[i], (double)(target - position[i]) / speed[i]);
+        }
+        Arrays.sort(position);
+        int ans = 0;
+        double slow = -1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (ts.get(position[i]) > slow) {
+                ans++;
+                slow = ts.get(position[i]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
