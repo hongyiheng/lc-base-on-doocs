@@ -41,7 +41,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        ans = 0
+        for c in stones:
+            if c in jewels:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -49,7 +55,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        int ans = 0;
+        for (char c : stones.toCharArray()) {
+            if (jewels.indexOf(c) != -1) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
