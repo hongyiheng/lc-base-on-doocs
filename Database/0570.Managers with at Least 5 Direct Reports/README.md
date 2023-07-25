@@ -44,7 +44,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+# Write your MySQL query statement below
+SELECT 
+	name 
+FROM
+	Employee 
+WHERE
+	id IN (
+        SELECT
+            managerId 
+        FROM
+            Employee 
+        GROUP BY
+            managerId 
+        HAVING
+            COUNT( 0 ) >= 5
+    )
 ```
 
 <!-- tabs:end -->
