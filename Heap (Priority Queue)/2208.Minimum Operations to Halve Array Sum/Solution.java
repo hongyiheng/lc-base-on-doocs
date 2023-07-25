@@ -1,23 +1,17 @@
 class Solution {
     public int halveArray(int[] nums) {
-        PriorityQueue<Double> q = new PriorityQueue<>((a, b) -> {
-            if (a > b) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
-        double s = 0;
+        PriorityQueue<Double> q = new PriorityQueue<>((a, b) -> b.compareTo(a));
+        long s = 0;
         for (int v : nums) {
-            q.add((double) v);
             s += v;
+            q.add(v * 1.0);
         }
-        double target = s / 2;
+        double t = s / 2.0, cur = 0;
         int ans = 0;
-        while (s > target) {
-            double cur = q.poll();
-            s -= cur / 2;
-            q.add(cur / 2);
+        while (cur < t) {
+            double v = q.poll() / 2;
+            cur += v;
+            q.add(v);
             ans++;
         }
         return ans;

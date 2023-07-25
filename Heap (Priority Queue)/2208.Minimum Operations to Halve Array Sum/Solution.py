@@ -1,16 +1,14 @@
-from sortedcontainers import SortedList
-
 class Solution:
     def halveArray(self, nums: List[int]) -> int:
         s = 0
-        q = SortedList()
+        q = []
         for v in nums:
             s += v
-            q.add(v)
-        target, ans = s / 2, 0
-        while s > target:
-            cur = q.pop()
-            s -= cur / 2
-            q.add(cur / 2)
+            heapq.heappush(q, -v)
+        t, cur, ans = s / 2, 0, 0
+        while cur < t:
+            v = -heapq.heappop(q) / 2
+            cur += v
+            heapq.heappush(q, -v)
             ans += 1
         return ans
