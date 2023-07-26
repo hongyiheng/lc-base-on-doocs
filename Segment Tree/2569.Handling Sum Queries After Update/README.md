@@ -61,7 +61,83 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self, l, r):
+        self.l = l
+        self.r = r
+        self.v = 0
+        self.lazy = 0
+        self.mid = (l + r) >> 1
+        self.left = None
+        self.right = None
 
+
+class SegmentTree:
+    def __init__(self):
+        self.root = Node(0, int(1e6))
+
+    def query(self, l, r, node=None):
+        if not node:
+            node = self.root
+        if l > r:
+            return 0
+        if l <= node.l and node.r <= r:
+            return node.v
+        self.pushDown(node)
+        ans = 0
+        if l <= node.mid:
+            ans += self.query(l, r, node.left)
+        if node.mid < r:
+            ans += self.query(l, r, node.right)
+        return ans
+
+    def modify(self, l, r, node=None):
+        if not node:
+            node = self.root
+        if l > r:
+            return
+        if l <= node.l and node.r <= r:
+            node.lazy ^= 1
+            node.v = node.r - node.l + 1 - node.v
+            return
+        self.pushDown(node)
+        if l <= node.mid:
+            self.modify(l, r, node.left)
+        if node.mid < r:
+            self.modify(l, r, node.right)
+        self.pushUp(node)
+
+    def pushUp(self, node):
+        node.v = node.left.v + node.right.v
+
+    def pushDown(self, node):
+        if not node.left:
+            node.left = Node(node.l, node.mid)
+        if not node.right:
+            node.right = Node(node.mid + 1, node.r)
+        if node.lazy:
+            node.left.v = node.left.r - node.left.l + 1 - node.left.v
+            node.left.lazy ^= 1
+            node.right.v = node.right.r - node.right.l + 1 - node.right.v
+            node.right.lazy ^= 1
+        node.lazy = 0
+
+class Solution:
+    def handleQuery(self, nums1: List[int], nums2: List[int], queries: List[List[int]]) -> List[int]:
+        st = SegmentTree()
+        for i, v in enumerate(nums1):
+            if v:
+                st.modify(i, i)
+        s = sum(nums2)
+        ans = []
+        for q in queries:
+            if q[0] == 1:
+                st.modify(q[1], q[2])
+            elif q[0] == 2:
+                s += st.query(0, int(1e9)) * q[1]
+            else:
+                ans.append(s)
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +145,121 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    int l;
+    int r;
+    int mid;
+    int v;
+    int lazy;
+    Node left;
+    Node right;
 
+    public Node(int l, int r) {
+        this.l = l;
+        this.r = r;
+        this.mid = (l + r) >> 1;
+        this.v = 0;
+        this.lazy = 0;
+    }
+}
+
+class SegmentTree {
+
+    Node root;
+
+    public SegmentTree() {
+        root = new Node(0, (int)1e6);
+    }
+    
+    public void modify(int l, int r, Node node) {
+        if (node == null) {
+            node = root;
+        }
+        if (l > r) {
+            return;
+        }
+        if (l <= node.l && node.r <= r) {
+            node.v = node.r - node.l + 1 - node.v;
+            node.lazy ^= 1;
+            return;
+        }
+        pushDown(node);
+        if (l <= node.mid) {
+            modify(l, r, node.left);
+        }
+        if (r > node.mid) {
+            modify(l, r, node.right);
+        }
+        pushUp(node);
+    }
+
+    public int query(int l, int r, Node node) {
+        if (node == null) {
+            node = root;
+        }
+        if (l > r) {
+            return 0;
+        }
+        if (l <= node.l && node.r <= r) {
+            return node.v;
+        }
+        pushDown(node);
+        int ans = 0;
+        if (l <= node.mid) {
+            ans += query(l, r, node.left);
+        }
+        if (node.mid < r) {
+            ans += query(l, r, node.right);
+        }
+        return ans;
+    }
+    
+    public void pushUp(Node node) {
+        node.v = node.left.v + node.right.v;
+    }
+    
+    public void pushDown(Node node) {
+        if (node.left == null) {
+            node.left = new Node(node.l, node.mid);
+        }
+        if (node.right == null) {
+            node.right = new Node(node.mid + 1, node.r);
+        }
+        if (node.lazy != 0) {
+            node.left.v = node.left.r - node.left.l + 1 - node.left.v;
+            node.left.lazy ^= 1;
+            node.right.v = node.right.r - node.right.l + 1 - node.right.v;
+            node.right.lazy ^= 1;
+            node.lazy = 0;
+        }
+    }
+}
+
+class Solution {
+    public long[] handleQuery(int[] nums1, int[] nums2, int[][] queries) {
+        SegmentTree st = new SegmentTree();
+        for (int i = 0; i < nums1.length; i++) {
+            if (nums1[i] == 1) {
+                st.modify(i, i, null);
+            }
+        }
+        long s = 0;
+        for (int v : nums2) {
+            s += v;
+        }
+        List<Long> ans = new ArrayList<>();
+        for (int[] q : queries) {
+            if (q[0] == 1) {
+                st.modify(q[1], q[2], null);
+            } else if (q[0] == 2) {
+                s += (long) q[1] * st.query(0, (int) 1e6, null);
+            } else {
+                ans.add(s);
+            }
+        }
+        return ans.stream().mapToLong(Long::longValue).toArray();
+    }
+}
 ```
 
 ### **...**
