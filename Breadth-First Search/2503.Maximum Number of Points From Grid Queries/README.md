@@ -60,7 +60,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxPoints(self, grid: List[List[int]], queries: List[int]) -> List[int]:
+        m, n = len(grid), len(grid[0])
+        arr = []
+        q = []
+        heapq.heappush(q, [grid[0][0], 0, 0])
+        vis = [[False] * n for _ in range(m)]
+        vis[0][0] = True
+        cur = grid[0][0] + 1
+        cnt = 0
+        while q:
+            v, x, y = heapq.heappop(q)
+            if cur <= v:
+                arr.append([cur, cnt])
+                cur = v + 1
+            cnt += 1
+            for d in [[0, -1], [-1, 0], [1, 0], [0, 1]]:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                    continue
+                if vis[nx][ny]:
+                    continue
+                vis[nx][ny] = True
+                heapq.heappush(q, [grid[nx][ny], nx, ny])
+        arr.append([cur, cnt])
+        ans = []
+        for v in queries:
+            l, r = 0, len(arr) - 1
+            while l < r:
+                mid = (l + r + 1) >> 1
+                if arr[mid][0] > v:
+                    r = mid - 1
+                else:
+                    l = mid
+            ans.append(arr[r][1] if v >= arr[r][0] else 0)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +103,54 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] maxPoints(int[][] grid, int[] queries) {
+        int m = grid.length, n = grid[0].length;
+        boolean[][] vis = new boolean[m][n];
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        q.add(new int[]{grid[0][0], 0, 0});
+        vis[0][0] = true;
+        int mx = grid[0][0] + 1, cnt = 0;
+        List<int[]> arr = new ArrayList<>();
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int v = cur[0], x = cur[1], y = cur[2];
+            if (v >= mx) {
+                arr.add(new int[]{mx, cnt});
+                mx = v + 1;
+            }
+            cnt++;
+            for (int[] d : new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                    continue;
+                }
+                if (vis[nx][ny]) {
+                    continue;
+                }
+                vis[nx][ny] = true;
+                q.add(new int[]{grid[nx][ny], nx, ny});
+            }
+        }
+        arr.add(new int[]{mx, cnt});
+        int[] ans = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int l = 0, r = arr.size() - 1;
+            while (l < r) {
+                int mid = (l + r + 1) >> 1;
+                if (queries[i] < arr.get(mid)[0]) {
+                    r = mid - 1;
+                } else {
+                    l = mid;
+                }
+            }
+            if (queries[i] >= arr.get(r)[0]) {
+                ans[i] = arr.get(r)[1];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
