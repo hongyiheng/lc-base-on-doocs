@@ -70,7 +70,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def deleteGreatestValue(self, grid: List[List[int]]) -> int:
+        for row in grid:
+            row.sort()
+        ans = 0
+        for j in range(len(grid[0])):
+            mx = grid[0][j]
+            for i in range(1, len(grid)):
+                mx = max(mx, grid[i][j])
+            ans += mx
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +88,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int deleteGreatestValue(int[][] grid) {
+        int m = grid.length, n = grid[0].length, ans = 0;
+        for (int[] row : grid) {
+            Arrays.sort(row);
+        }
+        for (int j = 0; j < n; j++) {
+            int mx = grid[0][j];
+            for (int i = 1; i < m; i++) {
+                mx = Math.max(mx, grid[i][j]);
+            }
+            ans += mx;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
