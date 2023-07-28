@@ -73,7 +73,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumTime(self, n: int, relations: List[List[int]], time: List[int]) -> int:
+        g = defaultdict(list)
+        ins = [0] * (n + 1)
+        for u, v in relations:
+            g[u].append(v)
+            ins[v] += 1
+        dist = [0] * (n + 1)
+        q = []
+        for i in range(1, n + 1):
+            if ins[i] == 0:
+                q.append(i)
+                dist[i] = time[i - 1]
+        while q:
+            u = q.pop()
+            for v in g[u]:
+                ins[v] -= 1
+                dist[v] = max(dist[v], dist[u] + time[v - 1])
+                if ins[v] == 0:
+                    q.append(v)
+        return max(dist)
 ```
 
 ### **Java**
@@ -81,7 +101,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumTime(int n, int[][] relations, int[] time) {
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        int[] ins = new int[n + 1];
+        for (int[] relation : relations) {
+            int u = relation[0], v = relation[1];
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+            ins[v]++;
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        int[] dist = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            if (ins[i] == 0) {
+                q.add(i);
+                dist[i] = time[i - 1];
+            }
+        }
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            for (int v : g.getOrDefault(u, new ArrayList<>())) {
+                ins[v]--;
+                dist[v] = Math.max(dist[v], dist[u] + time[v - 1]);
+                if (ins[v] == 0) {
+                    q.add(v);
+                }
+            }
+        }
+        int ans = 0;
+        for (int v : dist) {
+            ans = Math.max(ans, v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
