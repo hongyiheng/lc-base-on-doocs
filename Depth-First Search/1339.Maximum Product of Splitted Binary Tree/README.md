@@ -63,7 +63,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxProduct(self, root: Optional[TreeNode]) -> int:
+        def dfs(root):
+            if not root:
+                return 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            res = root.val + left + right
+            root.val = res
+            return res
+        
+        def dfs1(root):
+            nonlocal s, ans
+            if not root:
+                return
+            dfs1(root.left)
+            dfs1(root.right)
+            ans = max(ans, (s - root.val) * root.val)
 
+        s = dfs(root)
+        ans = 0
+        dfs1(root)
+        return ans % int(1e9 + 7)
 ```
 
 ### **Java**
@@ -71,7 +99,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
 
+    long ans = 0, s = 0;
+
+    public int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        int res = root.val + left + right;
+        root.val = res;
+        return res;
+    }
+
+    public void dfs1(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs1(root.left);
+        dfs1(root.right);
+        ans = Math.max(ans, (long)(s - root.val) * root.val);
+    }
+
+    public int maxProduct(TreeNode root) {
+        s = dfs(root);
+        dfs1(root);
+        return (int)(ans % ((int)1e9 + 7));
+    }
+}
 ```
 
 ### **...**
