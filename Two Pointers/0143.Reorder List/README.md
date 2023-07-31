@@ -54,7 +54,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        slow = fast = head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
 
+        cur = slow.next
+        slow.next = pre = None
+        while cur:
+            tmp = cur.next
+            cur.next = pre
+            pre, cur = cur, tmp
+            
+        cur = head
+        while pre:
+            tmp = pre.next
+            pre.next = cur.next
+            cur.next = pre
+            cur, pre = pre.next, tmp
 ```
 
 ### **Java**
@@ -62,7 +89,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public void reorderList(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode cur = slow.next;
+        slow.next = null;
+        ListNode pre = null;
+        while (cur != null) {
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        } 
+        cur = head;
+        while (pre != null) {
+            ListNode tmp = pre.next;
+            pre.next = cur.next;
+            cur.next = pre;
+            cur = pre.next;
+            pre = tmp;
+        }
+    }
+}
 ```
 
 ### **...**
