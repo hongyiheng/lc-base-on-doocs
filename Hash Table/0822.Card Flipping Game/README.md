@@ -48,7 +48,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def flipgame(self, fronts: List[int], backs: List[int]) -> int:
+        cnt = [0] * 2010
+        for a, b in zip(fronts, backs):
+            if a == b:
+                cnt[a] = -1
+            cnt[a] = -1 if cnt[a] == -1 else 1
+            cnt[b] = -1 if cnt[b] == -1 else 1
+        for i, v in enumerate(cnt):
+            if v == 1:
+                return i
+        return 0
 ```
 
 ### **Java**
@@ -56,7 +67,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int flipgame(int[] fronts, int[] backs) {
+        int M = 2010;
+        int[] cnt = new int[M];
+        for (int i = 0; i < fronts.length; i++) {
+            int a = fronts[i], b = backs[i];
+            if (a == b) {
+                cnt[a] = -1;
+            }
+            cnt[a] = cnt[a] == -1 ? -1 : 1;
+            cnt[b] = cnt[b] == -1 ? -1 : 1;
+        }
+        for (int i = 0; i < M; i++) {
+            if (cnt[i] == 1) {
+                return i;
+            }
+        }
+        return 0;
+    }
+}
 ```
 
 ### **...**
