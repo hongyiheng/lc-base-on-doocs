@@ -3,7 +3,7 @@ class Solution:
         s = "#".join(source)
         i = 0
         while i + 1 < len(s):
-            if s[i:i+2] == '//':
+            if s[i:i + 2] == '//':
                 end = s.find("#", i + 2)
                 if end != -1:
                     s = s[:i] + s[end:]
