@@ -89,7 +89,24 @@ source = [&quot;a/*comment&quot;, &quot;line&quot;, &quot;more_comment*/b&quot;]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeComments(self, source: List[str]) -> List[str]:
+        s = "#".join(source)
+        i = 0
+        while i + 1 < len(s):
+            if s[i:i+2] == '//':
+                end = s.find("#", i + 2)
+                if end != -1:
+                    s = s[:i] + s[end:]
+                else:
+                    s = s[:i]
+            elif s[i:i + 2] == '/*':
+                end = s.find("*/", i + 2)
+                if end != -1:
+                    s = s[:i] + s[end + 2:]
+            else:
+                i += 1
+        return [w for w in s.split("#") if w]
 ```
 
 ### **Java**
@@ -97,7 +114,36 @@ source = [&quot;a/*comment&quot;, &quot;line&quot;, &quot;more_comment*/b&quot;]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> removeComments(String[] source) {
+        String s = String.join("#", source);
+        int i = 0;
+        while (i + 1 < s.length()) {
+            if ("//".equals(s.substring(i, i + 2))) {
+                int end = s.indexOf("#", i + 2);
+                if (end != -1) {
+                    s = s.substring(0, i) + s.substring(end);
+                } else {
+                    s = s.substring(0, i);
+                }
+            } else if ("/*".equals(s.substring(i, i + 2))) {
+                int end = s.indexOf("*/", i + 2);
+                if (end != -1) {
+                    s = s.substring(0, i) + s.substring(end + 2);
+                }
+            } else {
+                i++;
+            }
+        }
+        List<String> ans = new ArrayList<>();
+        for (String w : s.split("#")) {
+            if (!w.isEmpty()) {
+                ans.add(w);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
