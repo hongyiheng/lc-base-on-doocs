@@ -51,7 +51,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numFactoredBinaryTrees(self, arr: List[int]) -> int:
+        n = len(arr)
+        arr.sort()
+        mp = dict()
+        for v in arr:
+            mp[v] = 1
+        for i in range(n):
+            a = arr[i]
+            for j in range(i, -1, -1):
+                b = arr[j]
+                if a % b != 0 or a // b > b:
+                    continue
+                if a // b in mp.keys():
+                    mp[a] += mp[b] * mp[b] if a == b * b else mp[b] * mp[a // b] * 2
+        ans = sum(mp.values())
+        return ans % int(1e9 + 7)
 ```
 
 ### **Java**
@@ -59,7 +75,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numFactoredBinaryTrees(int[] arr) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        Map<Integer, Long> mp = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int a = arr[i];
+            mp.put(a, 1L);
+            for (int j = i; j > -1; j--) {
+                int b = arr[j];
+                if (a % b != 0 || a / b > b || !mp.containsKey(a / b)) {
+                    continue;
+                }
+                long v = a / b == b ? mp.get(b) * mp.get(b) : mp.get(b) * mp.get(a / b) * 2;
+                mp.put(a, mp.get(a) + v);
+            }
+        }
+        int mod = (int)1e9 + 7;
+        long ans = 0L;
+        for (long v : mp.values()) {
+            ans += v;
+            ans %= mod;
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
