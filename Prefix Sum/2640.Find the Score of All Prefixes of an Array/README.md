@@ -64,7 +64,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findPrefixScore(self, nums: List[int]) -> List[int]:
+        ans = [nums[0] * 2]
+        mx = nums[0]
+        for i in range(1, len(nums)):
+            mx = max(mx, nums[i])
+            ans.append(ans[-1] + nums[i] + mx)
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +79,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long[] findPrefixScore(int[] nums) {
+        int n = nums.length, mx = nums[0];;
+        long[] ans = new long[n];
+        ans[0] = nums[0] * 2;
+        for (int i = 1; i < n; i++) {
+            mx = Math.max(mx, nums[i]);
+            ans[i] = ans[i - 1] + nums[i] + mx;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
