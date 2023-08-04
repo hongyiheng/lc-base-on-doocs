@@ -66,6 +66,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def replaceValueInTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        root.val = 0
+        q = deque([root])
+        while q:
+            s = 0
+            for node in q:
+                s += node.left.val if node.left else 0
+                s += node.right.val if node.right else 0
+            for _ in range(len(q)):
+                cur = q.popleft()
+                child_val = cur.left.val if cur.left else 0
+                child_val += cur.right.val if cur.right else 0
+                child_val = s - child_val
+                if cur.left:
+                    cur.left.val = child_val
+                    q.append(cur.left)
+                if cur.right:
+                    cur.right.val = child_val
+                    q.append(cur.right)
+        return root
 
 ```
 
@@ -74,7 +102,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode replaceValueInTree(TreeNode root) {
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.add(root);
+        root.val = 0;
+        while (!q.isEmpty()) {
+            int s = 0;
+            for (TreeNode node : q) {
+                s += node.left != null ? node.left.val : 0;
+                s += node.right != null ? node.right.val : 0;
+            }
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                TreeNode node = q.pollFirst();
+                int childVal = node.left != null ? node.left.val : 0;
+                childVal += node.right != null ? node.right.val : 0;
+                childVal = s - childVal;
+                if (node.left != null) {
+                    node.left.val = childVal;
+                    q.add(node.left);
+                }
+                if (node.right != null) {
+                    node.right.val = childVal;
+                    q.add(node.right);
+                }
+            }
+        }
+        return root;
+    }
+}
 ```
 
 ### **...**
