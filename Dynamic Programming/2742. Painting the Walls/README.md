@@ -53,7 +53,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def paintWalls(self, cost: List[int], time: List[int]) -> int:
+        @cache
+        def dfs(i, t):
+            nonlocal n
+            if t >= n - i:
+                return 0
+            if i == n:
+                return inf
+            return min(dfs(i + 1, t + time[i]) + cost[i], dfs(i + 1, t - 1))
+        
+        n = len(cost)
+        return dfs(0, 0)
 ```
 
 ### **Java**
@@ -61,7 +73,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int n;
+    Map<String, Integer> f;
+    int[] cost, time;
+
+    public int dfs(int i, int t) {
+        String key = i + ":" + t;
+        if (f.containsKey(key)) {
+            return f.get(key);
+        }
+        if (t >= n - i) {
+            return 0;
+        }
+        if (i == n) {
+            return 0x3f3f3f3f;
+        }
+        int ans = Math.min(dfs(i + 1, t + time[i]) + cost[i], dfs(i + 1, t - 1));
+        f.put(key, ans);
+        return ans;
+    }
+
+    public int paintWalls(int[] cost, int[] time) {
+        f = new HashMap<>();
+        this.cost = cost;
+        this.time = time;
+        n = cost.length;
+        return dfs(0, 0);
+    }
+}
 ```
 
 ### **...**
