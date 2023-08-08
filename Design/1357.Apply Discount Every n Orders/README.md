@@ -73,7 +73,32 @@ cashier.getBill([2,3,5],[5,3,2]);                    // 返回 2500.0
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Cashier:
 
+    def __init__(self, n: int, discount: int, products: List[int], prices: List[int]):
+        self.n = n
+        self.cur = 0
+        self.discount = discount
+        self.skus = dict()
+        for a, b in zip(products, prices):
+            self.skus[a] = b
+
+
+    def getBill(self, product: List[int], amount: List[int]) -> float:
+        ans = 0
+        for a, b in zip(product, amount):
+            ans += (self.skus[a] * b)
+        self.cur += 1
+        if self.cur == self.n:
+            self.cur = 0
+            ans = ans - (self.discount / 100) * ans
+        return ans
+
+
+
+# Your Cashier object will be instantiated and called as such:
+# obj = Cashier(n, discount, products, prices)
+# param_1 = obj.getBill(product,amount)
 ```
 
 ### **Java**
@@ -81,7 +106,38 @@ cashier.getBill([2,3,5],[5,3,2]);                    // 返回 2500.0
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Cashier {
 
+    Map<Integer, Integer> skus;
+    int n = 0, cur = 0, discount = 0;
+
+    public Cashier(int n, int discount, int[] products, int[] prices) {
+        this.n = n;
+        this.discount = discount;
+        skus = new HashMap<>();
+        for (int i = 0; i < products.length; i++) {
+            skus.put(products[i], prices[i]);
+        }
+    }
+
+    public double getBill(int[] product, int[] amount) {
+        double ans = 0;
+        for (int i = 0; i < product.length; i++) {
+            ans += skus.get(product[i]) * amount[i];
+        }
+        if (++cur == n) {
+            cur = 0;
+            ans = ans - (discount / 100.0) * ans;
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your Cashier object will be instantiated and called as such:
+ * Cashier obj = new Cashier(n, discount, products, prices);
+ * double param_1 = obj.getBill(product,amount);
+ */
 ```
 
 ### **...**
