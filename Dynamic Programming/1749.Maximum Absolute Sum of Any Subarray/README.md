@@ -56,7 +56,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxAbsoluteSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        pos = neg = ans = 0
+        for i in range(n):
+            pos = max(pos + nums[i], 0)
+            neg = min(neg + nums[i], 0)
+            ans = max(pos, -neg, ans)
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +72,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int n = nums.length;
+        int pos = 0, neg = 0, ans = 0;
+        for (int i = 0; i < n; i++) {
+            pos = Math.max(pos + nums[i], 0);
+            neg = Math.min(neg + nums[i], 0);
+            ans = Math.max(ans, Math.max(pos, - neg));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
