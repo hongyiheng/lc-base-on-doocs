@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def subtractProductAndSum(self, n: int) -> int:
+        a, b = 1, 0
+        while n:
+            v = n % 10
+            n //= 10
+            a *= v
+            b += v
+        return a - b
 ```
 
 ### **Java**
@@ -58,7 +66,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int subtractProductAndSum(int n) {
+        int a = 1, b = 0;
+        while (n > 0) {
+            int v = n % 10;
+            n /= 10;
+            a *= v;
+            b += v;
+        }
+        return a - b;
+    }
+}
 ```
 
 ### **...**
