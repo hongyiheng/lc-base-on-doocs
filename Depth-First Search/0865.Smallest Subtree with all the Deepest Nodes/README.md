@@ -69,7 +69,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+        def dfs(root):
+            if not root:
+                return 0
+            l, r = dfs(root.left), dfs(root.right)
+            return max(l, r) + 1
+        
+        l, r = dfs(root.left), dfs(root.right)
+        if l == r:
+            return root
+        return self.subtreeWithAllDeepest(root.left) if l > r else self.subtreeWithAllDeepest(root.right)
 ```
 
 ### **Java**
@@ -77,7 +94,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        int l = dfs(root.left), r = dfs(root.right);
+        if (l == r) {
+            return root;
+        }
+        return l > r ? subtreeWithAllDeepest(root.left) : subtreeWithAllDeepest(root.right);
+    }
 
+    public int dfs(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = dfs(root.left), r = dfs(root.right);
+        return Math.max(l, r) + 1;
+    }
+}
 ```
 
 ### **...**
