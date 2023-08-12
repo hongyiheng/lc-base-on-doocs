@@ -64,7 +64,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxCount(self, banned: List[int], n: int, maxSum: int) -> int:
+        ban = set(banned)
+        ans, cur = 0, 1
+        while maxSum > 0:
+            while cur in ban:
+                cur += 1
+            if cur > n or maxSum < cur:
+                break
+            maxSum -= cur
+            ans += 1
+            cur += 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +84,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxCount(int[] banned, int n, int maxSum) {
+        Set<Integer> ban = new HashSet<>();
+        for (int v : banned) {
+            ban.add(v);
+        }
+        int ans = 0, cur = 1;
+        while (maxSum > 0) {
+            while (ban.contains(cur)) {
+                cur++;
+            }
+            if (cur > n || cur > maxSum) {
+                break;
+            }
+            maxSum -= cur;
+            ans++;
+            cur++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
