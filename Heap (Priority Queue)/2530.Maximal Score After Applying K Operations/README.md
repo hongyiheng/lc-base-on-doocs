@@ -61,7 +61,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxKelements(self, nums: List[int], k: int) -> int:
+        q = []
+        for v in nums:
+            heappush(q, -v)
+        ans = 0
+        while k:
+            v = -heappop(q)
+            ans += v
+            v = v // 3 + (1 if v % 3 else 0)
+            heappush(q, -v)
+            k -= 1
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +81,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maxKelements(int[] nums, int k) {
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        for (int v : nums) {
+            q.add(v);
+        }
+        long ans = 0;
+        while (k-- > 0) {
+            int v = q.poll();
+            ans += v;
+            v = v / 3 + (v % 3 == 0 ? 0 : 1);
+            q.add(v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
