@@ -3,6 +3,7 @@ class Solution {
     Map<String, Integer> f = new HashMap<>();
     int n;
     int[][] g;
+    int inf = 0x3f3f3f3f;
 
     public int minFallingPathSum(int[][] grid) {
         n = grid.length;
@@ -21,14 +22,23 @@ class Solution {
         if (f.containsKey(key)) {
             return f.get(key);
         }
-        List<int[]> q = new ArrayList<>();
+        int a = inf, b = inf, aId = inf, bId = inf;
         for (int k = 0; k < n; k++) {
-            if (k != j) {
-                q.add(new int[]{g[i][k], k});
+            if (k == j) {
+                continue;
+            }
+            if (g[i][k] < a) {
+                int t = a, tId = aId;
+                a = g[i][k];
+                aId = k;
+                b = t;
+                bId = tId;
+            } else if (g[i][k] < b) {
+                b = g[i][k];
+                bId = k;
             }
         }
-        q.sort(Comparator.comparingInt(a -> a[0]));
-        int ans = Math.min(dfs(i + 1, q.get(0)[1]) + q.get(0)[0], dfs(i + 1, q.get(1)[1]) + q.get(1)[0]);
+        int ans = Math.min(dfs(i + 1, aId) + a, dfs(i + 1, bId) + b);
         f.put(key, ans);
         return ans;
     }
