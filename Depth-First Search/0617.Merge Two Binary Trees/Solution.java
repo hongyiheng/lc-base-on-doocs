@@ -14,27 +14,14 @@
  * }
  */
 class Solution {
-    public void dfs(TreeNode a, TreeNode b, TreeNode cur) {
-        if (a == null && b == null) {
-            return;
-        }
-        cur.val = (a == null ? 0 : a.val) + (b == null ? 0 : b.val);
-        if ((a != null && a.left != null) || (b != null && b.left != null)) {
-            cur.left = new TreeNode();
-            dfs(a == null ? null : a.left, b == null ? null : b.left, cur.left);
-        }
-        if ((a != null && a.right != null) || (b != null && b.right != null)) {
-            cur.right = new TreeNode();
-            dfs(a == null ? null : a.right, b == null ? null : b.right, cur.right);
-        }
-    }
-
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) {
             return null;
         }
-        TreeNode root = new TreeNode();
-        dfs(root1, root2, root);
-        return root;
+        TreeNode l = mergeTrees(root1 == null ? null : root1.left, root2 == null ? null : root2.left);
+        TreeNode r = mergeTrees(root1 == null ? null : root1.right, root2 == null ? null : root2.right);
+        int v = root1 == null ? 0 : root1.val;
+        v += root2 == null ? 0 : root2.val;
+        return new TreeNode(v, l, r);
     }
 }

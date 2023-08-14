@@ -51,22 +51,13 @@
 #         self.right = right
 class Solution:
     def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
-        def dfs(a, b, cur):
-            if not a and not b:
-                return
-            cur.val = (a.val if a else 0) + (b.val if b else 0)
-            if (a and a.left) or (b and b.left):
-                cur.left = TreeNode()
-                dfs(a.left if a else None, b.left if b else None, cur.left)
-            if (a and a.right) or (b and b.right):
-                cur.right = TreeNode()
-                dfs(a.right if a else None, b.right if b else None, cur.right)
-
         if not root1 and not root2:
             return None
-        ans = TreeNode()
-        dfs(root1, root2, ans)
-        return ans
+        l = self.mergeTrees(root1.left if root1 else None, root2.left if root2 else None)
+        r = self.mergeTrees(root1.right if root1 else None, root2.right if root2 else None)
+        v = root1.val if root1 else 0
+        v += root2.val if root2 else 0
+        return TreeNode(v, l, r)
 ```
 
 ### **Java**
@@ -90,28 +81,15 @@ class Solution:
  * }
  */
 class Solution {
-    public void dfs(TreeNode a, TreeNode b, TreeNode cur) {
-        if (a == null && b == null) {
-            return;
-        }
-        cur.val = (a == null ? 0 : a.val) + (b == null ? 0 : b.val);
-        if ((a != null && a.left != null) || (b != null && b.left != null)) {
-            cur.left = new TreeNode();
-            dfs(a == null ? null : a.left, b == null ? null : b.left, cur.left);
-        }
-        if ((a != null && a.right != null) || (b != null && b.right != null)) {
-            cur.right = new TreeNode();
-            dfs(a == null ? null : a.right, b == null ? null : b.right, cur.right);
-        }
-    }
-
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) {
             return null;
         }
-        TreeNode root = new TreeNode();
-        dfs(root1, root2, root);
-        return root;
+        TreeNode l = mergeTrees(root1 == null ? null : root1.left, root2 == null ? null : root2.left);
+        TreeNode r = mergeTrees(root1 == null ? null : root1.right, root2 == null ? null : root2.right);
+        int v = root1 == null ? 0 : root1.val;
+        v += root2 == null ? 0 : root2.val;
+        return new TreeNode(v, l, r);
     }
 }
 ```
