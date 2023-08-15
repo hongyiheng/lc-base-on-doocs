@@ -67,7 +67,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findReplaceString(self, s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
+        q = []
+        for i in range(len(indices)):
+            l, r = indices[i], indices[i] + len(sources[i])
+            if s[l:r] == sources[i]:
+                q.append((indices[i], i))
+        q.sort(reverse=True)
+        for _, i in q:
+            l, r = indices[i], indices[i] + len(sources[i])
+            s = s[:l] + targets[i] + s[r:]
+        return s
 ```
 
 ### **Java**
@@ -75,7 +86,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
+        int k = indices.length;
+        List<int[]> q = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            int l = indices[i], r = l + sources[i].length();
+            if (r <= s.length() && s.substring(l, r).equals(sources[i])) {
+                q.add(new int[]{indices[i], i});
+            }
+        }
+        q.sort(Comparator.comparingInt(a -> -a[0]));
+        for (int i = 0; i < q.size(); i++) {
+            int idx = q.get(i)[1];
+            int l = indices[idx], r = l + sources[idx].length();
+            s = s.substring(0, l) + targets[idx] + s.substring(r);
+        }
+        return s;
+    }
+}
 ```
 
 ### **...**
