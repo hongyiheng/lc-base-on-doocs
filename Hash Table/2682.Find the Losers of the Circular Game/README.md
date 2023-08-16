@@ -69,7 +69,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def circularGameLosers(self, n: int, k: int) -> List[int]:
+        s = [False] * (n + 1)
+        pos, cnt = 1, 0
+        while not s[pos]:
+            s[pos] = True
+            cnt += 1
+            pos = (pos + cnt * k - 1) % n + 1
+        return [i for i in range(1, n + 1) if not s[i]]
 ```
 
 ### **Java**
@@ -77,7 +85,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] circularGameLosers(int n, int k) {
+        boolean[] s = new boolean[n + 1];
+        int pos = 1, cnt = 0;
+        while (!s[pos]) {
+            s[pos] = true;
+            cnt++;
+            pos = (pos + cnt * k - 1) % n + 1;
+        }
+        int[] ans = new int[n - cnt];
+        for (int i = 1, j = 0; i <= n; i++) {
+            if (!s[i]) {
+                ans[j++] = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
