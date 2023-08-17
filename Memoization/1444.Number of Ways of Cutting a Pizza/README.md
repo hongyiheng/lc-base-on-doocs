@@ -59,7 +59,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def ways(self, pizza: List[str], k: int) -> int:
+        @cache
+        def dfs(x, y, k):
+            cur = s[m][n] - s[x][n] - s[m][y] + s[x][y]
+            if k == 0:
+                return 1 if cur > 0 else 0
+            ans = 0
+            for i in range(x + 1, m + 1):
+                v = s[m][n] - s[i][n] - s[m][y] + s[i][y]
+                if cur > v:
+                    ans += dfs(i, y, k - 1)
+            for j in range(y + 1, n + 1):
+                v = s[m][n] - s[x][n] - s[m][j] + s[x][j]
+                if cur > v:
+                    ans += dfs(x, j, k - 1)
+            return ans % mod
 
+        mod = int(1e9 + 7)
+        m, n = len(pizza), len(pizza[0])
+        s = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + (1 if pizza[i - 1][j - 1] == 'A' else 0)
+        return dfs(0, 0, k - 1)
 ```
 
 ### **Java**
@@ -67,7 +91,52 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int m, n, mod;
+    int[][] s;
+    Map<String, Integer> f;
+
+    public int dfs(int x, int y, int k) {
+        String key = x + "_" + y + "_" + k;
+        if (f.containsKey(key)) {
+            return f.get(key);
+        }
+        int cur = s[m][n] - s[x][n] - s[m][y] + s[x][y];
+        if (k == 0) {
+            return cur > 0 ? 1 : 0;
+        }
+        int ans = 0;
+        for (int i = x + 1; i < m + 1; i++) {
+            int v = s[m][n] - s[i][n] - s[m][y] + s[i][y];
+            if (cur > v) {
+                ans = (ans + dfs(i, y, k - 1)) % mod;
+            }
+        }
+        for (int j = y + 1; j < n + 1; j++) {
+            int v = s[m][n] - s[x][n] - s[m][j] + s[x][j];
+            if (cur > v) {
+                ans = (ans + dfs(x, j, k - 1)) % mod;
+            }
+        }
+        f.put(key, ans);
+        return ans;
+    }
+
+    public int ways(String[] pizza, int k) {
+        m = pizza.length;
+        n = pizza[0].length();
+        mod = (int) 1e9 + 7;
+        s = new int[m + 1][n + 1];
+        f = new HashMap<>();
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + (pizza[i - 1].charAt(j - 1) == 'A' ? 1 : 0);
+            }
+        }
+        return dfs(0, 0, k - 1);
+    }
+}
 ```
 
 ### **...**
