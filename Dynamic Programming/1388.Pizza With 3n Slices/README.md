@@ -73,7 +73,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxSizeSlices(self, slices: List[int]) -> int:
+        def get_max(arr):
+            m = len(arr)
+            f = [[0] * (k + 1) for _ in range(m + 1)]
+            for i in range(1, m + 1):
+                for j in range(1, k + 1):
+                    f[i][j] = max(f[i - 1][j], (f[i - 2][j - 1] if i >= 2 else 0) + arr[i - 1])
+            return f[m][k]
 
+        n, k = len(slices), len(slices) // 3
+        return max(get_max(slices[1:]), get_max(slices[:-1]))
 ```
 
 ### **Java**
@@ -81,7 +92,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    int k;
 
+    public int maxSizeSlices(int[] slices) {
+        int n = slices.length;
+        k = n / 3;
+        int[] a = Arrays.copyOfRange(slices, 0, n - 1);
+        int[] b = Arrays.copyOfRange(slices, 1, n);
+        return Math.max(getMax(a), getMax(b));
+    }
+
+    public int getMax(int[] arr) {
+        int m = arr.length;
+        int[][] f = new int[m + 1][k + 1];
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < k + 1; j++) {
+                f[i][j] = Math.max(f[i - 1][j], (i >= 2 ? f[i - 2][j - 1] : 0) + arr[i - 1]);
+            }
+        }
+        return f[m][k];
+    }
+}
 ```
 
 ### **...**
