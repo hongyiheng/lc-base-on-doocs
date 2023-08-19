@@ -58,7 +58,26 @@ target = 6
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def racecar(self, target: int) -> int:
+        f = [inf] * (target + 1)
+        for i in range(1, target + 1):
+            d = 1
+            while (1 << d) - 1 < 2 * i:
+                forward = (1 << d) - 1
+                if forward == i:
+                    f[i] = d
+                elif forward > i:
+                    f[i] = min(f[i], d + 1 + f[forward - i])
+                else:
+                    f[i] = min(f[i], d + 2 + f[i - forward])
+                    b = 1
+                    while (1 << b) - 1 < forward:
+                        backward = (1 << b) - 1
+                        f[i] = min(f[i], d + 1 + b + 1 + f[i - forward + backward])
+                        b += 1
+                d += 1
+        return f[target]
 ```
 
 ### **Java**
@@ -66,7 +85,33 @@ target = 6
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int racecar(int target) {
+        int[] f = new int[target + 1];
+        Arrays.fill(f, 0x3f3f3f3f);
+        for (int i = 1; i < target + 1; i++) {
+            int d = 1;
+            while ((1 << d) - 1 < 2 * i) {
+                int forward = (1 << d) - 1;
+                if (forward == i) {
+                    f[i] = d;
+                } else if (forward > i) {
+                    f[i] = Math.min(f[i], d + 1 + f[forward - i]);
+                } else {
+                    f[i] = Math.min(f[i], d + 2 + f[i - forward]);
+                    int b = 1;
+                    while ((1 << b) - 1 < forward) {
+                        int backward = (1 << b) - 1;
+                        f[i] = Math.min(f[i], d + 1 + b + 1 + f[i - forward + backward]);
+                        b++;
+                    }
+                }
+                d++;
+            }
+        }
+        return f[target];
+    }
+}
 ```
 
 ### **...**
