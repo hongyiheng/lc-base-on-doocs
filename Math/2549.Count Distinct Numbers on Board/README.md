@@ -65,7 +65,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distinctIntegers(self, n: int) -> int:
+        return max(n - 1, 1)
 ```
 
 ### **Java**
@@ -73,7 +75,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distinctIntegers(int n) {
+        return Math.max(n - 1, 1);
+    }
+}
 ```
 
 ### **...**
