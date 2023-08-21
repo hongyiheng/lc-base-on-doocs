@@ -75,7 +75,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countTriplets(self, arr: List[int]) -> int:
+        n = len(arr)
+        ans = 0
+        for j in range(n):
+            s = 0
+            for k in range(j, n):
+                s ^= arr[k]
+                if s == 0:
+                    ans += k - j
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +93,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countTriplets(int[] arr) {
+        int n = arr.length;
+        int ans = 0;
+        for (int j = 0; j < n; j++) {
+            int s = 0;
+            for (int k = j; k < n; k++) {
+                s ^= arr[k];
+                if (s == 0) {
+                    ans += k - j;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
