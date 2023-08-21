@@ -61,7 +61,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestPrefix(self, s: str) -> str:
+        nxt = [0]
+        x, now = 1, 0
+        while x < len(s):
+            if s[now] == s[x]:
+                now += 1
+                x += 1
+                nxt.append(now)
+            elif now:
+                now = nxt[now - 1]
+            else:
+                nxt.append(0)
+                x += 1
+        return s[:nxt[len(s) - 1]]
 ```
 
 ### **Java**
@@ -69,7 +83,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String longestPrefix(String s) {
+        int n = s.length();
+        int[] nxt = new int[n + 1];
+        int x = 1, now = 0;
+        while (x < n) {
+            if (s.charAt(x) == s.charAt(now)) {
+                x++;
+                now++;
+                nxt[x - 1] = now;
+            } else if (now != 0) {
+                now = nxt[now - 1];
+            } else {
+                x++;
+                nxt[x - 1] = 0;
+            }
+        }
+        return s.substring(0, nxt[n - 1]);
+    }
+}
 ```
 
 ### **...**
