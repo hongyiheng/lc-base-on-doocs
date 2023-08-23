@@ -63,12 +63,13 @@
 ```python
 class Solution:
     def countPairs(self, n: int, edges: List[List[int]], queries: List[int]) -> List[int]:
+        M = 20010
         cnt = [0] * (n + 1)
         g = defaultdict(int)
         for u, v in edges:
             cnt[u] += 1
             cnt[v] += 1
-            g[(min(u, v), max(u, v))] += 1
+            g[(min(u, v) * M + max(u, v))] += 1
         s = sorted(cnt)
         ans = [0] * len(queries)
         for i, t in enumerate(queries):
@@ -76,12 +77,13 @@ class Solution:
                 l, r = j + 1, len(s)
                 while l < r:
                     mid = (l + r) >> 1
-                    if s[mid] <= t - s[j]:
+                    if s[j] + s[mid] <= t:
                         l = mid + 1
                     else:
                         r = mid
                 ans[i] += n - l + 1
-            for (a, b), v in g.items():
+            for k, v in g.items():
+                a, b = k // M, k % M
                 if cnt[a] + cnt[b] > t and cnt[a] + cnt[b] - v <= t:
                     ans[i] -= 1
         return ans
@@ -92,7 +94,48 @@ class Solution:
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] countPairs(int n, int[][] edges, int[] queries) {
+        int M = 20010;
+        int[] cnt = new int[n + 1];
+        Map<Integer, Integer> g = new HashMap<>();
+        for (int[] e : edges) {
+            int u = Math.min(e[0], e[1]);
+            int v = Math.max(e[0], e[1]);
+            cnt[u]++;
+            cnt[v]++;
+            int k = u * M + v;
+            g.put(k, g.getOrDefault(k, 0) + 1);
+        }
+        int[] s = cnt.clone();
+        Arrays.sort(s);
+        int m = queries.length;
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            int t = queries[i];
+            for (int j = 1; j < n + 1; j++) {
+                int l = j + 1, r = n + 1;
+                while (l < r) {
+                    int mid = (l + r) >> 1;
+                    if (s[j] + s[mid] <= t) {
+                        l = mid + 1;
+                    } else {
+                        r = mid;
+                    }
+                }
+                ans[i] += n - l + 1;
+            }
+            for (Map.Entry<Integer, Integer> entry : g.entrySet()) {
+                int a = entry.getKey() / M, b = entry.getKey() % M;
+                int v = entry.getValue();
+                if (cnt[a] + cnt[b] > t && cnt[a] + cnt[b] - v <= t) {
+                    ans[i]--;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
