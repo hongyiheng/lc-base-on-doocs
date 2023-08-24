@@ -52,7 +52,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canCross(self, stones: List[int]) -> bool:
+        @cache
+        def dfs(pos, k):
+            if pos == t:
+                return True
+            for i in range(-1, 2, 1):
+                nx = pos + k + i
+                if nx not in s:
+                    continue
+                if nx <= pos:
+                    continue
+                if dfs(nx, k + i):
+                    return True
+            return False
+        
+        t = stones[-1]
+        s = set(stones)
+        return dfs(0, 0)
 ```
 
 ### **Java**
@@ -60,7 +78,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<String, Boolean> f;
+    Set<Integer> s;
+    int t;
+
+    public boolean canCross(int[] stones) {
+        f = new HashMap<>();
+        s = new HashSet<>(Arrays.stream(stones).boxed().collect(Collectors.toList()));
+        t = stones[stones.length - 1];
+        return dfs(0, 0);
+    }
+
+    public boolean dfs(int pos, int k) {
+        String key = pos + ":" + k;
+        if (f.containsKey(key)) {
+            return f.get(key);
+        }
+        if (pos == t) {
+            return true;
+        }
+        boolean ans = false;
+        for (int i = -1; i <= 1; i++) {
+            int nx = pos + k + i;
+            if (nx <= pos || !s.contains(nx)) {
+                continue;
+            }
+            ans = ans || dfs(nx, k + i);
+        }
+        f.put(key, ans);
+        return ans;
+    }
+}
 ```
 
 ### **...**
