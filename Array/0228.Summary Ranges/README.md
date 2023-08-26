@@ -86,7 +86,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        ans = []
+        i, n = 0, len(nums)
+        while i < n:
+            l = r = i
+            while r + 1 < n and nums[r + 1] == nums[r] + 1:
+                r += 1
+            if l == r:
+                ans.append(str(nums[i]))
+            else:
+                ans.append(str(nums[l]) + '->' + str(nums[r]))
+            i = r + 1
+        return ans
 ```
 
 ### **Java**
@@ -94,7 +107,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> ans = new ArrayList<>();
+        int i = 0, n = nums.length;
+        while (i < n) {
+            int l = i, r = i;
+            while (r + 1 < n && nums[r] + 1 == nums[r + 1]) {
+                r++;
+            }
+            if (l == r) {
+                ans.add(String.valueOf(nums[l]));
+            } else {
+                ans.add(nums[l] + "->" + nums[r]);
+            }
+            i = r + 1;
+        }
+        return ans;
 
+    }
+}
 ```
 
 ### **...**
