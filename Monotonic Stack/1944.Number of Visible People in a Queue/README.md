@@ -60,7 +60,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canSeePersonsCount(self, heights: List[int]) -> List[int]:
+        n = len(heights)
+        ans = [0] * n
+        q = []
+        for i in range(n - 1, -1, -1):
+            h = heights[i]
+            cnt = 0
+            while q and q[-1] < h:
+                cnt += 1
+                q.pop()
+            ans[i] = cnt + 1 if q else cnt
+            q.append(h)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +81,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] canSeePersonsCount(int[] heights) {
+        int n = heights.length;
+        int[] ans = new int[n];
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = n - 1; i > -1; i--) {
+            int h = heights[i];
+            int cnt = 0;
+            while (!q.isEmpty() && q.peekLast() < h) {
+                cnt++;
+                q.pollLast();
+            }
+            ans[i] = !q.isEmpty() ? cnt + 1 : cnt;
+            q.addLast(h);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
