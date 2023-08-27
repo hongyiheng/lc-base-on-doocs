@@ -58,7 +58,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        def dfs(path):
+            nonlocal n
+            if len(path) == n + 1:
+                return path
 
+            res = None
+            u = path[-1]
+            for v in sorted(g[u]):
+                g[u].remove(v)
+                path.append(v)
+                res = dfs(path)
+                if res:
+                    break
+                path.pop()
+                g[u].append(v)
+            return res
+
+        g = defaultdict(list)
+        for u, v in tickets:
+            g[u].append(v)
+        n = len(tickets)
+
+        return dfs(["JFK"])
 ```
 
 ### **Java**
@@ -66,7 +90,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<String, List<String>> g;
+    int n;
+
+    public List<String> dfs(Deque<String> path) {
+        if (path.size() == n + 1) {
+            return new ArrayList<>(path);
+        }
+        List<String> ans = null;
+        String u = path.peekLast();
+        List<String> vs = new ArrayList<>(g.getOrDefault(u, new ArrayList<>()));
+        Collections.sort(vs);
+        for (String v : vs) {
+            g.get(u).remove(v);
+            path.addLast(v);
+            ans = dfs(path);
+            if (ans != null) {
+                break;
+            }
+            path.pollLast();
+            g.get(u).add(v);
+        }
+        return ans;
+    }
+
+    public List<String> findItinerary(List<List<String>> tickets) {
+        n = tickets.size();
+        g = new HashMap<>();
+        for (List<String> uv : tickets) {
+            String u = uv.get(0), v = uv.get(1);
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+        }
+        Deque<String> path = new ArrayDeque<>();
+        path.addLast("JFK");
+        return dfs(path);
+    }
+}
 ```
 
 ### **...**
