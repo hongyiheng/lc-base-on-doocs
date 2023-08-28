@@ -52,7 +52,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        def dfs(root):
+            nonlocal ans
+            if not root:
+                return -1
+            l, r = dfs(root.left), dfs(root.right)
+            if l == 0 or r == 0:
+                ans += 1
+                return 1
+            return -1 if l == 1 or r == 1 else 0
+        
+        ans = 0
+        if dfs(root) == 0:
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +81,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
 
+    int ans;
+
+    public int minCameraCover(TreeNode root) {
+        ans = 0;
+        if (dfs(root) == 0) {
+            ans++;
+        }
+        return ans;
+    }
+
+    public int dfs(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        int l = dfs(root.left), r = dfs(root.right);
+        if (l == 0 || r == 0) {
+            ans++;
+            return 1;
+        }
+        return l == 1 || r == 1 ? -1 : 0;
+    }
+}
 ```
 
 ### **...**
