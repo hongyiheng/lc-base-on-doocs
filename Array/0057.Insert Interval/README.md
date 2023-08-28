@@ -75,20 +75,19 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         ans = []
-        idx, n = 0, len(intervals)
-        while idx < n and newInterval[0] > intervals[idx][1]:
-            ans.append(intervals[idx])
-            idx += 1
-        left, right = newInterval[0], newInterval[1]
-        if idx < n:
-            while idx < n and right >= intervals[idx][0]:
-                left = min(intervals[idx][0], left)
-                right = max(intervals[idx][1], right)
-                idx += 1  
-        ans.append([left, right])
-        while idx < n:
-            ans.append(intervals[idx])
-            idx += 1
+        i, n = 0, len(intervals)
+        while i < n and intervals[i][1] < newInterval[0]:
+            ans.append(intervals[i])
+            i += 1
+        l, r = newInterval
+        while i < n and intervals[i][0] <= r and intervals[i][1] >= l:
+            l = min(l, intervals[i][0])
+            r = max(r, intervals[i][1])
+            i += 1
+        ans.append([l, r])
+        while i < n:
+            ans.append(intervals[i])
+            i += 1
         return ans
 ```
 
@@ -99,29 +98,24 @@ class Solution:
 ```java
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> arr = new ArrayList<>();
-        int idx = 0, n = intervals.length;
-        while (idx < n && intervals[idx][1] < newInterval[0]) {
-            arr.add(intervals[idx]);
-            idx++;
+        List<int[]> ans = new ArrayList<>();
+        int i = 0, n = intervals.length;
+        while (i < n && intervals[i][1] < newInterval[0]) {
+            ans.add(intervals[i]);
+            i++;
         }
-        int left = newInterval[0], right = newInterval[1];
-        while (idx < n && right >= intervals[idx][0]) {
-            left = Math.min(left, intervals[idx][0]);
-            right = Math.max(right, intervals[idx][1]);
-            idx++;
+        int l = newInterval[0], r = newInterval[1];
+        while (i < n && intervals[i][0] <= r && intervals[i][1] >= l) {
+            l = Math.min(l, intervals[i][0]);
+            r = Math.max(r, intervals[i][1]);
+            i++;
         }
-        arr.add(new int[]{left, right});
-        while(idx < n) {
-            arr.add(intervals[idx]);
-            idx++;
+        ans.add(new int[]{l, r});
+        while (i < n) {
+            ans.add(intervals[i]);
+            i++;
         }
-        int[][] ans = new int[arr.size()][2];
-        for (int i = 0; i < arr.size(); i++) {
-            ans[i][0] = arr.get(i)[0];
-            ans[i][1] = arr.get(i)[1];
-        }
-        return ans;
+        return ans.toArray(new int[ans.size()][]);
     }
 }
 ```
