@@ -60,6 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def rearrangeSticks(self, n: int, k: int) -> int:
+        mod = int(1e9 + 7)
+        f = [[0] * (k + 1) for _ in range(n + 1)]
+        f[0][0] = 1
+        for i in range(1, n + 1):
+            for j in range(1, k + 1):
+                f[i][j] = f[i - 1][j - 1]
+                if i - 1 >= j:    
+                    f[i][j] = (f[i][j] + (i - 1) * f[i - 1][j]) % mod
+        return f[n][k]
 
 ```
 
@@ -68,7 +79,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int rearrangeSticks(int n, int k) {
+        int mod = (int)1e9 + 7;
+        int[][] f = new int[n + 1][k + 1];
+        f[0][0] = 1;
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < k + 1; j++) {
+                f[i][j] = f[i - 1][j - 1];
+                if (i - 1 >= j) {
+                    f[i][j] = (int)((f[i][j] + 1L * (i - 1) * f[i - 1][j]) % mod);
+                }
+            }
+        }
+        return f[n][k];
+    }
+}
 ```
 
 ### **...**
