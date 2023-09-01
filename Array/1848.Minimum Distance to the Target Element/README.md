@@ -61,7 +61,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getMinDistance(self, nums: List[int], target: int, start: int) -> int:
+        ans = inf
+        for i, v in enumerate(nums):
+            if v == target:
+                ans = min(ans, abs(i - start))
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +75,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int getMinDistance(int[] nums, int target, int start) {
+        int ans = 1010;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                ans = Math.min(ans, Math.abs(i - start));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
