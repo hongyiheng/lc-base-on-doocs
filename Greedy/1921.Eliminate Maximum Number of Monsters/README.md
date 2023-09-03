@@ -74,7 +74,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
+        t = [max((d + s - 1) // s, 1) for d, s in zip(dist, speed)]
+        print(t)
+        t.sort()
+        ans = 0
+        for i, v in enumerate(t):
+            if v <= i:
+                break
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +92,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int eliminateMaximum(int[] dist, int[] speed) {
+        int n = dist.length;
+        int[] t = new int[n];
+        for (int i = 0; i < n; i++) {
+            t[i] = Math.max((dist[i] + speed[i] - 1) / speed[i], 1);
+        }
+        Arrays.sort(t);
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (t[i] <= i) {
+                break;
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
