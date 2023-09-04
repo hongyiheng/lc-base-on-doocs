@@ -54,7 +54,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Codec:
+
+    def serialize(self, root: Optional[TreeNode]) -> str:
+        """Encodes a tree to a single string.
+        """
+        if not root:
+            return '#'
+        return str(root.val) + "," + self.serialize(root.left) + "," + self.serialize(root.right)
+        
+            
+        
+
+    def deserialize(self, data: str) -> Optional[TreeNode]:
+        """Decodes your encoded data to tree.
+        """
+        def dfs(q):
+            v = q.popleft()
+            if v == '#':
+                return None
+            root = TreeNode(int(v))
+            root.left = dfs(q)
+            root.right = dfs(q)
+            return root
+            
+        q = deque(data.split(","))
+        return dfs(q)
+
+        
+
+# Your Codec object will be instantiated and called as such:
+# Your Codec object will be instantiated and called as such:
+# ser = Codec()
+# deser = Codec()
+# tree = ser.serialize(root)
+# ans = deser.deserialize(tree)
+# return ans
 ```
 
 ### **Java**
@@ -62,7 +104,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
 
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if (root == null) {
+            return "#";
+        }
+        return root.val + "," + serialize(root.left) + "," + serialize(root.right);
+    }
+
+    public TreeNode dfs(Deque<String> q) {
+        String v = q.pollFirst();
+        if ("#".equals(v)) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.valueOf(v));
+        root.left = dfs(q);
+        root.right = dfs(q);
+        return root;
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Deque<String> q = new ArrayDeque<>(Arrays.asList(data.split(",")));
+        return dfs(q);
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// String tree = ser.serialize(root);
+// TreeNode ans = deser.deserialize(tree);
+// return ans;
 ```
 
 ### **...**
