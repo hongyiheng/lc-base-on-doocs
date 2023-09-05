@@ -45,7 +45,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minNumber(self, nums1: List[int], nums2: List[int]) -> int:
+        cnt = [0] * 10
+        for v in nums1:
+            cnt[v] = 1
+        for v in nums2:
+            cnt[v] = 3 if cnt[v] else 2
+        a = b = 0
+        for i, v in enumerate(cnt):
+            if v == 3:
+                return i
+            if v == 1 and not a:
+                a = i
+            if v == 2 and not b:
+                b = i
+        return min(a, b) * 10 + max(a, b)
 ```
 
 ### **Java**
@@ -53,7 +68,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minNumber(int[] nums1, int[] nums2) {
+        int[] cnt = new int[10];
+        for (int v : nums1) {
+            cnt[v] = 1;
+        }
+        for (int v : nums2) {
+            cnt[v] = cnt[v] == 1 ? 3 : 2;
+        }
+        int a = 0, b = 0;
+        for (int i = 0; i < 10; i++) {
+            if (cnt[i] == 3) {
+                return i;
+            }
+            if (cnt[i] == 1 && a == 0) {
+                a = i;
+            }
+            if (cnt[i] == 2 && b == 0) {
+                b = i;
+            }
+        }
+        return Math.min(a, b) * 10 + Math.max(a, b);
+    }
+}
 ```
 
 ### **...**
