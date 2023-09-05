@@ -56,7 +56,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findRotateSteps(self, ring: str, key: str) -> int:
+        n = len(ring)
+        g = defaultdict(list)
+        for i, v in enumerate(ring):
+            g[v].append(i)
+        f = [inf] * n
+        for i in g[key[0]]:
+            f[i] = min(i, n - i) + 1
+        for i in range(1, len(key)):
+            for v in g[key[i]]:
+                mi = inf
+                for u in g[key[i - 1]]:
+                    mi = min(mi, f[u] + min(abs(u - v), n - abs(u - v)) + 1)
+                f[v] = mi
+        return min(f[v] for v in g[key[-1]])
 ```
 
 ### **Java**
@@ -64,7 +79,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    final int inf = 0x3f3f3f3f;
+
+    public int findRotateSteps(String ring, String key) {
+        int n = ring.length(), m = key.length();
+        Map<Character, List<Integer>> g = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            g.computeIfAbsent(ring.charAt(i), k -> new ArrayList<>()).add(i);
+        }
+        int[] f = new int[n];
+        Arrays.fill(f, inf);
+        for (int i : g.get(key.charAt(0))) {
+            f[i] = Math.min(i, n - i) + 1;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int v : g.get(key.charAt(i))) {
+                int mi = inf;
+                for (int u : g.get(key.charAt(i - 1))) {
+                    mi = Math.min(mi, f[u] + Math.min(Math.abs(u - v), n - Math.abs(u - v)) + 1);
+                }
+                f[v] = mi;
+            }
+        }
+        int ans = inf;
+        for (int v : g.get(key.charAt(m - 1))) {
+            ans = Math.min(ans, f[v]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
