@@ -56,7 +56,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        g = defaultdict(list)
+        to = [0] * numCourses
+        for u, v in prerequisites:
+            g[v].append(u)
+            to[u] += 1
+        q = deque([i for i, v in enumerate(to) if not v])
+        cnt = 0
+        while q:
+            v = q.pop()
+            for u in g[v]:
+                to[u] -= 1
+                if to[u] == 0:
+                    q.append(u)
+            cnt += 1
+        return cnt == numCourses
 ```
 
 ### **Java**
@@ -64,7 +80,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        int[] to = new int[numCourses];
+        for (int[] e : prerequisites) {
+            g.computeIfAbsent(e[1], k -> new ArrayList<>()).add(e[0]);
+            to[e[0]]++;
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (to[i] == 0) {
+                q.add(i);
+            }
+        }
+        int cnt = 0;
+        while (!q.isEmpty()) {
+            int v = q.poll();
+            for (int u : g.getOrDefault(v, new ArrayList<>())) {
+                if (--to[u] == 0) {
+                    q.add(u);
+                }
+            }
+            cnt++;
+        }
+        return numCourses == cnt;
+    }
+}
 ```
 
 ### **...**
