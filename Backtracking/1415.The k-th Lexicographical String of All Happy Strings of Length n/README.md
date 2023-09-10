@@ -77,7 +77,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getHappyString(self, n: int, k: int) -> str:
+        def dfs(path):
+            if len(path) == n:
+                ans.append("".join(path))
+                return
+            for c in ['a', 'b', 'c']:
+                if path and path[-1] == c:
+                    continue
+                path.append(c)
+                dfs(path)
+                path.pop()
+        
+        ans = []
+        dfs([])
+        if len(ans) < k:
+            return ""
+        ans.sort()
+        return ans[k - 1]
 ```
 
 ### **Java**
@@ -85,7 +103,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int n;
+    List<String> ans;
+
+    public void dfs(Deque<String> path) {
+        if (path.size() == n) {
+            ans.add(String.join("", new ArrayList<>(path)));
+            return;
+        }
+        for (String c : new String[]{"a", "b", "c"}) {
+            if (!path.isEmpty() && path.peekLast().equals(c)) {
+                continue;
+            }
+            path.addLast(c);
+            dfs(path);
+            path.pollLast();
+        }
+    }
+
+    public String getHappyString(int n, int k) {
+        this.n = n;
+        ans = new ArrayList<>();
+        dfs(new ArrayDeque<String>());
+        if (ans.size() < k) {
+            return "";
+        }
+        Collections.sort(ans);
+        return ans.get(k - 1);
+    }
+}
 ```
 
 ### **...**
