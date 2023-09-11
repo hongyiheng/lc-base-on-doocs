@@ -64,7 +64,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def possibleToStamp(self, grid: List[List[int]], stampHeight: int, stampWidth: int) -> bool:
+        m, n = len(grid), len(grid[0])
+        s = [[0] * (n + 1) for _ in range(m + 1)]
+        diff = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                s[i][j] = s[i][j - 1] + s[i - 1][j] - s[i - 1][j - 1] + grid[i - 1][j - 1]
 
+        for i in range(m + 1):
+            for j in range(n + 1):
+                x, y = i + stampHeight, j + stampWidth
+                if x <= m and y <= n and s[x][y] - s[i][y] - s[x][j] + s[i][j] == 0:
+                    diff[i][j] += 1
+                    diff[x][j] -= 1
+                    diff[i][y] -= 1
+                    diff[x][y] += 1
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + diff[i - 1][j - 1]
+                if s[i][j] == 0 and grid[i - 1][j - 1] == 0:
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -72,7 +95,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean possibleToStamp(int[][] grid, int stampHeight, int stampWidth) {
+        int m = grid.length, n = grid[0].length;
+        int[][] s = new int[m + 1][n + 1];
+        int[][] diff = new int[m + 1][n + 1];
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + grid[i - 1][j - 1];
+            }
+        }
+        for (int i = 0; i < m + 1; i++) {
+            for (int j = 0; j < n + 1; j++) {
+                int x = i + stampHeight, y = j + stampWidth;
+                if (x <= m && y <= n && s[x][y] - s[i][y] - s[x][j] + s[i][j] == 0) {
+                    diff[i][j]++;
+                    diff[i][y]--;
+                    diff[x][j]--;
+                    diff[x][y]++;
+                }
+            }
+        }
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + diff[i - 1][j - 1];
+                if (s[i][j] == 0 && grid[i - 1][j - 1] == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
