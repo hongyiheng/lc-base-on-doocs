@@ -83,7 +83,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        f = [[False] * numCourses for _ in range(numCourses)]
+        for p, v in prerequisites:
+            f[p][v] = True
+        for k in range(numCourses):
+            for i in range(numCourses):
+                for j in range(numCourses):
+                    f[i][j] |= f[i][k] and f[k][j]
+        return [f[p][v] for p, v in queries]
 ```
 
 ### **Java**
@@ -91,7 +100,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
+        boolean[][] f = new boolean[numCourses][numCourses];
+        for (int[] e : prerequisites) {
+            int p = e[0], v = e[1];
+            f[p][v] = true;
+        }
+        for (int k = 0; k < numCourses; k++) {
+            for (int i = 0; i < numCourses; i++) {
+                for (int j = 0; j < numCourses; j++) {
+                    f[i][j] |= f[i][k] && f[k][j];
+                }
+            }
+        }
+        List<Boolean> ans = new ArrayList<>();
+        for (int[] q : queries) {
+            int p = q[0], v = q[1];
+            ans.add(f[p][v]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
