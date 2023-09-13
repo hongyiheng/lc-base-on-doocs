@@ -54,7 +54,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkValidGrid(self, grid: List[List[int]]) -> bool:
+        n = len(grid)
+        if grid[0][0]:
+            return False
+        cnt = x = y = 0
+        while cnt < n * n - 1:
+            flag = False
+            cnt += 1
+            for d in [[-2, 1], [-2, -1], [2, 1], [2, -1], [1, 2], [-1, 2], [1, -2], [-1, -2]]:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= n or ny < 0 or ny >= n:
+                    continue
+                if cnt == grid[nx][ny]:
+                    x, y = nx, ny
+                    flag = True
+            if not flag:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -62,7 +80,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkValidGrid(int[][] grid) {
+        int n = grid.length;
+        if (grid[0][0] != 0) {
+            return false;
+        }
+        int cnt = 0, x = 0, y = 0;
+        while (cnt < n * n - 1) {
+            cnt++;
+            boolean flag = false;
+            for (int[] d : new int[][]{{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}}) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx >= 0 && nx < n && ny >= 0 && ny < n && grid[nx][ny] == cnt) {
+                    x = nx;
+                    y = ny;
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
