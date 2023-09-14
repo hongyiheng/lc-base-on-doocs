@@ -66,7 +66,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def longestZigZag(self, root: Optional[TreeNode]) -> int:
+        def dfs(root, cnt, left):
+            if not root:
+                return 0
+            if left:
+                l, r = dfs(root.left, 1, True), dfs(root.right, cnt + 1, False)
+            else:
+                l, r = dfs(root.left, cnt + 1, True), dfs(root.right, 1, False)
+            return max(l, r, cnt)
+        
+        return dfs(root, 0, True)
 ```
 
 ### **Java**
@@ -74,7 +91,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int dfs(TreeNode root, int cnt, boolean left) {
+        if (root == null) {
+            return 0;
+        }
+        int l = 0, r = 0;
+        if (left) {
+            l = dfs(root.left, 1, true);
+            r = dfs(root.right, cnt + 1, false);
+        } else {
+            l = dfs(root.left, cnt + 1, true);
+            r = dfs(root.right, 1, false);
+        }
+        return Math.max(cnt, Math.max(l, r));
+    }
 
+    public int longestZigZag(TreeNode root) {
+        return dfs(root, 0, true);
+    }
+}
 ```
 
 ### **...**
