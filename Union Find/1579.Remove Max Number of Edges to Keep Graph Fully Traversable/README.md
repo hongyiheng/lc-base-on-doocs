@@ -71,7 +71,53 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxNumEdgesToRemove(self, n: int, edges: List[List[int]]) -> int:
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
 
+        def union(a, b):
+            p[find(a)] = find(b)
+
+        def is_link():
+            t = find(1)
+            for i in range(1, n + 1):
+                if find(i) != t:
+                    return False
+            return True
+
+        p = [i for i in range(n + 1)]
+        ans = 0
+        for t, u, v in edges:
+            if t == 3:
+                if find(u) == find(v):
+                    ans += 1
+                else:
+                    union(u, v)
+        tmp = p[::]
+
+        for t, u, v in edges:
+            if t == 1:
+                if find(u) == find(v):
+                    ans += 1
+                else:
+                    union(u, v)
+        if not is_link():
+            return -1
+
+        p = tmp
+        for t, u, v in edges:
+            if t == 2:
+                if find(u) == find(v):
+                    ans += 1
+                else:
+                    union(u, v)
+        if not is_link():
+            return -1
+
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +125,72 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] p;
+
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    public void union(int a, int b) {
+        p[find(a)] = find(b);
+    }
+
+    public boolean isLinked() {
+        int t = find(1);
+        for (int i = 1; i < p.length; i++) {
+            if (find(i) != t) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int maxNumEdgesToRemove(int n, int[][] edges) {
+        p = new int[n + 1];
+        for (int i = 0; i < n + 1; i++) {
+            p[i] = i;
+        }
+        int ans = 0;
+        for (int[] e : edges) {
+            if (e[0] == 3) {
+                if (find(e[1]) == find(e[2])) {
+                    ans++;
+                } else {
+                    union(e[1], e[2]);
+                }
+            }
+        }
+        int[] tmp = p.clone();
+        for (int[] e : edges) {
+            if (e[0] == 1) {
+                if (find(e[1]) == find(e[2])) {
+                    ans++;
+                } else {
+                    union(e[1], e[2]);
+                }
+            }
+        }
+        if (!isLinked()) {
+            return -1;
+        }
+        p = tmp;
+        for (int[] e : edges) {
+            if (e[0] == 2) {
+                if (find(e[1]) == find(e[2])) {
+                    ans++;
+                } else {
+                    union(e[1], e[2]);
+                }
+            }
+        }
+        return isLinked() ? ans : -1;
+    }
+}
 ```
 
 ### **...**
