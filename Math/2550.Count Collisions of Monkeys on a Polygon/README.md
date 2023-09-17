@@ -62,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def monkeyMove(self, n: int) -> int:
+        mod = int(1e9 + 7)
+        ans, base = 1, 2
+        while n:
+            if n & 1:
+                ans = ans * base % mod
+            base = base * base % mod
+            n >>= 1
+        return (ans - 2 + mod) % mod
 ```
 
 ### **Java**
@@ -70,7 +79,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int monkeyMove(int n) {
+        long ans = 1, base = 2;
+        int mod = (int)1e9 + 7;
+        while (n != 0) {
+            if ((n & 1) == 1) {
+                ans = ans * base % mod;
+            }
+            base = base * base % mod;
+            n >>= 1;
+        }
+        return ((int)ans - 2 + mod) % mod;
+    }
+}
 ```
 
 ### **...**
