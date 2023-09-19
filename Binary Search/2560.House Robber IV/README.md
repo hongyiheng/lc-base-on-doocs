@@ -63,7 +63,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minCapability(self, nums: List[int], k: int) -> int:
+        def check(x):
+            f0, f1 = 0, 1 if nums[0] <= x else 0
+            for i in range(2, len(nums) + 1):
+                cur = f1
+                if nums[i - 1] <= x:
+                    cur = max(cur, f0 + 1)
+                f0, f1 = f1, cur
+            return max(f0, f1) >= k
 
+        l, r = 0, int(1e9)
+        while l < r:
+            mid = (l + r) >> 1
+            if check(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r
 ```
 
 ### **Java**
@@ -71,7 +89,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minCapability(int[] nums, int k) {
+        int l = 0, r = (int)1e9;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (check(nums, mid, k)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return r;
+    }
 
+    public boolean check(int[] nums, int x, int k) {
+        int f0 = 0, f1 = nums[0] <= x ? 1 : 0;
+        for (int i = 2; i < nums.length + 1; i++) {
+            int cur = f1;
+            if (nums[i - 1] <= x) {
+                cur = Math.max(cur, f0 + 1);
+            }
+            f0 = f1;
+            f1 = cur;
+        }
+        return Math.max(f0, f1) >= k;
+    }
+}
 ```
 
 ### **...**
