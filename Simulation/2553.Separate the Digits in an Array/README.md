@@ -57,7 +57,16 @@ answer = [7,1,3,9] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def separateDigits(self, nums: List[int]) -> List[int]:
+        ans = []
+        for v in nums:
+            t = []
+            while v:
+                t.append(v % 10)
+                v //= 10
+            ans.extend(t[::-1])
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +74,20 @@ answer = [7,1,3,9] 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] separateDigits(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        for (int v : nums) {
+            Deque<Integer> t = new ArrayDeque<>();
+            while (v > 0) {
+                t.addFirst(v % 10);
+                v /= 10;
+            }
+            ans.addAll(new ArrayList<>(t));
+        }
+        return ans.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
 ```
 
 ### **...**
