@@ -66,7 +66,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def collectTheCoins(self, coins: List[int], edges: List[List[int]]) -> int:
+        n = len(coins)
+        to = [0] * n
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+            to[u] += 1
+            to[v] += 1
+        cnt = len(edges)
+        q = []
+        for i, v in enumerate(to):
+            if v == 1 and not coins[i]:
+                q.append(i)
+        while q:
+            v = q.pop()
+            cnt -= 1
+            for u in g[v]:
+                to[u] -= 1
+                if to[u] == 1 and not coins[u]:
+                    q.append(u)
+        for i, v in enumerate(to):
+            if v == 1 and coins[i]:
+                q.append(i)
+        for v in q:
+            cnt -= 1
+            for u in g[v]:
+                to[u] -= 1
+                if to[u] == 1:
+                    cnt -= 1
+        return max(cnt * 2, 0)
 ```
 
 ### **Java**
@@ -74,7 +105,50 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int collectTheCoins(int[] coins, int[][] edges) {
+        int n = coins.length;
+        int[] to = new int[n];
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        for (int[] e : edges) {
+            int u = e[0], v = e[1];
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+            g.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
+            to[u]++;
+            to[v]++;
+        }
+        int cnt = edges.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            if (to[i] == 1 && coins[i] == 0) {
+                q.add(i);
+            }
+        }
+        while (!q.isEmpty()) {
+            Integer v = q.poll();
+            cnt--;
+            for (int u : g.getOrDefault(v, new ArrayList<>())) {
+                if (--to[u] == 1 && coins[u] == 0) {
+                    q.add(u);
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (to[i] == 1 && coins[i] == 1) {
+                q.add(i);
+            }
+        }
+        for (int v : q) {
+            cnt--;
+            for (int u : g.getOrDefault(v, new ArrayList<>())) {
+                if (--to[u] == 1) {
+                    cnt--;
+                }
+            }
+        }
+        return Math.max(cnt * 2, 0);
+    }
+}
 ```
 
 ### **...**
