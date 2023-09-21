@@ -60,7 +60,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def isPossibleToCutPath(self, grid: List[List[int]]) -> bool:
+        def dfs(x, y):
+            if x == m - 1 and y == n - 1:
+                return True
+            grid[x][y] = 0
+            ans = False
+            for d in [[0, 1], [1, 0]]:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                    continue
+                if not grid[nx][ny]:
+                    continue
+                ans = ans or dfs(nx, ny)
+            return ans
 
+        m, n = len(grid), len(grid[0])
+        if not grid[0][0] or not grid[m - 1][n - 1]:
+            return True
+        return not dfs(0, 0) or not dfs(0, 0)
 ```
 
 ### **Java**
@@ -68,7 +87,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int m, n;
+    int[][] grid;
+
+    public boolean dfs(int x, int y) {
+        if (x == m - 1 && y == n - 1) {
+            return true;
+        }
+        grid[x][y] = 0;
+        boolean ans = false;
+        for (int[] d : new int[][]{{0, 1}, {1, 0}}) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                continue;
+            }
+            if (grid[nx][ny] == 0) {
+                continue;
+            }
+            ans = ans || dfs(nx, ny);
+        }
+        return ans;
+    }
+
+    public boolean isPossibleToCutPath(int[][] grid) {
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
+        if (grid[0][0] == 0 || grid[m - 1][n - 1] == 0) {
+            return true;
+        }
+        return !dfs(0, 0) || !dfs(0, 0);
+    }
+}
 ```
 
 ### **...**
