@@ -50,7 +50,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximizeGreatness(self, nums: List[int]) -> int:
+        nums.sort()
+        n = len(nums)
+        l = r = ans = 0
+        while r < n:
+            if nums[r] > nums[l]:
+                ans += 1
+                l += 1
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +68,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximizeGreatness(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int l = 0, r = 0, ans = 0;
+        while (r < n) {
+            if (nums[r] > nums[l]) {
+                ans++;
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
