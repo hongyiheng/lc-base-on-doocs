@@ -84,7 +84,61 @@ lockingTree.lock(0, 1);    // 返回 false ，因为节点 0 已经被上锁了�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class LockingTree:
 
+    def __init__(self, parent: List[int]):
+        self.parent = parent
+        self.g = defaultdict(list)
+        self.locks = [-1] * len(parent)
+        self.n = len(parent)
+        for i, p in enumerate(parent):
+            self.g[p].append(i)
+
+    def lock(self, num: int, user: int) -> bool:
+        if self.locks[num] == -1:
+            self.locks[num] = user
+            return True
+        return False
+
+    def unlock(self, num: int, user: int) -> bool:
+        if self.locks[num] == user:
+            self.locks[num] = -1
+            return True
+        return False
+
+    def upgrade(self, num: int, user: int) -> bool:
+        if self.locks[num] != -1:
+            return False
+
+        p = self.parent[num]
+        while p != -1:
+            if self.locks[p] != -1:
+                return False
+            p = self.parent[p]
+
+        cnt = 0
+        q = [num]
+        while q:
+            u = q.pop()
+            for v in self.g[u]:
+                if self.locks[v] != -1:
+                    self.locks[v] = -1
+                    cnt += 1
+                q.append(v)
+
+        if cnt > 0:
+            self.locks[num] = user
+        return cnt > 0
+
+
+
+
+
+# Your LockingTree object will be instantiated and called as such:
+# obj = LockingTree(parent)
+# param_1 = obj.lock(num,user)
+# param_2 = obj.unlock(num,user)
+# param_3 = obj.upgrade(num,user)
 ```
 
 ### **Java**
@@ -92,7 +146,78 @@ lockingTree.lock(0, 1);    // 返回 false ，因为节点 0 已经被上锁了�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class LockingTree {
 
+    int[] parent;
+    Map<Integer, List<Integer>> g;
+    int n;
+    int[] locks;
+
+    public LockingTree(int[] parent) {
+        this.parent = parent;
+        g = new HashMap<>();
+        n = parent.length;
+        locks = new int[n];
+        Arrays.fill(locks, -1);
+        for (int i = 0; i < n; i++) {
+            g.computeIfAbsent(parent[i], k -> new ArrayList<>()).add(i);
+        }
+    }
+    
+    public boolean lock(int num, int user) {
+        if (locks[num] == -1) {
+            locks[num] = user;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean unlock(int num, int user) {
+        if (locks[num] != user) {
+            return false;
+        }
+        locks[num] = -1;
+        return true;
+    }
+    
+    public boolean upgrade(int num, int user) {
+        if (locks[num] != -1) {
+            return false;
+        }
+        int p = parent[num];
+        while (p != -1) {
+            if (locks[p] != -1) {
+                return false;
+            }
+            p = parent[p];
+        }
+        int cnt = 0;
+        Deque<Integer> q = new ArrayDeque<>();
+        q.add(num);
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            for (int v : g.getOrDefault(u, new ArrayList<>())) {
+                if (locks[v] != -1) {
+                    locks[v] = -1;
+                    cnt++;
+                }
+                q.add(v);
+            }
+        }
+        if (cnt > 0) {
+            locks[num] = user;
+        }
+        return cnt > 0;
+    }
+}
+
+/**
+ * Your LockingTree object will be instantiated and called as such:
+ * LockingTree obj = new LockingTree(parent);
+ * boolean param_1 = obj.lock(num,user);
+ * boolean param_2 = obj.unlock(num,user);
+ * boolean param_3 = obj.upgrade(num,user);
+ */
 ```
 
 ### **...**
