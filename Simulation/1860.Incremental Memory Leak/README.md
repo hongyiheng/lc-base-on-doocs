@@ -57,7 +57,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def memLeak(self, memory1: int, memory2: int) -> List[int]:
+        i = 1
+        while True:
+            if memory1 >= memory2:
+                if memory1 < i:
+                    break
+                memory1 -= i
+            else:
+                if memory2 < i:
+                    break
+                memory2 -= i
+            i += 1
+        return [i, memory1, memory2]
 ```
 
 ### **Java**
@@ -65,7 +78,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] memLeak(int memory1, int memory2) {
+        int i = 0;
+        while (true) {
+            if (memory1 >= memory2) {
+                if (memory1 < i) {
+                    break;
+                }
+                memory1 -= i;
+            } else {
+                if (memory2 < i) {
+                    break;
+                }
+                memory2 -= i;
+            }
+            i++;
+        }
+        return new int[]{i, memory1, memory2};
+    }
+}
 ```
 
 ### **...**
