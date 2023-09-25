@@ -79,7 +79,55 @@ lFUCache.get(4);      // 返回 4
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class LFUCache:
 
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.minFreq = 0
+        self.kv = dict()
+        self.keyFreq = dict()
+        self.freqKeys = defaultdict(deque)
+
+    def get(self, key: int) -> int:
+        if key not in self.kv:
+            return -1
+        self.incrFreq(key)
+        return self.kv[key]
+
+    def put(self, key: int, value: int) -> None:
+        if self.capacity == 0:
+            return
+        if key in self.kv:
+            self.incrFreq(key)
+        else:
+            if len(self.kv) >= self.capacity:
+                delKey = self.freqKeys[self.minFreq].popleft()
+                if not self.freqKeys[self.minFreq]:
+                    self.freqKeys.pop(self.minFreq)
+                self.kv.pop(delKey)
+                self.keyFreq.pop(delKey)
+            self.keyFreq[key] = 1
+            self.freqKeys[1].append(key)
+            self.minFreq = 1
+        self.kv[key] = value
+
+    def incrFreq(self, key):
+        f = self.keyFreq.get(key)
+        self.freqKeys.get(f).remove(key)
+        if not self.freqKeys.get(f):
+            self.freqKeys.pop(f)
+            if f == self.minFreq:
+                self.minFreq += 1
+        self.keyFreq[key] = f + 1
+        self.freqKeys[f + 1].append(key)
+
+
+
+
+# Your LFUCache object will be instantiated and called as such:
+# obj = LFUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
 ```
 
 ### **Java**
@@ -87,7 +135,70 @@ lFUCache.get(4);      // 返回 4
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+    class LFUCache {
 
+        Map<Integer, Integer> kv, keyFreq;
+        Map<Integer, Deque<Integer>> freqKeys;
+        int minFreq, capacity;
+
+        public LFUCache(int capacity) {
+            kv = new HashMap<>();
+            keyFreq = new HashMap<>();
+            freqKeys = new HashMap<>();
+            minFreq = 0;
+            this.capacity = capacity;
+        }
+
+        public int get(int key) {
+            if (!kv.containsKey(key)) {
+                return -1;
+            }
+            incrFreq(key);
+            return kv.get(key);
+        }
+
+        public void put(int key, int value) {
+            if (capacity == 0) {
+                return;
+            }
+            if (kv.containsKey(key)) {
+                incrFreq(key);
+            } else {
+                if (kv.size() >= capacity) { 
+                    int delKey = freqKeys.get(minFreq).pollFirst();
+                    if (freqKeys.get(minFreq).isEmpty()) {
+                        freqKeys.remove(minFreq);
+                    }
+                    kv.remove(delKey);
+                    keyFreq.remove(delKey);
+                }
+                keyFreq.put(key, 1);
+                freqKeys.computeIfAbsent(1, k -> new ArrayDeque<>()).addLast(key);
+                minFreq = 1;
+            }
+            kv.put(key, value);
+        }
+
+        public void incrFreq(int key) {
+            int f = keyFreq.get(key);
+            freqKeys.get(f).remove(key);
+            if (freqKeys.get(f).isEmpty()) {
+                freqKeys.remove(f);
+                if (f == minFreq) {
+                    minFreq++;
+                }  
+            }
+            keyFreq.put(key, f + 1);
+            freqKeys.computeIfAbsent(f + 1, k -> new ArrayDeque<>()).addLast(key);
+        }
+    }
+
+/**
+ * Your LFUCache object will be instantiated and called as such:
+ * LFUCache obj = new LFUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
 ```
 
 ### **...**
