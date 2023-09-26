@@ -63,7 +63,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findValidSplit(self, nums: List[int]) -> int:
+        def f(x, i):
+            if x not in left:
+                left[x] = i
+            else:
+                right[left[x]] = i
 
+        left = dict()
+        right = [0] * len(nums)
+
+        for i, v in enumerate(nums):
+            d = 2
+            while d * d <= v:
+                if not v % d:
+                    f(d, i)
+                    while not v % d:
+                        v //= d
+                d += 1
+            if v > 1:
+                f(v, i)
+
+        mr = 0
+        for l, r in enumerate(right):
+            if l > mr:
+                return mr
+            mr = max(mr, r)
+        return -1
 ```
 
 ### **Java**
@@ -71,7 +98,50 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Integer, Integer> left = new HashMap<>();
+    int[] right;
+
+    public void f(int x, int i) {
+        if (!left.containsKey(x)) {
+            left.put(x, i);
+        } else {
+            right[left.get(x)] = i;
+        }
+    }
+
+    public int findValidSplit(int[] nums) {
+        int n = nums.length;
+        right = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int d = 2;
+            while (d * d <= nums[i]) {
+                if (nums[i] % d == 0) {
+                    f(d, i);
+                    while (nums[i] % d == 0) {
+                        nums[i] /= d;
+                    }
+                }
+                d++;
+            }
+            if (nums[i] > 1) {
+                f(nums[i], i);
+            }
+        }
+
+        int mr = 0;
+        for (int i = 0; i < n; i++) {
+            int l = i, r = right[i];
+            if (l > mr) {
+                return mr;
+            }
+            mr = Math.max(r, mr);
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
