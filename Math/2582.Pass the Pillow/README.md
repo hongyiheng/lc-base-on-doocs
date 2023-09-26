@@ -57,7 +57,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def passThePillow(self, n: int, time: int) -> int:
+        time %= (2 * n - 2)
+        return time + 1 if time <= n - 1 else n - (time - (n - 1))
 ```
 
 ### **Java**
@@ -65,7 +68,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int passThePillow(int n, int time) {
+        time %= (2 * n - 2);
+        return time <= n - 1 ? time + 1 : n - (time - (n - 1));
+    }
+}
 ```
 
 ### **...**
