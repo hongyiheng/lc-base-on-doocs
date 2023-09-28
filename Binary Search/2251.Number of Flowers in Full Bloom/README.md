@@ -54,7 +54,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def fullBloomFlowers(self, flowers: List[List[int]], people: List[int]) -> List[int]:
+        def lower_bound(arr, x):
+            l, r = 0, len(arr) - 1
+            while l < r:
+                mid = (l + r + 1) >> 1
+                if arr[mid] <= x:
+                    l = mid
+                else:
+                    r = mid - 1
+            return r + 1 if arr[r] <= x else r
 
+        start = sorted([s for s, _ in flowers])
+        end = sorted([e for _, e in flowers])
+        return [lower_bound(start, v) - lower_bound(end, v - 1) for v in people]
 ```
 
 ### **Java**
@@ -62,7 +76,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int lowerBound(int[] arr, int x) {
+        int l = 0, r = arr.length - 1;
+        while (l < r) {
+            int mid = (l + r + 1) >> 1;
+            if (arr[mid] <= x) {
+                l = mid;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return arr[r] <= x ? r + 1 : r;
+    }
+    
+
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+        int n = flowers.length, m = people.length;
+        int[] start = new int[n], end = new int[n];
+        for (int i = 0; i < n; i++) {
+            start[i] = flowers[i][0];
+            end[i] = flowers[i][1];
+        }
+        Arrays.sort(start);
+        Arrays.sort(end);
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            ans[i] = lowerBound(start, people[i]) - lowerBound(end, people[i] - 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
