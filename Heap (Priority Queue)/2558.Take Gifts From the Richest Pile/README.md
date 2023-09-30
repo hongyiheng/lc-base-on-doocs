@@ -65,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def pickGifts(self, gifts: List[int], k: int) -> int:
+        q = []
+        for v in gifts:
+            heappush(q, -v)
+        for i in range(k):
+            v = -heappop(q)
+            heappush(q, -int(sqrt(v)))
+        return -sum(q)
 ```
 
 ### **Java**
@@ -73,7 +81,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        for (int v : gifts) {
+            q.offer(v);
+        }
+        for (int i = 0; i < k; i++) {
+            int v = q.poll();
+            q.offer((int) Math.sqrt(v));
+        }
+        return q.stream().mapToLong(e -> e).sum();
+    }
+}
 ```
 
 ### **...**
