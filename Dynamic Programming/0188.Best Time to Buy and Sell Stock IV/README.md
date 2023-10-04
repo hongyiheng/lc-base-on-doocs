@@ -51,7 +51,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxProfit(self, k: int, prices: List[int]) -> int:
+        n = len(prices)
+        f = [[0] * (2 * k) for _ in range(n)]
+        for i in range(k):
+            f[0][i * 2 + 1] = -prices[0]
+        ans = 0
+        for i in range(1, n):
+            f[i][0] = max(f[i - 1][0], f[i - 1][1] + prices[i])
+            f[i][1] = max(f[i - 1][1], -prices[i])
+            for j in range(1, k):
+                f[i][j * 2] = max(f[i - 1][j * 2], f[i - 1][j * 2 + 1] + prices[i])
+                f[i][j * 2 + 1] = max(f[i - 1][j * 2 + 1], f[i][j * 2 - 2] - prices[i])
+            ans = max(ans, max(f[i]))
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +73,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxProfit(int k, int[] prices) {
+        int n = prices.length;
+        int[][] f = new int[n][2 * k];
+        for (int i = 0; i < k; i++) {
+            f[0][i * 2 + 1] = -prices[0];
+        }
+        int ans = 0;
+        for (int i = 1; i < n; i++) {
+            f[i][1] = Math.max(f[i - 1][1], -prices[i]);
+            f[i][0] = Math.max(f[i - 1][0], f[i - 1][1] + prices[i]);
+            ans = Math.max(ans, f[i][0]);
+            for (int j = 1; j < k; j++) {
+                f[i][j * 2 + 1] = Math.max(f[i - 1][j * 2 + 1], f[i][j * 2 - 2] - prices[i]);
+                f[i][j * 2] = Math.max(f[i - 1][j * 2], f[i][j * 2 + 1] + prices[i]);
+                ans = Math.max(ans, f[i][j * 2]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
