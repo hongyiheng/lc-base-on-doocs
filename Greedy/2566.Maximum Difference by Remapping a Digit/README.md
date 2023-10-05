@@ -62,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minMaxDifference(self, num: int) -> int:
+        s = str(num)
+        mx = num
+        for c in s:
+            if c != '9':
+                mx = int(str(num).replace(c, '9'))
+                break
+        s = s.replace(s[0], '0')
+        return mx - int(s)
 ```
 
 ### **Java**
@@ -70,7 +79,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minMaxDifference(int num) {
+        int mx = num;
+        String s = String.valueOf(num);
+        for (char c : s.toCharArray()) {
+            if (c != '9') {
+                mx = Integer.valueOf(String.valueOf(num).replace(c, '9'));
+                break;
+            }
+        }
+        return mx - Integer.valueOf(s.replace(s.charAt(0), '0'));
+    }
+}
 ```
 
 ### **...**
