@@ -52,7 +52,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        q = deque([root])
+        last = 0
+        while q:
+            n = len(q)
+            end = False
+            for _ in range(n):
+                v = q.popleft()
+                if v.left:
+                    if end:
+                        return False
+                    q.append(v.left)
+                else:
+                    end = True
+                if v.right:
+                    if end:
+                        return False
+                    q.append(v.right)
+                else:
+                    end = True
+            if q and last and last * 2 != n:
+                return False
+            last = n
+        return True
 ```
 
 ### **Java**
@@ -60,7 +90,56 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        Deque<TreeNode> q = new ArrayDeque<>();
+        q.addLast(root);
+        int last = 0;
+        while (!q.isEmpty()) {
+            int n = q.size();
+            boolean end = false;
+            for (int i = 0; i < n; i++) {
+                TreeNode v = q.pollFirst();
+                if (v.left != null) {
+                    if (end) {
+                        return false;
+                    }
+                    q.addLast(v.left);
+                } else {
+                    end = true;
+                }
+                if (v.right != null) {
+                    if (end) {
+                        return false;
+                    }
+                    q.addLast(v.right);
+                } else {
+                    end = true;
+                }
+            }
+            if (last != 0 && !q.isEmpty() && last * 2 != n) {
+                return false;
+            }
+            last = n;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
