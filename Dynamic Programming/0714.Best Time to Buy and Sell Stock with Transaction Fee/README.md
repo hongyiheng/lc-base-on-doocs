@@ -57,7 +57,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        n = len(prices)
+        f = [[0] * 2 for _ in range(n)]
+        f[0][1] = -prices[0]
+        for i in range(1, n):
+            f[i][1] = max(f[i - 1][1], f[i - 1][0] - prices[i])
+            f[i][0] = max(f[i - 1][0], f[i - 1][1] + prices[i] - fee)
+        return max(f[n - 1])
 ```
 
 ### **Java**
@@ -67,15 +75,15 @@
 ```java
 class Solution {
     public int maxProfit(int[] prices, int fee) {
-        int len = prices.length;
-        int[][] dp = new int[len][2];
-        dp[0][1] = prices[0] * -1;
-        for (int i = 1; i < len; i++) {
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+        int n = prices.length;
+        int[][] f = new int[n][2];
+        f[0][1] = -prices[0];
+        for (int i = 1; i < n; i++) {
+            f[i][0] = Math.max(f[i - 1][0], f[i - 1][1] + prices[i] - fee);
+            f[i][1] = Math.max(f[i - 1][1], f[i - 1][0] - prices[i]);
         }
-        return dp[len - 1][0];
-    } 
+        return Math.max(f[n - 1][0], f[n - 1][1]);
+    }
 }
 ```
 
