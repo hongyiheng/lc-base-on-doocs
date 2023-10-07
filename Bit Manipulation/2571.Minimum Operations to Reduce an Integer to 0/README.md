@@ -62,7 +62,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, n: int) -> int:
+        M = 20
+        q = [False] * M
+        for i in range(M):
+            if n >> i & 1:
+                q[i] = True
+        ans = l = 0
+        while l < M:
+            if not q[l]:
+                l += 1
+                continue
+            r = l
+            while r < M and q[r + 1]:
+                r += 1
+            if r > l:
+                q[r + 1] = True
+            ans += 1
+            l = r + 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +89,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int n) {
+        int M = 20;
+        boolean[] q = new boolean[M];
+        for (int i = 0; i < M; i++) {
+            q[i] = (n >> i & 1) == 1;
+        }
+        int ans = 0, l = 0;
+        while (l < M) {
+            if (!q[l]) {
+                l++;
+                continue;
+            }
+            int r = l;
+            while (r < M && q[r + 1]) {
+                r++;
+            }
+            if (l < r) {
+                q[r + 1] = true;
+            }
+            ans++;
+            l = r + 1;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
