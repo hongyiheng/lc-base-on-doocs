@@ -72,7 +72,41 @@ stockPrice.minimum();     // 返回 2 ，最低价格时间戳为 4 ，价格为
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class StockPrice:
 
+    def __init__(self):
+        self.g = dict()
+        self.max = []
+        self.mi = []
+        self.cur = -1
+
+    def update(self, timestamp: int, price: int) -> None:
+        self.g[timestamp] = price
+        heapq.heappush(self.max, (-price, timestamp))
+        heapq.heappush(self.mi, (price, timestamp))
+        if timestamp > self.cur:
+            self.cur = timestamp
+
+    def current(self) -> int:
+        return self.g[self.cur]
+
+    def maximum(self) -> int:
+        while self.max and -self.g[self.max[0][1]] != self.max[0][0]:
+            heapq.heappop(self.max)
+        return -self.max[0][0]
+
+    def minimum(self) -> int:
+        while self.mi and self.g[self.mi[0][1]] != self.mi[0][0]:
+            heapq.heappop(self.mi)
+        return self.mi[0][0]
+
+
+# Your StockPrice object will be instantiated and called as such:
+# obj = StockPrice()
+# obj.update(timestamp,price)
+# param_2 = obj.current()
+# param_3 = obj.maximum()
+# param_4 = obj.minimum()
 ```
 
 ### **Java**
@@ -80,7 +114,55 @@ stockPrice.minimum();     // 返回 2 ，最低价格时间戳为 4 ，价格为
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class StockPrice {
 
+    Map<Integer, Integer> g;
+    PriorityQueue<int[]> max, mi;
+    int cur;
+
+    public StockPrice() {
+        cur = -1;
+        g = new HashMap<>();
+        max = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        mi = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+    }
+    
+    public void update(int timestamp, int price) {
+        g.put(timestamp, price);
+        max.add(new int[]{price, timestamp});
+        mi.add(new int[]{price, timestamp});
+        if (timestamp > cur) {
+            cur = timestamp;
+        }
+    }
+    
+    public int current() {
+        return g.get(cur);
+    }
+    
+    public int maximum() {
+        while (!max.isEmpty() && g.get(max.peek()[1]) != max.peek()[0]) {
+            max.poll();
+        }
+        return max.peek()[0];
+    }
+    
+    public int minimum() {
+        while (!mi.isEmpty() && g.get(mi.peek()[1]) != mi.peek()[0]) {
+            mi.poll();
+        }
+        return mi.peek()[0];
+    }
+}
+
+/**
+ * Your StockPrice object will be instantiated and called as such:
+ * StockPrice obj = new StockPrice();
+ * obj.update(timestamp,price);
+ * int param_2 = obj.current();
+ * int param_3 = obj.maximum();
+ * int param_4 = obj.minimum();
+ */
 ```
 
 ### **...**
