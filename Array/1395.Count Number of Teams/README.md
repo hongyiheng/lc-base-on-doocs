@@ -65,7 +65,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        ans = 0
+        for i, v in enumerate(rating):
+            llt = rlt = lgt = rgt = 0
+            for j, x in enumerate(rating):
+                if x < v:
+                    if j < i:
+                        llt += 1
+                    else:
+                        rlt += 1
+                if x > v:
+                    if j < i:
+                        lgt += 1
+                    else:
+                        rgt += 1
+            ans += (llt * rgt) + (lgt * rlt)
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +90,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numTeams(int[] rating) {
+        int ans = 0, n = rating.length;
+        for (int i = 0; i < n; i++) {
+            int llt = 0, rlt = 0, lgt = 0, rgt = 0;
+            for (int j = 0; j < n; j++) {
+                if (rating[j] < rating[i]) {
+                    if (j < i) {
+                        llt++;
+                    } else {
+                        rlt++;
+                    }
+                }
+                if (rating[j] > rating[i]) {
+                    if (j < i) {
+                        lgt++;
+                    } else {
+                        rgt++;
+                    }
+                }
+            }
+            ans += (llt * rgt) + (lgt * rlt);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
