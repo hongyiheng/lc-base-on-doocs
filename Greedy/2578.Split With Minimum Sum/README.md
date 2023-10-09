@@ -65,7 +65,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def splitNum(self, num: int) -> int:
+        cnt = [0] * 10
+        while num:
+            cnt[num % 10] += 1
+            num //= 10
+        a = b = d = 0
+        for i in range(1, len(cnt)):
+            while cnt[i]:
+                if d:
+                    a = a * 10 + i
+                else:
+                    b = b * 10 + i
+                d ^= 1
+                cnt[i] -= 1
+        return a + b
 ```
 
 ### **Java**
@@ -73,7 +88,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int splitNum(int num) {
+        int[] cnt = new int[10];
+        while (num > 0) {
+            cnt[num % 10]++;
+            num /= 10;
+        }
+        int a = 0, b = 0, d = 0;
+        for (int i = 1; i < cnt.length; i++) {
+            while (cnt[i] > 0) {
+                if (d == 0) {
+                    a = a * 10 + i;
+                } else {
+                    b = b * 10 + i;
+                }
+                d ^= 1;
+                cnt[i]--;
+            }
+        }
+        return a + b;
+    }
+}
 ```
 
 ### **...**
