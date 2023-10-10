@@ -90,7 +90,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def sumDistance(self, nums: List[int], s: str, d: int) -> int:
+        n = len(nums)
+        for i in range(n):
+            nums[i] += d if s[i] == 'R' else -d
+        nums.sort()
+        M = int(1e9 + 7)
+        s = 0
+        for i in range(1, n):
+            s = (s + nums[i] - nums[0]) % M
+        ans = s
+        for i in range(1, n):
+            s = (s - (n - i) * (nums[i] - nums[i - 1])) % M
+            ans = (ans + s) % M
+        return ans
 
+                    
 ```
 
 ### **Java**
@@ -98,5 +114,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumDistance(int[] nums, String s, int d) {
+        int M = (int)1e9 + 7;
+        int n = nums.length;
+        long[] arr = new long[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = (long)nums[i];
+            arr[i] += s.charAt(i) == 'R' ? d : -d;
+        }
+        Arrays.sort(arr);
+        long b = 0;
+        for (int i = 1; i < n; i++) {
+            b = (b + arr[i] - arr[0]) % M;
+        }
+        long ans = b;
+        for (int i = 1; i < n; i++) {
+            b = (b - (n - i) * (arr[i] - arr[i - 1])) % M;
+            ans = (ans + b) % M;
+        }
+        while (ans < 0) {
+            ans += M;
+        }
+        return (int)(ans % M);
+    }
+}
 ```
