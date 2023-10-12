@@ -83,7 +83,15 @@ nums 只有一个元素，所以我们选中 13 并将其加到串联值上，�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findTheArrayConcVal(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) - 1
+        ans = 0
+        while l < r:
+            ans += nums[l] * 10 ** (len(str(nums[r])))  + nums[r]
+            l += 1
+            r -= 1
+        return ans + nums[r] if l == r else ans
 ```
 
 ### **Java**
@@ -91,7 +99,16 @@ nums 只有一个元素，所以我们选中 13 并将其加到串联值上，�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long findTheArrayConcVal(int[] nums) {
+        int l = 0, r = nums.length - 1;
+        long ans = 0;
+        while (l < r) {
+            ans += Integer.valueOf(String.valueOf(nums[l++]) + nums[r--]);
+        }
+        return l == r ? ans + nums[r] : ans;
+    }
+}
 ```
 
 ### **...**
