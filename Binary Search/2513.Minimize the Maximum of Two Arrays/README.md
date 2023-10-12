@@ -69,7 +69,23 @@ arr1 = [1,2] 和 arr2 = [3] 满足所有条件。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimizeSet(self, divisor1: int, divisor2: int, uniqueCnt1: int, uniqueCnt2: int) -> int:
+        def check(x):
+            cnt1 = x - x // divisor1
+            cnt2 = x - x // divisor2
+            common = x - x // lcm
+            return cnt1 >= uniqueCnt1 and cnt2 >= uniqueCnt2 and common >= uniqueCnt1 + uniqueCnt2 
+        
+        lcm = math.lcm(divisor1, divisor2)
+        l, r = 0, 0x3f3f3f3f * 2
+        while l < r:
+            mid = (l + r) >> 1
+            if not check(mid):
+                l = mid + 1
+            else:
+                r = mid
+        return r
 ```
 
 ### **Java**
@@ -77,7 +93,27 @@ arr1 = [1,2] 和 arr2 = [3] 满足所有条件。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
 
+    public int minimizeSet(int divisor1, int divisor2, int uniqueCnt1, int uniqueCnt2) {
+        long lcm = 1L * divisor1 * divisor2 / gcd(divisor1, divisor2);
+        long l = 0, r = 0x3f3f3f3f * 2;
+        while (l < r) {
+            long mid = l + r >> 1;
+            long cnt1 = mid - mid / divisor1, cnt2 = mid - mid / divisor2;
+            long common = mid - mid / lcm;
+            if (cnt1 >= uniqueCnt1 && cnt2 >= uniqueCnt2 && common >= uniqueCnt1 + uniqueCnt2) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return (int) r;
+    }
+}
 ```
 
 ### **...**
