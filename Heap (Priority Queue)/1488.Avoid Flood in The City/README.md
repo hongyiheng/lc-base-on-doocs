@@ -96,7 +96,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def avoidFlood(self, rains: List[int]) -> List[int]:
+        n = len(rains)
+        ans = [0] * n
+        g = dict()
+        for i in range(n - 1, -1, -1):
+            if rains[i]:
+                ans[i] = g.get(rains[i], 0)
+                g[rains[i]] = i
+        s = set()
+        q = []
+        for i, v in enumerate(ans):
+            if rains[i]:
+                if rains[i] in s:
+                    return []
+                if ans[i]:
+                    heapq.heappush(q, ans[i])
+                ans[i] = -1
+                s.add(rains[i])
+            else:
+                x = rains[heapq.heappop(q)] if q else 1
+                ans[i] = x
+                if x in s:
+                    s.remove(x)
+        return ans
 ```
 
 ### **Java**
@@ -104,7 +128,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] avoidFlood(int[] rains) {
+        int n = rains.length;
+        int[] ans = new int[n];
+        Map<Integer, Integer> g = new HashMap<>();
+        for (int i = n - 1; i >= 0; i--) {
+            if (rains[i] != 0) {
+                ans[i] = g.getOrDefault(rains[i], 0);
+                g.put(rains[i], i);
+            }
+        }
+        Set<Integer> s = new HashSet<>();
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int i = 0; i < n; i++) {
+            if (rains[i] != 0) {
+                if (s.contains(rains[i])) {
+                    return new int[0];
+                }
+                if (ans[i] != 0) {
+                    q.add(ans[i]);
+                }
+                s.add(rains[i]);
+                ans[i] = -1;
+            } else {
+                int x = q.isEmpty() ? 1 : rains[q.poll()];
+                ans[i] = x;
+                s.remove(x);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
