@@ -35,7 +35,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return reduce(xor, nums)
 ```
 
 ### **Java**
@@ -43,7 +45,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int singleNumber(int[] nums) {
+        int x = 0;
+        for (int v : nums) {
+            x ^= v;
+        }
+        return x;
+    }
+}
 ```
 
 ### **...**
