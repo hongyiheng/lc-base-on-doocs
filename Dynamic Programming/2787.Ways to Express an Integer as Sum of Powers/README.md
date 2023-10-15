@@ -52,7 +52,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfWays(self, n: int, x: int) -> int:
+        f = [[0] * (n + 1) for _ in range(n + 1)]
+        f[0][0] = 1
+        for i in range(1, n + 1):
+            if i ** x > n:
+                continue
+            for j in range(n + 1):
+                f[i][j] = f[i - 1][j]
+                if j >= i ** x:
+                    f[i][j] += f[i - 1][j - i ** x]
+        return max(f[i][n] for i in range(n + 1)) % int(1e9 + 7)
 ```
 
 ### **Java**
@@ -60,7 +71,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfWays(int n, int x) {
+        long[][] f = new long[n + 1][n + 1];
+        f[0][0] = 1;
+        long ans = 0;
+        int M = (int)1e9 + 7;
+        for (int i = 1; i <= n; i++) {
+            int v = (int)Math.pow(i, x);
+            if (v > n) {
+                continue;
+            }
+            for (int j = 0; j <= n; j++) {
+                f[i][j] = f[i - 1][j];   
+                if (v <= j) {
+                    f[i][j] = (f[i][j] + f[i - 1][j - v]) % M;
+                }
+            }
+            ans = f[i][n];
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
