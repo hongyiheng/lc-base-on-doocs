@@ -74,6 +74,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        i = 0
+        while i < len(nums):
+            v = nums[i]
+            if i == v:
+                i += 1
+                continue
+            if nums[i] == nums[v]:
+                return v
+            nums[i], nums[v] = nums[v], nums[i]
+        return -1
 
 ```
 
@@ -82,7 +94,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int i = 0; 
+        while (i < nums.length) {
+            int v = nums[i];
+            if (i == v) {
+                i++;
+                continue;
+            }
+            if (nums[i] == nums[v]) {
+                return v;
+            }
+            int t = nums[i];
+            nums[i] = nums[v];
+            nums[v] = t;
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
