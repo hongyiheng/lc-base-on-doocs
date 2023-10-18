@@ -59,7 +59,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def canTraverseAllPairs(self, nums: List[int]) -> bool:
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
 
+        def union(a, b):
+            p[find(a)] = find(b)
+
+        if len(nums) == 1:
+            return True
+        p = [i for i in range(100010)]
+        s = set()
+        for i, v in enumerate(nums):
+            if v == 1:
+                return False
+            if v in s:
+                continue
+            s.add(v)
+            x = 2
+            while x * x <= v:
+                if v % x == 0:
+                    union(nums[i], x)
+                    while v % x == 0:
+                        v //= x
+                x += 1
+            if 1 < v != nums[i]:
+                union(nums[i], v)
+        root = find(nums[0])
+        for v in nums:
+            if find(v) != root:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -67,7 +100,62 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] p;
+
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    public void union(int a, int b) {
+        p[find(a)] = find(b);
+    }
+
+    public boolean canTraverseAllPairs(int[] nums) {
+        int M = 100010, n = nums.length;
+        if (n == 1) {
+            return true;
+        }
+        p = new int[M];
+        for (int i = 0; i < M; i++) {
+            p[i] = i;
+        }
+        Set<Integer> s = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            if (v == 1) {
+                return false;
+            }
+            if (s.contains(v)) {
+                continue;
+            }
+            s.add(v);
+            for (int j = 2; j * j <= v; j++) {
+                if (v % j != 0) {
+                    continue;   
+                }
+                union(nums[i], j);
+                while (v % j == 0) {
+                    v /= j;
+                }
+            }
+            if (v > 1 && nums[i] != v) {
+                union(nums[i], v);
+            }
+        }
+        int root = find(nums[0]);
+        for (int v : nums) {
+            if (find(v) != root) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
