@@ -65,7 +65,16 @@ Result table:
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+# Write your MySQL query statement below
+SELECT
+	event_day AS DAY,
+	emp_id,
+	sum( out_time - in_time ) AS total_time 
+FROM
+	Employees 
+GROUP BY
+	event_day,
+	emp_id
 ```
 
 <!-- tabs:end -->
