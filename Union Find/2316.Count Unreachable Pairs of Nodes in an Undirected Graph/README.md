@@ -55,7 +55,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countPairs(self, n: int, edges: List[List[int]]) -> int:
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+        
+        def union(a, b):
+            r1, r2 = find(a), find(b)
+            if r1 != r2:
+                cnt[r2] += cnt[r1]
+                cnt[r1] = 0
+                p[find(a)] = find(b)
+           
 
+        p = [i for i in range(n)]
+        cnt = [1] * n
+        for u, v in edges:
+            union(u, v)
+        ans = pre = 0
+        for i in range(n):
+            if p[i] != i:
+                continue
+            ans += pre * cnt[i]
+            pre += cnt[i]
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +88,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] p;
+    int[] cnt;
+
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    } 
+
+    public void union(int a, int b) {
+        int r1 = find(a), r2 = find(b);
+        if (r1 != r2) {
+            cnt[r2] += cnt[r1];
+            cnt[r1] = 0;
+            p[r1] = r2;
+        }
+    } 
+
+    public long countPairs(int n, int[][] edges) {
+        p = new int[n];
+        cnt = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = i;
+            cnt[i] = 1;
+        }
+        for (int[] e : edges) {
+            union(e[0], e[1]);
+        }
+        long ans = 0, pre = 0;
+        for (int i = 0; i < n; i++) {
+            if (p[i] != i) {
+                continue;
+            }
+            ans += pre * cnt[i];
+            pre += cnt[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
