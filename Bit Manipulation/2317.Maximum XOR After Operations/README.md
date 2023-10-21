@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumXOR(self, nums: List[int]) -> int:
+        ans = 0
+        for i in range(32):
+            for v in nums:
+                if v >> i & 1:
+                    ans |= 1 << i
+                    break
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +66,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumXOR(int[] nums) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            for (int v : nums) {
+                if ((v >> i & 1) == 1) {
+                    ans |= 1 << i;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
