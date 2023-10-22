@@ -64,7 +64,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxSatisfaction(self, satisfaction: List[int]) -> int:
+        satisfaction.sort()
+        ans = posSum = posCnt = 0
+        negs = []
+        for v in satisfaction:
+            if v >= 0:
+                posCnt += 1
+                posSum += v
+                ans += v * posCnt
+            else:
+                negs.append(v)
 
+        negs.sort(reverse=True)
+        for i, v in enumerate(negs):
+            cur = ans + posSum + v
+            if cur <= ans:
+                break
+            posSum += v
+            ans = cur
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +92,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxSatisfaction(int[] satisfaction) {
+        Arrays.sort(satisfaction);
+        List<Integer> negs = new ArrayList<>();
+        int ans = 0, posSum = 0, posCnt = 0;
+        for (int v : satisfaction) {
+            if (v >= 0) {
+                posSum += v;
+                ans += v * ++posCnt;
+            } else {
+                negs.add(v);
+            }
+        }
+        negs.sort((a, b) -> b - a);
+        for (int v : negs) {
+            int cur = ans + posSum + v;
+            if (cur <= ans) {
+                break;
+            }
+            posSum += v;
+            ans = cur;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
