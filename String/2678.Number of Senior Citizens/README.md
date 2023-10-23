@@ -59,7 +59,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countSeniors(self, details: List[str]) -> int:
+        ans = 0
+        for v in details:
+            if int(v[11:13]) > 60:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +73,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countSeniors(String[] details) {
+        int ans = 0;
+        for (String v : details) {
+            if ((v.charAt(11) - '0') * 10 + (v.charAt(12) - '0') > 60) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
