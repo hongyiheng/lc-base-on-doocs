@@ -69,7 +69,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        l = r = 0
+        for c in s:
+            if c == ')':
+                r += 1
+        q = []
+        for c in s:
+            if c == '(':
+                if r - l <= 0:
+                    continue
+                l += 1
+            elif c == ')':
+                r -= 1
+                if l == 0:
+                    continue
+                l -= 1
+            q.append(c)
+        return "".join(q)
 ```
 
 ### **Java**
@@ -77,7 +95,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        int l = 0, r = 0;
+        for (char c : s.toCharArray()) {
+            if (c == ')') {
+                r++;
+            }
+        }
+        List<Character> q = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                if (r - l <= 0) {
+                    continue;
+                }
+                l++;
+            } else if (c == ')') {
+                r--;
+                if (l == 0) {
+                    continue;
+                }
+                l--;
+            }
+            q.add(c);
+        }
+        return q.stream().map(String::valueOf).collect(Collectors.joining());
+    }
+}
 ```
 
 ### **...**
