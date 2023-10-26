@@ -68,7 +68,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def displayTable(self, orders: List[List[str]]) -> List[List[str]]:
+        fs = set()
+        g = dict()
+        for _, t, f in orders:
+            if t not in g:
+                g[t] = defaultdict(int)
+            g[t][f] += 1
+            fs.add(f)
+        fs = sorted(list(fs))
+        ts = sorted([int(v) for v in g.keys()])
+        ans = [["Table"] + fs]
+        for t in ts:
+            r = [str(t)]
+            for f in fs:
+                r.append(str(g[str(t)][f]))
+            ans.append(r)
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +93,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<String>> displayTable(List<List<String>> orders) {
+        Map<String, Integer>[] ts = new HashMap[510];
+        Set<String> fs = new HashSet<>();
+        for (List<String> o : orders) {
+            int t = Integer.parseInt(o.get(1));
+            String f = o.get(2);
+            if (ts[t] == null) {
+                ts[t] = new HashMap<>();
+            }
+            fs.add(f);
+            ts[t].put(f, ts[t].getOrDefault(f, 0) + 1);
+        }
+        List<List<String>> ans = new ArrayList<>();
+        List<String> fsList = new ArrayList<>(fs);
+        Collections.sort(fsList);
+        for (int i = 0; i < 510; i++) {
+            if (ts[i] == null) {
+                continue;
+            }
+            List<String> t = new ArrayList<>();
+            t.add(String.valueOf(i));
+            for (String f : fsList) {
+                t.add(String.valueOf(ts[i].getOrDefault(f, 0)));
+            }
+            ans.add(t);
+        }
+        fsList.add(0, "Table");
+        ans.add(0, fsList);
+        return ans;
+    }
+}
 ```
 
 ### **...**
