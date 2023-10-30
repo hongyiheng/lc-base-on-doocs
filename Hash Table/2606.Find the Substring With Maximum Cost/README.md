@@ -69,7 +69,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumCostSubstring(self, s: str, chars: str, vals: List[int]) -> int:
+        g = [i for i in range(1, 27)]
+        for c, v in zip(chars, vals):
+            g[ord(c) - ord('a')] = v
+        ans = cnt = 0
+        for c in s:
+            cnt += g[ord(c) - ord('a')]
+            cnt = max(cnt, 0)
+            ans = max(ans, cnt)
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +87,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumCostSubstring(String s, String chars, int[] vals) {
+        int[] g = new int[26];
+        for (int i = 0; i < 26; i++) {
+            g[i] = i + 1;
+        }
+        for (int i = 0; i < chars.length(); i++) {
+            g[chars.charAt(i) - 'a'] = vals[i];
+        }
+        int ans = 0, cnt = 0;
+        for (char c : s.toCharArray()) {
+            cnt += g[c- 'a'];
+            cnt = Math.max(cnt, 0);
+            ans = Math.max(ans, cnt);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
