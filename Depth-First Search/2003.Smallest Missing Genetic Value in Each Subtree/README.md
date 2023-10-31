@@ -77,7 +77,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def smallestMissingValueSubtree(self, parents: List[int], nums: List[int]) -> List[int]:
+        def dfs(x):
+            vis.add(nums[x])
+            for v in g[x]:
+                if nums[v] not in vis:
+                    dfs(v)
 
+        g = defaultdict(list)
+        for i, p in enumerate(parents):
+            g[p].append(i)
+
+        ans = [1] * len(parents)
+        vis = set()
+        cur = 1
+        node = nums.index(min(nums))
+        while node >= 0:
+            dfs(node)
+            while cur in vis:
+                cur += 1
+            ans[node] = cur
+            node = parents[node]
+        return ans
 ```
 
 ### **Java**
@@ -85,7 +107,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Integer, List<Integer>> g;
+    Set<Integer> vis;
+
+    public void dfs(int x, int[] nums) {
+        vis.add(nums[x]);
+        for (int v : g.getOrDefault(x, new ArrayList<>())) {
+            if (!vis.contains(nums[v])) {
+                dfs(v, nums);
+            }
+        }
+    }
+
+    public int[] smallestMissingValueSubtree(int[] parents, int[] nums) {
+        g = new HashMap<>();
+        vis = new HashSet<>();
+
+        int n = parents.length;
+        for (int i = 0; i < n; i++) {
+            g.computeIfAbsent(parents[i], k -> new ArrayList<>()).add(i);
+        }
+        int[] ans = new int[n];
+        Arrays.fill(ans, 1);
+        int node = n, mi = 0x3f3f3f3f;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < mi) {
+                mi = nums[i];
+                node = i;
+            }
+        }
+        int cur = 1;
+        while (node != -1) {
+            dfs(node, nums);
+            while (vis.contains(cur)) {
+                cur++;
+            }
+            ans[node] = cur;
+            node = parents[node];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
