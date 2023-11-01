@@ -74,7 +74,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximumInvitations(self, favorite: List[int]) -> int:
+        n = len(favorite)
+        ins = [0] * n
+        for v in favorite:
+            ins[v] += 1
+        q = [i for i in range(n) if not ins[i]]
+        dist = [0] * n
+        while q:
+            u = q.pop()
+            v = favorite[u]
+            dist[v] = max(dist[v], dist[u] + 1)
+            ins[v] -= 1
+            if not ins[v]:
+                q.append(v)
 
+        ans1 = ans2 = 0
+        vis = set()
+        for i in range(n):
+            if not ins[i] or i in vis:
+                continue
+            j, d = favorite[i], 1
+            while j != i:
+                vis.add(j)
+                j = favorite[j]
+                d += 1
+            if d == 2:
+                ans2 += d + dist[i] + dist[favorite[i]]
+            else:
+                ans1 = max(ans1, d)
+        return max(ans1, ans2)
 ```
 
 ### **Java**
@@ -82,7 +112,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumInvitations(int[] favorite) {
+        int n = favorite.length;
+        int[] ins = new int[n];
+        for (int v : favorite) {
+            ins[v]++;
+        }
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            if (ins[i] == 0) {
+                q.add(i);
+            }
+        }
+        int[] dist = new int[n];
+        while (!q.isEmpty()) {
+            int u = q.poll();
+            int v = favorite[u];
+            dist[v] = Math.max(dist[v], dist[u] + 1);
+            if (--ins[v] == 0) {
+                q.add(v);
+            }
+        }
+        Set<Integer> vis = new HashSet<>();
+        int ans1 = 0, ans2 = 0;
+        for (int i = 0; i < n; i++) {
+            if (ins[i] == 0 || vis.contains(i)) {
+                continue;
+            }
+            int j = favorite[i], d = 1;
+            while (j != i) {
+                vis.add(j);
+                d++;
+                j = favorite[j];
+            }
+            if (d == 2) {
+                ans2 += d + dist[i] + dist[favorite[i]];
+            } else {
+                ans1 = Math.max(ans1, d);
+            }
+        }
+        return Math.max(ans1, ans2);
+    }
+}
 ```
 
 ### **...**
