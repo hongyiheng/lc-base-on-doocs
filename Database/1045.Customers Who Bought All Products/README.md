@@ -74,7 +74,15 @@ Result 表：
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+# Write your MySQL query statement below
+SELECT
+	customer_id
+FROM
+	Customer 
+GROUP BY
+	customer_id 
+HAVING
+	count(DISTINCT(product_key)) = (select count(0) from Product)
 ```
 
 <!-- tabs:end -->
