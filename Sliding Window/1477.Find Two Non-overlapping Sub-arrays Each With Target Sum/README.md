@@ -71,7 +71,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minSumOfLengths(self, arr: List[int], target: int) -> int:
+        n = len(arr)
+        l = r = s = 0
+        q = []
+        while r < n:
+            s += arr[r]
+            while s > target:
+                s -= arr[l]
+                l += 1
+            if s == target:
+                q.append((r - l + 1, l, r))
+            r += 1
 
+        q.sort(key=lambda x: x[0])
+        ans = n + 1
+        for i in range(len(q)):
+            for j in range(i + 1, len(q)):
+                if q[i][0] + q[j][0] >= ans:
+                    break
+                if q[i][1] > q[j][2] or q[j][1] > q[i][2]:
+                    ans = min(q[i][0] + q[j][0], ans)
+                    break
+        return -1 if ans > n else ans
 ```
 
 ### **Java**
@@ -79,7 +102,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minSumOfLengths(int[] arr, int target) {
+        int n = arr.length;
+        int l = 0, r = 0, s = 0;
+        List<int[]> q = new ArrayList<>();
+        while (r < n) {
+            s += arr[r];
+            while (s > target) {
+                s -= arr[l++];
+            }
+            if (s == target) {
+                q.add(new int[]{r - l + 1, l, r});
+            }
+            r++;
+        }
+        Collections.sort(q, (a, b) -> a[0] - b[0]);
+        int m = q.size(), ans = n + 1;
+        for (int i = 0; i < m; i++) {
+            for (int j = i + 1; j < m; j++) {
+                if (q.get(i)[0] + q.get(j)[0] >= ans) {
+                    break;
+                }
+                if (q.get(i)[1] > q.get(j)[2] || q.get(j)[1] > q.get(i)[2]) {
+                    ans = q.get(i)[0] + q.get(j)[0];
+                }
+            }
+        }
+        return ans > n ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
