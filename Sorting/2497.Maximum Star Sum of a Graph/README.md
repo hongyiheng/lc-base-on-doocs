@@ -68,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxStarSum(self, vals: List[int], edges: List[List[int]], k: int) -> int:
+        if k == 0:
+            return max(vals)
 
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        
+        ans = max(vals)
+        for u in range(len(vals)):
+            vs = [vals[v] for v in g[u] if vals[v] > 0]
+            s = vals[u] + sum(sorted(vs, reverse=True)[:min(len(vs), k)])
+            ans = max(ans, s)
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +91,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxStarSum(int[] vals, int[][] edges, int k) {
+        int ans = vals[0];
+        for (int v : vals) {
+            ans = Math.max(ans, v);
+        }
+        if (k == 0) {
+            return ans;
+        }
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        for (int[] e : edges) {
+            int u = e[0], v = e[1];
+            g.computeIfAbsent(u, o -> new ArrayList<>()).add(v);
+            g.computeIfAbsent(v, o -> new ArrayList<>()).add(u);
+        }
+        int n = vals.length;
+        for (int u = 0; u < n; u++) {
+            List<Integer> vs = new ArrayList<>();
+            for (int v : g.getOrDefault(u, new ArrayList<>())) {
+                if (vals[v] <= 0) {
+                    continue;
+                }
+                vs.add(vals[v]);
+            }
+            Collections.sort(vs, (a, b) -> b - a);
+            int s = vals[u];
+            for (int i = 0; i < Math.min(k, vs.size()); i++) {
+                s += vs.get(i);
+            }
+            ans = Math.max(ans, s);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
