@@ -62,7 +62,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumBags(self, capacity: List[int], rocks: List[int], additionalRocks: int) -> int:
+        q = [c - r for c, r in zip(capacity, rocks)]
+        q.sort()
+        ans = 0
+        for v in q:
+            if additionalRocks < v:
+                break
+            additionalRocks -= v
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +80,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumBags(int[] capacity, int[] rocks, int additionalRocks) {
+        int n = capacity.length, ans = 0;
+        int[] q = new int[n];
+        for (int i = 0; i < n; i++) {
+            q[i] = capacity[i] - rocks[i];
+        }
+        Arrays.sort(q);
+        for (int v : q) {
+            if (v > additionalRocks) {
+                break;
+            }
+            additionalRocks -= v;
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
