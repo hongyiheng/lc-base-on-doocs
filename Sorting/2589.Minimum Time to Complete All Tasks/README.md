@@ -59,7 +59,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMinimumTime(self, tasks: List[List[int]]) -> int:
+        tasks.sort(key=lambda x:x[1])
+        run = [False] * (tasks[-1][1] + 1)
+        ans = 0
+        for l, r, t in tasks:
+            t -= sum(run[l:r + 1])
+            if t > 0:
+                for i in range(r, l - 1, -1):
+                    if not run[i]:
+                        run[i] = True
+                        t -= 1
+                        ans += 1
+                    if t <= 0:
+                        break
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +82,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findMinimumTime(int[][] tasks) {
+        int n = tasks.length;
+        Arrays.sort(tasks, (a, b) -> a[1] - b[1]);
+        boolean[] run = new boolean[tasks[n - 1][1] + 1];
+        int ans = 0;
+        for (int[] task : tasks) {
+            int l = task[0], r = task[1], t = task[2];
+            for (int i = l; i <= r; i++) {
+                if (run[i]) {
+                    t--;
+                }
+            }
+            if (t <= 0) {
+                continue;
+            }
+            for (int i = r; i >= l && t > 0; i--) {
+                if (!run[i]) {
+                    run[i] = true;
+                    t--;
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
