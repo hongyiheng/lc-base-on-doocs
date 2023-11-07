@@ -62,7 +62,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def vowelStrings(self, words: List[str], left: int, right: int) -> int:
+        ans = 0
+        s = {'a', 'e', 'i', 'o', 'u'}
+        for i in range(left, right + 1):
+            if words[i][0] in s and words[i][-1] in s:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +77,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int vowelStrings(String[] words, int left, int right) {
+        Set<Character> s = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        int ans = 0;
+        for (int i = left; i <= right; i++) {
+            int n = words[i].length();
+            if (s.contains(words[i].charAt(0)) && s.contains(words[i].charAt(n - 1))) {
+                ans++;
+            }
+        }
+        return ans;
+    }   
+}
 ```
 
 ### **...**
