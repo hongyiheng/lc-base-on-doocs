@@ -61,7 +61,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findTheLongestBalancedSubstring(self, s: str) -> int:     
+        a = b = ans = 0
+        for c in s:
+            if c == '0':
+                if b:
+                    a = b = 0
+                a += 1
+            else:
+                b += 1
+                ans = max(ans, 2 * min(a, b))
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +80,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findTheLongestBalancedSubstring(String s) {
+        int a = 0, b = 0, ans = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '0') {
+                if (b > 0) {
+                    a = 0;
+                    b = 0;
+                }
+                a++;
+            } else {
+                b++;
+                ans = Math.max(ans, 2 * Math.min(a, b));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
