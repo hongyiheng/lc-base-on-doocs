@@ -65,7 +65,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isLongPressedName(self, name: str, typed: str) -> bool:
+        n, m = len(name), len(typed)
+        if n > m:
+            return False
+        i = j = 0
+        while j < m:
+            if i < n and name[i] == typed[j]:
+                i += 1
+                j += 1
+            elif j > 0 and typed[j] == typed[j - 1]:
+                j += 1
+            else:
+                return False
+        return i == n and j == m
 ```
 
 ### **Java**
@@ -73,7 +87,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isLongPressedName(String name, String typed) {
+        int n = name.length(), m = typed.length();
+        if (n > m) {
+            return false;
+        }
+        int i = 0, j = 0;
+        while (j < m) {
+            if (i < n && name.charAt(i) == typed.charAt(j)) {
+                i++;
+                j++;
+            } else if (j > 0 && typed.charAt(j) == typed.charAt(j - 1)) {
+                j++;
+            } else {
+                return false;
+            }
+        }
+        return i == n && j == m;
+    }
+}
 ```
 
 ### **...**
