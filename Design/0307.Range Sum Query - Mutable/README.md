@@ -63,7 +63,74 @@ numArray.sumRange(0, 2); // 返回 8 ，sum([1,2,5]) = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self, l, r):
+        self.l = l
+        self.r = r
+        self.mid = (l + r) >> 1
+        self.left = None
+        self.right = None
+        self.v = 0
 
+class SegmentTree():
+
+    def __init__(self, l, r):
+        self.root = Node(l, r)
+    
+    def modify(self, l, r, v, node=None):
+        if not node:
+            node = self.root
+        if l <= node.l and node.r <= r:
+            node.v = v
+            return
+        self.pushDown(node)
+        if l <= node.mid:
+            self.modify(l, r, v, node.left)
+        if r > node.mid:
+            self.modify(l, r, v, node.right)
+        self.pushUp(node)
+
+    def pushDown(self, node):
+        if not node.left:
+            node.left = Node(node.l, node.mid)
+        if not node.right:
+            node.right = Node(node.mid + 1, node.r)
+        
+    def pushUp(self, node):
+        node.v = node.left.v + node.right.v
+
+    def query(self, l, r, node=None):
+        if not node:
+            node = self.root
+        if l <= node.l and node.r <= r:
+            return node.v
+        self.pushDown(node)
+        ans = 0
+        if l <= node.mid:
+            ans += self.query(l, r, node.left)
+        if r > node.mid:
+            ans += self.query(l, r, node.right)
+        return ans
+        
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.st = SegmentTree(0, 30010)
+        for i, v in enumerate(nums):
+            self.st.modify(i, i, v)
+
+    def update(self, index: int, val: int) -> None:
+        self.st.modify(index, index, val)
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self.st.query(left, right)
+
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# obj.update(index,val)
+# param_2 = obj.sumRange(left,right)
 ```
 
 ### **Java**
@@ -71,7 +138,105 @@ numArray.sumRange(0, 2); // 返回 8 ，sum([1,2,5]) = 8
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    int l;
+    int r;
+    int mid;
+    int v;
+    Node left;
+    Node right;
 
+    public Node(int l, int r) {
+        this.l = l;
+        this.r = r;
+        mid = (l + r) >> 1;
+    }
+}
+
+class SegmentTree {
+    Node root;
+
+    public SegmentTree(int l, int r) {
+        root = new Node(l, r);
+    }
+
+    public void modify(int l, int r, int v, Node node) {
+        if (node == null) {
+            node = root;
+        }
+        if (l <= node.l && node.r <= r) {
+            node.v = v;
+            return;
+        }
+        pushDown(node);
+        if (l <= node.mid) {
+            modify(l, r, v, node.left);
+        }
+        if (r > node.mid) {
+            modify(l, r, v, node.right);
+        }
+        pushUp(node);
+    } 
+
+    public void pushDown(Node node) {
+        if (node.left == null) {
+            node.left = new Node(node.l, node.mid);
+        }
+        if (node.right == null) {
+            node.right = new Node(node.mid + 1, node.r);
+        }
+    }
+
+    public void pushUp(Node node) {
+        node.v = node.left.v + node.right.v;
+    }
+
+    public int query(int l, int r, Node node) {
+        if (node == null) {
+            node = root;
+        }
+        if (l <= node.l && node.r <= r) {
+            return node.v;
+        }
+        pushDown(node);
+        int ans = 0;
+        if (l <= node.mid) {
+            ans += query(l, r, node.left);
+        }
+        if (r > node.mid) {
+            ans += query(l, r, node.right);
+        }
+        return ans;
+    }
+}
+
+
+class NumArray {
+
+    SegmentTree st;
+
+    public NumArray(int[] nums) {
+        st = new SegmentTree(0, 30010);
+        for (int i = 0; i < nums.length; i++) {
+            st.modify(i, i, nums[i], null);
+        }
+    }
+    
+    public void update(int index, int val) {
+        st.modify(index, index, val, null);
+    }
+    
+    public int sumRange(int left, int right) {
+        return st.query(left, right, null);
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * obj.update(index,val);
+ * int param_2 = obj.sumRange(left,right);
+ */
 ```
 
 ### **...**

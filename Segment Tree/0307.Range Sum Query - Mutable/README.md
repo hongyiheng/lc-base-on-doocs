@@ -64,69 +64,66 @@ numArray.sumRange(0, 2); // 返回 8 ，sum([1,2,5]) = 8
 
 ```python
 class Node:
-    def __init__(self):
-        self.l = 0
-        self.r = 0
+    def __init__(self, l, r):
+        self.l = l
+        self.r = r
+        self.mid = (l + r) >> 1
+        self.left = None
+        self.right = None
         self.v = 0
 
-class SegmentTree:
-    def __init__(self, nums):
-        self.nums = nums
-        n = len(nums)
-        self.tr = [Node() for _ in range(4 * n)]
-        self.idx = 0
-        self.build(1, 1, n)
+class SegmentTree():
 
-    def build(self, u, l, r):
-        self.tr[u].l = l
-        self.tr[u].r = r
-        if l == r:
-            self.tr[u].v = self.nums[self.idx]
-            self.idx += 1
+    def __init__(self, l, r):
+        self.root = Node(l, r)
+    
+    def modify(self, l, r, v, node=None):
+        if not node:
+            node = self.root
+        if l <= node.l and node.r <= r:
+            node.v = v
             return
-        mid = (l + r) >> 1
-        self.build(u << 1, l, mid)
-        self.build(u << 1 | 1, mid + 1, r)
-        self.pushup(u)
+        self.pushDown(node)
+        if l <= node.mid:
+            self.modify(l, r, v, node.left)
+        if r > node.mid:
+            self.modify(l, r, v, node.right)
+        self.pushUp(node)
 
-    def pushup(self, u):
-        self.tr[u].v = self.tr[u << 1].v + self.tr[u << 1 | 1].v
+    def pushDown(self, node):
+        if not node.left:
+            node.left = Node(node.l, node.mid)
+        if not node.right:
+            node.right = Node(node.mid + 1, node.r)
+        
+    def pushUp(self, node):
+        node.v = node.left.v + node.right.v
 
-    def query(self, u, l, r):
-        if self.tr[u].l >= l and self.tr[u].r <= r:
-            return self.tr[u].v
-        mid = (self.tr[u].l + self.tr[u].r) >> 1
-        v = 0
-        if l <= mid:
-            v += self.query(u << 1, l, r)
-        if r > mid:
-            v += self.query(u << 1 | 1, l, r)
-        return v
-
-    def modify(self, u, x, incr):
-        if self.tr[u].l == x and self.tr[u].r == x:
-            self.tr[u].v += incr
-            return
-        mid = (self.tr[u].l + self.tr[u].r) >> 1
-        if x <= mid:
-            self.modify(u << 1, x, incr)
-        else:
-            self.modify(u << 1 | 1, x, incr)
-        self.pushup(u)
-
+    def query(self, l, r, node=None):
+        if not node:
+            node = self.root
+        if l <= node.l and node.r <= r:
+            return node.v
+        self.pushDown(node)
+        ans = 0
+        if l <= node.mid:
+            ans += self.query(l, r, node.left)
+        if r > node.mid:
+            ans += self.query(l, r, node.right)
+        return ans
+        
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.nums = nums
-        self.tree = SegmentTree(nums)
-
+        self.st = SegmentTree(0, 30010)
+        for i, v in enumerate(nums):
+            self.st.modify(i, i, v)
 
     def update(self, index: int, val: int) -> None:
-        self.tree.modify(1, index + 1, val - self.tree.query(1, index + 1, index + 1))
-
+        self.st.modify(index, index, val)
 
     def sumRange(self, left: int, right: int) -> int:
-        return self.tree.query(1, left + 1, right + 1)
+        return self.st.query(left, right)
 
 
 
@@ -144,88 +141,93 @@ class NumArray:
 class Node {
     int l;
     int r;
+    int mid;
     int v;
+    Node left;
+    Node right;
+
+    public Node(int l, int r) {
+        this.l = l;
+        this.r = r;
+        mid = (l + r) >> 1;
+    }
 }
 
-class Segment {
-    Node[] tr;
-    int idx;
-    int[] nums;
+class SegmentTree {
+    Node root;
 
-    public Segment(int[] nums) {
-        this.nums = nums;
-        int n = nums.length;
-        tr = new Node[4 * n];
-        for (int i = 0; i < 4 * n; i++) {
-            tr[i] = new Node();
-        }
-        idx = 0;
-        build(1, 1, n);
+    public SegmentTree(int l, int r) {
+        root = new Node(l, r);
     }
 
-    public void build(int u, int l, int r) {
-        tr[u].l = l;
-        tr[u].r = r;
-        if (l == r) {
-            tr[u].v = nums[idx++];
+    public void modify(int l, int r, int v, Node node) {
+        if (node == null) {
+            node = root;
+        }
+        if (l <= node.l && node.r <= r) {
+            node.v = v;
             return;
         }
-        int mid = (l + r) >> 1;
-        build(u << 1, l, mid);
-        build(u << 1 | 1, mid + 1, r);
-        pushUp(u);
-    }
-
-    public void pushUp(int u) {
-        tr[u].v = tr[u << 1].v + tr[u << 1 | 1].v;
-    }
-
-    public int query(int u, int l, int r) {
-        if (tr[u].l >= l && tr[u].r <= r) {
-            return tr[u].v;
+        pushDown(node);
+        if (l <= node.mid) {
+            modify(l, r, v, node.left);
         }
-        int mid = (tr[u].l + tr[u].r) >> 1;
+        if (r > node.mid) {
+            modify(l, r, v, node.right);
+        }
+        pushUp(node);
+    }
+
+    public void pushDown(Node node) {
+        if (node.left == null) {
+            node.left = new Node(node.l, node.mid);
+        }
+        if (node.right == null) {
+            node.right = new Node(node.mid + 1, node.r);
+        }
+    }
+
+    public void pushUp(Node node) {
+        node.v = node.left.v + node.right.v;
+    }
+
+    public int query(int l, int r, Node node) {
+        if (node == null) {
+            node = root;
+        }
+        if (l <= node.l && node.r <= r) {
+            return node.v;
+        }
+        pushDown(node);
         int ans = 0;
-        if (l <= mid) {
-            ans += query(u << 1, l, r);
+        if (l <= node.mid) {
+            ans += query(l, r, node.left);
         }
-        if (r > mid) {
-            ans += query(u << 1 | 1, l, r);
+        if (r > node.mid) {
+            ans += query(l, r, node.right);
         }
         return ans;
-    }
-
-    public void modify(int u, int x, int incr) {
-        if (tr[u].l == x && tr[u].r == x) {
-            tr[u].v += incr;
-            return;
-        }
-        int mid = (tr[u].l + tr[u].r) >> 1;
-        if (x <= mid) {
-            modify(u << 1, x, incr);
-        } else {
-            modify(u << 1 | 1, x, incr);
-        }
-        pushUp(u);
     }
 }
 
 
 class NumArray {
-    Segment tree;
-    int[] nums;
+
+    SegmentTree st;
 
     public NumArray(int[] nums) {
-        tree = new Segment(nums);
-        this.nums = nums;
+        st = new SegmentTree(0, 30010);
+        for (int i = 0; i < nums.length; i++) {
+            st.modify(i, i, nums[i], null);
+        }
     }
-    
+
     public void update(int index, int val) {
-        tree.modify(1, index + 1, val - tree.query(1, index + 1, index + 1));
+        st.modify(index, index, val, null);
     }
-    
+
     public int sumRange(int left, int right) {
-        return tree.query(1, left + 1, right + 1);
+        return st.query(left, right, null);
     }
 }
 
