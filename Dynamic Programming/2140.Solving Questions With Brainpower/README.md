@@ -67,7 +67,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mostPoints(self, questions: List[List[int]]) -> int:
+        n = len(questions)
+        f = [0] * (n + 1)
+        for i in range(1, n + 1):
+            f[i] = max(f[i - 1], f[i])
+            v, d = questions[i - 1]
+            j = min(i + d, n)
+            f[j] = max(f[j], f[i - 1] + v)
+        return f[n]
 ```
 
 ### **Java**
@@ -75,7 +84,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long mostPoints(int[][] questions) {
+        int n = questions.length;
+        long[] f = new long[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            f[i] = Math.max(f[i - 1], f[i]);
+            int[] q = questions[i - 1];
+            int j = Math.min(i + q[1], n);
+            f[j] = Math.max(f[j], f[i - 1] + q[0]);
+        }
+        return f[n];
+    }
+}
 ```
 
 ### **...**
