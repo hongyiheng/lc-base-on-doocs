@@ -82,7 +82,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumTime(self, s: str) -> int:
+        n = len(s)
+        suf = [0] * (n + 1)
+        for i in range(n - 1, -1, -1):
+            suf[i] = suf[i + 1]
+            if s[i] == '1':
+                suf[i] = min(suf[i] + 2, n - i)
+        pre, ans = 0, suf[0]
+        for i in range(n):
+            if s[i] == '1':
+                pre = min(pre + 2, i + 1)
+            ans = min(ans, pre + suf[i + 1])
+        return ans
 ```
 
 ### **Java**
@@ -90,7 +103,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumTime(String s) {
+        int n = s.length();
+        int[] suf = new int[n + 1];
+        for (int i = n - 1; i >= 0; i--) {
+            suf[i] = suf[i + 1];
+            if (s.charAt(i) == '1') {
+                suf[i] = Math.min(suf[i] + 2, n - i);
+            }
+        }
+        int pre = 0, ans = suf[0];
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == '1') {
+                pre = Math.min(pre + 2, i + 1);
+            }
+            ans = Math.min(ans, pre + suf[i + 1]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
