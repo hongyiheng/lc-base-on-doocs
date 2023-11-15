@@ -66,7 +66,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximizeSum(self, nums: List[int], k: int) -> int:
+        v = max(nums)
+        return (v + k - 1 + v) * k // 2
 ```
 
 ### **Java**
@@ -74,7 +77,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximizeSum(int[] nums, int k) {
+        int mv = 0;
+        for (int v : nums) {
+            mv = Math.max(mv, v);
+        }
+        return (mv + mv + k - 1) * k / 2;
+    }
+}
 ```
 
 ### **...**
