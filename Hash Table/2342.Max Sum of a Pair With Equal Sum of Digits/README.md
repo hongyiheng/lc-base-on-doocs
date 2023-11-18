@@ -49,7 +49,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        g = dict()
+        ans = -1
+        for v in nums:
+            k = 0
+            t = v
+            while t:
+                k += t % 10
+                t //= 10
+            nv = g.get(k, 0)
+            if nv:
+                ans = max(ans, g[k] + v)
+            g[k] = max(nv, v)
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +71,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumSum(int[] nums) {
+        Map<Integer, Integer> g = new HashMap<>();
+        int ans = -1;
+        for (int v : nums) {
+            int t = v, k = 0;
+            while (t > 0) {
+                k += t % 10;
+                t /= 10;
+            }
+            int nv = g.getOrDefault(k, 0);
+            if (nv > 0) {
+                ans = Math.max(ans, nv + v);
+            }
+            g.put(k, Math.max(nv, v));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
