@@ -67,7 +67,72 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self, l, r):
+        self.left = None
+        self.right = None
+        self.l = l
+        self.r = r
+        self.mid = (l + r) >> 1
+        self.v = -1
 
+
+class Segment_Tree:
+    def __init__(self):
+        self.root = Node(1, int(1e9))
+
+    def query_range(self, l, r, node=None):
+        if not node:
+            node = self.root
+        if l <= node.l and node.r <= r:
+            return node.v
+        self.push_down(node)
+        ans = -1
+        if l <= node.mid:
+            ans = max(ans, self.query_range(l, r, node.left))
+        if node.mid < r:
+            ans = max(ans, self.query_range(l, r, node.right))
+        return ans
+
+    def modify_range(self, l, r, v, node=None):
+        if not node:
+            node = self.root
+        if l <= node.l and node.r <= r:
+            node.v = max(node.v, v)
+            return
+        self.push_down(node)
+        if l <= node.mid:
+            self.modify_range(l, r, v, node.left)
+        if node.mid < r:
+            self.modify_range(l, r, v, node.right)
+        self.push_up(node)
+
+    def push_up(self, node):
+        node.v = max(node.left.v, node.right.v)
+
+    def push_down(self, node):
+        if not node.left:
+            node.left = Node(node.l, node.mid)
+        if not node.right:
+            node.right = Node(node.mid + 1, node.r)
+
+class Solution:
+    def maximumSumQueries(self, nums1: List[int], nums2: List[int], queries: List[List[int]]) -> List[int]:
+        nums = [(a, b) for a, b in zip(nums1, nums2)]
+        nums.sort(key=lambda x: -x[0])
+        q = [(v[0], v[1], i) for i, v in enumerate(queries)]
+        q.sort(key=lambda x: -x[0])
+
+        st = Segment_Tree()
+        n, m = len(nums1), len(queries)
+        ans = [-1] * m
+        j = 0
+        for x, y, i in q:
+            while j < n and nums[j][0] >= x:
+                st.modify_range(nums[j][1], nums[j][1], nums[j][0] + nums[j][1])
+                j += 1
+            ans[i] = st.query_range(y, inf)
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +140,112 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    class Node {
+        int l;
+        int r;
+        int mid;
+        int v;
+        Node left;
+        Node right;
+
+        public Node (int l, int r) {
+            this.l = l;
+            this.r = r;
+            mid = (l + r) >> 1;
+            v = -1;
+        }
+    }
+
+    class SegmentTree {
+        Node root;
+
+        public SegmentTree(int l, int r) {
+            root = new Node(l, r);
+        }
+
+        public void modify(int l, int r, int v, Node node) {
+            if (node == null) {
+                node = root;
+            }
+            if (l <= node.l && node.r <= r) {
+                node.v = Math.max(node.v, v);
+                return;
+            }
+            pushDown(node);
+            if (l <= node.mid) {
+                modify(l, r, v, node.left);
+            }
+            if (r > node.mid) {
+                modify(l, r, v, node.right);
+            }
+            pushUp(node);
+        }
+
+        public void pushDown(Node node) {
+            if (node.left == null) {
+                node.left = new Node(node.l, node.mid);
+            }
+            if (node.right == null) {
+                node.right = new Node(node.mid + 1, node.r);
+            }
+        }
+
+        public void pushUp(Node node) {
+            node.v = Math.max(node.left.v, node.right.v);
+        }
+
+        public int query(int l, int r, Node node) {
+            if (node == null) {
+                node = root;
+            }
+            if (l <= node.l && node.r <= r) {
+                return node.v;
+            }
+            pushDown(node);
+            int ans = -1;
+            if (l <= node.mid) {
+                ans = Math.max(ans, query(l, r, node.left));
+            }
+            if (r > node.mid) {
+                ans = Math.max(ans, query(l, r, node.right));
+            }
+            return ans;
+        }
+    }
+
+    public int[] maximumSumQueries(int[] nums1, int[] nums2, int[][] queries) {
+        int n = nums1.length, m = queries.length;
+        int[][] nums = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            nums[i][0] = nums1[i];
+            nums[i][1] = nums2[i];
+        }
+        int[][] q = new int[m][3];
+        for (int i = 0; i < m; i++) {
+            q[i][0] = queries[i][0];
+            q[i][1] = queries[i][1];
+            q[i][2] = i;
+        }
+        Arrays.sort(nums, (a, b) -> b[0] - a[0]);
+        Arrays.sort(q, (a, b) -> b[0] - a[0]);
+
+        int inf = (int)1e9;
+        SegmentTree st = new SegmentTree(0, inf);
+        int[] ans = new int[m];
+        int j = 0;
+        for (int[] qs : q) {
+            int x = qs[0], y = qs[1], i = qs[2];
+            while (j < n && nums[j][0] >= x) {
+                st.modify(nums[j][1], nums[j][1], nums[j][0] + nums[j][1], null);
+                j++;
+            }
+            ans[i] = st.query(y, inf, null);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
