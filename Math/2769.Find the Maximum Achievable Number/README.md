@@ -57,7 +57,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def theMaximumAchievableX(self, num: int, t: int) -> int:
+        return num + 2 * t
 ```
 
 ### **Java**
@@ -65,7 +67,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int theMaximumAchievableX(int num, int t) {
+        return num + 2 * t;
+    }
+}
 ```
 
 ### **...**
