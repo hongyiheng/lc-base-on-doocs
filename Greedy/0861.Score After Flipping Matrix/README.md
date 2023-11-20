@@ -49,7 +49,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def matrixScore(self, grid: List[List[int]]) -> int:
+        def reverse_row(i):
+            for j in range(n):
+                grid[i][j] ^= 1
 
+        def reverse_col(j):
+            for i in range(m):
+                grid[i][j] ^= 1
+
+        m, n = len(grid), len(grid[0])
+        for i in range(m):
+            if not grid[i][0]:
+                reverse_row(i)
+        for j in range(n):
+            cnt = 0
+            for i in range(m):
+                cnt += grid[i][j]
+            if cnt < m / 2:
+                reverse_col(j)
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if not grid[i][j]:
+                    continue
+                ans += 1 << (n - j - 1)
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +83,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int matrixScore(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            if (grid[i][0] == 1) {
+                continue;
+            }
+            for (int j = 0; j < n; j++) {
+                grid[i][j] ^= 1;
+            }
+        }
+        for (int j = 0; j < n; j++) {
+            int cnt = 0;
+            for (int i = 0; i < m; i++) {
+                if (grid[i][j] == 1) {
+                    cnt++;
+                }
+            }
+            if (cnt * 2 >= m) {
+               continue;
+            }
+            for (int i = 0; i < m; i++) {
+                grid[i][j] ^= 1;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    ans += 1 << (n - j - 1);
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
