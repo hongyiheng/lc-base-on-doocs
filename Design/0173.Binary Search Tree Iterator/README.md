@@ -75,7 +75,41 @@ bSTIterator.hasNext(); // 返回 False
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class BSTIterator:
 
+    def __init__(self, root: Optional[TreeNode]):
+        def dfs(root):
+            if not root:
+                return
+            dfs(root.left)
+            self.q.append(root.val)
+            dfs(root.right)
+
+        
+        self.q = []
+        dfs(root)
+        self.idx = 0
+
+    def next(self) -> int:
+        self.idx += 1
+        return self.q[self.idx - 1]
+
+
+    def hasNext(self) -> bool:
+        return self.idx < len(self.q)
+
+
+
+# Your BSTIterator object will be instantiated and called as such:
+# obj = BSTIterator(root)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
 ```
 
 ### **Java**
@@ -83,7 +117,56 @@ bSTIterator.hasNext(); // 返回 False
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class BSTIterator {
 
+    List<Integer> q;
+    int idx;
+
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.left);
+        q.add(root.val);
+        dfs(root.right);
+    }
+
+    public BSTIterator(TreeNode root) {
+        q = new ArrayList<>();
+        dfs(root);
+        idx = 0;
+    }
+    
+    public int next() {
+        return q.get(idx++);
+    }
+    
+    public boolean hasNext() {
+        return idx < q.size();
+    }
+}
+
+/**
+ * Your BSTIterator object will be instantiated and called as such:
+ * BSTIterator obj = new BSTIterator(root);
+ * int param_1 = obj.next();
+ * boolean param_2 = obj.hasNext();
+ */
 ```
 
 ### **...**
