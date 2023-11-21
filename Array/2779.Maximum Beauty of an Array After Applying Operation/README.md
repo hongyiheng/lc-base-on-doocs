@@ -65,7 +65,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumBeauty(self, nums: List[int], k: int) -> int:
+        M = 100010
+        cnt = [0] * M
+        for v in nums:
+            cnt[max(v - k, 0)] += 1
+            cnt[min(v + k + 1, M - 1)] -= 1
+        ans = s = 0
+        for v in cnt:
+            s += v
+            ans = max(ans, s)
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +84,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumBeauty(int[] nums, int k) {
+        int M = 100010;
+        int[] cnt = new int[M];
+        for (int v : nums) {
+            cnt[Math.max(v - k, 0)]++;
+            cnt[Math.min(v + k + 1, M - 1)]--;
+        }
+        int ans = 0, s = 0;
+        for (int v : cnt) {
+            s += v;
+            ans = Math.max(ans, s);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
