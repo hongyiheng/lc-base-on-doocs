@@ -80,7 +80,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def entityParser(self, text: str) -> str:
+        text = text.replace("&quot;", "\"")
+        text = text.replace("&apos;", "'")
+        text = text.replace("&gt;", ">")
+        text = text.replace("&lt;", "<")
+        text = text.replace("&frasl;", "/")
+        text = text.replace("&amp;", "&")
+        return text
 ```
 
 ### **Java**
@@ -88,7 +96,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String entityParser(String text) {
+        text = text.replaceAll("&quot;", "\"");
+        text = text.replaceAll("&apos;", "'");
+        text = text.replaceAll("&gt;", ">");
+        text = text.replaceAll("&lt;", "<");
+        text = text.replaceAll("&frasl;", "/");
+        text = text.replaceAll("&amp;", "&");
+        return text;
+    }
+}
 ```
 
 ### **...**
