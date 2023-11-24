@@ -63,7 +63,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canMakeSubsequence(self, str1: str, str2: str) -> bool:
+        m, n = len(str1), len(str2)
+        if m < n:
+            return False
+        j = 0
+        for i in range(m):
+            a, b = ord(str1[i]), ord(str2[j])
+            if a == b or (a + 1) % 26 == b % 26:
+                j += 1
+            if j == n:
+                return True
+        return False
 ```
 
 ### **Java**
@@ -71,7 +83,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canMakeSubsequence(String str1, String str2) {
+        int m = str1.length(), n = str2.length();
+        if (m < n) {
+            return false;
+        }
+        char[] s = str1.toCharArray(), t = str2.toCharArray();
+        int j = 0;
+        for (int i = 0; i < m; i++) {
+            int a = s[i] - 'a', b = t[j] - 'a';
+            if (a == b || (a + 1) % 26 == b % 26) {
+                j++;
+            }
+            if (j == n) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
