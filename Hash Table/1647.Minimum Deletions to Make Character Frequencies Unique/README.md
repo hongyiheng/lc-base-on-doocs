@@ -60,7 +60,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minDeletions(self, s: str) -> int:
+        cnt = [0] * 26
+        for c in s:
+            cnt[ord(c) - ord('a')] += 1
+        ans = 0
+        vis = set()
+        for i, v in enumerate(cnt):
+            if not v:
+                continue           
+            while v in vis:
+                v -= 1
+                ans += 1
+            if v:
+                vis.add(v)
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +83,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minDeletions(String s) {
+        int[] cnt = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        Set<Integer> vis = new HashSet<>();
+        int ans = 0;
+        for (int v : cnt) {
+            if (v == 0) {
+                continue;
+            }
+            while (vis.contains(v)) {
+                v--;
+                ans++;
+            }
+            if (v != 0) {
+                vis.add(v);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
