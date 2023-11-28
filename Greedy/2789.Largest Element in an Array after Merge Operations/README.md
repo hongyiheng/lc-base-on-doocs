@@ -58,7 +58,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxArrayValue(self, nums: List[int]) -> int:
+        ans = nums[0]
+        for i in range(len(nums) - 2, -1, -1):
+            if nums[i] <= nums[i + 1]:
+                nums[i] += nums[i + 1]
+            ans = max(ans, nums[i])
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +73,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maxArrayValue(int[] nums) {
+        int n = nums.length;
+        long ans = nums[n - 1], last = nums[n - 1];
+        for (int i = nums.length - 2; i > -1; i--) {
+            if (nums[i] <= last) {
+                last += nums[i];
+            } else {
+                last = nums[i];
+            }
+            ans = Math.max(ans, last);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
