@@ -72,7 +72,56 @@ q.popFront();     // 返回 -1 -> [] （队列为空）
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class FrontMiddleBackQueue:
 
+    def __init__(self):
+        self.front = deque()
+        self.tail = deque()
+
+    def balance(self):
+        while len(self.front) < len(self.tail):
+            self.front.append(self.tail.popleft())
+        while len(self.tail) < len(self.front):
+            self.tail.appendleft(self.front.pop())
+
+    def pushFront(self, val: int) -> None:
+        self.front.appendleft(val)
+
+    def pushMiddle(self, val: int) -> None:
+        self.balance()
+        self.front.append(val)
+        
+    def pushBack(self, val: int) -> None:
+        self.tail.append(val)
+
+    def popFront(self) -> int:
+        if not self.front and not self.tail:
+            return -1
+        self.balance()
+        return self.front.popleft() if self.front else self.tail.popleft()
+
+    def popMiddle(self) -> int:
+        if not self.front and not self.tail:
+            return -1
+        self.balance()
+        return self.front.pop() if len(self.front) == len(self.tail) else self.tail.popleft()
+
+    def popBack(self) -> int:
+        if not self.front and not self.tail:
+            return -1
+        self.balance()
+        return self.tail.pop()
+
+
+
+# Your FrontMiddleBackQueue object will be instantiated and called as such:
+# obj = FrontMiddleBackQueue()
+# obj.pushFront(val)
+# obj.pushMiddle(val)
+# obj.pushBack(val)
+# param_4 = obj.popFront()
+# param_5 = obj.popMiddle()
+# param_6 = obj.popBack()
 ```
 
 ### **Java**
@@ -80,7 +129,72 @@ q.popFront();     // 返回 -1 -> [] （队列为空）
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class FrontMiddleBackQueue {
 
+    Deque<Integer> front, tail;
+
+    public FrontMiddleBackQueue() {
+        front = new ArrayDeque<>();
+        tail = new ArrayDeque<>();
+    }
+
+    public void pushFront(int val) {
+        front.addFirst(val);
+    }
+
+    public void pushMiddle(int val) {
+        balanceDeque();
+        front.addLast(val);
+    }
+
+    public void pushBack(int val) {
+        tail.addLast(val);
+    }
+
+    public int popFront() {
+        if (tail.isEmpty() && front.isEmpty()) {
+            return -1;
+        }
+        balanceDeque();
+        return front.isEmpty() ? tail.pollFirst() : front.pollFirst();
+    }
+
+    public int popMiddle() {
+        if (tail.isEmpty() && front.isEmpty()) {
+            return -1;
+        }
+        balanceDeque();
+        return front.size() == tail.size() ? front.pollLast() : tail.pollFirst();
+    }
+
+    public int popBack() {
+        if (tail.isEmpty() && front.isEmpty()) {
+            return -1;
+        }
+        balanceDeque();
+        return tail.isEmpty() ? front.pollLast() : tail.pollLast();
+    }
+
+    public void balanceDeque() {
+        while (front.size() < tail.size()) {
+            front.addLast(tail.pollFirst());
+        }
+        while (tail.size() < front.size()) {
+            tail.addFirst(front.pollLast());
+        }
+    }
+}
+
+/**
+ * Your FrontMiddleBackQueue object will be instantiated and called as such:
+ * FrontMiddleBackQueue obj = new FrontMiddleBackQueue();
+ * obj.pushFront(val);
+ * obj.pushMiddle(val);
+ * obj.pushBack(val);
+ * int param_4 = obj.popFront();
+ * int param_5 = obj.popMiddle();
+ * int param_6 = obj.popBack();
+ */
 ```
 
 ### **...**
