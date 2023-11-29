@@ -57,7 +57,27 @@ smallestInfiniteSet.popSmallest(); // 返回 5 ，并将其从集合中移除。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedSet
 
+class SmallestInfiniteSet:
+
+    def __init__(self):
+        self.q = SortedSet(range(1, 1001))
+
+    def popSmallest(self) -> int:
+        ans = self.q[0]
+        self.q.remove(ans)
+        return ans
+
+    def addBack(self, num: int) -> None:
+        self.q.add(num)
+
+
+
+# Your SmallestInfiniteSet object will be instantiated and called as such:
+# obj = SmallestInfiniteSet()
+# param_1 = obj.popSmallest()
+# obj.addBack(num)
 ```
 
 ### **Java**
@@ -65,7 +85,32 @@ smallestInfiniteSet.popSmallest(); // 返回 5 ，并将其从集合中移除。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class SmallestInfiniteSet {
 
+    TreeSet<Integer> q;
+
+    public SmallestInfiniteSet() {
+        q = new TreeSet();
+        for (int i = 1; i < 1001; i++) {
+            q.add(i);
+        }
+    }
+    
+    public int popSmallest() {
+        return q.pollFirst();
+    }
+    
+    public void addBack(int num) {
+        q.add(num);
+    }
+}
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet obj = new SmallestInfiniteSet();
+ * int param_1 = obj.popSmallest();
+ * obj.addBack(num);
+ */
 ```
 
 ### **...**
