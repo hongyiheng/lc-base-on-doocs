@@ -84,7 +84,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        cnt1 = [0] * 26
+        for c in word1:
+            cnt1[ord(c) - ord('a')] += 1
+        cnt2 = [0] * 26
+        for c in word2:
+            if not cnt1[ord(c) - ord('a')]:
+                return False
+            cnt2[ord(c) - ord('a')] += 1
+        cnt1.sort()
+        cnt2.sort()
+        return cnt1 == cnt2
 ```
 
 ### **Java**
@@ -92,7 +104,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+        if (word1.length() != word2.length()) {
+            return false;
+        }
+        int[] cnt1 = new int[26];
+        for (char c : word1.toCharArray()) {
+            cnt1[c - 'a']++;
+        }
+        int[] cnt2 = new int[26];
+        for (char c : word2.toCharArray()) {
+            if (cnt1[c - 'a'] == 0) {
+                return false;
+            }
+            cnt2[c - 'a']++;
+        }
+        Arrays.sort(cnt1);
+        Arrays.sort(cnt2);
+        return Arrays.equals(cnt1, cnt2);
+    }
+}
 ```
 
 ### **...**
