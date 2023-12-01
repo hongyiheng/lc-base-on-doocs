@@ -57,7 +57,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def firstCompleteIndex(self, arr: List[int], mat: List[List[int]]) -> int:
+        m, n = len(mat), len(mat[0])
+        g = dict()
+        for i in range(m):
+            for j in range(n):
+                g[mat[i][j]] = (i, j)
+        row, col = [0] * m, [0] * n
+        for i, v in enumerate(arr):
+            x, y = g[v]
+            row[x] += 1
+            col[y] += 1
+            if row[x] == n or col[y] == m:
+                return i
+        return -1
 ```
 
 ### **Java**
@@ -65,7 +79,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int firstCompleteIndex(int[] arr, int[][] mat) {
+        int m = mat.length, n = mat[0].length;
+        Map<Integer, Integer> g = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                g.put(mat[i][j], i * n + j);
+            }
+        }
+        int[] row = new int[m], col = new int[n];
+        for (int i = 0; i < m * n; i++) {
+            int v = g.get(arr[i]);
+            int x = v / n, y = v % n;
+            if (++row[x] == n || ++col[y] == m) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
