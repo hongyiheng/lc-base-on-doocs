@@ -71,7 +71,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        q = [0] * 1010
+        for n, u, v in trips:
+            q[u] += n
+            q[v] -= n
+        s = 0
+        for v in q:
+            s += v
+            if s > capacity:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -79,7 +90,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+        int[] q = new int[1010];
+        for (int[] t : trips) {
+            int n = t[0], u = t[1], v = t[2];
+            q[u] += n;
+            q[v] -= n;
+        }
+        int s = 0;
+        for (int v : q) {
+            s += v;
+            if (s > capacity) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
