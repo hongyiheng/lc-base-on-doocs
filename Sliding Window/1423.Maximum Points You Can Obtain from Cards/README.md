@@ -75,14 +75,19 @@
 class Solution:
     def maxScore(self, cardPoints: List[int], k: int) -> int:
         n = len(cardPoints)
-        pre = [0] * (n + 1)
-        for i in range(1, n + 1):
-            pre[i] = pre[i - 1] + cardPoints[i - 1]
-        w, m = n - k, float("inf")
-        for l in range(n - w + 1):
-            r = l + w
-            m = min(m, pre[r] - pre[l])
-        return pre[n] - m
+        if n == k:
+            return sum(cardPoints)
+        l = r = s = total = 0
+        mi = inf
+        while r < len(cardPoints):
+            s += cardPoints[r]
+            total += cardPoints[r]
+            if r - l + 1 == n - k:
+                mi = min(mi, s)
+                s -= cardPoints[l]
+                l += 1
+            r += 1
+        return total - mi
 ```
 
 ### **Java**
@@ -93,17 +98,21 @@ class Solution:
 class Solution {
     public int maxScore(int[] cardPoints, int k) {
         int n = cardPoints.length;
-        int w = n - k;
-        int[] pre = new int[n + 1];
-        for (int i = 1; i <= n; i++) {
-            pre[i] = pre[i - 1] + cardPoints[i - 1];
+        if (n == k) {
+            return (int)Arrays.stream(cardPoints).sum();
         }
-        int m = Integer.MAX_VALUE;
-        for (int l = 0; l + w <= n; l++) {
-            int right = l + w;
-            m = Math.min(m, pre[right] - pre[l]);
-        }
-        return pre[n] - m;
+        int total = 0, s = 0, l = 0, r = 0;
+        int mi = 0x3f3f3f3f;
+        while (r < n) {
+            s += cardPoints[r];
+            total += cardPoints[r];
+            if (r - l + 1 == n - k) {
+                mi = Math.min(mi, s);
+                s -= cardPoints[l++];
+            }
+            r += 1;
+        } 
+        return total - mi;
     }
 }
 ```
