@@ -73,7 +73,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def bstToGst(self, root: TreeNode) -> TreeNode:
+        def dfs(root):
+            nonlocal s
+            if not root:
+                return
+            dfs(root.right)
+            s += root.val
+            root.val = s
+            dfs(root.left)
+        
+        s = 0
+        dfs(root)
+        return root
 ```
 
 ### **Java**
@@ -81,7 +100,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
 
+    int s;
+
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.right);
+        s += root.val;
+        root.val = s;
+        dfs(root.left);
+    }
+
+    public TreeNode bstToGst(TreeNode root) {
+        s = 0;
+        dfs(root);
+        return root;
+    }
+}
 ```
 
 ### **...**
