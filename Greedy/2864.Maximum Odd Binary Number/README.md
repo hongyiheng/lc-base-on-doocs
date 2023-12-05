@@ -54,7 +54,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumOddBinaryNumber(self, s: str) -> str:
+        cnt = 0
+        for c in s:
+            if c == '1':
+                cnt += 1
+        return (cnt - 1) * '1' + (len(s) - cnt) * '0' + '1'
 ```
 
 ### **Java**
@@ -62,7 +68,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String maximumOddBinaryNumber(String s) {
+        int n = s.length(), cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '1') {
+                cnt++;
+            }
+        }
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < n - 1; i++) {
+            if (cnt > 1) {
+                cnt--;
+                ans.append('1');
+            } else {
+                ans.append('0');
+            }
+        }
+        ans.append('1');
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
