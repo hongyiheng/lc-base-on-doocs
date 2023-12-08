@@ -59,7 +59,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxTaxiEarnings(self, n: int, rides: List[List[int]]) -> int:
+        rides.sort(key=lambda x:x[1])
+        f = [0] * (n + 1)
+        j = 0
+        for i in range(n + 1):
+            f[i] = f[i - 1]
+            while j < len(rides) and rides[j][1] == i:
+                s, e, t = rides[j]
+                f[i] = max(f[i], f[s] + e - s + t)
+                j += 1
+        return f[n]
 ```
 
 ### **Java**
@@ -67,7 +78,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maxTaxiEarnings(int n, int[][] rides) {
+        Arrays.sort(rides, (a, b) -> a[1] - b[1]);
+        long[] f = new long[n + 1];
+        int j = 0;
+        for (int i = 1; i < n + 1; i++) {
+            f[i] = f[i - 1];
+            while (j < rides.length && rides[j][1] == i) {
+                int s = rides[j][0], e = rides[j][1], t = rides[j][2];
+                f[i] = Math.max(f[i], f[s] + e - s + t);
+                j++;
+            }
+        }
+        return f[n];
+    }
+}
 ```
 
 ### **...**
