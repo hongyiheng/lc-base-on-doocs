@@ -65,7 +65,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nextBeautifulNumber(self, n: int) -> int:
+        for v in range(n + 1, 0x3f3f3f3f):
+            cnt = [0] * 10
+            x = v
+            while x:
+                cnt[x % 10] += 1
+                x //= 10
+            bal = True 
+            for i in range(10):
+                if cnt[i] and i != cnt[i]:
+                    bal = False
+                    break
+            if bal:
+                return v
+        return -1
 ```
 
 ### **Java**
@@ -73,7 +88,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int nextBeautifulNumber(int n) {
+        for (int v = n + 1; v < 0x3f3f3f3f; v++) {
+            int[] cnt = new int[10];
+            int x = v;
+            while (x > 0) {
+                cnt[x % 10]++;
+                x /= 10;
+            }
+            boolean bal = true;
+            for (int i = 0; i < 10; i++) {
+                if (cnt[i] > 0 && cnt[i] != i) {
+                    bal = false;
+                    break;
+                }
+            }
+            if (bal) {
+                return v;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
