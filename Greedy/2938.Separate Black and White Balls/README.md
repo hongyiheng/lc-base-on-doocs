@@ -65,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumSteps(self, s: str) -> int:
+        cnt = ans = 0
+        for c in s:
+            if c == '1':
+                cnt += 1
+            else:
+                ans += cnt
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +81,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minimumSteps(String s) {
+        long ans = 0, cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '1') {
+                cnt++;
+            } else {
+                ans += cnt;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
