@@ -68,7 +68,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def secondGreaterElement(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        ans = [-1] * n
+        q = []
+        for i in range(n):
+            tmp = []
+            while q and q[0][0] < nums[i]:
+                tmp.append(heapq.heappop(q))
+                tmp[-1][2] -= 1
+            for v, j, k in tmp:
+                if not k:
+                    ans[j] = nums[i]
+                else:
+                    heapq.heappush(q, [v, j, k])
+            heapq.heappush(q, [nums[i], i, 2])
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +92,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] secondGreaterElement(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        for (int i = 0; i < n; i++) {
+            List<int[]> tmp = new ArrayList<>();
+            while (!q.isEmpty() && q.peek()[0] < nums[i]) {
+                tmp.add(q.poll());
+            }
+            for (int[] t : tmp) {
+                int v = t[0], j = t[1], k = t[2];
+                if (k == 1) {
+                    ans[j] = nums[i];
+                } else {
+                    q.add(new int[]{v, j, k - 1});
+                }
+            }
+            q.add(new int[]{nums[i], i, 2});
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
