@@ -65,19 +65,15 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        q = deque()
-
-        def dfs(head):
-            nonlocal q
-            if not head:
-                return
-            q.append(head.val)
-            dfs(head.next)
-            head.val = q.popleft()
-
-        dfs(head)
-        return head
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def dfs(node, pre):
+            if not node:
+                return pre
+            nx = node.next
+            node.next = pre
+            return dfs(nx, node)
+ 
+        return dfs(head, None)
 ```
 
 ### **Java**
@@ -96,21 +92,18 @@ class Solution:
  * }
  */
 class Solution {
-    Deque<Integer> q;
-
-    public ListNode reverseList(ListNode head) {
-        q = new ArrayDeque<>();
-        dfs(head);
-        return head;
+    
+    public ListNode dfs(ListNode node, ListNode pre) {
+        if (node == null) {
+            return pre;
+        }
+        ListNode nx = node.next;
+        node.next = pre;
+        return dfs(nx, node);
     }
 
-    public void dfs(ListNode head) {
-        if (head == null) {
-            return;
-        }
-        q.offer(head.val);
-        dfs(head.next);
-        head.val = q.pollFirst();
+    public ListNode reverseList(ListNode head) {
+        return dfs(head, null);
     }
 }
 ```

@@ -9,20 +9,17 @@
  * }
  */
 class Solution {
-    Deque<Integer> q;
 
-    public ListNode reverseList(ListNode head) {
-        q = new ArrayDeque<>();
-        dfs(head);
-        return head;
+    public ListNode dfs(ListNode node, ListNode pre) {
+        if (node == null) {
+            return pre;
+        }
+        ListNode nx = node.next;
+        node.next = pre;
+        return dfs(nx, node);
     }
 
-    public void dfs(ListNode head) {
-        if (head == null) {
-            return;
-        }
-        q.offer(head.val);
-        dfs(head.next);
-        head.val = q.pollFirst();
+    public ListNode reverseList(ListNode head) {
+        return dfs(head, null);
     }
 }

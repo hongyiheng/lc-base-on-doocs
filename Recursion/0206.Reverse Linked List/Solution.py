@@ -4,16 +4,12 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        q = deque()
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def dfs(node, pre):
+            if not node:
+                return pre
+            nx = node.next
+            node.next = pre
+            return dfs(nx, node)
 
-        def dfs(head):
-            nonlocal q
-            if not head:
-                return
-            q.append(head.val)
-            dfs(head.next)
-            head.val = q.popleft()
-
-        dfs(head)
-        return head
+        return dfs(head, None)
