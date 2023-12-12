@@ -52,7 +52,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        mx = max(nums)
+        l = r = cnt = ans = 0
+        while r < len(nums):
+            cnt += nums[r] == mx
+            while cnt >= k:
+                cnt -= nums[l] == mx
+                l += 1
+            ans += l
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        int mx = Arrays.stream(nums).max().getAsInt();
+        int l = 0, r = 0, cnt = 0;
+        long ans = 0;
+        while (r < nums.length) {
+            if (nums[r] == mx) {
+                cnt++;
+            }
+            while (cnt >= k) {
+                if (nums[l] == mx) {
+                    cnt--;
+                }
+                l++;
+            }
+            ans += l;
+            r++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
