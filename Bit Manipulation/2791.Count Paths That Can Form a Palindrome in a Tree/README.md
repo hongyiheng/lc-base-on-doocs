@@ -61,7 +61,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countPalindromePaths(self, parent: List[int], s: str) -> int:
+        def dfs(u, mask):
+            ans = 0
+            for v in g[u]:
+                nm = mask ^ (1 << (ord(s[v]) - ord('a')))
+                ans += cnt[nm]
+                for i in range(26):
+                    ans += cnt[nm ^ (1 << i)]
+                cnt[nm] += 1
+                ans += dfs(v, nm)
+            return ans
+        
+        g = defaultdict(list)
+        for v, u in enumerate(parent):
+            g[u].append(v)
+        cnt = defaultdict(int)
+        cnt[0] = 1
+        return dfs(0, 0)
 ```
 
 ### **Java**
@@ -69,7 +87,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Map<Integer, List<Integer>> g;
+    Map<Integer, Integer> cnt;
+    String s;
+
+    public long dfs(int u, int mask) {
+        long ans = 0;
+        for (int v : g.getOrDefault(u, new ArrayList<>())) {
+            int nm = mask ^ (1 << (s.charAt(v) - 'a'));
+            ans += cnt.getOrDefault(nm, 0);
+            for (int i = 0; i < 26; i++) {
+                ans += cnt.getOrDefault(nm ^ (1 << i), 0);
+            }
+            cnt.put(nm, cnt.getOrDefault(nm, 0) + 1);
+            ans += dfs(v, nm);
+        }
+        return ans;
+    }
+
+    public long countPalindromePaths(List<Integer> parent, String s) {
+        g = new HashMap<>();
+        cnt = new HashMap<>();
+        this.s = s;
+        for (int i = 0; i < parent.size(); i++) {
+            g.computeIfAbsent(parent.get(i), k -> new ArrayList<>()).add(i);
+        }
+        cnt.put(0, 1);
+        return dfs(0, 0);
+    }
+}
 ```
 
 ### **...**
