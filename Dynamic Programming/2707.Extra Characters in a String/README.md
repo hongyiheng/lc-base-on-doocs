@@ -48,7 +48,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minExtraChar(self, s: str, dictionary: List[str]) -> int:
+        @cache
+        def dfs(i):
+            if not i:
+                return 0
+            ans = dfs(i - 1) + 1
+            for j in range(i):
+                if s[j:i] in d:
+                    ans = min(ans, dfs(j))
+            return ans
 
+        d = set(dictionary)
+        return dfs(len(s))
 ```
 
 ### **Java**
@@ -56,7 +69,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    Set<String> d = new HashSet<>();
+    Map<Integer, Integer> g = new HashMap<>();
+
+    public int dfs(String s, int i) {
+        if (i == 0) {
+            return 0;
+        }
+        if (g.containsKey(i)) {
+            return g.get(i);
+        }
+        int ans = dfs(s, i - 1) + 1;
+        for (int j = 0; j < i; j++) {
+            if (d.contains(s.substring(j, i))) {
+                ans = Math.min(ans, dfs(s, j));
+            }
+        }
+        g.put(i, ans);
+        return ans;
+    }
+
+    public int minExtraChar(String s, String[] dictionary) {
+        for (String v : dictionary) {
+            d.add(v);
+        }
+        return dfs(s, s.length());
+    }
+}
 ```
 
 ### **...**
