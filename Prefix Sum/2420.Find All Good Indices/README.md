@@ -58,7 +58,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def goodIndices(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        down, up = [1] * n, [1] * n
+        for i in range(1, n):
+            if nums[i] <= nums[i - 1]:
+                down[i] = down[i - 1] + 1
+        for i in range(n - 2, -1, -1):
+            if nums[i] <= nums[i + 1]:
+                up[i] = up[i + 1] + 1
+        return [i for i in range(1, n - 1) if up[i + 1] >= k and down[i - 1] >= k]
 ```
 
 ### **Java**
@@ -66,7 +76,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> goodIndices(int[] nums, int k) {
+        int n = nums.length;
+        int[] up = new int[n], down = new int[n];
+        Arrays.fill(up, 1);
+        Arrays.fill(down, 1);
+        for (int i = 1; i < n; i++) {
+            if (nums[i - 1] >= nums[i]) {
+                down[i] = down[i - 1] + 1;
+            }
+        }
+        for (int i = n - 2; i > -1; i--) {
+            if (nums[i] <= nums[i + 1]) {
+                up[i] = up[i + 1] + 1;
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 1; i < n - 1; i++) {
+            if (down[i - 1] >= k && up[i + 1] >= k) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
