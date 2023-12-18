@@ -64,7 +64,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestString(self, s: str) -> str:
+        cs = list(s)
+        flag = False
+        for i, c in enumerate(cs):
+            if c != 'a':
+                cs[i] = chr(ord(c) - 1)
+                flag = True
+            elif flag:
+                break
+        if not flag:
+            cs[-1] = 'z'
+        return "".join(cs)     
 ```
 
 ### **Java**
@@ -72,7 +84,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String smallestString(String s) {
+        char[] cs = s.toCharArray();
+        int n = cs.length;
+        boolean flag = false;
+        for (int i = 0; i < n; i++) {
+            if (cs[i] != 'a') {
+                cs[i]--;
+                flag = true;
+            } else if (flag) {
+                break;
+            }
+        }
+        if (!flag) {
+            cs[n - 1] = 'z';
+        }
+        return new String(cs);
+    }
+}
 ```
 
 ### **...**
