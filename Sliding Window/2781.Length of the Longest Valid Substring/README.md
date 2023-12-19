@@ -53,7 +53,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.children = [None] * 26
+        self.end = False
 
+class Trie:
+    def __init__(self):
+        self.root = Node()
+    
+    def insert(self, s):
+        cur = self.root
+        for i in range(len(s) - 1, -1, -1):
+            idx = ord(s[i]) - ord('a')
+            if not cur.children[idx]:
+                cur.children[idx] = Node()
+            cur = cur.children[idx]
+        cur.end = True
+
+    def search(self, s) -> bool:
+        cur = self.root
+        for i in range(len(s) - 1, -1, -1):
+            idx = ord(s[i]) - ord('a')
+            if not cur.children[idx]:
+                return False
+            cur = cur.children[idx]
+            if cur.end:
+                return True
+        return False
+
+            
+class Solution:
+    def longestValidSubstring(self, word: str, forbidden: List[str]) -> int:
+        tr = Trie()
+        for s in forbidden:
+            tr.insert(s)
+        l = r = ans = 0
+        while r < len(word):
+            while tr.search(word[l:r + 1]):
+                l += 1
+            ans = max(ans, r - l + 1)
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +102,67 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    Node[] children;
+    boolean end;
 
+    public Node() {
+        children = new Node[26];
+    }
+}
+
+class Trie {
+    Node root;
+
+    public Trie() {
+        root = new Node();
+    }
+
+    public void insert(String s) {
+        Node cur = root;
+        for (int i = s.length() - 1; i > -1; i--) {
+            int idx = s.charAt(i) - 'a';
+            if (cur.children[idx] == null) {
+                cur.children[idx] = new Node();
+            }
+            cur = cur.children[idx];
+        }
+        cur.end = true;
+    }
+
+    public boolean search(String s) {
+        Node cur = root;
+        for (int i = s.length() - 1; i > -1; i--) {
+            int idx = s.charAt(i) - 'a';
+            if (cur.children[idx] == null) {
+                return false;
+            }
+            cur = cur.children[idx];
+            if (cur.end) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public int longestValidSubstring(String word, List<String> forbidden) {
+        Trie tr = new Trie();
+        for (String s : forbidden) {
+            tr.insert(s);
+        }
+        int l = 0, r = 0, ans = 0;
+        while (r < word.length()) {
+            while (tr.search(word.substring(l, r + 1))) {
+                l++;
+            }
+            ans = Math.max(ans, r - l + 1);
+            r++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
