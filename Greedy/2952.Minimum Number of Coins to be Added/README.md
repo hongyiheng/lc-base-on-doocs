@@ -64,7 +64,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumAddedCoins(self, coins: List[int], target: int) -> int:
+        coins.sort()
+        i = ans = 0
+        s = 1
+        while s <= target:
+            if i < len(coins) and coins[i] <= s:
+                s += coins[i]
+                i += 1
+            else:
+                s *= 2
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +84,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumAddedCoins(int[] coins, int target) {
+        Arrays.sort(coins);
+        int i = 0, s = 1, ans = 0;
+        while (s <= target) {
+            if (i < coins.length && coins[i] <= s) {
+                s += coins[i++];
+            } else {
+                s *= 2;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
