@@ -62,7 +62,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def xorOperation(self, n: int, start: int) -> int:
+        ans = 0
+        for i in range(n):
+            ans ^= (start + 2 * i)
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +75,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int xorOperation(int n, int start) {
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans ^= (start + 2 * i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
