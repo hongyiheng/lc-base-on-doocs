@@ -62,7 +62,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isAcronym(self, words: List[str], s: str) -> bool:
+        n = len(words)
+        if len(s) != n:
+            return False
+        for i in range(n):
+            if s[i] != words[i][0]:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -70,7 +78,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isAcronym(List<String> words, String s) {
+        int n = words.size();
+        if (s.length() != n) {
+            return false;
+        }
+        for (int i = 0; i < n; i++) {
+            if (words.get(i).charAt(0) != s.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
