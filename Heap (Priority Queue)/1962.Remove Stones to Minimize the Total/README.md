@@ -65,7 +65,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minStoneSum(self, piles: List[int], k: int) -> int:
+        q = []
+        ans = 0
+        for v in piles:
+            heapq.heappush(q, -v)
+            ans += v
+        for _ in range(k):
+            v = -heapq.heappop(q)
+            nv = (v + 1) // 2
+            ans -= (v - nv)
+            heapq.heappush(q, -nv)
+        return int(ans)
 ```
 
 ### **Java**
@@ -73,7 +85,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minStoneSum(int[] piles, int k) {
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        int ans = 0;
+        for (int v : piles) {
+            ans += v;
+            q.offer(v);
+        }
+        for (int i = 0; i < k; i++) {
+            int v = q.poll();
+            int nv = (v + 1) / 2;
+            ans -= (v - nv);
+            q.offer(nv);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
