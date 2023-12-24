@@ -70,7 +70,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumMountainRemovals(self, nums: List[int]) -> int:
+        n = len(nums)
+        suf = [0] * n
+        g = []
+        for i in range(n - 1, 0, -1):
+            x = nums[i]
+            j = bisect_left(g, x)
+            if j == len(g):
+                g.append(x)
+            else:
+                g[j] = x
+            suf[i] = j + 1
 
+        mx = 0 
+        g = []
+        for i, x in enumerate(nums):
+            j = bisect_left(g, x)
+            if j == len(g):
+                g.append(x)
+            else:
+                g[j] = x
+            pre = j + 1 
+            if pre >= 2 and suf[i] >= 2:
+                mx = max(mx, pre + suf[i] - 1) 
+        return n - mx
 ```
 
 ### **Java**
@@ -78,7 +103,55 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minimumMountainRemovals(int[] nums) {
+        int n = nums.length;
+        int[] pre = new int[n];
+        List<Integer> q = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            int idx = queryLowBound(q, v);
+            if (idx == q.size()) {
+                q.add(v);
+            } else {
+                q.set(idx, v);
+            }
+            pre[i] = idx + 1;
+        }
 
+        int ans = 0;
+        q.clear();
+        for (int i = n - 1; i > -1; i--) {
+            int v = nums[i];
+            int idx = queryLowBound(q, v);
+            if (idx == q.size()) {
+                q.add(v);
+            } else {
+                q.set(idx, v);
+            }
+            if (idx + 1 >= 2 && pre[i] >= 2) {
+                ans = Math.max(ans, idx + pre[i]);
+            }
+        }
+        return n - ans;
+    }
+
+    public int queryLowBound(List<Integer> q, int v) {
+        if (q.isEmpty()) {
+            return 0;
+        }
+        int l = 0, r = q.size() - 1;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (q.get(mid) < v) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }  
+        }
+        return q.get(r) < v ? r + 1 : r;
+    }
+}
 ```
 
 ### **...**
