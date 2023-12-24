@@ -65,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumPerimeter(self, neededApples: int) -> int:
+        i, c, s = 1, 1, 12
+        while s < neededApples:
+            c = c + (2 * i) - 1
+            c += (i + 1) * 2 * 2
+            s += (c + i + 1) * 4
+            i += 1
+        return (2 * i - 1) * 4 + 4
 ```
 
 ### **Java**
@@ -73,7 +81,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minimumPerimeter(long neededApples) {
+        int i = 1;
+        long c = 1, s = 12;
+        while (s < neededApples) {
+            c = c + (2 * i) - 1;
+            c += (i + 1) * 2 * 2;
+            s += (c + i + 1) * 4;
+            i++;
+        }
+        return (2 * i - 1) * 4 + 4;
+    }
+}
 ```
 
 ### **...**
