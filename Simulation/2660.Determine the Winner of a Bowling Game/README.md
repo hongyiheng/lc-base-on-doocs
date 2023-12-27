@@ -80,7 +80,17 @@ player1 的得分等于 player2 的得分，所以这一场比赛平局，答案
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isWinner(self, player1: List[int], player2: List[int]) -> int:
+        t1 = t2 = d1 = d2 = 0
+        for a, b in zip(player1, player2):
+            t1 += 2 * a if d1 > 0 else a
+            t2 += 2 * b if d2 > 0 else b
+            d1 = 2 if a == 10 else d1 - 1
+            d2 = 2 if b == 10 else d2 - 1
+        if t1 == t2:
+            return 0
+        return 1 if t1 > t2 else 2
 ```
 
 ### **Java**
@@ -88,7 +98,22 @@ player1 的得分等于 player2 的得分，所以这一场比赛平局，答案
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int isWinner(int[] player1, int[] player2) {
+        int t1 = 0, t2 = 0, d1 = 0, d2 = 0;
+        for (int i = 0; i < player1.length; i++) {
+            int a = player1[i], b = player2[i];
+            t1 += d1 > 0 ? 2 * a : a;
+            t2 += d2 > 0 ? 2 * b : b;
+            d1 = a == 10 ? 2 : d1 - 1;
+            d2 = b == 10 ? 2 : d2 - 1;
+        }
+        if (t1 == t2) {
+            return 0;
+        }
+        return t1 > t2 ? 1 : 2;
+    }
+}
 ```
 
 ### **...**
