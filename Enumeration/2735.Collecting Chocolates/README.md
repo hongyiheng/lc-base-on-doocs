@@ -59,7 +59,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minCost(self, nums: List[int], x: int) -> int:
+        n = len(nums)
+        f = [[0] * n for _ in range(n)]
+        ans = inf
+        for i in range(n):
+            s = i * x
+            for j in range(n):
+                f[i][j] = nums[(i + j) % n]
+                if i > 0:
+                    f[i][j] = min(f[i][j], f[i - 1][j])
+                s += f[i][j]
+            ans = min(ans, s)
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +80,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minCost(int[] nums, int x) {
+        int n = nums.length;
+        int[][] f = new int[n][n];
+        long ans = Long.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            long s = 1L * i * x;
+            for (int j = 0; j < n; j++) {
+                f[i][j] = nums[(i + j) % n];
+                if (i > 0) {
+                    f[i][j] = Math.min(f[i][j], f[i - 1][j]);
+                }
+                s += f[i][j];
+            }
+            ans = Math.min(ans, s);
+        }  
+        return ans;
+    }
+}
 ```
 
 ### **...**
