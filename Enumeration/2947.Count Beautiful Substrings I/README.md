@@ -82,7 +82,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def beautifulSubstrings(self, s: str, k: int) -> int:
+        n = len(s)
+        ans = 0
+        vs = {'a', 'e', 'i', 'o', 'u'}
+        for w in range(2, n + 1, 2):
+            l = r = 0
+            v = c = 0
+            while r < n:
+                if s[r] in vs:
+                    v += 1
+                else:
+                    c += 1
+                if r - l + 1 == w:
+                    if v == c and not (v * c) % k:
+                        ans += 1
+                    if s[l] in vs:
+                        v -= 1
+                    else:
+                        c -= 1
+                    l += 1
+                r += 1
+        return ans
 ```
 
 ### **Java**
@@ -90,7 +112,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int beautifulSubstrings(String s, int k) {
+        int n = s.length(), ans = 0;
+        Set<Character> vs = new HashSet();
+        for (char v : new char[]{'a', 'e', 'i', 'o', 'u'}) {
+            vs.add(v);
+        }
+        for (int w = 2; w <= n; w += 2) {
+            int l = 0, r = 0;
+            int v = 0, c = 0;
+            while (r < n) {
+                if (vs.contains(s.charAt(r))) {
+                    v++;
+                } else {
+                    c++;
+                }
+                if (r - l + 1 == w) {
+                    if (v == c && (v * c) % k == 0) {
+                        ans++;
+                    }
+                    if (vs.contains(s.charAt(l))) {
+                        v--;
+                    } else {
+                        c--;
+                    }
+                    l++;
+                }
+                r++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
