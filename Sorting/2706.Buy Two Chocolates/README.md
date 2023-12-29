@@ -50,7 +50,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def buyChoco(self, prices: List[int], money: int) -> int:
+        prices.sort()
+        return money if prices[0] + prices[1] > money else money - prices[0] - prices[1]
 ```
 
 ### **Java**
@@ -58,7 +61,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int buyChoco(int[] prices, int money) {
+        Arrays.sort(prices);
+        return prices[0] + prices[1] > money ? money : money - prices[0] - prices[1];
+    }
+}
 ```
 
 ### **...**
