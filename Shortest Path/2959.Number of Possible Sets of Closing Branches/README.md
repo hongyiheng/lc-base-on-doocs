@@ -94,7 +94,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def numberOfSets(self, n: int, maxDistance: int, roads: List[List[int]]) -> int:
+        def dfs(i, mask):
+            if i == n:
+                masks.add(mask)
+                return
+            dfs(i + 1, mask)
+            dfs(i + 1, mask | 1 << i)
 
+        def check(mask):
+            f = [[inf] * n for _ in range(n)]
+            for u, v, w in roads:
+                if not mask >> u & 1 or not mask >> v & 1:
+                    continue
+                f[v][u] = f[u][v] = min(f[u][v], w)
+            for k in range(n):
+                for i in range(n):
+                    for j in range(i + 1, n):
+                        f[i][j] = f[j][i] = min(f[i][j], f[i][k] + f[k][j])
+            for u in range(n):
+                for v in range(u + 1, n):
+                    if not mask >> u & 1 or not mask >> v & 1:
+                        continue
+                    if f[u][v] > maxDistance:
+                        return False
+            return True
+
+        masks = set()
+        dfs(0, 0)
+        ans = 0
+        for mask in masks:
+            if check(mask):
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -102,7 +135,50 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    public boolean check(int n, int[][] roads, int maxDistance, int mask) {
+        int[][] f = new int[n][n];
+        for (int[] row : f) {
+            Arrays.fill(row, 0x3f3f3f3f);
+        }
+        for (int[] e : roads) {
+            int u = e[0], v = e[1], w = e[2];
+            if ((mask >> u & 1) == 0 || (mask >> v & 1) == 0) {
+                continue;
+            }
+            f[u][v] = f[v][u] = Math.min(f[u][v], w);
+        }
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = i + 1; j < n; j++) {
+                    f[i][j] = f[j][i] = Math.min(f[i][j], f[i][k] + f[k][j]);
+                }
+            }
+        }
+        for (int u = 0; u < n; u++) {
+            for (int v = u + 1; v < n; v++) {
+                if ((mask >> u & 1) == 0 || (mask >> v & 1) == 0) {
+                    continue;
+                }
+                if (f[u][v] > maxDistance) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
+    public int numberOfSets(int n, int maxDistance, int[][] roads) {
+        int ans = 0;
+        for (int mask = 0; mask < 1 << n; mask++) {
+            if (check(n, roads, maxDistance, mask)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
