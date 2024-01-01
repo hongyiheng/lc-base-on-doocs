@@ -67,7 +67,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def relocateMarbles(self, nums: List[int], moveFrom: List[int], moveTo: List[int]) -> List[int]:
+        ans = set(nums)
+        for u, v in zip(moveFrom, moveTo):
+            ans.remove(u)
+            ans.add(v)
+        return sorted(ans)
 ```
 
 ### **Java**
@@ -75,7 +81,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> relocateMarbles(int[] nums, int[] moveFrom, int[] moveTo) {
+        Set<Integer> ans = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        for (int i = 0; i < moveFrom.length; i++) {
+            ans.remove(moveFrom[i]);
+            ans.add(moveTo[i]);
+        }
+        return ans.stream().sorted((a, b) -> a - b).collect(Collectors.toList());
+    }
+}
 ```
 
 ### **...**
