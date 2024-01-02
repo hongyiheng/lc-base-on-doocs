@@ -63,7 +63,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeAlmostEqualCharacters(self, word: str) -> int:
+        i, n = 1, len(word)
+        ans = 0
+        while i < n:
+            c = ord(word[i - 1])
+            s = {c, c + 1, c - 1}
+            if ord(word[i]) in s:
+                ans += 1
+                i += 1
+            i += 1
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +82,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int removeAlmostEqualCharacters(String word) {
+        int i = 1, n = word.length();
+        int ans = 0;
+        while (i < n) {
+            int c = word.charAt(i - 1) - 'a';
+            for (int j = c - 1; j <= c + 1; j++) {
+                if (word.charAt(i) - 'a' == j) {
+                    ans++;
+                    i++;
+                    break;
+                }
+            }
+            i++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
