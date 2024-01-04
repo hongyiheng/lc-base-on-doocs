@@ -70,7 +70,13 @@ nums = [1,3,4] 是美丽数组。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumPossibleSum(self, n: int, target: int) -> int:
+        cnt = min(n, target // 2)
+        ans = (1 + cnt) * cnt / 2
+        if cnt < n:
+            ans += (target + target + n - cnt - 1) * (n - cnt) / 2
+        return int(ans % int(1e9 + 7))
 ```
 
 ### **Java**
@@ -78,7 +84,17 @@ nums = [1,3,4] 是美丽数组。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumPossibleSum(int n, int target) {
+        int M = (int)1e9 + 7;
+        int cnt = Math.min(n, target / 2);
+        long ans = (long)(1 + cnt) * cnt / 2;
+        if (cnt < n) {
+            ans += ((long)target + target + n - cnt - 1) * (n - cnt) / 2 % M;
+        }
+        return (int)(ans % M);
+    }
+}
 ```
 
 ### **...**
