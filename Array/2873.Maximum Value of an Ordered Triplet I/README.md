@@ -59,7 +59,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumTripletValue(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                for k in range(j + 1, n):
+                    ans = max(ans, (nums[i] - nums[j]) * nums[k])
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +75,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumTripletValue(int[] nums) {
+        int n = nums.length;
+        long ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                for (int k = j + 1; k < n; k++) {
+                    ans = Math.max(ans, (long)(nums[i] - nums[j]) * nums[k]);
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
