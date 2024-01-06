@@ -58,7 +58,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def gcd(a, b):
+            return gcd(b, a % b) if b else a
 
+        def dfs(node):
+            if not node or not node.next:
+                return node
+            ne = node.next
+            mid = ListNode(gcd(node.val, ne.val))
+            node.next = mid
+            mid.next = dfs(ne)
+            return node
+
+        dfs(head)
+        return head
 ```
 
 ### **Java**
@@ -66,7 +86,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
 
+    public int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    public ListNode dfs(ListNode node) {
+        if (node == null || node.next == null) {
+            return node;
+        }
+        ListNode ne = node.next;
+        ListNode mid = new ListNode(gcd(node.val, ne.val));
+        node.next = mid;
+        mid.next = dfs(ne);
+        return node;
+    }
+
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        return dfs(head);
+    }
+}
 ```
 
 ### **...**
