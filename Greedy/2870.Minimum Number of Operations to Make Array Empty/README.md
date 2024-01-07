@@ -59,7 +59,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        cnt = Counter(nums)
+        if 1 in cnt.values():
+            return -1
+        return sum([(c + 2) // 3 for c in cnt.values()])
 ```
 
 ### **Java**
@@ -67,7 +72,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int v : nums) {
+            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+        }
+        int ans = 0;
+        for (int v : cnt.values()) {
+            if (v == 1) {
+                return -1;
+            }
+            ans += (v + 2) / 3;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
