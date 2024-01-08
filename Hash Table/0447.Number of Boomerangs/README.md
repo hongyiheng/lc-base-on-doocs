@@ -57,7 +57,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfBoomerangs(self, points: List[List[int]]) -> int:
+        n, ans = len(points), 0
+        for i in range(n):
+            cnt = defaultdict(int)
+            for j in range(n):
+                if i == j:
+                    continue
+                x = points[j][0] - points[i][0]
+                y = points[j][1] - points[i][1]
+                d = x * x + y * y
+                if d in cnt:
+                    ans += cnt[d] * 2
+                cnt[d] += 1
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +79,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfBoomerangs(int[][] points) {
+        int n = points.length, ans = 0;
+        for (int i = 0; i < n; i++) {
+            Map<Integer, Integer> cnt = new HashMap<>();
+            for (int j = 0; j < n; j++) {
+                if (i == j) {
+                    continue;
+                }
+                int x = points[i][0] - points[j][0], y = points[i][1] - points[j][1];
+                int d = x * x + y * y;
+                if (cnt.containsKey(d)) {
+                    ans += cnt.get(d) * 2;
+                }
+                cnt.put(d, cnt.getOrDefault(d, 0) + 1);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
