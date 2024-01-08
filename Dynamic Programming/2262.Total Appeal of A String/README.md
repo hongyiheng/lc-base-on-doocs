@@ -62,7 +62,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def appealSum(self, s: str) -> int:
+        ans = cnt = 0
+        last = [-1] * 26
+        for i, c in enumerate(s):
+            cnt += i - last[ord(c) - ord('a')]
+            ans += cnt
+            last[ord(c) - ord('a')] = i
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +78,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long appealSum(String s) {
+        long ans = 0, cnt = 0;
+        int[] last = new int[26];
+        Arrays.fill(last, -1);
+        for (int i = 0; i < s.length(); i++) {
+            cnt += i - last[s.charAt(i) - 'a'];
+            ans += cnt;
+            last[s.charAt(i) - 'a'] = i;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
