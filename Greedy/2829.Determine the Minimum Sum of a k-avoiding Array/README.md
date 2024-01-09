@@ -52,7 +52,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumSum(self, n: int, k: int) -> int:
+        ans = 0
+        for i in range(1, k // 2 + 1):
+            if not n:
+                break
+            ans += i
+            n -= 1
+        while n:
+            ans += k
+            k += 1
+            n -= 1
+        return ans
 ```
 
 ### **Java**
@@ -60,7 +72,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumSum(int n, int k) {
+        int ans = 0;
+        for (int i = 1; i < k / 2 + 1; i++) {
+            if (n == 0) {
+                break;
+            }
+            ans += i;
+            n--;
+        }
+        while (n > 0) {
+            ans += k++;
+            n--;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
