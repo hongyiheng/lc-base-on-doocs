@@ -54,7 +54,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def addMinimum(self, word: str) -> int:
+        t = ans = 0
+        i, n = 0, len(word)
+        while i < n:
+            v = ord(word[i]) - ord('a')
+            if v != t:
+                ans += 1
+            else:
+                i += 1
+            t = (t + 1) % 3
+        return ans + (3 - t) % 3
 ```
 
 ### **Java**
@@ -62,7 +73,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int addMinimum(String word) {
+        int t = 0, ans = 0;
+        int i = 0, n = word.length();
+        while (i < n) {
+            int v = word.charAt(i) - 'a';
+            if (v != t) {
+                ans++;
+            } else {
+                i++;
+            }
+            t = (t + 1) % 3;
+        }
+        return ans + (3 - t) % 3;
+    }
+}
 ```
 
 ### **...**
