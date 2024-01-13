@@ -63,7 +63,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countServers(self, n: int, logs: List[List[int]], x: int, queries: List[int]) -> List[int]:
+        ans = [0] * len(queries)
+        q = [[i, v] for i, v in enumerate(queries)]
+        q.sort(key=lambda k:k[1])
+        logs.sort(key=lambda k:k[1])
+        cnt = [0] * (n + 1)
+        l = r = cur = 0
+        for i, v in q:
+            while r < len(logs) and logs[r][1] <= v:
+                if not cnt[logs[r][0]]:
+                    cur += 1
+                cnt[logs[r][0]] += 1
+                r += 1
+            while l < len(logs) and logs[l][1] < v - x:
+                cnt[logs[l][0]] -= 1
+                if not cnt[logs[l][0]]:
+                    cur -= 1
+                l += 1
+            ans[i] = n - cur
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +91,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] countServers(int n, int[][] logs, int x, int[] queries) {
+        int m = logs.length, k = queries.length;
+        int[] ans = new int[k];
+        List<int[]> qs = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            qs.add(new int[]{i, queries[i]});
+        }
+        qs.sort((a, b) -> a[1] - b[1]);
+        Arrays.sort(logs, (a, b) -> a[1] - b[1]);
+        int[] cnt = new int[n + 1];
+        int l = 0, r = 0, cur = 0;
+        for (int[] q : qs) {
+            int i = q[0], v = q[1];
+            while (r < m && logs[r][1] <= v) {
+                if (cnt[logs[r][0]]++ == 0) {
+                    cur++;
+                }
+                r++;
+            }
+            while (l < m && logs[l][1] < v - x) {
+                if (--cnt[logs[l][0]] == 0) {
+                    cur--;
+                }
+                l++;
+            }
+            ans[i] = n - cur;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
