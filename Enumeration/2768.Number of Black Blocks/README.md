@@ -64,7 +64,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countBlackBlocks(self, m: int, n: int, coordinates: List[List[int]]) -> List[int]:
+        s = {(x, y) for x, y in coordinates}
+        vis = set()
+        ans = [0] * 5
+        for x, y in coordinates:
+            for i in range(max(0, x - 1), min(m - 1, x + 1)):
+                for j in range(max(0, y - 1), min(n - 1, y + 1)):
+                    if (i, j) in vis:
+                        continue
+                    vis.add((i, j))
+                    cnt = 1 if (i, j) in s else 0
+                    cnt += 1 if (i, j + 1) in s else 0
+                    cnt += 1 if (i + 1, j) in s else 0
+                    cnt += 1 if (i + 1, j + 1) in s else 0
+                    ans[cnt] += 1
+        ans[0] = (m - 1) * (n - 1) - len(vis)
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +89,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long[] countBlackBlocks(int m, int n, int[][] coordinates) {
+        Set<Long> s = new HashSet<>(), vis = new HashSet<>();
+        for (int[] e : coordinates) {
+            s.add((long)e[0] * n + e[1]);
+        }
+        long[] ans = new long[5];
+        for (int[] e : coordinates) {
+            int x = e[0], y = e[1];
+            for (int i = Math.max(0, e[0] - 1); i < Math.min(m - 1, x + 1); i++) {
+                for (int j = Math.max(0, e[1] - 1); j < Math.min(n - 1, y + 1); j++) {
+                    if (vis.contains((long)i * n + j)) {
+                        continue;
+                    }
+                    vis.add((long)i * n + j);
+                    int cnt = s.contains((long)i * n + j) ? 1 : 0;
+                    cnt += s.contains((long)i * n + j + 1) ? 1 : 0;
+                    cnt += s.contains((long)(i + 1) * n + j) ? 1 : 0;
+                    cnt += s.contains((long)(i + 1) * n + j + 1) ? 1 : 0;
+                    ans[cnt]++;
+                }
+            }
+        }
+        ans[0] = (long)(m - 1) * (n - 1) - vis.size();
+        return ans;
+    }
+}
 ```
 
 ### **...**
