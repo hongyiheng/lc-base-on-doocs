@@ -53,7 +53,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:
+        if sx == fx and sy == fy and t == 1:
+            return False
+        dx, dy = abs(fx - sx), abs(fy - sy)
+        return max(dx, dy) <= t
 ```
 
 ### **Java**
@@ -61,7 +66,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+        if (sx == fx && sy == fy && t == 1) {
+            return false;
+        } 
+        return Math.max(Math.abs(sx - fx), Math.abs(sy - fy)) <= t;
+    }
+}
 ```
 
 ### **...**
