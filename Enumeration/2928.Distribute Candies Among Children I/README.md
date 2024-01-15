@@ -49,7 +49,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distributeCandies(self, n: int, limit: int) -> int:
+        ans = 0
+        for i in range(min(n, limit) + 1):
+            for j in range(min(n - i, limit) + 1):
+                if n - i - j <= limit:
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +64,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distributeCandies(int n, int limit) {
+        int ans = 0;
+        for (int i = 0; i <= Math.min(n, limit); i++) {
+            for (int j = 0; j <= Math.min(n - i, limit); j++) {
+                if (n - i - j <= limit) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
