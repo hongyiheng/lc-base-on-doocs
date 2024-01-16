@@ -108,7 +108,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maximizeSquareHoleArea(self, n: int, m: int, hBars: List[int], vBars: List[int]) -> int:
+        def get_mx(arr):
+            arr.sort()
+            ans, cur, cnt = 0, 1, 0
+            for v in arr:
+                if v == cur + 1:
+                    cnt += 1
+                else:
+                    cnt = 1
+                ans = max(ans, cnt + 1)
+                cur = v
+            return ans
 
+        return min(get_mx(hBars), get_mx(vBars)) ** 2
 ```
 
 ### **Java**
@@ -116,7 +130,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int getMax(int[] arr) {
+        Arrays.sort(arr);
+        int ans = 0, cur = 1, cnt = 0;
+        for (int v : arr) {
+            if (v == cur + 1) {
+                cnt++;
+            } else {
+                cnt = 1;
+            }
+            ans = Math.max(ans, cnt + 1);
+            cur = v;
+        }
+        return ans;
+    }
+
+    public int maximizeSquareHoleArea(int n, int m, int[] hBars, int[] vBars) {
+        int maxD = Math.min(getMax(hBars), getMax(vBars));
+        return maxD * maxD;
+    }
+}
 ```
 
 ### **...**
