@@ -73,7 +73,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.children = [None] * 26
+        self.end = False
 
+class Trie:
+    def __init__(self):
+        self.root = Node()
+    
+    def insert(self, s):
+        node = self.root
+        for i in range(len(s) - 1, -1, -1):
+            idx = ord(s[i]) - ord('a')
+            if not node.children[idx]:
+                node.children[idx] = Node()
+            node = node.children[idx]
+        node.end = True
+    
+    def search(self, s):
+        node = self.root
+        for c in s:
+            idx = ord(c) - ord('a')
+            if not node.children[idx]:
+                return False
+            node = node.children[idx]
+        return node.end
+
+class Solution:
+    def maximumNumberOfStringPairs(self, words: List[str]) -> int:
+        ans = 0
+        tr = Trie()
+        for w in words:
+            if tr.search(w):
+                ans += 1
+            tr.insert(w)
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +116,61 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    Node[] children;
+    boolean end;
 
+    public Node() {
+        children = new Node[26];
+        end = false;
+    }
+}
+
+class Trie {
+    Node root;
+
+    public Trie() {
+        root = new Node(); 
+    }
+
+    public void insert(String s) {
+        Node node = root;
+        for (int i = s.length() - 1; i > -1; i--) {
+            int idx = s.charAt(i) - 'a';
+            if (node.children[idx] == null) {
+                node.children[idx] = new Node();
+            }
+            node = node.children[idx];
+        }
+        node.end = true;
+    }
+
+    public boolean search(String s) {
+        Node node = root;
+        for (char c : s.toCharArray()) {
+            int idx = c - 'a';
+            if (node.children[idx] == null) {
+                return false;
+            }
+            node = node.children[idx];
+        }
+        return node.end;
+    }
+}
+
+class Solution {
+    public int maximumNumberOfStringPairs(String[] words) {
+        int ans = 0;
+        Trie tr = new Trie();
+        for (String w : words) {
+            if (tr.search(w)) {
+                ans++;
+            }
+            tr.insert(w);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
