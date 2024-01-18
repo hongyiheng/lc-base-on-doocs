@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumRightShifts(self, nums: List[int]) -> int:
+        i, n = 1, len(nums)
+        while i < n:
+            if nums[i] < nums[i - 1]:
+                break
+            i += 1
+        for j in range(1, n):
+            if nums[(i + j) % n] < nums[(i + j - 1) % n]:
+                return -1
+        return n - i
 ```
 
 ### **Java**
@@ -68,7 +78,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumRightShifts(List<Integer> nums) {
+        int i = 1, n = nums.size();
+        while (i < n) {
+            if (nums.get(i) < nums.get(i - 1)) {
+                break;
+            }
+            i++;
+        }
+        for (int j = 1; j < n; j++) {
+            if (nums.get((i + j) % n) < nums.get((i + j - 1) % n)) {
+                return -1;
+            }
+        }
+        return n - i;
+    }
+}
 ```
 
 ### **...**
