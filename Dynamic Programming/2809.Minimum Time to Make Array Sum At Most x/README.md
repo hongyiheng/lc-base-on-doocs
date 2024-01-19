@@ -62,7 +62,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumTime(self, nums1: List[int], nums2: List[int], x: int) -> int:
+        q = [(a, b) for a, b in zip(nums1, nums2)]
+        q.sort(key=lambda x: x[1])
+        n = len(nums1)
+        f = [0] * (n + 1)
+        for i in range(n):
+            a, b = q[i]
+            for j in range(i + 1, 0, -1):
+                f[j] = max(f[j], f[j - 1] + a + b * j)
+        s1, s2 = sum(nums1), sum(nums2)
+        for i in range(n + 1):
+            if s1 + s2 * i - f[i] <= x:
+                return i
+        return -1
 ```
 
 ### **Java**
@@ -70,7 +84,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumTime(List<Integer> nums1, List<Integer> nums2, int x) {
+        int n = nums1.size();
+        int[][] q = new int[n][2];
+        int s1 = 0, s2 = 0;
+        for (int i = 0; i < n; i++) {
+            int a = nums1.get(i), b = nums2.get(i);
+            q[i][0] = a;
+            q[i][1] = b;
+            s1 += a;
+            s2 += b;
+        }
+        Arrays.sort(q, (a, b) -> a[1] - b[1]);
+        int[] f = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            int a = q[i][0], b = q[i][1];
+            for (int j = i + 1; j > 0; j--) {
+                f[j] = Math.max(f[j], f[j - 1] + a + b * j);
+            }
+        }
+        for (int i = 0; i < n + 1; i++) {
+            if (s1 + s2 * i - f[i] <= x) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
