@@ -74,7 +74,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def splitWordsBySeparator(self, words: List[str], separator: str) -> List[str]:
+        ans = []
+        for w in words:
+            ans.extend([s for s in w.split(separator) if s])
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +87,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> splitWordsBySeparator(List<String> words, char separator) {
+        List<String> ans = new ArrayList<>();
+        for (String w : words) {
+            StringBuilder sb = new StringBuilder();
+            for (char c : w.toCharArray()) {
+                if (c == separator) {
+                    if (sb.length() > 0) {
+                        ans.add(sb.toString());
+                        sb = new StringBuilder();
+                    }
+                } else {
+                    sb.append(c);
+                }
+            }
+            if (sb.length() > 0) {
+                ans.add(sb.toString());
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
