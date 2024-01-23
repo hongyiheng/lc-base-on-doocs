@@ -55,7 +55,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def alternatingSubarray(self, nums: List[int]) -> int:
+        ans = cur = 0
+        for i in range(1, len(nums)):
+            if nums[i - 1] + 1 == nums[i] or nums[i - 1] - 1 == nums[i]:
+                if cur and i >= 2 and nums[i - 2] == nums[i]:
+                    cur += 1
+                elif nums[i - 1] + 1 == nums[i]:
+                    cur = 2
+                else:
+                    cur = 0
+            ans = max(ans, cur)
+        return -1 if not ans else ans
 ```
 
 ### **Java**
@@ -63,7 +75,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int alternatingSubarray(int[] nums) {
+        int n = nums.length, ans = 0, cur = 0;
+        for (int i = 1; i < n; i++) {
+            if (nums[i - 1] + 1 == nums[i] || nums[i - 1] - 1 == nums[i]) {
+                if (cur != 0 && i >= 2 && nums[i - 2] == nums[i]) {
+                    cur++;
+                } else if (nums[i - 1] + 1 == nums[i]) {
+                    cur = 2;
+                } else {
+                    cur = 0;
+                }
+            }
+            ans = Math.max(ans, cur);
+        }
+        return ans == 0 ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
