@@ -45,7 +45,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minSteps(self, n: int) -> int:
+        def dfs(s, d):
+            if s + d == n:
+                return 1
+            if s + d > n:
+                return inf
+            return min(dfs(s + d, d) + 1, dfs(s + s, s) + 2)
 
+        if n <= 1:
+            return 0
+        return dfs(1, 1) + 1
 ```
 
 ### **Java**
@@ -53,7 +64,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int dfs(int s, int d, int n) {
+        if (s + d == n) {
+            return 1;
+        }
+        if (s + d > n) {
+            return 0x3f3f3f3f;
+        }
+        return Math.min(dfs(s + d, d, n) + 1, dfs(s + s, s, n) + 2);
+    }
+
+    public int minSteps(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+        return dfs(1, 1, n) + 1;
+    }
+}
 ```
 
 ### **...**
