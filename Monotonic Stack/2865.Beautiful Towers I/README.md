@@ -79,7 +79,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumSumOfHeights(self, maxHeights: List[int]) -> int:
+        n = len(maxHeights)
+        pre, suf = [0] * n, [0] * n
+        q = deque()
+        for i, v in enumerate(maxHeights):
+            while q and q[-1][0] > v:
+                q.pop()
+            s, last = 0, -1
+            for h, j in q:
+                s += (j - last) * h
+                last = j
+            q.append([v, i])
+            pre[i] = s + (i - last) * v
+        q.clear()
+        for i in range(n - 1, -1, -1):
+            v = maxHeights[i]
+            while q and q[-1][0] > v:
+                q.pop()
+            s, last = 0, n
+            for h, j in q:
+                s += (last - j) * h
+                last = j
+            q.append([v, i])
+            suf[i] = s + (last - i) * v
+        ans = max(suf[0], pre[-1])
+        for i in range(n - 1):
+            ans = max(ans, pre[i] + suf[i + 1])
+        return ans 
 ```
 
 ### **Java**
@@ -87,7 +115,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumSumOfHeights(List<Integer> maxHeights) {
+        int n = maxHeights.size();
+        long[] pre = new long[n], suf = new long[n];
+        Deque<int[]> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            int v = maxHeights.get(i);
+            while (!q.isEmpty() && q.peekLast()[0] > v) {
+                q.pollLast();
+            }
+            long s = 0, last = -1;
+            for (int[] e : q) {
+                s += (e[1] - last) * e[0];
+                last = e[1];
+            }
+            q.add(new int[]{v, i});
+            pre[i] = s + (i - last) * v;
+        }
+        q.clear();
+        for (int i = n - 1; i >= 0; i--) {
+            int v = maxHeights.get(i);
+            while (!q.isEmpty() && q.peekLast()[0] > v) {
+                q.pollLast();
+            }
+            long s = 0, last = n;
+            for (int[] e : q) {
+                s += (last - e[1]) * e[0];
+                last = e[1];
+            }
+            q.add(new int[]{v, i});
+            suf[i] = s + (last - i) * v;
+        }
+        long ans = Math.max(pre[n - 1], suf[0]);
+        for (int i = 0; i < n - 1; i++) {
+            ans = Math.max(ans, pre[i] + suf[i + 1]);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
