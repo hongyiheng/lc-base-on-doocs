@@ -34,7 +34,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        q = []
+        while head:
+            q.append(head.val)
+            head = head.next
+        l, r = 0, len(q) - 1
+        while l < r:
+            if q[l] != q[r]:
+                break
+            l += 1
+            r -= 1
+        return l >= r
 ```
 
 ### **Java**
@@ -42,7 +59,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> q = new ArrayList<>();
+        while (head != null) {
+            q.add(head.val);
+            head = head.next;
+        }
+        int l = 0, r = q.size() - 1;
+        while (l < r) {
+            if (q.get(l) != q.get(r)) {
+                break;
+            }
+            l++;
+            r--;
+        }
+        return l >= r;
+    }
+}
 ```
 
 ### **...**
