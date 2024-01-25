@@ -64,7 +64,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumIndicesWithKSetBits(self, nums: List[int], k: int) -> int:
+        return sum(v for i, v in enumerate(nums) if i.bit_count() == k)
 ```
 
 ### **Java**
@@ -72,7 +74,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int ans = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (Integer.bitCount(i) == k) {
+                ans += nums.get(i);
+            }
+        }
+        return ans;
+    }   
+}
 ```
 
 ### **...**
