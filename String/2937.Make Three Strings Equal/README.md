@@ -50,7 +50,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findMinimumOperations(self, s1: str, s2: str, s3: str) -> int:
+        n1, n2, n3 = len(s1), len(s2), len(s3)
+        i, n = 0, min(n1, n2, n3)
+        while i < n:
+            if s1[i] != s2[i] or s2[i] != s3[i]:
+                if not i:
+                    return -1
+                return n1 + n2 + n3 - 3 * i
+            i += 1
+        return n1 + n2 + n3 - 3 * n
 
+        
 ```
 
 ### **Java**
@@ -58,7 +70,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findMinimumOperations(String s1, String s2, String s3) {
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        int n = Math.min(Math.min(n1, n2), n3);
+        for (int i = 0; i < n; i++) {
+            if (s1.charAt(i) != s2.charAt(i) || s2.charAt(i) != s3.charAt(i)) {
+                if (i == 0) {
+                    return -1;
+                }
+                return n1 + n2 + n3 - 3 * i;
+            }
+        }
+        return n1 + n2 + n3 - 3 * n;
+    }
+}
 ```
 
 ### **...**
