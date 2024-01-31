@@ -63,7 +63,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distinctDifferenceArray(self, nums: List[int]) -> List[int]:
+        cnt = defaultdict(int)
+        for v in nums:
+            cnt[v] += 1
+        ans = []
+        s = set()
+        for v in nums:
+            s.add(v)
+            cnt[v] -= 1
+            if cnt[v] == 0:
+                cnt.pop(v)
+            ans.append(len(s) - len(cnt.keys()))
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +84,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] distinctDifferenceArray(int[] nums) {
+        int n = nums.length;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int v : nums) {
+            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+        }
+        int[] ans = new int[n];
+        Set<Integer> s = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            s.add(v);
+            int c = cnt.getOrDefault(v, 0);
+            if (c == 1) {
+                cnt.remove(v);
+            } else {
+                cnt.put(v, c - 1);
+            }
+            ans[i] = s.size() - cnt.keySet().size();
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
