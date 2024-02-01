@@ -65,7 +65,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def areSimilar(self, mat: List[List[int]], k: int) -> bool:
+        m, n = len(mat), len(mat[0])
+        k %= n
+        if not k:
+            return True
+        for i in range(m):
+            for j in range(n):
+                t = (j - k + n) % n if not i % 2 else (j + k) % n
+                if mat[i][j] != mat[i][t]: 
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -73,7 +84,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean areSimilar(int[][] mat, int k) {
+        int m = mat.length, n = mat[0].length;
+        k %= n;
+        if (k == 0) {
+            return true;
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int t = i % 2 == 0 ? (j - k + n) % n : (j + k) % n;
+                if (mat[i][j] != mat[i][t]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
