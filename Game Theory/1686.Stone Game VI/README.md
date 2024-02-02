@@ -78,7 +78,15 @@ Bob 会获胜。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def stoneGameVI(self, aliceValues: List[int], bobValues: List[int]) -> int:
+        q = [(a + b, i) for i, (a, b) in enumerate(zip(aliceValues, bobValues))]
+        q.sort(reverse=True)
+        a = sum([aliceValues[v[1]] for i, v in enumerate(q) if not i % 2])
+        b = sum([bobValues[v[1]] for i, v in enumerate(q) if i % 2])
+        if a == b:
+            return 0
+        return 1 if a > b else -1
 ```
 
 ### **Java**
@@ -86,7 +94,28 @@ Bob 会获胜。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int stoneGameVI(int[] aliceValues, int[] bobValues) {
+        List<int[]> q = new ArrayList<>();
+        int n = aliceValues.length;
+        for (int i = 0; i < n; i++) {
+            q.add(new int[]{i, aliceValues[i] + bobValues[i]});
+        }
+        Collections.sort(q, (a, b) -> b[1] - a[1]);
+        int a = 0, b = 0;
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                a += aliceValues[q.get(i)[0]];
+            } else {
+                b += bobValues[q.get(i)[0]];
+            }
+        }
+        if (a == b) {
+            return 0;
+        }
+        return a > b ? 1 : -1;
+    }
+}
 ```
 
 ### **...**
