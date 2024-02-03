@@ -58,7 +58,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def stoneGameVII(self, stones: List[int]) -> int:
+        @cache
+        def dfs(l, r):
+            if l == r:
+                return 0
+            a = pre[r + 1] - pre[l + 1] - dfs(l + 1, r)
+            b = pre[r] - pre[l] - dfs(l, r - 1)
+            return max(a, b)
 
+        n = len(stones)
+        pre = [0] * (n + 1)
+        for i in range(n):
+            pre[i + 1] = pre[i] + stones[i]
+        ans = dfs(0, n - 1)
+        dfs.cache_clear()
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +82,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] pre;
+    int[][] f;
+
+    public int dfs(int l, int r) {
+        if (l == r) {
+            return 0;
+        }
+        if (f[l][r] != 0) {
+            return f[l][r];
+        }
+        int a = pre[r + 1] - pre[l + 1] - dfs(l + 1, r);
+        int b = pre[r] - pre[l] - dfs(l, r - 1);
+        f[l][r] = Math.max(a, b);
+        return Math.max(a, b);
+    }
+
+    public int stoneGameVII(int[] stones) {
+        int n = stones.length;
+        f = new int[n][n];
+        pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + stones[i];
+        }
+        return dfs(0, n - 1);
+    }
+}
 ```
 
 ### **...**
