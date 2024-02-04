@@ -62,7 +62,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canWinNim(self, n: int) -> bool:
+        return n % 4 != 0
 ```
 
 ### **Java**
@@ -70,7 +72,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canWinNim(int n) {
+        return n % 4 != 0;
+    }
+}
 ```
 
 ### **...**
