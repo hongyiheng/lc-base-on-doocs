@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxResult(self, nums: List[int], k: int) -> int:
+        q = []
+        for i, v in enumerate(nums):
+            while q and i - q[0][1] > k:
+                heapq.heappop(q)
+            last = q[0][0] if q else 0
+            if i == len(nums) - 1:
+                return -(last - v)
+            heapq.heappush(q, [last - v, i])
+        return -1
 ```
 
 ### **Java**
@@ -68,7 +78,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxResult(int[] nums, int k) {
+        int n = nums.length;
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        for (int i = 0; i < n; i++) {
+            while (!q.isEmpty() && i - q.peek()[1] > k) {
+                q.poll();
+            }
+            int last = q.isEmpty() ? 0 : q.peek()[0];
+            if (i == n - 1) {
+                return last + nums[i];
+            }
+            q.add(new int[]{last + nums[i], i});
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
