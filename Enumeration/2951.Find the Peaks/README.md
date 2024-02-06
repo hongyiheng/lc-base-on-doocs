@@ -61,7 +61,13 @@ mountain[2] 也不可能是峰值，因为它不严格大于 mountain[3] 和 mou
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findPeaks(self, mountain: List[int]) -> List[int]:
+        ans = []
+        for i in range(1, len(mountain) - 1):
+            if mountain[i - 1] < mountain[i] > mountain[i + 1]:
+                ans.append(i)
+        return ans 
 ```
 
 ### **Java**
@@ -69,7 +75,17 @@ mountain[2] 也不可能是峰值，因为它不严格大于 mountain[3] 和 mou
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> findPeaks(int[] mountain) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 1; i < mountain.length - 1; i++) {
+            if (mountain[i - 1] < mountain[i] && mountain[i] > mountain[i + 1]) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
