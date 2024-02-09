@@ -51,7 +51,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def missingInteger(self, nums: List[int]) -> int:
+        x = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1] + 1:
+                break
+            x += nums[i]
+        while x in nums:
+            x += 1
+        return x
 ```
 
 ### **Java**
@@ -59,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int missingInteger(int[] nums) {
+        int x = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1] + 1) {
+                break;
+            }
+            x += nums[i];
+        }
+        Set<Integer> s = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        while (s.contains(x)) {
+            x++;
+        }
+        return x;
+    }
+}
 ```
 
 ### **...**
