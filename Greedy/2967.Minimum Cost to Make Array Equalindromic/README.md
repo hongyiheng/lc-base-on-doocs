@@ -72,7 +72,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumCost(self, nums: List[int]) -> int:
+        def f(x):
+            v, t = x, 0
+            while v:
+                t = t * 10 + v % 10
+                v //= 10
+            if t != x:
+                return -1
+            ans = 0
+            for v in nums:
+                ans += abs(v - x)
+            return ans
 
+        nums.sort()
+        n = len(nums)
+        mid = nums[n // 2] if n % 2 else (nums[n // 2] + nums[n // 2 - 1]) // 2
+        ans = inf
+        for v in range(mid, -1, -1):
+            if f(v) != -1:
+                ans = f(v)
+                break
+        while True:
+            if f(mid) != -1:
+                return min(ans, f(mid))
+            mid += 1
 ```
 
 ### **Java**
@@ -80,7 +105,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public long f(int[] nums, int x) {
+        int cur = x, t = 0;
+        while (cur != 0) {
+            t = t * 10 + cur % 10;
+            cur /= 10;
+        }
+        if (t != x) {
+            return -1;
+        }
+        long ans = 0;
+        for (int v : nums) {
+            ans += Math.abs(x - v);
+        }
+        return ans;
+    }
+
+    public long minimumCost(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int mid = n / 2 != 0 || n == 1 ? nums[n / 2] : (nums[n / 2] + nums[n / 2 + 1]) / 2;
+        long ans = Long.MAX_VALUE;
+        for (int i = mid; i > -1; i--) {
+            if (f(nums, i) != -1) {
+                ans = f(nums, i);
+                break;
+            }
+        }
+        while (true) {
+            if (f(nums, mid) != -1) {
+                return Math.min(ans, f(nums, mid));
+            }
+            mid++;
+        }
+    }
+}
 ```
 
 ### **...**
