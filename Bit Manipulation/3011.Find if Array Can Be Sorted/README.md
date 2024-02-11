@@ -64,7 +64,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def canSortArray(self, nums: List[int]) -> bool:
+        def bit_cnt(x):
+            ans = 0
+            while x:
+                x -= x & - x
+                ans += 1
+            return ans
 
+        mx = last_mx = last_bit = 0
+        for v in nums:
+            cur_bit = bit_cnt(v)
+            if v < last_mx or (v < mx and last_bit != cur_bit):
+                return False
+            if cur_bit != last_bit:
+                last_mx = mx
+            mx = max(mx, v)
+            last_bit = cur_bit
+        return True
 ```
 
 ### **Java**
@@ -72,7 +90,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int bitCnt(int x) {
+        int ans = 0;
+        while (x > 0) {
+            x -= x & -x;
+            ans++;
+        }
+        return ans;
+    }
+
+    public boolean canSortArray(int[] nums) {
+        int mx = 0, lastMx = 0, lastBit = 0;
+        for (int v : nums) {
+            int curBit = bitCnt(v);
+            if (v < lastMx || (v < mx && curBit != lastBit)) {
+                return false;
+            }
+            if (curBit != lastBit) {
+                lastMx = mx;
+            }
+            mx = Math.max(mx, v);
+            lastBit = curBit;
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
