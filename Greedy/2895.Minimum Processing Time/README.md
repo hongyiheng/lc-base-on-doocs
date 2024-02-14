@@ -59,7 +59,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minProcessingTime(self, processorTime: List[int], tasks: List[int]) -> int:
+        processorTime.sort()
+        tasks.sort(reverse=True)
+        ans = 0
+        for i, v in enumerate(processorTime):
+            t = tasks[i * 4]
+            ans = max(ans, v + t)
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +75,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minProcessingTime(List<Integer> processorTime, List<Integer> tasks) {
+        Collections.sort(processorTime, (a, b) -> a - b);
+        Collections.sort(tasks, (a, b) -> b - a);
+        int ans = 0;
+        for (int i = 0; i < processorTime.size(); i++) {
+            ans = Math.max(ans, processorTime.get(i) + tasks.get(i * 4));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
