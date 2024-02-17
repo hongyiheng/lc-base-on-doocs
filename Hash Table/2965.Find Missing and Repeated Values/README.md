@@ -54,7 +54,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:
+        vis = set()
+        ans = []
+        for row in grid:
+            for v in row:
+                if v in vis:
+                    ans.append(v)
+                vis.add(v)
+        for i in range(1, len(grid) ** 2 + 1):
+            if i not in vis:
+                ans.append(i)
+                break
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +75,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int n = grid.length;
+        int[] ans = new int[2];
+        Set<Integer> vis = new HashSet<>();
+        for (int[] row : grid) {
+            for (int v : row) {
+                if (vis.contains(v)) {
+                    ans[0] = v;
+                }
+                vis.add(v);
+            }
+        }
+        for (int i = 1; i <= n * n; i++) {
+            if (!vis.contains(i)) {
+                ans[1] = i;
+                break;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
