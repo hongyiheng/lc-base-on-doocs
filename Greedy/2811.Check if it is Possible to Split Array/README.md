@@ -76,7 +76,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canSplitArray(self, nums: List[int], m: int) -> bool:
+        n = len(nums)
+        if n <= 2:
+            return True
+        for i in range(1, n):
+            if nums[i - 1] + nums[i] >= m:
+                return True
+        return False
 ```
 
 ### **Java**
@@ -84,7 +92,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canSplitArray(List<Integer> nums, int m) {
+        int n = nums.size();
+        if (n <= 2) {
+            return true;
+        }
+        for (int i = 1; i < n; i++) {
+            if (nums.get(i - 1) + nums.get(i) >= m) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
