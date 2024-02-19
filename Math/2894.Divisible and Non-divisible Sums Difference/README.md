@@ -70,7 +70,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def differenceOfSums(self, n: int, m: int) -> int:
+        a = b = 0
+        for i in range(1, n + 1):
+            if i % m:
+                a += i
+            else:
+                b += i
+        return a - b
 ```
 
 ### **Java**
@@ -78,7 +86,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int differenceOfSums(int n, int m) {
+        int a = 0, b = 0;
+        for (int i = 1; i <= n; i++) {
+            if (i % m != 0) {
+                a += i;
+            } else {
+                b += i;
+            }
+        }
+        return a - b;
+    }
+}
 ```
 
 ### **...**
