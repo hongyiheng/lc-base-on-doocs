@@ -55,7 +55,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def areaOfMaxDiagonal(self, dimensions: List[List[int]]) -> int:
+        mx = ans = 0
+        for h, w in dimensions:
+            v, s = h * h + w * w, h * w
+            if v > mx or (v == mx and s > ans):
+                mx = v
+                ans = s
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +71,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int areaOfMaxDiagonal(int[][] dimensions) {
+        int mx = 0, ans = 0;
+        for (int[] e : dimensions) {
+            int h = e[0], w = e[1];
+            int v = h * h + w * w, s = h * w;
+            if (v > mx || (v == mx && s > ans)) {
+                mx = v;
+                ans = s;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
