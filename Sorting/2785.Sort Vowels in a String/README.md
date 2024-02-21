@@ -54,7 +54,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortVowels(self, s: str) -> str:
+        vs = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
+        vowels = []
+        for c in s:
+            if c in vs:
+                vowels.append(c)
+        vowels.sort()
+        j = 0
+        cs = list(s)
+        for i, c in enumerate(cs):
+            if c in vs:
+                cs[i] = vowels[j]
+                j += 1
+        return "".join(cs)
 ```
 
 ### **Java**
@@ -62,7 +76,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String sortVowels(String s) {
+        Set<Character> vs = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+        List<Character> vowels = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            if (vs.contains(c)) {
+                vowels.add(c);
+            }
+        }
+        Collections.sort(vowels);
+        StringBuilder ans = new StringBuilder();
+        int i = 0;
+        for (char c : s.toCharArray()) {
+            if (vs.contains(c)) {
+                ans.append(vowels.get(i++));
+            } else {
+                ans.append(c);
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
