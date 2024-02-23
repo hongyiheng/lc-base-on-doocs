@@ -64,7 +64,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def kthLargestLevelSum(self, root: Optional[TreeNode], k: int) -> int:
+        q = deque([root])
+        rs = []
+        while q:
+            s = 0
+            for _ in range(len(q)):
+                cur = q.popleft()
+                s += cur.val
+                if cur.left:
+                    q.append(cur.left)
+                if cur.right:
+                    q.append(cur.right)
+            rs.append(s)
+        if len(rs) < k:
+            return -1
+        rs.sort(reverse=True)
+        return rs[k - 1]
 ```
 
 ### **Java**
@@ -72,7 +95,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public long kthLargestLevelSum(TreeNode root, int k) {
+        Deque<TreeNode> q = new ArrayDeque();
+        q.add(root);
+        List<Long> rs = new ArrayList<>();
+        while (!q.isEmpty()) {
+            long s = 0;
+            int n = q.size();
+            for (int i = 0; i < n; i++) {
+                TreeNode cur = q.pollFirst();
+                s += cur.val;
+                if (cur.left != null) {
+                    q.add(cur.left);
+                }
+                if (cur.right != null) {
+                    q.add(cur.right);
+                }
+            }
+            rs.add(s);
+        }
+        if (rs.size() < k) {
+            return -1;
+        }
+        rs.sort((a, b) -> b - a > 0 ? 1 : -1);
+        return rs.get(k - 1);
+    }
+}
 ```
 
 ### **...**
