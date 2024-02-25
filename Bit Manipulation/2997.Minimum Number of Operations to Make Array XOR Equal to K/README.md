@@ -62,7 +62,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        cnt = [0] * 32
+        for v in nums:
+            for i in range(32):
+                if v >> i & 1:
+                    cnt[i] ^= 1
+        ans = 0
+        for i in range(32):
+            if k >> i & 1 and not cnt[i] or (not k >> i & 1 and cnt[i]):
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +81,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int[] cnt = new int[32];
+        for (int v : nums) {
+            for (int i = 0; i < 32; i++) {
+                if ((v >> i & 1) == 1) {
+                    cnt[i] ^= 1;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            if (((k >> i & 1) == 1 && cnt[i] == 0) || ((k >> i & 1) == 0 && cnt[i] == 1)) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
