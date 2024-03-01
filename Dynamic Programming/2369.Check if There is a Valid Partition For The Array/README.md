@@ -56,7 +56,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def validPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        f = [True] + [False] * n
+        for i in range(1, n + 1):
+            a = i > 1 and f[i - 2] and nums[i - 1] == nums[i - 2]
+            b = i > 2 and f[i - 3] and nums[i - 1] == nums[i - 2] == nums[i - 3]
+            c = i > 2 and f[i - 3] and nums[i - 1] - nums[i - 2] == nums[i - 2] - nums[i - 3] == 1
+            f[i] = a or b or c
+        return f[n]
 ```
 
 ### **Java**
@@ -64,7 +73,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean validPartition(int[] nums) {
+        int n = nums.length;
+        boolean[] f = new boolean[n + 1];
+        f[0] = true;
+        for (int i = 1; i <= n; i++) {
+            boolean a = i > 1 && f[i - 2] && nums[i - 1] == nums[i - 2];
+            boolean b = i > 2 && f[i - 3] && nums[i - 1] == nums[i - 2] && nums[i - 2] == nums[i - 3];
+            boolean c = i > 2 && f[i - 3] && nums[i - 1] - nums[i - 2] == 1 && nums[i - 2] - nums[i - 3] == 1;
+            f[i] = a || b || c;
+        }
+        return f[n];
+    }       
+}
 ```
 
 ### **...**
