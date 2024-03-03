@@ -72,7 +72,30 @@ myStack.empty(); // 返回 False
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MyStack:
 
+    def __init__(self):
+        self.q = []
+
+    def push(self, x: int) -> None:
+        self.q.append(x)
+
+    def pop(self) -> int:
+        return self.q.pop()
+
+    def top(self) -> int:
+        return self.q[-1]
+
+    def empty(self) -> bool:
+        return not self.q 
+
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
 ```
 
 ### **Java**
@@ -80,7 +103,39 @@ myStack.empty(); // 返回 False
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MyStack {
 
+    Deque<Integer> q;
+
+    public MyStack() {
+        q = new ArrayDeque<>();
+    }
+    
+    public void push(int x) {
+        q.addFirst(x);
+    }
+    
+    public int pop() {
+        return q.pollFirst();
+    }
+    
+    public int top() {
+        return q.peekFirst();
+    }
+    
+    public boolean empty() {
+        return q.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
 ```
 
 ### **...**
