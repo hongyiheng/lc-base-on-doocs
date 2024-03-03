@@ -62,7 +62,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def hasTrailingZeros(self, nums: List[int]) -> bool:
+        zero = 0
+        for v in nums:
+            if v & 1 == 0:
+                zero += 1
+        return zero >= 2
 ```
 
 ### **Java**
@@ -70,7 +76,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean hasTrailingZeros(int[] nums) {
+        int zero = 0;
+        for (int v : nums) {
+            if ((v & 1) == 0) {
+                zero++;
+            }
+        }
+        return zero >= 2;
+    }   
+}
 ```
 
 ### **...**
