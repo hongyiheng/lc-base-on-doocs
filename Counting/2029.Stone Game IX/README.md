@@ -72,7 +72,20 @@ Alice 输掉游戏，因为已移除石子值总和（15）可以被 3 整除，
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def lastNonEmptyString(self, s: str) -> str:
+        cnt = [0] * 26
+        for c in s:
+            cnt[ord(c) - ord('a')] += 1
+        mx = max(cnt)
+        cnt = [0] * 26
+        ans = []
+        for c in s:
+            idx = ord(c) - ord('a')
+            cnt[idx] += 1
+            if cnt[idx] == mx:
+                ans.append(c)
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -80,7 +93,23 @@ Alice 输掉游戏，因为已移除石子值总和（15）可以被 3 整除，
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String lastNonEmptyString(String s) {
+        int[] cnt = new int[26];
+        int mx = 0;
+        for (char c : s.toCharArray()) {
+            mx = Math.max(mx, ++cnt[c - 'a']);
+        }
+        Arrays.fill(cnt, 0);
+        StringBuilder ans = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (++cnt[c - 'a'] == mx) {
+                ans.append(c);
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
