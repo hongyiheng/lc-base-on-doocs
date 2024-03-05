@@ -60,6 +60,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countPaths(self, n: int, roads: List[List[int]]) -> int:
+        MOD = int(1e9) + 7
+        g = [[inf] * n for _ in range(n)]
+        for u, v, w in roads:
+            g[u][v] = g[v][u] = w
+        dist = [inf] * n
+        dist[0] = 0
+        f = [0] * n
+        f[0] = 1
+        q = [(0, 0)]
+        while q:
+            w, u = heapq.heappop(q)
+            if u == n - 1:
+                return f[-1]
+            if w > dist[u]:
+                continue
+            for v, d in enumerate(g[u]):
+                nw = w + d
+                if nw < dist[v]:
+                    dist[v] = nw
+                    f[v] = f[u]
+                    heapq.heappush(q, (nw, v))
+                elif nw == dist[v]:
+                    f[v] = (f[u] + f[v]) % MOD
+        return f[-1]
 
 ```
 
@@ -68,7 +94,52 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countPaths(int n, int[][] roads) {
+        int MOD = (int)1e9 + 7, INF = Integer.MAX_VALUE;
+        int[][] g = new int[n][n];
+        for (int[] row : g) {
+            Arrays.fill(row, INF);
+        }
+        for (int[] e : roads) {
+            int u = e[0], v = e[1], w = e[2];
+            g[u][v] = w;
+            g[v][u] = w;
+        }
+        long[] dist = new long[n];
+        Arrays.fill(dist, INF);
+        dist[0] = 0;
+        int[] f = new int[n];
+        f[0] = 1;
+        PriorityQueue<long[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0] > 0 ? 1 : -1);
+        q.add(new long[]{0, 0});
+        while (!q.isEmpty()) {
+            long[] cur = q.poll();
+            long w = cur[0];
+            int u = (int)cur[1];
+            if (u == n - 1) {
+                return f[n - 1];
+            }
+            if (dist[u] < w) {
+                continue;
+            }
+            for (int v = 0; v < n; v++) {
+                long nw = g[u][v] + w;
+                if (nw < dist[v]) {
+                    dist[v] = nw;
+                    f[v] = f[u];
+                    q.add(new long[]{nw, v});
+                } else if (nw == dist[v]) {
+                    if (v == 199) {
+                        System.out.println(v);
+                    }
+                    f[v] = (f[u] + f[v]) % MOD;
+                }
+            }
+        }
+        return f[n - 1];
+    }
+}
 ```
 
 ### **...**
