@@ -1,8 +1,9 @@
 class Solution {
     public int countPaths(int n, int[][] roads) {
-        int MOD = (int)1e9 + 7, INF = Integer.MAX_VALUE;
-        int[][] g = new int[n][n];
-        for (int[] row : g) {
+        int MOD = (int)1e9 + 7;
+        long INF = Long.MAX_VALUE / 2;
+        long[][] g = new long[n][n];
+        for (long[] row : g) {
             Arrays.fill(row, INF);
         }
         for (int[] e : roads) {
@@ -13,7 +14,7 @@ class Solution {
         long[] dist = new long[n];
         Arrays.fill(dist, INF);
         dist[0] = 0;
-        int[] f = new int[n];
+        long[] f = new long[n];
         f[0] = 1;
         PriorityQueue<long[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0] > 0 ? 1 : -1);
         q.add(new long[]{0, 0});
@@ -22,7 +23,7 @@ class Solution {
             long w = cur[0];
             int u = (int)cur[1];
             if (u == n - 1) {
-                return f[n - 1];
+                return (int)f[n - 1];
             }
             if (dist[u] < w) {
                 continue;
@@ -34,13 +35,10 @@ class Solution {
                     f[v] = f[u];
                     q.add(new long[]{nw, v});
                 } else if (nw == dist[v]) {
-                    if (v == 199) {
-                        System.out.println(v);
-                    }
                     f[v] = (f[u] + f[v]) % MOD;
                 }
             }
         }
-        return f[n - 1];
+        return (int)f[n - 1];
     }
 }
