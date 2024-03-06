@@ -69,7 +69,18 @@ nums[1]、nums[2]、nums[3]、nums[4] 和 nums[5] 的第 3 位的值为 1 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findKOr(self, nums: List[int], k: int) -> int:
+        cnt = [0] * 31
+        for i in range(31):
+            for v in nums:
+                if v >> i & 1:
+                    cnt[i] += 1
+        ans = 0
+        for i in range(31):
+            if cnt[i] >= k:
+                ans |= (1 << i)
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +88,25 @@ nums[1]、nums[2]、nums[3]、nums[4] 和 nums[5] 的第 3 位的值为 1 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findKOr(int[] nums, int k) {
+        int[] cnt = new int[31];
+        for (int i = 0; i < 31; i++) {
+            for (int v : nums) {
+                if ((v >> i & 1) == 1) {
+                    cnt[i]++;
+                }
+            }           
+        }
+        int ans = 0;
+        for (int i = 0; i < 31; i++) {
+            if (cnt[i] >= k) {
+                ans |= (1 << i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
