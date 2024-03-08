@@ -69,7 +69,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minMovesToCaptureTheQueen(self, a: int, b: int, c: int, d: int, e: int, f: int) -> int:
+        def check(i, j, dirs):
+            for dir in dirs:
+                x, y = i, j
+                while True:
+                    nx, ny = x + dir[0], y + dir[1]
+                    if nx < 1 or nx > 8 or ny < 1 or ny > 8:
+                        break
+                    if (nx == a and ny == b) or (nx == c and ny == d):
+                        break
+                    if nx == e and ny == f:
+                        return True
+                    x, y = nx, ny
+            return False
 
+        ans1 = check(a, b, [[1, 0], [0, 1], [-1, 0], [0, -1]])
+        ans2 = check(c, d, [[1, 1], [1, -1], [-1, 1], [-1, -1]])
+        return 1 if ans1 or ans2 else 2
 ```
 
 ### **Java**
@@ -77,7 +95,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean check(int i, int j, int k, int l, int e, int f, int[][] dirs) {
+        for (int[] d : dirs) {
+            int x = i, y = j;
+            while (true) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 1 || nx > 8 || ny < 1 || ny > 8) {
+                    break;
+                }
+                if (nx == k && ny == l) {
+                    break;
+                }
+                if (nx == e && ny == f) {
+                    return true;
+                }
+                x = nx;
+                y = ny;
+            }
+        }
+        return false;
+    }
+
+
+    public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {
+        boolean ans1 = check(a, b, c, d, e, f, new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}});
+        boolean ans2 = check(c, d, a, b, e, f, new int[][]{{1, 1}, {1, -1}, {-1, 1}, {-1, -1}});
+        return ans1 || ans2 ? 1 : 2;
+    }
+}
 ```
 
 ### **...**
