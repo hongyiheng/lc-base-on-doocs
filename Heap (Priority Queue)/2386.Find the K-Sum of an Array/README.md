@@ -55,7 +55,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kSum(self, nums: List[int], k: int) -> int:
+        s = 0
+        for i, v in enumerate(nums):
+            if v > 0:
+                s += v
+            else:
+                nums[i] = -v
+        nums.sort()
+        q = [(0, 0)] 
+        for _ in range(k - 1):
+            cur, i = heapq.heappop(q)
+            if i < len(nums):
+                heapq.heappush(q, (cur + nums[i], i + 1))
+                if i:
+                    heapq.heappush(q, (cur + nums[i] - nums[i - 1], i + 1))
+        return s - q[0][0]
 ```
 
 ### **Java**
@@ -63,7 +79,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long kSum(int[] nums, int k) {
+        int n = nums.length;
+        long s = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                s += nums[i];
+            } else {
+                nums[i] *= -1;
+            }
+        }
+        Arrays.sort(nums);
+        PriorityQueue<Pair<Long, Integer>> q = new PriorityQueue<>(Comparator.comparingLong(Pair::getKey));
+        q.offer(new Pair<>(0L, 0));
+        for (int i = 0; i < k - 1; i++) {
+            Pair<Long, Integer> cur = q.poll();
+            long sum = cur.getKey();
+            int idx = cur.getValue();
+            if (idx < n) {
+                q.offer(new Pair<>(sum + nums[idx], idx + 1));
+                if (idx > 0) {
+                    q.offer(new Pair<>(sum + nums[idx] - nums[idx - 1], idx + 1));
+                }
+            }
+        }
+        return s - q.poll().getKey();
+    }
+}
 ```
 
 ### **...**
