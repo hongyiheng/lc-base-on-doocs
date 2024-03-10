@@ -53,7 +53,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getHint(self, secret: str, guess: str) -> str:
+        cnt = [0] * 10
+        for c in secret:
+            cnt[int(c)] += 1
+        ans = [0, 0]
+        for c in guess:
+            idx = int(c)
+            if cnt[idx]:
+                ans[1] += 1
+                cnt[idx] -= 1
+        for a, b in zip(secret, guess):
+            if a == b:
+                ans[0] += 1
+                ans[1] -= 1
+        return str(ans[0]) + 'A' + str(ans[1]) + 'B'
 ```
 
 ### **Java**
@@ -61,7 +76,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String getHint(String secret, String guess) {
+        int[] cnt = new int[10];
+        for (char c : secret.toCharArray()) {
+            cnt[c - '0']++;
+        }
+        int[] ans = new int[]{0, 0};
+        for (char c : guess.toCharArray()) {
+            if (cnt[c - '0'] > 0) {
+                cnt[c - '0']--;
+                ans[1]++;
+            }
+        }
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                ans[0]++;
+                ans[1]--;
+            }
+        }
+        return ans[0] + "A" + ans[1] + "B";
+    }
+}
 ```
 
 ### **...**
