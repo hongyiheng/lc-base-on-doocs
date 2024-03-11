@@ -63,7 +63,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def capitalizeTitle(self, title: str) -> str:
+        ws = title.split(" ")
+        for i, w in enumerate(ws):
+            if len(w) <= 2:
+                ws[i] = w.lower()
+            else:
+                ws[i] = w[0].upper() + w[1:].lower()
+        return " ".join(ws)
 ```
 
 ### **Java**
@@ -71,7 +79,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String capitalizeTitle(String title) {
+        String[] ws = title.split(" ");
+        for (int i = 0; i < ws.length; i++) {
+            if (ws[i].length() <= 2) {
+                ws[i] = ws[i].toLowerCase();
+            } else {
+                ws[i] = ws[i].substring(0, 1).toUpperCase() + ws[i].substring(1).toLowerCase();
+            }
+        }
+        return String.join(" ", ws);
+    }
+}
 ```
 
 ### **...**
