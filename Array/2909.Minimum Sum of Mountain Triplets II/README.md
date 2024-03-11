@@ -70,7 +70,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        q = [inf] * n
+        for i in range(1, n):
+            q[i] = min(q[i - 1], nums[i - 1])
+        ans = mi = inf
+        for i in range(n - 2, -1, -1):
+            mi = min(mi, nums[i + 1])
+            if q[i] < nums[i] > mi:
+                ans = min(ans, q[i] + nums[i] + mi)
+        return -1 if ans == inf else ans
 ```
 
 ### **Java**
@@ -78,7 +89,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumSum(int[] nums) {
+        int inf = Integer.MAX_VALUE;
+        int n = nums.length;
+        int[] q = new int[n];
+        Arrays.fill(q, inf);
+        for (int i = 1; i < n; i++) {
+            q[i] = Math.min(q[i - 1], nums[i - 1]);
+        }
+        int ans = inf, mi = inf;
+        for (int i = n - 2; i > -1; i--) {
+            mi = Math.min(mi, nums[i + 1]);
+            if (q[i] < nums[i] && nums[i] > mi) {
+                ans = Math.min(ans, q[i] + nums[i] + mi);
+            }
+        }
+        return ans == inf ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
