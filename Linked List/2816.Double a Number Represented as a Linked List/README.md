@@ -49,6 +49,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def dfs(head):
+            if not head:
+                return None
+            up = dfs(head.next)
+            v = head.val * 2 + 1 if up else head.val * 2
+            head.val = v % 10
+            return v >= 10
+        
+        up = dfs(head)
+        return ListNode(1, head) if up else head
 
 ```
 
@@ -57,7 +74,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
 
+    public boolean dfs(ListNode head) {
+        if (head == null) {
+            return false;
+        }
+        boolean up = dfs(head.next);
+        int v = up ? head.val * 2 + 1 : head.val * 2;
+        head.val = v % 10;
+        return v >= 10;
+    }
+
+    public ListNode doubleIt(ListNode head) {
+        boolean up = dfs(head);
+        return up ? new ListNode(1, head) : head;
+    }
+}
 ```
 
 ### **...**
