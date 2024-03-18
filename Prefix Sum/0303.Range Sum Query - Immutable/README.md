@@ -60,7 +60,22 @@ numArray.sumRange(0, 5); // return -3 ((-2) + 0 + 3 + (-5) + 2 + (-1))
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class NumArray:
 
+    def __init__(self, nums: List[int]):
+        n = len(nums)
+        self.pre = [0] * (n + 1)
+        for i, v in enumerate(nums):
+            self.pre[i + 1] = self.pre[i] + nums[i] 
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self.pre[right + 1] - self.pre[left]
+
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)
 ```
 
 ### **Java**
@@ -68,7 +83,28 @@ numArray.sumRange(0, 5); // return -3 ((-2) + 0 + 3 + (-5) + 2 + (-1))
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class NumArray {
 
+    int[] pre;
+
+    public NumArray(int[] nums) {
+        int n = nums.length;
+        pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+        }
+    }
+    
+    public int sumRange(int left, int right) {
+        return pre[right + 1] - pre[left];
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(left,right);
+ */
 ```
 
 ### **...**
