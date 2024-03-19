@@ -50,7 +50,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumScore(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        left = [-1] * n
+        q = []
+        for i, v in enumerate(nums):
+            while q and nums[q[-1]] >= v:
+                q.pop()
+            if q:
+                left[i] = q[-1]
+            q.append(i)
+        right = [n] * n
+        q.clear()
+        for i in range(n - 1, -1, -1):
+            v = nums[i]
+            while q and v <= nums[q[-1]]:
+                q.pop()
+            if q:
+                right[i] = q[-1]
+            q.append(i)
+        ans = 0
+        for h, l, r in zip(nums, left, right):
+            if l < k < r:
+                ans = max(ans, h * (r - l - 1))
+        return ans        
 ```
 
 ### **Java**
@@ -58,7 +82,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumScore(int[] nums, int k) {
+        int n = nums.length;
+        int[] left = new int[n];
+        Arrays.fill(left, -1);
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            while (!q.isEmpty() && nums[q.peekLast()] >= v) {
+                q.pollLast();
+            } 
+            if (!q.isEmpty()) {
+                left[i] = q.peekLast();
+            }
+            q.addLast(i);
+        }
+        int[] right = new int[n];
+        Arrays.fill(right, n);
+        q.clear();
+        for (int i = n - 1; i > -1; i--) {
+            int v = nums[i];
+            while (!q.isEmpty() && nums[q.peekLast()] >= v) {
+                q.pollLast();
+            }
+            if (!q.isEmpty()) {
+                right[i] = q.peekLast();
+            }
+            q.addLast(i);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            int h = nums[i], l = left[i], r = right[i];
+            if (l < k && k < r) {
+                ans = Math.max(ans, h * (r - l - 1));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
