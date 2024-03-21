@@ -89,7 +89,37 @@ frequencyTracker.hasFrequency(1); // 返回 true ，因为 3 出现 1 次
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class FrequencyTracker:
 
+    def __init__(self):
+        self.cnt = defaultdict(int)
+        self.freq = defaultdict(set)
+
+    def add(self, number: int) -> None:
+        d = self.cnt.get(number, 0)
+        if d:
+            self.freq[d].remove(number)
+        self.freq[d + 1].add(number)
+        self.cnt[number] += 1
+
+    def deleteOne(self, number: int) -> None:
+        d = self.cnt.get(number, 0)
+        if d:
+            self.freq[d].remove(number)
+            if d - 1 > 0:
+                self.freq[d - 1].add(number)
+            self.cnt[number] -= 1
+
+    def hasFrequency(self, frequency: int) -> bool:
+        return len(self.freq[frequency]) > 0
+
+
+
+# Your FrequencyTracker object will be instantiated and called as such:
+# obj = FrequencyTracker()
+# obj.add(number)
+# obj.deleteOne(number)
+# param_3 = obj.hasFrequency(frequency)
 ```
 
 ### **Java**
@@ -97,7 +127,50 @@ frequencyTracker.hasFrequency(1); // 返回 true ，因为 3 出现 1 次
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class FrequencyTracker {
 
+    Map<Integer, Integer> cnt;
+    Map<Integer, Set<Integer>> freq;
+
+    public FrequencyTracker() {
+        cnt = new HashMap<>();
+        freq = new HashMap<>();
+    }
+    
+    public void add(int number) {
+        int d = cnt.getOrDefault(number, 0);
+        if (d != 0) {
+            freq.get(d).remove(number);
+        }
+        freq.computeIfAbsent(d + 1, k -> new HashSet<>()).add(number);
+        cnt.put(number, d + 1);
+    }
+    
+    public void deleteOne(int number) {
+        int d = cnt.getOrDefault(number, 0);
+        if (d != 0) {
+            freq.get(d).remove(number);
+            cnt.remove(number);
+        }
+        if (d - 1 > 0) {
+            freq.computeIfAbsent(d - 1, k -> new HashSet<>()).add(number);
+            cnt.put(number, d - 1);  
+        }
+    }
+    
+    public boolean hasFrequency(int frequency) {
+        Set<Integer> s = freq.getOrDefault(frequency, new HashSet<>());
+        return !s.isEmpty();
+    }
+}
+
+/**
+ * Your FrequencyTracker object will be instantiated and called as such:
+ * FrequencyTracker obj = new FrequencyTracker();
+ * obj.add(number);
+ * obj.deleteOne(number);
+ * boolean param_3 = obj.hasFrequency(frequency);
+ */
 ```
 
 ### **...**
