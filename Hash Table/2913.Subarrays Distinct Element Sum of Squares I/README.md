@@ -70,7 +70,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumCounts(self, nums: List[int]) -> int:
+        MOD = int(1e9 + 7)
+        n = len(nums)
+        ans = 0
+        for i in range(n):
+            s = set()
+            for j in range(i, n):
+                s.add(nums[j])
+                ans = (ans + len(s) ** 2) % MOD
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +88,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+        int n = nums.size(), MOD = (int)1e9 + 7;
+        long ans = 0;
+        for (int i = 0; i < n; i++) {
+            Set<Integer> s = new HashSet<>();
+            for (int j = i; j < n; j++) {
+                s.add(nums.get(j));
+                ans = (ans + (long)s.size() * s.size()) % MOD;
+            }
+        }
+        return (int)ans;
+    }
+}
 ```
 
 ### **...**
