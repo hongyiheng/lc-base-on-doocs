@@ -59,7 +59,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximizeTheProfit(self, n: int, offers: List[List[int]]) -> int:
+        f = [0] * n
+        offers.sort(key=lambda x:x[1])
+        j = 0
+        for i in range(n):
+            if i:
+                f[i] = f[i - 1]
+            while j < len(offers) and offers[j][1] <= i:
+                s, e, w = offers[j]
+                f[e] = max(f[e], (0 if s - 1 < 0 else f[s - 1]) + w)
+                j += 1
+        return f[n - 1]
 ```
 
 ### **Java**
@@ -67,7 +79,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximizeTheProfit(int n, List<List<Integer>> offers) {
+        int[] f = new int[n];
+        int m = offers.size();
+        offers.sort((a, b) -> a.get(1) - b.get(1));
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            if (i > 0) {
+                f[i] = f[i - 1];
+            }
+            while (j < m && offers.get(j).get(1) <= i) {
+                int s = offers.get(j).get(0), e = offers.get(j).get(1), w = offers.get(j).get(2);
+                f[e] = Math.max(f[e], (s - 1 < 0 ? 0 : f[s - 1]) + w);
+                j++;
+            }
+        }
+        return f[n - 1];
+    }
+}
 ```
 
 ### **...**
