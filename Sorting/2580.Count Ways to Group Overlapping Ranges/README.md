@@ -72,7 +72,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countWays(self, ranges: List[List[int]]) -> int:
+        ranges.sort(key=lambda x:x[0])
+        x, max_r = 0, -1
+        for l, r in ranges:
+            if l > max_r:
+                x += 1
+            max_r = max(max_r, r)
+        return pow(2, x, int(1e9 + 7))
 ```
 
 ### **Java**
@@ -80,7 +88,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countWays(int[][] ranges) {
+        Arrays.sort(ranges, (a, b) -> a[0] - b[0]);
+        int x = 0, maxR = -1;
+        for (int[] e : ranges) {
+            int l = e[0], r = e[1];
+            if (l > maxR) {
+                x++;
+            }
+            maxR = Math.max(maxR, r);
+        }
+        int ans = 1;
+        for (int i = 0; i < x; i++) {
+            ans = (int)((long)ans * 2 % (int)(1e9 + 7));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
