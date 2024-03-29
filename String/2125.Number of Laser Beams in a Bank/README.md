@@ -72,7 +72,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfBeams(self, bank: List[str]) -> int:
+        ans = last = 0
+        for row in bank:
+            cur = 0
+            for c in row:
+                if c == '1':
+                    cur += 1
+                    ans += last
+            if cur:
+                last = cur
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +91,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfBeams(String[] bank) {
+        int ans = 0, last = 0;
+        for (String row : bank) {
+            int cur = 0;
+            for (char c : row.toCharArray()) {
+                if (c == '1') {
+                    cur++;
+                    ans += last;
+                }
+            }
+            if (cur != 0) {
+                last = cur;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
