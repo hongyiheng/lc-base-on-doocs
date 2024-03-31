@@ -53,7 +53,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isValidSerialization(self, preorder: str) -> bool:
+        s = 1
+        for node in preorder.split(","):
+            s -= 1
+            if s < 0:
+                return False
+            if node != '#':
+                s += 2
+        return s == 0
 ```
 
 ### **Java**
@@ -61,7 +70,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isValidSerialization(String preorder) {
+        int s = 1;
+        for (String node : preorder.split(",")) {
+            if (--s < 0) {
+                return false;
+            }
+            if (!"#".equals(node)) {
+                s += 2;
+            }
+        }
+        return s == 0;
+    }
+}
 ```
 
 ### **...**
