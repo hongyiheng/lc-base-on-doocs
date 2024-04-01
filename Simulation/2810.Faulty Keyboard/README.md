@@ -65,7 +65,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def finalString(self, s: str) -> str:
+        ans = []
+        for c in s:
+            if c == 'i':
+                ans = ans[::-1]
+            else:
+                ans.append(c)
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -73,7 +81,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String finalString(String s) {
+        StringBuilder ans = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c == 'i') {
+                ans.reverse();
+            } else {
+                ans.append(c);
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
