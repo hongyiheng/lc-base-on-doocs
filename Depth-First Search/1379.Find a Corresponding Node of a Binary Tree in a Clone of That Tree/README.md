@@ -92,7 +92,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution:
+    def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+        def dfs(root):
+            if not root:
+                return None
+            if root.val == target.val:
+                return root
+            ans = dfs(root.left)
+            if not ans:
+                ans = dfs(root.right)
+            return ans
+
+        return dfs(cloned)
 ```
 
 ### **Java**
@@ -100,7 +119,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 
+class Solution {
+
+    public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
+        if (cloned == null) {
+            return null;
+        }
+        if (cloned.val == target.val) {
+            return cloned;
+        }
+        TreeNode ans = getTargetCopy(original, cloned.left, target);
+        if (ans == null) {
+            ans = getTargetCopy(original, cloned.right, target);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
