@@ -71,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def getAncestors(self, n: int, edges: List[List[int]]) -> List[List[int]]:
+        def bfs(x):
+            q = deque([x])
+            vis = {x}
+            while q:
+                u = q.popleft()
+                for v in g[u]:
+                    if v in vis:
+                        continue
+                    vis.add(v)
+                    q.append(v)
+                    ans[v].append(x)
 
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+        ans = [[] for _ in range(n)]
+        for i in range(n):
+            bfs(i)
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +99,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    List<List<Integer>> ans = new ArrayList<>();
+    Map<Integer, List<Integer>> g = new HashMap<>();
+
+    public void bfs(int x) {
+        Deque<Integer> q = new ArrayDeque<>();
+        q.add(x);
+        Set<Integer> vis = new HashSet<>();
+        vis.add(x);
+        while (!q.isEmpty()) {
+            int u = q.pollFirst();
+            for (int v : g.getOrDefault(u, new ArrayList<>())) {
+                if (vis.contains(v)) {
+                    continue;
+                }
+                vis.add(v);
+                q.offer(v);
+                ans.get(v).add(x);
+            }
+        }
+    }
+
+    public List<List<Integer>> getAncestors(int n, int[][] edges) {
+        for (int[] e : edges) {
+            int u = e[0], v = e[1];
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+        }
+        for (int i = 0; i < n; i++) {
+            ans.add(new ArrayList<>());
+        }
+        for (int i = 0; i < n; i++) {
+            bfs(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
