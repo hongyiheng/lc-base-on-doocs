@@ -57,7 +57,17 @@ nums[1] + nums[2] = 4 + 5 = 9 ，大于 nums[0] = 3 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def triangleType(self, nums: List[int]) -> str:
+        nums.sort()
+        a, b, c = nums
+        if a + b <= c:
+            return "none"
+        if a == c:
+            return "equilateral"
+        if a == b or b == c:
+            return "isosceles"
+        return "scalene"
 ```
 
 ### **Java**
@@ -65,7 +75,22 @@ nums[1] + nums[2] = 4 + 5 = 9 ，大于 nums[0] = 3 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String triangleType(int[] nums) {
+        Arrays.sort(nums);
+        int a = nums[0], b = nums[1], c = nums[2];
+        if (a + b <= c) {
+            return "none";
+        }
+        if (a == c) {
+            return "equilateral";
+        }
+        if (a == b || b == c) {
+            return "isosceles";
+        }
+        return "scalene";
+    }
+}
 ```
 
 ### **...**
