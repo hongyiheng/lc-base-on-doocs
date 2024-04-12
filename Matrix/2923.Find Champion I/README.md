@@ -62,7 +62,18 @@ grid[1][2] == 1 表示 1 队比 2 队强。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findChampion(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        for j in range(n):
+            win = True
+            for i in range(n):
+                if grid[i][j]:
+                    win = False
+                    break
+            if win:
+                return j
+        return 0
 ```
 
 ### **Java**
@@ -70,7 +81,24 @@ grid[1][2] == 1 表示 1 队比 2 队强。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findChampion(int[][] grid) {
+        int n = grid.length;
+        for (int j = 0; j < n; j++) {
+            boolean win = true;
+            for (int i = 0; i < n; i++) {
+                if (grid[i][j] == 1) {
+                    win = false;
+                    break;
+                }
+            }
+            if (win) {
+                return j;
+            }
+        }
+        return 0;
+    }
+}
 ```
 
 ### **...**
