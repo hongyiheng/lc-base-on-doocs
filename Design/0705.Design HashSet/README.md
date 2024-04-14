@@ -62,7 +62,26 @@ myHashSet.contains(2); // 返回 False ，（已移除）</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MyHashSet:
 
+    def __init__(self):
+        self.s = [False] * 1000010
+
+    def add(self, key: int) -> None:
+        self.s[key] = True
+
+    def remove(self, key: int) -> None:
+        self.s[key] = False
+
+    def contains(self, key: int) -> bool:
+        return self.s[key]
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)
 ```
 
 ### **Java**
@@ -70,7 +89,34 @@ myHashSet.contains(2); // 返回 False ，（已移除）</pre>
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MyHashSet {
 
+    boolean[] s;
+
+    public MyHashSet() {
+        s = new boolean[1000010];
+    }
+    
+    public void add(int key) {
+        s[key] = true;
+    }
+    
+    public void remove(int key) {
+        s[key] = false;
+    }
+    
+    public boolean contains(int key) {
+        return s[key];
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
 ```
 
 ### **...**
