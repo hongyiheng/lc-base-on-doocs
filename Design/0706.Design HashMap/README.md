@@ -65,7 +65,26 @@ myHashMap.get(2);    // 返回 -1（未找到），myHashMap 现在为 [[1,1]]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MyHashMap:
 
+    def __init__(self):
+        self.s = [-1] * 1000010
+
+    def put(self, key: int, value: int) -> None:
+        self.s[key] = value
+
+    def get(self, key: int) -> int:
+        return self.s[key]
+
+    def remove(self, key: int) -> None:
+        self.s[key] = -1
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
 ```
 
 ### **Java**
@@ -73,7 +92,35 @@ myHashMap.get(2);    // 返回 -1（未找到），myHashMap 现在为 [[1,1]]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MyHashMap {
 
+    int[] s;
+
+    public MyHashMap() {
+        s = new int[1000010];
+        Arrays.fill(s, -1);
+    }
+    
+    public void put(int key, int value) {
+        s[key] = value;
+    }
+    
+    public int get(int key) {
+        return s[key];
+    }
+    
+    public void remove(int key) {
+        s[key] = -1;
+    }
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
 ```
 
 ### **...**
