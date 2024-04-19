@@ -77,7 +77,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minSkips(self, dist: List[int], speed: int, hoursBefore: int) -> int:
+        n = len(dist)
+        f = [[inf] * n for _ in range(n + 1)]
+        f[0][0] = 0
+        for i in range(1, n + 1):
+            d = dist[i - 1]
+            for j in range(i + 1):
+                if j < i:
+                    f[i][j] = min(f[i][j], ceil(f[i - 1][j] + d / speed - 1e-9))
+                if 0 < j < n:
+                    f[i][j] = min(f[i][j], f[i - 1][j - 1] + d / speed)
+        for i in range(n):
+            if f[n][i] <= hoursBefore:
+                return i
+        return -1
 ```
 
 ### **Java**
@@ -85,7 +100,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minSkips(int[] dist, int speed, int hoursBefore) {
+        int n = dist.length;
+        double[][] f = new double[n + 1][n];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(f[i], 1e9);
+        }
+        f[0][0] = 0;
+        for (int i = 1; i <= n; i++) {
+            int d = dist[i - 1];
+            for (int j = 0; j <= i; j++) {
+                if (j < i) {
+                    f[i][j] = Math.ceil(f[i - 1][j] + d * 1.0 / speed - 1e-9);
+                }
+                if (j > 0 && j < n) {
+                    f[i][j] = Math.min(f[i][j], f[i - 1][j - 1] + d * 1.0 / speed);
+                }
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (f[n][i] <= hoursBefore) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
