@@ -85,7 +85,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def mostFrequentPrime(self, mat: List[List[int]]) -> int:
+        def is_primes(x):
+            for i in range(2, int(x ** 0.5) + 1):
+                if not x % i:
+                    return False
+            return True
 
+        m, n = len(mat), len(mat[0])
+        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]
+        g = defaultdict(int)
+        for i in range(m):
+            for j in range(n):
+                for d in dirs:
+                    x, y, v = i, j, mat[i][j]
+                    while True:
+                        nx, ny = x + d[0], y + d[1]
+                        if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                            break
+                        v = v * 10 + mat[nx][ny]
+                        x, y = nx, ny
+                        if v > 10:
+                            g[v] += 1
+        q = [(k, g[k]) for k in g.keys()]
+        q.sort(key=lambda x: (x[1], x[0]), reverse=True)
+        for v, _ in q:
+            if is_primes(v):
+                return v
+        return -1
 ```
 
 ### **Java**
@@ -93,7 +121,51 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean isPrime(int x) {
+        for (int i = 2; i <= (int)Math.sqrt(x); i++) {
+            if (x % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int mostFrequentPrime(int[][] mat) {
+        int m = mat.length, n = mat[0].length;
+        Map<Integer, Integer> g = new HashMap<>();
+        int[][] dirs = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int[] d : dirs) {
+                    int v = mat[i][j], x = i, y = j;
+                    while (true) {
+                        int nx = x + d[0], ny = y + d[1];
+                        if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                            break;
+                        }
+                        v = v * 10 + mat[nx][ny];
+                        g.put(v, g.getOrDefault(v, 0) + 1);
+                        x = nx;
+                        y = ny;
+                    }
+                }
+            }
+        }
+        List<int[]> q = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> e : g.entrySet()) {
+            q.add(new int[]{e.getKey(), e.getValue()});
+        }
+        Collections.sort(q, (a, b) -> a[1] != b[1] ? b[1] - a[1] : b[0] - a[0]);
+        for (int[] e : q) {
+            if (isPrime(e[0])) {
+                return e[0];
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
