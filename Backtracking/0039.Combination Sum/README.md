@@ -71,7 +71,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def dfs(i, s, path):
+            if i == len(candidates) or s >= target:
+                if s == target:
+                    ans.append(path[::])
+                return
+            path.append(candidates[i])
+            dfs(i, s + candidates[i], path)
+            path.pop()
+            dfs(i + 1, s, path)
+        
+        ans = []
+        dfs(0, 0, [])
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +93,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    List<List<Integer>> ans = new ArrayList<>();
+    int[] cancelAccount;
+    int target;
 
+    public void dfs(int i, int s, Deque<Integer> path) {
+        if (i == cancelAccount.length || s >= target) {
+            if (s == target) {
+                ans.add(new ArrayList<>(path));
+            }
+            return;
+        }
+        path.addLast(cancelAccount[i]);
+        dfs(i, s + cancelAccount[i], path);
+        path.pollLast();
+        dfs(i + 1, s, path);
+    }
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        this.target = target;
+        this.cancelAccount = candidates;
+        dfs(0, 0, new ArrayDeque<>());
+        return ans;
+    }
+}
 ```
 
 ### **...**
