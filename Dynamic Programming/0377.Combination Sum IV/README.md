@@ -63,7 +63,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        f = [0] * (target + 1)
+        f[0] = 1
+        for i in range(target + 1):
+            for v in nums:
+                if i < v:
+                    continue
+                f[i] += f[i - v]
+        return f[target]
 ```
 
 ### **Java**
@@ -71,7 +80,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        int[] f = new int[target + 1];
+        f[0] = 1;
+        for (int i = 1; i < target + 1; i++) {
+            for (int v : nums) {
+                if (i < v) {
+                    continue;
+                }
+                f[i] += f[i - v];
+            }
+        }
+        return f[target];
+    }
+}
 ```
 
 ### **...**
