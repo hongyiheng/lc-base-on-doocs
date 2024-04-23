@@ -47,7 +47,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        n = len(customers)
+        l = r = 0
+        resL = mx = cur = 0
+        while r < n:
+            if r - l + 1 > minutes:
+                if grumpy[l]:
+                    cur -= customers[l]
+                l += 1
+            if grumpy[r]:
+                cur += customers[r]
+            if cur > mx:
+                resL = l
+                mx = cur
+            r += 1
+        ans = 0
+        for i in range(n):
+            if resL <= i <= resL + minutes - 1 or not grumpy[i]:
+                ans += customers[i]
+        return ans
 ```
 
 ### **Java**
@@ -55,7 +75,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
+        int n = customers.length;
+        int l = 0, resL = 0, mx = 0, cur = 0;
+        for (int r = 0; r < n; r++) {
+            if (r - l + 1 > minutes) {
+                if (grumpy[l] == 1) {
+                    cur -= customers[l];
+                }
+                l++;
+            }
+            if (grumpy[r] == 1) {
+                cur += customers[r];
+            }
+            if (cur > mx) {
+                mx = cur;
+                resL = l;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if ((resL <= i && i <= resL + minutes - 1) || grumpy[i] == 0) {
+                ans += customers[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
