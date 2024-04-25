@@ -53,7 +53,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distanceTraveled(self, mainTank: int, additionalTank: int) -> int:
+        ans = cnt = 0
+        while mainTank:
+            ans += mainTank * 10
+            cnt += mainTank
+            extra = min(additionalTank, cnt // 5)
+            cnt %= 5
+            additionalTank -= extra
+            mainTank = extra
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +71,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distanceTraveled(int mainTank, int additionalTank) {
+        int ans = 0, cnt = 0;
+        while (mainTank > 0) {
+            ans += mainTank * 10;
+            cnt += mainTank;
+            int extra = Math.min(cnt / 5, additionalTank);
+            additionalTank -= extra;
+            cnt %= 5;
+            mainTank = extra;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
