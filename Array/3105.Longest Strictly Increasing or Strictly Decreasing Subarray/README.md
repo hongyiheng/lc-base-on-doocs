@@ -81,7 +81,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestMonotonicSubarray(self, nums: List[int]) -> int:
+        up, down = list(), list()
+        ans = 0
+        for v in nums:
+            if up and up[-1] >= v:
+                up.clear()
+            if down and down[-1] <= v:
+                down.clear()
+            up.append(v)
+            down.append(v)
+            ans = max(ans, len(up), len(down))
+        return ans
 ```
 
 ### **Java**
@@ -89,7 +101,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestMonotonicSubarray(int[] nums) {
+        List<Integer> up = new ArrayList<>(), down = new ArrayList<>();
+        int ans = 0;
+        for (int v : nums) {
+            if (!up.isEmpty() && up.get(up.size() - 1) >= v) {
+                up.clear();
+            }
+            if (!down.isEmpty() && down.get(down.size() - 1) <= v) {
+                down.clear();
+            }
+            up.add(v);
+            down.add(v);
+            ans = Math.max(ans, Math.max(up.size(), down.size()));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
