@@ -74,7 +74,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def unmarkedSumArray(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        def cmp(a, b):
+            return a[1] - b[1] if a[1] != b[1] else a[0] - b[0]
 
+        q = [(i, v) for i, v in enumerate(nums)]
+        q.sort(key=cmp_to_key(cmp))
+        used = set()
+        s, idx = sum(nums), 0
+        ans = []
+        for i, k in queries:
+            if i not in used:
+                s -= nums[i]
+                used.add(i)
+            while k and idx < len(q):
+                if q[idx][0] in used:
+                    idx += 1
+                    continue
+                s -= q[idx][1]
+                used.add(q[idx][0])
+                k -= 1
+                idx += 1  
+            ans.append(s)
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +105,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long[] unmarkedSumArray(int[] nums, int[][] queries) {
+        int n = nums.length, m = queries.length;
+        long[] ans = new long[m];
+        List<int[]> q = new ArrayList<>();
+        long s = 0;
+        for (int i = 0; i < n; i++) {
+            q.add(new int[]{i, nums[i]});
+            s += nums[i];
+        }
+        q.sort((a, b) -> a[1] != b[1] ?  a[1] - b[1] : a[0] - b[0]);
+        Set<Integer> used = new HashSet<>();
+        int idx = 0;
+        for (int j = 0; j < m; j++) {
+            int i = queries[j][0], k = queries[j][1];
+            if (!used.contains(i)) {
+                s -= nums[i];
+                used.add(i);
+            }
+            while (k > 0 && idx < n) {
+                if (used.contains(q.get(idx)[0])) {
+                    idx++;
+                    continue;
+                }
+                s -= q.get(idx)[1];
+                used.add(q.get(idx)[0]);
+                k--;
+                idx++;
+            }
+            ans[j] = s;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
