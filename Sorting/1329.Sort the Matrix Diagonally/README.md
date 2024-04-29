@@ -51,7 +51,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
+        def reset(i, j):
+            nonlocal m, n
+            q = []
+            x, y = i, j
+            while x < m and y < n:
+                q.append(mat[x][y])
+                x += 1
+                y += 1
+            q.sort(reverse=True)
+            x, y = i, j
+            while x < m and y < n:
+                mat[x][y] = q.pop()
+                x += 1
+                y += 1
 
+        m, n = len(mat), len(mat[0])
+        for i in range(1, m):
+            reset(i, 0)
+        for j in range(n):
+            reset(0, j)
+        return mat
 ```
 
 ### **Java**
@@ -59,7 +81,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int m, n;
+
+    public void reset(int[][] mat, int i, int j) {
+        List<Integer> q = new ArrayList<>();
+        int x = i, y = j;
+        while (x < m && y < n) {
+            q.add(mat[x++][y++]);
+        }
+        Collections.sort(q, (a, b) -> a - b);
+        x = i;
+        y = j;
+        int idx = 0;
+        while (x < m && y < n) {
+            mat[x++][y++] = q.get(idx++); 
+        }
+    }
+
+    public int[][] diagonalSort(int[][] mat) {
+        m = mat.length;
+        n = mat[0].length;
+        for (int i = 1; i < m; i++) {
+            reset(mat, i, 0);
+        }
+        for (int j = 0; j < n; j++) {
+            reset(mat, 0, j);
+        }
+        return mat;
+    }
+}
 ```
 
 ### **...**
