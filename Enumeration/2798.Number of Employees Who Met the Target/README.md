@@ -58,7 +58,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfEmployeesWhoMetTarget(self, hours: List[int], target: int) -> int:
+        ans = 0
+        for v in hours:
+            if v >= target:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +72,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
+        int ans = 0;
+        for (int v : hours) {
+            if (v >= target) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
