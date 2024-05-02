@@ -69,7 +69,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperationsToWriteY(self, grid: List[List[int]]) -> int:
+        n, mid = len(grid), len(grid) // 2
+        cnt = [[0] * 3 for _ in range(2)]
+        for i in range(n):
+            for j in range(n):
+                if i <= mid:
+                    if i == j or j == n - i - 1:
+                        cnt[0][grid[i][j]] += 1
+                    else:
+                        cnt[1][grid[i][j]] += 1
+                else:
+                    if j == mid:
+                        cnt[0][grid[i][j]] += 1
+                    else:
+                        cnt[1][grid[i][j]] += 1
+        ans = n * n
+        for i in range(3):
+            for j in range(3):
+                if i == j:
+                    continue
+                v = cnt[0][(i + 1) % 3] + cnt[0][(i + 2) % 3] + cnt[1][(j + 1) % 3] + cnt[1][(j + 2) % 3]
+                ans = min(ans, v)
+        return ans         
 ```
 
 ### **Java**
@@ -77,7 +100,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperationsToWriteY(int[][] grid) {
+        int n = grid.length, mid = grid.length / 2;
+        int[][] cnt = new int[2][3];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int v = grid[i][j];
+                if (i <= mid) {
+                    if (j == i || j == n - i - 1) {
+                        cnt[0][v]++;
+                    } else {
+                        cnt[1][v]++;
+                    }
+                } else {
+                    if (j == mid) {
+                        cnt[0][v]++;
+                    } else {
+                        cnt[1][v]++;
+                    }
+                }
+            }
+        }
+        int ans = n * n;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i == j) {
+                    continue;
+                }
+                int v = cnt[0][(i + 1) % 3] + cnt[0][(i + 2) % 3] + cnt[1][(j + 1) % 3] + cnt[1][(j + 2) % 3];
+                ans = Math.min(ans, v);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
