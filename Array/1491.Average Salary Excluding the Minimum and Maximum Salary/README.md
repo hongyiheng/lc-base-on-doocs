@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def average(self, salary: List[int]) -> float:
+        mi, mx = inf, 0
+        s = 0
+        for v in salary:
+            if mi > v:
+                mi = v
+            if mx < v:
+                mx = v
+            s += v
+        return (s - mi - mx) / (len(salary) - 2)
 ```
 
 ### **Java**
@@ -71,7 +81,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double average(int[] salary) {
+        int mi = (int)1e9, mx = 0;
+        long ans = 0;
+        for (int v : salary) {
+            if (mi > v) {
+                mi = v;
+            }
+            if (mx < v) {
+                mx = v;
+            }
+            ans += v;
+        }
+        return (1.0 * ans - mi - mx) / (salary.length - 2);
+    }
+}
 ```
 
 ### **...**
