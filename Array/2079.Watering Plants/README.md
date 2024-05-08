@@ -79,7 +79,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def wateringPlants(self, plants: List[int], capacity: int) -> int:
+        ans, cur = 0, capacity
+        for i, v in enumerate(plants):
+            if cur < v:
+                ans += i * 2
+                cur = capacity
+            cur -= v
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -87,7 +96,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int wateringPlants(int[] plants, int capacity) {
+        int ans = 0, cur = capacity;
+        for (int i = 0; i < plants.length; i++) {
+            int v = plants[i];
+            if (cur < v) {
+                ans += 2 * i;
+                cur = capacity;
+            }
+            cur -= v;
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
