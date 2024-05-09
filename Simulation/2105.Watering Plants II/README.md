@@ -98,7 +98,32 @@ Alice 和 Bob 都会到达中间的植物，并且此时他俩剩下的水量相
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumRefill(self, plants: List[int], capacityA: int, capacityB: int) -> int:
+        l, r = 0, len(plants) - 1
+        ac, bc = capacityA, capacityB
+        ans = 0
+        while l <= r:
+            lv, rv = plants[l], plants[r]
+            if l == r:
+                if ac >= bc:
+                    if lv > ac:
+                        ans += 1
+                else:
+                    if lv > bc:
+                        ans += 1
+            else:
+                if lv > ac:
+                    ans += 1
+                    ac = capacityA
+                if rv > bc:
+                    ans += 1
+                    bc = capacityB
+            ac -= lv
+            bc -= rv
+            l += 1
+            r -= 1
+        return ans
 ```
 
 ### **Java**
@@ -106,7 +131,40 @@ Alice 和 Bob 都会到达中间的植物，并且此时他俩剩下的水量相
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumRefill(int[] plants, int capacityA, int capacityB) {
+        int l = 0, r = plants.length - 1;
+        int ac = capacityA, bc = capacityB, ans = 0;
+        while (l <= r) {
+            int lv = plants[l], rv = plants[r];
+            if (l == r) {
+                if (ac >= bc) {
+                    if (lv > ac) {
+                        ans++;
+                    }
+                } else {
+                    if (lv > bc) {
+                        ans++;
+                    }
+                }
+            } else {
+                if (lv > ac) {
+                    ans++;
+                    ac = capacityA;
+                }
+                if (rv > bc) {
+                    ans++;
+                    bc = capacityB;
+                }
+            }
+            ac -= lv;
+            bc -= rv;
+            l++;
+            r--;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
