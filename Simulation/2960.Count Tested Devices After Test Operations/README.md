@@ -73,7 +73,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countTestedDevices(self, batteryPercentages: List[int]) -> int:
+        ans = cnt = 0
+        for v in batteryPercentages:
+            if v - cnt > 0:
+                cnt += 1
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +88,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countTestedDevices(int[] batteryPercentages) {
+        int ans = 0, cnt = 0;
+        for (int v : batteryPercentages) {
+            if (v - cnt > 0) {
+                cnt++;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
