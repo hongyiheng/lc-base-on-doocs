@@ -74,7 +74,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def garbageCollection(self, garbage: List[str], travel: List[int]) -> int:
+        ans = 0
+        g = defaultdict(int)
+        for i, w in enumerate(garbage):
+            for c in w:
+                g[c] = i
+            ans += len(w)
+        for i, v in enumerate(travel):
+            for d in g.values():
+                if d > i:
+                    ans += v
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +94,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+        Map<Character, Integer> g = new HashMap<>();
+        int ans = 0;
+        for (int i = 0; i < garbage.length; i++) {
+            String w = garbage[i];
+            ans += w.length();
+            for (char c : w.toCharArray()) {
+                g.put(c, i);
+            }
+        }
+        for (int i = 0; i < travel.length; i++) {
+            for (int d : g.values()) {
+                if (d > i) {
+                    ans += travel[i];
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
