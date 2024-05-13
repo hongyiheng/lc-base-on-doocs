@@ -71,7 +71,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minChanges(self, s: str) -> int:
+        ans = cnt = cur = 0
+        for v in s:
+            if v != cur:
+                if cnt:
+                    ans += 1
+                    cnt ^= 1
+                else:
+                    cur = v
+                    cnt = 1
+            else:
+                cnt ^= 1
+        return ans + 1 if cnt else ans
 ```
 
 ### **Java**
@@ -79,7 +92,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minChanges(String s) {
+        int ans = 0, cnt = 0;
+        char cur = s.charAt(0);
+        for (char c : s.toCharArray()) {
+            if (c != cur) {
+                if (cnt == 1) {
+                    cnt ^= 1;
+                    ans++;
+                } else {
+                    cnt = 1;
+                    cur = c;
+                }
+            } else {
+                cnt ^= 1;
+            }
+        }
+        return cnt == 1 ? ans + 1 : ans;
+    }
+}
 ```
 
 ### **...**
