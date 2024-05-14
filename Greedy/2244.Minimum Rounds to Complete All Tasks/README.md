@@ -50,7 +50,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumRounds(self, tasks: List[int]) -> int:
+        cnt = defaultdict(int)
+        for v in tasks:
+            cnt[v] += 1
+        ans = 0
+        for v in cnt.values():
+            if v == 1:
+                return -1
+            ans += ((v + 2) // 3)
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumRounds(int[] tasks) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int v : tasks) {
+            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+        }
+        int ans = 0;
+        for (int v : cnt.values()) {
+            if (v == 1) {
+                return -1;
+            }
+            ans += ((v + 2) / 3);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
