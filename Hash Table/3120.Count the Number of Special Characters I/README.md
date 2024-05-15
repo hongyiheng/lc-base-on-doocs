@@ -69,7 +69,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfSpecialChars(self, word: str) -> int:
+        cnt = [[False] * 2 for _ in range(26)]
+        for c in word:
+            v = ord(c)
+            if 'a' <= c <= 'z':
+                v -= ord('a')
+                cnt[v][0] = True
+            else:
+                v -= ord('A')
+                cnt[v][1] = True
+        return sum(1 if a and b else 0 for a, b in cnt)
 ```
 
 ### **Java**
@@ -77,7 +88,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfSpecialChars(String word) {
+        boolean[][] cnt = new boolean[26][2];
+        for (char c : word.toCharArray()) {
+            if ('a' <= c && c <= 'z') {
+                int v = c - 'a';
+                cnt[v][0] = true;
+            } else {
+                int v = c - 'A';
+                cnt[v][1] = true;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < 26; i++) {
+            if (cnt[i][0] && cnt[i][1]) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
