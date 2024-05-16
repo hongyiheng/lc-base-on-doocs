@@ -79,7 +79,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getSmallestString(self, s: str, k: int) -> str:
+        cs = list(s)
+        for i, c in enumerate(cs):
+            d = ord(c) - ord('a')
+            d = min(26 - d, d)
+            if k >= d:
+                k -= d
+                cs[i] = 'a'
+            else:
+                cs[i] = chr(ord(c) - k)
+                break
+        return "".join(cs)
 ```
 
 ### **Java**
@@ -87,7 +99,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String getSmallestString(String s, int k) {
+        char[] cs = s.toCharArray();
+        for (int i = 0; i < cs.length; i++) {
+            int d = cs[i] - 'a';
+            d = Math.min(d, 26 - d);
+            if (k >= d) {
+                cs[i] = 'a';
+                k -= d;
+            } else {
+                cs[i] = (char)(cs[i] - k);
+                break;
+            }
+        }
+        return new String(cs);
+    }
+}
 ```
 
 ### **...**
