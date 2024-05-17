@@ -46,7 +46,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxProfitAssignment(self, difficulty: List[int], profit: List[int], worker: List[int]) -> int:
+        q = [[d, p] for d, p in zip(difficulty, profit)]
+        q.sort(key=lambda x: (x[0], x[1]))
+        stk = []
+        for d, p in q:
+            if stk and stk[-1][1] >= p:
+                continue
+            stk.append([d, p])
+        ans = 0
+        for w in worker:
+            l, r = 0, len(stk) - 1
+            while l < r:
+                mid = (l + r + 1) >> 1
+                if stk[mid][0] <= w:
+                    l = mid
+                else:
+                    r = mid - 1
+            if stk[r][0] <= w:
+                ans += stk[r][1]
+        return ans
 ```
 
 ### **Java**
@@ -54,7 +74,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+        int n = difficulty.length;
+        int[][] q = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            q[i][0] = difficulty[i];
+            q[i][1] = profit[i];
+        } 
+        Arrays.sort(q, (a, b) -> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]);
+        List<int[]> stk = new ArrayList<>();
+        for (int[] e : q) {
+            if (!stk.isEmpty() && stk.get(stk.size() - 1)[1] >= e[1]) {
+                continue;
+            }
+            stk.add(e);
+        }
+        int ans = 0;
+        for (int w : worker) {
+            int l = 0, r = stk.size() - 1;
+            while (l < r) {
+                int mid = (l + r + 1) >> 1;
+                if (stk.get(mid)[0] <= w) {
+                    l = mid;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            if (stk.get(r)[0] <= w) {
+                ans += stk.get(r)[1];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
