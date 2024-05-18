@@ -70,7 +70,18 @@ divisors[1] 的可整除性得分为 0 ，因为 nums 中没有任何数字能�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxDivScore(self, nums: List[int], divisors: List[int]) -> int:
+        mx, ans = 0, divisors[0]
+        for d in divisors:
+            cnt = 0
+            for v in nums:
+                if not v % d:
+                    cnt += 1
+            if cnt > mx or (cnt == mx and ans > d):
+                ans = d
+                mx = cnt
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +89,24 @@ divisors[1] 的可整除性得分为 0 ，因为 nums 中没有任何数字能�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxDivScore(int[] nums, int[] divisors) {
+        int mx = 0, ans = divisors[0];
+        for (int d : divisors) {
+            int cnt = 0;
+            for (int v : nums) {
+                if (v % d == 0) {
+                    cnt++;
+                }
+            }
+            if (cnt > mx || (cnt == mx && ans > d)) {
+                ans = d;
+                mx = cnt;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
