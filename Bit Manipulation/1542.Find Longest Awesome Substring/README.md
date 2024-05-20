@@ -64,7 +64,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestAwesome(self, s: str) -> int:
+        n = len(s)
+        pos = [n] * (1 << 10)
+        pos[0] = -1
+        ans = pre = 0
+        for i, c in enumerate(s):
+            v = int(c)
+            pre ^= 1 << v
+            ans = max(ans, i - pos[pre], max([i - pos[pre ^ 1 << d] for d in range(10)]))
+            if pos[pre] == n:
+                pos[pre] = i
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +84,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestAwesome(String s) {
+        int n = s.length();
+        int[] pos = new int[1 << 10];
+        Arrays.fill(pos, n);
+        pos[0] = -1;
+        int ans = 0, pre = 0;
+        for (int i = 0; i < n; i++) {
+            int v = s.charAt(i) - '0';
+            pre ^= 1 << v;
+            ans = Math.max(ans, i - pos[pre]);
+            for (int j = 0; j < 10; j++) {
+                ans = Math.max(ans, i - pos[pre ^ (1 << j)]);
+            }
+            if (pos[pre] == n) {
+                pos[pre] = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
