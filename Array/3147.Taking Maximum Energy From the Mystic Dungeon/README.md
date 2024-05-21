@@ -90,7 +90,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumEnergy(self, energy: List[int], k: int) -> int:
+        n = len(energy)
+        ans = energy[-1]
+        for i in range(n - 1, n - k - 1, -1):
+            s = 0
+            for j in range(i, -1, -k):
+                s += energy[j]
+                ans = max(ans, s)
+        return ans
 ```
 
 ### **Java**
@@ -98,7 +107,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumEnergy(int[] energy, int k) {
+        int n = energy.length;
+        int ans = energy[n - 1];
+        for (int i = n - 1; i > n - k - 1; i--) {
+            int s = 0;
+            for (int j = i; j > -1; j -= k) {
+                s += energy[j];
+                ans = Math.max(ans, s);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
