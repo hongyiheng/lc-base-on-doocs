@@ -71,7 +71,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+        to = dict()
+        for w, l in matches:
+            to[l] = to.get(l, 0) + 1
+            to[w] = to.get(w, 0)
+        win, lose_one = [], []
+        for k in to.keys():
+            if to[k] == 0:
+                win.append(k)
+            elif to[k] == 1:
+                lose_one.append(k)
+        win.sort()
+        lose_one.sort()
+        return [win, lose_one]
 ```
 
 ### **Java**
@@ -79,7 +93,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> findWinners(int[][] matches) {
+        Map<Integer, Integer> to = new HashMap<>();
+        for (int[] e : matches) {
+            int w = e[0], l = e[1];
+            to.put(w, to.getOrDefault(w, 0));
+            to.put(l, to.getOrDefault(l, 0) + 1);
+        }
+        List<Integer> win = new ArrayList<>(), loseOne = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> e : to.entrySet()) {
+            if (e.getValue() == 0) {
+                win.add(e.getKey());
+            } else if (e.getValue() == 1) {
+                loseOne.add(e.getKey());
+            }
+        }
+        Collections.sort(win);
+        Collections.sort(loseOne);
+        return Arrays.asList(win, loseOne);
+    }
+}
 ```
 
 ### **...**
