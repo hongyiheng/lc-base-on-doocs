@@ -58,7 +58,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def longestEqualSubarray(self, nums: List[int], k: int) -> int:
+        def get_mx():
+            while rk and -rk[0][0] != cnt[rk[0][1]]:
+                heapq.heappop(rk)
+            return -rk[0][0]
 
+        rk = []
+        cnt = defaultdict(int)
+        l = -1
+        ans = 0
+        for i, v in enumerate(nums):
+            cnt[v] += 1
+            heapq.heappush(rk, (-cnt[v], v))
+            while i - l - get_mx() > k:
+                l += 1
+                cnt[nums[l]] -= 1     
+            ans = max(ans, get_mx())
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +84,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int getMx(PriorityQueue<int[]> rk, Map<Integer, Integer> cnt) {
+        while (!rk.isEmpty() && cnt.get(rk.peek()[1]) != rk.peek()[0]) {
+            rk.poll();
+        }
+        return rk.peek()[0];
+    }
 
+    public int longestEqualSubarray(List<Integer> nums, int k) {
+        PriorityQueue<int[]> rk = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int l = -1, ans = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            int v = nums.get(i);
+            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+            rk.add(new int[]{cnt.get(v), v});
+            while (i - l - getMx(rk, cnt) > k) {
+                cnt.put(nums.get(++l), cnt.get(nums.get(l)) - 1);
+            }
+            ans = Math.max(ans, getMx(rk, cnt));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
