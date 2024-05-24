@@ -51,7 +51,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def mostCompetitive(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        q = []
+        for i, v in enumerate(nums):
+            while q and q[-1] > v and n - i > k - len(q):
+                q.pop()
+            if len(q) < k:
+                q.append(v)
+        return q
 ```
 
 ### **Java**
@@ -59,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] mostCompetitive(int[] nums, int k) {
+        int n = nums.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            while (!q.isEmpty() && q.peekLast() > v && n - i > k - q.size()) {
+                q.pollLast();
+            }
+            if (q.size() < k) {
+                q.addLast(v);
+            }
+        }
+        return q.stream().mapToInt(e -> e).toArray();
+    }
+}
 ```
 
 ### **...**
