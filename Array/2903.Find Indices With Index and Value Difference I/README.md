@@ -75,7 +75,14 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findIndices(self, nums: List[int], indexDifference: int, valueDifference: int) -> List[int]:
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + indexDifference, n):
+                if abs(nums[i] - nums[j]) >= valueDifference:
+                    return [i, j]
+        return [-1, -1]
 ```
 
 ### **Java**
@@ -83,7 +90,19 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findIndices(int[] nums, int indexDifference, int valueDifference) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + indexDifference; j < n; j++) {
+                if (Math.abs(nums[i] - nums[j]) >= valueDifference) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+}
 ```
 
 ### **...**
