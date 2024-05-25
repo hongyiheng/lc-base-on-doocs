@@ -81,7 +81,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def shortestBeautifulSubstring(self, s: str, k: int) -> str:
+        def check(a, b):
+            if a == "":
+                return b
+            if len(a) != len(b):
+                return a if len(a) < len(b) else b
+            for c, d in zip(a, b):
+                if c != d:
+                    return a if c < d else b
+            return a
 
+        ans = ""
+        l = cnt = 0
+        for r in range(len(s)):
+            cnt += 1 if s[r] == '1' else 0
+            while cnt == k:
+                ans = check(ans, s[l:r + 1])
+                cnt -= 1 if s[l] == '1' else 0
+                l += 1
+        return ans
 ```
 
 ### **Java**
@@ -89,7 +109,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public String check(String a, String b) {
+        if ("".equals(a)) {
+            return b;
+        }
+        if (a.length() != b.length()) {
+            return a.length() > b.length() ? b : a;
+        }
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) != b.charAt(i)) {
+                return a.charAt(i) > b.charAt(i) ? b : a;
+            }
+        }
+        return a;
+    }
+
+    public String shortestBeautifulSubstring(String s, int k) {
+        int l = 0, cnt = 0;
+        String ans = "";
+        for (int r = 0; r < s.length(); r++) {
+            cnt += s.charAt(r) == '1' ? 1 : 0;
+            while (cnt == k) {
+                ans = check(ans, s.substring(l, r + 1));
+                cnt -= s.charAt(l++) == '1' ? 1 : 0;
+            }
+        }
+        return ans;
+    }       
+}
 ```
 
 ### **...**
