@@ -68,7 +68,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortEvenOdd(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        even = [nums[i] for i in range(0, n, 2)]
+        odd = [nums[i] for i in range(1, n, 2)]
+        even.sort()
+        odd.sort(reverse=True)
+        for i in range(n):
+            if not i & 1:
+                nums[i] = even[i // 2]
+            else:
+                nums[i] = odd[(i - 1) // 2]
+        return nums
 ```
 
 ### **Java**
@@ -76,7 +88,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] sortEvenOdd(int[] nums) {
+        int n = nums.length;
+        List<Integer> even = new ArrayList<>(), odd = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                even.add(nums[i]);
+            } else {
+                odd.add(nums[i]);
+            }
+        }
+        Collections.sort(even);
+        odd.sort((a, b) -> b - a);
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                nums[i] = even.get(i / 2);
+            } else {
+                nums[i] = odd.get((i - 1) / 2);
+            }
+        }
+        return nums;
+    }
+}
 ```
 
 ### **...**
