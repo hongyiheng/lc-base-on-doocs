@@ -80,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def satisfiesConditions(self, grid: List[List[int]]) -> bool:
+        m, n = len(grid), len(grid[0])
+        for i in range(m):
+            for j in range(n):
+                if i and grid[i][j] != grid[i - 1][j]:
+                    return False
+                if j and grid[i][j] == grid[i][j - 1]:
+                    return False
+        return True
 ```
 
 ### **Java**
@@ -88,7 +97,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean satisfiesConditions(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i > 0 && grid[i][j] != grid[i - 1][j]) {
+                    return false;
+                }
+                if (j > 0 && grid[i][j] == grid[i][j - 1]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
