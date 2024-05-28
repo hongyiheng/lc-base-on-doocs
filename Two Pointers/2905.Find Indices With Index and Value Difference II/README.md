@@ -75,7 +75,24 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findIndices(self, nums: List[int], indexDifference: int, valueDifference: int) -> List[int]:
+        mi = mx = nums[0]
+        mi_idx = mx_idx = 0
+        for i in range(indexDifference, len(nums)):
+            v, l = nums[i], i - indexDifference
+            if i >= indexDifference:
+                if nums[l] < mi:
+                    mi = nums[l]
+                    mi_idx = l
+                if nums[l] > mx:
+                    mx = nums[l]
+                    mx_idx = l
+            if abs(v - mi) >= valueDifference:
+                return [mi_idx, i]
+            if abs(v - mx) >= valueDifference:
+                return [mx_idx, i]
+        return [-1, -1]
 ```
 
 ### **Java**
@@ -83,7 +100,30 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findIndices(int[] nums, int indexDifference, int valueDifference) {
+        int n = nums.length;
+        int mi = nums[0], mx = nums[0], miIdx = 0, mxIdx = 0;
+        for (int i = indexDifference; i < n; i++) {
+            int v = nums[i], l = i - indexDifference;
+            if (nums[l] < mi) {
+                mi = nums[l];
+                miIdx = l;
+            }
+            if (nums[l] > mx) {
+                mx = nums[l];
+                mxIdx = l;
+            }
+            if (Math.abs(mi - v) >= valueDifference) {
+                return new int[]{miIdx, i};
+            }
+            if (Math.abs(mx - v) >= valueDifference) {
+                return new int[]{mxIdx, i};
+            }
+        }
+        return new int[]{-1, -1};
+    }
+}
 ```
 
 ### **...**
