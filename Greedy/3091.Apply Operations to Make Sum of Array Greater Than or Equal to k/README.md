@@ -69,7 +69,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, k: int) -> int:
+        ans = k - 1
+        for i in range(1, k):
+            ans = min(ans, (i - 1) + (k - 1) // i)
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +82,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int k) {
+        int ans = k - 1;
+        for (int i = 1; i < k; i++) {
+            ans = Math.min(ans, i - 1 + (k - 1) / i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
