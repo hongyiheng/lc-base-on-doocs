@@ -1,3 +1,3 @@
 # lc-base-on-doocs
 
-leetcode solution record
+leetcode python/java solution record
