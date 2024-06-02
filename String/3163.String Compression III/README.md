@@ -75,7 +75,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def compressedString(self, word: str) -> str:
+        ans = []
+        cnt, cur = 0, -1
+        for c in word:
+            v = ord(c) - ord('a')
+            if cnt >= 9:
+                ans.append(str(cnt))
+                ans.append(chr(cur + ord('a')))
+                cnt -= 9
+            if cur != v:
+                if cnt:
+                    ans.append(str(cnt))
+                    ans.append(chr(cur + ord('a')))
+                cur = v
+                cnt = 1
+            else:
+                cnt += 1
+        ans.append(str(cnt))
+        ans.append(chr(cur + ord('a')))    
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -83,7 +103,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String compressedString(String word) {
+        StringBuilder ans = new StringBuilder();
+        int cnt = 0, cur = -1;
+        for (char c : word.toCharArray()) {
+            if (cnt >= 9) {
+                ans.append(String.valueOf(cnt));
+                ans.append((char)(cur + 'a'));
+                cnt -= 9;
+            }
+            if (cur != c - 'a') {
+                if (cnt > 0) {
+                    ans.append(String.valueOf(cnt));
+                    ans.append((char)(cur + 'a'));
+                }
+                cur = c - 'a';
+                cnt = 1;
+            } else {
+                cnt++;
+            }
+        }
+        ans.append(String.valueOf(cnt));
+        ans.append((char)(cur + 'a'));
+        return ans.toString();
+    } 
+}
 ```
 
 ### **...**
