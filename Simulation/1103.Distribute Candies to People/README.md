@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distributeCandies(self, candies: int, num_people: int) -> List[int]:
+        i, t = 0, 1
+        ans = [0] * num_people
+        while candies:
+            v = min(t, candies)
+            ans[i % num_people] += v
+            candies -= v
+            t += 1
+            i += 1
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +81,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] distributeCandies(int candies, int num_people) {
+        int[] ans = new int[num_people];
+        int i = 0, t = 1;
+        while (candies > 0) {
+            int v = Math.min(t, candies);
+            ans[i % num_people] += v;
+            candies -= v;
+            t++;
+            i++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
