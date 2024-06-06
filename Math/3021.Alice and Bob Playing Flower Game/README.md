@@ -62,7 +62,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def flowerGame(self, n: int, m: int) -> int:
+        return n // 2 * (m - m // 2) + m // 2 * (n - n // 2)
 ```
 
 ### **Java**
@@ -70,7 +72,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long flowerGame(int n, int m) {
+        return n / 2 * (m - m / 2) + m / 2 * (n - n / 2);
+    }
+}
 ```
 
 ### **...**
