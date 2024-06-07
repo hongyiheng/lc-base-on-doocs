@@ -61,7 +61,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxOperations(self, nums: List[int]) -> int:
+        t = nums[0] + nums[1]
+        ans = 0
+        for i in range(1, len(nums), 2):
+            if nums[i - 1] + nums[i] != t:
+                break
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +77,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxOperations(int[] nums) {
+        int t = nums[0] + nums[1];
+        int ans = 0;
+        for (int i = 1; i < nums.length; i += 2) {
+            if (nums[i - 1] + nums[i] != t) {
+                break;
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
