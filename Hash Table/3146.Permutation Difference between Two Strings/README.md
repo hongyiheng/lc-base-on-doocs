@@ -67,7 +67,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findPermutationDifference(self, s: str, t: str) -> int:
+        idx = [-1] * 26
+        for i, c in enumerate(s):
+            idx[ord(c) - ord('a')] = i
+        ans = 0
+        for i, c in enumerate(t):
+            ans += abs(idx[ord(c) - ord('a')] - i)
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +83,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findPermutationDifference(String s, String t) {
+        int[] idx = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            idx[s.charAt(i) - 'a'] = i;
+        }
+        int ans = 0;
+        for (int i = 0; i < t.length(); i++) {
+            ans += Math.abs(idx[t.charAt(i) - 'a'] - i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
