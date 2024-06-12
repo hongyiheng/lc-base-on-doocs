@@ -53,7 +53,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:
+        ans = 100 - purchaseAmount // 10 * 10
+        return ans - (10 if purchaseAmount % 10 >= 5 else 0)
 ```
 
 ### **Java**
@@ -61,7 +64,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int accountBalanceAfterPurchase(int purchaseAmount) {
+        int ans = 100 - purchaseAmount / 10 * 10;
+        return ans - (purchaseAmount % 10 >= 5 ? 10 : 0);
+    }
+}
 ```
 
 ### **...**
