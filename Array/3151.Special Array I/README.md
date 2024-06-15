@@ -67,7 +67,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isArraySpecial(self, nums: List[int]) -> bool:
+        for i in range(1, len(nums)):
+            if nums[i - 1] % 2 == nums[i] % 2:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -75,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isArraySpecial(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] % 2 == nums[i] % 2) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
