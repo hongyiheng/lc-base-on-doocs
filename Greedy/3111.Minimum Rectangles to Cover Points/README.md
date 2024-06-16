@@ -101,7 +101,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minRectanglesToCoverPoints(self, points: List[List[int]], w: int) -> int:
+        q = [x for x, _ in points]
+        q.sort()
+        ans, cur = 0, -1
+        for v in q:
+            if cur < v:
+                cur = v + w
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -109,7 +118,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minRectanglesToCoverPoints(int[][] points, int w) {
+        int n = points.length;
+        int[] q = new int[n];
+        for (int i = 0; i < n; i++) {
+            q[i] = points[i][0];
+        }
+        Arrays.sort(q);
+        int ans = 0, cur = -1;
+        for (int v : q) {
+            if (cur < v) {
+                cur = v + w;
+                ans++;
+            }
+        } 
+        return ans;
+    }
+}
 ```
 
 ### **...**
