@@ -43,7 +43,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLUSlength(self, strs: List[str]) -> int:
+        def check(i, j):
+            if i == j or len(strs[j]) < len(strs[j]):
+                return False
+            idx = 0
+            for c in strs[j]:
+                if c == strs[i][idx]:
+                    idx += 1
+                if idx == len(strs[i]):
+                    return True
+            return False
+        
+        n = len(strs)
+        ans = -1
+        for i in range(n):
+            if len(strs[i]) < ans:
+                continue
+            same = False
+            for j in range(n):
+                if check(i, j):
+                    same = True
+                    break
+            if not same:
+                ans = len(strs[i])
+        return ans
 ```
 
 ### **Java**
@@ -51,7 +76,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean check(int i, int j, String[] strs) {
+        if (i == j || strs[i].length() > strs[j].length()) {
+            return false;
+        }
+        int idx = 0;
+        for (char c : strs[j].toCharArray()) {
+            if (c == strs[i].charAt(idx)) {
+                if (++idx == strs[i].length()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public int findLUSlength(String[] strs) {
+        int n = strs.length;
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            if (strs[i].length() < ans) {
+                continue;
+            }
+            boolean same = false;
+            for (int j = 0; j < n; j++) {
+                if (check(i, j, strs)) {
+                    same = true;
+                    break;
+                }
+            }
+            if (!same) {
+                ans = strs[i].length();
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
