@@ -65,7 +65,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def discountPrices(self, sentence: str, discount: int) -> str:
+        ws = sentence.split(" ")
+        for i, w in enumerate(ws):
+            if w[0] == '$' and w[1:].isdigit():
+                v = int(w[1:]) * (100 - discount) / 100
+                ws[i] = '$' + "{:.2f}".format(v)
+        return " ".join(ws)
 ```
 
 ### **Java**
@@ -73,7 +80,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String discountPrices(String sentence, int discount) {
+        String[] ws = sentence.split(" ");
+        for (int i = 0; i < ws.length; i++) {
+            String w = ws[i];
+            if (w.charAt(0) != '$' || w.length() < 2) {
+                continue;
+            }
+            boolean digit = true;
+            for (int j = 1; j < w.length() && digit; j++) {
+                if (!Character.isDigit(w.charAt(j))) {
+                    digit = false;
+                }
+            }
+            if (!digit) {
+                continue;
+            }
+            Long v = Long.parseLong(w.substring(1));
+            if (v != -1) {
+                ws[i] = "$" + String.format("%.2f", 1.0 * v * (100 - discount) / 100);
+            }
+        }
+        return String.join(" ", ws);
+    }
+}
 ```
 
 ### **...**
