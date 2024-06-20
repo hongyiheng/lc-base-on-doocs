@@ -73,7 +73,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if not n:
+            return False
+        return n == (n & -n)
 ```
 
 ### **Java**
@@ -81,7 +85,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        if (n == 0) {
+            return false;
+        }
+        return (n & -n) > 0 && n == (n & -n);
+    }   
+}
 ```
 
 ### **...**
