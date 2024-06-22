@@ -60,7 +60,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countOperations(self, num1: int, num2: int) -> int:
+        ans = 0
+        while num1 and num2:
+            if num1 >= num2:
+                num1 -= num2
+            else:
+                num2 -= num1
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +77,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countOperations(int num1, int num2) {
+        int ans = 0;
+        while (num1 > 0 && num2 > 0) {
+            if (num1 >= num2) {
+                num1 -= num2;
+            } else {
+                num2 -= num1;
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
