@@ -80,7 +80,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperationsToMakeEqual(self, x: int, y: int) -> int:
+        ans = 0
+        q = deque([x])
+        vis = {x}
+        while q:
+            for _ in range(len(q)):
+                v = q.popleft()
+                if v == y:
+                    return ans
+                for k in [5, 11]:
+                    if not v % k and v // k not in vis:
+                        vis.add(v // k)
+                        q.append(v // k)
+                for k in [-1, 1]:
+                    if v + k not in vis:
+                        vis.add(v + k)
+                        q.append(v + k)
+            ans += 1
+        return ans 
 ```
 
 ### **Java**
@@ -88,7 +107,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperationsToMakeEqual(int x, int y) {
+        int ans = 0;
+        Deque<Integer> q = new ArrayDeque<>();
+        Set<Integer> vis = new HashSet<>(Arrays.asList(x));
+        q.add(x);
+        while (!q.isEmpty()) {
+            int m = q.size();
+            for (int i = 0; i < m; i++) {
+                int v = q.pollFirst();
+                if (v == y) {
+                    return ans;
+                }
+                for (int k : Arrays.asList(5, 11)) {
+                    if (v % k == 0 && !vis.contains(v / k)) {
+                        q.addLast(v / k);
+                        vis.add(v / k);
+                    }
+                }
+                for (int k : Arrays.asList(-1, 1)) {
+                    if (!vis.contains(v + k)) {
+                        q.addLast(v + k);
+                        vis.add(v + k);
+                    }
+                }
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
