@@ -73,7 +73,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumTimeToInitialState(self, word: str, k: int) -> int:
+        ans, n = 0, len(word)
+        for i in range(k, n, k):
+            ans += 1
+            s = word[i:]
+            if s == word[:len(s)]:
+                return ans
+        return ans + 1
 ```
 
 ### **Java**
@@ -81,7 +89,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumTimeToInitialState(String word, int k) {
+        int ans = 0, n = word.length();
+        for (int i = k; i < n; i += k) {
+            ans++;
+            String s = word.substring(i);
+            if (s.equals(word.substring(0, s.length()))) {
+                return ans;
+            }
+        }
+        return ans + 1;
+    }
+}
 ```
 
 ### **...**
