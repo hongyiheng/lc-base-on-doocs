@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def clearDigits(self, s: str) -> str:
+        ans = []
+        for c in s:
+            if '0' <= c <= '9':
+                if ans:
+                    ans.pop()
+            else:
+                ans.append(c)
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -74,7 +83,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String clearDigits(String s) {
+        StringBuilder ans = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c >= '0' && c <= '9') {
+                if (ans.length() > 0) {
+                    ans.deleteCharAt(ans.length() - 1);
+                }
+            } else {
+                ans.append(c);
+            }
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
