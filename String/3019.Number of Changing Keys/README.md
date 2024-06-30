@@ -54,7 +54,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countKeyChanges(self, s: str) -> int:
+        s = s.lower()
+        ans = 0
+        for i in range(1, len(s)):
+            last, cur = ord(s[i - 1]), ord(s[i])
+            if last % 26 != cur % 26:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +70,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countKeyChanges(String s) {
+        s = s.toLowerCase();
+        int ans = 0;
+        for (int i = 1; i < s.length(); i++) {
+            char last = s.charAt(i - 1), cur = s.charAt(i);
+            if ((last - 'a') % 26 != (cur - 'a') % 26) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
