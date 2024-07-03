@@ -52,7 +52,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumOfTheDigitsOfHarshadNumber(self, x: int) -> int:
+        s, v = 0, x
+        while v:
+            s += v % 10
+            v //= 10
+        return s if x % s == 0 else -1
 ```
 
 ### **Java**
@@ -60,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumOfTheDigitsOfHarshadNumber(int x) {
+        int s = 0, v = x;
+        while (v > 0) {
+            s += v % 10;
+            v /= 10;
+        }
+        return x % s == 0 ? s : -1;
+    }
+}
 ```
 
 ### **...**
