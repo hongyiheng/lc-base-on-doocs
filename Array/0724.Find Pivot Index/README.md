@@ -66,6 +66,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        s = sum(nums)
+        t = 0
+        for i, v in enumerate(nums):
+            if t == (s - v) / 2:
+                return i
+            t += v
+        return -1
 
 ```
 
@@ -74,7 +83,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int n = nums.length;
+        int s = 0, t = 0;
+        for (int v : nums) {
+            s += v;
+        }
+        for (int i = 0; i < n; i++) {
+            if ((s - nums[i]) % 2 == 0 && t == (s - nums[i]) / 2) {
+                return i;
+            }
+            t += nums[i];
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
