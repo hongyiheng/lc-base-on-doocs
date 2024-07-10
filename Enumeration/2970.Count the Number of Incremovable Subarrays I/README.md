@@ -64,7 +64,26 @@ nums 中只有这 7 个移除递增子数组。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def incremovableSubarrayCount(self, nums: List[int]) -> int:
+        def check(i, j):
+            last = 0
+            for k, v in enumerate(nums):
+                if i <= k <= j:
+                    continue
+                if v <= last:
+                    return False
+                last = v
+            return True
 
+        ans, n = 1, len(nums)
+        for i in range(n):
+            for j in range(i, n):
+                if j - i + 1 == n:
+                    continue
+                if check(i, j):
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +91,36 @@ nums 中只有这 7 个移除递增子数组。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean check(int i, int j, int[] nums) {
+        int last = 0;
+        for (int k = 0; k < nums.length; k++) {
+            if (i <= k && k <= j) {
+                continue;
+            }
+            if (nums[k] <= last) {
+                return false;
+            }
+            last = nums[k];
+        }
+        return true;
+    }
 
+    public int incremovableSubarrayCount(int[] nums) {
+        int ans = 1, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (j - i + 1 == n) {
+                    continue;
+                }
+                if (check(i, j, nums)) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
