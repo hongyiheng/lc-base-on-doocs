@@ -57,7 +57,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberGame(self, nums: List[int]) -> List[int]:
+        nums.sort()
+        for i in range(0, len(nums), 2):
+            nums[i], nums[i + 1] = nums[i + 1], nums[i]
+        return nums
 ```
 
 ### **Java**
@@ -65,7 +70,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] numberGame(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        for (int i = 0; i < n; i += 2) {
+            int t = nums[i + 1];
+            nums[i + 1] = nums[i];
+            nums[i] = t;
+        }
+        return nums;
+    }
+}
 ```
 
 ### **...**
