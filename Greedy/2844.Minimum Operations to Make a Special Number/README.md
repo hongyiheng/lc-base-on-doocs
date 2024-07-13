@@ -63,7 +63,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumOperations(self, num: str) -> int:
+        n = len(num)
+        t = a1 = False
+        ans1 = ans2 = n
+        for i in range(n - 1, -1, -1):
+            if not t and num[i] == '5':
+                t = True
+                continue
+            if t and num[i] in {'2', '7'}:
+                a1 = True
+                break
+            ans1 -= 1
 
+        t = False
+        for i in range(n - 1, -1, -1):
+            if t and num[i] in {'0', '5'}:
+                break
+            if num[i] == '0':
+                t = True
+                continue
+            ans2 -= 1
+        return n - max(ans1, ans2) if a1 else n - ans2
 ```
 
 ### **Java**
@@ -71,7 +93,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int minimumOperations(String num) {
+        int n = num.length();
+        boolean t = false, a1 = false;;
+        int ans1 = n, ans2 = n;
+        for (int i = n - 1; i >= 0; i--) {
+            if (!t && num.charAt(i) == '5') {
+                t = true;
+                continue;
+            }
+            if (t && (num.charAt(i) == '2' || num.charAt(i) == '7')) {
+                a1 = true;
+                break;
+            }
+            ans1--;
+        }
 
+        t = false;
+        for (int i = n - 1; i >= 0; i--) {
+            if (t && (num.charAt(i) == '0' || num.charAt(i) == '5')) {
+                break;
+            }
+            if (num.charAt(i) == '0') {
+                t = true;
+                continue;
+            }
+            ans2--;
+        }
+        return a1 ? n - Math.max(ans1, ans2) : n - ans2;
+    }
+}
 ```
 
 ### **...**
