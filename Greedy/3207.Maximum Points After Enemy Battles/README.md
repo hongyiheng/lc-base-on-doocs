@@ -82,7 +82,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumPoints(self, enemyEnergies: List[int], currentEnergy: int) -> int:
+        enemyEnergies.sort()
+        if currentEnergy < enemyEnergies[0]:
+            return 0
+        return (currentEnergy + sum(enemyEnergies[1:])) // enemyEnergies[0]
 ```
 
 ### **Java**
@@ -90,7 +95,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumPoints(int[] enemyEnergies, int currentEnergy) {
+        Arrays.sort(enemyEnergies);
+        if (currentEnergy < enemyEnergies[0]) {
+            return 0;
+        }
+        long ans = currentEnergy / enemyEnergies[0];
+        currentEnergy %= enemyEnergies[0];
+        for (int i = enemyEnergies.length - 1; i > 0; i--) {
+            currentEnergy += enemyEnergies[i];
+            ans += currentEnergy / enemyEnergies[0];
+            currentEnergy %= enemyEnergies[0];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
