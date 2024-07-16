@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findIntersectionValues(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        s1, s2 = set(nums1), set(nums2)
+        ans = [0, 0]
+        for v in nums1:
+            if v in s2:
+                ans[0] += 1
+        for v in nums2:
+            if v in s1:
+                ans[1] += 1
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +78,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findIntersectionValues(int[] nums1, int[] nums2) {
+        Set<Integer> s1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
+        Set<Integer> s2 = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
+        int[] ans = new int[]{0, 0};
+        for (int v : nums1) {
+            if (s2.contains(v)) {
+                ans[0]++;
+            }
+        }
+        for (int v : nums2) {
+            if (s1.contains(v)) {
+                ans[1]++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
