@@ -89,7 +89,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findWinningPlayer(self, skills: List[int], k: int) -> int:
+        ans, cur, cnt = 0, skills[0], 0
+        for i in range(1, len(skills)):
+            if cur < skills[i]:
+                cur = skills[i]
+                ans = i
+                cnt = 0
+            cnt += 1
+            if cnt == k:
+                return ans
+        return ans
 ```
 
 ### **Java**
@@ -97,7 +108,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findWinningPlayer(int[] skills, int k) {
+        int ans = 0, cur = skills[0], cnt = 0;
+        for (int i = 1; i < skills.length; i++) {
+            if (skills[i] > cur) {
+                cur = skills[i];
+                cnt = 0;
+                ans = i;
+            }
+            if (++cnt >= k) {
+                return ans;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
