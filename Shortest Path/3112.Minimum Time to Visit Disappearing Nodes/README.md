@@ -94,7 +94,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumTime(self, n: int, edges: List[List[int]], disappear: List[int]) -> List[int]:
+        g = defaultdict(list)
+        for u, v, w in edges:
+            g[u].append([v, w])
+            g[v].append([u, w])
+        ans = [-1] * n
+        ans[0] = 0
+        q = [[0, 0]]
+        while q:
+            t, u = heapq.heappop(q)
+            if t > ans[u]:
+                continue
+            for v, w in g[u]:
+                if t + w >= disappear[v]:
+                    continue
+                if ans[v] == -1 or ans[v] > t + w:
+                    ans[v] = t + w
+                    heapq.heappush(q, [t + w, v])
+        return ans
 ```
 
 ### **Java**
@@ -102,7 +121,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] minimumTime(int n, int[][] edges, int[] disappear) {
+        Map<Integer, List<int[]>> g = new HashMap<>();
+        for (int[] e : edges) {
+            int u = e[0], v = e[1], w = e[2];
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(new int[]{v, w});
+            g.computeIfAbsent(v, k -> new ArrayList<>()).add(new int[]{u, w});
+        }
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        ans[0] = 0;
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        q.offer(new int[]{0, 0});
+        while (!q.isEmpty()) {
+            int[] us = q.poll();
+            int t = us[0], u = us[1];
+            if (t > ans[u]) {
+                continue;
+            } 
+            for (int[] vs : g.getOrDefault(u, new ArrayList<>())) {
+                int v = vs[0], w = vs[1];
+                if (t + w >= disappear[v]) {
+                    continue;
+                }
+                if (ans[v] == -1 || ans[v] > t + w) {
+                    ans[v] = t + w;
+                    q.offer(new int[]{t + w, v});
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
