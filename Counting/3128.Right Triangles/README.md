@@ -185,7 +185,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        rows, cols = [0] * m, [0] * n
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    rows[i] += 1
+                    cols[j] += 1
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    ans += (rows[i] - 1) * (cols[j] - 1)
+        return ans
 ```
 
 ### **Java**
@@ -193,7 +207,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long numberOfRightTriangles(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        int[] rows = new int[m], cols = new int[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    rows[i]++;
+                    cols[j]++;
+                }
+            }
+        }
+        long ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    ans += (long)(rows[i] - 1) * (cols[j] - 1);
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
