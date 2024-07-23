@@ -72,7 +72,17 @@ i = 2 且 j = 3 ，因为 isPrefixAndSuffix("ma", "mama") 为 true 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countPrefixSuffixPairs(self, words: List[str]) -> int:
+        ans, n = 0, len(words)
+        for i in range(n):
+            m = len(words[i])
+            for j in range(i + 1, n):
+                if len(words[j]) < m:
+                    continue
+                if words[j][:m] == words[j][-m:] == words[i]:
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +90,19 @@ i = 2 且 j = 3 ，因为 isPrefixAndSuffix("ma", "mama") 为 true 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countPrefixSuffixPairs(String[] words) {
+        int ans = 0, n = words.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (words[j].startsWith(words[i]) && words[j].endsWith(words[i])) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
