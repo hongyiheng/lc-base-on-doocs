@@ -72,7 +72,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def sumOfPowers(self, nums: List[int], k: int) -> int:
+        @cache
+        def dfs(i, j, k, mi) -> int:
+            if i >= n:
+                return mi if k == 0 else 0
+            if n - i < k:
+                return 0
+            ans = dfs(i + 1, j, k, mi)
+            if j == n:
+                ans += dfs(i + 1, i, k - 1, mi)
+            else:
+                ans += dfs(i + 1, i, k - 1, min(mi, nums[i] - nums[j]))
+            return ans % mod
 
+        mod = int(1e9 + 7)
+        n = len(nums)
+        nums.sort()
+        return dfs(0, n, k, inf)
 ```
 
 ### **Java**
@@ -80,7 +98,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int n;
+    int mod = (int)1e9 + 7;
+    int[] nums;
+    Map<String, Integer> f = new HashMap<>();
 
+    public int dfs(int i, int j, int t, int mi) {
+        if (i == n || t == 0) {
+            return t == 0 ? mi : 0;
+        }
+        if (n - i < t) {
+            return 0;
+        }
+        String key = i + ":" + j + ":" + t + ":" + mi;
+        if (f.containsKey(key)) {
+            return f.get(key);
+        }
+        int ans = dfs(i + 1, j, t, mi) % mod;
+        if (j == -1) {
+            ans = (ans + dfs(i + 1, i, t - 1, mi)) % mod;
+        } else {
+            ans = (ans + dfs(i + 1, i, t - 1, Math.min(mi, Math.abs(nums[i] - nums[j])))) % mod;
+        }
+        f.put(key, ans);
+        return ans;
+    }
+
+    public int sumOfPowers(int[] nums, int k) {
+        n = nums.length;
+        Arrays.sort(nums);
+        this.nums = nums;
+        return dfs(0, -1, k, Integer.MAX_VALUE);
+    }
+}
 ```
 
 ### **...**
