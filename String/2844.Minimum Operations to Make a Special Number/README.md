@@ -63,7 +63,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, num: str) -> int:
+        def f(t, ts):
+            n = len(num)
+            flag = False
+            for i in range(n - 1, -1, -1):
+                if flag and num[i] in ts:
+                    return n - i - 2
+                if num[i] == t:
+                    flag = True
+            if t == '0' and flag:
+                return n - 1
+            return n
+        
+        return min(f('0', ['0', '5']), f('5', ['2', '7']))
 ```
 
 ### **Java**
@@ -71,7 +85,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int f(String num, char t, Set<Character> ts) {
+        int n = num.length();
+        boolean flag = false;
+        for (int i = n - 1; i > -1; i--) {
+            char c = num.charAt(i);
+            if (flag && ts.contains(c)) {
+                return n - i - 2;
+            }
+            if (t == c) {
+                flag = true;
+            }
+        }
+        if (t == '0' && flag) {
+            return n - 1;
+        }
+        return n;
+    }
 
+    public int minimumOperations(String num) {
+        return Math.min(f(num, '0', new HashSet<>(Arrays.asList('0', '5'))), f(num, '5', new HashSet<>(Arrays.asList('2', '7'))));
+    }
+}
 ```
 
 ### **...**
