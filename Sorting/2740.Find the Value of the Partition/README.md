@@ -65,7 +65,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findValueOfPartition(self, nums: List[int]) -> int:
+        nums.sort()
+        ans = nums[1] - nums[0]
+        for i in range(2, len(nums)):
+            ans = min(ans, nums[i] - nums[i - 1])
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +79,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findValueOfPartition(int[] nums) {
+        Arrays.sort(nums);
+        int ans = nums[1] - nums[0];
+        for (int i = 2; i < nums.length; i++) {
+            ans = Math.min(ans, nums[i] - nums[i - 1]);
+        }
+        return ans;
+    }       
+}
 ```
 
 ### **...**
