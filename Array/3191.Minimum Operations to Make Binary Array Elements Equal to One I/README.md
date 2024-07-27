@@ -67,7 +67,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        ans = 0
+        for i, v in enumerate(nums):
+            if v == 1:
+                continue
+            if i + 2 >= len(nums):
+                return -1
+            for j in range(i + 1, i + 3):
+                nums[j] ^= 1
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +86,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums) {
+        int ans = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 1) {
+                continue;
+            }
+            if (i + 2 >= n) {
+                return -1;
+            }
+            for (int j = i + 1; j < i + 3; j++) {
+                nums[j] ^= 1;
+            }
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
