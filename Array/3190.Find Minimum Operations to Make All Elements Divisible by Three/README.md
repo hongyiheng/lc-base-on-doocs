@@ -57,7 +57,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        return sum([1 if v % 3 else 0 for v in nums])
 ```
 
 ### **Java**
@@ -65,7 +67,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperations(int[] nums) {
+        int ans = 0;
+        for (int v : nums) {
+            if (v % 3 != 0) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
