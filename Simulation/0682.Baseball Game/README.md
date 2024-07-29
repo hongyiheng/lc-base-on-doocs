@@ -82,7 +82,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def calPoints(self, operations: List[str]) -> int:
+        ans = []
+        for i, c in enumerate(operations):
+            if c == '+':
+                ans.append(ans[-2] + ans[-1])
+            elif c == 'D':
+                ans.append(ans[-1] * 2)
+            elif c == 'C':
+                ans.pop()
+            else:
+                ans.append(int(operations[i]))
+        return sum(ans)
 ```
 
 ### **Java**
@@ -90,7 +102,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int calPoints(String[] operations) {
+        Deque<Integer> ans = new ArrayDeque<>();
+        for (int i = 0; i < operations.length; i++) {
+            String c = operations[i];
+            if ("+".equals(c)) {
+                int a = ans.pollLast();
+                int b = ans.peekLast();
+                ans.add(a);
+                ans.add(a + b);
+            } else if ("D".equals(c)) {
+                ans.add(ans.peekLast() * 2);
+            } else if ("C".equals(c)) {
+                ans.pollLast();
+            } else {
+                ans.add(Integer.parseInt(c));
+            }
+        }
+        int t = 0;
+        for (int v : ans) {
+            t += v;
+        }
+        return t;
+    }
+}
 ```
 
 ### **...**
