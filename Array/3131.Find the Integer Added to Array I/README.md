@@ -92,7 +92,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def addedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        return min(nums2) - min(nums1)
 ```
 
 ### **Java**
@@ -100,7 +102,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int addedInteger(int[] nums1, int[] nums2) {
+        int m1 = nums1[0], m2 = nums2[0];
+        for (int v : nums1) {
+            m1 = Math.min(v, m1);
+        }
+        for (int v : nums2) {
+            m2 = Math.min(v, m2);
+        }
+        return m2 - m1;
+    }
+}
 ```
 
 ### **...**
