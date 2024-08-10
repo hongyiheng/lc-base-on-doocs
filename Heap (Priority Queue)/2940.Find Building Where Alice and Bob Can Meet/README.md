@@ -68,7 +68,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def leftmostBuildingQueries(self, heights: List[int], queries: List[List[int]]) -> List[int]:
+        n = len(queries)
+        ans = [-1] * n
+        qs = []
+        for i, v in enumerate(queries):
+            v.sort()
+            j, k = v
+            if j == k:
+                ans[i] = j
+            elif heights[j] < heights[k]:
+                ans[i] = k
+            elif heights[j] >= heights[k]:
+                qs.append([k, heights[j] + 1, i])
 
+        qs.sort(key = lambda x: (-x[0], -x[1]))
+        hs = []
+        for i, h in enumerate(heights):
+            while qs and qs[-1][0] <= i:
+                heapq.heappush(hs, (qs[-1][1], qs[-1][2]))
+                qs.pop()
+            while hs and hs[0][0] <= h:
+                ans[heapq.heappop(hs)[1]] = i
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +99,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] leftmostBuildingQueries(int[] heights, int[][] queries) {
+        int n = queries.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        
+        PriorityQueue<int[]> qs = new PriorityQueue<>((a, b) -> b[0] != a[0] ? a[0] - b[0] : a[1] - b[1]);
+        for (int i = 0; i < n; i++) {
+            int[] v = queries[i];
+            Arrays.sort(v);
+            int j = v[0], k = v[1];
+            if (j == k) {
+                ans[i] = j;
+            } else if (heights[j] < heights[k]) {
+                ans[i] = k;
+            } else if (heights[j] >= heights[k]) {
+                qs.add(new int[] {k, heights[j] + 1, i});
+            }
+        }
+        
+        PriorityQueue<int[]> hs = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        for (int i = 0; i < heights.length; i++) {
+            while (!qs.isEmpty() && qs.peek()[0] <= i) {
+                hs.add(new int[] {qs.peek()[1], qs.poll()[2]});
+            }
+            while (!hs.isEmpty() && hs.peek()[0] <= heights[i]) {
+                ans[hs.poll()[1]] = i;
+            }
+        }
+    
+        return ans;
+    }
+}
 ```
 
 ### **...**
