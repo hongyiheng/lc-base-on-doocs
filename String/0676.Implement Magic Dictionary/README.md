@@ -69,7 +69,33 @@ magicDictionary.search("leetcoded"); // 返回 False
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MagicDictionary:
 
+    def __init__(self):
+        return
+
+    def buildDict(self, dictionary: List[str]) -> None:
+        self.ws = dictionary
+
+    def search(self, searchWord: str) -> bool:
+        for s in self.ws:
+            if len(s) != len(searchWord):
+                continue
+            diff = 0
+            for a, b in zip(s, searchWord):
+                if a != b:
+                    diff += 1
+                if diff > 1:
+                    break
+            if diff == 1:
+                return True
+        return False
+
+
+# Your MagicDictionary object will be instantiated and called as such:
+# obj = MagicDictionary()
+# obj.buildDict(dictionary)
+# param_2 = obj.search(searchWord)
 ```
 
 ### **Java**
@@ -77,7 +103,42 @@ magicDictionary.search("leetcoded"); // 返回 False
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MagicDictionary {
 
+    String[] ws;
+
+    public MagicDictionary() {
+    }
+    
+    public void buildDict(String[] dictionary) {
+        ws = dictionary;
+    }
+    
+    public boolean search(String searchWord) {
+        for (String s : ws) {
+            if (searchWord.length() != s.length()) {
+                continue;
+            }
+            int diff = 0;
+            for (int i = 0; i < s.length() && diff <= 1; i++) {
+                if (s.charAt(i) != searchWord.charAt(i)) {
+                    diff++;
+                }
+            }
+            if (diff == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+/**
+ * Your MagicDictionary object will be instantiated and called as such:
+ * MagicDictionary obj = new MagicDictionary();
+ * obj.buildDict(dictionary);
+ * boolean param_2 = obj.search(searchWord);
+ */
 ```
 
 ### **...**
