@@ -63,7 +63,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxScore(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        f = [[inf] * (n + 1) for _ in range(m + 1)]
+        ans = -inf
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                mi = min(f[i][j - 1], f[i - 1][j])
+                ans = max(ans, grid[i - 1][j - 1] - mi)
+                f[i][j] = min(mi, grid[i - 1][j - 1])
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +81,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxScore(List<List<Integer>> grid) {
+        int m = grid.size(), n = grid.get(0).size();
+        int[][] f = new int[m + 1][n + 1];
+        int inf = 0x3f3f3f3f;
+        for(int[] r : f) {
+            Arrays.fill(r, inf);
+        }
+        int ans = -inf;
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                int v = grid.get(i - 1).get(j - 1);
+                int mi = Math.min(f[i][j - 1], f[i - 1][j]);
+                ans = Math.max(ans, v - mi);
+                f[i][j] = Math.min(mi, v);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
