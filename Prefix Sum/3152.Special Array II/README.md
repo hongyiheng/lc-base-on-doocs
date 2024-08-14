@@ -63,7 +63,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isArraySpecial(self, nums: List[int], queries: List[List[int]]) -> List[bool]:
+        n = len(nums)
+        pre = [0] * n
+        for i in range(1, n):
+            pre[i] = pre[i - 1] + (1 if nums[i - 1] % 2 == nums[i] % 2 else 0)
+        return [pre[i] == pre[j] for i, j in queries]
 ```
 
 ### **Java**
@@ -71,7 +77,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean[] isArraySpecial(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int[] pre = new int[n];
+        for (int i = 1; i < n; i++) {
+            pre[i] = pre[i - 1] + (nums[i - 1] % 2 == nums[i] % 2 ? 1 : 0);
+        }
+        boolean[] ans = new boolean[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int[] q = queries[i];
+            ans[i] = pre[q[0]] == pre[q[1]];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
