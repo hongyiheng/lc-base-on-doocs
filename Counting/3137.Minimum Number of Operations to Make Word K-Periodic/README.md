@@ -111,7 +111,14 @@ font-size: 0.85rem;
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperationsToMakeKPeriodic(self, word: str, k: int) -> int:
+        cnt = defaultdict(int)
+        for i in range(0, len(word), k):
+            s = word[i: i + k]
+            cnt[s] += 1
+        mx = max(cnt.values())
+        return len(word) // k - mx
 ```
 
 ### **Java**
@@ -119,7 +126,21 @@ font-size: 0.85rem;
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperationsToMakeKPeriodic(String word, int k) {
+        Map<String, Integer> cnt = new HashMap<>();
+        int n = word.length();
+        for (int i = 0; i < n; i += k) {
+            String s = word.substring(i, i + k);
+            cnt.put(s, cnt.getOrDefault(s, 0) + 1);
+        }
+        int mx = 0;
+        for (int v : cnt.values()) {
+            mx = Math.max(mx, v);
+        }
+        return n / k - mx;
+    }
+}
 ```
 
 ### **...**
