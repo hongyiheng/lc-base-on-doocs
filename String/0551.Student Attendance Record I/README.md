@@ -42,7 +42,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkRecord(self, s: str) -> bool:
+        a = l = 0
+        for c in s:
+            if c == 'A':
+                a += 1
+            if c == 'L':
+                l += 1
+            else:
+                l = 0
+            if a >= 2 or l >= 3:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -50,7 +62,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkRecord(String s) {
+        int a = 0, l = 0;
+        for (char c : s.toCharArray()) {
+            if (c == 'A') {
+                a++;
+            }
+            if (c == 'L') {
+                l++;
+            } else {
+                l = 0;
+            }
+            if (a >= 2 || l >= 3) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
