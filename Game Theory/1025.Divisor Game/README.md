@@ -58,7 +58,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def divisorGame(self, n: int) -> bool:
+        return n % 2 == 0
 ```
 
 ### **Java**
@@ -66,7 +68,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean divisorGame(int n) {
+        return n % 2 == 0;
+    }
+}
 ```
 
 ### **...**
