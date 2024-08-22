@@ -56,7 +56,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minEnd(self, n: int, x: int) -> int:
+        n -= 1
+        j = 0
+        for i in range(64):
+            if x >> i & 1 == 0:
+                if n >> j & 1:
+                    x |= 1 << i
+                j += 1
+        return x
 ```
 
 ### **Java**
@@ -64,7 +73,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minEnd(int n, int x) {
+        n--;
+        long j = 0, ans = x;
+        for (int i = 0; i < 64; i++) {
+            if ((ans & (1L << i)) == 0) {
+                if ((n & (1L << j)) != 0) {
+                    ans |= (1L << i);
+                }
+                j++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
