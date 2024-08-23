@@ -77,7 +77,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        def dfs(node):
+            if not node:
+                return None
+            if node.val in s:
+                return dfs(node.next)
+            node.next = dfs(node.next)
+            return node
+        
+        s = set(nums)
+        return dfs(head)
 ```
 
 ### **Java**
@@ -85,7 +101,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
 
+    Set<Integer> s;
+
+    public ListNode dfs(ListNode node) {
+        if (node == null) {
+            return null;
+        }
+        if (s.contains(node.val)) {
+            return dfs(node.next);
+        }
+        node.next = dfs(node.next);
+        return node;
+    }
+
+    public ListNode modifiedList(int[] nums, ListNode head) {
+        s = new HashSet<>();
+        for (int v : nums) {
+            s.add(v);
+        }
+        return dfs(head);
+    }
+}
 ```
 
 ### **...**
