@@ -9,21 +9,16 @@ class Employee:
 
 class Solution:
     def getImportance(self, employees: List['Employee'], id: int) -> int:
-        mp = dict()
+        def dfs(i):
+            e = es[i]
+            if not e:
+                return 0
+            ans = e.importance
+            for j in e.subordinates:
+                ans += dfs(j)
+            return ans
 
-        def dfs(item_id):
-            if item_id in mp:
-                return mp[item_id]
-            res = 0
-            for e in employees:
-                if e.id == item_id:
-                    res = e.importance
-                    if e.subordinates:
-                        for subordinate_id in e.subordinates:
-                            res += dfs(subordinate_id)
-                    else:
-                        break
-            mp[item_id] = res
-            return res
-
+        es = [None] * 2010
+        for e in employees:
+            es[e.id] = e
         return dfs(id)

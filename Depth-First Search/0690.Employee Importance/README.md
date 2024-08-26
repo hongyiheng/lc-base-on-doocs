@@ -55,23 +55,18 @@ class Employee:
 
 class Solution:
     def getImportance(self, employees: List['Employee'], id: int) -> int:
-        mp = dict()
-
-        def dfs(item_id):
-            if item_id in mp:
-                return mp[item_id]
-            res = 0
-            for e in employees:
-                if e.id == item_id:
-                    res = e.importance
-                    if e.subordinates:
-                        for subordinate_id in e.subordinates:
-                            res += dfs(subordinate_id)
-                    else:
-                        break
-            mp[item_id] = res
-            return res
+        def dfs(i):
+            e = es[i]
+            if not e:
+                return 0
+            ans = e.importance
+            for j in e.subordinates:
+                ans += dfs(j)
+            return ans
         
+        es = [None] * 2010
+        for e in employees:
+            es[e.id] = e
         return dfs(id)
 ```
 
@@ -90,27 +85,28 @@ class Employee {
 */
 
 class Solution {
-    Map<Integer, Integer> mp = new HashMap<>();
+
+    Employee[] es;
+
+    public int dfs(int i) {
+        Employee e = es[i];
+        if (e == null) {
+            return 0;
+        }
+        int ans = e.importance;
+        for (int j : e.subordinates) {
+            ans += dfs(j);
+        }
+        return ans;
+    }
+
     public int getImportance(List<Employee> employees, int id) {
-        if (mp.containsKey(id)) {
-            return mp.get(id);
-        }
-        int res = 0;
+        es = new Employee[2010];
         for (Employee e : employees) {
-            if (e.id == id) {
-                res = e.importance;
-                if (e.subordinates.isEmpty()) {
-                    break;
-                } else {   
-                    for (Integer itemId : e.subordinates) {
-                        res += getImportance(employees, itemId);
-                    }
-                }
-            }
+            es[e.id] = e;
         }
-        mp.put(id, res);
-        return res;
-    } 
+        return dfs(id);
+    }
 }
 ```
 

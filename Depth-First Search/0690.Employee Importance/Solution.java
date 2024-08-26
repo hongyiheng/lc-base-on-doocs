@@ -8,25 +8,26 @@ class Employee {
 */
 
 class Solution {
-    Map<Integer, Integer> mp = new HashMap<>();
+
+    Employee[] es;
+
+    public int dfs(int i) {
+        Employee e = es[i];
+        if (e == null) {
+            return 0;
+        }
+        int ans = e.importance;
+        for (int j : e.subordinates) {
+            ans += dfs(j);
+        }
+        return ans;
+    }
+
     public int getImportance(List<Employee> employees, int id) {
-        if (mp.containsKey(id)) {
-            return mp.get(id);
-        }
-        int res = 0;
+        es = new Employee[2010];
         for (Employee e : employees) {
-            if (e.id == id) {
-                res = e.importance;
-                if (e.subordinates.isEmpty()) {
-                    break;
-                } else {
-                    for (Integer itemId : e.subordinates) {
-                        res += getImportance(employees, itemId);
-                    }
-                }
-            }
+            es[e.id] = e;
         }
-        mp.put(id, res);
-        return res;
+        return dfs(id);
     }
 }
