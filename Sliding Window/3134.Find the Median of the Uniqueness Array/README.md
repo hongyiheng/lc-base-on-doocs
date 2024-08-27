@@ -75,7 +75,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def medianOfUniquenessArray(self, nums: List[int]) -> int:
+        def check(x):
+            nonlocal k, n
+            l = r = s = 0
+            cnt = defaultdict(int)
+            while r < n:
+                cnt[nums[r]] += 1
+                while len(cnt) > x:
+                    cnt[nums[l]] -= 1
+                    if cnt[nums[l]] == 0:
+                        cnt.pop(nums[l])
+                    l += 1
+                s += r - l + 1
+                if s >= k:
+                    return True
+                r += 1
+            return False
 
+        n = len(nums)
+        k = ((1 + n) * n / 2 + 1) // 2
+        l, r = 1, 10 ** 5
+        while l < r:
+            mid = (l + r) >> 1
+            if check(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r
 ```
 
 ### **Java**
@@ -83,7 +111,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean check(int[] nums, int x, long k) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int l = 0, r = 0;
+        long s = 0;
+        while (r < nums.length) {
+            cnt.put(nums[r], cnt.getOrDefault(nums[r], 0) + 1);
+            while (cnt.keySet().size() > x) {
+                int v = cnt.get(nums[l]);
+                if (v == 1) {
+                    cnt.remove(nums[l]);
+                } else {
+                    cnt.put(nums[l], --v);
+                }
+                l++;
+            }
+            s += r - l + 1;
+            if (s >= k) {
+                return true;
+            }
+            r++;
+        }
+        return false;
+    }
+
+    public int medianOfUniquenessArray(int[] nums) {
+        int n = nums.length;
+        long k = ((long)(1 + n) * n / 2 + 1) / 2;
+        int l = 1, r = (int)1e6;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (check(nums, mid, k)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return r;
+    }
+}
 ```
 
 ### **...**
