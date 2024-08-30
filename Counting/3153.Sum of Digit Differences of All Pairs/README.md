@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumDigitDifferences(self, nums: List[int]) -> int:
+        m, n = len(nums), len(str(nums[0]))
+        ans = 0
+        s = [[0] * 10 for _ in range(n)]
+        for i, v in enumerate(nums):
+            for j in range(n):
+                s[j][v % 10] += 1
+                ans += i + 1 - s[j][v % 10]
+                v //= 10
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +78,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long sumDigitDifferences(int[] nums) {
+        int m = nums.length, n = String.valueOf(nums[0]).length();
+        long[][] s = new long[n][10];
+        long ans = 0;
+        for (int i = 0; i < m; i++) {
+            int v = nums[i];
+            for (int j = 0; j < n; j++) {
+                s[j][v % 10] += 1;
+                ans += i + 1 - s[j][v % 10];
+                v /= 10;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
