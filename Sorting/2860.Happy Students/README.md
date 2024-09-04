@@ -62,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countWays(self, nums: List[int]) -> int:
+        nums.sort()
+        ans = 1 if nums[0] > 0 else 0
+        for i, v in enumerate(nums):
+            if v < i + 1:
+                if i < len(nums) - 1 and nums[i + 1] <= i + 1:
+                    continue
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +79,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countWays(List<Integer> nums) {
+        Collections.sort(nums);
+        int ans = nums.get(0) > 0 ? 1 : 0, n = nums.size();
+        for (int i = 0; i < n; i++) {
+            int v = nums.get(i);
+            if (v < i + 1) {
+                if (i < n - 1 && nums.get(i + 1) <= i + 1) {
+                    continue;
+                }
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
