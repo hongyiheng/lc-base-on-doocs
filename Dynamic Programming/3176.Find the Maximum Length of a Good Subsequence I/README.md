@@ -58,7 +58,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumLength(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        f = [[1] * (k + 1) for _ in range(n)]
+        ans = 0
+        for i in range(n):
+            for d in range(k + 1):
+                for j in range(i):
+                    if nums[i] == nums[j]:
+                        f[i][d] = max(f[i][d], f[j][d] + 1)
+                    elif d:
+                        f[i][d] = max(f[i][d], f[j][d - 1] + 1)
+                ans = max(ans, f[i][d])
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +79,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumLength(int[] nums, int k) {
+        int n = nums.length;
+        int[][] f = new int[n][k + 1];
+        for (int[] r : f) {
+            Arrays.fill(r, 1);
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int d = 0; d < k + 1; d++) {
+                for (int j = 0; j < i; j++) {
+                    if (nums[i] == nums[j]) {
+                        f[i][d] = Math.max(f[i][d], f[j][d] + 1);
+                    } else if (d > 0) {
+                        f[i][d] = Math.max(f[i][d], f[j][d - 1] + 1);
+                    }
+                }
+                ans = Math.max(ans, f[i][d]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
