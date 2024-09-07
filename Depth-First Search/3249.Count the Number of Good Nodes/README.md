@@ -76,7 +76,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countGoodNodes(self, edges: List[List[int]]) -> int:
+        def dfs(u, p):
+            nonlocal ans
+            t, s, cnt = -1, 1, 0
+            for v in g[u]:
+                if v == p:
+                    continue
+                cnt += 1
+                nv = dfs(v, u)
+                if t == -1:
+                    t = nv
+                elif t != nv:
+                    t = -2
+                s += nv
+            if not cnt or t != -2:
+                ans += 1
+            return s
+        
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        ans = 0
+        dfs(0, -1)
+        return ans
 ```
 
 ### **Java**
@@ -84,7 +109,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    
+    Map<Integer, List<Integer>> g;
+    int ans;
 
+    public int dfs(int u, int p) {
+        List<Integer> child = g.getOrDefault(u, new ArrayList<>());
+        int t = -1, s = 1, cnt = 0;
+        for (int v : child) {
+            if (v == p) {
+                continue;
+            }
+            cnt++;
+            int nv = dfs(v, u);
+            if (t == -1) {
+                t = nv;
+            } else if (t != nv) {
+                t = -2;
+            }
+            s += nv;
+        }
+        if (cnt == 0 || t != -2) {
+            ans++;
+        }
+        return s;
+    }
+
+    public int countGoodNodes(int[][] edges) {
+        g = new HashMap<>();
+        for (int[] e : edges) {
+            int u = e[0], v = e[1];
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+            g.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
+        }
+        dfs(0, -1);
+        return ans;
+    }
+}
 ```
 
 ### **...**
