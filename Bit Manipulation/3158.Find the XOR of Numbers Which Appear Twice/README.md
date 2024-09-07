@@ -68,7 +68,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def duplicateNumbersXOR(self, nums: List[int]) -> int:
+        cnt = ans = 0
+        for v in nums:
+            if cnt >> v & 1 != 0:
+                ans ^= v
+            cnt |= 1 << v
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +83,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int duplicateNumbersXOR(int[] nums) {
+        boolean[] cnt = new boolean[51];
+        int ans = 0;
+        for (int v : nums) {
+            if (cnt[v]) {
+                ans ^= v;
+            }
+            cnt[v] = true;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
