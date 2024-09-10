@@ -156,7 +156,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfChild(self, n: int, k: int) -> int:
+        d = True
+        ans = 0
+        while k:
+            if ans == 0:
+                d = True
+            elif ans == n - 1:
+                d = False
+            v = min(k, n - 1)
+            if d:
+                ans += v
+            else:
+                ans -= v
+            k -= v
+        return ans
 ```
 
 ### **Java**
@@ -164,7 +179,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfChild(int n, int k) {
+        boolean d = true;
+        int ans = 0;
+        while (k > 0) {
+            if (ans == 0) {
+                d = true;
+            } else if (ans == n - 1) {
+                d = false;
+            }
+            int v = Math.min(k, n - 1);
+            ans = d ? ans + v : ans - v;
+            k -= v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
