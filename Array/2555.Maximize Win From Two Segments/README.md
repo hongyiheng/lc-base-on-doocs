@@ -57,7 +57,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximizeWin(self, prizePositions: List[int], k: int) -> int:
+        n = len(prizePositions)
+        f = [0] * (n + 1)
+        l = r = ans = 0
+        while r < n:
+            while prizePositions[r] - prizePositions[l] > k:
+                l += 1
+            f[r + 1] = max(f[r], r - l + 1)
+            ans = max(ans, r - l + 1 + f[l])
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +76,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximizeWin(int[] prizePositions, int k) {
+        int n = prizePositions.length;
+        int[] f = new int[n + 1];
+        int l = 0, r = 0, ans = 0;
+        while (r < n) {
+            while (prizePositions[r] - prizePositions[l] > k) {
+                l++;
+            }
+            f[r + 1] = Math.max(f[r], r - l + 1);
+            ans = Math.max(ans, r - l + 1 + f[l]);
+            r++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
