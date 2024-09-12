@@ -66,7 +66,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxNumOfMarkedIndices(self, nums: List[int]) -> int:
+        nums.sort()
+        n, l = len(nums), 0
+        for i in range((n + 1) // 2, n):
+            if nums[l] * 2 <= nums[i]:
+                l += 1
+        return l * 2
 ```
 
 ### **Java**
@@ -74,7 +81,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxNumOfMarkedIndices(int[] nums) {
+        Arrays.sort(nums);
+        int l = 0, n = nums.length;
+        for (int i = (n + 1) / 2; i < n; i++) {
+            if (nums[l] * 2 <= nums[i]) {
+                l++;
+            }
+        }
+        return l * 2;
+    }
+}
 ```
 
 ### **...**
