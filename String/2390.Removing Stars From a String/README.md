@@ -65,7 +65,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeStars(self, s: str) -> str:
+        ans = ""
+        cnt = 0
+        for i in range(len(s) - 1, -1, -1):
+            c = s[i]
+            if c == '*':
+                cnt += 1
+            else:
+                if cnt == 0:
+                    ans = c + ans
+                else:
+                    cnt -= 1
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +86,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String removeStars(String s) {
+        String ans = "";
+        int cnt = 0;
+        for (int i = s.length() - 1; i > -1; i--) {
+            if (s.charAt(i) == '*') {
+                cnt++;
+            } else {
+                if (cnt == 0) {
+                    ans = s.charAt(i) + ans;
+                } else {
+                    cnt--;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
