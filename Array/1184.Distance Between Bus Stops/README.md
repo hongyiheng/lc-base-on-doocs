@@ -67,7 +67,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distanceBetweenBusStops(self, distance: List[int], start: int, destination: int) -> int:
+        if start > destination:
+            return self.distanceBetweenBusStops(distance, destination, start)
+        s = sum(distance)
+        d = 0
+        for i in range(start, destination):
+            d += distance[i]
+        return min(d, s - d)
 ```
 
 ### **Java**
@@ -75,7 +83,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        if (start > destination) {
+            return distanceBetweenBusStops(distance, destination, start);
+        }
+        int s = 0, d = 0;
+        for (int i = 0; i < distance.length; i++) {
+            s += distance[i];
+            if (start <= i && i < destination) {
+                d += distance[i];
+            }
+        }
+        return Math.min(d, s - d);
+    }   
+}
 ```
 
 ### **...**
