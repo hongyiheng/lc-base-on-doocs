@@ -65,7 +65,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def occurrencesOfElement(self, nums: List[int], queries: List[int], x: int) -> List[int]:
+        qs = [[v, i] for i, v in enumerate(queries)]
+        qs.sort(key=lambda x : x[0])
+        n = len(queries)
+        ans = [-1] * n
+        j = s = 0
+        for i, v in enumerate(nums):
+            if v == x:
+                s += 1
+            while j < n and s >= qs[j][0]:
+                ans[qs[j][1]] = i
+                j += 1
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +86,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] occurrencesOfElement(int[] nums, int[] queries, int x) {
+        int n = queries.length, m = nums.length;
+        int[][] qs = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            qs[i] = new int[]{queries[i], i};
+        }
+        Arrays.sort(qs, (a, b) -> a[0] - b[0]);
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        int s = 0, j = 0;
+        for (int i = 0; i < m; i++) {
+            if (x == nums[i]) {
+                s++;
+            }
+            while (j < n && s >= qs[j][0]) {
+                ans[qs[j++][1]] = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
