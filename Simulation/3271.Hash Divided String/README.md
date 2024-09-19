@@ -71,7 +71,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def stringHash(self, s: str, k: int) -> str:
+        ans = []
+        for i in range(0, len(s), k):
+            v = 0
+            for j in range(i, i + k):
+                v += ord(s[j]) - ord('a')
+            ans.append(chr(v % 26 + ord('a')))
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -79,7 +87,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String stringHash(String s, int k) {
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < s.length(); i += k) {
+            int v = 0;
+            for (int j = i; j < i + k; j++) {
+                v += s.charAt(j) - 'a';
+            }
+            ans.append((char)(v % 26 + 'a'));
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
