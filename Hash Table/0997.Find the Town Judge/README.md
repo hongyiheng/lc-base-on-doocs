@@ -81,7 +81,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        q = [[0] * 2 for _ in range(n + 1)]
+        for u, v in trust:
+            q[u][0] += 1
+            q[v][1] += 1
+        for i, v in enumerate(q):
+            if i == 0:
+                continue
+            if v[0] == 0 and v[1] == n - 1:
+                return i
+        return -1
 ```
 
 ### **Java**
@@ -89,7 +100,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+        int[][] q = new int[n + 1][2];
+        for (int[] t : trust) {
+            q[t[0]][0]++;
+            q[t[1]][1]++;
+        }
+        for (int i = 1; i < n + 1; i++) {
+            if (q[i][0] == 0 && q[i][1] == n - 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
