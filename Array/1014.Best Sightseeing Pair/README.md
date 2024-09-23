@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxScoreSightseeingPair(self, values: List[int]) -> int:
+        mx, ans = -1, 0
+        for i, v in enumerate(values):
+            if mx != -1:
+                ans = max(ans, v + values[mx] + mx - i)
+            if mx == -1 or v > values[mx] + mx - i:
+                mx = i
+        return ans
 ```
 
 ### **Java**
@@ -58,7 +66,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxScoreSightseeingPair(int[] values) {
+        int mx = -1, ans = 0;
+        for (int i = 0; i < values.length; i++) {
+            if (mx != -1) {
+                ans = Math.max(ans, values[mx] + values[i] + mx - i);
+            }
+            if (mx == -1 || values[i] > values[mx] + mx - i) {
+                mx = i;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
