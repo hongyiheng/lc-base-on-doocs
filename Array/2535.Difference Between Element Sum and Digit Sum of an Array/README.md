@@ -62,7 +62,15 @@ nums 的数字和是 1 + 2 + 3 + 4 = 10 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def differenceOfSum(self, nums: List[int]) -> int:
+        a = b = 0
+        for v in nums:
+            a += v
+            while v:
+                b += v % 10
+                v //= 10
+        return abs(a - b)
 ```
 
 ### **Java**
@@ -70,7 +78,19 @@ nums 的数字和是 1 + 2 + 3 + 4 = 10 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int differenceOfSum(int[] nums) {
+        int a = 0, b = 0;
+        for (int v : nums) {
+            a += v;
+            while (v > 0) {
+                b += v % 10;
+                v /= 10;
+            }
+        }
+        return Math.abs(a - b);
+    }
+}
 ```
 
 ### **...**
