@@ -52,6 +52,42 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def takeCharacters(self, s: str, k: int) -> int:
+        def check(x):
+            cnt = [0] * 3
+            l = 0
+            for i, v in enumerate(s):
+                cnt[ord(v) - ord('a')] += 1
+                if i - l + 1 == x:
+                    hit = True
+                    for a, b in zip(t, cnt):
+                        if a < b:
+                            hit = False
+                    if hit:
+                        return True
+                    cnt[ord(s[l]) - ord('a')] -= 1
+                    l += 1
+            return False
+                
+        if k == 0:
+            return 0
+        q, t = [0] * 3, [-k] * 3
+        for c in s:
+            pos = ord(c) - ord('a')
+            q[pos] += 1
+            t[pos] += 1
+        for v in t:
+            if v < 0:
+                return -1
+        l, r = 0, len(s) - 1
+        while l < r:
+            mid = (l + r + 1) >> 1
+            if check(mid):
+                l = mid
+            else:
+                r = mid - 1
+        return len(s) - r
 
 ```
 
@@ -60,7 +96,56 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int takeCharacters(String s, int k) {
+        if (k == 0) {
+            return 0;
+        }
+        int[] q = new int[3], t = new int[3];
+        Arrays.fill(t, -k);
+        for (char c : s.toCharArray()) {
+            q[c - 'a']++;
+            t[c - 'a']++;
+        }        
+        for (int v : t) {
+            if (v < 0) {
+                return -1;
+            }
+        }
+        int l = 0, r = s.length() - 1;
+        while (l < r) {
+            int mid = (l + r + 1) >> 1;
+            if (check(mid, s, t)) {
+                l = mid;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return s.length() - r;
+    }
 
+    public boolean check(int x, String s, int[] t) {
+        int[] cnt = new int[3];
+        int l = 0;
+        for (int r = 0; r < s.length(); r++) {
+            cnt[s.charAt(r) - 'a']++;
+            if (r - l + 1 == x) {
+                boolean hit = true;
+                for (int i = 0; i < 3; i++) {
+                    if (cnt[i] > t[i]) {
+                        hit = false;
+                    }
+                }
+                if (hit) {
+                    return true;
+                }
+                cnt[s.charAt(l++) - 'a']--;
+            }
+        }
+
+        return false;
+    }
+}
 ```
 
 ### **...**
