@@ -56,7 +56,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def validStrings(self, n: int) -> List[str]:
+        def dfs(s):
+            if len(s) == n:
+                ans.append(s[::])
+                return
+            if s[-1] == '1':
+                s += '0'
+                dfs(s)
+                s = s[:-1]
+            s += '1'
+            dfs(s)
+        
+        ans = []
+        dfs('0')
+        dfs('1')
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +80,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    List<String> ans = new ArrayList<>();
+    int n;
+
+    public void dfs(int i, char[] cs) {
+        if (i == n) {
+            ans.add(new String(cs));
+            return;
+        }
+        if (cs[i - 1] == '1') {
+            cs[i] = '0';
+            dfs(i + 1, cs);
+        }
+        cs[i] = '1';
+        dfs(i + 1, cs);
+    }
+
+    public List<String> validStrings(int n) {
+        this.n = n;
+        char[] cs = new char[n];
+        cs[0] = '0';
+        dfs(1, cs);
+        cs[0] = '1';
+        dfs(1, cs);
+        return ans;
+    }
+}
 ```
 
 ### **...**
