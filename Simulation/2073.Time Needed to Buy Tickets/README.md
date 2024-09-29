@@ -57,7 +57,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        ans = tickets[k]
+        for i, v in enumerate(tickets):
+            if i < k:
+                ans += min(tickets[k], v)
+            elif i > k:
+                ans += min(tickets[k] - 1, v)
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +73,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int timeRequiredToBuy(int[] tickets, int k) {
+        int ans = tickets[k];
+        for (int i = 0; i < tickets.length; i++) {
+            if (i < k) {
+                ans += Math.min(tickets[i], tickets[k]);
+            } else if (i > k) {
+                ans += Math.min(tickets[i], tickets[k] - 1);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
