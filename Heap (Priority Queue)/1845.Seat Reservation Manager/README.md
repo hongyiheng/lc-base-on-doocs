@@ -62,7 +62,22 @@ seatManager.unreserve(5); // 将座位 5 变为可以预约，现在可预约的
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class SeatManager:
 
+    def __init__(self, n: int):
+        self.q = [i + 1 for i in range(n)]
+
+    def reserve(self) -> int:
+        return heapq.heappop(self.q)
+
+    def unreserve(self, seatNumber: int) -> None:
+        heapq.heappush(self.q, seatNumber)
+
+
+# Your SeatManager object will be instantiated and called as such:
+# obj = SeatManager(n)
+# param_1 = obj.reserve()
+# obj.unreserve(seatNumber)
 ```
 
 ### **Java**
@@ -70,7 +85,32 @@ seatManager.unreserve(5); // 将座位 5 变为可以预约，现在可预约的
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class SeatManager {
 
+    PriorityQueue<Integer> q;
+
+    public SeatManager(int n) {
+        q = new PriorityQueue<>((a, b) -> a - b);
+        for (int i = 1; i <= n; i++) {
+            q.add(i);
+        }
+    }
+    
+    public int reserve() {
+        return q.poll();
+    }
+    
+    public void unreserve(int seatNumber) {
+        q.add(seatNumber);
+    }
+}
+
+/**
+ * Your SeatManager object will be instantiated and called as such:
+ * SeatManager obj = new SeatManager(n);
+ * int param_1 = obj.reserve();
+ * obj.unreserve(seatNumber);
+ */
 ```
 
 ### **...**
