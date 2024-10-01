@@ -56,7 +56,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canThreePartsEqualSum(self, arr: List[int]) -> bool:
+        s = sum(arr)
+        if s % 3:
+            return False
+        t = s // 3
+        cur = cnt = 0
+        for v in arr:
+            cur += v
+            if cur == t:
+                cur = 0
+                cnt += 1
+        return cnt >= 3
 ```
 
 ### **Java**
@@ -64,7 +76,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canThreePartsEqualSum(int[] arr) {
+        int s = 0;
+        for (int v : arr) {
+            s += v;
+        }
+        if (s % 3 != 0) {
+            return false;
+        }
+        int t = s / 3, cur = 0, cnt = 0;
+        for (int v : arr) {
+            cur += v;
+            if (cur == t) {
+                cur = 0;
+                cnt++;
+            }
+        }
+        return cnt >= 3;
+    }
+}
 ```
 
 ### **...**
