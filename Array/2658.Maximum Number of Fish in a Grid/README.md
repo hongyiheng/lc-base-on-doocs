@@ -67,7 +67,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMaxFish(self, grid: List[List[int]]) -> int:
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+        
+        def union(a, b):
+            if find(a) != find(b):
+                p[find(a)] = p[b]
+        
+        m, n = len(grid), len(grid[0])
+        p = [i for i in range(m * n)]
+        for i in range(m):
+            for j in range(n):
+                if not grid[i][j]:
+                    continue
+                if i and grid[i - 1][j]:
+                    union(i * n + j, (i - 1) * n + j)
+                if j and grid[i][j - 1]:
+                    union(i * n + j, i * n + j - 1)
+        f = defaultdict(int)
+        for i in range(m):
+            for j in range(n):
+                if not grid[i][j]:
+                    continue
+                f[find(i * n + j)] += grid[i][j]
+        return 0 if not f else max(f.values())
 ```
 
 ### **Java**
@@ -75,7 +102,59 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] p;
+
+    int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    }
+
+    void union(int a, int b) {
+        if (find(a) != find(b)) {
+            p[find(a)] = find(b);
+        }
+    }
+
+    public int findMaxFish(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        p = new int[m * n];
+        for (int i = 0; i < m * n; i++) {
+            p[i] = i;
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 0) {
+                    continue;
+                }
+                if (i > 0 && grid[i - 1][j] > 0) {
+                    union(i * n + j, (i - 1) * n + j);
+                }
+                if (j > 0 && grid[i][j - 1] > 0) {
+                    union(i * n + j, i * n + j - 1);
+                }
+            }
+        }
+        Map<Integer, Integer> f = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 0) {
+                    continue;
+                }
+                int root = find(i * n + j);
+                f.put(root, f.getOrDefault(root, 0) + grid[i][j]);
+            }
+        }
+        int ans = 0;
+        for (int v : f.values()) {
+            ans = Math.max(ans, v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
