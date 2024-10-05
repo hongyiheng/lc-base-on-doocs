@@ -180,7 +180,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def finalPositionOfSnake(self, n: int, commands: List[str]) -> int:
+        ans = 0
+        for d in commands:
+            if d == 'UP':
+                ans -= n
+            elif d == 'DOWN':
+                ans += n
+            elif d == 'RIGHT':
+                ans += 1
+            else:
+                ans -= 1
+        return ans
 ```
 
 ### **Java**
@@ -188,7 +200,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int finalPositionOfSnake(int n, List<String> commands) {
+        int ans = 0;
+        for (String d : commands) {
+            switch (d) {
+                case "UP":
+                    ans -= n;
+                    break;
+                case "DOWN":
+                    ans += n;
+                    break;
+                case "RIGHT":
+                    ans += 1;
+                    break;
+                case "LEFT":
+                    ans -= 1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
