@@ -47,14 +47,47 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        cnt = [0] * 1010
+        for v in arr1:
+            cnt[v] += 1
+        ans = []
+        for v in arr2:
+            ans += cnt[v] * [v]
+            cnt[v] = 0
+        for i, v in enumerate(cnt):
+            if v:
+                ans += [i] * v
+        return ans
 ```
 
 ### **Java**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
-```java
+```class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        int n = arr1.length;
+        int[] cnt = new int[1010];
+        for (int v : arr1) {
+            cnt[v]++;
+        }
+        int[] ans = new int[n];
+        int idx = 0;
+        for (int v : arr2) {
+            while (cnt[v]-- > 0) {
+                ans[idx++] = v;
+            }
+        }
+        for (int i = 0; i < 1010; i++) {
+            while (cnt[i]-- > 0) {
+                ans[idx++] = i;
+            }
+        }
+        return ans;
+    }
+}java
 
 ```
 
