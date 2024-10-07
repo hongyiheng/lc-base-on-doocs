@@ -72,7 +72,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        ans = 0
+        f = False
+        for v in nums:
+            v = v if not f else v ^ 1
+            if not v:
+                ans += 1
+                f = not f
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +89,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums) {
+        int ans = 0;
+        boolean f = false;
+        for (int v : nums) {
+            v = f ? v ^ 1 : v;
+            if (v == 0) {
+                ans++;
+                f = !f;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
