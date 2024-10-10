@@ -58,7 +58,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfPairs(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        ans = 0
+        for x in nums1:
+            for y in nums2:
+                if not x % (y * k):
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +73,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfPairs(int[] nums1, int[] nums2, int k) {
+        int ans = 0;
+        for (int x : nums1) {
+            for (int y : nums2) {
+                if (x % (y * k) == 0) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
