@@ -58,7 +58,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfPairs(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        cnt = Counter(v // k for v in nums1 if not v % k)
+        if not cnt:
+            return 0
+        ans = 0
+        mx = max(cnt)
+        cnt2 = Counter(nums2)
+        for x in cnt2.keys():
+            for y in range(x, mx + 1, x):
+                ans += cnt[y] * cnt2[x]
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +77,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long numberOfPairs(int[] nums1, int[] nums2, int k) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int mx = 0;
+        for (int v : nums1) {
+            if (v % k != 0) {
+                continue;
+            }
+            cnt.put(v / k, cnt.getOrDefault(v / k, 0) + 1);
+            mx = Math.max(mx, v);
+        }
+        Map<Integer, Integer> cnt2 = new HashMap<>();
+        for (int v : nums2) {
+            cnt2.put(v, cnt2.getOrDefault(v, 0) + 1);
+        }
+        long ans = 0;
+        for (Integer x : cnt2.keySet()) {
+            for (int y = x; y <= mx; y += x) {
+                ans += (long)cnt.getOrDefault(y, 0) * cnt2.get(x);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
