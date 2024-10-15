@@ -80,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxHeightOfTriangle(self, red: int, blue: int) -> int:
+        a = b = 0
+        for i in range(1, 51):
+            if i % 2:
+                a += i
+            else:
+                b += i
+            if not (a <= red and b <= blue) and not (a <= blue and b <= red):
+                return i - 1
 ```
 
 ### **Java**
@@ -88,7 +97,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxHeightOfTriangle(int red, int blue) {
+        int a = 0, b = 0;
+        for (int i = 1; i <= 50; i++) {
+            if (i % 2 != 0) {
+                a += i;
+            } else {
+                b += i;
+            }
+            if (!(red >= a && blue >= b) && !(red >= b && blue >= a)) {
+                return i - 1;
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
