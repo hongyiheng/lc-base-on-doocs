@@ -164,7 +164,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumAverage(self, nums: List[int]) -> float:
+        nums.sort()
+        l, r = 0, len(nums) - 1
+        ans = nums[-1]
+        while l < r:
+            ans = min(ans, (nums[l] + nums[r]) / 2)
+            r -= 1
+            l += 1
+        return ans
 ```
 
 ### **Java**
@@ -172,7 +181,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public double minimumAverage(int[] nums) {
+        Arrays.sort(nums);
+        int l = 0, r = nums.length - 1;
+        double ans = 50;
+        while (l < r) {
+            ans = Math.min((nums[r--] + nums[l++]) / 2.0, ans);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
