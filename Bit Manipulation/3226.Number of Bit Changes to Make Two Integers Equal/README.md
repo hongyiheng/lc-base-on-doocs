@@ -67,7 +67,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minChanges(self, n: int, k: int) -> int:
+        ans = 0
+        for i in range(31):
+            if n >> i & 1 and not k >> i & 1:
+                ans += 1
+            if not n >> i & 1 and k >> i & 1:
+                return -1
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +83,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minChanges(int n, int k) {
+        int ans = 0;
+        for (int i = 0; i < 31; i++) {
+            if ((n >> i & 1) != 0 && (k >> i & 1) == 0) {
+                ans++;
+            }
+            if ((n >> i & 1) == 0 && (k >> i & 1) == 1) {
+                return -1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
