@@ -83,7 +83,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findSafeWalk(self, grid: List[List[int]], health: int) -> bool:
+        m, n = len(grid), len(grid[0])
+        f = [[inf] * n for _ in range(m)]
+        f[0][0] = grid[0][0]
+        q = [(grid[0][0], 0, 0)]
+        while q:
+            w, x, y = heapq.heappop(q)
+            if x == m - 1 and y == n - 1:
+                return w < health
+            for d in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                    continue
+                if f[nx][ny] <= w + grid[nx][ny]:
+                    continue
+                f[nx][ny] = w + grid[nx][ny]
+                heapq.heappush(q, (f[nx][ny], nx, ny))
+        return False
 ```
 
 ### **Java**
@@ -91,7 +109,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean findSafeWalk(List<List<Integer>> grid, int health) {
+        int m = grid.size(), n = grid.get(0).size();
+        int[][] f = new int[m][n];
+        for (int[] r : f) {
+            Arrays.fill(r, 0x3f3f3f3f);
+        }
+        f[0][0] = grid.get(0).get(0);
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        q.add(new int[]{f[0][0], 0, 0});
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int w = cur[0], x = cur[1], y = cur[2];
+            if (x == m - 1 && y == n - 1) {
+                return w < health;
+            }
+            for (int[] d : new int[][]{{0, 1}, {1, 0}, {-1, 0}, {0, -1}}) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                    continue;
+                }
+                if (f[nx][ny] <= w + grid.get(nx).get(ny)) {
+                    continue;
+                }
+                f[nx][ny] = w + grid.get(nx).get(ny);
+                q.add(new int[]{f[nx][ny], nx, ny});
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
