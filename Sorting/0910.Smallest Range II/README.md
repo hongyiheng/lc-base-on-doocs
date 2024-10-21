@@ -63,7 +63,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestRangeII(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        mi, mx = nums[0], nums[-1]
+        ans = mx - mi
+        for i in range(len(nums) - 1):
+            a, b = nums[i], nums[i + 1]
+            ans = min(ans, max(mx - k, a + k) - min(mi + k, b - k))
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +79,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int smallestRangeII(int[] nums, int k) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int mi = nums[0], mx = nums[n - 1];
+        int ans = mx - mi;
+        for (int i = 0; i < n - 1; i++) {
+            int a = nums[i], b = nums[i + 1];
+            ans = Math.min(ans, Math.max(mx - k, a + k) - Math.min(mi + k, b - k));
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
