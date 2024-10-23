@@ -57,7 +57,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countCompleteDayPairs(self, hours: List[int]) -> int:
+        cnt = [0] * 24
+        ans = 0
+        for v in hours:
+            ans += cnt[(24 - v % 24) % 24]
+            cnt[v % 24] += 1
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +72,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long countCompleteDayPairs(int[] hours) {
+        int[] cnt = new int[24];
+        long ans = 0;
+        for (int v : hours) {
+            ans += cnt[(24 - v % 24) % 24];
+            cnt[v % 24]++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
