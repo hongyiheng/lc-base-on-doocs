@@ -77,7 +77,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def resultsArray(self, nums: List[int], k: int) -> List[int]:
+        ans, q = [], []
+        for i, v in enumerate(nums):
+            if not q or nums[q[-1]] + 1 != v:
+                q.clear()
+            q.append(i)
+            if i >= k - 1:
+                if len(q) == k:
+                    ans.append(v)
+                    q.pop(0)
+                else:
+                    ans.append(-1)
+        return ans
 ```
 
 ### **Java**
@@ -85,7 +98,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] resultsArray(int[] nums, int k) {
+        int n = nums.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        int[] ans = new int[n - k + 1];
+        for (int i = 0; i < n; i++) {
+            if (!q.isEmpty() && nums[q.peekLast()] + 1 != nums[i]) {
+                q.clear();
+            }
+            q.add(i);
+            if (i >= k - 1) {
+                if (q.size() == k) {
+                    ans[i - k + 1] = nums[i];
+                    q.pollFirst();
+                } else {
+                    ans[i - k + 1] = -1;
+                }     
+            }
+        }
+        return ans; 
+    }
+}
 ```
 
 ### **...**
