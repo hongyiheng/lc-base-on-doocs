@@ -64,7 +64,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxTotalReward(self, rewardValues: List[int]) -> int:
+        f = 1
+        nums = sorted(set(rewardValues))
+        for v in nums:
+            f |= (f & ((1 << v) - 1)) << v
+        return f.bit_length() - 1
 ```
 
 ### **Java**
@@ -72,7 +78,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+import java.math.BigInteger;
 
+class Solution {
+    public int maxTotalReward(int[] rewardValues) {
+        int n = rewardValues.length;
+        Arrays.sort(rewardValues);
+        if (n > 1 && rewardValues[n - 2] == rewardValues[n - 1] - 1) {
+            return 2 * rewardValues[n - 1] - 1;
+        }
+        int[] nums = Arrays.stream(rewardValues).distinct().toArray();
+        BigInteger f = BigInteger.ONE;
+        for (int v : nums) {
+            BigInteger mask = BigInteger.ONE.shiftLeft(v).subtract(BigInteger.ONE);
+            BigInteger shiftLeft = f.and(mask).shiftLeft(v);
+            f = f.or(shiftLeft);
+        }
+        return f.bitLength() - 1;      
+    }
+}
 ```
 
 ### **...**
