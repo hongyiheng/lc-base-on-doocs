@@ -63,7 +63,6 @@ class Solution:
             if s <= 0:
                 return i + 1
         return -1
-
 ```
 
 ### **Java**
