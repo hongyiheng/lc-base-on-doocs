@@ -57,7 +57,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getSmallestString(self, s: str) -> str:
+        ans = list(s)
+        for i in range(1, len(ans)):
+            last, v = int(ans[i - 1]), int(ans[i])
+            if last > v and last % 2 == v % 2:
+                ans[i - 1], ans[i] = ans[i], ans[i - 1]
+                break
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -65,7 +73,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String getSmallestString(String s) {
+        char[] cs = s.toCharArray();
+        for (int i = 1; i < cs.length; i++) {
+            int last = cs[i - 1] - '0', v = cs[i] - '0';
+            if (last > v && last % 2 == v % 2) {
+                char t = cs[i - 1];
+                cs[i - 1] = cs[i];
+                cs[i] = t;
+                break;
+            }
+        }
+        return new String(cs);
+    }
+}
 ```
 
 ### **...**
