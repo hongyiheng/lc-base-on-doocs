@@ -73,7 +73,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countDays(self, days: int, meetings: List[List[int]]) -> int:
+        meetings.sort(key=lambda x:(x[0], -x[1]))
+        ans = mx = 0
+        for u, v in meetings:
+            if u > mx + 1:
+                ans += u - mx - 1
+            mx = max(mx, v)
+        return ans if mx >= days else ans + days - mx
 ```
 
 ### **Java**
@@ -81,7 +89,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countDays(int days, int[][] meetings) {
+        Arrays.sort(meetings, (a, b) -> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]);
+        int ans = 0, mx = 0;
+        for (int[] e : meetings) {
+            int u = e[0], v = e[1];
+            if (u > mx + 1) {
+                ans += u - mx - 1;
+            }
+            mx = Math.max(mx, v);
+        }
+        return mx >= days ? ans : ans + days - mx;
+    }
+}
 ```
 
 ### **...**
