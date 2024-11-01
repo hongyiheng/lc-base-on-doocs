@@ -71,7 +71,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canAliceWin(self, nums: List[int]) -> bool:
+        return sum(v if v >= 10 else -v for v in nums) != 0
 ```
 
 ### **Java**
@@ -79,7 +81,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canAliceWin(int[] nums) {
+        int ans = 0;
+        for (int v : nums) {
+            ans += v >= 10 ? v : -v;
+        }
+        return ans != 0;
+    }
+}
 ```
 
 ### **...**
