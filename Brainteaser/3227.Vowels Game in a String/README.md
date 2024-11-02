@@ -71,7 +71,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def doesAliceWin(self, s: str) -> bool:
+        cnt = 0
+        for c in s:
+            if c in {'a', 'e', 'i', 'o', 'u'}:
+                cnt += 1
+        return cnt != 0
 ```
 
 ### **Java**
@@ -79,7 +85,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean doesAliceWin(String s) {
+        Set<Character> d = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        int cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (d.contains(c)) {
+                cnt++;
+            }
+        }
+        return cnt != 0;
+    }
+}
 ```
 
 ### **...**
