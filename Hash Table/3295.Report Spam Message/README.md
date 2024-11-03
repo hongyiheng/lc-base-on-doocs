@@ -58,7 +58,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reportSpam(self, message: List[str], bannedWords: List[str]) -> bool:
+        bans = set(bannedWords)
+        return sum(1 if s in bans else 0 for s in message) >= 2
 ```
 
 ### **Java**
@@ -66,7 +69,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean reportSpam(String[] message, String[] bannedWords) {
+        Set<String> bans = new HashSet<>(Arrays.asList(bannedWords));
+        int cnt = 0;
+        for (String s : message) {
+            if (bans.contains(s)) {
+                cnt++;
+            }
+        }
+        return cnt >= 2;
+    }
+}
 ```
 
 ### **...**
