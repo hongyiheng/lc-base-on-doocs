@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        s = {0}
+        for i in range(c + 1):
+            if i * i > c:
+                return False
+            s.add(i * i)
+            if c - i * i in s:
+                return True
+            i += 1
+        return False
 ```
 
 ### **Java**
@@ -68,7 +78,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean judgeSquareSum(int c) {
+        Set<Long> s = new HashSet<>();
+        s.add(0L);
+        for (long i = 0; i < (long)c + 1; i++) {
+            if (i * i > c) {
+                return false;
+            }
+            s.add(i * i);
+            if (s.contains(c - i * i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
