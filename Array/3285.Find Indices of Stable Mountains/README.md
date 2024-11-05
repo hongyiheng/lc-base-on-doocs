@@ -65,7 +65,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def stableMountains(self, height: List[int], threshold: int) -> List[int]:
+        ans = []
+        for i in range(len(height) - 1):
+            if height[i] > threshold:
+                ans.append(i + 1)
+        return ans
 ```
 
 ### **Java**
@@ -73,7 +79,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> stableMountains(int[] height, int threshold) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < height.length - 1; i++) {
+            if (height[i] > threshold) {
+                ans.add(i + 1);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
