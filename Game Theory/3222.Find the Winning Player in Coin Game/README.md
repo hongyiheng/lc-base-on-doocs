@@ -65,7 +65,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def losingPlayer(self, x: int, y: int) -> str:
+        ans = min(x, y // 4)
+        return "Alice" if ans % 2 == 1 else "Bob"
 ```
 
 ### **Java**
@@ -73,7 +76,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String losingPlayer(int x, int y) {
+        int ans = Math.min(x, y / 4);
+        return ans % 2 == 1 ? "Alice" : "Bob";
+    }
+}
 ```
 
 ### **...**
