@@ -74,7 +74,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumTotalSum(self, maximumHeight: List[int]) -> int:
+        maximumHeight.sort(reverse=True)
+        ans = 0
+        for i in range(1, len(maximumHeight)):
+            maximumHeight[i] = min(maximumHeight[i], maximumHeight[i - 1] - 1)
+            if maximumHeight[i] <= 0:
+                return -1
+        return sum(maximumHeight)
 ```
 
 ### **Java**
@@ -82,7 +90,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maximumTotalSum(int[] maximumHeight) {
+        Arrays.sort(maximumHeight);
+        int n = maximumHeight.length;
+        long ans = maximumHeight[n - 1];
+        for (int i = n - 2; i > -1; i--) {
+            maximumHeight[i] = Math.min(maximumHeight[i], maximumHeight[i + 1] - 1);
+            if (maximumHeight[i] <= 0) {
+                return -1L;
+            }
+            ans += maximumHeight[i];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
