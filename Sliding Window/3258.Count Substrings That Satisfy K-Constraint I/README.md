@@ -75,7 +75,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countKConstraintSubstrings(self, s: str, k: int) -> int:
+        cnt = [0, 0]
+        ans = l = 0
+        for r in range(len(s)):
+            cnt[int(s[r])] += 1
+            while cnt[0] > k and cnt[1] > k:
+                cnt[int(s[l])] -= 1
+                l += 1
+            ans += r - l + 1
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +93,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countKConstraintSubstrings(String s, int k) {
+        int[] cnt = new int[2];
+        int ans = 0, l = 0;
+        for (int r = 0; r < s.length(); r++) {
+            cnt[s.charAt(r) - '0']++;
+            while (cnt[0] > k && cnt[1] > k) {
+                cnt[s.charAt(l++) - '0']--;
+            }
+            ans += r - l + 1;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
