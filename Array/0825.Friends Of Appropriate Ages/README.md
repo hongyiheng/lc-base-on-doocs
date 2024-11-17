@@ -68,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numFriendRequests(self, ages: List[int]) -> int:
+        cnt = [0] * 121
+        for v in ages:
+            cnt[v] += 1
+        ans = 0
+        for i in range(121):
+            if not cnt[i]:
+                continue
+            for j in range(121):
+                if not cnt[j]:
+                    continue
+                if j <= 0.5 * i + 7 or j > i:
+                    continue
+                ans += cnt[i] * (cnt[j] - int(i == j))
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +91,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numFriendRequests(int[] ages) {
+        int[] cnt = new int[121];
+        for (int v : ages) {
+            cnt[v]++;
+        }
+        int ans = 0;
+        for (int i = 0; i < 121; i++) {
+            if (cnt[i] == 0) {
+                continue;
+            }
+            for (int j = 0; j < 121; j++) {
+                if (cnt[j] == 0) {
+                    continue;
+                }
+                if (j <= 0.5 * i + 7 || j > i) {
+                    continue;
+                }
+                ans += cnt[i] * (cnt[j] - (i == j ? 1 : 0));
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
