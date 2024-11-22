@@ -63,7 +63,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def nonSpecialCount(self, l: int, r: int) -> int:
+        def get_primes():
+            n = 34000
+            primes = [False] * n
+            for i in range(2, n):
+                if not primes[i]:
+                    for j in range(i * i, n, i):
+                        primes[j] = True
+            primes[1] = True
+            return primes
+    
+        primes = get_primes()
+        ans = r - l + 1
+        for i in range(int(math.sqrt(l)), int(math.sqrt(r)) + 1):
+            if l <= i * i <= r and not primes[i]:
+                print(i)
+                ans -= 1
+        return ans
 ```
 
 ### **Java**
@@ -71,7 +89,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    private boolean[] getPrimes() {
+        int n = 34000;
+        boolean[] primes = new boolean[n];
+        for (int i = 2; i < n; i++) {
+            if (!primes[i]) {
+                for (int j = i * i; j < n; j += i) {
+                    primes[j] = true;
+                }
+            }
+        }
+        primes[1] = true;
+        return primes;
+    } 
+
+    public int nonSpecialCount(int l, int r) {
+        int ans = r - l + 1;
+        boolean[] primes = getPrimes();
+        for (int i = (int)Math.sqrt(l); i < (int)Math.sqrt(r) + 1; i++) {
+            if (l <= i * i && i * i <= r && !primes[i]) {
+                ans--;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
