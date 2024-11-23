@@ -81,7 +81,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def winningPlayerCount(self, n: int, pick: List[List[int]]) -> int:
+        cnt = [[0] * 11 for _ in range(n)]
+        ans = 0
+        for i, v in pick:
+            if ans >> i & 1:
+                continue
+            cnt[i][v] += 1
+            if cnt[i][v] > i:
+                ans |= 1 << i
+        return ans.bit_count()
 ```
 
 ### **Java**
@@ -89,7 +99,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int winningPlayerCount(int n, int[][] pick) {
+        int[][] cnt = new int[n][11];
+        int ans = 0;
+        for (int[] p : pick) {
+            int i = p[0], v = p[1];
+            if ((ans >> i & 1) == 1) {
+                continue;
+            }
+            if (++cnt[i][v] > i) {
+                ans |= 1 << i;
+            }
+        }
+        return Integer.bitCount(ans);
+    }
+}
 ```
 
 ### **...**
