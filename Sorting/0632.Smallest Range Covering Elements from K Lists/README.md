@@ -75,7 +75,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestRange(self, nums: List[List[int]]) -> List[int]:
+        q = []
+        for i, arr in enumerate(nums):
+            for v in arr:
+                q.append((v, i))
+        q.sort(key=lambda x: x[0])
+        cnt = defaultdict(int)
+        ans = [q[0][0], q[-1][0]]
+        l = r = 0
+        while r < len(q):
+            cnt[q[r][1]] += 1
+            while len(cnt) == len(nums):
+                if ans[1] - ans[0] > q[r][0] - q[l][0]:
+                    ans = [q[l][0], q[r][0]]
+                cnt[q[l][1]] -= 1
+                if cnt[q[l][1]] == 0:
+                    cnt.pop(q[l][1])
+                l += 1
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -83,7 +103,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] smallestRange(List<List<Integer>> nums) {
+        int n = nums.size();
+        List<int[]> q = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            for (int v : nums.get(i)) {
+                q.add(new int[]{v, i});
+            }
+        }
+        q.sort((a, b) -> a[0] - b[0]);
+        int m = q.size();
+        int[] ans = new int[]{q.get(0)[0], q.get(m - 1)[0]};
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int l = 0, r = 0;
+        while (r < m) {
+            cnt.put(q.get(r)[1], cnt.getOrDefault(q.get(r)[1], 0) + 1);
+            while (cnt.size() == n) {
+                if (ans[1] - ans[0] > q.get(r)[0] - q.get(l)[0]) {
+                    ans = new int[]{q.get(l)[0], q.get(r)[0]};
+                }
+                cnt.put(q.get(l)[1], cnt.get(q.get(l)[1]) - 1);
+                if (cnt.get(q.get(l)[1]) == 0) {
+                    cnt.remove(q.get(l)[1]);
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
