@@ -63,7 +63,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        g = [[inf] * (n + 1) for _ in range(n + 1)]
+        for u, v, w in times:
+            g[u][v] = w
+        dist = [inf] * (n + 1)
+        dist[k] = 0
+        q = [[0, k]]
+        while q:
+            w, u = heapq.heappop(q)
+            for v in range(len(g[u])):
+                if g[u][v] == inf:
+                    continue
+                if w + g[u][v] >= dist[v]:
+                    continue
+                dist[v] = w + g[u][v]
+                heapq.heappush(q, [dist[v], v])
+        ans = max(dist[1:])
+        return -1 if ans == inf else ans
 ```
 
 ### **Java**
@@ -71,7 +89,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    final int inf = 0x3f3f3f3f;
+
+    public int networkDelayTime(int[][] times, int n, int k) {
+        int[][] g = new int[n + 1][n + 1];
+        for (int[] f : g) {
+            Arrays.fill(f, inf);
+        }
+        for (int[] t : times) {
+            int u = t[0], v = t[1], w = t[2];
+            g[u][v] = w;
+        }
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, inf);
+        dist[k] = 0;
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        q.add(new int[]{k, 0});
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int u = cur[0], w = cur[1];
+            for (int v = 1; v < n + 1; v++) {
+                if (g[u][v] >= inf) {
+                    continue;
+                }
+                if (g[u][v] + w >= dist[v]) {
+                    continue;
+                }
+                dist[v] = g[u][v] + w;
+                q.add(new int[]{v, dist[v]});
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < n + 1; i++) {
+            ans = Math.max(ans, dist[i]);
+        }
+        return ans >= inf ? -1 : ans; 
+    }
+}
 ```
 
 ### **...**
