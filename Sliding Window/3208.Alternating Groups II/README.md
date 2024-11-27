@@ -83,7 +83,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfAlternatingGroups(self, colors: List[int], k: int) -> int:
+        n = len(colors)
+        ans, cnt = 0, 1
+        for i in range(1, len(colors) * 2):
+            if colors[i % n] == colors[(i - 1) % n]:
+                cnt = 0
+            cnt += 1
+            if i >= n and cnt >= k:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -91,7 +101,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfAlternatingGroups(int[] colors, int k) {
+        int n = colors.length;
+        int ans = 0, cnt = 1;
+        for (int i = 1; i < n * 2; i++) {
+            if (colors[i % n] == colors[(i - 1) % n]) {
+                cnt = 0;
+            }
+            if (++cnt >= k && i >= n) {
+                ans++;
+            }
+        }
+        return ans;        
+    }
+}
 ```
 
 ### **...**
