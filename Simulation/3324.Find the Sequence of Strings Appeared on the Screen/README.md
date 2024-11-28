@@ -69,7 +69,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def stringSequence(self, target: str) -> List[str]:
+        ans = []
+        s = ""
+        for t in target:
+            v = 'a'
+            ans.append(s[:] + v)
+            while v != t:
+                v = chr(ord(v) + 1)
+                ans.append(s[:] + v)
+            s += v
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +88,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<String> stringSequence(String target) {
+        List<String> ans = new ArrayList<>();
+        String s = "";
+        for (char t : target.toCharArray()) {
+            char v = 'a';
+            ans.add(s + v);
+            while (v != t) {
+                v++;
+                ans.add(s + v);
+            }
+            s += v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
