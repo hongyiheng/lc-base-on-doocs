@@ -57,7 +57,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxGoodNumber(self, nums: List[int]) -> int:
+        ans = 0
+        for i in range(3):
+            for j in range(3):
+                for k in range(3):
+                    if i != j and i != k and j != k:
+                        v = (nums[i] << (nums[j].bit_length() + nums[k].bit_length())) + (nums[j] << nums[k].bit_length()) + nums[k]
+                        ans = max(ans, v)
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +74,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxGoodNumber(int[] nums) {
+        int ans = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    if (i != j && i != k && j != k) {
+                        int jLen = 32 - Integer.numberOfLeadingZeros(nums[j]);
+                        int kLen = 32 - Integer.numberOfLeadingZeros(nums[k]);
+                        int v = (nums[i] << (jLen + kLen)) + (nums[j] << kLen) + nums[k];
+                        ans = Math.max(ans, v);
+                    }  
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
