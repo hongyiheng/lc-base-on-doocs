@@ -54,7 +54,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        def check(g, x, y):
+            for d in [[-1, 0], [-1, -1], [-1, 1]]:
+                nx, ny = x + d[0], y + d[1]
+                while 0 <= nx < n and 0 <= ny < n:
+                    if g[nx][ny]:
+                        return False
+                    nx += d[0]
+                    ny += d[1]
+            return True
+        
+        def dfs(g, x):
+            if x == n:
+                ans.append(["".join(["Q" if v else "." for v in r]) for r in g])
+                return
+            for y in range(n):
+                if not check(g, x, y):
+                    continue
+                g[x][y] = True
+                dfs(g, x + 1)
+                g[x][y] = False
 
+
+        g = [[False] * n for _ in range(n)]
+        ans = []
+        dfs(g, 0)
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +89,56 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    List<List<String>> ans = new ArrayList<>();
+    boolean[][] g;
+    int n;
+
+    boolean check(boolean[][] g, int x, int y) {
+        for (int[] d : new int[][]{{-1, 0}, {-1, -1}, {-1, 1}}) {
+            int nx = x + d[0], ny = y + d[1];
+            while (nx >= 0 && nx < n && ny >= 0 && ny < n) {
+                if (g[nx][ny]) {
+                    return false;
+                }
+                nx += d[0];
+                ny += d[1];
+            }
+        }
+        return true;
+    }
+
+    void dfs(boolean[][] g, int x) {
+        if (x >= n) {
+            List<String> t = new ArrayList<>();
+            for (boolean[] r : g) {
+                StringBuilder sb = new StringBuilder();
+                for (boolean v : r) {
+                    sb.append(v ? "Q" : ".");
+                }
+                t.add(sb.toString());
+            }
+            ans.add(t);
+            return;
+        }
+        for (int y = 0; y < n; y++) {
+            if (!check(g, x, y)) {
+                continue;
+            }
+            g[x][y] = true;
+            dfs(g, x + 1);
+            g[x][y] = false;
+        }
+    }
+
+    public List<List<String>> solveNQueens(int n) {
+        g = new boolean[n][n];
+        this.n = n;
+        dfs(g, 0);
+        return ans;
+    }
+}
 ```
 
 ### **...**
