@@ -62,7 +62,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def checkTwoChessboards(self, coordinate1: str, coordinate2: str) -> bool:
+        x1, y1, x2, y2 = ord(coordinate1[0]) - ord('a'), int(coordinate1[1]), ord(coordinate2[0]) - ord('a'), int(coordinate2[1])
+        if x1 % 2 == x2 % 2:
+            return y1 % 2 == y2 % 2
+        return y1 % 2 != y2 % 2
 ```
 
 ### **Java**
@@ -70,7 +75,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean checkTwoChessboards(String coordinate1, String coordinate2) {
+        int x1 = coordinate1.charAt(0) - 'a', y1 = coordinate1.charAt(1) - '1';
+        int x2 = coordinate2.charAt(0) - 'a', y2 = coordinate2.charAt(1) - '1';
+        if (x1 % 2 == x2 % 2) {
+            return y1 % 2 == y2 % 2;
+        }
+        return y1 % 2 != y2 % 2;
+    }
+}
 ```
 
 ### **...**
