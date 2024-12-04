@@ -97,7 +97,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minNumberOfSeconds(self, mountainHeight: int, workerTimes: List[int]) -> int:
+        def check(x):
+            h = 0
+            for t in workerTimes:
+                l, r = 0, mountainHeight
+                while l < r:
+                    mid = (l + r + 1) >> 1
+                    if t * mid * (mid + 1) // 2 <= x:
+                        l = mid
+                    else:
+                        r = mid - 1
+                h += r
+            return h >= mountainHeight
 
+        
+        l, r = 0, (1 + mountainHeight) * mountainHeight // 2 * workerTimes[0]
+        while l < r:
+            mid = (l + r) >> 1
+            if check(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r
 ```
 
 ### **Java**
@@ -105,7 +128,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    boolean check(long x, int mountainHeight, int[] workerTimes) {
+        long h = 0;
+        for (int t : workerTimes) {
+            int l = 0, r = mountainHeight;
+            while (l < r) {
+                int mid = (l + r + 1) >> 1;
+                if ((long) t * mid * (mid + 1) / 2 <= x) {
+                    l = mid;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            h += r;
+        }
+        return h >= mountainHeight;
+    }
+
+    public long minNumberOfSeconds(int mountainHeight, int[] workerTimes) {
+        long l = 0, r = (1L + mountainHeight) * mountainHeight / 2 * workerTimes[0];
+        while (l < r) {
+            long mid = (l + r) >> 1;
+            if (check(mid, mountainHeight, workerTimes)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return r;
+    }
+}
 ```
 
 ### **...**
