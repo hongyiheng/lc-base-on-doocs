@@ -61,7 +61,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimizeResult(self, expression: str) -> str:
+        l, r = expression.split("+")
+        ans, mi = "(" + expression + ")", int(l) + int(r)
+        for i in range(len(l)):
+            for j in range(1, len(r) + 1):
+                la, lb = int(l[:i]) if l[:i] else 1, int(l[i:]) if l[i:] else 1
+                ra, rb = int(r[:j]) if r[:j] else 1, int(r[j:]) if r[j:] else 1
+                v = la * (lb + ra) * rb
+                if v < mi:
+                    mi = v
+                    ans = l[:i] + "(" + l[i:] + '+' + r[:j] + ')' + r[j:]
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +81,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String minimizeResult(String expression) {
+        String[] s = expression.split("\\+");
+        String ans = "(" + expression + ")";
+        int mi = Integer.parseInt(s[0]) + Integer.parseInt(s[1]);
+        for (int i = 0; i < s[0].length(); i++) {
+            for (int j = 1; j < s[1].length() + 1; j++) {
+                String la = s[0].substring(0, i), lb = s[0].substring(i);
+                String ra = s[1].substring(0, j), rb = s[1].substring(j);
+                int a = i == 0 ? 1 : Integer.parseInt(la), b = Integer.parseInt(lb);
+                int c = Integer.parseInt(ra), d = j == s[1].length() ? 1 : Integer.parseInt(rb);
+                int v = a * (b + c) * d;
+                if (v < mi) {
+                    mi = v;
+                    ans = la + "(" + lb + "+" + ra + ")" + rb;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
