@@ -73,7 +73,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def semiOrderedPermutation(self, nums: List[int]) -> int:
+        n = len(nums)
+        x = y = -1
+        for i, v in enumerate(nums):
+            if v == 1:
+                x = i
+            elif v == n:
+                y = i
+        return x + n - y - 1 if x < y else x + n - y - 2
 ```
 
 ### **Java**
@@ -81,7 +90,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int semiOrderedPermutation(int[] nums) {
+        int x = -1, y = -1;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 1) {
+                x = i;
+            } else if (nums[i] == n) {
+                y = i;
+            }
+        }
+        return x < y ? x + n - y - 1 : x + n - y - 2;
+    }
+}
 ```
 
 ### **...**
