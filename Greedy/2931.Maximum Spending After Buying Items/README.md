@@ -81,7 +81,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSpending(self, values: List[List[int]]) -> int:
+        m, n = len(values), len(values[0])
+        ans = 0 
+        q = [(values[i][-1], i, n - 1) for i in range(m)]
+        heapq.heapify(q)
+        for i in range(m * n):
+            v, j, idx = heapq.heappop(q)
+            ans += v * (i + 1)
+            if idx > 0:
+                heapq.heappush(q, (values[j][idx - 1], j, idx - 1))
+        return ans
 ```
 
 ### **Java**
@@ -89,7 +100,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long maxSpending(int[][] values) {
+        int m = values.length, n = values[0].length;
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        for (int i = 0; i < m; i++) {
+            q.add(new int[]{values[i][n - 1], i, n - 1});
+        }
+        long ans = 0;
+        for (int i = 0; i < m * n; i++) {
+            int[] item = q.poll();
+            int v = item[0], j = item[1], idx = item[2];
+            ans += (long)(i + 1) * v;
+            if (idx > 0) {
+                q.add(new int[]{values[j][idx - 1], j, idx - 1});
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
