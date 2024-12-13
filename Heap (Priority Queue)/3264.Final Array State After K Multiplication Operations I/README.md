@@ -110,7 +110,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getFinalState(self, nums: List[int], k: int, multiplier: int) -> List[int]:
+        q = [[v, i] for i, v in enumerate(nums)]
+        heapq.heapify(q)
+        for _ in range(k):
+            v, i = heapq.heappop(q)
+            heapq.heappush(q, [v * multiplier, i])
+        q.sort(key=lambda x: x[1])
+        return [v for v, _ in q]
 ```
 
 ### **Java**
@@ -118,7 +126,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] getFinalState(int[] nums, int k, int multiplier) {
+        int n = nums.length;
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
+        for (int i = 0; i < n; i++) {
+            q.add(new int[]{nums[i], i});
+        }
+        while (k-- > 0) {
+            int[] e = q.poll();
+            q.add(new int[]{e[0] * multiplier, e[1]});
+        }
+        int[] ans = new int[n];
+        for (int[] e : q) {
+            ans[e[1]] = e[0];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
