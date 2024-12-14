@@ -91,7 +91,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
+        q = [0] * (len(nums) + 2)
+        for l, r in queries:
+            q[l] += 1
+            q[r + 1] -= 1
+        d = 0
+        for i, v in enumerate(nums):
+            d += q[i]
+            if v > d:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -99,7 +110,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isZeroArray(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int[] q = new int[n + 2];
+        for (int[] e : queries) {
+            q[e[0]]++;
+            q[e[1] + 1]--;
+        }
+        int d = 0;
+        for (int i = 0; i < n; i++) {
+            d += q[i];
+            if (nums[i] > d) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
