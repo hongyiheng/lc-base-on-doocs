@@ -69,7 +69,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minElement(self, nums: List[int]) -> int:
+        ans = nums[0]
+        for v in nums:
+            s = 0
+            while v:
+                s += v % 10
+                v //= 10
+            ans = min(ans, s)
+        return ans
 ```
 
 ### **Java**
@@ -77,7 +86,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minElement(int[] nums) {
+        int ans = nums[0];
+        for (int v : nums) {
+            int s = 0;
+            while (v > 0) {
+                s += v % 10;
+                v /= 10;
+            }
+            ans = Math.min(ans, s);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
