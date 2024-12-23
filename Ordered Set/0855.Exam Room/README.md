@@ -50,7 +50,40 @@ seat() -&gt; 5，学生最后坐在 5 号座位上。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+from sortedcontainers import SortedList
 
+class ExamRoom:
+
+    def __init__(self, n: int):
+        self.q = SortedList(key=lambda x: x)
+        self.n = n
+
+    def seat(self) -> int:
+        if len(self.q) == 0:
+            self.q.add(0)
+            return 0
+        last = self.q[0]
+        d, ans = last, 0
+        for v in self.q:
+            nd = (v - last) // 2
+            if d < nd:
+                ans = (v + last) // 2
+                d = nd
+            last = v
+        if d < self.n - 1 - last:
+            ans = self.n - 1
+        self.q.add(ans)
+        return ans
+
+    def leave(self, p: int) -> None:
+        self.q.remove(p)
+        
+
+
+# Your ExamRoom object will be instantiated and called as such:
+# obj = ExamRoom(n)
+# param_1 = obj.seat()
+# obj.leave(p)
 ```
 
 ### **Java**
@@ -58,7 +91,50 @@ seat() -&gt; 5，学生最后坐在 5 号座位上。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class ExamRoom {
 
+    TreeSet<Integer> q;
+    int n;
+
+    public ExamRoom(int n) {
+        this.n = n;
+        q = new TreeSet<>();
+    }
+
+    public int seat() {
+        if (q.size() == 0) {
+            q.add(0);
+            return 0;
+        }
+        int last = q.first();
+        int d = last, ans = 0;
+        for (int v : q) {
+            int nd = (v - last) / 2;
+            if (d < nd) {
+                ans = (v + last) / 2;
+                d = nd; 
+            }
+            last = v;
+        }
+        if (d < n - 1 - last) {
+            ans = n - 1;
+        }
+        q.add(ans);
+        return ans;
+    }
+
+    public void leave(int p) {
+        q.remove(p);
+    }
+}
+
+
+/**
+ * Your ExamRoom object will be instantiated and called as such:
+ * ExamRoom obj = new ExamRoom(n);
+ * int param_1 = obj.seat();
+ * obj.leave(p);
+ */
 ```
 
 ### **...**
