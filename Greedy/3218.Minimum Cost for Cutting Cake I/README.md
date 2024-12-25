@@ -93,7 +93,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumCost(self, m: int, n: int, horizontalCut: List[int], verticalCut: List[int]) -> int:
+        horizontalCut.sort(reverse=True)
+        verticalCut.sort(reverse=True)
+        i = j = ans = 0
+        while i < m - 1 or j < n - 1:
+            if i < m - 1 and j < n - 1:
+                if horizontalCut[i] < verticalCut[j]:
+                    ans += verticalCut[j] * (i + 1)
+                    j += 1
+                else:
+                    ans += horizontalCut[i] * (j + 1)
+                    i += 1
+            elif i < m - 1:
+                ans += horizontalCut[i] * (j + 1)
+                i += 1
+            else:
+                ans += verticalCut[j] * (i + 1)
+                j += 1
+        return ans
 ```
 
 ### **Java**
@@ -101,7 +120,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumCost(int m, int n, int[] horizontalCut, int[] verticalCut) {
+        Arrays.sort(horizontalCut);
+        Arrays.sort(verticalCut);
+        int ans = 0, i = 0, j = 0;
+        while (i < m - 1 || j < n - 1) {
+            if (i < m - 1 && j < n - 1) {
+                if (horizontalCut[m - i - 2] < verticalCut[n - j - 2]) {
+                    ans += verticalCut[n - j - 2] * (i + 1);
+                    j++;
+                } else {
+                    ans += horizontalCut[m - i - 2] * (j + 1);
+                    i++;
+                }
+            } else if (i < m - 1) {
+                ans += horizontalCut[m - i - 2] * (j + 1);
+                i++;              
+            } else {
+                ans += verticalCut[n - j - 2] * (i + 1);
+                j++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
