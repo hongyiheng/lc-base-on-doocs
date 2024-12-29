@@ -88,7 +88,22 @@ C 队获得两票「排位第一」，两票「排位第二」，两票「排位
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def rankTeams(self, votes: List[str]) -> str:
+        def cmp(a, b):
+            nonlocal n
+            i, j = ord(a) - ord('A'), ord(b) - ord('A')
+            for k in range(n):
+                if cnt[i][k] != cnt[j][k]:
+                    return cnt[j][k] - cnt[i][k]
+            return i - j
 
+        n = len(votes[0])
+        cnt = [[0] * n for _ in range(26)]
+        for v in votes:
+            for i, c in enumerate(v):
+                cnt[ord(c) - ord('A')][i] += 1
+        return "".join(sorted(votes[0], key=cmp_to_key(cmp)))
 ```
 
 ### **Java**
@@ -96,7 +111,35 @@ C 队获得两票「排位第一」，两票「排位第二」，两票「排位
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String rankTeams(String[] votes) {
+        int n = votes[0].length();
+        int[][] cnt = new int[26][n];
+        for (String vote : votes) {
+            for (int i = 0; i < n; i++) {
+                cnt[vote.charAt(i) - 'A'][i]++;
+            }
+        }
+        Character[] cs = new Character[n];
+        for (int i = 0; i < n; i++) {
+            cs[i] = votes[0].charAt(i);
+        }   
+        Arrays.sort(cs, (a, b) -> {
+            int i = a - 'A', j = b - 'A';
+            for (int k = 0; k < n; k++) {
+                if (cnt[i][k] != cnt[j][k]) {
+                    return cnt[j][k] - cnt[i][k];
+                }
+            }
+            return i - j;
+        });    
+        StringBuilder ans = new StringBuilder();
+        for (Character c : cs) {
+            ans.append(c);
+        }
+        return ans.toString();
+    }
+}
 ```
 
 ### **...**
