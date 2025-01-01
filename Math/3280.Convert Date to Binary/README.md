@@ -58,7 +58,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def convertDateToBinary(self, date: str) -> str:
+        ans = []
+        for v in date.split("-"):
+            s = ""
+            t = 0
+            for i in range(13):
+                if t == int(v):
+                    break
+                if int(v) >> i & 1:
+                    s = "1" + s
+                    t += 1 << i
+                else:
+                    s = "0" + s
+            ans.append(s)
+        return "-".join(ans)
 ```
 
 ### **Java**
@@ -66,7 +81,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String convertDateToBinary(String date) {
+        String[] ans = new String[3];
+        for (int i = 0; i < 3; i++) {
+            String s = "";
+            int t = 0, v = Integer.valueOf(date.split("-")[i]);
+            for (int j = 0; j < 13 && t != v; j++) {
+                if ((v >> j & 1) != 0) {
+                    s = "1" + s;
+                    t += 1 << j;
+                } else {
+                    s = "0" + s;
+                }    
+            }
+            ans[i] = s;
+        }
+        return String.join("-", ans);
+    }
+}
 ```
 
 ### **...**
