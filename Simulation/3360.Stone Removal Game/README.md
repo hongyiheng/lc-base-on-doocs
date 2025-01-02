@@ -66,7 +66,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canAliceWin(self, n: int) -> bool:
+        i = 10
+        while n >= i:
+            n -= i
+            i -= 1
+        return i % 2 != 0
 ```
 
 ### **Java**
@@ -74,7 +80,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canAliceWin(int n) {
+        int i = 10;
+        while (n >= i) {
+            n -= i;
+            i--;
+        }
+        return i % 2 == 1;
+    }
+}
 ```
 
 ### **...**
