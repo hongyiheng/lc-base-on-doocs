@@ -72,7 +72,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getLargestOutlier(self, nums: List[int]) -> int:
+        ns = [0] * 2010
+        s = 0
+        for v in nums:
+            ns[v + 1000] += 1
+            s += v
+        ans = -1010
+        for v in nums:
+            if (s - v) % 2 != 0:
+                continue
+            t = (s - v) // 2
+            if t < -1000 or t > 1000:
+                continue
+            if ns[t + 1000] >= 2 or (ns[t + 1000] >= 1 and t != v):
+                ans = max(ans, v)
+        return ans
 ```
 
 ### **Java**
@@ -80,7 +96,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int getLargestOutlier(int[] nums) {
+        int[] ns = new int[2010];
+        int s = 0;
+        for (int v : nums) {
+            ns[v + 1000]++;
+            s += v;
+        }
+        int ans = -1010;
+        for (int v : nums) {
+            if ((s - v) % 2 != 0) {
+                continue;
+            }
+            int t = (s - v) / 2;
+            if (t < -1000 || t > 1000) {
+                continue;
+            }
+            if (ns[t + 1000] >= 2 || (ns[t + 1000] >= 1 && t != v)) {
+                ans = Math.max(ans, v);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
