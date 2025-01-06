@@ -54,7 +54,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxConsecutive(self, bottom: int, top: int, special: List[int]) -> int:
+        special.sort()
+        ans = max(special[0] - bottom, top - special[-1])
+        for i in range(1, len(special)):
+            ans = max(ans, special[i] - special[i - 1] - 1)
+        return ans
 ```
 
 ### **Java**
@@ -62,7 +68,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxConsecutive(int bottom, int top, int[] special) {
+        Arrays.sort(special);
+        int n = special.length;
+        int ans = Math.max(special[0] - bottom, top - special[n - 1]);
+        for (int i = 1; i < n; i++) {
+            ans = Math.max(ans, special[i] - special[i - 1] - 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
