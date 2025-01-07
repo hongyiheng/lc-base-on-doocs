@@ -63,7 +63,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def hasIncreasingSubarrays(self, nums: List[int], k: int) -> bool:
+        if k == 1:
+            return True
+        n, cnt = len(nums), 1
+        f = [False] * n
+        for i in range(1, n):
+            if nums[i - 1] < nums[i]:
+                cnt += 1
+            else:
+                cnt = 1
+            if cnt >= k:
+                f[i] = True
+                if f[i - k]:
+                    return True
+        return False
 ```
 
 ### **Java**
@@ -71,7 +86,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
+        if (k == 1) {
+            return true;
+        }
+        int n = nums.size(), cnt = 1;
+        boolean[] f = new boolean[n];
+        for (int i = 1; i < n; i++) {
+            if (nums.get(i - 1) < nums.get(i)) {
+                cnt++;
+            } else {
+                cnt = 1;
+            }
+            if (cnt >= k) {
+                f[i] = true;
+                if (i - k >= 0 && f[i - k]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
