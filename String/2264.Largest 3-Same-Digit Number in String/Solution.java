@@ -1,18 +1,16 @@
 class Solution {
     public String largestGoodInteger(String num) {
-        int cnt = 0, ans = -1;
-        char cur = ' ';
-        for (char c : num.toCharArray()) {
-            if (cur != c) {
-                cnt = 1;
-                cur = c;
-            } else {
+        int mx = -1, cnt = 1;
+        for (int i = 1; i < num.length(); i++) {
+            if (num.charAt(i - 1) == num.charAt(i)) {
                 cnt++;
+            } else {
+                cnt = 1;
             }
-            if (cnt == 3) {
-                ans = Math.max(c - '0', ans);
+            if (cnt >= 3) {
+                mx = Math.max(mx, num.charAt(i) - '0');
             }
         }
-        return ans == -1 ? "" : "" + ans + ans + ans;
+        return mx == -1 ? "" :  "" + mx + mx + mx;
     }
 }
