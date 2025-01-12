@@ -59,7 +59,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def largestCombination(self, candidates: List[int]) -> int:
+        f = [0] * 32
+        for v in candidates:
+            for i in range(32):
+                if v >> i & 1:
+                    f[i] += 1
+        return max(f)
 ```
 
 ### **Java**
@@ -67,7 +74,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int largestCombination(int[] candidates) {
+        int[] f = new int[32];
+        for (int v : candidates) {
+            for (int i = 0; i < 32; i++) {
+                if ((v >> i & 1) != 0) {
+                    f[i]++;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            ans = Math.max(f[i], ans);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
