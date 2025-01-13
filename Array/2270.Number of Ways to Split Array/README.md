@@ -61,7 +61,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def waysToSplitArray(self, nums: List[int]) -> int:
+        s = sum(nums)
+        ans = cur = 0
+        for i in range(len(nums) - 1):
+            cur += nums[i]
+            s -= nums[i]
+            if cur >= s:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +78,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int waysToSplitArray(int[] nums) {
+        long s = 0, cur = 0;
+        for (int v : nums) {
+            s += v;
+        }
+        int ans = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            cur += nums[i];
+            s -= nums[i];
+            if (cur >= s) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
