@@ -68,7 +68,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        ans = 0
+        heapq.heapify(nums)
+        while len(nums) >= 2 and nums[0] < k:
+            a, b = heapq.heappop(nums), heapq.heappop(nums)
+            heapq.heappush(nums, a * 2 + b)
+            ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -76,7 +84,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        PriorityQueue<Long> q = new PriorityQueue();
+        for (int v : nums) {
+            q.add((long)v);
+        }
+        int ans = 0;
+        while (q.size() >= 2 && q.peek() < k) {
+            long a = q.poll(), b = q.poll();
+            q.add(1L * a * 2 + b);
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
