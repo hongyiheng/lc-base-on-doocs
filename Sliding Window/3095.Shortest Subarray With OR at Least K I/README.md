@@ -70,7 +70,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumSubarrayLength(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        ans = n + 1
+        for i in range(n):
+            s = nums[i]
+            for j in range(i, n):
+                s |= nums[j]
+                if s >= k:
+                    ans = min(ans, j - i + 1)
+                    break
+        return ans if ans <= n else -1
 ```
 
 ### **Java**
@@ -78,7 +89,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumSubarrayLength(int[] nums, int k) {
+        int n = nums.length;
+        int ans = n + 1;
+        for (int i = 0; i < n; i++) {
+            int s = nums[i];
+            for (int j = i; j < n; j++) {
+                s |= nums[j];
+                if (s >= k) {
+                    ans = Math.min(ans, j - i + 1);
+                    break;
+                }
+            }
+        }
+        return ans <= n ? ans : -1;
+    }
+}
 ```
 
 ### **...**
