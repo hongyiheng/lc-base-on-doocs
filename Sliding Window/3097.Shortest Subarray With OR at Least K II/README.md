@@ -70,7 +70,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumSubarrayLength(self, nums: List[int], k: int) -> int:
+        def getVal():
+            ans = 0
+            for i in range(31):
+                if s[i]:
+                    ans |= 1 << i
+            return ans
 
+        if k == 0:
+            return 1
+        n = len(nums)
+        l = r = 0
+        s = [0] * 32
+        ans = n + 1
+        while r < n:
+            for i in range(31):
+                if nums[r] >> i & 1:
+                    s[i] += 1
+            while getVal() >= k:
+                ans = min(ans, r - l + 1)
+                for i in range(31):
+                    if nums[l] >> i & 1:
+                        s[i] -= 1
+                l += 1
+            r += 1
+        return -1 if ans > n else ans
 ```
 
 ### **Java**
@@ -78,7 +104,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int getVal(int[] s) {
+        int ans = 0;
+        for (int i = 0; i < 31; i++) {
+            if (s[i] > 0) {
+                ans |= 1 << i;
+            }
+        }
+        return ans;
+    }
+
+    public int minimumSubarrayLength(int[] nums, int k) {
+        if (k == 0) {
+            return 1;
+        }
+        int n = nums.length;
+        int l = 0, r = 0, ans = n + 1;
+        int[] s = new int[32];
+        while (r < n) {
+            for (int i = 0; i < 31; i++) {
+                if ((nums[r] >> i & 1) == 1) {
+                    s[i]++;
+                }
+            }
+            while (getVal(s) >= k) {
+                ans = Math.min(ans, r - l + 1);
+                for (int i = 0; i < 31; i++) {
+                    if ((nums[l] >> i & 1) == 1) {
+                        s[i]--;
+                    }
+                }  
+                l++;
+            }
+            r++;
+        }
+        return ans > n ? -1 : ans;
+    }
+}
 ```
 
 ### **...**
