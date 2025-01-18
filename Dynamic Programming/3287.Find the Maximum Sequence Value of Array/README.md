@@ -62,7 +62,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxValue(self, nums: List[int], k: int) -> int:
+        m = 1 << 7
+        n = len(nums)
+        f = [[[False] * m for _ in range(k + 2)] for _ in range(n + 1)]
+        f[0][0][0] = True
+        for i in range(n):
+            for j in range(k + 1):
+                for x in range(m):
+                    f[i + 1][j][x] |= f[i][j][x]
+                    f[i + 1][j + 1][x | nums[i]] |= f[i][j][x]
 
+        g = [[[False] * m for _ in range(k + 2)] for _ in range(n + 1)]
+        g[n][0][0] = True
+        for i in range(n, 0, -1):
+            for j in range(k + 1):
+                for x in range(m):
+                    g[i - 1][j][x] |= g[i][j][x]
+                    g[i - 1][j + 1][x | nums[i - 1]] |= g[i][j][x]
+        
+        ans = 0
+        for i in range(k, n - k + 1):
+            for x in range(m):
+                if f[i][k][x]:
+                    for y in range(m):
+                        if g[i][k][y]:
+                            ans = max(ans, x ^ y)
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +97,50 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int maxValue(int[] nums, int k) {
+        int m = 1 << 7;
+        int n = nums.length;
+        boolean[][][] f = new boolean[n + 1][k + 2][m];
+        f[0][0][0] = true;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= k; j++) {
+                for (int x = 0; x < m; x++) {
+                    if (f[i][j][x]) {
+                        f[i + 1][j][x] = true;
+                        f[i + 1][j + 1][x | nums[i]] = true;
+                    }
+                }
+            }
+        }
 
+        boolean[][][] g = new boolean[n + 1][k + 2][m];
+        g[n][0][0] = true;
+        for (int i = n; i > 0; i--) {
+            for (int j = 0; j < k + 1; j++) {
+                for (int x = 0; x < m; x++) {
+                    if (g[i][j][x]) {
+                        g[i - 1][j][x] = true;
+                        g[i - 1][j + 1][x | nums[i - 1]] = true;
+                    }
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = k; i < n - k + 1; i++) {
+            for (int x = 0; x < m; x++) {
+                if (f[i][k][x]) {
+                    for (int y = 0; y < m; y++) {
+                        if (g[i][k][y]) {
+                            ans = Math.max(ans, x ^ y);
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
