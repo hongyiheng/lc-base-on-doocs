@@ -56,7 +56,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxValueOfCoins(self, piles: List[List[int]], k: int) -> int:
+        n = len(piles)
+        f = [[0] * (k + 1) for _ in range(n + 1)]
+        for i, p in enumerate(piles):
+            for j in range(k + 1):
+                f[i + 1][j] = f[i][j]
+                s = 0
+                for x in range(min(len(p), j)):
+                    s += p[x]
+                    f[i + 1][j] = max(f[i + 1][j], f[i][j - x - 1] + s)
+        return f[n][k]
 ```
 
 ### **Java**
@@ -64,7 +75,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxValueOfCoins(List<List<Integer>> piles, int k) {
+        int n = piles.size();
+        int[][] f = new int[n + 1][k + 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k + 1; j++) {
+                f[i + 1][j] = f[i][j];
+                int s = 0;
+                for (int x = 0; x < Math.min(j, piles.get(i).size()); x++) {
+                    s += piles.get(i).get(x);
+                    f[i + 1][j] = Math.max(f[i + 1][j], f[i][j - x - 1] + s);
+                }
+            }
+        }
+        return f[n][k];
+    }
+}
 ```
 
 ### **...**
