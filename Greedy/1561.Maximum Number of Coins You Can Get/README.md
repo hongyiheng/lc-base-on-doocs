@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxCoins(self, piles: List[int]) -> int:
+        piles.sort()
+        ans = 0
+        l, r = 0, len(piles) - 1
+        while l < r:
+            ans += piles[r - 1]
+            r -= 2
+            l += 1
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +83,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxCoins(int[] piles) {
+        Arrays.sort(piles);
+        int ans = 0;
+        int l = 0, r = piles.length - 1;
+        while (l < r) {
+            ans += piles[r - 1];
+            r -= 2;
+            l++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
