@@ -55,7 +55,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumMoney(self, transactions: List[List[int]]) -> int:
+        s = sum([max(0, a - b) for a, b in transactions])
+        ans = 0
+        for a, b in transactions:
+            if a > b:
+                ans = max(ans, s + b)
+            else:
+                ans = max(ans, s + a)
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +72,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minimumMoney(int[][] transactions) {
+        long s = 0;
+        for (int[] t : transactions) {
+            int a = t[0], b = t[1];
+            if (a > b) {
+                s += a - b;
+            }
+        }
+        long ans = 0;
+        for (int[] t : transactions) {
+            int a = t[0], b = t[1];
+            if (a > b) {
+                ans = Math.max(ans, s + b);
+            } else {
+                ans = Math.max(ans, s + a);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
