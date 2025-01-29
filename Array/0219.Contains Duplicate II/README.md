@@ -37,7 +37,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        f = dict()
+        for i, v in enumerate(nums):
+            if v in f and i - f[v] <= k:
+                return True
+            f[v] = i
+        return False
 ```
 
 ### **Java**
@@ -45,7 +52,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, Integer> f = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (f.containsKey(nums[i]) && i - f.get(nums[i]) <= k) {
+                return true;
+            }
+            f.put(nums[i], i);
+        }
+        return false;      
+    }
+}
 ```
 
 ### **...**
