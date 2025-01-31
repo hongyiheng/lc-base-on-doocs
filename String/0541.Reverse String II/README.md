@@ -42,7 +42,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        n = len(s)
+        ans = []
+        for i in range(0, n, k):
+            t = s[i:min(i + k, n)]
+            if not i // k % 2:
+                ans.append(t[::-1])
+            else:
+                ans.append(t)
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -50,7 +60,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String reverseStr(String s, int k) {
+        int n = s.length();
+        char[] ans = s.toCharArray();
+        for (int i = 0; i < n; i+= k) {
+            if (i / k % 2 == 0) {
+                int l = i, r = Math.min(n - 1, i + k - 1);
+                while (l < r) {
+                    char t = ans[l];
+                    ans[l] = ans[r];
+                    ans[r] = t;
+                    l++;
+                    r--;
+                }
+            }
+        }
+        return new String(ans);
+    }
+}
 ```
 
 ### **...**
