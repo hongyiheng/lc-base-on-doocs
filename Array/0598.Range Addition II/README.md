@@ -58,7 +58,13 @@ M 中最大的整数是 2, 而且 M 中有4个值为2的元素。因此返回 4�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxCount(self, m: int, n: int, ops: List[List[int]]) -> int:
+        x, y = m, n
+        for a, b in ops:
+            x = min(x, a)
+            y = min(y, b)
+        return x * y
 ```
 
 ### **Java**
@@ -66,7 +72,16 @@ M 中最大的整数是 2, 而且 M 中有4个值为2的元素。因此返回 4�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxCount(int m, int n, int[][] ops) {
+        int x = m, y = n;
+        for (int[] e : ops) {
+            x = Math.min(e[0], x);
+            y = Math.min(e[1], y);
+        }
+        return x * y;
+    }
+}
 ```
 
 ### **...**
