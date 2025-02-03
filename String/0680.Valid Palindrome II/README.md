@@ -52,7 +52,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        def dfs(t, skip):
+            if len(t) <= 1:
+                return True
+            if not skip and len(t) <= 2:
+                return True
+            if t[0] != t[-1]:
+                if skip:
+                    return False
+                return dfs(t[1:], True) or dfs(t[:-1], True)
+            return dfs(t[1:-1], skip)
+        
+        return dfs(s, False)
 ```
 
 ### **Java**
@@ -60,7 +73,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public boolean dfs(String s, int l, int r, boolean skip) {
+        if (r - l + 1 <= 1) {
+            return true;
+        }
+        if (r - l + 1 <= 2 && !skip) {
+            return true;
+        }
+        if (s.charAt(l) != s.charAt(r)) {
+            if (skip) {
+                return false;
+            }
+            return dfs(s, l + 1, r, true) || dfs(s, l, r - 1, true);
+        }
+        return dfs(s, l + 1, r - 1, skip);
+    }
 
+    public boolean validPalindrome(String s) {
+        return dfs(s, 0, s.length() - 1, false);
+    }
+}
 ```
 
 ### **...**
