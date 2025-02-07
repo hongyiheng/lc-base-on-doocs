@@ -44,7 +44,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        ans = [[0] * n for _ in range(n)]
+        ds = [[0, 1], [1, 0], [-1, 0], [0, -1]]
+        x, y, v = 0, -1, 1
+        while v <= n * n:
+            for d in ds:
+                nx, ny = x + d[0], y + d[1]
+                f = False
+                while 0 <= nx < n and 0 <= ny < n and ans[nx][ny] == 0:
+                    f = True
+                    ans[nx][ny] = v
+                    v += 1
+                    nx += d[0]
+                    ny += d[1]
+                if f:
+                    x, y = nx - d[0], ny - d[1]
+                    break
+        return ans
 ```
 
 ### **Java**
@@ -52,7 +70,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] ans = new int[n][n];
+        int[][] ds = new int[][]{{0, 1}, {1, 0}, {-1, 0}, {0, - 1}};
+        int x = 0, y = -1, v = 1;
+        while (v <= n * n) {
+            for (int[] d : ds) {
+                int nx = x + d[0], ny = y + d[1];
+                boolean f = false;
+                while (0 <= nx && nx < n && 0 <= ny && ny < n && ans[nx][ny] == 0) {
+                    f = true;
+                    ans[nx][ny] = v++;
+                    nx += d[0];
+                    ny += d[1];
+                }
+                if (f) {
+                    x = nx - d[0];
+                    y = ny - d[1];
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
