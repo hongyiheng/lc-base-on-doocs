@@ -60,7 +60,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        if obstacleGrid[0][0] == 1:
+            return 0
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        f = [[0] * n for _ in range(m)]
+        f[0][0] = 1
+        for i in range(m):
+            for j in range(n):
+                if obstacleGrid[i][j] == 1:
+                    continue
+                if i:
+                    f[i][j] += f[i - 1][j]
+                if j:
+                    f[i][j] += f[i][j - 1]
+        return f[-1][-1]
 ```
 
 ### **Java**
@@ -68,7 +83,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        if (obstacleGrid[0][0] == 1) {
+            return 0;
+        }
+        int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        int[][] f = new int[m][n];
+        f[0][0] = 1;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) {
+                    continue;
+                }
+                if (i > 0) {
+                    f[i][j] += f[i - 1][j];
+                }
+                if (j > 0) {
+                    f[i][j] += f[i][j - 1];
+                }
+            }
+        }
+        return f[m - 1][n - 1];
+    }
+}
 ```
 
 ### **...**
