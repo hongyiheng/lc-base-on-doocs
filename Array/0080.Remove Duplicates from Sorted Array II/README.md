@@ -71,7 +71,17 @@ for (int i = 0; i < len; i++) {
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        n = len(nums)
+        j = ans = 0
+        for i in range(n):
+            if j >= 2 and nums[j - 2] == nums[i]:
+                continue
+            nums[j] = nums[i]
+            ans += 1
+            j += 1
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +89,20 @@ for (int i = 0; i < len; i++) {
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int n = nums.length;
+        int j = 0, ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (j >= 2 && nums[j - 2] == nums[i]) {
+                continue;
+            }
+            nums[j++] = nums[i];
+            ans++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
