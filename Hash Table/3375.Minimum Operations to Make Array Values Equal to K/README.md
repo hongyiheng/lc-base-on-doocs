@@ -79,7 +79,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        s = set()
+        for v in nums:
+            if v > k:
+                s.add(v)
+            elif v < k:
+                return -1
+        return len(s)
 ```
 
 ### **Java**
@@ -87,7 +95,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        Set<Integer> s = new HashSet<>();
+        for (int v : nums) {
+            if (v > k) {
+                s.add(v);
+            } else if (v < k) {
+                return -1;
+            }
+        }
+        return s.size();
+    }
+}
 ```
 
 ### **...**
