@@ -77,7 +77,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+        def check(x):
+            ans = 0
+            for v in nums:
+                if v > x:
+                    ans += (v - 1) // x
+                if ans > maxOperations:
+                    return False
+            return True
 
+        l, r = 1, max(nums)
+        while l < r:
+            mid = (l + r) >> 1
+            if check(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r
 ```
 
 ### **Java**
@@ -85,7 +103,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean check(int[] nums, int x, int maxOperations) {
+        int ans = 0;
+        for (int v : nums) {
+            if (v > x) {
+                ans += (v - 1) / x;
+            }
+            if (ans > maxOperations) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int minimumSize(int[] nums, int maxOperations) {
+        int l = 1, r = (int)1e9;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (check(nums, mid, maxOperations)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return r;
+    }
+}
 ```
 
 ### **...**
