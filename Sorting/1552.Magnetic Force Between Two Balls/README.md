@@ -54,7 +54,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxDistance(self, position: List[int], m: int) -> int:
+        def check(x):
+            last = position[0]
+            ans = 1
+            for v in position:
+                if v - last >= x:
+                    ans += 1
+                    last = v
+            return ans >= m
 
+        position.sort()
+        l, r = 1, position[-1]
+        while l < r:
+            mid = (l + r + 1) >> 1
+            if check(mid):
+                l = mid
+            else:
+                r = mid - 1
+        return r
 ```
 
 ### **Java**
@@ -62,7 +81,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int maxDistance(int[] position, int m) {
+        Arrays.sort(position);
+        int l = 0, r = position[position.length - 1];
+        while (l < r) {
+            int mid = (l + r + 1) >> 1;
+            if (check(position, mid, m)) {
+                l = mid;
+            } else {
+                r = mid - 1;
+            }
+        } 
+    }
 
+    public boolean check(int[] position, int x, int m) {
+        int last = position[0], ans = 1;
+        for (int i = 1; i < position.length; i++) {
+            if (position[i] - last >= x) {
+                last = position[i];
+                ans++;
+            }
+        }
+        return ans >= m;
+    }
+}
 ```
 
 ### **...**
