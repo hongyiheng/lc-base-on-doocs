@@ -55,7 +55,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def replaceElements(self, arr: List[int]) -> List[int]:
+        mx = -1
+        for i in range(len(arr) -1, -1, -1):
+            arr[i], mx = mx, max(arr[i], mx)
+        return arr 
 ```
 
 ### **Java**
@@ -63,7 +68,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] replaceElements(int[] arr) {
+        int mx = -1;
+        for (int i = arr.length - 1; i > -1; i--) {
+            int t = arr[i];
+            arr[i] = mx;
+            mx = Math.max(mx, t);
+        }
+        return arr;
+    }
+}
 ```
 
 ### **...**
