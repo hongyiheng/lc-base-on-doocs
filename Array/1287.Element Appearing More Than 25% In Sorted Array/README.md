@@ -40,7 +40,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        t = len(arr) // 4
+        for i in range(t, len(arr)):
+            if arr[i] == arr[i - t]:
+                return arr[i]
+        return -1
 ```
 
 ### **Java**
@@ -50,16 +56,9 @@
 ```java
 class Solution {
     public int findSpecialInteger(int[] arr) {
-        int limit = arr.length >> 2;
-        int cur = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            if (cur == arr[i]) {
-                limit--;
-            } else {
-                limit = (arr.length >> 2) - 1;
-                cur = arr[i];
-            }
-            if (limit < 0) {
+        int t = arr.length / 4;
+        for (int i = t; i < arr.length; i++) {
+            if (arr[i] == arr[i - t]) {
                 return arr[i];
             }
         }
