@@ -56,7 +56,22 @@ rangeFreqQuery.query(0, 11, 33); // 返回 2 。33 在整个子数组中出现 2
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class RangeFreqQuery:
 
+    def __init__(self, arr: List[int]):
+        self.g = defaultdict(list)
+        for i, v in enumerate(arr):
+            self.g[v].append(i)
+
+    def query(self, left: int, right: int, value: int) -> int:
+        idxs = self.g[value]
+        l = bisect_left(idxs, left)
+        r = bisect_left(idxs, right + 1)
+        return r - l
+        
+# Your RangeFreqQuery object will be instantiated and called as such:
+# obj = RangeFreqQuery(arr)
+# param_1 = obj.query(left,right,value)
 ```
 
 ### **Java**
@@ -64,7 +79,45 @@ rangeFreqQuery.query(0, 11, 33); // 返回 2 。33 在整个子数组中出现 2
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class RangeFreqQuery {
 
+    Map<Integer, List<Integer>> g = new HashMap<>();
+
+    public RangeFreqQuery(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            g.computeIfAbsent(arr[i], k -> new ArrayList<>()).add(i);
+        }
+    }
+
+    public int search(List<Integer> q, int t) {
+        int l = 0, r = q.size();
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (q.get(mid) < t) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return r;
+    }
+    
+    public int query(int left, int right, int value) {
+        List<Integer> q = g.get(value);
+        if (q == null) {
+            return 0;
+        }
+        int l = search(q, left);
+        int r = search(q, right + 1);
+        return r - l;
+    }
+}
+
+/**
+ * Your RangeFreqQuery object will be instantiated and called as such:
+ * RangeFreqQuery obj = new RangeFreqQuery(arr);
+ * int param_1 = obj.query(left,right,value);
+ */
 ```
 
 ### **...**
