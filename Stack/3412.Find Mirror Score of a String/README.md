@@ -73,7 +73,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def calculateScore(self, s: str) -> int:
+        idx = [[] for _ in range(26)]
+        ans = 0
+        for i, c in enumerate(list(s)):
+            v = ord(c) - ord('a')
+            t = 25 - v
+            if idx[t]:
+                ans += i - idx[t].pop()
+            else:
+                idx[v].append(i)
+        return ans
 ```
 
 ### **Java**
@@ -81,7 +92,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long calculateScore(String s) {
+        Deque<Integer>[] idx = new Deque[26];
+        for (int i = 0; i < 26; i++) {
+            idx[i] = new ArrayDeque<>();
+        }
+        long ans = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int v = s.charAt(i) - 'a';
+            int t = 25 - v;
+            if (!idx[t].isEmpty()) {
+                ans += i - idx[t].pollLast();
+            } else {
+                idx[v].addLast(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
