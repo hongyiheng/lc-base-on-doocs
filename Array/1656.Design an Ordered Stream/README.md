@@ -71,7 +71,24 @@ os.insert(4, "ddddd"); // 插入 (4, "ddddd")，返回 ["ddddd", "eeeee"]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class OrderedStream:
 
+    def __init__(self, n: int):
+        self.ws = [None] * n
+        self.i = 0
+        
+    def insert(self, idKey: int, value: str) -> List[str]:
+        self.ws[idKey - 1] = value
+        ans = []
+        while self.i < len(self.ws) and self.ws[self.i]:
+            ans.append(self.ws[self.i])
+            self.i += 1
+        return ans
+
+
+# Your OrderedStream object will be instantiated and called as such:
+# obj = OrderedStream(n)
+# param_1 = obj.insert(idKey,value)
 ```
 
 ### **Java**
@@ -79,7 +96,30 @@ os.insert(4, "ddddd"); // 插入 (4, "ddddd")，返回 ["ddddd", "eeeee"]
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class OrderedStream {
 
+    String[] ws;
+    int i = 0;
+
+    public OrderedStream(int n) {
+        ws = new String[n];
+    }
+    
+    public List<String> insert(int idKey, String value) {
+        ws[idKey - 1] = value;
+        List<String> ans = new ArrayList<>();
+        while (i < ws.length && ws[i] != null) {
+            ans.add(ws[i++]);
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your OrderedStream object will be instantiated and called as such:
+ * OrderedStream obj = new OrderedStream(n);
+ * List<String> param_1 = obj.insert(idKey,value);
+ */
 ```
 
 ### **...**
