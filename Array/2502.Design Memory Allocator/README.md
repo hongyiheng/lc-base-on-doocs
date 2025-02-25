@@ -75,7 +75,38 @@ loc.free(7); // 释放 mID 为 7 的所有内存单元。内存数组保持原�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Allocator:
 
+    def __init__(self, n: int):
+        self.m = [0] * n
+
+    def allocate(self, size: int, mID: int) -> int:
+        cnt = 0
+        for i, v in enumerate(self.m):
+            if v == 0:
+                cnt += 1
+            else:
+                cnt = 0
+            if cnt == size:
+                for j in range(i - size + 1, i + 1):
+                    self.m[j] = mID
+                return i - size + 1
+        return -1
+
+    def freeMemory(self, mID: int) -> int:
+        ans = 0
+        for i, v in enumerate(self.m):
+            if v == mID:
+                self.m[i] = 0
+                ans += 1
+        return ans
+
+
+
+# Your Allocator object will be instantiated and called as such:
+# obj = Allocator(n)
+# param_1 = obj.allocate(size,mID)
+# param_2 = obj.free(mID)
 ```
 
 ### **Java**
@@ -83,7 +114,50 @@ loc.free(7); // 释放 mID 为 7 的所有内存单元。内存数组保持原�
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Allocator {
 
+    int[] q;
+
+    public Allocator(int n) {
+        q = new int[n];
+    }
+    
+    public int allocate(int size, int mID) {
+        int cnt = 0;
+        for (int i = 0; i < q.length; i++) {
+            if (q[i] == 0) {
+                cnt++;
+            } else {
+                cnt = 0;
+            }
+            if (cnt == size) {
+                for (int j = i - size + 1; j <= i; j++) {
+                    q[j] = mID;
+                }
+                return i - size + 1;
+            }
+        }
+        return -1;
+    }
+    
+    public int freeMemory(int mID) {
+        int ans = 0;
+        for (int i = 0; i < q.length; i++) {
+            if (q[i] == mID) {
+                q[i] = 0;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your Allocator object will be instantiated and called as such:
+ * Allocator obj = new Allocator(n);
+ * int param_1 = obj.allocate(size,mID);
+ * int param_2 = obj.freeMemory(mID);
+ */
 ```
 
 ### **...**
