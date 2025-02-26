@@ -65,7 +65,32 @@ browserHistory.back(7);                   // 你原本在浏览 &quot;google.com
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class BrowserHistory:
 
+    def __init__(self, homepage: str):
+        self.q = [homepage]
+        self.idx = 0
+        
+    def visit(self, url: str) -> None:
+        self.q = self.q[:self.idx + 1]
+        self.q.append(url)
+        self.idx = len(self.q) - 1
+
+    def back(self, steps: int) -> str:
+        self.idx = max(0, self.idx - steps)
+        return self.q[self.idx]
+        
+    def forward(self, steps: int) -> str:
+        self.idx = min(self.idx + steps, len(self.q) - 1)
+        return self.q[self.idx]
+        
+
+
+# Your BrowserHistory object will be instantiated and called as such:
+# obj = BrowserHistory(homepage)
+# obj.visit(url)
+# param_2 = obj.back(steps)
+# param_3 = obj.forward(steps)
 ```
 
 ### **Java**
@@ -73,7 +98,39 @@ browserHistory.back(7);                   // 你原本在浏览 &quot;google.com
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class BrowserHistory {
 
+    List<String> q = new ArrayList<>();
+    int idx = 0;
+
+    public BrowserHistory(String homepage) {
+        q.add(homepage);
+    }
+    
+    public void visit(String url) {
+        q = q.subList(0, idx + 1);
+        q.add(url);
+        idx = q.size() - 1;
+    }
+    
+    public String back(int steps) {
+        idx = Math.max(0, idx - steps);
+        return q.get(idx);
+    }
+    
+    public String forward(int steps) {
+        idx = Math.min(idx + steps, q.size() - 1);
+        return q.get(idx);
+    }
+}
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory obj = new BrowserHistory(homepage);
+ * obj.visit(url);
+ * String param_2 = obj.back(steps);
+ * String param_3 = obj.forward(steps);
+ */
 ```
 
 ### **...**
