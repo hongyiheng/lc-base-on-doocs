@@ -1,35 +1,34 @@
 class Solution {
+
+    List<List<String>> ans = new ArrayList<>();
+    String s;
+
     public List<List<String>> partition(String s) {
-        int len = s.length();
-        List<List<String>> res = new ArrayList<>();
-        if (len == 0) {
-            return res;
-        }
-        Deque<String> path = new ArrayDeque<>();
-        char[] charArray = s.toCharArray();
-        dfs(charArray, 0, len, path, res);
-        return res;
+        this.s = s;
+        dfs(0, "", new ArrayDeque<>());
+        return ans;
     }
 
-    private void dfs(char[] charArray, int index, int len, Deque<String> path, List<List<String>> res) {
-        if (index == len) {
-            res.add(new ArrayList<>(path));
+    public void dfs(int i, String word, Deque<String> path) {
+        if (i >= s.length()) {
+            if ("".equals(word)) {
+                ans.add(new ArrayList(path));
+            }
             return;
         }
-
-        for (int i = index; i < len; i++) {
-            if (!checkPalindrome(charArray, index, i)) {
-                continue;
-            }
-            path.addLast(new String(charArray, index, i + 1 - index));
-            dfs(charArray, i + 1, len, path, res);
-            path.removeLast();
+        word += s.charAt(i);
+        if (check(word)) {
+            path.add(word);
+            dfs(i + 1, "", path);
+            path.pollLast();
         }
+        dfs(i + 1, word, path);
     }
 
-    private boolean checkPalindrome(char[] charArray, int left, int right) {
-        while (left < right) {
-            if (charArray[left++] != charArray[right--]) {
+    public boolean check(String word) {
+        int l = 0, r = word.length() - 1;
+        while (l < r) {
+            if (word.charAt(l++) != word.charAt(r--)) {
                 return false;
             }
         }
