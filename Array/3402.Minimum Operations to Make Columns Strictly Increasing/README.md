@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, grid: List[List[int]]) -> int:
+        ans = 0
+        for j in range(len(grid[0])):
+            for i in range(1, len(grid)):
+                pre, v = grid[i - 1][j], grid[i][j]
+                if v <= pre:
+                    ans += pre - v + 1
+                    grid[i][j] = pre + 1
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +83,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperations(int[][] grid) {
+        int ans = 0;
+        for (int j = 0; j < grid[0].length; j++) {
+            for (int i = 1; i < grid.length; i++) {
+                int pre = grid[i - 1][j], v = grid[i][j];
+                if (pre >= v) {
+                    ans += pre - v + 1;
+                    grid[i][j] = pre + 1;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
