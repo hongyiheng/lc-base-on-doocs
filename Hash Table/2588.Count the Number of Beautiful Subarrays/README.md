@@ -66,7 +66,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def beautifulSubarrays(self, nums: List[int]) -> int:
+        ans = s = 0
+        cnt = defaultdict(int)
+        cnt[0] = 1
+        for v in nums:
+            s ^= v
+            ans += cnt[s]
+            cnt[s] += 1
+        return ans
 ```
 
 ### **Java**
@@ -74,7 +83,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long beautifulSubarrays(int[] nums) {
+        long ans = 0;
+        int s = 0;
+        int[] cnt = new int[(int)1e6 * 2];
+        cnt[0] = 1;
+        for (int v : nums) {
+            s ^= v;
+            ans += cnt[s];
+            cnt[s]++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
