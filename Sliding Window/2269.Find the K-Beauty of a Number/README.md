@@ -70,7 +70,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def divisorSubstrings(self, num: int, k: int) -> int:
+        s = str(num)
+        l = ans = 0
+        for r in range(len(s)):
+            if r - l + 1 == k:
+                v = int(s[l:r + 1])
+                if v and num % v == 0:
+                    ans += 1
+                l += 1
+        return ans 
 ```
 
 ### **Java**
@@ -78,7 +88,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int divisorSubstrings(int num, int k) {
+        String s = String.valueOf(num);
+        int l = 0, ans = 0;
+        for (int r = 0; r < s.length(); r++) {
+            if (r - l + 1 == k) {
+                int v = Integer.parseInt(s.substring(l, r + 1));
+                if (v != 0 && num % v == 0) {
+                    ans++;
+                }
+                l++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
