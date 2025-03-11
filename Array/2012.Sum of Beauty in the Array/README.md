@@ -64,7 +64,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumOfBeauties(self, nums: List[int]) -> int:
+        n = len(nums)
+        q = [[0] * 2 for _ in range(n)]
+        for i in range(len(nums)):
+            q[i][0] = nums[i]
+            if i:
+                q[i][0] = max(q[i - 1][0], q[i][0])
+            q[n - i - 1][1] = nums[n - i - 1]
+            if n - i <= n - 1:
+                q[n - i - 1][1] = min(q[n - i][1], q[n - i - 1][1])
+        ans = 0
+        for i in range(1, n - 1):
+            if q[i - 1][0] < nums[i] < q[i + 1][1]:
+                ans += 2
+            elif nums[i - 1] < nums[i] < nums[i + 1]:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -72,7 +89,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int sumOfBeauties(int[] nums) {
+        int n = nums.length;
+        int[][] q = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            q[i][0] = nums[i];
+            if (i > 0) {
+                q[i][0] = Math.max(q[i][0], q[i - 1][0]);
+            }
+            q[n - i - 1][1] = nums[n - i - 1];
+            if (n - i < n) {
+                q[n - i - 1][1] = Math.min(q[n - i - 1][1], q[n - i][1]);
+            }
+        }
+        int ans = 0;
+        for (int i = 1; i < n - 1; i++) {
+            if (q[i - 1][0] < nums[i] && nums[i] < q[i + 1][1]) {
+                ans += 2;
+            } else if (nums[i - 1] < nums[i] && nums[i] < nums[i + 1]) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
