@@ -75,7 +75,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countOfSubstrings(self, word: str, k: int) -> int:
+        def f(k):
+            vowel = defaultdict(int)
+            ans = cnt = l = 0
+            for c in word:
+                if c in 'aeiou':
+                    vowel[c] += 1
+                else:
+                    cnt += 1
+                while len(vowel) == 5 and cnt >= k:
+                    t = word[l]
+                    if t in 'aeiou':
+                        vowel[t] -= 1
+                        if vowel[t] == 0:
+                            vowel.pop(t)
+                    else:
+                        cnt -= 1
+                    l += 1
+                ans += l
+            return ans
 
+        return f(k) - f(k + 1)
 ```
 
 ### **Java**
@@ -83,7 +105,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public long f(String word, int k) {
+        Map<Character, Integer> vowel = new HashMap<>();
+        long ans = 0;
+        int l = 0, cnt = 0;
+        Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        for (char c : word.toCharArray()) {
+            if (vowels.contains(c)) {
+                vowel.put(c, vowel.getOrDefault(c, 0) + 1);
+            } else {
+                cnt++;
+            }
+            while (vowel.keySet().size() == 5 && cnt >= k) {
+                char t = word.charAt(l);
+                if (vowels.contains(t)) {
+                    vowel.put(t, vowel.get(t) - 1);
+                    if (vowel.get(t) == 0) {
+                        vowel.remove(t);
+                    } 
+                } else {
+                        cnt--;
+                }
+                l++;
+            }
+            ans += l;
+        }
+        return ans;
+    }
+
+    public long countOfSubstrings(String word, int k) {
+        return f(word, k) - f(word, k + 1);
+    }
+}
 ```
 
 ### **...**
