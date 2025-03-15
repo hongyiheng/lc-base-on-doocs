@@ -57,7 +57,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def scoreOfString(self, s: str) -> int:
+        ans = 0
+        last = ord(s[0])
+        for i in range(1, len(s)):
+            v = ord(s[i])
+            ans += abs(last - v)
+            last = v
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +73,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int scoreOfString(String s) {
+        int ans = 0;
+        char last = s.charAt(0);
+        for (int i = 1; i < s.length(); i++) {
+            char v = s.charAt(i);
+            ans += Math.abs(last - v);
+            last = v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
