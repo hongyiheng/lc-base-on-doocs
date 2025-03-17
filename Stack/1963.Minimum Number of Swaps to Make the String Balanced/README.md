@@ -74,7 +74,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minSwaps(self, s: str) -> int:
+        q = []
+        for c in list(s):
+            if c == ']' and q and q[-1] == '[':
+                q.pop()
+            else:
+                q.append(c)
+        return (len(q) // 2 + 1) // 2 
 ```
 
 ### **Java**
@@ -82,7 +90,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minSwaps(String s) {
+        Deque<Character> q = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {
+            if (c == ']' && !q.isEmpty() && q.peekLast() == '[') {
+                q.pollLast();
+            } else {
+                q.addLast(c);
+            }
+        }
+        return (q.size() / 2 + 1) / 2;
+    }
+}
 ```
 
 ### **...**
