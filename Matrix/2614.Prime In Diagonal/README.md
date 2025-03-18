@@ -61,7 +61,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def diagonalPrime(self, nums: List[List[int]]) -> int:
+        def is_prime(v):
+            for i in range(2, int(math.sqrt(v)) + 1):
+                if v % i == 0:
+                    return False
+            return v >= 2
+        
+        ans = 0
+        for i, row in enumerate(nums):
+            for v in [row[i], row[-i - 1]]:
+                if v > ans and is_prime(v):
+                    ans = v
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +82,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean isPrime(int v) {
+        for (int i = 2; i < (int)Math.sqrt(v) + 1; i++) {
+            if (v % i == 0) {
+                return false;
+            }
+        }
+        return v >= 2;
+    }
+
+    public int diagonalPrime(int[][] nums) {
+        int ans = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int[] row = nums[i];
+            for (int v : new int[]{row[i], row[n - i - 1]}) {
+                if (v > ans && isPrime(v)) {
+                    ans = v;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
