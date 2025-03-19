@@ -59,7 +59,22 @@ nums 中的所有元素都有用到，并且每一行都由不同的整数组成
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        cnt = Counter(nums)
+        ans = []
+        while cnt:
+            row = []
+            del_k = []
+            for k in cnt.keys():
+                row.append(k)
+                cnt[k] = cnt[k] - 1
+                if cnt[k] == 0:
+                    del_k.append(k)
+            for k in del_k:
+                cnt.pop(k)
+            ans.append(row)
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +82,28 @@ nums 中的所有元素都有用到，并且每一行都由不同的整数组成
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums) {
+        int[] cnt = new int[210];
+        for (int v : nums) {
+            cnt[v]++;
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        while (n > 0) {
+            List<Integer> row = new ArrayList<>();
+            for (int i = 0; i < 210; i++) {
+                if (cnt[i] > 0) {
+                    row.add(i);
+                    cnt[i]--;
+                    n--;
+                }
+            }
+            ans.add(row);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
