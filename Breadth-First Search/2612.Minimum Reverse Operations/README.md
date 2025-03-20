@@ -76,7 +76,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minReverseOperations(self, n: int, p: int, banned: List[int], k: int) -> List[int]:
+        f = [-1] * n
+        f[p] = 0
+        q = [[0, p]]
+        while q:
+            w, pos = heapq.heappop(q)
+            for np in range(max(0, pos - k + 1), min(n, pos + k)):
+                if (f[np] != -1 and f[np] <= f[pos] + 1) or np in banned:
+                    continue
+                if (k - abs(np - pos) - 1) % 2:
+                    continue
+                t = (k - abs(np - pos) - 1) // 2
+                if 0 <= min(np, pos) - t and max(np, pos) + t < n:
+                    f[np] = f[pos] + 1
+                    heapq.heappush(q, [f[np], np])
+        return f
 ```
 
 ### **Java**
@@ -84,7 +100,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] minReverseOperations(int n, int p, int[] banned, int k) {
+        int[] f = new int[n];
+        Arrays.fill(f, -1);
+        f[p] = 0;
+        PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+        q.offer(new int[]{0, p});
+        Set<Integer> banSet = new HashSet<>();
+        for (int b : banned) {
+            banSet.add(b);
+        }
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int w = cur[0], pos = cur[1];
+            for (int np = Math.max(0, pos - k + 1); np < Math.min(n, pos + k); np++) {
+                if ((f[np] != -1 && f[np] <= f[pos] + 1) || banSet.contains(np)) {
+                    continue;
+                }
+                if ((k - Math.abs(np - pos) - 1) % 2 != 0) {
+                    continue;
+                }
+                int t = (k - Math.abs(np - pos) - 1) / 2;
+                if (0 <= Math.min(np, pos) - t && Math.max(np, pos) + t < n) {
+                    f[np] = f[pos] + 1;
+                    q.offer(new int[]{f[np], np});
+                }
+            }
+        }
+        return f;
+    }
+}
 ```
 
 ### **...**
