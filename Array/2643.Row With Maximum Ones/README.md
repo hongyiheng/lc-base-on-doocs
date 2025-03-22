@@ -60,7 +60,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def rowAndMaximumOnes(self, mat: List[List[int]]) -> List[int]:
+        ans = [0, 0]
+        for i, row in enumerate(mat):
+            v = sum(row)
+            if v > ans[1]:
+                ans = [i, v]
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +75,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] rowAndMaximumOnes(int[][] mat) {
+        int[] ans = new int[]{0, 0};
+        for (int i = 0; i < mat.length; i++) {
+            int v = 0;
+            for (int j = 0; j < mat[0].length; j++) {
+                v += mat[i][j];
+            }
+            if (v > ans[1]) {
+                ans = new int[]{i, v};
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
