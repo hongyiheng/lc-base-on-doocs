@@ -58,7 +58,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumCost(self, s: str) -> int:
+        def f(t):
+            n = len(s)
+            ans = d = 0
+            for i in range(n // 2, -1, -1):
+                v = ord(s[i]) - ord('0')
+                if v ^ d != t:
+                    ans += i + 1
+                    d ^= 1
+            d = 0
+            for i in range(n // 2, n):
+                v = ord(s[i]) - ord('0')
+                if v ^ d != t:
+                    ans += n - i
+                    d ^= 1
+            return ans
 
+        return min(f(0), f(1))
 ```
 
 ### **Java**
@@ -66,7 +84,33 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public long f(String s, int t) {
+        long ans = 0;
+        int d = 0, n = s.length();
+        for (int i = n / 2; i > -1; i--) {
+            int v = s.charAt(i) - '0';
+            if ((v ^ d) != t) {
+                ans += i + 1;
+                d ^= 1;
+            }
+        }
+        d = 0;
+        for (int i = n / 2; i < n; i++) {
+            int v = s.charAt(i) - '0';
+            if ((v ^ d) != t) {
+                ans += n - i;
+                d ^= 1;
+            }
+        }
+        return ans;
+    }
+
+    public long minimumCost(String s) {
+        return Math.min(f(s, 0), f(s, 1));
+    }
+}
 ```
 
 ### **...**
