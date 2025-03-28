@@ -59,7 +59,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimizedStringLength(self, s: str) -> int:
+        return len(set(list(s)))
 ```
 
 ### **Java**
@@ -67,7 +69,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimizedStringLength(String s) {
+        Set<Character> cs = new HashSet<>();
+        for (char c : s.toCharArray()) {
+            cs.add(c);
+        }
+        return cs.size();
+    }
+}
 ```
 
 ### **...**
