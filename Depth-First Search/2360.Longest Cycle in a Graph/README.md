@@ -58,7 +58,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def longestCycle(self, edges: List[int]) -> int: 
+        def dfs(x):
+            nonlocal t, ans
+            if time[x]:
+                return
+            st = t
+            while x != -1:
+                if time[x]:
+                    if time[x] >= st:
+                        ans = max(ans, t - time[x])
+                    break
+                else:
+                    time[x] = t
+                    t += 1
+                x = edges[x]
 
+        n = len(edges)
+        time = [0] * n
+        ans, t = -1, 1
+        for i in range(n):
+            dfs(i)
+        return ans
 ```
 
 ### **Java**
@@ -66,7 +88,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int ans = -1, t = 1;
+    int[] time;
+    int[] edges;
+
+    public void dfs(int x) {
+        if (time[x] != 0) {
+            return;
+        }
+        int st = t;
+        while (x != -1) {
+            if (time[x] != 0) {
+                if (time[x] >= st) {
+                    ans = Math.max(ans, t - time[x]);
+                }
+                break;
+            } else {
+                time[x] = t++;
+            }
+            x = edges[x];
+        }
+    }
+
+    public int longestCycle(int[] edges) {
+        int n = edges.length;
+        time = new int[n];
+        this.edges = edges;
+        for (int i = 0; i < n; i++) {
+            dfs(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
