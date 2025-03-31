@@ -47,7 +47,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def percentageLetter(self, s: str, letter: str) -> int:
+        cnt = sum([1 if c == letter else 0 for c in s])
+        return int(cnt / len(s) * 100)        
 ```
 
 ### **Java**
@@ -55,7 +58,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int percentageLetter(String s, char letter) {
+        int cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (c == letter) {
+                cnt++;
+            }
+        }
+        return cnt * 100 / s.length() ;
+    }
+}
 ```
 
 ### **...**
