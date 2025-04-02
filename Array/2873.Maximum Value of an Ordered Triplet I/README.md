@@ -62,11 +62,14 @@
 class Solution:
     def maximumTripletValue(self, nums: List[int]) -> int:
         n = len(nums)
+        f = [0] * (n + 1)
+        for i in range(n - 1, -1, -1):
+            f[i] = max(nums[i], f[i + 1])
         ans = 0
-        for i in range(n):
-            for j in range(i + 1, n):
-                for k in range(j + 1, n):
-                    ans = max(ans, (nums[i] - nums[j]) * nums[k])
+        mx = nums[0]
+        for i, v in enumerate(nums):
+            ans = max((mx - v) * f[i + 1], ans)
+            mx = max(mx, v)
         return ans
 ```
 
