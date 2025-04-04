@@ -70,7 +70,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        def dfs(root, depth):
+            if not root:
+                return depth
+            l = dfs(root.left, depth + 1)
+            r = dfs(root.right, depth + 1)
+            return max(l, r)
+            
 
+        if not root:
+            return root
+        l = dfs(root.left, 0)
+        r = dfs(root.right, 0)
+        if l == r:
+            return root
+        return self.lcaDeepestLeaves(root.left) if l > r else self.lcaDeepestLeaves(root.right) 
 ```
 
 ### **Java**
@@ -78,7 +100,41 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode lcaDeepestLeaves(TreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        int l = dfs(root.left, 0), r = dfs(root.right, 0);
+        if (l == r) {
+            return root;
+        }
+        return l > r ? lcaDeepestLeaves(root.left) : lcaDeepestLeaves(root.right);
+    }
 
+    public int dfs(TreeNode root, int depth) {
+        if (root == null) {
+            return depth;
+        }
+        int l = dfs(root.left, depth + 1), r = dfs(root.right, depth + 1);
+        return Math.max(l, r);
+    }
+}
 ```
 
 ### **...**
