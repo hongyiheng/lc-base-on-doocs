@@ -76,7 +76,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        def dfs(i, v):
+            nonlocal n
+            if i == n:
+                return v
+            ans = dfs(i + 1, v ^ nums[i])
+            ans += dfs(i + 1, v)
+            return ans
+        
+        n = len(nums)
+        return dfs(0, 0)
 ```
 
 ### **Java**
@@ -84,7 +95,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] nums;
 
+    public int dfs(int i, int v) {
+        if (i == nums.length) {
+            return v;
+        }
+        int ans = dfs(i + 1, v ^ nums[i]);
+        ans += dfs(i + 1, v);
+        return ans;
+    }
+
+    public int subsetXORSum(int[] nums) {
+        this.nums = nums;
+        return dfs(0, 0);
+    }
+}
 ```
 
 ### **...**
