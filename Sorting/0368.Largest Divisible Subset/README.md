@@ -53,7 +53,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
+        nums.sort()
+        n = len(nums)
+        f, p = [0] * n, [-1] * n
+        mx_i = 0
+        for i, v in enumerate(nums):
+            for j in range(i):
+                if v % nums[j] == 0 and f[j] > f[i]:
+                    f[i] = f[j]
+                    p[i] = j
+            f[i] += 1
+            if f[i] > f[mx_i]:
+                mx_i = i
 
+        ans = []
+        i = mx_i
+        while i >= 0:
+            ans.append(nums[i])
+            i = p[i]
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +81,34 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int[] f = new int[n], p = new int[n];
+        Arrays.fill(p, -1);
+        int mxIdx = 0;
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            for (int j = 0; j < i; j++) {
+                if (v % nums[j] == 0 && f[j] > f[i]) {
+                    f[i] = f[j];
+                    p[i] = j;
+                }     
+            }
+            f[i]++;
+            if (f[i] > f[mxIdx]) {
+                mxIdx = i;
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        while (mxIdx >= 0) {
+            ans.add(nums[mxIdx]);
+            mxIdx = p[mxIdx];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
