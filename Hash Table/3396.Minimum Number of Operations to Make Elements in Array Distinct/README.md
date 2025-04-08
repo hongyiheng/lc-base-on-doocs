@@ -83,7 +83,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumOperations(self, nums: List[int]) -> int:
+        n = len(nums)
+        s = set()
+        for i in range(n - 1, -1, -1):
+            if nums[i] in s:
+                return i // 3 + 1
+            s.add(nums[i])
+        return 0
 ```
 
 ### **Java**
@@ -91,7 +99,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minimumOperations(int[] nums) {
+        int n = nums.length;
+        Set<Integer> s = new HashSet<>();
+        for (int i = n - 1; i > -1; i--) {
+            if (s.contains(nums[i])) {
+                return i / 3 + 1;
+            }
+            s.add(nums[i]);
+        }
+        return 0;
+    }
+}
 ```
 
 ### **...**
