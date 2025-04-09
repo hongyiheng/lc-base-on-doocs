@@ -79,7 +79,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        ans = last = 0
+        for v in nums:
+            if v < k:
+                return -1
+            elif v > k and v != last:
+                ans += 1
+            last = v
+        return ans
 ```
 
 ### **Java**
@@ -87,7 +97,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        Arrays.sort(nums);
+        int ans = 0, last = 0;
+        for (int v : nums) {
+            if (v < k) {
+                return -1;
+            } else if (v > k && v != last) {
+                ans++;
+            }
+            last = v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
