@@ -48,7 +48,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countSymmetricIntegers(self, low: int, high: int) -> int:
+        ans = 0
+        for i in range(low, high + 1):
+            s = str(i)
+            n = len(s)
+            if n % 2:
+                continue
+            a = b = 0
+            for j in range(n // 2):
+                a += int(s[j])
+                b += int(s[j + n // 2])
+            if a == b:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +70,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countSymmetricIntegers(int low, int high) {
+        int ans = 0;
+        for (int i = low; i < high + 1; i++) {
+            char[] cs = String.valueOf(i).toCharArray();
+            int n = cs.length;
+            if (n % 2 != 0) {
+                continue;
+            }
+            int a = 0, b = 0;
+            for (int j = 0; j < n / 2; j++) {
+                a += cs[j] - '0';
+                b += cs[j + n / 2] - '0';
+            }
+            if (a == b) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
