@@ -59,7 +59,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
+        n = len(arr)
+        ans = 0
+        for i in range(n):
+            for k in range(i + 2, n):
+                if abs(arr[i] - arr[k]) > c:
+                    continue
+                for j in range(i + 1, k):
+                    if abs(arr[i] - arr[j]) > a or abs(arr[j] - arr[k]) > b:
+                        continue
+                    ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +79,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countGoodTriplets(int[] arr, int a, int b, int c) {
+        int n = arr.length;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int k = i + 2; k < n; k++) {
+                if (Math.abs(arr[i] - arr[k]) > c) {
+                    continue;
+                }
+                for (int j = i + 1; j < k; j++) {
+                    if (Math.abs(arr[i] - arr[j]) > a || Math.abs(arr[j] - arr[k]) > b) {
+                        continue;
+                    }
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
