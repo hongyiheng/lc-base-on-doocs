@@ -83,7 +83,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumAmount(self, coins: List[List[int]]) -> int:
+        m, n = len(coins), len(coins[0])
+        f = [[[-inf] * 3 for _ in range(n + 1)] for _ in range(m + 1)]
+        f[1][0] = [0] * 3
+        for i, row in enumerate(coins):
+            for j, x in enumerate(row):
+                f[i + 1][j + 1][0] = max(f[i + 1][j][0], f[i][j + 1][0]) + x
+                f[i + 1][j + 1][1] = max(f[i + 1][j][1] + x, f[i][j + 1][1] + x, f[i + 1][j][0], f[i][j + 1][0])
+                f[i + 1][j + 1][2] = max(f[i + 1][j][2] + x, f[i][j + 1][2] + x, f[i + 1][j][1], f[i][j + 1][1])
+        return f[m][n][2]
 ```
 
 ### **Java**
@@ -91,7 +101,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumAmount(int[][] coins) {
+        int m = coins.length, n = coins[0].length;
+        int[][][] f = new int[m + 1][n + 1][3];
+        for (int[][] row : f) {
+            for (int[] r : row) {
+                Arrays.fill(r, -0x3f3f3f);
+            }
+        }
+        f[1][0] = new int[3];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int x = coins[i][j];
+                f[i + 1][j + 1][0] = Math.max(f[i + 1][j][0], f[i][j + 1][0]) + x;
+                f[i + 1][j + 1][1] = Math.max(Math.max(f[i + 1][j][0], f[i][j + 1][0]), Math.max(f[i + 1][j][1], f[i][j + 1][1]) + x);
+                f[i + 1][j + 1][2] = Math.max(Math.max(f[i + 1][j][1], f[i][j + 1][1]), Math.max(f[i + 1][j][2], f[i][j + 1][2]) + x);
+            }
+        }
+        return f[m][n][2];
+    }
+}
 ```
 
 ### **...**
