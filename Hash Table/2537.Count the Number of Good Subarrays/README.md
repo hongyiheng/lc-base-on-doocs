@@ -53,7 +53,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countGood(self, nums: List[int], k: int) -> int:
+        g = defaultdict(int)
+        ans = cur = l = 0
+        n = len(nums)
+        for r in range(n):
+            cur += g[nums[r]]
+            g[nums[r]] += 1
+            while cur >= k:
+                ans += n - r
+                cur -= g[nums[l]] - 1
+                g[nums[l]] -= 1
+                l += 1
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +74,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long countGood(int[] nums, int k) {
+        Map<Integer, Long> g = new HashMap<>();
+        long ans = 0;
+        int cur = 0, n = nums.length, l = 0;
+        for (int r = 0; r < n; r++) {
+            cur += g.getOrDefault(nums[r], 0L);
+            g.put(nums[r], g.getOrDefault(nums[r], 0L) + 1);
+            while (cur >= k) {
+                ans += n - r;
+                cur -= (g.get(nums[l]) - 1);
+                g.put(nums[l], g.get(nums[l]) - 1);
+                l++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
