@@ -50,7 +50,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countBadPairs(self, nums: List[int]) -> int:
+        ans = 0
+        g = defaultdict(int)
+        for i, v in enumerate(nums):
+            ans += g[v - i]
+            g[v - i] += 1
+        n = len(nums)
+        return n * (n - 1) // 2 - ans
 ```
 
 ### **Java**
@@ -58,7 +66,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long countBadPairs(int[] nums) {
+        Map<Integer, Integer> g = new HashMap<>();
+        long ans = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int v = g.getOrDefault(nums[i] - i, 0);
+            ans += v;
+            g.put(nums[i] - i, v + 1);
+        }
+        return (long)n * (n - 1) / 2 - ans;
+    }
+}
 ```
 
 ### **...**
