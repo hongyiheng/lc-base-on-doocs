@@ -56,7 +56,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        def search_left(x, l):
+            r = len(nums)
+            while l < r:
+                mid = (l + r) >> 1
+                if nums[mid] < x:
+                    l = mid + 1
+                else:
+                    r = mid
+            return r
 
+        nums.sort()
+        ans = 0
+        for i, v in enumerate(nums):
+            l = search_left(lower - v, i + 1)
+            r = search_left(upper - v + 1, i + 1) - 1
+            if r >= l:
+                ans += r - l + 1
+        return ans
 ```
 
 ### **Java**
@@ -64,7 +83,35 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int searchLeft(int[] nums, int l, int x) {
+        int r = nums.length;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (nums[mid] < x) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return r;
+    }
+
+    public long countFairPairs(int[] nums, int lower, int upper) {
+        Arrays.sort(nums);
+        long ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int v = nums[i];
+            int l = searchLeft(nums, i + 1, lower - v);
+            int r = searchLeft(nums, i + 1, upper - v + 1) - 1;
+            if (r >= l) {
+                ans += (long)r - l + 1;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
