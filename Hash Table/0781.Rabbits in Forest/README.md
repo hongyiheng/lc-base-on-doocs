@@ -47,7 +47,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numRabbits(self, answers: List[int]) -> int:
+        cnt = Counter(answers)
+        ans = 0
+        for k in cnt.keys():
+            v = cnt[k]
+            ans += (v + k) // (k + 1) * (k + 1)
+        return ans
 ```
 
 ### **Java**
@@ -55,7 +62,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numRabbits(int[] answers) {
+        int[] cnt = new int[1010];
+        for (int v : answers) {
+            cnt[v]++;
+        }
+        int ans = 0;
+        for (int i = 0; i < 1010; i++) {
+            if (cnt[i] == 0) {
+                continue;
+            }
+            ans += (cnt[i] + i) / (i + 1) * (i + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
