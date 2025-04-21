@@ -75,7 +75,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
+        last = mi = mx = lower
+        for v in differences:
+            cur = last + v
+            mx = max(mx, cur)
+            mi = min(mi, cur)
+            last = cur
+        return max(0, upper - mx + 1 - max(0, lower - mi))
 ```
 
 ### **Java**
@@ -83,7 +91,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfArrays(int[] differences, int lower, int upper) {
+        int last = lower, mi = lower, mx = lower;
+        for (int v : differences) {
+            int cur = last + v;
+            mi = Math.min(mi, cur);
+            mx = Math.max(mx, cur);
+            last = cur;
+        }
+        return (int)Math.max(0, (long)upper - mx + 1 - Math.max(0, lower - mi));
+    }
+}
 ```
 
 ### **...**
