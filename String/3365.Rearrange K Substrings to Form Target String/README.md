@@ -85,7 +85,49 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Node:
+    def __init__(self):
+        self.children = [None] * 26
+        self.cnt = 0
 
+class Trie:
+
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word: str) -> None:
+        head = self.root
+        for c in word:
+            if not head.children[ord(c) - ord('a')]:
+                head.children[ord(c) - ord('a')] = Node()
+            head = head.children[ord(c) - ord('a')]
+        head.cnt += 1
+
+    def search(self, word: str) -> bool:
+        head = self.root
+        for c in word:
+            if not head.children[ord(c) - ord('a')]:
+                return False
+            head = head.children[ord(c) - ord('a')]
+        if head.cnt:
+            head.cnt -= 1
+            return True
+        return False
+        
+
+class Solution:
+    def isPossibleToRearrange(self, s: str, t: str, k: int) -> bool:
+        n = len(s)
+        tr = Trie()
+        d = n // k
+        for i in range(k):
+            w = s[i * d: (i + 1) * d]
+            tr.insert(w)
+        for i in range(k):
+            w = t[i * d: (i + 1) * d]
+            if not tr.search(w):
+                return False
+        return True
 ```
 
 ### **Java**
@@ -93,7 +135,60 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Node {
+    Node[] children = new Node[26];
+    int cnt = 0;
+}
 
+class Trie {
+    Node root = new Node();
+
+    public void insert(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                head.children[c - 'a'] = new Node();
+            }
+            head = head.children[c - 'a'];
+        }
+        head.cnt++;
+    }
+
+    public boolean search(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                return false;
+            }
+            head = head.children[c - 'a'];
+        }
+        if (head.cnt > 0) {
+            head.cnt--;
+            return true;
+        }
+        return false;
+    }
+}
+
+
+class Solution {
+    public boolean isPossibleToRearrange(String s, String t, int k) {
+        int n = s.length();
+        Trie tr = new Trie();
+        int d = n / k;
+        for (int i = 0; i < k; i++) {
+            String w = s.substring(i * d, (i + 1) * d);
+            tr.insert(w);
+        }
+        for (int i = 0; i < k; i++) {
+            String w = t.substring(i * d, (i + 1) * d);
+            if (!tr.search(w)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
