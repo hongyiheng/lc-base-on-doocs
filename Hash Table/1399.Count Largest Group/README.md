@@ -59,7 +59,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countLargestGroup(self, n: int) -> int:
+        cnt = defaultdict(int)
+        for v in range(1, n + 1):
+            s = 0
+            while v:
+                s += v % 10
+                v //= 10
+            cnt[s] += 1
+        mx = 0
+        group = defaultdict(int)
+        for k in cnt.keys():
+            group[cnt[k]] += 1
+            mx = max(mx, cnt[k])
+        return group[mx]
 ```
 
 ### **Java**
@@ -67,7 +81,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countLargestGroup(int n) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int i = 1; i <= n; i++) {
+            int s = 0, v = i;
+            while (v > 0) {
+                s += v % 10;
+                v /= 10;
+            }
+            cnt.put(s, cnt.getOrDefault(s, 0) + 1);
+        }
+        int mx = 0;
+        Map<Integer, Integer> g = new HashMap<>();
+        for (int k : cnt.keySet()) {
+            g.put(cnt.get(k), g.getOrDefault(cnt.get(k), 0) + 1);
+            mx = Math.max(mx, cnt.get(k));
+        }
+        return g.get(mx);
+    }
+}
 ```
 
 ### **...**
