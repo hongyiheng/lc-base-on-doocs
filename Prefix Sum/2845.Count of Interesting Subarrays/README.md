@@ -76,7 +76,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def countInterestingSubarrays(self, nums: List[int], modulo: int, k: int) -> int:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        for i in range(n):
+            pre[i + 1] = pre[i] + (1 if nums[i] % modulo == k else 0)
 
+        g = defaultdict(int)
+        ans = 0
+        for v in pre:
+            if v >= k:
+                ans += g[(v - k) % modulo]
+            g[v % modulo] += 1
+        return ans
 ```
 
 ### **Java**
@@ -84,7 +97,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long countInterestingSubarrays(List<Integer> nums, int modulo, int k) {
+        int n = nums.size();
+        int[] pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + (nums.get(i) % modulo == k ? 1 : 0);
+        }
+        Map<Integer, Integer> g = new HashMap<>();
+        long ans = 0;
+        for (int v : pre) {
+            if (v >= k) {
+                ans += g.getOrDefault((v - k) % modulo, 0);
+            }
+            g.put(v % modulo, g.getOrDefault(v % modulo, 0) + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
