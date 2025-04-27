@@ -55,7 +55,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countSubarrays(self, nums: List[int]) -> int:
+        ans = 0
+        for i, v in enumerate(nums[2:], 2):
+            if (v + nums[i - 2]) * 2 == nums[i - 1]:
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -63,7 +69,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int countSubarrays(int[] nums) {
+        int ans = 0;
+        for (int i = 2; i < nums.length; i++) {
+             if ((nums[i - 2] + nums[i]) * 2 == nums[i - 1]) {
+                 ans++;
+             }   
+        }    
+        return ans;
+    }
+}
 ```
 
 ### **...**
