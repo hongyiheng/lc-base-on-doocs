@@ -52,7 +52,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findNumbers(self, nums: List[int]) -> int:
+        return len([v for v in nums if len(str(v)) % 2 == 0])
 ```
 
 ### **Java**
@@ -60,7 +62,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findNumbers(int[] nums) {
+        return (int) Arrays.stream(nums).filter(e -> String.valueOf(e).length() % 2 == 0).count();
+    }
+}
 ```
 
 ### **...**
