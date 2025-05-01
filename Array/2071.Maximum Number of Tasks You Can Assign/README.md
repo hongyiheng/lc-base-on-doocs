@@ -81,7 +81,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numberOfSubstrings(self, s: str, k: int) -> int:
+        cnt = [0] * 26
+        n = len(s)
+        ans = l = 0
+        for r in range(n):
+            cnt[ord(s[r]) - ord('a')] += 1
+            while max(cnt) >= k:
+                ans += n - r
+                cnt[ord(s[l]) - ord('a')] -= 1
+                l += 1
+        return ans
 ```
 
 ### **Java**
@@ -89,7 +100,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numberOfSubstrings(String s, int k) {
+        int[] cnt = new int[26];
+        int ans = 0, l = 0, n = s.length();
+        for (int r = 0; r < n; r++) {
+            cnt[s.charAt(r) - 'a']++;
+            while (Arrays.stream(cnt).max().getAsInt() >= k) {
+                ans += n - r;
+                cnt[s.charAt(l++) - 'a']--;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
