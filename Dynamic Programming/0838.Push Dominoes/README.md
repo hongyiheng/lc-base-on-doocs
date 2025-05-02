@@ -54,7 +54,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        n = len(dominoes)
+        q = deque([[i, v] for i, v in enumerate(dominoes) if v != '.'])
+        ans = list(dominoes)
+        while q:
+            for _ in range(len(q)):
+                pos, c = q.popleft()
+                if c == 'L' and pos > 0 and dominoes[pos - 1] == '.':
+                    if pos > 1 and dominoes[pos - 2] == 'R':
+                        continue
+                    ans[pos - 1] = 'L'
+                    q.append([pos - 1, 'L'])
+                if c == 'R' and pos < n - 1 and dominoes[pos + 1] == '.':
+                    if pos + 2 < n and dominoes[pos + 2] == 'L':
+                        continue
+                    ans[pos + 1] = 'R'
+                    q.append([pos + 1, 'R'])   
+            dominoes = "".join(ans)
+        return "".join(ans)
 ```
 
 ### **Java**
@@ -62,6 +81,44 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+public class Solution {
+
+    public String pushDominoes(String dominoes) {
+        int n = dominoes.length();
+        char[] ans = dominoes.toCharArray();
+        Deque<Pair<Integer, Character>> q = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            char c = dominoes.charAt(i);
+            if (c != '.') {
+                q.offer(new Pair<>(i, c));
+            }
+        }
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                Pair<Integer, Character> item = q.poll();
+                int pos = item.getKey();
+                char c = item.getValue();
+                if (c == 'L' && pos > 0 && dominoes.charAt(pos - 1) == '.') {
+                    if (pos > 1 && dominoes.charAt(pos - 2) == 'R') {
+                        continue;
+                    }
+                    ans[pos - 1] = 'L';
+                    q.offer(new Pair<>(pos - 1, 'L'));
+                }
+                if (c == 'R' && pos < n - 1 && dominoes.charAt(pos + 1) == '.') {
+                    if (pos + 2 < n && dominoes.charAt(pos + 2) == 'L') {
+                        continue;
+                    } 
+                    ans[pos + 1] = 'R';
+                    q.offer(new Pair<>(pos + 1, 'R'));
+                }
+            }
+            dominoes = new String(ans);
+        }
+        return new String(ans);
+    }
+}
 
 ```
 
