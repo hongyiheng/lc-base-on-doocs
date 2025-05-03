@@ -56,7 +56,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
+        def f(x):
+            ans1 = ans2 = 0
+            for t, b in zip(tops, bottoms):
+                if t == b == x:
+                    continue
+                if t == x:
+                    ans2 += 1
+                elif b == x:
+                    ans1 += 1
+                else:
+                    return -1
+            return min(ans1, ans2)
+        
+        ans1, ans2 = f(tops[0]), f(bottoms[0])
+        if ans1 == -1:
+            return ans2
+        elif ans2 == -1:
+            return ans1
+        return min(ans1, ans2)
 ```
 
 ### **Java**
@@ -64,7 +84,37 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int f(int x, int[] tops, int[] bottoms) {
+        int ans1 = 0, ans2 = 0;
+        for (int i = 0; i < tops.length; i++) {
+            int t = tops[i], b = bottoms[i];
+            if (t == x && b == x) {
+                continue;
+            }
+            if (t == x) {
+                ans2++;
+            } else if (b == x) {
+                ans1++;
+            } else {
+                return -1;
+            }
+        }
+        return Math.min(ans1, ans2);
+    }
+
+    public int minDominoRotations(int[] tops, int[] bottoms) {
+        int ans1 = f(tops[0], tops, bottoms);
+        int ans2 = f(bottoms[0], tops, bottoms);
+        if (ans1 == -1) {
+            return ans2;
+        } else if (ans2 == -1) {
+            return ans1;
+        }
+        return Math.min(ans1, ans2);
+    }
+}
 ```
 
 ### **...**
