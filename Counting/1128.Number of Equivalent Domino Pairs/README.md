@@ -43,7 +43,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+        cnt = [[0] * 10 for _ in range(10)]
+        ans = 0
+        for a, b in dominoes:
+            ans += cnt[a][b]
+            cnt[a][b] += 1
+            cnt[b][a] = cnt[a][b]
+        return ans
 ```
 
 ### **Java**
@@ -51,7 +59,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int[][] cnt = new int[10][10];
+        int ans = 0;
+        for (int[] v : dominoes) {
+            int a = v[0], b = v[1];
+            ans += cnt[a][b]++;
+            cnt[b][a] = cnt[a][b];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
