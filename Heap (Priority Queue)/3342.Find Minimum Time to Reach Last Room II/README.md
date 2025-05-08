@@ -81,7 +81,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minTimeToReach(self, moveTime: List[List[int]]) -> int:
+        m, n = len(moveTime), len(moveTime[0])
+        q = [(0, 0, 0)]
+        step = [[inf] * n for _ in range(m)]
+        step[0][0] = 0
+        while q:
+            w, x, y = heapq.heappop(q)
+            if x == m - 1 and y == n - 1:
+                return w
+            t = (x + y) % 2 + 1
+            for d in [[0, 1], [1, 0], [-1, 0], [0, -1]]:
+                nx, ny = x + d[0], y + d[1]
+                if nx < 0 or nx >= m or ny < 0 or ny >= n:
+                    continue
+                nw = max(moveTime[nx][ny], w) + t
+                if step[nx][ny] <= nw:
+                    continue
+                step[nx][ny] = nw
+                heapq.heappush(q, (nw, nx, ny))
+        return -1
 ```
 
 ### **Java**
@@ -89,7 +109,39 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minTimeToReach(int[][] moveTime) {
+        int m = moveTime.length, n = moveTime[0].length;
+        int[][] step = new int[m][n];
+        for (int[] r : step) {
+            Arrays.fill(r, 0x3f3f3f3f);
+        }
+        step[0][0] = 0;
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        q.add(new int[]{0, 0, 0});
+        while (!q.isEmpty()) {
+            int[] e = q.poll();
+            int w = e[0], x = e[1], y = e[2];
+            if (x == m - 1 && y == n - 1) {
+                return w;
+            }
+            int t = (x + y) % 2 + 1;
+            for (int[] d : new int[][]{{0, 1}, {1, 0}, {-1, 0}, {0, -1}}) {
+                int nx = x + d[0], ny = y + d[1];
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                    continue;
+                }
+                int nw = Math.max(moveTime[nx][ny], w) + t;
+                if (step[nx][ny] <= nw) {
+                    continue;
+                }
+                step[nx][ny] = nw;
+                q.add(new int[]{nw, nx, ny});
+            }
+        }
+        return -1;
+    }
+}
 ```
 
 ### **...**
