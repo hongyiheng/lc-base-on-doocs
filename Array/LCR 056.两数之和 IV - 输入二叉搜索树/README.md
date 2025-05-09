@@ -53,7 +53,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        def dfs(root):
+            if not root:
+                return False
+            ans = dfs(root.left)
+            if k - root.val in g:
+                return True
+            g[root.val] = True
+            return ans or dfs(root.right)
+        
+        g = dict()
+        return dfs(root)
 ```
 
 ### **Java**
@@ -61,7 +79,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
 
+    Map<Integer, Boolean> g = new HashMap<>();
+    int k;
+
+    public boolean dfs(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        boolean ans = dfs(root.left);
+        if (g.containsKey(k - root.val)) {
+            return true;
+        }
+        g.put(root.val, true);
+        return ans || dfs(root.right);
+    }
+
+    public boolean findTarget(TreeNode root, int k) {
+        this.k = k;
+        return dfs(root);
+    }
+}
 ```
 
 ### **...**
