@@ -54,7 +54,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minSum(self, nums1: List[int], nums2: List[int]) -> int:
+        s1 = s2 = 0
+        cnt1 = cnt2 = 0
+        for v in nums1:
+            s1 += v
+            if v == 0:
+                cnt1 += 1
+        for v in nums2:
+            s2 += v
+            if v == 0:
+                cnt2 += 1
+        if (cnt1 == 0 and s1 < s2 + cnt2) or (cnt2 == 0 and s1 + cnt1 > s2):
+            return -1
+        return max(s1 + cnt1, s2 + cnt2)
 ```
 
 ### **Java**
@@ -62,7 +76,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long minSum(int[] nums1, int[] nums2) {
+        long s1 = 0, s2 = 0;
+        int cnt1 = 0, cnt2 = 0;
+        for (int v : nums1) {
+            s1 += v;
+            if (v == 0) {
+                cnt1++;
+            }
+        }
+        for (int v : nums2) {
+            s2 += v;
+            if (v == 0) {
+                cnt2++;
+            }
+        }
+        if ((cnt1 == 0 && s1 < s2 + cnt2) || (cnt2 == 0 && s1 + cnt1 > s2)) {
+            return -1;
+        } 
+        return Math.max(s1 + cnt1, s2 + cnt2); 
+    }
+}
 ```
 
 ### **...**
