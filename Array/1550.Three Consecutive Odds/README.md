@@ -45,7 +45,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def threeConsecutiveOdds(self, arr: List[int]) -> bool:
+        cnt = 0
+        for v in arr:
+            if v % 2 == 1:
+                cnt += 1
+            else:
+                cnt = 0
+            if cnt >= 3:
+                return True
+        return False
 ```
 
 ### **Java**
@@ -53,7 +63,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean threeConsecutiveOdds(int[] arr) {
+        int cnt = 0;
+        for (int v : arr) {
+            if (v % 2 == 1) {
+                cnt++;
+            } else {
+                cnt = 0;
+            } 
+            if (cnt >= 3) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
