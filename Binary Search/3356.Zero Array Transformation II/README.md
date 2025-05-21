@@ -97,7 +97,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
+        def check(t):
+            q = [0] * (len(nums) + 1)
+            for l, r, v in queries[:t]:
+                q[l] += v
+                q[r + 1] -= v
+            d = 0
+            for i, v in enumerate(nums):
+                d += q[i]
+                if v > d:
+                    return False
+            return True
+        
+        l, r = 0, len(queries)
+        while l < r:
+            mid = (l + r) >> 1
+            if check(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r if check(r) else -1
 ```
 
 ### **Java**
@@ -105,7 +126,38 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean check(int[] nums, int[][] queries, int t) {
+        int[] q = new int[nums.length + 1];
+        for (int i = 0; i < t; i++) {
+            int[] v = queries[i];
+            q[v[0]] += v[2];
+            q[v[1] + 1] -= v[2];
+        }
+        int d = 0;
+        for (int i = 0; i < nums.length; i++) {
+            d += q[i];
+            if (nums[i] > d) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int minZeroArray(int[] nums, int[][] queries) {
+        int l = 0, r = queries.length;
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (check(nums, queries, mid)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return check(nums, queries, r) ? r : -1;
+    }
+}
 ```
 
 ### **...**
