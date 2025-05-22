@@ -85,7 +85,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxRemoval(self, nums: List[int], queries: List[List[int]]) -> int:
+        queries.sort()
+        pq = []
+        q = [0] * (len(nums) + 1)
+        d = pos = 0
+        for i, v in enumerate(nums):
+            d += q[i]
+            while pos < len(queries) and queries[pos][0] <= i:
+                heapq.heappush(pq, -queries[pos][1])
+                pos += 1
+            while d < v and pq and -pq[0] >= i:
+                d += 1
+                q[-heapq.heappop(pq) + 1] -= 1
+            if v > d:
+                return -1      
+        return len(pq)
 ```
 
 ### **Java**
@@ -93,7 +109,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxRemoval(int[] nums, int[][] queries) {
+        Arrays.sort(queries, (a, b) -> a[0] - b[0]);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        int[] q = new int[nums.length + 1];
+        int d = 0, pos = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int v = nums[i];
+            d += q[i];
+            while (pos < queries.length && queries[pos][0] <= i) {
+                pq.offer(-queries[pos][1]);
+                pos++;
+            }
+            while (d < v && !pq.isEmpty() && -pq.peek() >= i) {
+                d += 1;
+                q[-pq.poll() + 1] -= 1;
+            }
+            if (v > d) {
+                return -1;
+            }
+        }
+        return pq.size();
+    }
+}
 ```
 
 ### **...**
