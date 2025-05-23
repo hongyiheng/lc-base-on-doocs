@@ -58,7 +58,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxContainers(self, n: int, w: int, maxWeight: int) -> int:
+        return min(n * n, maxWeight // w)
 ```
 
 ### **Java**
@@ -66,7 +68,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxContainers(int n, int w, int maxWeight) {
+        return Math.min(n * n, maxWeight / w);
+    }
+}
 ```
 
 ### **...**
