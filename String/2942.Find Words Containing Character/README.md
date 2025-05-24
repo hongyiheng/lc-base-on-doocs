@@ -61,7 +61,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findWordsContaining(self, words: List[str], x: str) -> List[int]:
+        return [i for i, w in enumerate(words) if x in w]
 ```
 
 ### **Java**
@@ -69,7 +71,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<Integer> findWordsContaining(String[] words, char x) {
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].indexOf(x) != -1) {
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
