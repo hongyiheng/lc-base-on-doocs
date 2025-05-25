@@ -59,7 +59,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestPalindrome(self, words: List[str]) -> int:
+        g = [[0] * 26 for _ in range(26)]
+        ans = 0
+        for w in words:
+            i, j = ord(w[0]) - ord('a'), ord(w[1]) - ord('a')
+            if g[j][i]:
+                ans += 4
+                g[j][i] -= 1
+            else:
+                g[i][j] += 1
+        for i in range(26):
+            if g[i][i]:
+                return ans + 2
+        return ans
 ```
 
 ### **Java**
@@ -67,7 +81,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestPalindrome(String[] words) {
+        int[][] g = new int[26][26];
+        int ans = 0;
+        for (String w : words) {
+            int i = w.charAt(0) - 'a', j = w.charAt(1) - 'a';
+            if (g[j][i] > 0) {
+                g[j][i]--;
+                ans += 4;
+            } else {
+                g[i][j]++;
+            }
+        }
+        for (int i = 0; i < 26; i++) {
+            if (g[i][i] > 0) {
+                return ans + 2;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
