@@ -121,7 +121,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def subarraySum(self, nums: List[int]) -> int:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        for i, v in enumerate(nums):
+            pre[i + 1] = pre[i] + v
+        ans = 0
+        for i, v in enumerate(nums):
+            ans += pre[i + 1] - pre[max(0, i - v)] 
+        return ans
 ```
 
 ### **Java**
@@ -129,7 +138,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int subarraySum(int[] nums) {
+        int n = nums.length;
+        int[] pre = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            ans += pre[i + 1] - pre[Math.max(0, i - nums[i])];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
