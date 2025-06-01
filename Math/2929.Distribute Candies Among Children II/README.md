@@ -49,7 +49,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def distributeCandies(self, n: int, limit: int) -> int:
+        def c2(n):
+            return n * (n - 1) // 2 if n > 1 else 0
+            
+        return c2(n + 2) - 3 * c2(n - limit + 1) + 3 * c2(n - 2 * limit) - c2(n - 3 * limit - 1)
 ```
 
 ### **Java**
@@ -57,7 +62,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public long distributeCandies(int n, int limit) {
+        return c2(n + 2) - 3 * c2(n - limit + 1) + 3 * c2(n - 2 * limit) - c2(n - 3 * limit - 1);
+    }
 
+    private long c2(int n) {
+        return n > 1 ? (long) n * (n - 1) / 2 : 0;
+    }
+}
 ```
 
 ### **...**
