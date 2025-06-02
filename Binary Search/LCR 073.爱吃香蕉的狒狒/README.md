@@ -66,7 +66,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        def check(t):
+            return sum([(x + t - 1) // t for x in piles]) <= h
 
+        n = len(piles)
+        l, r = 1, max(piles)
+        while l < r:
+            mid = (l + r) >> 1
+            if not check(mid):
+                l = mid + 1
+            else:
+                r = mid
+        return r
 ```
 
 ### **Java**
@@ -74,7 +87,29 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean check(int[] piles, int t, int h) {
+        int ans = 0;
+        for (int x : piles) {
+            ans += (x + t - 1) / t;
+        }
+        return ans <= h;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int l = 1, r = Arrays.stream(piles).max().getAsInt();
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (!check(piles, mid, h)) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return r;
+    }
+}
 ```
 
 ### **...**
