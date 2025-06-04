@@ -69,7 +69,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def answerString(self, word: str, numFriends: int) -> str:
+        if numFriends == 1:
+            return word
+        n = len(word)
+        return max(word[i:i + n - numFriends + 1] for i in range(n))
 ```
 
 ### **Java**
@@ -77,7 +82,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String answerString(String word, int numFriends) {
+        if (numFriends == 1) {
+            return word;
+        }
+        int n = word.length();
+        String ans = "";
+        for (int i = 0 ; i < n ; i++) {
+            String ns = word.substring(i, Math.min(n, i + n - (numFriends - 1)));
+            if (ns.compareTo(ans) > 0) {
+                ans = ns;
+            }
+        }    
+        return ans;
+    }
+}
 ```
 
 ### **...**
