@@ -65,7 +65,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+        def find(x):
+            if p[x] != x:
+                p[x] = find(p[x])
+            return p[x]
+        
+        def union(a, b):
+            if find(a) > find(b):
+                p[find(a)] = find(b)
+                return 
+            p[find(b)] = find(a)
+        
+        p = [i for i in range(26)]
+        for a, b in zip(s1, s2):
+            if a != b:
+                union(ord(a) - ord('a'), ord(b) - ord('a'))
+        cs = list(baseStr)
+        for i, c in enumerate(cs):
+            cs[i] = chr(find(ord(c) - ord('a')) + ord('a'))
+        return "".join(cs)
 ```
 
 ### **Java**
@@ -73,7 +93,43 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int[] p = new int[26];
+
+    public int find(int x) {
+        if (p[x] != x) {
+            p[x] = find(p[x]);
+            
+        }
+        return p[x];
+    }
+
+    public void union(int a, int b) {
+        int r1 = find(a), r2 = find(b);
+        if (r1 < r2) {
+            p[r2] = r1;
+        } else {
+            p[r1] = r2;
+        }
+    }
+
+    public String smallestEquivalentString(String s1, String s2, String baseStr) {
+        for (int i = 0; i < 26; i++) {
+            p[i] = i;
+        }
+        int n = s1.length();
+        for (int i = 0; i < n; i++) {
+            int a = s1.charAt(i) - 'a', b = s2.charAt(i) - 'a';
+            union(a, b);
+        }
+        char[] cs = baseStr.toCharArray();
+        for (int i = 0; i < baseStr.length(); i++) {
+            cs[i] = (char)(find(cs[i] - 'a') + 'a');
+        }
+        return new String(cs);
+    }
+}
 ```
 
 ### **...**
