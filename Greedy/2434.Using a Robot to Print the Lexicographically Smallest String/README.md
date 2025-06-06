@@ -67,7 +67,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def robotWithString(self, s: str) -> str:
+        def is_min(c):
+            idx = ord(c) - ord('a')
+            for i in range(idx - 1, -1, -1):
+                if cnt[i] > 0:
+                    return False
+            return True
+        
+        cnt = [0] * 26
+        for c in s:
+            cnt[ord(c) - ord('a')] += 1
+        q = []
+        ans = ""
+        for c in s:
+            q.append(c)
+            cnt[ord(c) - ord('a')] -= 1
+            while q and is_min(q[-1]):
+                ans += q.pop() 
+        while q:
+            ans += q.pop()
+        return ans
 ```
 
 ### **Java**
@@ -75,7 +96,40 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    int[] cnt;
 
+    public String robotWithString(String s) {
+        cnt = new int[26];
+        char[] cs = s.toCharArray();
+        for (char c : cs) {
+            cnt[c - 'a']++;
+        }
+        Deque<Character> q = new ArrayDeque<>();
+        StringBuilder ans = new StringBuilder();
+        for (char c : cs) {
+            cnt[c - 'a']--;
+            q.addLast(c);
+            while (!q.isEmpty() && isMin(q.peekLast())) {
+                ans.append(String.valueOf(q.pollLast()));
+            }
+        }
+        while (!q.isEmpty()) {
+            ans.append(String.valueOf(q.pollLast()));
+        }
+        return ans.toString();
+    }
+
+    public boolean isMin(char c) {
+        int idx = c - 'a';
+        for (int i = idx - 1; i >= 0; i--) {
+            if (cnt[i] > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
