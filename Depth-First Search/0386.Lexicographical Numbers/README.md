@@ -26,7 +26,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def lexicalOrder(self, n: int) -> List[int]:
+        def dfs(x):
+            if x > n:
+                return
+            ans.append(x)
+            for i in range(10):
+                nx = x * 10 + i
+                dfs(nx)
 
+        if n < 10:
+            return [i for i in range(1, n + 1)]
+        ans = []
+        for i in range(1, 10):
+            dfs(i)
+        return ans
 ```
 
 ### **Java**
@@ -34,7 +49,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    List<Integer> ans;
+    int n;
 
+    public void dfs(int x) {
+        if (x > n) {
+            return;
+        }
+        ans.add(x);
+        for (int i = 0; i < 10; i++) {
+            int nx = x * 10 + i;
+            dfs(nx);
+        }
+    }
+
+    public List<Integer> lexicalOrder(int n) {
+        ans = new ArrayList<>();
+        if (n < 10) {
+            for (int i = 1; i < n + 1; i++) {
+                ans.add(i);
+            }
+            return ans;
+        }
+        this.n = n;
+        for (int i = 1; i < 10; i++) {
+            dfs(i);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
