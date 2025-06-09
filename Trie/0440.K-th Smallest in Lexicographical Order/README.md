@@ -35,7 +35,28 @@ n: 13   k: 2
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findKthNumber(self, n: int, k: int) -> int:
+        def get_cnt(x):
+            cnt = 0
+            l, r = x, x + 1
+            while l <= n:
+                cnt += min(r, n + 1) - l
+                l *= 10
+                r *= 10
+            return cnt
+        
+        cur = 1
+        k -= 1
+        while k > 0:
+            cnt = get_cnt(cur)
+            if k >= cnt:
+                cur += 1
+                k -= cnt
+            else:
+                cur *= 10
+                k -= 1
+        return cur
 ```
 
 ### **Java**
@@ -43,7 +64,38 @@ n: 13   k: 2
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    int n;
+
+    public long getCnt(int x) {
+        long cnt = 0;
+        long l = x, r = x + 1;
+        while (l <= n) {
+            cnt += Math.min(n + 1, r) - l;
+            l *= 10;
+            r *= 10;
+        }
+        return cnt;
+    }
+
+    public int findKthNumber(int n, int k) {
+        this.n = n;
+        int cur = 1;
+        k--;
+        while (k > 0) {
+            long cnt = getCnt(cur);
+            if (k >= cnt) {
+                cur++;
+                k -= cnt;
+            } else {
+                cur *= 10;
+                k--;
+            }
+        }
+        return cur;
+    }
+}
 ```
 
 ### **...**
