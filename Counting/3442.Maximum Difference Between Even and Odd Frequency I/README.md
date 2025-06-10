@@ -67,7 +67,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxDifference(self, s: str) -> int:
+        cnt = [0] * 26
+        for c in s:
+            x = ord(c) - ord('a')
+            cnt[x] += 1
+        mi, mx = 110, 1
+        for v in cnt:
+            if not v:
+                continue
+            if v % 2:
+                mx = max(mx, v)
+            else:
+                mi = min(mi, v)
+        return mx - mi
 ```
 
 ### **Java**
@@ -75,7 +89,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxDifference(String s) {
+        int[] cnt = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        int mi = 110, mx = 1;
+        for (int v : cnt) {
+            if (v == 0) {
+                continue;
+            }
+            if (v % 2 == 1) {
+                mx = Math.max(mx, v);
+            } else {
+                mi = Math.min(mi, v);
+            }
+        }
+        return mx - mi;
+    }
+}
 ```
 
 ### **...**
