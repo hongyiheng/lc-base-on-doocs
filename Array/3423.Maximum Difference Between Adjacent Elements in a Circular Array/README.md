@@ -55,7 +55,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxAdjacentDistance(self, nums: List[int]) -> int:
+        return max(abs(nums[i] - nums[i - 1]) for i in range(len(nums)))
 ```
 
 ### **Java**
@@ -63,7 +65,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxAdjacentDistance(int[] nums) {
+        int n = nums.length;
+        int d = Math.abs(nums[0] - nums[n - 1]);
+        for (int i = 1; i < n; i++) {
+            d = Math.max(d, Math.abs(nums[i] - nums[i - 1]));
+        }
+        return d;
+    }
+}
 ```
 
 ### **...**
