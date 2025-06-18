@@ -61,7 +61,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
+        nums.sort()
+        ans = []
+        for i in range(0, len(nums), 3):
+            if nums[i + 2] - nums[i] > k:
+                return [] 
+            ans.append(nums[i:i+3])
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +77,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] divideArray(int[] nums, int k) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int[][] ans = new int[n / 3][3];
+        for (int i = 0; i < n; i += 3) {
+            if (nums[i + 2] - nums[i] > k) {
+                return new int[][]{};
+            }
+            ans[i / 3] = new int[]{nums[i], nums[i + 1], nums[i + 2]};
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
