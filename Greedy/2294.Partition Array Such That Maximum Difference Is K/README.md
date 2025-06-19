@@ -71,7 +71,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def partitionArray(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        mi = nums[0]
+        ans = 1
+        for v in nums:
+            if v - mi > k:
+                mi = v
+                ans += 1
+        return ans
 ```
 
 ### **Java**
@@ -79,7 +88,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int partitionArray(int[] nums, int k) {
+        Arrays.sort(nums);
+        int mi = nums[0], ans = 1;
+        for (int v : nums) {
+            if (v - mi > k) {
+                mi = v;
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
