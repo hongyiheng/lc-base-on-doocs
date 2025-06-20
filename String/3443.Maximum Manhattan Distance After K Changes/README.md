@@ -108,7 +108,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def maxDistance(self, s: str, k: int) -> int:
+        def f(a, b):
+            ans = cur = cnt = 0
+            for c in s:
+                if c == a or c == b:
+                    cur += 1
+                elif cnt < k:
+                    cur += 1
+                    cnt += 1
+                else:
+                    cur -= 1
+                ans = max(ans, cur)
+            return ans
 
+        return max(f("N", "E"), f("N", "W"), f("S", "E"), f("S", "W"))
 ```
 
 ### **Java**
@@ -116,7 +131,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int f(String s, char a, char b, int k) {
+        int ans = 0, cur = 0, cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (c == a || c == b) {
+                cur++;
+            } else if (cnt < k) {
+                cur++;
+                cnt++;
+            } else {
+                cur--;
+            }
+            ans = Math.max(ans, cur);
+        }
+        return ans;
+    }
+
+    public int maxDistance(String s, int k) {
+        return Math.max(Math.max(f(s, 'N', 'E', k), f(s, 'N', 'W', k)), Math.max(f(s, 'S', 'E', k), f(s, 'S', 'W', k)));
+    }
+}
 ```
 
 ### **...**
