@@ -51,7 +51,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumDeletions(self, word: str, k: int) -> int:
+        cnt = [0] * 26
+        for c in word:
+            cnt[ord(c) - ord('a')] += 1
+        ans = n = len(word)
+        for x in cnt:
+            c = 0
+            for v in cnt:
+                if v >= x:
+                    c += min(x + k, v)
+            ans = min(ans, n - c)
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public int minimumDeletions(String word, int k) {
+        int[] cnt = new int[26];
+        for (char c : word.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        int n = word.length();
+        int ans = n;
+        for (int x : cnt) {
+            int c = 0;
+            for (int v : cnt) {
+                if (v >= x) {
+                    c += Math.min(x + k, v);
+                }  
+            }
+            ans = Math.min(ans, n - c);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
