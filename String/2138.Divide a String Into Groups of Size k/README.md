@@ -62,7 +62,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def divideString(self, s: str, k: int, fill: str) -> List[str]:
+        ans = []
+        n = len(s)
+        for i in range(0, n, k):
+            v = s[i:min(n, i + k)]
+            while len(v) < k:
+                v += fill
+            ans.append(v)
+        return ans
 ```
 
 ### **Java**
@@ -70,7 +79,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public String[] divideString(String s, int k, char fill) {
+        int n = s.length();
+        String[] ans = new String[(n + k - 1) / k];
+        for (int i = 0; i < n; i += k) {
+            String v = s.substring(i, Math.min(i + k, n));
+            while (v.length() < k) {
+                v += fill;
+            }
+            ans[i / k] = v;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
