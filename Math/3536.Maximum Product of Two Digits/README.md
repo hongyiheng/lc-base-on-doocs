@@ -80,7 +80,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxProduct(self, n: int) -> int:
+        mx = ans = 0
+        while n:
+            v = n % 10
+            ans = max(ans, v * mx)
+            mx = max(mx, v)
+            n //= 10
+        return ans
 ```
 
 ### **Java**
@@ -88,7 +96,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxProduct(int n) {
+        int mx = 0, ans = 0;
+        while (n > 0) {
+            int v = n % 10;
+            ans = Math.max(ans, mx * v);
+            mx = Math.max(mx, v);
+            n /= 10;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
