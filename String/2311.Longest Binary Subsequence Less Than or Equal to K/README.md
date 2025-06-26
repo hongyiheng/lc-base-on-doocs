@@ -57,7 +57,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestSubsequence(self, s: str, k: int) -> int:
+        n = len(s)
+        ans = 0
+        for i in range(n - 1, -1, -1):
+            x = idx = 0
+            for j in range(i, -1, -1):
+                v = ord(s[j]) - ord('0')
+                if not v:
+                    idx += 1
+                    continue
+                if idx > 32 or x | 1 << idx > k:
+                    continue
+                x = x | 1 << idx
+                idx += 1
+            ans = max(ans, idx)
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +81,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestSubsequence(String s, int k) {
+        int n = s.length(), ans = 0;
+        for (int i = n - 1; i > -1; i--) {
+            long x = 0, idx = 0;
+            for (int j = i; j > -1; j--) {
+                int v = s.charAt(j) - '0';
+                if (v == 0) {
+                    idx++;
+                    continue;
+                }
+                if (idx > 32 || ((x | 1L << idx) > k)) {  
+                    continue; 
+                }
+                x = x | 1L << idx;      
+                idx++;
+            }
+            ans = Math.max(ans, (int)idx);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
