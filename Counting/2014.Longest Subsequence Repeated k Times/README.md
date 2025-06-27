@@ -78,7 +78,32 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def longestSubsequenceRepeatedK(self, s: str, k: int) -> str: 
+        def check(x):
+            i = cnt = 0
+            for c in s:
+                if c == x[i]:
+                    i += 1
+                if i == len(x):
+                    cnt += 1
+                    i = 0
+                if cnt >= k:
+                    return True
+            return False
 
+        cnt = Counter(s)
+        cs = [c for c in sorted(cnt.keys()) if cnt[c] >= k]
+        q = deque([""])
+        ans = ""
+        while q:
+            x = q.popleft()
+            for c in cs:
+                nx = x + c
+                if check(nx):
+                    ans = nx
+                    q.append(nx)
+        return ans
 ```
 
 ### **Java**
@@ -86,7 +111,52 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    private boolean check(String x, String s, int k) {
+        int i = 0, cnt = 0;
+        for (char c : s.toCharArray()) {
+            if (c == x.charAt(i)) {
+                i++;
+            }
+            if (i == x.length()) {
+                cnt++;
+                i = 0;
+                if (cnt >= k) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public String longestSubsequenceRepeatedK(String s, int k) {
+        Map<Character, Integer> cnt = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            cnt.put(c, cnt.getOrDefault(c, 0) + 1);
+        }
+        List<Character> cs = new ArrayList<>();
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (cnt.getOrDefault(c, 0) >= k) {
+                cs.add(c);
+            }
+        }
+        Deque<String> q = new ArrayDeque<>();
+        q.add("");
+        String ans = "";
+        while (!q.isEmpty()) {
+            String x = q.poll();
+            for (char c : cs) {
+                String nx = x + c;
+                if (check(nx, s, k)) {
+                    ans = nx;
+                    q.add(nx);
+                }
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
