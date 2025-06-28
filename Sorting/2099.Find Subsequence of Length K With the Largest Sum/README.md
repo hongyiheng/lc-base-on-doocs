@@ -58,7 +58,13 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+        q = [(i, v) for i, v in enumerate(nums)]
+        q.sort(key=lambda x:-x[1])
+        q = q[:k]
+        q.sort(key=lambda x:x[0])
+        return [v for _, v in q]
 ```
 
 ### **Java**
@@ -66,7 +72,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] maxSubsequence(int[] nums, int k) {
+        List<int[]> q = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            q.add(new int[]{i, nums[i]});
+        }
+        q.sort((a, b) -> b[1] - a[1]);
+        q = q.subList(0, k);
+        q.sort((a, b) -> a[0] - b[0]);
+        int[] ans = new int[k];
+        for (int i = 0; i < k; i++) {
+            ans[i] = q.get(i)[1];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
