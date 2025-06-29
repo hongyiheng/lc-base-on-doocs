@@ -4,7 +4,7 @@ class Solution {
 
     public int numSubseq(int[] nums, int target) {
         int n = nums.length;
-        int[] f = new int[n + 1];
+        int[] f = new int[n];
         f[0] = 1;
         for (int i = 1; i < n; i++) {
             f[i] = f[i - 1] * 2 % mod;
