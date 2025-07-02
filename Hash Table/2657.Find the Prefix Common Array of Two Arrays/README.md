@@ -57,7 +57,15 @@ i = 2：1，2 和 3 是两个数组的前缀公共元素，所以 C[2] = 3 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findThePrefixCommonArray(self, a: List[int], b: List[int]) -> List[int]:
+        ans = []
+        p = q = 0
+        for x, y in zip(a, b):
+            p |= 1 << x
+            q |= 1 << y
+            ans.append((p & q).bit_count())
+        return ans
 ```
 
 ### **Java**
@@ -65,7 +73,19 @@ i = 2：1，2 和 3 是两个数组的前缀公共元素，所以 C[2] = 3 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] findThePrefixCommonArray(int[] A, int[] B) {
+        long p = 0, q = 0;
+        int[] ans = new int[A.length];
+        for (int i = 0; i < A.length; i++) {
+            int x = A[i], y = B[i];
+            p |= 1L << x;
+            q |= 1L << y;
+            ans[i] = Long.bitCount(p & q);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
