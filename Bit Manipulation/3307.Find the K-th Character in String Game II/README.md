@@ -82,7 +82,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def kthCharacter(self, k: int, operations: List[int]) -> str:
+        m = 0
+        while 1 << m < k:
+            m += 1
+        pos = k
+        cnt = 0
+        while m > 0:
+            half = 1 << (m - 1)
+            if pos > half:
+                pos -= half
+                if operations[m - 1]:
+                    cnt += 1
+            m -= 1
+        return chr(cnt % 26 + ord('a'))
 ```
 
 ### **Java**
@@ -90,7 +104,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public char kthCharacter(long k, int[] operations) {
+        int m = 0;
+        while (1L << m < k) {
+            m++;
+        }
+        long pos = k, cnt = 0;
+        while(m > 0) {
+            long half = 1L << (m - 1);
+            if (pos > half) {
+                cnt += operations[m - 1];
+                pos -= half;
+            }
+            m--;
+        }
+        return (char)(cnt % 26 + 'a');
+    }
+}
 ```
 
 ### **...**
