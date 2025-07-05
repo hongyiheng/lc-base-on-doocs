@@ -71,7 +71,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findLucky(self, arr: List[int]) -> int:
+        cnt = Counter(arr)
+        ans = max([k if cnt[k] == k else 0 for k in cnt.keys()])
+        return -1 if not ans else ans
 ```
 
 ### **Java**
@@ -79,7 +83,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findLucky(int[] arr) {
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int v : arr) {
+            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+        }
+        int ans = -1;
+        for (int k : cnt.keySet()) {
+            if (cnt.get(k) == k) {
+                ans = Math.max(ans, k);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
