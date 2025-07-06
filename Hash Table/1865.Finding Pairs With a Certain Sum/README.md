@@ -70,7 +70,32 @@ findSumPairs.count(7);  // 返回 11 ；下标对 (2,1), (2,2), (2,4), (3,1), (3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class FindSumPairs:
 
+    def __init__(self, nums1: List[int], nums2: List[int]):
+        self.cnt1 = Counter(nums1)
+        self.cnt2 = Counter(nums2)
+        self.nums2 = nums2
+        
+    def add(self, index: int, val: int) -> None:
+        self.cnt2[self.nums2[index]] -= 1
+        self.nums2[index] += val
+        self.cnt2[self.nums2[index]] += 1
+
+    def count(self, tot: int) -> int:
+        ans = 0
+        for k in self.cnt1.keys():
+            if k >= tot:
+                continue
+            ans += self.cnt1[k] * self.cnt2.get(tot - k, 0)
+        return ans
+
+
+
+# Your FindSumPairs object will be instantiated and called as such:
+# obj = FindSumPairs(nums1, nums2)
+# obj.add(index,val)
+# param_2 = obj.count(tot)
 ```
 
 ### **Java**
@@ -78,7 +103,48 @@ findSumPairs.count(7);  // 返回 11 ；下标对 (2,1), (2,2), (2,4), (3,1), (3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class FindSumPairs {
 
+    int[] nums2;
+    Map<Integer, Integer> cnt1, cnt2;
+
+    public FindSumPairs(int[] nums1, int[] nums2) {
+        this.nums2 = nums2;
+        cnt1 = new HashMap<>();
+        cnt2 = new HashMap<>();
+        for (int v : nums1) {
+            cnt1.put(v, cnt1.getOrDefault(v, 0) + 1);
+        }
+        for (int v : nums2) {
+            cnt2.put(v, cnt2.getOrDefault(v, 0) + 1);
+        }
+    }
+
+    public void add(int index, int val) {
+        cnt2.put(nums2[index], cnt2.get(nums2[index]) - 1);
+        nums2[index] += val;
+        cnt2.put(nums2[index], cnt2.getOrDefault(nums2[index], 0) + 1);
+    }
+
+    public int count(int tot) {
+        int ans = 0;
+        for (Map.Entry<Integer, Integer> entry : cnt1.entrySet()) {
+            if (entry.getKey() > tot) {
+                continue;
+            }
+            int k = entry.getKey(), cnt = entry.getValue();
+            ans += cnt * cnt2.getOrDefault(tot - k, 0);
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your FindSumPairs object will be instantiated and called as such:
+ * FindSumPairs obj = new FindSumPairs(nums1, nums2);
+ * obj.add(index,val);
+ * int param_2 = obj.count(tot);
+ */
 ```
 
 ### **...**
