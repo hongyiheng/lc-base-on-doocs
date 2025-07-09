@@ -83,7 +83,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxFreeTime(self, eventTime: int, k: int, startTime: List[int], endTime: List[int]) -> int:
+        free = [startTime[0]]
+        for i in range(1, len(startTime)):
+            free.append(startTime[i] - endTime[i - 1])
+        free.append(eventTime - endTime[-1])
+        ans = s = 0
+        for i, v in enumerate(free):
+            s += v
+            if i < k:
+                continue
+            ans = max(ans, s)
+            s -= free[i - k]
+        return ans
 ```
 
 ### **Java**
@@ -91,7 +104,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxFreeTime(int eventTime, int k, int[] startTime, int[] endTime) {
+        int n = startTime.length;
+        int[] free = new int[n + 1];
+        free[0] = startTime[0];
+        for (int i = 1; i < n; i++) {
+            free[i] = startTime[i] - endTime[i - 1];
+        }
+        free[n] = eventTime - endTime[n - 1];
+        int ans = 0, s = 0;
+        for (int i = 0; i < n + 1; i++) {
+            s += free[i];
+            if (i < k) {
+                continue;
+            }
+            ans = Math.max(ans, s);
+            s -= free[i - k];
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
