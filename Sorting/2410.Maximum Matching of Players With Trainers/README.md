@@ -53,7 +53,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
+        players.sort()
+        trainers.sort()
+        n = len(trainers)
+        i = ans = 0
+        for v in players:
+            while i < n and v > trainers[i]:
+                i += 1
+            if i >= n:
+                break
+            ans += 1
+            i += 1
+        return ans
 ```
 
 ### **Java**
@@ -61,7 +74,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int matchPlayersAndTrainers(int[] players, int[] trainers) {
+        Arrays.sort(players);
+        Arrays.sort(trainers);
+        int n = trainers.length;
+        int i = 0, ans = 0;
+        for (int v : players) {
+            while (i < n && v > trainers[i]) {
+                i++;
+            }
+            if (i >= n) {
+                break;
+            }
+            ans++;
+            i++;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
