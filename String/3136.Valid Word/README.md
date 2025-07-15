@@ -83,7 +83,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isValid(self, word: str) -> bool:
+        if len(word) < 3:
+            return False
+        vs = {'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'}
+        v = c = False
+        for x in word:
+            if '0' <= x <= '9':
+                continue
+            elif x in vs:
+                v = True
+            elif 'a' <= x <= 'z' or 'A' <= x <= 'Z':
+                c = True
+            else:
+                return False
+        return v and c
 ```
 
 ### **Java**
@@ -91,7 +106,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isValid(String word) {
+        if (word.length() < 3) {
+            return false;
+        }
+        Set<Character> vs = new HashSet<>(Arrays.asList('A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'));
+        boolean v = false, c = false;
+        for (char x : word.toCharArray()) {
+            if ('0' <= x && x <= '9') {
+                continue;
+            } else if (vs.contains(x)) {
+                v = true;  
+            } else if (('a' <= x && x <= 'z') || ('A' <= x && x <= 'Z')) {
+                c = true;
+            } else {
+                return false;
+            }
+        }
+        return v && c;
+    }
+}
 ```
 
 ### **...**
