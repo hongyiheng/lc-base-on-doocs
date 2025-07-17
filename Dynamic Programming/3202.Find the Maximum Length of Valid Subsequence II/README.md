@@ -60,7 +60,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumLength(self, nums: List[int], k: int) -> int:
+        f = [[0] * k for _ in range(k)]
+        for i, v in enumerate(nums):
+            x = v % k
+            for j in range(k):
+                f[j][x] = max(f[j][x], f[x][j] + 1)
+        ans = 0
+        for r in f:
+            ans = max(ans, max(r))
+        return ans
 ```
 
 ### **Java**
@@ -68,7 +78,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumLength(int[] nums, int k) {
+        int[][] f = new int[k][k];
+        int ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int x = nums[i] % k;
+            for (int j = 0; j < k; j++) {
+                f[j][x] = Math.max(f[j][x], f[x][j] + 1);
+                ans = Math.max(ans, f[j][x]);
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
