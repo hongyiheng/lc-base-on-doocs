@@ -68,7 +68,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def minimumDifference(self, nums: List[int]) -> int:
+        n = len(nums)
+        k = n // 3
 
+        suffix = [nums[i] for i in range(2 * k, n)]
+        heapq.heapify(suffix)
+        suf_s = [0] * (n - k + 1)
+        suf_s[-1] = sum(suffix)
+        for i in range(n - k - 1, k - 1, -1):
+            suf_s[i] = suf_s[i + 1]
+            if nums[i] > suffix[0]:
+                suf_s[i] = suf_s[i] - heapq.heappop(suffix) + nums[i]
+                heapq.heappush(suffix, nums[i])
+
+        pre = [-nums[i] for i in range(k)]
+        heapq.heapify(pre)
+        pre_s = -sum(pre)
+        ans = pre_s - suf_s[k]
+        for i in range(k, n - k):
+            if nums[i] < -pre[0]:
+                pre_s = pre_s + heapq.heappop(pre) + nums[i]
+                heapq.heappush(pre, -nums[i])
+            ans = min(ans, pre_s - suf_s[i + 1])
+        return ans
 ```
 
 ### **Java**
@@ -76,6 +100,48 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public long minimumDifference(int[] nums) {
+        int n = nums.length;
+        int k = n / 3;
+
+        PriorityQueue<Integer> suffixHeap = new PriorityQueue<>();
+        long[] suffixSum = new long[n - k + 1];
+
+        long sufSum = 0;
+        for (int i = 2 * k; i < n; i++) {
+            suffixHeap.offer(nums[i]);
+            sufSum += nums[i];
+        }
+        suffixSum[n - k] = sufSum;
+
+        for (int i = n - k - 1; i >= k; i--) {
+            suffixSum[i] = suffixSum[i + 1];
+            if (nums[i] > suffixHeap.peek()) {
+                suffixSum[i] = suffixSum[i] - suffixHeap.poll() + nums[i];
+                suffixHeap.offer(nums[i]);
+            }
+        }
+
+        PriorityQueue<Integer> prefixHeap = new PriorityQueue<>((a, b) -> b - a);
+        long prefixSum = 0;
+        for (int i = 0; i < k; i++) {
+            prefixHeap.offer(nums[i]);
+            prefixSum += nums[i];
+        }
+
+        long ans = prefixSum - suffixSum[k];
+        for (int i = k; i < n - k; i++) {
+            if (nums[i] < prefixHeap.peek()) {
+                prefixSum = prefixSum - prefixHeap.poll() + nums[i];
+                prefixHeap.offer(nums[i]);
+            }
+            ans = Math.min(ans, prefixSum - suffixSum[i + 1]);
+        }
+
+        return ans;
+    }
+}
 
 ```
 
