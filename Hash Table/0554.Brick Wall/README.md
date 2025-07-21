@@ -52,7 +52,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def leastBricks(self, wall: List[List[int]]) -> int:
+        m, n = len(wall), sum(wall[0])
+        interval = defaultdict(int)
+        for i, row in enumerate(wall):
+            s = 0
+            for v in row:
+                s += v
+                if s == n:
+                    continue
+                interval[s] += 1
+        return m - max(interval.values()) if interval.values() else m
 ```
 
 ### **Java**
@@ -60,7 +71,27 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int leastBricks(List<List<Integer>> wall) {
+        int m = wall.size(), n = wall.get(0).stream().mapToInt(e->e).sum();
+        Map<Integer, Integer> interval = new HashMap<>();
+        for (List<Integer> row : wall) {
+            int s = 0;
+            for (int v : row) {
+                s += v;
+                if (s == n) {
+                    continue;
+                }
+                interval.put(s, interval.getOrDefault(s, 0) + 1);
+            }
+        }
+        int ans = m;
+        for (int v : interval.values()) {
+            ans = Math.min(ans, m - v);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
