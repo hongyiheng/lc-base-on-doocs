@@ -51,7 +51,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumUniqueSubarray(self, nums: List[int]) -> int:
+        n = len(nums)
+        pre = [0] * (n + 1)
+        pos = dict()
+        ans = last = 0
+        for i, v in enumerate(nums):
+            pre[i + 1] = pre[i] + v
+            if v in pos and pos[v] > last:
+                last = pos[v]
+            ans = max(ans, pre[i + 1] - pre[last])
+            pos[v] = i + 1
+        return ans
 ```
 
 ### **Java**
@@ -59,7 +71,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumUniqueSubarray(int[] nums) {
+        int n = nums.length;
+        int[] pre = new int[n + 1];
+        Map<Integer, Integer> pos = new HashMap<>();
+        int ans = 0, last = 0;
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            pre[i + 1] = pre[i] + v;
+            if (pos.getOrDefault(v, 0) > last) {
+                last = pos.get(v);
+            }
+            ans = Math.max(ans, pre[i + 1] - pre[last]);
+            pos.put(v, i + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
