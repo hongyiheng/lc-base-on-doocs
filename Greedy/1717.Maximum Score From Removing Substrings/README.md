@@ -65,7 +65,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumGain(self, s: str, x: int, y: int) -> int:
+        a, b = 'a', 'b'
+        if x < y:
+            a, b = b, a
+            x, y = y, x
+        ans = cnt1 = cnt2 = 0
+        for c in list(s):
+            if c == a:
+                cnt1 += 1
+            elif c == b:
+                if cnt1:
+                    ans += x
+                    cnt1 -= 1
+                else:
+                    cnt2 += 1
+            else:
+                ans += min(cnt1, cnt2) * y
+                cnt1 = cnt2 = 0
+        return ans + min(cnt1, cnt2) * y
 ```
 
 ### **Java**
@@ -73,7 +92,36 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximumGain(String s, int x, int y) {
+        char a = 'a', b = 'b';
+        if (x < y) {
+            b = 'a';
+            a = 'b';
+            int z = x;
+            x = y;
+            y = z;
+        }
+        int ans = 0, cnt1 = 0, cnt2 = 0;
+        for (char c : s.toCharArray()) {
+            if (c == a) {
+                cnt1++;
+            } else if (c == b) {
+                if (cnt1 > 0) {
+                    cnt1--;
+                    ans += x;
+                } else {
+                    cnt2++;
+                }
+            } else {
+                ans += Math.min(cnt1, cnt2) * y;
+                cnt1 = 0;
+                cnt2 = 0;
+            }
+        }
+        return ans + Math.min(cnt1, cnt2) * y;
+    }
+}
 ```
 
 ### **...**
