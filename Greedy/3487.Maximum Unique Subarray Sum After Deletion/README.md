@@ -75,7 +75,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSum(self, nums: List[int]) -> int:
+        s = set([v for v in nums if v >= 0])
+        return sum(s) if s else max(nums)
 ```
 
 ### **Java**
@@ -83,7 +86,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maxSum(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        int ans = nums[0];
+        for (int v : nums) {
+            if (v >= 0) {
+                s.add(v);
+            }
+            ans = Math.max(ans, v);
+        }
+        return s.isEmpty() ? ans : s.stream().mapToInt(e -> e).sum();
+    }
+}
 ```
 
 ### **...**
