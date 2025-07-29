@@ -64,6 +64,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def smallestSubarrays(self, nums: List[int]) -> List[int]:
+        cnt = [[] for _ in range(32)]
+        for i, v in enumerate(nums):
+            for j in range(32):
+                if v >> j & 1:
+                    cnt[j].append(i)
+        ans = []
+        n = len(nums)
+        for i in range(n):
+            t = 1
+            for j in range(32):
+                if not cnt[j]:
+                    continue
+                l, r = 0, len(cnt[j]) - 1
+                while l < r:
+                    mid = (l + r) >> 1
+                    if cnt[j][mid] < i:
+                        l = mid + 1
+                    else:
+                        r = mid
+                if cnt[j][r] >= i:
+                    t = max(t, cnt[j][r] - i + 1)
+            ans.append(t)
+        return ans
 
 ```
 
@@ -72,6 +97,46 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int[] smallestSubarrays(int[] nums) {
+        int n = nums.length;
+        List<Integer>[] cnt = new List[32];
+        for (int i = 0; i < 32; i++) {
+            cnt[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < n; i++) {
+            int v = nums[i];
+            for (int j = 0; j < 32; j++) {
+                if (((v >> j) & 1) == 1) {
+                    cnt[j].add(i);
+                }
+            }
+        }
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            int t = 1;
+            for (int j = 0; j < 32; j++) {
+                if (cnt[j].isEmpty()) {
+                    continue;
+                }
+                int l = 0, r = cnt[j].size() - 1;
+                while (l < r) {
+                    int mid = (l + r) >> 1;
+                    if (cnt[j].get(mid) < i) {
+                        l = mid + 1;
+                    } else {
+                        r = mid;
+                    }
+                }
+                if (cnt[j].get(r) >= i) {
+                    t = Math.max(t, cnt[j].get(r) - i + 1);
+                }
+            }
+            ans[i] = t;
+        }
+        return ans;
+    }
+}
 
 ```
 
