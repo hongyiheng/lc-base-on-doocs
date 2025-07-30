@@ -61,7 +61,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        mx = max(nums)
+        ans = cnt = 0
+        for v in nums:
+            if v == mx:
+                cnt += 1
+            else:
+                cnt = 0
+            ans = max(ans, cnt)
+        return ans
 ```
 
 ### **Java**
@@ -69,7 +79,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int ans = 0, cnt = 0, mx = nums[0];
+        for (int v : nums) {
+            if (v == mx) {
+                cnt++;
+            } else if (v > mx) {
+                mx = v;
+                cnt = 1;
+                ans = 0;
+            } else {
+                cnt = 0;
+            }
+            ans = Math.max(ans, cnt);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
