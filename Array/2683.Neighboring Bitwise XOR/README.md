@@ -73,7 +73,16 @@ derived[1] = original[1] ⊕ original[0] = 1
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def doesValidArrayExist(self, derived: List[int]) -> bool:
+        def check(head):
+            last = head
+            for i in range(len(derived) - 1):
+                if derived[i]:
+                    last ^= 1
+            return head ^ last == derived[-1]
+        
+        return check(0) or check(1)
 ```
 
 ### **Java**
@@ -81,7 +90,22 @@ derived[1] = original[1] ⊕ original[0] = 1
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
 
+    public boolean check(int[] derived, int head) {
+        int last = head;
+        for (int i = 0; i < derived.length - 1; i++) {
+            if (derived[i] == 1) {
+                last ^= 1;
+            }
+        }
+        return (last ^ head) == derived[derived.length - 1];
+    }
+
+    public boolean doesValidArrayExist(int[] derived) {
+        return check(derived, 0) || check(derived, 1);
+    }
+}
 ```
 
 ### **...**
