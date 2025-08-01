@@ -48,7 +48,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        ans = [[1]]
+        for i in range(1, numRows):
+            last = ans[-1]
+            cur = [0] * (len(last) + 1)
+            cur[0] = cur[-1] = 1
+            for j in range(1, len(cur) - 1):
+                cur[j] = last[j - 1] + last[j]
+            ans.append(cur)
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +66,25 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(Arrays.asList(1));
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> last = ans.get(ans.size() - 1);
+            List<Integer> cur = new ArrayList<>();
+            for (int j = 0; j < last.size() + 1; j++) {
+                if (j == 0 || j == last.size()) {
+                    cur.add(1);
+                } else {
+                    cur.add(last.get(j - 1) + last.get(j));
+                }
+            }
+            ans.add(cur);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
