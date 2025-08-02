@@ -59,7 +59,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minCost(self, basket1: List[int], basket2: List[int]) -> int:
+        diff = defaultdict(int)
+        for v in basket1:
+            diff[v] += 1
+        for v in basket2:
+            diff[v] -= 1
+        l, r = [], []
+        for k in diff.keys():
+            if diff[k] % 2:
+                return -1
+            while diff[k] > 0:
+                l.append(k)
+                diff[k] -= 2
+            while diff[k] < 0:
+                r.append(k)
+                diff[k] += 2
+        l.sort()
+        r.sort(reverse=True)
+        mi = min(min(basket1), min(basket2))
+        ans = 0
+        for a, b in zip(l, r):
+            ans += min(a, b, 2 * mi)
+        return ans
 ```
 
 ### **Java**
@@ -67,6 +90,45 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public long minCost(int[] basket1, int[] basket2) {
+        Map<Integer, Integer> diff = new HashMap<>();
+        int mi = basket1[0];
+        for (int v : basket1) {
+            diff.put(v, diff.getOrDefault(v, 0) + 1);
+            mi = Math.min(mi, v);
+        }
+        for (int v : basket2) {
+            diff.put(v, diff.getOrDefault(v, 0) - 1);
+            mi = Math.min(mi, v);
+        }
+        List<Integer> l = new ArrayList<>();
+        List<Integer> r = new ArrayList<>();
+        for (int k : diff.keySet()) {
+            int d = diff.get(k);
+            if ((d & 1) != 0) {
+                return -1;
+            }
+            while (d > 0) {
+                l.add(k);
+                d -= 2;
+            }
+            while (d < 0) {
+                r.add(k);
+                d += 2;
+            }
+        }
+        l.sort((a, b) -> a - b);
+        r.sort((a, b) -> b - a);
+        long ans = 0;
+        for (int i = 0; i < l.size(); i++) {
+            int a = l.get(i);
+            int b = r.get(i);
+            ans += Math.min(Math.min(a, b), 2 * mi);
+        }
+        return ans;
+    }
+}
 
 ```
 
