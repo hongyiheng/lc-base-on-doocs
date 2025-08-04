@@ -74,7 +74,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        l = r = ans = 0
+        cnt = defaultdict(int)
+        while r < len(fruits):
+            cnt[fruits[r]] += 1
+            while len(cnt.keys()) > 2:
+                cnt[fruits[l]] -= 1
+                if cnt[fruits[l]] == 0:
+                    cnt.pop(fruits[l])
+                l += 1
+            ans = max(ans, r - l + 1)
+            r += 1
+        return ans
 ```
 
 ### **Java**
@@ -82,7 +95,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int l = 0, ans = 0;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int r = 0; r < fruits.length; r++) {
+            cnt.put(fruits[r], cnt.getOrDefault(fruits[r], 0) + 1);
+            while (cnt.size() > 2) {
+                cnt.put(fruits[l], cnt.get(fruits[l]) - 1);
+                if (cnt.get(fruits[l]) == 0) {
+                    cnt.remove(fruits[l]);
+                }
+                l++;
+            }
+            ans = Math.max(ans, r - l + 1);
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
