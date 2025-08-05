@@ -76,7 +76,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numOfUnplacedFruits(self, fruits: List[int], baskets: List[int]) -> int:
+        used = set()
+        for x in fruits:
+            for i, y in enumerate(baskets):
+                if i not in used and y >= x:
+                    used.add(i)
+                    break
+        return len(fruits) - len(used)
 ```
 
 ### **Java**
@@ -84,7 +92,20 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
+        Set<Integer> used = new HashSet<>();
+        for (int v : fruits) {
+            for (int i = 0; i < baskets.length; i++) {
+                if (!used.contains(i) && baskets[i] >= v) {
+                    used.add(i);
+                    break;
+                }
+            }
+        }
+        return fruits.length - used.size();
+    }
+}
 ```
 
 ### **...**
