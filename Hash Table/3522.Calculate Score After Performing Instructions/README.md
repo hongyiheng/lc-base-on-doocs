@@ -112,7 +112,21 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def calculateScore(self, instructions: List[str], values: List[int]) -> int:
+        n = len(instructions)
+        used = set()
+        ans = i = 0
+        while 0 <= i < n:
+            if i in used:
+                break
+            used.add(i)
+            if instructions[i] == 'add':
+                ans += values[i]
+                i += 1
+            else:
+                i += values[i]
+        return ans
 ```
 
 ### **Java**
@@ -120,7 +134,26 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public long calculateScore(String[] instructions, int[] values) {
+        int n = instructions.length;
+        Set<Integer> used = new HashSet<>();
+        long ans = 0;
+        int i = 0;
+        while (0 <= i && i < n) {
+            if (used.contains(i)) {
+                break;
+            }
+            used.add(i);
+            if ("add".equals(instructions[i])) {
+                ans += values[i++];
+            } else {
+                i += values[i];
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
