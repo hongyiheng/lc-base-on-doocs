@@ -1,0 +1,7 @@
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        t = sorted(str(n))
+        for i in range(32):
+            if t == sorted(str(1 << i)):
+                return True
+        return False
