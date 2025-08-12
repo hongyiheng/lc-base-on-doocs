@@ -49,7 +49,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
+        arr.sort()
+        d = arr[1] - arr[0]
+        for i in range(2, len(arr)):
+            if arr[i] - arr[i - 1] != d:
+                return False
+        return True
 ```
 
 ### **Java**
@@ -57,7 +64,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        Arrays.sort(arr);
+        int d = arr[1] - arr[0];
+        for (int i = 2; i < arr.length; i++) {
+            if (arr[i] - arr[i - 1] != d) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### **...**
