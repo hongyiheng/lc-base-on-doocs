@@ -68,7 +68,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+      if n <= 0:
+        return False
+      return not 3 ** 20 % n
 ```
 
 ### **Java**
@@ -76,7 +80,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isPowerOfThree(int n) {
+      if (n <= 0) {
+        return false;
+      }
+      return Math.pow(3, 20) % n == 0;
+    }
+}
 ```
 
 ### **...**
