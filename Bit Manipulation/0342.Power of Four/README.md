@@ -61,7 +61,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        for i in range(16):
+            if 4 ** i == n:
+                return True
+        return False
 ```
 
 ### **Java**
@@ -69,7 +74,16 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        for (int i = 0; i < 16; i++) {
+            if (Math.pow(4, i) == n) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 ```
 
 ### **...**
