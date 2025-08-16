@@ -59,7 +59,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximum69Number (self, num: int) -> int:
+        s = list(str(num))
+        for i, v in enumerate(s):
+            if v == '6':
+                s[i] = '9'
+                break
+        return int("".join(s))
 ```
 
 ### **Java**
@@ -67,7 +74,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int maximum69Number (int num) {
+        char[] s = String.valueOf(num).toCharArray();
+        for (int i = 0; i < s.length; i++) {
+            if (s[i] == '6') {
+                s[i] = '9';
+                break;
+            }
+        }
+        return Integer.parseInt(new String(s));
+    }
+}
 ```
 
 ### **...**
