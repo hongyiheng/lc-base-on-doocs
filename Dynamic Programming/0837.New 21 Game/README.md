@@ -55,7 +55,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def new21Game(self, n: int, k: int, maxPts: int) -> float:
+        if k == 0 or k + maxPts <= n:
+            return 1
+        f = [1] * (n + 1)
+        cur = 0
+        for i in range(1, n + 1):
+            if i <= k:
+                cur += f[i - 1]
+            if i > maxPts:
+                cur -= f[i - 1 - maxPts]
+            f[i] = cur / maxPts
+        return sum(f[k:])
 ```
 
 ### **Java**
@@ -63,6 +75,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public double new21Game(int n, int k, int maxPts) {
+        if (k == 0 || k + maxPts <= n) {
+            return 1.0;
+        }
+        double[] f = new double[n + 1];
+        f[0] = 1.0;
+        double cur = 0.0;
+        for (int i = 1; i <= n; i++) {
+            if (i <= k) {
+                cur += f[i - 1];
+            }
+            if (i > maxPts) {
+                cur -= f[i - 1 - maxPts];
+            }
+            f[i] = cur / maxPts;
+        }
+
+        double ans = 0.0;
+        for (int i = k; i <= n; i++) {
+            ans += f[i];
+        }
+        return ans;
+    }
+}
 
 ```
 
