@@ -60,7 +60,31 @@ mapSum.sum(&quot;ap&quot;);           // return 5 (<u>ap</u>ple + <u>ap</u>p = 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class MapSum:
 
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.g = dict()
+
+
+    def insert(self, key: str, val: int) -> None:
+        self.g[key] = val
+
+
+    def sum(self, prefix: str) -> int:
+        ans = 0
+        for k, v in self.g.items():
+            if k.startswith(prefix):
+                ans += v
+        return ans
+
+
+# Your MapSum object will be instantiated and called as such:
+# obj = MapSum()
+# obj.insert(key,val)
+# param_2 = obj.sum(prefix)
 ```
 
 ### **Java**
@@ -68,7 +92,36 @@ mapSum.sum(&quot;ap&quot;);           // return 5 (<u>ap</u>ple + <u>ap</u>p = 3
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class MapSum {
 
+    /** Initialize your data structure here. */
+    Map<String, Integer> g;
+
+    public MapSum() {
+        g = new HashMap<>();
+    }
+    
+    public void insert(String key, int val) {
+        g.put(key, val);
+    }
+    
+    public int sum(String prefix) {
+        int ans = 0;
+        for (Map.Entry<String, Integer> entry : g.entrySet()) {
+            if (entry.getKey().startsWith(prefix)) {
+                ans += entry.getValue();
+            }
+        }
+        return ans;
+    }
+}
+
+/**
+ * Your MapSum object will be instantiated and called as such:
+ * MapSum obj = new MapSum();
+ * obj.insert(key,val);
+ * int param_2 = obj.sum(prefix);
+ */
 ```
 
 ### **...**
