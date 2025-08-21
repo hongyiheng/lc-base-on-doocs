@@ -80,7 +80,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numSubmat(self, mat: List[List[int]]) -> int:
+        m, n = len(mat), len(mat[0])
+        hs = [[0] * n for _ in range(m)]
+        ans = 0
+        for i in range(m):
+            for j in range(n):
+                if not mat[i][j]:
+                    continue
+                hs[i][j] = hs[i - 1][j] + 1 if i else 1
+                h = hs[i][j]
+                ans += h
+                for y in range(j - 1, -1, -1):
+                    h = min(h, hs[i][y])
+                    ans += h
+        return ans
 ```
 
 ### **Java**
@@ -88,6 +103,28 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int numSubmat(int[][] mat) {
+        int m = mat.length, n = mat[0].length;
+        int[][] hs = new int[m][n];
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 0) {
+                    continue;
+                }
+                hs[i][j] = i == 0 ? 1 : hs[i - 1][j] + 1;
+                int h = hs[i][j];
+                ans += h;
+                for (int y = j - 1; y >= 0; y--) {
+                    h = Math.min(h, hs[i][y]);
+                    ans += h;
+                }
+            }
+        }
+        return ans;
+    }
+}
 
 ```
 
