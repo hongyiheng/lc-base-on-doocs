@@ -5,10 +5,7 @@ class Solution {
         for (int r = 0; r < nums.length; r++) {
             s += (nums[r] & 1);
             while (l < r && s <= r - l - 1) {
-                if (nums[l] == 1) {
-                    s--;
-                }
-                l++;
+                s -= (nums[l++] & 1);
             }
             ans = Math.max(ans, r - l);
         }
