@@ -82,7 +82,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minRemoval(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        l = ans = 0
+        for r, v in enumerate(nums):
+            while v > nums[l] * k:
+                l += 1
+            ans = max(ans, r - l + 1)
+        return len(nums) - ans
 ```
 
 ### **Java**
@@ -90,7 +98,19 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int minRemoval(int[] nums, int k) {
+        Arrays.sort(nums);
+        int l = 0, ans = 0;
+        for (int r = 0; r < nums.length; r++) {
+            while (nums[r] > (long)nums[l] * k) {
+                l++;
+            }
+            ans = Math.max(ans, r - l + 1);
+        }
+        return nums.length - ans;
+    }
+}
 ```
 
 ### **...**
