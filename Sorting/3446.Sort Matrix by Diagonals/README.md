@@ -87,7 +87,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortMatrix(self, grid: List[List[int]]) -> List[List[int]]:
+        m, n = len(grid), len(grid[0])
+        g = defaultdict(list)
+        for i, row in enumerate(grid):
+            for j, v in enumerate(row):
+                g[i - j].append(v)
+        for k in g.keys():
+            if k < 0:
+                g[k].sort(reverse=True)
+            else:
+                g[k].sort()
+        for i in range(m):
+            for j in range(n):
+                grid[i][j] = g[i - j].pop()
+        return grid
 ```
 
 ### **Java**
@@ -95,7 +110,31 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[][] sortMatrix(int[][] grid) {
+        int m = grid.length, n = grid[0].length;
+        Map<Integer, List<Integer>> g = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                g.computeIfAbsent(i - j, k -> new ArrayList<>()).add(grid[i][j]);
+            }
+        }
+        for (Map.Entry<Integer, List<Integer>> e : g.entrySet()) {
+            if (e.getKey() < 0) {
+                e.getValue().sort(Collections.reverseOrder());
+            } else {
+                Collections.sort(e.getValue());
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                List<Integer> r = g.get(i - j);
+                grid[i][j] = r.remove(r.size() - 1);
+            }
+        }
+        return grid;
+    }
+}
 ```
 
 ### **...**
