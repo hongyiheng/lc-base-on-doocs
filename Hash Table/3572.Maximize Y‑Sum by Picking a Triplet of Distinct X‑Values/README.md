@@ -69,7 +69,24 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maxSumDistinctTriplet(self, x: List[int], y: List[int]) -> int:
+        g = dict()
+        for i, v in enumerate(x):
+            if g.get(v, -1) < y[i]:
+                g[v] = y[i]
+        a = b = c = -1
+        for v in g.values():
+            if v >= a:
+                c = b
+                b = a
+                a = v
+            elif v >= b:
+                c = b
+                b = v
+            elif v >= c:
+                c = v
+        return -1 if c == -1 else a + b + c
 ```
 
 ### **Java**
@@ -77,7 +94,30 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+ class Solution {
+    public int maxSumDistinctTriplet(int[] x, int[] y) {
+        Map<Integer, Integer> g = new HashMap<>();
+        for (int i = 0; i < x.length; i++) {
+            if (g.getOrDefault(x[i], - 1) < y[i]) {
+                g.put(x[i], y[i]);
+            }
+        }
+        int a = -1, b = -1, c = -1;
+        for (int v : g.values()) {
+            if (v >= a) {
+                c = b;
+                b = a;
+                a = v;
+            } else if (v >= b) {
+                c = b;
+                b = v;
+            } else if (v >= c) {
+                c = v;
+            }
+        }
+        return c == -1 ? -1 : a + b + c;
+    }
+}
 ```
 
 ### **...**
