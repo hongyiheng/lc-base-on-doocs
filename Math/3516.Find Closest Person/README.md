@@ -97,7 +97,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findClosest(self, x: int, y: int, z: int) -> int:
+        d = abs(z - x) - abs(z - y)
+        if not d:
+            return 0
+        return 2 if d > 0 else 1 
 ```
 
 ### **Java**
@@ -105,7 +110,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int findClosest(int x, int y, int z) {
+        int d = Math.abs(z - x) - Math.abs(z - y);
+        if (d == 0) {
+            return 0;
+        }
+        return d > 0 ? 2 : 1;
+    }
+}
 ```
 
 ### **...**
