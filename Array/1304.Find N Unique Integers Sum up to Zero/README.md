@@ -49,7 +49,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sumZero(self, n: int) -> List[int]:
+        x = 500
+        ans = []
+        for i in range(n, 0, -2):
+            if i == 1:
+                ans.append(0)
+            else:
+                ans.append(x)
+                ans.append(-x)
+                x -= 1
+        return ans
 ```
 
 ### **Java**
@@ -57,7 +68,22 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] sumZero(int n) {
+        int x = 500;
+        int[] ans = new int[n];
+        for (int i = n; i > 0; i -= 2) {
+            if (i == 1) {
+                ans[i - 1] = 0;
+            } else {
+                ans[i - 1] = x;
+                ans[i - 2] = -x;
+            }
+            x--;
+        }
+        return ans;
+    }
+}
 ```
 
 ### **...**
