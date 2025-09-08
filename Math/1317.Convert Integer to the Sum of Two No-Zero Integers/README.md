@@ -72,7 +72,11 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getNoZeroIntegers(self, n: int) -> List[int]:
+        for i in range(1, n // 2 + 1):
+            if '0' not in str(i) and '0' not in str(n - i):
+                return [i, n - i]
 ```
 
 ### **Java**
@@ -80,7 +84,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int[] getNoZeroIntegers(int n) {
+        for (int i = 1; i < n; i++) {
+            if (String.valueOf(i).contains("0") || String.valueOf(n - i).contains("0")) {
+                continue;
+            }
+            return new int[]{i, n - i};
+        }
+        return new int[]{1, n - 1};
+    }
+}
 ```
 
 ### **...**
