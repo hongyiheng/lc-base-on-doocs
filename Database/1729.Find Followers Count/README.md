@@ -61,7 +61,7 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```sql
-
+select user_id, count(0) as followers_count from Followers group by user_id order by user_id
 ```
 
 <!-- tabs:end -->
