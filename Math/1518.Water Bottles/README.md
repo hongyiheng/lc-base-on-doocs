@@ -67,7 +67,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        return (numBottles * numExchange - 1) // (numExchange - 1)
 ```
 
 ### **Java**
