@@ -14,6 +14,8 @@ class Solution:
                     nw = max(grid[nx][ny], w)
                     if f[nx][ny] <= nw:
                         continue
+                    if nx == m - 1 and ny == n - 1:
+                        return nw
                     f[nx][ny] = nw
                     heapq.heappush(q, [nw, nx, ny])
         return f[-1][-1]
