@@ -68,7 +68,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def smallestNumber(self, n: int) -> int:
+        ans = 1
+        while ans < n:
+            ans = ans << 1 | 1
+        return ans
 ```
 
 ### **Java**
