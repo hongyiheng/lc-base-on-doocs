@@ -71,7 +71,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def getSneakyNumbers(self, nums: List[int]) -> List[int]:
+        cnt = Counter(nums)
+        return sorted([k for k in cnt if cnt[k] == 2])
 ```
 
 ### **Java**
