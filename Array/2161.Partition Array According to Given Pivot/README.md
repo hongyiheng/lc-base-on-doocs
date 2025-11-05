@@ -62,7 +62,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+        return [v for v in nums if v < pivot] + [v for v in nums if v == pivot] + [v for v in nums if v > pivot]
 ```
 
 ### **Java**
