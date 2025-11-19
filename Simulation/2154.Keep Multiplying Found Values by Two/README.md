@@ -60,7 +60,12 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findFinalValue(self, nums: List[int], original: int) -> int:
+        s = set(nums)
+        while original in s:
+            original *= 2
+        return original  
 ```
 
 ### **Java**
