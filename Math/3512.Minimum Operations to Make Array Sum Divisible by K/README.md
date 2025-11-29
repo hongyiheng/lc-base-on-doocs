@@ -80,7 +80,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        return sum(nums) % k
 ```
 
 ### **Java**
