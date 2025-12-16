@@ -71,7 +71,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def findMissingElements(self, nums: List[int]) -> List[int]:
+        s = set(nums)
+        return [i for i in range(min(s) + 1, max(s)) if i not in s]
 ```
 
 ### **Java**
