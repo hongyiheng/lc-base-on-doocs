@@ -58,7 +58,14 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def repeatedNTimes(self, nums: List[int]) -> int:
+        n = len(nums) // 2
+        cnt = Counter(nums)
+        for k, v in cnt.items():
+            if v == n:
+                return k
+        return -1
 ```
 
 ### **Java**
