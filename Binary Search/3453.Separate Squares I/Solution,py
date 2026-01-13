@@ -1,0 +1,22 @@
+class Solution:
+    def separateSquares(self, squares: List[List[int]]) -> float:
+        def check(k):
+            up = down = 0
+            for x, y, l in squares:
+                if y >= k:
+                    up += l * l
+                elif y + l <= k:
+                    down += l * l
+                else:
+                    up += (y + l - k) * l
+                    down += (k - y) * l
+            return down >= up
+
+        l, r = 0, int(1e9)
+        while (r - l) > 10 ** (-5):
+            mid = (l + r) / 2
+            if check(mid):
+                r = mid
+            else:
+                l = mid
+        return r
