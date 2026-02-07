@@ -53,7 +53,18 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        a = sum(1 if c == 'a' else 0 for c in list(s))
+        b = 0
+        ans = a
+        for c in s:
+            if c == 'a':
+                a -= 1
+            else:
+                b += 1
+            ans = min(ans, a + b)
+        return ans
 ```
 
 ### **Java**
