@@ -71,7 +71,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        arr.sort(key=lambda x: (x.bit_count(), x))
+        return arr
 ```
 
 ### **Java**
