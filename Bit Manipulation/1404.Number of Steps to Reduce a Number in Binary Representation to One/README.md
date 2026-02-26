@@ -70,7 +70,22 @@ Step 1) 2 是偶数，除 2 得到 1
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numSteps(self, s: str) -> int:
+        ans = 0
+        add = False
+        for i in range(len(s) - 1, 0, -1):
+            v = 1 if add else 0
+            v += 1 if s[i] == '1' else 0 
+            if v == 0:
+                ans += 1
+            elif v == 1:
+                ans += 2
+                v += 1
+            elif v == 2:
+                ans += 1
+            add = v == 2
+        return ans + 1 if add else ans
 ```
 
 ### **Java**
